@@ -1,14 +1,18 @@
 return {
+
+  -- tokyonight
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("tokyonight").setup({ style = "moon" })
-      vim.cmd.colorscheme("tokyonight")
+      local tokyonight = require("tokyonight")
+      tokyonight.setup({ style = "moon" })
+      tokyonight.load()
     end,
   },
 
+  -- catppuccin
   {
     "catppuccin/nvim",
     name = "catppuccin",
