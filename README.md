@@ -15,7 +15,6 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 
 ## Plugins
 
-- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [alpha-nvim](https://github.com/goolord/alpha-nvim)
 - [catppuccin](https://github.com/catppuccin/nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
@@ -28,6 +27,7 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
+- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
 - [mini.comment](https://github.com/echasnovski/mini.comment)
