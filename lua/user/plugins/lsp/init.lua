@@ -1,4 +1,5 @@
 local servers = require("user.plugins.lsp.servers")
+
 local function on_attach(client, bufnr)
   require("user.plugins.lsp.format").on_attach(client, bufnr)
   require("user.plugins.lsp.keymaps").on_attach(client, bufnr)
@@ -17,14 +18,10 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      ---@type _.lspconfig.options
-      local defaults = {
-        on_attach = on_attach,
-        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      }
-
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
       for server, opts in pairs(servers) do
-        opts = vim.tbl_deep_extend("force", {}, defaults, opts or {})
+        opts.capabilities = capabilities
+        opts.on_attach = on_attach
         require("lspconfig")[server].setup(opts)
       end
     end,
