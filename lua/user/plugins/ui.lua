@@ -26,7 +26,11 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    config = true,
+    config = {
+      options = {
+        globalstatus = true,
+      },
+    },
   },
 
   -- indent guides for Neovim
