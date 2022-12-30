@@ -2,9 +2,11 @@ return {
   -- better vim.notify
   {
     "rcarriga/nvim-notify",
-    event = "VeryLazy",
-    config = function()
-      vim.notify = require("notify")
+    init = function()
+      vim.notify = function(...)
+        vim.notify = require("notify")
+        return vim.notify(...)
+      end
     end,
   },
 
