@@ -2,7 +2,11 @@
 vim.api.nvim_create_autocmd("FocusGained", { command = "checktime" })
 
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", { callback = vim.highlight.on_yank })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPre", {
