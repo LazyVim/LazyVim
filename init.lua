@@ -1,4 +1,4 @@
 require("user.options")
 require("user.lazy")
-require("user.autocommands")
+require("user.autocmds")
 require("user.mappings")
