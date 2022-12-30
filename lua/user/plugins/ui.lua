@@ -72,7 +72,7 @@ return {
         button.opts.hl = "AlphaButtons"
         button.opts.hl_shortcut = "AlphaShortcut"
       end
-      dashboard.section.footer.opts.hl = "AlphaFooter"
+      dashboard.section.footer.opts.hl = "Type"
       dashboard.section.header.opts.hl = "AlphaHeader"
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.opts.layout[1].val = 8
