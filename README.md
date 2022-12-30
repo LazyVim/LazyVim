@@ -2,7 +2,7 @@
 
 A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-![image](https://user-images.githubusercontent.com/292349/210092442-95025d4b-50e9-47e4-9fe8-16eee07a6d50.png)
+![image](https://user-images.githubusercontent.com/292349/210118343-3fc1849a-179a-4203-8a32-1125d328b2ab.png)
 
 ## ✅ Todo
 
