@@ -1,7 +1,7 @@
 local servers = require("user.plugins.lsp.servers")
 local function on_attach(client, bufnr)
   require("user.plugins.lsp.format").on_attach(client, bufnr)
-  require("user.plugins.lsp.mappings").on_attach(client, bufnr)
+  require("user.plugins.lsp.keymaps").on_attach(client, bufnr)
 end
 
 return {
