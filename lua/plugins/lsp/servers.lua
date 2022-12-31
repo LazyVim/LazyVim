@@ -1,3 +1,4 @@
+-- Add any servers here together with their settings
 ---@type lspconfig.options
 local servers = {
   bashls = {},
