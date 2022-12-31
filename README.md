@@ -16,29 +16,29 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 ## File Structure
 
 <pre>
- ~/.config/nvim
-├──  lua
-│  └──  user
-│     ├──  plugins
-│     │  ├──  lsp
-│     │  │  ├──  format.lua
-│     │  │  ├──  init.lua
-│     │  │  ├──  keymaps.lua
-│     │  │  └──  servers.lua
-│     │  ├──  api.lua
-│     │  ├──  coding.lua
-│     │  ├──  colorscheme.lua
-│     │  ├──  editor.lua
-│     │  ├──  treesitter.lua
-│     │  └──  ui.lua
-│     ├──  autocmds.lua
-│     ├──  keymaps.lua
-│     ├──  lazy.lua
-│     └──  options.lua
-├──  init.lua
-├──  lazy-lock.json
-├──  README.md
-└──  stylua.toml
+~/.config/nvim
+├── lua
+│   ├── config
+│   │   ├── autocmds.lua
+│   │   ├── keymaps.lua
+│   │   ├── lazy.lua
+│   │   └── options.lua
+│   └── plugins
+│       ├── lsp
+│       │   ├── format.lua
+│       │   ├── init.lua
+│       │   ├── keymaps.lua
+│       │   └── servers.lua
+│       ├── api.lua
+│       ├── coding.lua
+│       ├── colorscheme.lua
+│       ├── editor.lua
+│       ├── treesitter.lua
+│       └── ui.lua
+├── init.lua
+├── lazy-lock.json
+├── README.md
+└── stylua.toml
 </pre>
 
 ## Plugins

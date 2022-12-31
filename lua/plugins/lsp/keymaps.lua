@@ -20,12 +20,12 @@ function M.on_attach(client, buffer)
         },
         f = {
           {
-            require("user.plugins.lsp.format").format,
+            require("plugins.lsp.format").format,
             "Format Document",
             cond = cap.documentFormatting,
           },
           {
-            require("user.plugins.lsp.format").format,
+            require("plugins.lsp.format").format,
             "Format Range",
             cond = cap.documentRangeFormatting,
             mode = "v",

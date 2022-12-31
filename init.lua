@@ -1,4 +1,4 @@
-require("user.options")
-require("user.lazy")
-require("user.autocmds")
-require("user.keymaps")
+require("config.options")
+require("config.lazy")
+require("config.autocmds")
+require("config.keymaps")
