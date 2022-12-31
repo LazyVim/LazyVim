@@ -52,19 +52,7 @@ vim.keymap.set("n", "<C-s>", "<cmd>:w<cr><esc>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- makes * and # work on visual mode too.
-vim.cmd([[
-  function! g:VSetSearch(cmdtype)
-    let temp = @s
-    norm! gv"sy
-    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-    let @s = temp
-  endfunction
-
-  xnoremap * :<C-u>call g:VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
-  xnoremap # :<C-u>call g:VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
-]])
-
+-- lazygit
 vim.keymap.set("n", "<leader>gg", function()
   require("lazy.util").open_cmd({ "lazygit" }, {
     terminal = true,
