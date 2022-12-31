@@ -7,8 +7,8 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 ## ✅ Todo
 
 - [ ] documentation
-- [ ] treesitter auto-install seems broken. Switch to `ensure_installed` instead?
-- [ ] list all plugins in readme
+- [x] treesitter auto-install seems broken. Switch to `ensure_installed` instead?
+- [x] list all plugins in readme
 - [ ] test all-the-things
 
 <!-- plugins:start -->
