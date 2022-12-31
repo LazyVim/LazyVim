@@ -43,6 +43,7 @@ return {
       wk.register({
         f = { name = "+file" },
         g = { name = "+git" },
+        b = { name = "+buffer" },
       }, { prefix = "<leader>" })
     end,
   },
@@ -84,6 +85,27 @@ return {
           require("illuminate").goto_prev_reference(false)
         end,
         desc = "Prev Reference",
+      },
+    },
+  },
+
+  -- buffer remove
+  {
+    "echasnovski/mini.bufremove",
+    keys = {
+      {
+        "<leader>bd",
+        function()
+          require("mini.bufremove").delete(0, false)
+        end,
+        desc = "Delete Buffer",
+      },
+      {
+        "<leader>bD",
+        function()
+          require("mini.bufremove").delete(0, true)
+        end,
+        desc = "Delete Buffer (Force)",
       },
     },
   },
