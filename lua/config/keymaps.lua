@@ -76,8 +76,3 @@ vim.keymap.set("n", "<leader>gg", function()
     },
   })
 end, { desc = "Lazygit" })
-
-require("which-key").register({
-  f = { name = "+file" },
-  g = { name = "+git" },
-}, { prefix = "<leader>" })
