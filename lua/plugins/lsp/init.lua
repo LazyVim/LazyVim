@@ -13,11 +13,24 @@ return {
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
       { "folke/neodev.nvim", config = true },
-      { "williamboman/mason.nvim", config = true },
-      { "williamboman/mason-lspconfig.nvim", config = { ensure_installed = vim.tbl_keys(servers) } },
+      { "williamboman/mason.nvim", config = true, cmd = "Mason" },
+      { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
+      -- diagnostics
+      for name, icon in pairs(require("config.icons").diagnostics) do
+        name = "DiagnosticSign" .. name
+        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+      end
+      vim.diagnostic.config({
+        underline = true,
+        update_in_insert = false,
+        virtual_text = { spacing = 4, prefix = "●" },
+        severity_sort = true,
+      })
+
+      -- lspconfig
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
       for server, opts in pairs(servers) do
         opts.capabilities = capabilities
