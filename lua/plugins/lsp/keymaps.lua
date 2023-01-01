@@ -1,70 +1,62 @@
 local M = {}
 
+function M.diagnostic_goto(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+
 function M.on_attach(client, buffer)
   local cap = client.server_capabilities
 
-  require("which-key").register({
-    buffer = buffer,
-    ["<leader>"] = {
-      c = {
-        name = "+code",
-        {
-          cond = client.name == "tsserver",
-          o = { "<cmd>:TypescriptOrganizeImports<CR>", "Organize Imports" },
-          R = { "<cmd>:TypescriptRenameFile<CR>", "Rename File" },
-        },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename", cond = cap.renameProvider },
-        a = {
-          { vim.lsp.buf.code_action, "Code Action" },
-          { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
-        },
-        f = {
-          {
-            require("plugins.lsp.format").format,
-            "Format Document",
-            cond = cap.documentFormatting,
-          },
-          {
-            require("plugins.lsp.format").format,
-            "Format Range",
-            cond = cap.documentRangeFormatting,
-            mode = "v",
-          },
-        },
-        d = { vim.diagnostic.open_float, "Line Diagnostics" },
-        l = {
-          name = "+lsp",
-          i = { "<cmd>LspInfo<cr>", "Lsp Info" },
-        },
-      },
-      x = {
-        d = { "<cmd>Telescope diagnostics<cr>", "Search Diagnostics" },
-      },
-    },
-    g = {
-      name = "+goto",
-      d = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
-      r = { "<cmd>Telescope lsp_references<cr>", "References" },
-      R = { "<cmd>Trouble lsp_references<cr>", "Trouble References" },
-      D = { "<cmd>Telescope lsp_declarations<CR>", "Goto Declaration" },
-      I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
-      t = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto Type Definition" },
-    },
-    ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help", mode = { "n", "i" } },
-    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Next Diagnostic" },
-    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Prev Diagnostic" },
-    ["[e"] = { "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", "Next Error" },
-    ["]e"] = { "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", "Prev Error" },
-    ["[w"] = {
-      "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.WARNING})<CR>",
-      "Next Warning",
-    },
-    ["]w"] = {
-      "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.WARNING})<CR>",
-      "Prev Warning",
-    },
-  })
+  local function map(lhs, rhs, opts)
+    opts = opts or {}
+    vim.keymap.set(opts.mode or "n", lhs, rhs, { silent = true, buffer = buffer, expr = opts.expr, desc = opts.desc })
+  end
+
+  map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" } })
+  map("<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+  map("<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
+  map("<leader>xd", "<cmd>Telescope diagnostics<cr>", { desc = "Telescope Diagnostics" })
+  map("gd", "<cmd>Telescope lsp_definitions<cr>", { desc = "Goto Definition" })
+  map("gr", "<cmd>Telescope lsp_references<cr>", { desc = "References" })
+  map("gR", "<cmd>Trouble lsp_references<cr>", { desc = "Trouble References" })
+  map("gD", "<cmd>Telescope lsp_declarations<CR>", { desc = "Goto Declaration" })
+  map("gI", "<cmd>Telescope lsp_implementations<CR>", { desc = "Goto Implementation" })
+  map("gt", "<cmd>Telescope lsp_type_definitions<cr>", { desc = "Goto Type Definition" })
+  map("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { desc = "Signature Help", mode = { "i", "n" } })
+  map("K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Hover" })
+  map("[d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
+  map("]d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
+  map("]e", M.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+  map("[e", M.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+  map("]w", M.diagnostic_goto(true, "WARNING"), { desc = "Next Warning" })
+  map("[w", M.diagnostic_goto(false, "WARNING"), { desc = "Prev Warning" })
+
+  if cap.documentFormatting then
+    map("<leader>cf", require("plugins.lsp.format").format, { desc = "Format Document" })
+  end
+
+  if cap.documentRangeFormatting then
+    map("<leader>cf", require("plugins.lsp.format").format, { desc = "Format Range", mode = "v" })
+  end
+
+  if cap.renameProvider then
+    map("<leader>cr", function()
+      if pcall(require, "inc_rename") then
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      else
+        vim.lsp.buf.rename()
+      end
+    end, { expr = true, desc = "Rename" })
+  end
+
+  if client.name == "tsserver" and pcall(require, "typescript") then
+    map("<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { desc = "Organize Imports" })
+    map("<leader>cR", "<cmd>TypescriptRenameFile<CR>", { desc = "Rename File" })
+  end
 end
 
 return M
