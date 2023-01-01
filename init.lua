@@ -1,4 +1,4 @@
-require("config.options")
-require("config.lazy")
-require("config.autocmds")
-require("config.keymaps")
+require("lazyvim.config.options")
+require("lazyvim.config.lazy")
+require("lazyvim.config.autocmds")
+require("lazyvim.config.keymaps")

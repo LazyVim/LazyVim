@@ -1,8 +1,8 @@
-local servers = require("plugins.lsp.servers")
+local servers = require("lazyvim.plugins.lsp.servers")
 
 local function on_attach(client, bufnr)
-  require("plugins.lsp.format").on_attach(client, bufnr)
-  require("plugins.lsp.keymaps").on_attach(client, bufnr)
+  require("lazyvim.plugins.lsp.format").on_attach(client, bufnr)
+  require("lazyvim.plugins.lsp.keymaps").on_attach(client, bufnr)
 end
 
 return {
@@ -24,7 +24,7 @@ return {
     },
     config = function()
       -- diagnostics
-      for name, icon in pairs(require("config.icons").diagnostics) do
+      for name, icon in pairs(require("lazyvim.config.icons").diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
