@@ -98,12 +98,15 @@ return {
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.opts.layout[1].val = 8
 
-      if vim.bo[0].filetype == "lazy" then
-        vim.notify("Missing plugins installed!", vim.log.levels.INFO, { title = "LazyVim" })
+      if vim.o.filetype == "lazy" then
+        -- close and re-open Lazy after showing alpha
+        vim.notify("Missing plugins installed!", vim.log.levels.INFO, { title = "lazy.nvim" })
         vim.cmd.close()
+        require("alpha").setup(dashboard.opts)
+        require("lazy").show()
+      else
+        require("alpha").setup(dashboard.opts)
       end
-
-      require("alpha").setup(dashboard.opts)
 
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
