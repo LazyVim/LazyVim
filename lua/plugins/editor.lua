@@ -53,6 +53,7 @@ return {
         key_labels = { ["<leader>"] = "SPC" },
       })
       wk.register({
+        mode = { "n", "v" },
         ["g"] = { name = "+goto" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
