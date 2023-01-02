@@ -62,4 +62,17 @@ function M.telescope(builtin, opts)
   end
 end
 
+function M.float_term(cmd, opts)
+  opts = vim.tbl_deep_extend("force", {
+    terminal = true,
+    close_on_exit = true,
+    enter = true,
+    float = {
+      size = { width = 0.9, height = 0.9 },
+      margin = { top = 0, right = 0, bottom = 0, left = 0 },
+    },
+  }, opts or {})
+  require("lazy.util").open_cmd(cmd, opts)
+end
+
 return M
