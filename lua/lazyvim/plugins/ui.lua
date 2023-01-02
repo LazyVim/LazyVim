@@ -2,12 +2,15 @@ return {
   -- better vim.notify
   {
     "rcarriga/nvim-notify",
-    init = function()
-      vim.notify = function(...)
-        vim.notify = require("notify")
-        return vim.notify(...)
-      end
-    end,
+    config = {
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+    },
   },
 
   -- better vim.ui
