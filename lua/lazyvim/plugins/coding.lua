@@ -72,6 +72,11 @@ return {
             return item
           end,
         },
+        experimental = {
+          ghost_text = {
+            hl_group = "LspCodeLens",
+          },
+        },
       })
     end,
   },
