@@ -9,6 +9,19 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
+    config = {
+      history = true,
+      delete_check_events = "TextChanged",
+    },
+    init = function()
+      local function jump(key, dir)
+        vim.keymap.set({ "i", "s" }, key, function()
+          return require("luasnip").jump(dir) or key
+        end, { expr = true })
+      end
+      jump("<tab>", 1)
+      jump("<s-tab>", -1)
+    end,
   },
 
   -- auto completion
@@ -22,7 +35,6 @@ return {
       "hrsh7th/cmp-emoji",
       "saadparwaiz1/cmp_luasnip",
     },
-
     config = function()
       local cmp = require("cmp")
       cmp.setup({
@@ -37,26 +49,6 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            local luasnip = require("luasnip")
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            local luasnip = require("luasnip")
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
