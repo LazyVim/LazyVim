@@ -2,6 +2,15 @@ return {
   -- better vim.notify
   {
     "rcarriga/nvim-notify",
+    keys = {
+      {
+        "<leader>nc",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+        desc = "Clear all Notifications",
+      },
+    },
     config = {
       timeout = 3000,
       max_height = function()
