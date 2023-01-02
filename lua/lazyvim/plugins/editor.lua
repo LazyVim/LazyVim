@@ -1,4 +1,3 @@
-vim.g.neo_tree_remove_legacy_commands = 1
 local util = require("lazyvim.util")
 
 return {
@@ -16,6 +15,9 @@ return {
         desc = "NeoTree",
       },
     },
+    init = function()
+      vim.g.neo_tree_remove_legacy_commands = 1
+    end,
     config = {
       filesystem = {
         follow_current_file = true,
@@ -26,7 +28,6 @@ return {
 
   -- search/replace in multiple files
   {
-
     "windwp/nvim-spectre",
     keys = {
       {
