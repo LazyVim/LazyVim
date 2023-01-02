@@ -1,10 +1,3 @@
-local servers = require("lazyvim.plugins.lsp.servers")
-
-local function on_attach(client, bufnr)
-  require("lazyvim.plugins.lsp.format").on_attach(client, bufnr)
-  require("lazyvim.plugins.lsp.keymaps").on_attach(client, bufnr)
-end
-
 return {
   -- lspconfig
   {
@@ -13,16 +6,19 @@ return {
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
       { "folke/neodev.nvim", config = true },
-      {
-        "williamboman/mason.nvim",
-        config = true,
-        cmd = "Mason",
-        keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-      },
+      "mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
       "hrsh7th/cmp-nvim-lsp",
     },
-    config = function()
+    ---@type lspconfig.options
+    servers = nil,
+    config = function(plugin)
+      -- setup formatting and keymaps
+      require("lazyvim.util").on_attach(function(client, buffer)
+        require("lazyvim.plugins.lsp.format").on_attach(client, buffer)
+        require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+      end)
+
       -- diagnostics
       for name, icon in pairs(require("lazyvim.config.icons").diagnostics) do
         name = "DiagnosticSign" .. name
@@ -37,9 +33,11 @@ return {
 
       -- lspconfig
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+      ---@type lspconfig.options
+      local servers = plugin.servers or require("lazyvim.plugins.lsp.servers")
       for server, opts in pairs(servers) do
         opts.capabilities = capabilities
-        opts.on_attach = on_attach
         require("lspconfig")[server].setup(opts)
       end
     end,
@@ -49,10 +47,10 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
+    dependencies = { "mason.nvim" },
     config = function()
       local nls = require("null-ls")
       nls.setup({
-        on_attach = on_attach,
         sources = {
           -- nls.builtins.formatting.prettierd,
           nls.builtins.formatting.stylua,
