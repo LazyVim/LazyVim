@@ -16,7 +16,6 @@ return {
   -- better vim.ui
   {
     "stevearc/dressing.nvim",
-    event = "VeryLazy",
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
@@ -103,7 +102,7 @@ return {
   -- dashboard
   {
     "goolord/alpha-nvim",
-    lazy = false,
+    event = "VimEnter",
     config = function()
       local dashboard = require("alpha.themes.dashboard")
       local logo = [[
@@ -134,14 +133,14 @@ return {
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.opts.layout[1].val = 8
 
+      local alpha = require("alpha")
       if vim.o.filetype == "lazy" then
         -- close and re-open Lazy after showing alpha
-        vim.notify("Missing plugins installed!", vim.log.levels.INFO, { title = "lazy.nvim" })
         vim.cmd.close()
-        require("alpha").setup(dashboard.opts)
+        alpha.setup(dashboard.opts)
         require("lazy").show()
       else
-        require("alpha").setup(dashboard.opts)
+        alpha.setup(dashboard.opts)
       end
 
       vim.api.nvim_create_autocmd("User", {
