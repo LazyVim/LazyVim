@@ -152,6 +152,7 @@ return {
         alpha.setup(dashboard.opts)
       end
 
+
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
         callback = function()
@@ -163,4 +164,10 @@ return {
       })
     end,
   },
+
+  -- icons
+  "nvim-tree/nvim-web-devicons",
+
+  -- ui components
+  "MunifTanjim/nui.nvim",
 }
