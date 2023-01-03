@@ -56,9 +56,7 @@ end
 
 function M.telescope(builtin, opts)
   return function()
-    opts = opts or {}
-    opts.cwd = M.get_root()
-    require("telescope.builtin")[builtin](opts)
+    require("telescope.builtin")[builtin](vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {}))
   end
 end
 
