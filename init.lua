@@ -1,4 +1,4 @@
-require("lazyvim.config.options")
-require("lazyvim.config.lazy")
-require("lazyvim.config.autocmds")
-require("lazyvim.config.keymaps")
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("lazyvim").setup()
