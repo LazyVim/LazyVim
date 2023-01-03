@@ -142,16 +142,18 @@ return {
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.opts.layout[1].val = 8
 
-      local alpha = require("alpha")
+      -- close Lazy and re-open when the dashboard is ready
       if vim.o.filetype == "lazy" then
-        -- close and re-open Lazy after showing alpha
         vim.cmd.close()
-        alpha.setup(dashboard.opts)
-        require("lazy").show()
-      else
-        alpha.setup(dashboard.opts)
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "AlphaReady",
+          callback = function()
+            require("lazy").show()
+          end,
+        })
       end
 
+      require("alpha").setup(dashboard.opts)
 
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
