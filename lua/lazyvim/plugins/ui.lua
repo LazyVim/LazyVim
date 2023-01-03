@@ -82,11 +82,31 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
     config = {
-      char = "▏",
+      -- char = "▏",
+      char = "│",
       filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
       show_trailing_blankline_indent = false,
-      show_current_context = true,
+      show_current_context = false,
     },
+  },
+
+  -- active indent guide and indent text objects
+  {
+    "echasnovski/mini.indentscope",
+    event = "BufReadPre",
+    config = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "alpha", "lazy" },
+        callback = function()
+          vim.b.miniindentscope_disable = true
+        end,
+      })
+      require("mini.indentscope").setup({
+        -- symbol = "▏",
+        symbol = "│",
+        options = { try_as_border = true },
+      })
+    end,
   },
 
   -- noicer ui
@@ -141,6 +161,7 @@ return {
       dashboard.section.header.opts.hl = "AlphaHeader"
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.opts.layout[1].val = 8
+      vim.b.miniindentscope_disable = true
 
       -- close Lazy and re-open when the dashboard is ready
       if vim.o.filetype == "lazy" then
