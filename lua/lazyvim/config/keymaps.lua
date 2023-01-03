@@ -1,3 +1,5 @@
+-- This file is automatically loaded by plugins.config
+
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<A-left>", "<C-w>h")
 vim.keymap.set("n", "<A-down>", "<C-w>j")

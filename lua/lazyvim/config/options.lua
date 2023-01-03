@@ -1,3 +1,5 @@
+-- This file is automatically loaded by plugins.config
+
 vim.opt.autowrite = true -- enable auto write
 vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
 vim.opt.cmdheight = 1
