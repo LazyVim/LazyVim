@@ -29,14 +29,9 @@ return {
   -- search/replace in multiple files
   {
     "windwp/nvim-spectre",
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>sr",
-        function()
-          require("spectre").open()
-        end,
-        desc = "Replace in files (Spectre)",
-      },
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
   },
 
@@ -117,9 +112,7 @@ return {
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",
-    dependencies = {
-      { "ggandor/flit.nvim", config = { labeled_modes = "nv" } },
-    },
+    dependencies = { { "ggandor/flit.nvim", config = { labeled_modes = "nv" } } },
     config = function()
       require("leap").add_default_mappings(true)
     end,
@@ -177,42 +170,20 @@ return {
     config = function()
       require("illuminate").configure({ delay = 200 })
     end,
+    -- stylua: ignore
     keys = {
-      {
-        "]]",
-        function()
-          require("illuminate").goto_next_reference(false)
-        end,
-        desc = "Next Reference",
-      },
-      {
-        "[[",
-        function()
-          require("illuminate").goto_prev_reference(false)
-        end,
-        desc = "Prev Reference",
-      },
+      { "]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference", },
+      { "[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference" },
     },
   },
 
   -- buffer remove
   {
     "echasnovski/mini.bufremove",
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>bd",
-        function()
-          require("mini.bufremove").delete(0, false)
-        end,
-        desc = "Delete Buffer",
-      },
-      {
-        "<leader>bD",
-        function()
-          require("mini.bufremove").delete(0, true)
-        end,
-        desc = "Delete Buffer (Force)",
-      },
+      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
     },
   },
 }
