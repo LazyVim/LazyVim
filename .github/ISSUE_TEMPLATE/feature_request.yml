@@ -1,0 +1,36 @@
+name: Feature Request
+description: Suggest a new feature
+title: "feature: "
+labels: [enhancement]
+body:
+  - type: checkboxes
+    attributes:
+      label: Did you check the docs?
+      description: Make sure you read all the docs before submitting a feature request
+      options:
+        - label: I have read all the LazyVim docs
+          required: true
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Is your feature request related to a problem? Please describe.
+      description: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Describe alternatives you've considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
+  - type: textarea
+    validations:
+      required: false
+    attributes:
+      label: Additional context
+      description: Add any other context or screenshots about the feature request here.

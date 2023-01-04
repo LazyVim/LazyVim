@@ -1,0 +1,88 @@
+name: Bug Report
+description: File a bug/issue
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before** reporting an issue, make sure to read the [documentation](https://github.com/folke/LazyVim) and search [existing issues](https://github.com/folke/LazyVim/issues). Usage questions such as ***"How do I...?"*** belong in [Discussions](https://github.com/folke/LazyVim/discussions) and will be closed.
+  - type: checkboxes
+    attributes:
+      label: Did you check docs and existing issues?
+      description: Make sure you checked all of the below before submitting an issue
+      options:
+        - label: I have read all the LazyVim docs
+          required: true
+        - label: I have searched the existing issues of LazyVim
+          required: true
+        - label: I have searched the exsiting issues of plugins related to this issue
+          required: true
+  - type: input
+    attributes:
+      label: "Neovim version (nvim -v)"
+      placeholder: "0.8.0 commit db1b0ee3b30f"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Operating system/version"
+      placeholder: "MacOS 11.5"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is. Please include any related errors you see in Neovim.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1.
+        2. 
+        3.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: A concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Repro
+      description: Minimal `init.lua` to reproduce this issue. Save as `repro.lua` and run with `nvim -u repro.lua`
+      value: |
+        -- DO NOT change the paths and don't remove the colorscheme
+        local root = vim.fn.fnamemodify("./.repro", ":p")
+        -- set stdpaths to use .repro
+        for _, name in ipairs({ "config", "data", "state", "cache" }) do
+          vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
+        end
+
+        -- bootstrap lazy
+        local lazypath = root .. "/plugins/lazy.nvim"
+        if not vim.loop.fs_stat(lazypath) then
+          vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazypath, })
+        end
+        vim.opt.runtimepath:prepend(lazypath)
+
+        -- install plugins
+        local plugins = {
+          "folke/tokyonight.nvim",
+          "folke/LazyVim",
+          -- add any other plugins here
+        }
+        require("lazy").setup(plugins, {
+          root = root .. "/plugins",
+        })
+
+        vim.cmd.colorscheme("tokyonight")
+        -- add anything else here
+      render: Lua
+    validations:
+      required: false
