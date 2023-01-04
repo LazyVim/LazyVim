@@ -41,7 +41,9 @@
   "persistence.nvim": { "branch": "main", "commit": "5da6ddd077a63c4ba3b6d7c7ba53b7c7e6530715" },
   "plenary.nvim": { "branch": "master", "commit": "4b7e52044bbb84242158d977a50c4cbcd85070c7" },
   "telescope.nvim": { "branch": "master", "commit": "b79cd6c88b3d96b0f49cb7d240807cd59b610cd8" },
+  "todo-comments.nvim": { "branch": "main", "commit": "c1760010f46992165995aaa52ca967f473a2e8e6" },
   "tokyonight.nvim": { "branch": "main", "commit": "63879369ac45e1dfe14c541d630e59240a6f2d4a" },
+  "trouble.nvim": { "branch": "main", "commit": "897542f90050c3230856bc6e45de58b94c700bbf" },
   "vim-illuminate": { "branch": "master", "commit": "a6d0b28ea7d6b9d139374be1f94a16bd120fcda3" },
   "vim-startuptime": { "branch": "master", "commit": "5f52ed26e0296a3e1d1453935f417e5808eefab8" },
   "which-key.nvim": { "branch": "main", "commit": "8682d3003595017cd8ffb4c860a07576647cc6f8" }
