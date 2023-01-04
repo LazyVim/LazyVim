@@ -47,8 +47,8 @@ vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
 
 -- save in insert mode
-vim.keymap.set("i", "<C-s>", "<cmd>up<cr><esc>")
-vim.keymap.set("n", "<C-s>", "<cmd>up<cr><esc>")
+vim.keymap.set("i", "<C-s>", "<cmd>w<cr><esc>")
+vim.keymap.set("n", "<C-s>", "<cmd>w<cr><esc>")
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
