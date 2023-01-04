@@ -16,24 +16,26 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 <pre>
 ~/.config/nvim
 ├── lua
-│   ├── config
-│   │   ├── autocmds.lua
-│   │   ├── icons.lua
-│   │   ├── keymaps.lua
-│   │   ├── lazy.lua
-│   │   └── options.lua
-│   └── plugins
-│       ├── lsp
-│       │   ├── format.lua
-│       │   ├── init.lua
+│   └── lazyvim
+│       ├── config
+│       │   ├── autocmds.lua
 │       │   ├── keymaps.lua
-│       │   └── servers.lua
-│       ├── api.lua
-│       ├── coding.lua
-│       ├── colorscheme.lua
-│       ├── editor.lua
-│       ├── treesitter.lua
-│       ├── ui.lua
+│       │   ├── lazy.lua
+│       │   ├── options.lua
+│       │   └── settings.lua
+│       ├── plugins
+│       │   ├── lsp
+│       │   │   ├── format.lua
+│       │   │   ├── init.lua
+│       │   │   ├── keymaps.lua
+│       │   │   └── servers.lua
+│       │   ├── coding.lua
+│       │   ├── colorscheme.lua
+│       │   ├── config.lua
+│       │   ├── editor.lua
+│       │   ├── treesitter.lua
+│       │   ├── ui.lua
+│       │   └── util.lua
 │       └── util.lua
 ├── init.lua
 ├── lazy-lock.json
@@ -49,6 +51,7 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 - [alpha-nvim](https://github.com/goolord/alpha-nvim)
 - [catppuccin](https://github.com/catppuccin/nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
+- [cmp-emoji](https://github.com/hrsh7th/cmp-emoji)
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
 - [cmp-path](https://github.com/hrsh7th/cmp-path)
 - [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
@@ -63,9 +66,12 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 - [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
+- [mini.ai](https://github.com/echasnovski/mini.ai)
 - [mini.bufremove](https://github.com/echasnovski/mini.bufremove)
 - [mini.comment](https://github.com/echasnovski/mini.comment)
+- [mini.indentscope](https://github.com/echasnovski/mini.indentscope)
 - [mini.pairs](https://github.com/echasnovski/mini.pairs)
+- [mini.surround](https://github.com/echasnovski/mini.surround)
 - [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)
 - [neoconf.nvim](https://github.com/folke/neoconf.nvim)
 - [neodev.nvim](https://github.com/folke/neodev.nvim)
@@ -76,12 +82,17 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nvim-notify](https://github.com/rcarriga/nvim-notify)
+- [nvim-spectre](https://github.com/windwp/nvim-spectre)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [nvim-ts-context-commentstring](https://github.com/JoosepAlviste/nvim-ts-context-commentstring)
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
+- [persistence.nvim](https://github.com/folke/persistence.nvim)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+- [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
 - [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
+- [trouble.nvim](https://github.com/folke/trouble.nvim)
 - [vim-illuminate](https://github.com/RRethy/vim-illuminate)
 - [vim-startuptime](https://github.com/dstein64/vim-startuptime)
 - [which-key.nvim](https://github.com/folke/which-key.nvim)
