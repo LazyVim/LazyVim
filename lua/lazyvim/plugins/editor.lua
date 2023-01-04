@@ -12,8 +12,9 @@ return {
         function()
           require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
         end,
-        desc = "NeoTree",
+        desc = "NeoTree (root dir)",
       },
+      { "<leader>fT", "<cmd>Neotree toggle<cmd>", desc = "NeoTree (cwd)" },
     },
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
@@ -41,9 +42,10 @@ return {
     cmd = "Telescope",
     keys = {
       { "<leader>/", util.telescope("live_grep"), desc = "Find in Files (Grep)" },
-      { "<leader><space>", util.telescope("find_files"), desc = "Find Files" },
+      { "<leader><space>", util.telescope("find_files"), desc = "Find Files (root dir)" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-      { "<leader>ff", util.telescope("find_files"), desc = "Find Files" },
+      { "<leader>ff", util.telescope("find_files"), desc = "Find Files (root dir)" },
+      { "<leader>fF", util.telescope("find_files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>gc", "<Cmd>Telescope git_commits<CR>", desc = "commits" },
       { "<leader>gs", "<Cmd>Telescope git_status<CR>", desc = "status" },
@@ -58,7 +60,8 @@ return {
       { "<leader>ht", "<cmd>Telescope builtin<cr>", desc = "Telescope" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader>sg", util.telescope("live_grep"), desc = "Grep" },
+      { "<leader>sg", util.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>sG", util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
@@ -125,7 +128,6 @@ return {
     config = function()
       local wk = require("which-key")
       wk.setup({
-        show_help = false,
         plugins = { spelling = true },
         key_labels = { ["<leader>"] = "SPC" },
       })
@@ -193,7 +195,8 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     config = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble" },
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
     },
   },
 
@@ -207,7 +210,7 @@ return {
     keys = {
       { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
       { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", "Todo Trouble" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
       { "<leader>xtt", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo Trouble" },
       { "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo Telescope" },
     },

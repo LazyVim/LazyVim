@@ -73,4 +73,16 @@ function M.float_term(cmd, opts)
   require("lazy.util").open_cmd(cmd, opts)
 end
 
+---@param silent boolean?
+function M.toggle(option, silent)
+  vim.opt_local[option] = not vim.opt_local[option]:get()
+  if not silent then
+    vim.notify(
+      (vim.opt_local[option]:get() and "Enabled" or "Disabled") .. option,
+      vim.log.levels.INFO,
+      { title = "Option" }
+    )
+  end
+end
+
 return M
