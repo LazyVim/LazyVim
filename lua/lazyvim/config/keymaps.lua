@@ -64,26 +64,17 @@ vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
 vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
 
+-- stylua: ignore start
+
 -- toggle options
 vim.keymap.set("n", "<leader>tf", require("lazyvim.plugins.lsp.format").toggle, { desc = "Format on Save" })
-vim.keymap.set("n", "<leader>ts", function()
-  util.toggle("spell")
-end, { desc = "Spelling" })
-vim.keymap.set("n", "<leader>tw", function()
-  util.toggle("wrap")
-end, { desc = "Word Wrap" })
-vim.keymap.set("n", "<leader>tn", function()
-  util.toggle("relativenumber", true)
-  util.toggle("number")
-end, { desc = "Line Numbers" })
+vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Spelling" })
+vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Word Wrap" })
+vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end, { desc = "Line Numbers" })
 
 -- lazygit
-vim.keymap.set("n", "<leader>gg", function()
-  require("lazyvim.util").float_term({ "lazygit" })
-end, { desc = "Lazygit (cwd)" })
-vim.keymap.set("n", "<leader>gG", function()
-  util.float_term({ "lazygit" }, { cwd = util.get_root() })
-end, { desc = "Lazygit (root dir)" })
+vim.keymap.set("n", "<leader>gg", function() require("lazyvim.util").float_term({ "lazygit" }) end, { desc = "Lazygit (cwd)" })
+vim.keymap.set("n", "<leader>gG", function() util.float_term({ "lazygit" }, { cwd = util.get_root() }) end, { desc = "Lazygit (root dir)" })
 
 -- quit
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -92,3 +83,23 @@ vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 if vim.fn.has("nvim-0.9.0") == 1 then
   vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })
 end
+
+-- windows
+vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "other-window" })
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "delete-window" })
+vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "split-window-below" })
+vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "split-window-right" })
+
+-- tabs
+vim.keymap.set("n", "<leader><tab>l", "<cmd>tablast<CR>", { desc = "Last" })
+vim.keymap.set("n", "<leader><tab>f", "<cmd>tabfirst<CR>", { desc = "First" })
+vim.keymap.set("n", "<leader><tab><tab>", "<cmd>tabnew<CR>", { desc = "New Tab" })
+vim.keymap.set("n", "<leader><tab>]", "<cmd>tabnext<CR>", { desc = "Next" })
+vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<CR>", { desc = "Close" })
+vim.keymap.set("n", "<leader><tab>[", "<cmd>tabprevious<CR>", { desc = "Previous" })
+
+-- buffers
+vim.keymap.set("n", "<leader>b]", "<cmd>:BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+vim.keymap.set("n", "<leader>bb", "<cmd>:e #<cr>", { desc = "Switch to Other Buffer" })
+vim.keymap.set("n", "<leader>b[", "<cmd>:BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
+vim.keymap.set("n", "<leader>`", "<cmd>:e #<cr>", { desc = "Switch to Other Buffer" })
