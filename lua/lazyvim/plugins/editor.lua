@@ -142,7 +142,7 @@ return {
         ["<leader>n"] = { name = "+noice" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
-        ["<leader>x"] = { name = "+diagnostics" },
+        ["<leader>x"] = { name = "+diagnostics/quickfix" },
       })
     end,
   },
@@ -186,4 +186,15 @@ return {
       { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
     },
   },
+
+  -- better diagnostics list and others
+  {
+    "folke/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
+    config = { use_diagnostic_signs = true },
+    keys = {
+      { "<leader>xx", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble" },
+    },
+  },
+
 }

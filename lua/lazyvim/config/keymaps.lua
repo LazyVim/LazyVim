@@ -56,6 +56,9 @@ vim.keymap.set("v", ">", ">gv")
 -- new file
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
+vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
+vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
+
 -- lazygit
 vim.keymap.set("n", "<leader>gg", function()
   require("lazyvim.util").float_term({ "lazygit" })
