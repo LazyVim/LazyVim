@@ -86,7 +86,31 @@ return {
         desc = "Goto Symbol",
       },
     },
-    config = true,
+    config = {
+      defaults = {
+        prompt_prefix = " ",
+        selection_caret = " ",
+        mappings = {
+          i = {
+            ["<c-t>"] = function(...)
+              return require("trouble.providers.telescope").open_with_trouble(...)
+            end,
+            ["<C-i>"] = function()
+              util.telescope("find_files", { no_ignore = true })()
+            end,
+            ["<C-h>"] = function()
+              util.telescope("find_files", { hidden = true })()
+            end,
+            ["<C-Down>"] = function(...)
+              return require("telescope.actions").cycle_history_next(...)
+            end,
+            ["<C-Up>"] = function(...)
+              return require("telescope.actions").cycle_history_prev(...)
+            end,
+          },
+        },
+      },
+    },
   },
 
   -- easily jump to any location and enhanced f/t motions for Leap
