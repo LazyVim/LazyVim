@@ -96,7 +96,7 @@ return {
     event = "BufReadPre",
     config = function()
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "alpha", "lazy" },
+        pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
