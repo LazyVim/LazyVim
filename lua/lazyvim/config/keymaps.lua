@@ -65,5 +65,8 @@ vim.keymap.set("n", "<leader>gG", function()
   util.float_term({ "lazygit" }, { cwd = util.get_root() })
 end, { desc = "Lazygit for root dir" })
 
+-- quit
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+
 -- highlights under cursor
 vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })

@@ -147,6 +147,7 @@ return {
         ["<leader>g"] = { name = "+git" },
         ["<leader>h"] = { name = "+help" },
         ["<leader>n"] = { name = "+noice" },
+        ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
         ["<leader>x"] = { name = "+diagnostics" },
       })
