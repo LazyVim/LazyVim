@@ -122,6 +122,8 @@ return {
         ["<leader>f"] = { name = "+file" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>h"] = { name = "+help" },
+        ["<leader>n"] = { name = "+noice" },
+        ["<leader>s"] = { name = "+search" },
         ["<leader>x"] = { name = "+diagnostics" },
       })
     end,
