@@ -2,6 +2,10 @@
 
 local util = require("lazyvim.util")
 
+-- better up/down
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<A-left>", "<C-w>h")
 vim.keymap.set("n", "<A-down>", "<C-w>j")
