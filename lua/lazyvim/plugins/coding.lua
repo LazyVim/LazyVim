@@ -13,15 +13,18 @@ return {
       history = true,
       delete_check_events = "TextChanged",
     },
-    init = function()
-      local function jump(key, dir)
-        vim.keymap.set({ "i", "s" }, key, function()
-          return require("luasnip").jump(dir) or key
-        end, { expr = true })
-      end
-      jump("<tab>", 1)
-      jump("<s-tab>", -1)
-    end,
+    -- stylua: ignore
+    keys = {
+      {
+        "<tab>",
+        function()
+          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+        end,
+        expr = true, remap = true, silent = true, mode = "i",
+      },
+      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+    },
   },
 
   -- auto completion
