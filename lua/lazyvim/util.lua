@@ -78,7 +78,7 @@ function M.toggle(option, silent)
   vim.opt_local[option] = not vim.opt_local[option]:get()
   if not silent then
     vim.notify(
-      (vim.opt_local[option]:get() and "Enabled" or "Disabled") .. option,
+      (vim.opt_local[option]:get() and "Enabled" or "Disabled") .. " " .. option,
       vim.log.levels.INFO,
       { title = "Option" }
     )
