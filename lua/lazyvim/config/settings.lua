@@ -7,6 +7,11 @@ local settings = {
       Hint = " ",
       Info = " ",
     },
+    git = {
+      added = " ",
+      modified = "柳",
+      removed = " ",
+    },
     kinds = {
       Class = " ",
       Color = " ",

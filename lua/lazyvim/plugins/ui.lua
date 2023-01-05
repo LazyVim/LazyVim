@@ -69,12 +69,35 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    config = {
-      options = {
-        globalstatus = true,
-        disabled_filetypes = { statusline = { "lazy", "alpha" } },
-      },
-    },
+    config = function()
+      local navic = require("nvim-navic")
+      local lualine = require("lualine")
+      local symbols = require("lazyvim.config.settings")
+      lualine.setup({
+        options = {
+          globalstatus = true,
+          disabled_filetypes = { statusline = { "lazy", "alpha" } },
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = {
+            { "branch" },
+            {
+              "diff",
+              symbols = { added = symbols.icons.git.added, modified = symbols.icons.git.modified, removed = symbols.icons.git.removed }, -- changes diff symbols
+            },
+          },
+          lualine_c = {
+            {
+              "diagnostics",
+              symbols = { error = symbols.icons.diagnostics.Error, warn = symbols.icons.diagnostics.Warn, info = symbols.icons.diagnostics.Info, hint = symbols.icons.diagnostics.Hint }
+            },
+            { "filename", padding = { left = 1, right = 1 } },
+            { navic.get_location, cond = navic.is_available }
+          },
+        }
+      })
+    end
   },
 
   -- indent guides for Neovim
