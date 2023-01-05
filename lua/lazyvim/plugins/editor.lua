@@ -14,7 +14,7 @@ return {
         end,
         desc = "NeoTree (root dir)",
       },
-      { "<leader>fT", "<cmd>Neotree toggle<cmd>", desc = "NeoTree (cwd)" },
+      { "<leader>fT", "<cmd>Neotree toggle<CR>", desc = "NeoTree (cwd)" },
     },
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
@@ -47,8 +47,8 @@ return {
       { "<leader>ff", util.telescope("find_files"), desc = "Find Files (root dir)" },
       { "<leader>fF", util.telescope("find_files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-      { "<leader>gc", "<Cmd>Telescope git_commits<CR>", desc = "commits" },
-      { "<leader>gs", "<Cmd>Telescope git_status<CR>", desc = "status" },
+      { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+      { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
       { "<leader>ha", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
       { "<leader>hc", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>hf", "<cmd>Telescope filetypes<cr>", desc = "File Types" },
