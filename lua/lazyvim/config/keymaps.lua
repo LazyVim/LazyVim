@@ -88,6 +88,10 @@ if vim.fn.has("nvim-0.9.0") == 1 then
   vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })
 end
 
+-- floating terminal
+vim.keymap.set("n", "<leader>ot", function() util.float_term(nil, { cwd = util.get_root() }) end, { desc = "Terminal (root dir)" })
+vim.keymap.set("n", "<leader>oT", function() require("lazyvim.util").float_term() end, { desc = "Terminal (cwd)" })
+
 -- windows
 vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "other-window" })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "delete-window" })

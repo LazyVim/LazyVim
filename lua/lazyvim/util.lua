@@ -61,6 +61,7 @@ function M.telescope(builtin, opts)
 end
 
 function M.float_term(cmd, opts)
+  cmd = cmd or { vim.env.SHELL or vim.o.shell }
   opts = vim.tbl_deep_extend("force", {
     terminal = true,
     close_on_exit = true,
