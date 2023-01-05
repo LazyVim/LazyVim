@@ -60,18 +60,14 @@ function M.telescope(builtin, opts)
   end
 end
 
+-- Opens a floating terminal (interactive by default)
+---@param cmd? string[]|string
+---@param opts? LazyCmdOptions|{interactive?:boolean}
 function M.float_term(cmd, opts)
-  cmd = cmd or { vim.env.SHELL or vim.o.shell }
   opts = vim.tbl_deep_extend("force", {
-    terminal = true,
-    close_on_exit = true,
-    enter = true,
-    float = {
-      size = { width = 0.9, height = 0.9 },
-      margin = { top = 0, right = 0, bottom = 0, left = 0 },
-    },
+    size = { width = 0.9, height = 0.9 },
   }, opts or {})
-  require("lazy.util").open_cmd(cmd, opts)
+  require("lazy.util").float_term(cmd, opts)
 end
 
 ---@param silent boolean?
