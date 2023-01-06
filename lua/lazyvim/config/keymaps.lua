@@ -3,8 +3,8 @@
 local util = require("lazyvim.util")
 
 -- better up/down
-vim.keymap.set("n", "j", "gj")
-vim.keymap.set("n", "k", "gk")
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move to window using the <meta> movement keys
 vim.keymap.set("n", "<A-left>", "<C-w>h")
