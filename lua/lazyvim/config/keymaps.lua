@@ -75,6 +75,9 @@ vim.keymap.set("n", "<leader>tf", require("lazyvim.plugins.lsp.format").toggle, 
 vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Spelling" })
 vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Word Wrap" })
 vim.keymap.set("n", "<leader>tn", function() util.toggle("relativenumber", true) util.toggle("number") end, { desc = "Line Numbers" })
+vim.keymap.set("n", "<leader>td", util.toggle_diagnostics, { desc = "Diagnostics" })
+local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
+vim.keymap.set("n", "<leader>tc", function() util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Conceal" })
 
 -- lazygit
 vim.keymap.set("n", "<leader>gg", function() require("lazyvim.util").float_term({ "lazygit" }) end, { desc = "Lazygit (cwd)" })
