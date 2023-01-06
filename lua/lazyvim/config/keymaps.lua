@@ -6,17 +6,16 @@ local util = require("lazyvim.util")
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
--- Move to window using the <meta> movement keys
-vim.keymap.set("n", "<A-left>", "<C-w>h")
-vim.keymap.set("n", "<A-down>", "<C-w>j")
-vim.keymap.set("n", "<A-up>", "<C-w>k")
-vim.keymap.set("n", "<A-right>", "<C-w>l")
-
 -- Resize window using <shift> arrow keys
 vim.keymap.set("n", "<S-Up>", "<cmd>resize +2<CR>")
 vim.keymap.set("n", "<S-Down>", "<cmd>resize -2<CR>")
 vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>")
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>")
+-- Move to window using the <ctrl> hjkl keys
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Move Lines
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
