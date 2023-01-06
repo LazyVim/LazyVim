@@ -26,9 +26,9 @@ vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 
--- Switch buffers with <ctrl>
-vim.keymap.set("n", "<C-Left>", "<cmd>bprevious<cr>")
-vim.keymap.set("n", "<C-Right>", "<cmd>bnext<cr>")
+-- Switch buffers with <shift> hl
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>")
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>")
 
 -- Easier pasting
 vim.keymap.set("n", "[p", ":pu!<cr>")
