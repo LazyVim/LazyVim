@@ -1,8 +1,12 @@
 # LazyVim
 
-A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nvim)
+Basic IDE for lazy Neovim users using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ![image](https://user-images.githubusercontent.com/292349/210136312-c211f781-6d51-46b0-a265-6098bdbb364d.png)
+
+## 🚀 Getting Started
+
+You can find a starter template for **LazyVim** [here](https://github.com/LazyVim/starter)
 
 ## ✅ Todo
 
@@ -10,39 +14,6 @@ A starter template for Neovim using [lazy.nvim](https://github.com/folke/lazy.nv
 - [x] treesitter auto-install seems broken. Switch to `ensure_installed` instead?
 - [x] list all plugins in readme
 - [ ] test all-the-things
-
-## File Structure
-
-<pre>
-~/.config/nvim
-├── lua
-│   └── lazyvim
-│       ├── config
-│       │   ├── autocmds.lua
-│       │   ├── keymaps.lua
-│       │   ├── lazy.lua
-│       │   ├── options.lua
-│       │   └── settings.lua
-│       ├── plugins
-│       │   ├── lsp
-│       │   │   ├── format.lua
-│       │   │   ├── init.lua
-│       │   │   ├── keymaps.lua
-│       │   │   └── servers.lua
-│       │   ├── coding.lua
-│       │   ├── colorscheme.lua
-│       │   ├── config.lua
-│       │   ├── editor.lua
-│       │   ├── treesitter.lua
-│       │   ├── ui.lua
-│       │   └── util.lua
-│       └── util.lua
-├── init.lua
-├── lazy-lock.json
-├── LICENSE
-├── README.md
-└── stylua.toml
-</pre>
 
 <!-- plugins:start -->
 
