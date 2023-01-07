@@ -61,7 +61,7 @@ return {
         function(server)
           local opts = servers[server] or {}
           opts.capabilities = capabilities
-          if not plugin.setup_server(opts) then
+          if not plugin.setup_server(server, opts) then
             require("lspconfig")[server].setup(opts)
           end
         end,
