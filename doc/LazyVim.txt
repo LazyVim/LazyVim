@@ -4,20 +4,25 @@
 Table of Contents                                  *LazyVim-table-of-contents*
 
 1. LazyVim                                                   |LazyVim-lazyvim|
+  - Getting Started                                  |LazyVim-getting-started|
   - Todo                                                        |LazyVim-todo|
-  - File Structure                                    |LazyVim-file-structure|
   - Plugins                                                  |LazyVim-plugins|
 
 ==============================================================================
 1. LazyVim                                                   *LazyVim-lazyvim*
 
-A starter template for Neovim using lazy.nvim
+Basic IDE for lazy Neovim users using lazy.nvim
 <https://github.com/folke/lazy.nvim>
 
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/292349/210136312-c211f781-6d51-46b0-a265-6098bdbb364d.png" title="fig:"/>
 <p class="caption">image</p>
 </div>
+
+GETTING STARTED                                      *LazyVim-getting-started*
+
+You can find a starter template for **LazyVim** here
+<https://github.com/LazyVim/starter>
 
 TODO                                                            *LazyVim-todo*
 
@@ -27,39 +32,6 @@ TODO                                                            *LazyVim-todo*
 - list all plugins in readme
 - test all-the-things
 
-
-FILE STRUCTURE                                        *LazyVim-file-structure*
-
-<pre>
-~/.config/nvim
- lua
-    lazyvim
-        config
-           autocmds.lua
-           keymaps.lua
-           lazy.lua
-           options.lua
-           settings.lua
-        plugins
-           lsp
-              format.lua
-              init.lua
-              keymaps.lua
-              servers.lua
-           coding.lua
-           colorscheme.lua
-           config.lua
-           editor.lua
-           treesitter.lua
-           ui.lua
-           util.lua
-        util.lua
- init.lua
- lazy-lock.json
- LICENSE
- README.md
- stylua.toml
-</pre>
 
 PLUGINS                                                      *LazyVim-plugins*
 
