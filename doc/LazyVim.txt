@@ -31,6 +31,24 @@ GETTING STARTED                                      *LazyVim-getting-started*
 You can find a starter template for **LazyVim** here
 <https://github.com/LazyVim/starter>
 
+**TLDR:**
+
+>lua
+    require("lazy").setup({
+      spec = {
+        -- import LazyVim plugins
+        { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+        -- import/override with your plugins
+        { import = "plugins" },
+      },
+      defaults = {
+        lazy = true, -- every plugin is lazy-loaded by default
+        version = "", -- try installing the latest stable version for plugins that support semver
+        },
+    })
+<
+
+
 TODO                                                            *LazyVim-todo*
 
 
