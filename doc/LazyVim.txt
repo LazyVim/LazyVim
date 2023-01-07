@@ -77,6 +77,7 @@ PLUGINS                                                      *LazyVim-plugins*
 - gitsigns.nvim <https://github.com/lewis6991/gitsigns.nvim>
 - indent-blankline.nvim <https://github.com/lukas-reineke/indent-blankline.nvim>
 - lazy.nvim <https://github.com/folke/lazy.nvim>
+- LazyVim <https://github.com/LazyVim/LazyVim>
 - leap.nvim <https://github.com/ggandor/leap.nvim>
 - lualine.nvim <https://github.com/nvim-lualine/lualine.nvim>
 - LuaSnip <https://github.com/L3MON4D3/LuaSnip>
@@ -97,6 +98,7 @@ PLUGINS                                                      *LazyVim-plugins*
 - nvim-bufferline.lua <https://github.com/akinsho/nvim-bufferline.lua>
 - nvim-cmp <https://github.com/hrsh7th/nvim-cmp>
 - nvim-lspconfig <https://github.com/neovim/nvim-lspconfig>
+- nvim-navic <https://github.com/SmiteshP/nvim-navic>
 - nvim-notify <https://github.com/rcarriga/nvim-notify>
 - nvim-spectre <https://github.com/windwp/nvim-spectre>
 - nvim-treesitter <https://github.com/nvim-treesitter/nvim-treesitter>
