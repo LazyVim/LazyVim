@@ -26,6 +26,13 @@ return {
         },
       },
     },
+    -- you can do any additional lsp server setup here
+    -- return true if you don't want this server to be setup with lspconfig
+    ---@param server string lsp server name
+    ---@param opts _.lspconfig.options any options set for the server
+    setup_server = function(server, opts)
+      return false
+    end,
     config = function(plugin)
       -- setup formatting and keymaps
       require("lazyvim.util").on_attach(function(client, buffer)
@@ -54,7 +61,9 @@ return {
         function(server)
           local opts = servers[server] or {}
           opts.capabilities = capabilities
-          require("lspconfig")[server].setup(opts)
+          if not plugin.setup_server(opts) then
+            require("lspconfig")[server].setup(opts)
+          end
         end,
       })
     end,
