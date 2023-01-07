@@ -11,7 +11,21 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
     ---@type lspconfig.options
-    servers = nil,
+    servers = {
+      jsonls = {},
+      sumneko_lua = {
+        settings = {
+          Lua = {
+            workspace = {
+              checkThirdParty = false,
+            },
+            completion = {
+              callSnippet = "Replace",
+            },
+          },
+        },
+      },
+    },
     config = function(plugin)
       -- setup formatting and keymaps
       require("lazyvim.util").on_attach(function(client, buffer)
@@ -31,8 +45,8 @@ return {
         severity_sort = true,
       })
 
-      -- lspconfig
-      local servers = plugin.servers or require("lazyvim.plugins.lsp.servers")
+      ---@type lspconfig.options
+      local servers = plugin.servers or {}
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
