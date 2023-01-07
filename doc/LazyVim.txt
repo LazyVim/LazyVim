@@ -14,6 +14,13 @@ Table of Contents                                  *LazyVim-table-of-contents*
 Basic IDE for lazy Neovim users using lazy.nvim
 <https://github.com/folke/lazy.nvim>
 
+Can’t decide between building a config from scratch or using one of the
+existing Neovim "distros"?
+
+With **LazyVim** you don’t have to. Configuring **LazyVim** is **exactly the
+same** as you would configure a config from scratch. You can easily add new
+plugins, change the config for existing ones or disable plugins.
+
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/292349/210136312-c211f781-6d51-46b0-a265-6098bdbb364d.png" title="fig:"/>
 <p class="caption">image</p>
