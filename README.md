@@ -3,7 +3,7 @@
 Neovim config for the lazy powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim).
 
 Can't decide between building a config from scratch or using one of the existing
-Neovim "distros"?
+Neovim `"distros"`?
 
 With **LazyVim** you don't have to. Configuring **LazyVim** is
 **exactly the same** as you would configure a config from scratch.
