@@ -11,11 +11,11 @@ Table of Contents                                  *LazyVim-table-of-contents*
 ==============================================================================
 1. LazyVim                                                   *LazyVim-lazyvim*
 
-Basic IDE for lazy Neovim users powered by lazy.nvim
+Neovim config for the lazy powered by lazy.nvim
 <https://github.com/folke/lazy.nvim>.
 
 Can’t decide between building a config from scratch or using one of the
-existing Neovim "distros"?
+existing Neovim **_distros_**?
 
 With **LazyVim** you don’t have to. Configuring **LazyVim** is **exactly the
 same** as you would configure a config from scratch. You can easily add new
