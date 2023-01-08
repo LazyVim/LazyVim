@@ -117,8 +117,12 @@ return {
     "ggandor/leap.nvim",
     event = "VeryLazy",
     dependencies = { { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } } },
-    config = function()
-      require("leap").add_default_mappings(true)
+    config = function(_, opts)
+      local leap = require("leap")
+      for k, v in pairs(opts) do
+        leap.opts[k] = v
+      end
+      leap.add_default_mappings(true)
     end,
   },
 
@@ -196,8 +200,9 @@ return {
   {
     "RRethy/vim-illuminate",
     event = "BufReadPost",
-    config = function()
-      require("illuminate").configure({ delay = 200 })
+    opts = { delay = 200 },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
     end,
     -- stylua: ignore
     keys = {
