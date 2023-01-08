@@ -43,10 +43,10 @@ return {
     version = false, -- telescope did only one release, so use HEAD for now
     keys = {
       { "<leader>/", util.telescope("live_grep"), desc = "Find in Files (Grep)" },
-      { "<leader><space>", util.telescope("find_files"), desc = "Find Files (root dir)" },
+      { "<leader><space>", util.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-      { "<leader>ff", util.telescope("find_files"), desc = "Find Files (root dir)" },
-      { "<leader>fF", util.telescope("find_files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader>ff", util.telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>fF", util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
