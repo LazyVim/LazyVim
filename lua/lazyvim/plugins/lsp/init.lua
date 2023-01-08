@@ -10,30 +10,46 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
-    ---@type lspconfig.options
-    servers = {
-      jsonls = {},
-      sumneko_lua = {
-        settings = {
-          Lua = {
-            workspace = {
-              checkThirdParty = false,
-            },
-            completion = {
-              callSnippet = "Replace",
+    ---@class PluginLspOpts
+    opts = {
+      ---@type lspconfig.options
+      servers = {
+        jsonls = {},
+        sumneko_lua = {
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
             },
           },
         },
       },
+      -- you can do any additional lsp server setup here
+      -- return true if you don't want this server to be setup with lspconfig
+      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+      setup = {
+        -- example to setup with typescript.nvim
+        -- tsserver = function(_, opts)
+        --   require("typescript").setup({ server = opts })
+        --   return true
+        -- end,
+        -- Specify * to use this function as a fallback for any server
+        -- ["*"] = function(server, opts) end,
+      },
     },
-    -- you can do any additional lsp server setup here
-    -- return true if you don't want this server to be setup with lspconfig
-    ---@param server string lsp server name
-    ---@param opts _.lspconfig.options any options set for the server
-    setup_server = function(server, opts)
-      return false
-    end,
-    config = function(plugin)
+    ---@param opts PluginLspOpts
+    config = function(plugin, opts)
+      if plugin.servers then
+        require("lazyvim.util").deprecate("lspconfig.servers", "lspconfig.opts.servers")
+      end
+      if plugin.setup_server then
+        require("lazyvim.util").deprecate("lspconfig.setup_server", "lspconfig.opts.setup[SERVER]")
+      end
+
       -- setup formatting and keymaps
       require("lazyvim.util").on_attach(function(client, buffer)
         require("lazyvim.plugins.lsp.format").on_attach(client, buffer)
@@ -52,18 +68,24 @@ return {
         severity_sort = true,
       })
 
-      ---@type lspconfig.options
-      local servers = plugin.servers or {}
+      local servers = opts.servers
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
       require("mason-lspconfig").setup_handlers({
         function(server)
-          local opts = servers[server] or {}
-          opts.capabilities = capabilities
-          if not plugin.setup_server(server, opts) then
-            require("lspconfig")[server].setup(opts)
+          local server_opts = servers[server] or {}
+          server_opts.capabilities = capabilities
+          if opts.setup[server] then
+            if opts.setup[server](server, server_opts) then
+              return
+            end
+          elseif opts.setup["*"] then
+            if opts.setup["*"](server, server_opts) then
+              return
+            end
           end
+          require("lspconfig")[server].setup(server_opts)
         end,
       })
     end,
@@ -74,15 +96,15 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
     dependencies = { "mason.nvim" },
-    config = function()
+    opts = function()
       local nls = require("null-ls")
-      nls.setup({
+      return {
         sources = {
           -- nls.builtins.formatting.prettierd,
           nls.builtins.formatting.stylua,
           nls.builtins.diagnostics.flake8,
         },
-      })
+      }
     end,
   },
 
@@ -98,10 +120,11 @@ return {
       "shfmt",
       "flake8",
     },
-    config = function(plugin)
-      require("mason").setup()
+    ---@param opts MasonSettings
+    config = function(self, opts)
+      require("mason").setup(opts)
       local mr = require("mason-registry")
-      for _, tool in ipairs(plugin.ensure_installed) do
+      for _, tool in ipairs(self.ensure_installed) do
         local p = mr.get_package(tool)
         if not p:is_installed() then
           p:install()

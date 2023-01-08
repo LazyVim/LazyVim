@@ -11,7 +11,7 @@ return {
         desc = "Delete all Notifications",
       },
     },
-    config = {
+    opts = {
       timeout = 3000,
       max_height = function()
         return math.floor(vim.o.lines * 0.75)
@@ -43,7 +43,7 @@ return {
   {
     "akinsho/nvim-bufferline.lua",
     event = "BufAdd",
-    config = {
+    opts = {
       options = {
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
@@ -69,10 +69,11 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    override = function(config)
-      return config
-    end,
-    config = function(plugin)
+    opts = function(plugin)
+      if plugin.override then
+        require("lazyvim.util").deprecate("lualine.override", "lualine.opts")
+      end
+
       local icons = require("lazyvim.config.settings").icons
 
       local function fg(name)
@@ -83,7 +84,7 @@ return {
         end
       end
 
-      require("lualine").setup(plugin.override({
+      return {
         options = {
           theme = "auto",
           globalstatus = true,
@@ -144,7 +145,7 @@ return {
           },
         },
         extensions = { "nvim-tree" },
-      }))
+      }
     end,
   },
 
@@ -152,7 +153,7 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
-    config = {
+    opts = {
       -- char = "▏",
       char = "│",
       filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
@@ -185,7 +186,7 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    config = {
+    opts = {
       lsp = {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -279,15 +280,15 @@ return {
   {
     "goolord/alpha-nvim",
     event = "VimEnter",
-    config = function()
+    opts = function()
       local dashboard = require("alpha.themes.dashboard")
       local logo = [[
-             ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-             ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
-             ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
-             ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-             ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-             ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
+      ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
+      ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
+      ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
+      ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
+      ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
+      ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
       ]]
 
       dashboard.section.header.val = vim.split(logo, "\n")
@@ -309,6 +310,9 @@ return {
       dashboard.section.header.opts.hl = "AlphaHeader"
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.opts.layout[1].val = 8
+      return dashboard
+    end,
+    config = function(_, dashboard)
       vim.b.miniindentscope_disable = true
 
       -- close Lazy and re-open when the dashboard is ready
@@ -347,7 +351,7 @@ return {
         end
       end)
     end,
-    config = { separator = " ", highlight = true, depth_limit = 5 },
+    opts = { separator = " ", highlight = true, depth_limit = 5 },
   },
 
   -- icons

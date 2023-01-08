@@ -75,6 +75,7 @@ function M.telescope(builtin, opts)
   end
 end
 
+-- FIXME: create a togglable termiminal
 -- Opens a floating terminal (interactive by default)
 ---@param cmd? string[]|string
 ---@param opts? LazyCmdOptions|{interactive?:boolean}
@@ -120,6 +121,14 @@ function M.toggle_diagnostics()
     vim.diagnostic.disable()
     vim.notify("Disabled diagnostics", vim.log.levels.INFO, { title = "Diagnostics" })
   end
+end
+
+function M.deprecate(old, new)
+  vim.notify(
+    ("`%s` is deprecated. Please use `%s` instead"):format(old, new),
+    vim.log.levels.WARN,
+    { title = "LazyVim" }
+  )
 end
 
 return M

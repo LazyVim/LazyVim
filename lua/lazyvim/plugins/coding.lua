@@ -9,7 +9,7 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
-    config = {
+    opts = {
       history = true,
       delete_check_events = "TextChanged",
     },
@@ -35,12 +35,11 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-emoji",
       "saadparwaiz1/cmp_luasnip",
     },
-    config = function()
+    opts = function()
       local cmp = require("cmp")
-      cmp.setup({
+      return {
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
@@ -61,7 +60,6 @@ return {
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
-          { name = "emoji" },
         }),
         formatting = {
           format = function(_, item)
@@ -77,7 +75,7 @@ return {
             hl_group = "LspCodeLens",
           },
         },
-      })
+      }
     end,
   },
 
@@ -142,9 +140,9 @@ return {
         end,
       },
     },
-    config = function()
+    opts = function()
       local ai = require("mini.ai")
-      ai.setup({
+      return {
         n_lines = 500,
         custom_textobjects = {
           o = ai.gen_spec.treesitter({
@@ -154,7 +152,11 @@ return {
           f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
           c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
         },
-      })
+      }
+    end,
+    config = function(_, opts)
+      local ai = require("mini.ai")
+      ai.setup(opts)
     end,
   },
 }

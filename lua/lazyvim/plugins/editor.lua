@@ -19,7 +19,7 @@ return {
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
     end,
-    config = {
+    opts = {
       filesystem = {
         follow_current_file = true,
         hijack_netrw_behavior = "open_current",
@@ -85,7 +85,7 @@ return {
         desc = "Goto Symbol",
       },
     },
-    config = {
+    opts = {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
@@ -116,7 +116,7 @@ return {
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",
-    dependencies = { { "ggandor/flit.nvim", config = { labeled_modes = "nv" } } },
+    dependencies = { { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } } },
     config = function()
       require("leap").add_default_mappings(true)
     end,
@@ -126,12 +126,13 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    config = function()
+    opts = {
+      plugins = { spelling = true },
+      key_labels = { ["<leader>"] = "SPC" },
+    },
+    config = function(_, opts)
       local wk = require("which-key")
-      wk.setup({
-        plugins = { spelling = true },
-        key_labels = { ["<leader>"] = "SPC" },
-      })
+      wk.setup(opts)
       wk.register({
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
@@ -158,7 +159,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
-    config = {
+    opts = {
       signs = {
         add = { text = "▎" },
         change = { text = "▎" },
@@ -219,7 +220,7 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
-    config = { use_diagnostic_signs = true },
+    opts = { use_diagnostic_signs = true },
     keys = {
       { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },

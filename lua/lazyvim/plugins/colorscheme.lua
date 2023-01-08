@@ -5,9 +5,10 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
+    opts = { style = "moon" },
+    config = function(_, opts)
       local tokyonight = require("tokyonight")
-      tokyonight.setup({ style = "moon" })
+      tokyonight.setup(opts)
       tokyonight.load()
     end,
   },
