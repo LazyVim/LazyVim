@@ -1,4 +1,3 @@
-vim.notify("adding typescript")
 return {
 
   -- add typescript to treesitter
