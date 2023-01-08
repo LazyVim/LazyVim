@@ -57,6 +57,8 @@ TODO                                                            *LazyVim-todo*
 - treesitter auto-install seems broken. Switch to `ensure_installed` instead?
 - list all plugins in readme
 - test all-the-things
+- auto-generate keymaps for README.md
+- auto-generate plugins for README.md
 
 
 KEYMAPS                                                      *LazyVim-keymaps*
@@ -86,12 +88,12 @@ GENERAL ~
 │<leader>fn            │New File                  │**n**                     │
 │<leader>xl            │Open Location List        │**n**                     │
 │<leader>xq            │Open Quickfix List        │**n**                     │
-│<leader>tf            │Format on Save            │**n**                     │
-│<leader>ts            │Spelling                  │**n**                     │
-│<leader>tw            │Word Wrap                 │**n**                     │
-│<leader>tn            │Line Numbers              │**n**                     │
-│<leader>td            │Diagnostics               │**n**                     │
-│<leader>tc            │Conceal                   │**n**                     │
+│<leader>tf            │Toggle Format on Save     │**n**                     │
+│<leader>ts            │Toggle Spelling           │**n**                     │
+│<leader>tw            │Toggle Word Wrap          │**n**                     │
+│<leader>tn            │Toggle Line Numbers       │**n**                     │
+│<leader>td            │Toggle Diagnostics        │**n**                     │
+│<leader>tc            │Toggle Conceal            │**n**                     │
 │<leader>gg            │Lazygit (cwd)             │**n**                     │
 │<leader>gG            │Lazygit (root dir)        │**n**                     │
 │<leader>qq            │Quit all                  │**n**                     │
