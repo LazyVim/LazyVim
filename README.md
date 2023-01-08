@@ -96,7 +96,7 @@ require("lazy").setup({
 | ``<leader>b]`` | Next Buffer | **n** |
 | ``<leader>bb`` | Switch to Other Buffer | **n** |
 | ``<leader>b[`` | Previous Buffer | **n** |
-| ``<leader>``` | Switch to Other Buffer | **n** |
+| ``<leader>` `` | Switch to Other Buffer | **n** |
 
 ### LSP
 
