@@ -48,7 +48,7 @@ require("lazy").setup({
 keymaps. Just press any key like `<space>` and you'll see a popup with all
 possible keymaps starting with `<space>`.
 
-![image](https://user-images.githubusercontent.com/292349/211259887-1ce1d4c0-cd5c-4f27-9562-fa2095c71f07.png)
+![image](https://user-images.githubusercontent.com/292349/211259984-a7522199-81a2-44f7-be6c-af21ba153f0a.png)
 
 <!-- keymaps:start -->
 
