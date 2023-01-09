@@ -12,7 +12,7 @@ to tweak your config as needed, along with the convenience of a pre-configured s
 
 - 🔥 Transform your Neovim into a full-fledged IDE
 - 💤 Easily customize and extend your config with [lazy.nvim](https://github.com/folke/lazy.nvim)
-- 🚀 Blazingly fast startup (loads in under **20ms**)
+- 🚀 Blazingly fast
 - 🧹 Sane default settings for options, autocmds, and keymaps
 - 📦 Comes with a wealth of plugins pre-configured and ready to use
 
