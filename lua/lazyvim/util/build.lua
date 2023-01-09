@@ -56,7 +56,7 @@ function M.keymaps()
   local lines = {}
 
   for _, group in ipairs(groups) do
-    lines[#lines + 1] = "### " .. group
+    lines[#lines + 1] = "<details><summary>" .. group .. "</summary>"
     lines[#lines + 1] = ""
     vim.list_extend(lines, { "| Key | Description | Mode |", "| --- | --- | --- |" })
     local mappings = vim.tbl_filter(function(m)
@@ -81,6 +81,8 @@ function M.keymaps()
         )
         .. " |"
     end
+    lines[#lines + 1] = ""
+    lines[#lines + 1] = "</details>"
     lines[#lines + 1] = ""
   end
   return table.concat(lines, "\n")

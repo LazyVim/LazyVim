@@ -44,9 +44,13 @@ require("lazy").setup({
 
 ## ⌨️ Keymaps
 
+**LazyVim** uses [which-key.nvim](https://github.com/folke/which-key) to help you remember your
+keymaps. Just press any key like `<space>` and you'll see a popup with all
+possible keymaps starting with `<space>`.
+
 <!-- keymaps:start -->
 
-### General
+<details><summary>General</summary>
 
 | Key                  | Description                | Mode                       |
 | -------------------- | -------------------------- | -------------------------- |
@@ -72,7 +76,7 @@ require("lazy").setup({
 | `<leader>fn`         | New File                   | **n**                      |
 | `<leader>xl`         | Open Location List         | **n**                      |
 | `<leader>xq`         | Open Quickfix List         | **n**                      |
-| `<leader>tf`         | Toggle Format on Save      | **n**                      |
+| `<leader>tf`         | Toggle format on Save      | **n**                      |
 | `<leader>ts`         | Toggle Spelling            | **n**                      |
 | `<leader>tw`         | Toggle Word Wrap           | **n**                      |
 | `<leader>tn`         | Toggle Line Numbers        | **n**                      |
@@ -100,7 +104,9 @@ require("lazy").setup({
 | `<leader>b[`         | Previous Buffer            | **n**                      |
 | `` <leader>`  ``     | Switch to Other Buffer     | **n**                      |
 
-### LSP
+</details>
+
+<details><summary>LSP</summary>
 
 | Key          | Description           | Mode         |
 | ------------ | --------------------- | ------------ |
@@ -125,7 +131,9 @@ require("lazy").setup({
 | `<leader>cf` | Format Range          | **v**        |
 | `<leader>cr` | Rename                | **n**        |
 
-### Plugins
+</details>
+
+<details><summary>Plugins</summary>
 
 | Key               | Description                                                                                    | Mode  |
 | ----------------- | ---------------------------------------------------------------------------------------------- | ----- |
@@ -177,6 +185,8 @@ require("lazy").setup({
 | `<leader>xX`      | [trouble.nvim](https://github.com/folke/trouble.nvim.git) Workspace Diagnostics (Trouble)      | **n** |
 | `]]`              | [vim-illuminate](https://github.com/RRethy/vim-illuminate.git) Next Reference                  | **n** |
 | `[[`              | [vim-illuminate](https://github.com/RRethy/vim-illuminate.git) Prev Reference                  | **n** |
+
+</details>
 
 <!-- keymaps:end -->
 
