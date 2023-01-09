@@ -1,14 +1,11 @@
 # LazyVim
 
-Neovim config for the lazy powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim).
-
-Can't decide between building a config from scratch or using one of the existing
-Neovim **_distros_**?
-
-With **LazyVim** you don't have to. Configuring **LazyVim** is
-**exactly the same** as you would configure a config from scratch.
-You can easily add new plugins, change the config for existing ones
-or disable plugins.
+Introducing LazyVim, a Neovim configuration that combines the benefits of a pre-made
+distro with the flexibility of building your own setup from scratch.
+Powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim),
+LazyVim allows you to easily add, modify, or disable plugins
+as needed, all while enjoying the convenience of a pre-configured config.
+With LazyVim, you get the best of both worlds.
 
 ![image](https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png)
 
