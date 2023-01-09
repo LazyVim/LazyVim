@@ -15,6 +15,8 @@ return {
         desc = "NeoTree (root dir)",
       },
       { "<leader>fT", "<cmd>Neotree toggle<CR>", desc = "NeoTree (cwd)" },
+      { "<leader>e", "<leader>ft", desc = "NeoTree (root dir)", remap = true },
+      { "<leader>E", "<leader>fT", desc = "NeoTree (cwd)", remap = true },
     },
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
