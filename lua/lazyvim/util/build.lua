@@ -101,7 +101,7 @@ function M.update()
 
   ---@type string[]
   local plugins = {
-    "<details><summary>Core Plugins</summary>",
+    "<details><summary>Core</summary>",
     "",
     Docs.plugins(core.plugins).content,
     "",
@@ -138,6 +138,8 @@ require("lazy").setup({
     end
   end)
   data.plugins = { content = table.concat(plugins, "\n") }
+  local examples = vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/plugins/example.lua", ":p")
+  data.examples = Util.read_file(examples):gsub("^[^\n]+\n[^\n]+\n[^\n]+\n", "")
   Docs.save(data)
 end
 
