@@ -58,7 +58,6 @@ jobs:
           prerelease: true
           bump-minor-pre-major: true
           bump-patch-for-minor-pre-major: true
-          release-as: 0.1.0-alpha
       - uses: actions/checkout@v2
       - name: tag stable versions
         if: ${{ steps.release.outputs.release_created }}
