@@ -63,7 +63,11 @@ TODO                                                            *LazyVim-todo*
 
 KEYMAPS                                                      *LazyVim-keymaps*
 
-GENERAL ~
+**LazyVim** uses which-key.nvim <https://github.com/folke/which-key> to help
+you remember your keymaps. Just press any key like `<space>` and you’ll see a
+popup with all possible keymaps starting with `<space>`.
+
+General
 
 │         Key          │       Description        │           Mode           │
 │<C-h>                 │Go to left window         │**n**                     │
@@ -88,7 +92,7 @@ GENERAL ~
 │<leader>fn            │New File                  │**n**                     │
 │<leader>xl            │Open Location List        │**n**                     │
 │<leader>xq            │Open Quickfix List        │**n**                     │
-│<leader>tf            │Toggle Format on Save     │**n**                     │
+│<leader>tf            │Toggle format on Save     │**n**                     │
 │<leader>ts            │Toggle Spelling           │**n**                     │
 │<leader>tw            │Toggle Word Wrap          │**n**                     │
 │<leader>tn            │Toggle Line Numbers       │**n**                     │
@@ -117,7 +121,7 @@ GENERAL ~
 │<leader>              │Switch to Other Buffer    │**n**                     │
 
 
-LSP ~
+LSP
 
 │     Key      │     Description     │    Mode    │
 │<leader>cd    │Line Diagnostics     │**n**       │
@@ -142,7 +146,7 @@ LSP ~
 │<leader>cr    │Rename               │**n**       │
 
 
-PLUGINS ~
+Plugins
 
 │        Key        │                                         Description                                         │Mode │
 │<leader>cm         │mason.nvim <https://github.com/williamboman/mason.nvim.git> Mason                            │**n**│
