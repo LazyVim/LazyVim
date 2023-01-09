@@ -32,10 +32,6 @@ vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move up" })
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
--- Easier pasting
-vim.keymap.set("n", "[p", ":pu!<cr>", { desc = "Paste below" })
-vim.keymap.set("n", "]p", ":pu<cr>", { desc = "Paste above" })
-
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 vim.keymap.set("n", "gw", "*N")
