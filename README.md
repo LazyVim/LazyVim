@@ -10,7 +10,7 @@ With **LazyVim** you don't have to. Configuring **LazyVim** is
 You can easily add new plugins, change the config for existing ones
 or disable plugins.
 
-![image](https://user-images.githubusercontent.com/292349/210136312-c211f781-6d51-46b0-a265-6098bdbb364d.png)
+![image](https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png)
 
 ## 🚀 Getting Started
 
