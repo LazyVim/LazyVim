@@ -15,12 +15,12 @@ Table of Contents                                  *LazyVim-table-of-contents*
 ==============================================================================
 1. LazyVim                                                   *LazyVim-lazyvim*
 
-Introducing LazyVim, a Neovim configuration that combines the benefits of a
-pre-made distro with the flexibility of building your own setup from scratch.
-Powered by lazy.nvim <https://github.com/folke/lazy.nvim>, LazyVim allows you
-to easily add, modify, or disable plugins as needed, all while enjoying the
-convenience of a pre-configured config. With LazyVim, you get the best of both
-worlds.
+LazyVim is a Neovim setup powered by lazy.nvim
+<https://github.com/folke/lazy.nvim> to make it easy to customize and extend
+your config. Rather than having to choose between starting from scratch or
+using a pre-made distro, LazyVim offers the best of both worlds - the
+flexibility to tweak your config as needed, along with the convenience of a
+pre-configured setup.
 
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png" title="fig:"/>
