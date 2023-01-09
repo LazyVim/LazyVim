@@ -1,9 +1,11 @@
 -- Ugly code to generate some things for the readme
+local Util = require("lazy.util")
 
 local M = {}
+local root = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h:h:h:h")
 
+---@return ReadmeBlock
 function M.keymaps()
-  local root = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h:h:h:h")
   local keymap_set = vim.keymap.set
   ---@type table<string,{mode?:string|string[], keys:string, desc?:string, i:number, group:string}>
   local keymaps = {}
@@ -42,7 +44,7 @@ function M.keymaps()
 
   group = "Plugins"
 
-  require("lazy.util").foreach(require("lazy.core.config").plugins, function(name, plugin)
+  Util.foreach(require("lazy.core.config").plugins, function(name, plugin)
     for _, key in ipairs(plugin.keys or {}) do
       if type(key) == "table" and key.desc then
         local desc = key.desc or ""
@@ -85,14 +87,58 @@ function M.keymaps()
     lines[#lines + 1] = "</details>"
     lines[#lines + 1] = ""
   end
-  return table.concat(lines, "\n")
+  return { content = table.concat(lines, "\n") }
 end
 
 function M.update()
   local Docs = require("lazy.docs")
-  Docs.plugins()
-  Docs.save({ keymaps = M.keymaps() })
-  vim.cmd.checktime()
+  ---@type table<string, ReadmeBlock>
+  local data = {
+    keymaps = M.keymaps(),
+  }
+
+  local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
+
+  ---@type string[]
+  local plugins = {
+    "<details><summary>Core Plugins</summary>",
+    "",
+    Docs.plugins(core.plugins).content,
+    "",
+    "</details>",
+    "",
+  }
+
+  Util.walk(root .. "/lua/lazyvim/plugins/extras", function(path, name, type)
+    if type == "file" and name:find("%.lua$") then
+      local modname = path:gsub(".*/lua/", ""):gsub("/", "."):gsub("%.lua$", "")
+      local spec = require("lazy.core.plugin").Spec.new({ import = modname })
+      spec:fix_disabled()
+      vim.list_extend(plugins, {
+        ("<details><summary>Extras: <code>%s</code></summary>"):format(modname:gsub(".*extras%.", "")),
+        "",
+        ([[
+To use this, add it to your **lazy.nvim** imports:
+
+```lua
+require("lazy").setup({
+  spec = {
+    { "folke/LazyVim", import = "lazyvim.plugins" },
+    { import = "%s" },
+    { import = "plugins" },
+  },
+})
+```
+]]):format(modname),
+        Docs.plugins(spec.plugins).content,
+        "",
+        "</details>",
+        "",
+      })
+    end
+  end)
+  data.plugins = { content = table.concat(plugins, "\n") }
+  Docs.save(data)
 end
 
 M.update()

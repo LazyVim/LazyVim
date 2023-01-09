@@ -148,6 +148,8 @@ possible keymaps starting with `<space>`.
 | `<leader>nl`      | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice Last Message                       | **n** |
 | `<leader>nh`      | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice History                            | **n** |
 | `<leader>na`      | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice All                                | **n** |
+| `<c-f>`           | [noice.nvim](https://github.com/folke/noice.nvim.git) Scroll forward                           | **n** |
+| `<c-b>`           | [noice.nvim](https://github.com/folke/noice.nvim.git) Scroll backward                          | **n** |
 | `<leader>nd`      | [nvim-notify](https://github.com/rcarriga/nvim-notify.git) Delete all Notifications            | **n** |
 | `<leader>sr`      | [nvim-spectre](https://github.com/windwp/nvim-spectre.git) Replace in files (Spectre)          | **n** |
 | `<leader>qs`      | [persistence.nvim](https://github.com/folke/persistence.nvim.git) Restore Session              | **n** |
@@ -196,10 +198,11 @@ possible keymaps starting with `<space>`.
 
 <!-- plugins:start -->
 
+<details><summary>Core Plugins</summary>
+
 - [alpha-nvim](https://github.com/goolord/alpha-nvim)
 - [catppuccin](https://github.com/catppuccin/nvim)
 - [cmp-buffer](https://github.com/hrsh7th/cmp-buffer)
-- [cmp-emoji](https://github.com/hrsh7th/cmp-emoji)
 - [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)
 - [cmp-path](https://github.com/hrsh7th/cmp-path)
 - [cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)
@@ -209,7 +212,6 @@ possible keymaps starting with `<space>`.
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
-- [LazyVim](https://github.com/LazyVim/LazyVim)
 - [leap.nvim](https://github.com/ggandor/leap.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
@@ -246,5 +248,65 @@ possible keymaps starting with `<space>`.
 - [vim-illuminate](https://github.com/RRethy/vim-illuminate)
 - [vim-startuptime](https://github.com/dstein64/vim-startuptime)
 - [which-key.nvim](https://github.com/folke/which-key.nvim)
+
+</details>
+
+<details><summary>Extras: <code>lang.json</code></summary>
+
+To use this, add it to your **lazy.nvim** imports:
+
+```lua
+require("lazy").setup({
+  spec = {
+    { "folke/LazyVim", import = "lazyvim.plugins" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "plugins" },
+  },
+})
+```
+
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [schemastore.nvim](https://github.com/b0o/schemastore.nvim)
+
+</details>
+
+<details><summary>Extras: <code>lang.typescript</code></summary>
+
+To use this, add it to your **lazy.nvim** imports:
+
+```lua
+require("lazy").setup({
+  spec = {
+    { "folke/LazyVim", import = "lazyvim.plugins" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "plugins" },
+  },
+})
+```
+
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
+- [typescript.nvim](https://github.com/jose-elias-alvarez/typescript.nvim)
+
+</details>
+
+<details><summary>Extras: <code>ui.mini-starter</code></summary>
+
+To use this, add it to your **lazy.nvim** imports:
+
+```lua
+require("lazy").setup({
+  spec = {
+    { "folke/LazyVim", import = "lazyvim.plugins" },
+    { import = "lazyvim.plugins.extras.ui.mini-starter" },
+    { import = "plugins" },
+  },
+})
+```
+
+- [mini.starter](https://github.com/echasnovski/mini.starter)
+
+</details>
 
 <!-- plugins:end -->
