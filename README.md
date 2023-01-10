@@ -277,7 +277,7 @@ return {
 
 ## ⌨️ Keymaps
 
-**LazyVim** uses [which-key.nvim](https://github.com/folke/which-key) to help you remember your
+**LazyVim** uses [which-key.nvim](https://github.com/folke/which-key.nvim) to help you remember your
 keymaps. Just press any key like `<space>` and you'll see a popup with all
 possible keymaps starting with `<space>`.
 
