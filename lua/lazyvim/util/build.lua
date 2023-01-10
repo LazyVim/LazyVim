@@ -44,7 +44,8 @@ function M.keymaps()
 
   group = "Plugins"
 
-  Util.foreach(require("lazy.core.config").plugins, function(name, plugin)
+  local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
+  Util.foreach(core.plugins, function(name, plugin)
     for _, key in ipairs(plugin.keys or {}) do
       if type(key) == "table" and key.desc then
         local desc = key.desc or ""
@@ -95,6 +96,7 @@ function M.update()
   ---@type table<string, ReadmeBlock>
   local data = {
     keymaps = M.keymaps(),
+    config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})"),
   }
 
   local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
