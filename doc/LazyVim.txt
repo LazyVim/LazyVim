@@ -1,4 +1,4 @@
-*LazyVim.txt*         For Neovim >= 0.8.0         Last change: 2023 January 09
+*LazyVim.txt*         For Neovim >= 0.8.0         Last change: 2023 January 10
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
@@ -297,9 +297,9 @@ Example spec: <code>lua/plugins/example.lua</code>
 
 KEYMAPS                                                      *LazyVim-keymaps*
 
-**LazyVim** uses which-key.nvim <https://github.com/folke/which-key> to help
-you remember your keymaps. Just press any key like `<space>` and you’ll see a
-popup with all possible keymaps starting with `<space>`.
+**LazyVim** uses which-key.nvim <https://github.com/folke/which-key.nvim> to
+help you remember your keymaps. Just press any key like `<space>` and you’ll
+see a popup with all possible keymaps starting with `<space>`.
 
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/292349/211259984-a7522199-81a2-44f7-be6c-af21ba153f0a.png" title="fig:"/>
