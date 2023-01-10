@@ -1,54 +1,16 @@
----@class LazyVimSettings
-local settings = {
-  icons = {
-    diagnostics = {
-      Error = " ",
-      Warn = " ",
-      Hint = " ",
-      Info = " ",
-    },
-    git = {
-      added = " ",
-      modified = " ",
-      removed = " ",
-    },
-    kinds = {
-      Array = " ",
-      Boolean = " ",
-      Class = " ",
-      Color = " ",
-      Constant = " ",
-      Constructor = " ",
-      Enum = " ",
-      EnumMember = " ",
-      Event = " ",
-      Field = " ",
-      File = " ",
-      Folder = " ",
-      Function = " ",
-      Interface = " ",
-      Key = " ",
-      Keyword = " ",
-      Method = " ",
-      Module = " ",
-      Namespace = " ",
-      Null = "ﳠ ",
-      Number = " ",
-      Object = " ",
-      Operator = " ",
-      Package = " ",
-      Property = " ",
-      Reference = " ",
-      Snippet = " ",
-      String = " ",
-      Struct = " ",
-      Text = " ",
-      TypeParameter = " ",
-      Unit = " ",
-      Value = " ",
-      Variable = " ",
-    },
+require("lazy.core.util").warn(
+  [[`config.settings` is deprecated.
+
+Please configure LazyVim as a plugin:
+```lua
+{
+  "LazyVim/LazyVim",
+  opts = {
+    -- your config comes here
   },
 }
-
-return settings
+```
+]],
+  { title = "LazyVim" }
+)
+return require("lazyvim.config")
