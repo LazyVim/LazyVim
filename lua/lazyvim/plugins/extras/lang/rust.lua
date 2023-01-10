@@ -11,16 +11,7 @@ return {
   -- correctly setup lspconfig for Rust 🚀
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "simrat39/rust-tools.nvim",
-      init = function()
-        require("lazyvim.util").on_attach(function(_, buffer)
-		  -- stylua: ignore
-		  vim.keymap.set("n", "<C-space>", "RustHoverActions", { buffer = buffer, desc = "Hover Actions (Rust)" })
-          vim.keymap.set("n", "<Leader>a", "RustCodeActionGroup", { buffer = buffer, desc = "Code Action (Rust)" })
-        end)
-      end,
-    },
+    dependencies = { "simrat39/rust-tools.nvim" },
     opts = {
       servers = {
         rust_analyzer = {
@@ -47,6 +38,13 @@ return {
       },
       setup = {
         rust_analyzer = function(_, opts)
+          require("lazyvim.util").on_attach(function(client, buffer)
+            if client.name == "rust_analyzer" then
+			  -- stylua: ignore
+			  vim.keymap.set("n", "<leader>co", "RustHoverActions", { buffer = buffer, desc = "Hover Actions (Rust)" })
+              vim.keymap.set("n", "<leader>cR", "RustCodeActionGroup", { buffer = buffer, desc = "Code Action (Rust)" })
+            end
+          end)
           local rust_opts = {
             server = vim.tbl_deep_extend("force", {}, opts, opts.server or {}),
             tools = { -- rust-tools options
