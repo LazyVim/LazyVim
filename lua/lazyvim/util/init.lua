@@ -1,3 +1,5 @@
+local Util = require("lazy.core.util")
+
 local M = {}
 
 M.root_patterns = { ".git", "/lua" }
@@ -95,19 +97,15 @@ function M.toggle(option, silent, values)
     else
       vim.opt_local[option] = values[1]
     end
-    return vim.notify(
-      "Set " .. option .. " to " .. vim.opt_local[option]:get(),
-      vim.log.levels.INFO,
-      { title = "Option" }
-    )
+    return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
   end
   vim.opt_local[option] = not vim.opt_local[option]:get()
   if not silent then
-    vim.notify(
-      (vim.opt_local[option]:get() and "Enabled" or "Disabled") .. " " .. option,
-      vim.log.levels.INFO,
-      { title = "Option" }
-    )
+    if vim.opt_local[option]:get() then
+      Util.info("Enabled " .. option, { title = "Option" })
+    else
+      Util.warn("Disabled " .. option, { title = "Option" })
+    end
   end
 end
 
@@ -116,19 +114,15 @@ function M.toggle_diagnostics()
   enabled = not enabled
   if enabled then
     vim.diagnostic.enable()
-    vim.notify("Enabled diagnostics", vim.log.levels.INFO, { title = "Diagnostics" })
+    Util.info("Enabled diagnostics", { title = "Diagnostics" })
   else
     vim.diagnostic.disable()
-    vim.notify("Disabled diagnostics", vim.log.levels.INFO, { title = "Diagnostics" })
+    Util.warn("Disabled diagnostics", { title = "Diagnostics" })
   end
 end
 
 function M.deprecate(old, new)
-  vim.notify(
-    ("`%s` is deprecated. Please use `%s` instead"):format(old, new),
-    vim.log.levels.WARN,
-    { title = "LazyVim" }
-  )
+  Util.warn(("`%s` is deprecated. Please use `%s` instead"):format(old, new), { title = "LazyVim" })
 end
 
 return M
