@@ -174,6 +174,17 @@ For the full plugin spec documentation please check the **lazy.nvim**
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
+  -- add gruvbox
+  { "ellisonleao/gruvbox.nvim" },
+
+  -- Configure LazyVim to load gruvbox
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "gruvbox",
+    },
+  },
+
   -- change trouble config
   {
     "folke/trouble.nvim",
@@ -203,10 +214,9 @@ return {
     end,
   },
 
-  -- change some telescope options and add telescope-fzf-native
+  -- change some telescope options and a keymap to browse plugin files
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
     keys = {
       -- add a keymap to browse plugin files
       -- stylua: ignore
@@ -225,6 +235,12 @@ return {
         winblend = 0,
       },
     },
+  },
+
+  -- add telescope-fzf-native
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
     -- apply the config and additionally load fzf-native
     config = function(_, opts)
       local telescope = require("telescope")
@@ -233,7 +249,20 @@ return {
     end,
   },
 
-  -- add pyright and setup tsserver with typescript.nvim
+  -- add pyright to lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
+    opts = {
+      ---@type lspconfig.options
+      servers = {
+        -- pyright will be automatically installed with mason and loaded with lspconfig
+        pyright = {},
+      },
+    },
+  },
+
+  -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -250,8 +279,7 @@ return {
     opts = {
       ---@type lspconfig.options
       servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
+        -- tsserver will be automatically installed with mason and loaded with lspconfig
         tsserver = {},
       },
       -- you can do any additional lsp server setup here
@@ -298,7 +326,7 @@ return {
   },
 
   -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
-  -- would overwrite `ensure_installed` with the ne value.
+  -- would overwrite `ensure_installed` with the new value.
   -- If you'd rather extend the default config, use the code below instead:
   {
     "nvim-treesitter/nvim-treesitter",
