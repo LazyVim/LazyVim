@@ -20,6 +20,12 @@ return {
         return math.floor(vim.o.columns * 0.75)
       end,
     },
+    init = function()
+      -- lazy-load notify here. Will be overriden by Noice when it loads
+      vim.notify = function(...)
+        return require("notify").notify(...)
+      end
+    end,
   },
 
   -- better vim.ui
