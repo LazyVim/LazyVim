@@ -11,7 +11,7 @@ return {
   -- correctly setup lspconfig
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "b0o/schemastore.nvim" },
+    dependencies = { "b0o/SchemaStore.nvim" },
     opts = {
       -- make sure mason installs the server
       servers = {
