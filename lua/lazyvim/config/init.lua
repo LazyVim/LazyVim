@@ -5,6 +5,12 @@ M.lazy_version = ">=9.1.0"
 
 ---@class LazyVimConfig
 local defaults = {
+  -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
+  ---@type string|fun()
+  colorscheme = function()
+    require("tokyonight").load()
+  end,
+  -- icons used by other plugins
   icons = {
     diagnostics = {
       Error = " ",
@@ -79,6 +85,20 @@ function M.setup(opts)
     callback = function()
       M.load("autocmds")
       M.load("keymaps")
+    end,
+  })
+
+  require("lazy.core.util").try(function()
+    if type(M.colorscheme) == "function" then
+      M.colorscheme()
+    else
+      vim.cmd.colorscheme(M.colorscheme)
+    end
+  end, {
+    msg = "Could not load your colorscheme",
+    on_error = function(msg)
+      require("lazy.core.util").error(msg)
+      vim.cmd.colorscheme("habamax")
     end,
   })
 end
