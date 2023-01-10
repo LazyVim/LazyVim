@@ -1,6 +1,8 @@
 ---@type LazyVimConfig
 local M = {}
 
+M.lazy_version = ">=9.1.0"
+
 ---@class LazyVimConfig
 local defaults = {
   icons = {
@@ -60,6 +62,17 @@ local options
 ---@param opts? LazyVimConfig
 function M.setup(opts)
   options = vim.tbl_deep_extend("force", defaults, opts or {})
+  if not M.has() then
+    require("lazy.core.util").error(
+      "**LazyVim** needs **lazy.nvim** version "
+        .. M.lazy_version
+        .. " to work properly.\n"
+        .. "Please upgrade **lazy.nvim**",
+      { title = "LazyVim" }
+    )
+  end
+end
+
 ---@param range? string
 function M.has(range)
   local Semver = require("lazy.manage.semver")
