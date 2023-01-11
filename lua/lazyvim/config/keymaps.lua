@@ -98,8 +98,8 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- floating terminal
-vim.keymap.set("n", "<leader>ot", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
-vim.keymap.set("n", "<leader>oT", function() require("lazyvim.util").float_term() end, { desc = "Terminal (cwd)" })
+vim.keymap.set("n", "<leader>ft", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
+vim.keymap.set("n", "<leader>fT", function() require("lazyvim.util").float_term() end, { desc = "Terminal (cwd)" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Enter Normal Mode"})
 
 -- windows
