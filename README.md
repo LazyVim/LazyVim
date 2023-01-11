@@ -412,7 +412,7 @@ return {
 keymaps. Just press any key like `<space>` and you'll see a popup with all
 possible keymaps starting with `<space>`.
 
-![image](https://user-images.githubusercontent.com/292349/211259984-a7522199-81a2-44f7-be6c-af21ba153f0a.png)
+![image](https://user-images.githubusercontent.com/292349/211862473-1ff5ee7a-3bb9-4782-a9f6-014f0e5d4474.png)
 
 <!-- keymaps:start -->
 
