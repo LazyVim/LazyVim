@@ -3,8 +3,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- set global only, to make sure we don't override the Lazy ui
-local opt = vim.opt_global
+local opt = vim.opt
 
 opt.autowrite = true -- enable auto write
 opt.clipboard = "unnamedplus" -- sync with system clipboard

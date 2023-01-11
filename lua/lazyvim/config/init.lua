@@ -126,6 +126,10 @@ function M.load(name)
       end,
     })
   end
+  if vim.bo.filetype == "lazy" then
+    -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
+    vim.cmd([[do VimResized]])
+  end
 end
 
 M.did_init = false
