@@ -94,7 +94,7 @@ vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- highlights under cursor
 if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.keymap.set("n", "<leader>hl", vim.show_pos, { desc = "Highlight Groups at cursor" })
+  vim.keymap.set("n", "<leader>sH", vim.show_pos, { desc = "Highlight Groups at cursor" })
 end
 
 -- floating terminal
