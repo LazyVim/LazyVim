@@ -146,7 +146,7 @@ function M.lazy_notify()
     end
     vim.schedule(function()
       ---@diagnostic disable-next-line: no-unknown
-      for _, notif in ipairs(notifs) do
+      for _, notif in ipairs(vim.deepcopy(notifs)) do
         vim.notify(vim.F.unpack_len(notif))
       end
     end)
