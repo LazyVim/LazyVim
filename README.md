@@ -26,25 +26,43 @@ to tweak your config as needed, along with the convenience of a pre-configured s
 
 You can find a starter template for **LazyVim** [here](https://github.com/LazyVim/starter)
 
-**TLDR:**
+<details><summary>Try it with Docker</summary>
 
-```lua
-require("lazy").setup({
-  spec = {
-    -- import LazyVim plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import/override with your plugins
-    { import = "plugins" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-  },
-  defaults = {
-    lazy = true, -- every plugin is lazy-loaded by default
-    version = "*", -- try installing the latest stable version for plugins that support semver
-  },
-})
+```sh
+docker run -w /root -it --rm alpine:edge sh -uelic '
+  apk add git lazygit neovim ripgrep alpine-sdk --update
+  git clone https://github.com/LazyVim/starter ~/.config/nvim
+  cd ~/.config/nvim
+  nvim
+'
 ```
+
+</details>
+
+<details><summary>Install the <a href="https://github.com/LazyVim/starter">LazyVim Starter</a></summary>
+
+- Make a backup of your current Neovim files:
+
+  ```sh
+  mv ~/.config/nvim ~/.config/nvim.bak
+  mv ~/.local/share/nvim ~/.local/share/nvim.bak
+  ```
+
+- Clone the starter
+
+  ```sh
+  git clone https://github.com/LazyVim/starter ~/.config/nvim
+  ```
+
+- Start Neovim!
+
+  ```sh
+  nvim
+  ```
+
+  Refer to the comments in the files on how to customize **LazyVim**.
+
+</details>
 
 ## 📂 File Structure
 
@@ -73,7 +91,22 @@ will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ## ⚙️ Configuration
 
-**LazyVim** comes with the following defaults:
+**LazyVim** can be configured in the same way as any other plugin.
+
+For example in `lua/plugins/core.lua`
+
+```lua
+return {
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    }
+  }
+}
+```
+
+<details><summary>Default Settings</summary>
 
 <!-- config:start -->
 
@@ -139,20 +172,7 @@ will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 <!-- config:end -->
 
-**LazyVim** can be configured in the same way as any other plugin.
-
-For example in `lua/plugins/core.lua`
-
-```lua
-return {
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    }
-  }
-}
-```
+</details>
 
 ## 🚀 Configuring **Plugins**
 
