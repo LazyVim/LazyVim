@@ -15,6 +15,11 @@ function M.on_attach(on_attach)
   })
 end
 
+---@param plugin string
+function M.has(plugin)
+  return require("lazy.core.config").plugins[plugin] ~= nil
+end
+
 -- returns the root directory based on:
 -- * lsp workspace folders
 -- * lsp root_dir
