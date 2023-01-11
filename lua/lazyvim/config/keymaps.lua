@@ -40,7 +40,7 @@ vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffe
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
 -- Clear search and redraw
-vim.keymap.set("n", "<leader>r", "<cmd>noh<cr><cmd>redraw<cr><c-l>", { desc = "Redraw and clear hlsearch" })
+vim.keymap.set("n", "<leader>ur", "<cmd>noh<cr><cmd>redraw<cr><c-l>", { desc = "Redraw and clear hlsearch" })
 
 vim.keymap.set("n", "gw", "*N")
 vim.keymap.set("x", "gw", "*N")
