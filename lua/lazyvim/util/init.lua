@@ -132,8 +132,8 @@ function M.lazy_notify()
     table.insert(notifs, vim.F.pack_len(...))
   end
 
-  vim.notify = temp
   local orig = vim.notify
+  vim.notify = temp
 
   local timer = vim.loop.new_timer()
   local check = vim.loop.new_check()
@@ -146,7 +146,7 @@ function M.lazy_notify()
     end
     vim.schedule(function()
       ---@diagnostic disable-next-line: no-unknown
-      for _, notif in ipairs(vim.deepcopy(notifs)) do
+      for _, notif in ipairs(notifs) do
         vim.notify(vim.F.unpack_len(notif))
       end
     end)
