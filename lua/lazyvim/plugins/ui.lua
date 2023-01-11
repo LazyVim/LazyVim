@@ -42,7 +42,7 @@ return {
   -- bufferline
   {
     "akinsho/nvim-bufferline.lua",
-    event = "BufAdd",
+    event = "VeryLazy",
     opts = {
       options = {
         diagnostics = "nvim_lsp",
