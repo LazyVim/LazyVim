@@ -1,4 +1,4 @@
-local util = require("lazyvim.util")
+local Util = require("lazyvim.util")
 
 return {
 
@@ -50,22 +50,22 @@ return {
     version = false, -- telescope did only one release, so use HEAD for now
     keys = {
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-      { "<leader>/", util.telescope("live_grep"), desc = "Find in Files (Grep)" },
+      { "<leader>/", Util.telescope("live_grep"), desc = "Find in Files (Grep)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", util.telescope("files"), desc = "Find Files (root dir)" },
-      { "<leader>fF", util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-      { "<leader>ff", util.telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
       { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-      { "<leader>sG", util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+      { "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader>sg", util.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>sg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
       { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
       { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -74,7 +74,7 @@ return {
       { "<leader>st", "<cmd>Telescope builtin<cr>", desc = "Telescope" },
       {
         "<leader>ss",
-        util.telescope("lsp_document_symbols", {
+        Util.telescope("lsp_document_symbols", {
           symbols = {
             "Class",
             "Function",
@@ -101,10 +101,10 @@ return {
               return require("trouble.providers.telescope").open_with_trouble(...)
             end,
             ["<C-i>"] = function()
-              util.telescope("find_files", { no_ignore = true })()
+              Util.telescope("find_files", { no_ignore = true })()
             end,
             ["<C-h>"] = function()
-              util.telescope("find_files", { hidden = true })()
+              Util.telescope("find_files", { hidden = true })()
             end,
             ["<C-Down>"] = function(...)
               return require("telescope.actions").cycle_history_next(...)
