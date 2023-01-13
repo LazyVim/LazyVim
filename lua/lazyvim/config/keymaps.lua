@@ -41,8 +41,14 @@ vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffe
 -- Clear search with <esc>
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
--- Clear search and redraw
-vim.keymap.set("n", "<leader>ur", "<cmd>noh<cr><cmd>redraw<cr><c-l>", { desc = "Redraw and clear hlsearch" })
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+vim.keymap.set(
+  "n",
+  "<leader>ur",
+  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+  { desc = "Redraw / clear hlsearch / diff update" }
+)
 
 vim.keymap.set("n", "gw", "*N")
 vim.keymap.set("x", "gw", "*N")
