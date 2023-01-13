@@ -24,7 +24,7 @@ return {
       -- but can be also overriden when specified
       format = {
         formatting_options = nil,
-        timeout = nil,
+        timeout_ms = nil,
       },
       ---@type lspconfig.options
       servers = {
