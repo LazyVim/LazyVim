@@ -12,11 +12,19 @@ return {
     },
     ---@class PluginLspOpts
     opts = {
+      -- options for vim.diagnostic.config()
       diagnostics = {
         underline = true,
         update_in_insert = false,
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
+      },
+      -- options for vim.lsp.buf.format
+      -- `bufnr` and `filter` is handled by the LazyVim formatter,
+      -- but can be also overriden when specified
+      format = {
+        formatting_options = nil,
+        timeout = nil,
       },
       ---@type lspconfig.options
       servers = {
