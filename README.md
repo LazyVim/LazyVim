@@ -497,58 +497,65 @@ possible keymaps starting with `<space>`.
 <details><summary>Plugins</summary>
 
 | Key               | Description                                                                                     | Mode  |
-| ----------------- | ----------------------------------------------------------------------------------------------- | ----- |
-| `<leader>cm`      | [mason.nvim](https://github.com/williamboman/mason.nvim.git) Mason                              | **n** |
-| `<leader>bd`      | [mini.bufremove](https://github.com/echasnovski/mini.bufremove.git) Delete Buffer               | **n** |
-| `<leader>bD`      | [mini.bufremove](https://github.com/echasnovski/mini.bufremove.git) Delete Buffer (Force)       | **n** |
-| `<leader>fe`      | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (root dir) | **n** |
-| `<leader>fE`      | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (cwd)      | **n** |
-| `<leader>e`       | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (root dir) | **n** |
-| `<leader>E`       | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (cwd)      | **n** |
-| `<S-Enter>`       | [noice.nvim](https://github.com/folke/noice.nvim.git) Redirect Cmdline                          | **c** |
-| `<leader>snl`     | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice Last Message                        | **n** |
-| `<leader>snh`     | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice History                             | **n** |
-| `<leader>sna`     | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice All                                 | **n** |
-| `<c-f>`           | [noice.nvim](https://github.com/folke/noice.nvim.git) Scroll forward                            | **n** |
-| `<c-b>`           | [noice.nvim](https://github.com/folke/noice.nvim.git) Scroll backward                           | **n** |
-| `<leader>un`      | [nvim-notify](https://github.com/rcarriga/nvim-notify.git) Delete all Notifications             | **n** |
-| `<leader>sr`      | [nvim-spectre](https://github.com/windwp/nvim-spectre.git) Replace in files (Spectre)           | **n** |
-| `<leader>qs`      | [persistence.nvim](https://github.com/folke/persistence.nvim.git) Restore Session               | **n** |
-| `<leader>ql`      | [persistence.nvim](https://github.com/folke/persistence.nvim.git) Restore Last Session          | **n** |
-| `<leader>qd`      | [persistence.nvim](https://github.com/folke/persistence.nvim.git) Don't Save Current Session    | **n** |
-| `<leader>,`       | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Switch Buffer            | **n** |
-| `<leader>/`       | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find in Files (Grep)     | **n** |
-| `<leader>:`       | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Command History          | **n** |
-| `<leader><space>` | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find Files (root dir)    | **n** |
-| `<leader>fF`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find Files (cwd)         | **n** |
-| `<leader>fb`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Buffers                  | **n** |
-| `<leader>ff`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find Files (root dir)    | **n** |
-| `<leader>fr`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Recent                   | **n** |
-| `<leader>gc`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) commits                  | **n** |
-| `<leader>gs`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) status                   | **n** |
-| `<leader>sa`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Auto Commands            | **n** |
-| `<leader>sC`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Commands                 | **n** |
-| `<leader>so`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Options                  | **n** |
-| `<leader>st`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Telescope                | **n** |
-| `<leader>sh`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Search Highlight Groups  | **n** |
-| `<leader>sG`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Grep (cwd)               | **n** |
-| `<leader>sk`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Key Maps                 | **n** |
-| `<leader>sM`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Man Pages                | **n** |
-| `<leader>sb`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Buffer                   | **n** |
-| `<leader>sc`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Command History          | **n** |
-| `<leader>sg`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Grep (root dir)          | **n** |
-| `<leader>sh`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Help Pages               | **n** |
-| `<leader>sm`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Jump to Mark             | **n** |
-| `<leader>ss`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Goto Symbol              | **n** |
-| `]t`              | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Next todo comment         | **n** |
-| `[t`              | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Previous todo comment     | **n** |
-| `<leader>xt`      | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Todo Trouble              | **n** |
-| `<leader>xtt`     | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Todo Trouble              | **n** |
-| `<leader>xT`      | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Todo Telescope            | **n** |
-| `<leader>xx`      | [trouble.nvim](https://github.com/folke/trouble.nvim.git) Document Diagnostics (Trouble)        | **n** |
-| `<leader>xX`      | [trouble.nvim](https://github.com/folke/trouble.nvim.git) Workspace Diagnostics (Trouble)       | **n** |
-| `]]`              | [vim-illuminate](https://github.com/RRethy/vim-illuminate.git) Next Reference                   | **n** |
-| `[[`              | [vim-illuminate](https://github.com/RRethy/vim-illuminate.git) Prev Reference                   | **n** |
+| ----------------- | ----------------------------------------------------------------------------------------------- | ------------ |
+| `<leader>cm`      | [mason.nvim](https://github.com/williamboman/mason.nvim.git) Mason                                   | **n**   |
+| `<leader>bd`      | [mini.bufremove](https://github.com/echasnovski/mini.bufremove.git) Delete Buffer               | **n**        |
+| `<leader>bD`      | [mini.bufremove](https://github.com/echasnovski/mini.bufremove.git) Delete Buffer (Force)       | **n**        |
+| `<leader>fe`      | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (root dir) | **n**        |
+| `<leader>fE`      | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (cwd)      | **n**        |
+| `<leader>e`       | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (root dir) | **n**        |
+| `<leader>E`       | [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim.git) Explorer NeoTree (cwd)      | **n**        |
+| `<S-Enter>`       | [noice.nvim](https://github.com/folke/noice.nvim.git) Redirect Cmdline                          | **c**        |
+| `<leader>snl`     | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice Last Message                        | **n**        |
+| `<leader>snh`     | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice History                             | **n**        |
+| `<leader>sna`     | [noice.nvim](https://github.com/folke/noice.nvim.git) Noice All                                 | **n**        |
+| `<c-f>`           | [noice.nvim](https://github.com/folke/noice.nvim.git) Scroll forward                            | **n**        |
+| `<c-b>`           | [noice.nvim](https://github.com/folke/noice.nvim.git) Scroll backward                           | **n**        |
+| `<leader>un`      | [nvim-notify](https://github.com/rcarriga/nvim-notify.git) Delete all Notifications             | **n**        |
+| `<leader>sr`      | [nvim-spectre](https://github.com/windwp/nvim-spectre.git) Replace in files (Spectre)           | **n**        |
+| `<leader>qs`      | [persistence.nvim](https://github.com/folke/persistence.nvim.git) Restore Session               | **n**        |
+| `<leader>ql`      | [persistence.nvim](https://github.com/folke/persistence.nvim.git) Restore Last Session          | **n**        |
+| `<leader>qd`      | [persistence.nvim](https://github.com/folke/persistence.nvim.git) Don't Save Current Session    | **n**        |
+| `<leader>,`       | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Switch Buffer            | **n**        |
+| `<leader>/`       | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find in Files (Grep)     | **n**        |
+| `<leader>:`       | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Command History          | **n**        |
+| `<leader><space>` | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find Files (root dir)    | **n**        |
+| `<leader>fF`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find Files (cwd)         | **n**        |
+| `<leader>fb`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Buffers                  | **n**        |
+| `<leader>ff`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Find Files (root dir)    | **n**        |
+| `<leader>fr`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Recent                   | **n**        |
+| `<leader>gc`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) commits                  | **n**        |
+| `<leader>gs`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) status                   | **n**        |
+| `<leader>sa`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Auto Commands            | **n**        |
+| `<leader>sC`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Commands                 | **n**        |
+| `<leader>so`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Options                  | **n**        |
+| `<leader>st`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Telescope                | **n**        |
+| `<leader>sh`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Search Highlight Groups  | **n**        |
+| `<leader>sG`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Grep (cwd)               | **n**        |
+| `<leader>sk`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Key Maps                 | **n**        |
+| `<leader>sM`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Man Pages                | **n**        |
+| `<leader>sb`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Buffer                   | **n**        |
+| `<leader>sc`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Command History          | **n**        |
+| `<leader>sg`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Grep (root dir)          | **n**        |
+| `<leader>sh`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Help Pages               | **n**        |
+| `<leader>sm`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Jump to Mark             | **n**        |
+| `<leader>ss`      | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim.git) Goto Symbol              | **n**        |
+| `]t`              | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Next todo comment         | **n**        |
+| `[t`              | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Previous todo comment     | **n**        |
+| `<leader>xt`      | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Todo Trouble              | **n**        |
+| `<leader>xtt`     | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Todo Trouble              | **n**        |
+| `<leader>xT`      | [todo-comments.nvim](https://github.com/folke/todo-comments.nvim.git) Todo Telescope            | **n**        |
+| `<leader>xx`      | [trouble.nvim](https://github.com/folke/trouble.nvim.git) Document Diagnostics (Trouble)        | **n**        |
+| `<leader>xX`      | [trouble.nvim](https://github.com/folke/trouble.nvim.git) Workspace Diagnostics (Trouble)       | **n**        |
+| `]]`              | [vim-illuminate](https://github.com/RRethy/vim-illuminate.git) Next Reference                   | **n**        |
+| `[[`              | [vim-illuminate](https://github.com/RRethy/vim-illuminate.git) Prev Reference                   | **n**        |
+| `gza`             | [mini.surround](https://github.com/echasnovski/mini.surround) Add surrounding                   | **n**, **v** |
+| `gzd`             | [mini.surround](https://github.com/echasnovski/mini.surround) Delete surrounding                | **n**, **v** |
+| `gzf`             | [mini.surround](https://github.com/echasnovski/mini.surround) Find surrounding (to the right)   | **n**, **v** |
+| `gzF`             | [mini.surround](https://github.com/echasnovski/mini.surround) Find surrounding (to the left)    | **n**, **v** |
+| `gzh`             | [mini.surround](https://github.com/echasnovski/mini.surround) Highlight surrounding             | **n**, **v** |
+| `gzr`             | [mini.surround](https://github.com/echasnovski/mini.surround) Replace surrounding               | **n**, **v** |
+| `gzn`             | [mini.surround](https://github.com/echasnovski/mini.surround) Update `n_lines`                  | **n**, **v** |
 
 </details>
 
