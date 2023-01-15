@@ -444,7 +444,7 @@ possible keymaps starting with `<space>`.
 | `<leader>uf`         | Toggle format on Save      | **n**                      |
 | `<leader>us`         | Toggle Spelling            | **n**                      |
 | `<leader>uw`         | Toggle Word Wrap           | **n**                      |
-| `<leader>un`         | Toggle Line Numbers        | **n**                      |
+| `<leader>ul`         | Toggle Line Numbers        | **n**                      |
 | `<leader>ud`         | Toggle Diagnostics         | **n**                      |
 | `<leader>uc`         | Toggle Conceal             | **n**                      |
 | `<leader>gg`         | Lazygit (cwd)              | **n**                      |
