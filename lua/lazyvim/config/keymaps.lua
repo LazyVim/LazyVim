@@ -109,10 +109,12 @@ vim.keymap.set("n", "<leader>fT", function() require("lazyvim.util").float_term(
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Enter Normal Mode"})
 
 -- windows
-vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "other-window" })
-vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "delete-window" })
-vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "split-window-below" })
-vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "split-window-right" })
+vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
+vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
+vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
+vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
+vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
 
 -- tabs
 vim.keymap.set("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last" })
