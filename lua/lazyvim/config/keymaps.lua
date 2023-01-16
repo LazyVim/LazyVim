@@ -92,7 +92,7 @@ local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 vim.keymap.set("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
 
 -- lazygit
-vim.keymap.set("n", "<leader>gg", function() require("lazyvim.util").float_term({ "lazygit" }) end, { desc = "Lazygit (cwd)" })
+vim.keymap.set("n", "<leader>gg", function() Util.float_term({ "lazygit" }) end, { desc = "Lazygit (cwd)" })
 vim.keymap.set("n", "<leader>gG", function() Util.float_term({ "lazygit" }, { cwd = Util.get_root() }) end, { desc = "Lazygit (root dir)" })
 
 -- quit
@@ -105,7 +105,7 @@ end
 
 -- floating terminal
 vim.keymap.set("n", "<leader>ft", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
-vim.keymap.set("n", "<leader>fT", function() require("lazyvim.util").float_term() end, { desc = "Terminal (cwd)" })
+vim.keymap.set("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Enter Normal Mode"})
 
 -- windows
