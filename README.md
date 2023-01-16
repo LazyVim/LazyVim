@@ -117,6 +117,9 @@ return {
   colorscheme = function()
     require("tokyonight").load()
   end,
+  lsp = {
+    autoformat = true,
+  },
   -- icons used by other plugins
   icons = {
     diagnostics = {
