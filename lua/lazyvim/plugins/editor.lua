@@ -138,7 +138,6 @@ return {
     event = "VeryLazy",
     opts = {
       plugins = { spelling = true },
-      key_labels = { ["<leader>"] = "SPC" },
     },
     config = function(_, opts)
       local wk = require("which-key")
@@ -146,6 +145,7 @@ return {
       wk.register({
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
+        ["gz"] = { name = "+surround" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
         ["<leader><tab>"] = { name = "+tabs" },
