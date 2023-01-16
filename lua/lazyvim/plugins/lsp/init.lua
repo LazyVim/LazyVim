@@ -19,6 +19,8 @@ return {
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
       },
+      -- Automatically format on save
+      autoformat = true,
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
       -- but can be also overriden when specified
@@ -63,6 +65,9 @@ return {
       if plugin.setup_server then
         require("lazyvim.util").deprecate("lspconfig.setup_server", "lspconfig.opts.setup[SERVER]")
       end
+
+      -- setup autoformat
+      require("lazyvim.plugins.lsp.format").autoformat = opts.autoformat
 
       -- setup formatting and keymaps
       require("lazyvim.util").on_attach(function(client, buffer)
