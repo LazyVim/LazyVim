@@ -3,9 +3,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "BufReadPost",
+    keys = {
+      { "<c-space>", desc = "Increment selection" },
+      { "<c-bs>", desc = "Schrink selection" },
+    },
     ---@type TSConfig
     opts = {
-      sync_install = false,
       highlight = { enable = true },
       indent = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },
@@ -25,6 +28,15 @@ return {
         "typescript",
         "vim",
         "yaml",
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          scope_incremental = false,
+          node_decremental = "<C-bs>",
+        },
       },
     },
     ---@param opts TSConfig
