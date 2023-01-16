@@ -25,6 +25,7 @@ return {
   -- better vim.ui
   {
     "stevearc/dressing.nvim",
+    lazy = true,
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
@@ -284,6 +285,7 @@ return {
   -- lsp symbol navigation for lualine
   {
     "SmiteshP/nvim-navic",
+    lazy = true,
     init = function()
       vim.g.navic_silence = true
       require("lazyvim.util").on_attach(function(client, buffer)
@@ -296,8 +298,8 @@ return {
   },
 
   -- icons
-  "nvim-tree/nvim-web-devicons",
+  { "nvim-tree/nvim-web-devicons", lazy = true },
 
   -- ui components
-  "MunifTanjim/nui.nvim",
+  { "MunifTanjim/nui.nvim", lazy = true },
 }
