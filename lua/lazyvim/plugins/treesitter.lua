@@ -6,7 +6,7 @@ return {
     event = "BufReadPost",
     keys = {
       { "<c-space>", desc = "Increment selection" },
-      { "<c-bs>", desc = "Schrink selection" },
+      { "<bs>", desc = "Schrink selection", mode = "x" },
     },
     ---@type TSConfig
     opts = {
@@ -35,8 +35,8 @@ return {
         keymaps = {
           init_selection = "<C-space>",
           node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<C-bs>",
+          scope_incremental = "<nop>",
+          node_decremental = "<bs>",
         },
       },
     },
