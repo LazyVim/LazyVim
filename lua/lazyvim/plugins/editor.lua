@@ -75,7 +75,6 @@ return {
       { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { "<leader>st", "<cmd>Telescope builtin<cr>", desc = "Telescope" },
       { "<leader>sw", Util.telescope("grep_string"), desc = "Word (root dir)" },
       { "<leader>sW", Util.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
       { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
@@ -257,6 +256,7 @@ return {
       { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo Trouble" },
       { "<leader>xtt", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo Trouble" },
       { "<leader>xT", "<cmd>TodoTelescope<cr>", desc = "Todo Telescope" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
     },
   },
 }
