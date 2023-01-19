@@ -27,7 +27,7 @@ src="https://user-images.githubusercontent.com/292349/213446185-2db63fd5-8c84-45
 <div align="center">
 
 <a href="https://github.com/LazyVim/LazyVim/releases/latest">
-<img alt="Latest release" src="https://img.shields.io/github/v/release/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41" />
+<img alt="Latest release" src="https://img.shields.io/github/v/release/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41&include_prerelease&sort=semver" />
 </a>
 <a href="https://github.com/LazyVim/LazyVim/pulse">
 <img alt="Last commit" src="https://img.shields.io/github/last-commit/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=8bd5ca&logoColor=D9E0EE&labelColor=302D41"/>
