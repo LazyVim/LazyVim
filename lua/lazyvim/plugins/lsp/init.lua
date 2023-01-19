@@ -28,6 +28,7 @@ return {
         formatting_options = nil,
         timeout_ms = nil,
       },
+      -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
         jsonls = {},
@@ -88,6 +89,9 @@ return {
       require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
       require("mason-lspconfig").setup_handlers({
         function(server)
+          if servers[server] == false then
+            return
+          end
           local server_opts = servers[server] or {}
           server_opts.capabilities = capabilities
           if opts.setup[server] then
