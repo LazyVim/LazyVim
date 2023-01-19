@@ -1,4 +1,5 @@
 -- Ugly code to generate some things for the readme
+local Docs = require("lazy.docs")
 local Util = require("lazy.util")
 
 local M = {}
@@ -59,7 +60,7 @@ function M.keymaps()
   local lines = {}
 
   for _, group in ipairs(groups) do
-    lines[#lines + 1] = "<details><summary>" .. group .. "</summary>"
+    lines[#lines + 1] = "## " .. group
     lines[#lines + 1] = ""
     vim.list_extend(lines, { "| Key | Description | Mode |", "| --- | --- | --- |" })
     local mappings = vim.tbl_filter(function(m)
@@ -85,31 +86,25 @@ function M.keymaps()
         .. " |"
     end
     lines[#lines + 1] = ""
-    lines[#lines + 1] = "</details>"
-    lines[#lines + 1] = ""
   end
   return { content = table.concat(lines, "\n") }
 end
 
-function M.update()
-  local Docs = require("lazy.docs")
-  ---@type table<string, ReadmeBlock>
-  local data = {
+function M.update2()
+  local docs = vim.fs.normalize("~/projects/lazyvim.github.io/docs")
+
+  Docs.save({
     keymaps = M.keymaps(),
-    config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})"),
-  }
+  }, docs .. "/keymaps.md")
 
   local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
 
+  Docs.save({
+    plugins = Docs.plugins(core.plugins),
+  }, docs .. "/plugins/plugins.md")
+
   ---@type string[]
-  local plugins = {
-    "<details><summary>Core</summary>",
-    "",
-    Docs.plugins(core.plugins).content,
-    "",
-    "</details>",
-    "",
-  }
+  local plugins = {}
 
   Util.walk(root .. "/lua/lazyvim/plugins/extras", function(path, name, type)
     if type == "file" and name:find("%.lua$") then
@@ -117,7 +112,7 @@ function M.update()
       local spec = require("lazy.core.plugin").Spec.new({ import = modname })
       spec:fix_disabled()
       vim.list_extend(plugins, {
-        ("<details><summary>Extras: <code>%s</code></summary>"):format(modname:gsub(".*extras%.", "")),
+        ("## <code>%s</code>"):format(modname:gsub(".*extras%.", "")),
         "",
         ([[
 To use this, add it to your **lazy.nvim** imports:
@@ -134,17 +129,78 @@ require("lazy").setup({
 ]]):format(modname),
         Docs.plugins(spec.plugins).content,
         "",
-        "</details>",
-        "",
       })
     end
   end)
-  data.plugins = { content = table.concat(plugins, "\n") }
+  Docs.save({
+    plugins = { content = table.concat(plugins, "\n") },
+  }, docs .. "/plugins/extras.md")
+
+  local examples = vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/plugins/example.lua", ":p")
+  Docs.save({
+    examples = Util.read_file(examples):gsub("^[^\n]+\n[^\n]+\n[^\n]+\n", ""),
+  }, docs .. "/configuration/examples.md")
+  Docs.save({
+    config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})"),
+  }, docs .. "/configuration/lazyvim.md")
+end
+
+function M.update()
+  ---@type table<string, ReadmeBlock>
+  local data = {
+    keymaps = M.keymaps(),
+    config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})"),
+  }
+
   local examples = vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/plugins/example.lua", ":p")
   data.examples = Util.read_file(examples):gsub("^[^\n]+\n[^\n]+\n[^\n]+\n", "")
   Docs.save(data)
 end
 
-M.update()
+function M.extract_opts(plugin)
+  local code ---@type string
+  Util.lsmod("lazyvim.plugins", function(modname, modpath)
+    local data = Util.read_file(modpath)
+    if data:find('"' .. plugin .. '"', 1, true) then
+      code = data
+    end
+  end)
+  if not code then
+    return
+  end
+
+  local lines = vim.split(code, "\n")
+  local found_plugin = false
+  local found_opts = false
+  local indent = 0
+  local opts = {} ---@type string[]
+  local comments = {} ---@type string[]
+  for _, line in ipairs(lines) do
+    if line:find('"' .. plugin .. '"', 1, true) then
+      found_plugin = true
+    end
+    if found_plugin and line:find("^%s+opts = {") then
+      found_opts = true
+      indent = #line:match("^(%s+)")
+    elseif found_plugin and not found_opts and line:find("^%s+%-%-") then
+      comments[#comments + 1] = line
+    elseif found_plugin and not found_opts and not line:find("^%s+%-%-") then
+      comments = {}
+    elseif found_opts and line:find("^" .. string.rep(" ", indent) .. "}") then
+      break
+    elseif found_opts then
+      opts[#opts + 1] = line
+    end
+  end
+
+  local ret = "{\n" .. Docs.indent(Docs.fix_indent(table.concat(opts, "\n")), 2) .. "\n}"
+  if #comments > 0 then
+    ret = Docs.fix_indent(table.concat(comments, "\n")) .. "\n" .. ret
+  end
+  print(ret)
+end
+-- M.extract_opts("neovim/nvim-lspconfig")
+
+M.update2()
 
 return M
