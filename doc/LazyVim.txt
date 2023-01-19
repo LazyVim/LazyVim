@@ -1,20 +1,54 @@
-*LazyVim.txt*         For Neovim >= 0.8.0         Last change: 2023 January 18
+*LazyVim.txt*         For Neovim >= 0.8.0         Last change: 2023 January 19
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
 
-1. LazyVim                                                   |LazyVim-lazyvim|
   - Features                                                |LazyVim-features|
   - Requirements                                        |LazyVim-requirements|
   - Getting Started                                  |LazyVim-getting-started|
   - File Structure                                    |LazyVim-file-structure|
   - Configuration                                      |LazyVim-configuration|
-  - Configuring **Plugins**                  |LazyVim-configuring-**plugins**|
-  - Keymaps                                                  |LazyVim-keymaps|
-  - Plugins                                                  |LazyVim-plugins|
 
-==============================================================================
-1. LazyVim                                                   *LazyVim-lazyvim*
+<img
+src="https://user-images.githubusercontent.com/292349/213446185-2db63fd5-8c84-459c-9f04-e286382d6e80.png">
+
+<hr>
+
+<h4 align="center">
+
+<a href="https://lazyvim.github.io/installation">Install</a>
+·
+<a href="https://lazyvim.github.io/configuration">Configure</a>
+·
+<a href="https://lazyvim.github.io">Docs</a>
+
+</h4>
+
+<div align="center">
+
+<a href="https://github.com/LazyVim/LazyVim/releases/latest">
+<img alt="Latest release" src="https://img.shields.io/github/v/release/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41" />
+</a>
+<a href="https://github.com/LazyVim/LazyVim/pulse">
+<img alt="Last commit" src="https://img.shields.io/github/last-commit/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=8bd5ca&logoColor=D9E0EE&labelColor=302D41"/>
+</a>
+<a href="https://github.com/LazyVim/LazyVim/blob/main/LICENSE">
+<img alt="License" src="https://img.shields.io/github/license/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=ee999f&logoColor=D9E0EE&labelColor=302D41" />
+</a>
+<a href="https://github.com/LazyVim/LazyVim/stargazers">
+<img alt="Stars" src="https://img.shields.io/github/stars/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=c69ff5&logoColor=D9E0EE&labelColor=302D41" />
+</a>
+<a href="https://github.com/LazyVim/LazyVim/issues">
+<img alt="Issues" src="https://img.shields.io/github/issues/LazyVim/LazyVim?style=for-the-badge&logo=bilibili&color=F5E0DC&logoColor=D9E0EE&labelColor=302D41" />
+</a>
+<a href="https://github.com/LazyVim/LazyVim">
+<img alt="Repo Size" src="https://img.shields.io/github/repo-size/LazyVim/LazyVim?color=%23DDB6F2&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=D9E0EE&labelColor=302D41" />
+</a>
+<a href="https://twitter.com/intent/follow?screen_name=folke">
+<img alt="follow on Twitter" src="https://img.shields.io/twitter/follow/folke?style=for-the-badge&logo=twitter&color=8aadf3&logoColor=D9E0EE&labelColor=302D41" />
+</a>
+
+</div>
 
 LazyVim is a Neovim setup powered by lazy.nvim
 <https://github.com/folke/lazy.nvim> to make it easy to customize and extend
@@ -22,6 +56,11 @@ your config. Rather than having to choose between starting from scratch or
 using a pre-made distro, LazyVim offers the best of both worlds - the
 flexibility to tweak your config as needed, along with the convenience of a
 pre-configured setup.
+
+<div class="figure">
+<img src="https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png" title="fig:"/>
+<p class="caption">image</p>
+</div>
 
 <div class="figure">
 <img src="https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png" title="fig:"/>
@@ -75,6 +114,10 @@ Install the <a href="https://github.com/LazyVim/starter">LazyVim Starter</a>
     >sh
         git clone https://github.com/LazyVim/starter ~/.config/nvim
     <
+- Remove the `.git` folder, so you can add it to your own repo later
+    >sh
+        rm -rf ~/.config/nvim/.git
+    <
 - Start Neovim!
     >sh
         nvim
@@ -109,638 +152,7 @@ be automatically loaded by lazy.nvim <https://github.com/folke/lazy.nvim>
 
 CONFIGURATION                                          *LazyVim-configuration*
 
-**LazyVim** can be configured in the same way as any other plugin.
-
-For example in `lua/plugins/core.lua`
-
->lua
-    return {
-      {
-        "LazyVim/LazyVim",
-        opts = {
-          colorscheme = "catppuccin",
-        }
-      }
-    }
-<
-
-
-Default Settings
-
->lua
-    {
-      -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
-      ---@type string|fun()
-      colorscheme = function()
-        require("tokyonight").load()
-      end,
-      -- icons used by other plugins
-      icons = {
-        diagnostics = {
-          Error = " ",
-          Warn = " ",
-          Hint = " ",
-          Info = " ",
-        },
-        git = {
-          added = " ",
-          modified = " ",
-          removed = " ",
-        },
-        kinds = {
-          Array = " ",
-          Boolean = " ",
-          Class = " ",
-          Color = " ",
-          Constant = " ",
-          Constructor = " ",
-          Enum = " ",
-          EnumMember = " ",
-          Event = " ",
-          Field = " ",
-          File = " ",
-          Folder = " ",
-          Function = " ",
-          Interface = " ",
-          Key = " ",
-          Keyword = " ",
-          Method = " ",
-          Module = " ",
-          Namespace = " ",
-          Null = " ",
-          Number = " ",
-          Object = " ",
-          Operator = " ",
-          Package = " ",
-          Property = " ",
-          Reference = " ",
-          Snippet = " ",
-          String = " ",
-          Struct = " ",
-          Text = " ",
-          TypeParameter = " ",
-          Unit = " ",
-          Value = " ",
-          Variable = " ",
-        },
-      },
-    }
-<
-
-
-CONFIGURING **PLUGINS**                      *LazyVim-configuring-**plugins***
-
-Configuring **LazyVim** is exactly the same as using **lazy.nvim** to build a
-config from scratch.
-
-For the full plugin spec documentation please check the **lazy.nvim** readme
-<https://github.com/folke/lazy.nvim>.
-
-Example spec: <code>lua/plugins/example.lua</code>
-
->lua
-    -- every spec file under config.plugins will be loaded automatically by lazy.nvim
-    --
-    -- In your plugin files, you can:
-    --  add extra plugins
-    --  disable/enabled LazyVim plugins
-    --  override the configuration of LazyVim plugins
-    return {
-      -- add gruvbox
-      { "ellisonleao/gruvbox.nvim" },
-    
-      -- Configure LazyVim to load gruvbox
-      {
-        "LazyVim/LazyVim",
-        opts = {
-          colorscheme = "gruvbox",
-        },
-      },
-    
-      -- change trouble config
-      {
-        "folke/trouble.nvim",
-        -- opts will be merged with the parent spec
-        opts = { use_diagnostic_signs = true },
-      },
-    
-      -- disable trouble
-      { "folke/trouble.nvim", enabled = false },
-    
-      -- add symbols-outline
-      {
-        "simrat39/symbols-outline.nvim",
-        cmd = "SymbolsOutline",
-        keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-        config = true,
-      },
-    
-      -- override nvim-cmp and add cmp-emoji
-      {
-        "hrsh7th/nvim-cmp",
-        dependencies = { "hrsh7th/cmp-emoji" },
-        ---@param opts cmp.ConfigSchema
-        opts = function(_, opts)
-          local cmp = require("cmp")
-          opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
-        end,
-      },
-    
-      -- change some telescope options and a keymap to browse plugin files
-      {
-        "nvim-telescope/telescope.nvim",
-        keys = {
-          -- add a keymap to browse plugin files
-          -- stylua: ignore
-          {
-            "<leader>fp",
-            function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
-            desc = "Find Plugin File",
-          },
-        },
-        -- change some options
-        opts = {
-          defaults = {
-            layout_strategy = "horizontal",
-            layout_config = { prompt_position = "top" },
-            sorting_strategy = "ascending",
-            winblend = 0,
-          },
-        },
-      },
-    
-      -- add telescope-fzf-native
-      {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
-        -- apply the config and additionally load fzf-native
-        config = function(_, opts)
-          local telescope = require("telescope")
-          telescope.setup(opts)
-          telescope.load_extension("fzf")
-        end,
-      },
-    
-      -- add pyright to lspconfig
-      {
-        "neovim/nvim-lspconfig",
-        ---@class PluginLspOpts
-        opts = {
-          ---@type lspconfig.options
-          servers = {
-            -- pyright will be automatically installed with mason and loaded with lspconfig
-            pyright = {},
-          },
-        },
-      },
-    
-      -- add tsserver and setup with typescript.nvim instead of lspconfig
-      {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-          "jose-elias-alvarez/typescript.nvim",
-          init = function()
-            require("lazyvim.util").on_attach(function(_, buffer)
-              -- stylua: ignore
-              vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-              vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-            end)
-          end,
-        },
-        ---@class PluginLspOpts
-        opts = {
-          ---@type lspconfig.options
-          servers = {
-            -- tsserver will be automatically installed with mason and loaded with lspconfig
-            tsserver = {},
-          },
-          -- you can do any additional lsp server setup here
-          -- return true if you don't want this server to be setup with lspconfig
-          ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-          setup = {
-            -- example to setup with typescript.nvim
-            tsserver = function(_, opts)
-              require("typescript").setup({ server = opts })
-              return true
-            end,
-            -- Specify  to use this function as a fallback for any server
-            -- [""] = function(server, opts) end,
-          },
-        },
-      },
-    
-      -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
-      -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
-      { import = "lazyvim.plugins.extras.lang.typescript" },
-    
-      -- add more treesitter parsers
-      {
-        "nvim-treesitter/nvim-treesitter",
-        opts = {
-          ensure_installed = {
-            "bash",
-            "help",
-            "html",
-            "javascript",
-            "json",
-            "lua",
-            "markdown",
-            "markdown_inline",
-            "python",
-            "query",
-            "regex",
-            "tsx",
-            "typescript",
-            "vim",
-            "yaml",
-          },
-        },
-      },
-    
-      -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
-      -- would overwrite `ensure_installed` with the new value.
-      -- If you'd rather extend the default config, use the code below instead:
-      {
-        "nvim-treesitter/nvim-treesitter",
-        opts = function(_, opts)
-          vim.list_extend(opts.ensure_installed, {
-            -- add tsx and treesitter
-            ensure_installed = {
-              "tsx",
-              "typescript",
-            },
-          })
-        end,
-      },
-    
-      -- the opts function can also be used to change the default opts:
-      {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        opts = function(_, opts)
-          table.insert(opts.sections.lualine_x, "")
-        end,
-      },
-    
-      -- or you can return new options to override all the defaults
-      {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        opts = function()
-          return {
-            --[[add your custom lualine config here]]
-          }
-        end,
-      },
-    
-      -- use mini.starter instead of alpha
-      { import = "lazyvim.plugins.extras.ui.mini-starter" },
-    
-      -- add jsonls and schemastore ans setup treesitter for json, json5 and jsonc
-      { import = "lazyvim.plugins.extras.lang.json" },
-    
-      -- add any tools you want to have installed below
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          ensure_installed = {
-            "stylua",
-            "shellcheck",
-            "shfmt",
-            "flake8",
-          },
-        },
-      },
-    
-      -- Use <tab> for completion and snippets (supertab)
-      -- first: disable default <tab> and <s-tab> behavior in LuaSnip
-      {
-        "L3MON4D3/LuaSnip",
-        keys = function()
-          return {}
-        end,
-      },
-      -- then: setup supertab in cmp
-      {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-          "hrsh7th/cmp-emoji",
-        },
-        ---@param opts cmp.ConfigSchema
-        opts = function(_, opts)
-          local has_words_before = function()
-            unpack = unpack or table.unpack
-            local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-            return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-          end
-    
-          local luasnip = require("luasnip")
-          local cmp = require("cmp")
-    
-          opts.mapping = vim.tbl_extend("force", opts.mapping, {
-            ["<Tab>"] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.select_next_item()
-                -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                -- they way you will only jump inside the snippet region
-              elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-              elseif has_words_before() then
-                cmp.complete()
-              else
-                fallback()
-              end
-            end, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-              if cmp.visible() then
-                cmp.select_prev_item()
-              elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-              else
-                fallback()
-              end
-            end, { "i", "s" }),
-          })
-        end,
-      },
-    }
-<
-
-
-KEYMAPS                                                      *LazyVim-keymaps*
-
-**LazyVim** uses which-key.nvim <https://github.com/folke/which-key.nvim> to
-help you remember your keymaps. Just press any key like `<space>` and you’ll
-see a popup with all possible keymaps starting with `<space>`.
-
-<div class="figure">
-<img src="https://user-images.githubusercontent.com/292349/211862473-1ff5ee7a-3bb9-4782-a9f6-014f0e5d4474.png" title="fig:"/>
-<p class="caption">image</p>
-</div>
-
-General
-
-│         Key          │             Description             │           Mode           │
-│<C-h>                 │Go to left window                    │**n**                     │
-│<C-j>                 │Go to lower window                   │**n**                     │
-│<C-k>                 │Go to upper window                   │**n**                     │
-│<C-l>                 │Go to right window                   │**n**                     │
-│<C-Up>                │Increase window height               │**n**                     │
-│<C-Down>              │Decrease window height               │**n**                     │
-│<C-Left>              │Decrease window width                │**n**                     │
-│<C-Right>             │Increase window width                │**n**                     │
-│<A-j>                 │Move down                            │**n**, **v**, **i**       │
-│<A-k>                 │Move up                              │**n**, **v**, **i**       │
-│<leader>bb            │Switch to Other Buffer               │**n**                     │
-│<leader>              │Switch to Other Buffer               │**n**                     │
-│<esc>                 │Escape and clear hlsearch            │**i**, **n**              │
-│<leader>ur            │Redraw / clear hlsearch / diff update│**n**                     │
-│n                     │Next search result                   │**n**, **x**, **o**       │
-│N                     │Prev search result                   │**n**, **x**, **o**       │
-│<C-s>                 │Save file                            │**i**, **v**, **n**, **s**│
-│<leader>l             │Lazy                                 │**n**                     │
-│<leader>fn            │New File                             │**n**                     │
-│<leader>xl            │Open Location List                   │**n**                     │
-│<leader>xq            │Open Quickfix List                   │**n**                     │
-│<leader>uf            │Toggle format on Save                │**n**                     │
-│<leader>us            │Toggle Spelling                      │**n**                     │
-│<leader>uw            │Toggle Word Wrap                     │**n**                     │
-│<leader>ul            │Toggle Line Numbers                  │**n**                     │
-│<leader>ud            │Toggle Diagnostics                   │**n**                     │
-│<leader>uc            │Toggle Conceal                       │**n**                     │
-│<leader>gg            │Lazygit (cwd)                        │**n**                     │
-│<leader>gG            │Lazygit (root dir)                   │**n**                     │
-│<leader>qq            │Quit all                             │**n**                     │
-│<leader>ui            │Inspect Pos                          │**n**                     │
-│<leader>ft            │Terminal (root dir)                  │**n**                     │
-│<leader>fT            │Terminal (cwd)                       │**n**                     │
-│<esc><esc>            │Enter Normal Mode                    │**t**                     │
-│<leader>ww            │Other window                         │**n**                     │
-│<leader>wd            │Delete window                        │**n**                     │
-│<leader>w-            │Split window below                   │**n**                     │
-│<leader>w\|           │Split window right                   │**n**                     │
-│<leader>-             │Split window below                   │**n**                     │
-│<leader>\|            │Split window right                   │**n**                     │
-│<leader><tab>l        │Last                                 │**n**                     │
-│<leader><tab>f        │First                                │**n**                     │
-│<leader><tab><tab>    │New Tab                              │**n**                     │
-│<leader><tab>]        │Next                                 │**n**                     │
-│<leader><tab>d        │Close                                │**n**                     │
-│<leader><tab>[        │Previous                             │**n**                     │
-
-
-LSP
-
-│     Key      │    Description     │    Mode    │
-│<leader>cd    │Line Diagnostics    │**n**       │
-│<leader>cl    │Lsp Info            │**n**       │
-│gd            │Goto Definition     │**n**       │
-│gr            │References          │**n**       │
-│gD            │Goto Declaration    │**n**       │
-│gI            │Goto Implementation │**n**       │
-│gt            │Goto Type Definition│**n**       │
-│K             │Hover               │**n**       │
-│gK            │Signature Help      │**n**       │
-│<c-k>         │Signature Help      │**i**       │
-│]d            │Next Diagnostic     │**n**       │
-│[d            │Prev Diagnostic     │**n**       │
-│]e            │Next Error          │**n**       │
-│[e            │Prev Error          │**n**       │
-│]w            │Next Warning        │**n**       │
-│[w            │Prev Warning        │**n**       │
-│<leader>ca    │Code Action         │**n**, **v**│
-│<leader>cf    │Format Document     │**n**       │
-│<leader>cf    │Format Range        │**v**       │
-│<leader>cr    │Rename              │**n**       │
-
-
-Plugins
-
-│        Key        │                                              Description                                              │    Mode    │
-│<leader>cm         │mason.nvim <https://github.com/williamboman/mason.nvim.git> Mason                                      │**n**       │
-│<leader>bd         │mini.bufremove <https://github.com/echasnovski/mini.bufremove.git> Delete Buffer                       │**n**       │
-│<leader>bD         │mini.bufremove <https://github.com/echasnovski/mini.bufremove.git> Delete Buffer (Force)               │**n**       │
-│gza                │mini.surround <https://github.com/echasnovski/mini.surround.git> Add surrounding                       │**n**, **v**│
-│gzd                │mini.surround <https://github.com/echasnovski/mini.surround.git> Delete surrounding                    │**n**       │
-│gzf                │mini.surround <https://github.com/echasnovski/mini.surround.git> Find right surrounding                │**n**       │
-│gzF                │mini.surround <https://github.com/echasnovski/mini.surround.git> Find left surrounding                 │**n**       │
-│gzh                │mini.surround <https://github.com/echasnovski/mini.surround.git> Highlight surrounding                 │**n**       │
-│gzr                │mini.surround <https://github.com/echasnovski/mini.surround.git> Replace surrounding                   │**n**       │
-│gzn                │mini.surround <https://github.com/echasnovski/mini.surround.git> Update MiniSurround.config.n_lines    │**n**       │
-│<leader>fe         │neo-tree.nvim <https://github.com/nvim-neo-tree/neo-tree.nvim.git> Explorer NeoTree (root dir)         │**n**       │
-│<leader>fE         │neo-tree.nvim <https://github.com/nvim-neo-tree/neo-tree.nvim.git> Explorer NeoTree (cwd)              │**n**       │
-│<leader>e          │neo-tree.nvim <https://github.com/nvim-neo-tree/neo-tree.nvim.git> Explorer NeoTree (root dir)         │**n**       │
-│<leader>E          │neo-tree.nvim <https://github.com/nvim-neo-tree/neo-tree.nvim.git> Explorer NeoTree (cwd)              │**n**       │
-│<S-Enter>          │noice.nvim <https://github.com/folke/noice.nvim.git> Redirect Cmdline                                  │**c**       │
-│<leader>snl        │noice.nvim <https://github.com/folke/noice.nvim.git> Noice Last Message                                │**n**       │
-│<leader>snh        │noice.nvim <https://github.com/folke/noice.nvim.git> Noice History                                     │**n**       │
-│<leader>sna        │noice.nvim <https://github.com/folke/noice.nvim.git> Noice All                                         │**n**       │
-│<c-f>              │noice.nvim <https://github.com/folke/noice.nvim.git> Scroll forward                                    │**n**       │
-│<c-b>              │noice.nvim <https://github.com/folke/noice.nvim.git> Scroll backward                                   │**n**       │
-│<leader>un         │nvim-notify <https://github.com/rcarriga/nvim-notify.git> Delete all Notifications                     │**n**       │
-│<leader>sr         │nvim-spectre <https://github.com/windwp/nvim-spectre.git> Replace in files (Spectre)                   │**n**       │
-│<c-space>          │nvim-treesitter <https://github.com/nvim-treesitter/nvim-treesitter.git> Increment selection           │**n**       │
-│<bs>               │nvim-treesitter <https://github.com/nvim-treesitter/nvim-treesitter.git> Schrink selection             │**x**       │
-│<leader>qs         │persistence.nvim <https://github.com/folke/persistence.nvim.git> Restore Session                       │**n**       │
-│<leader>ql         │persistence.nvim <https://github.com/folke/persistence.nvim.git> Restore Last Session                  │**n**       │
-│<leader>qd         │persistence.nvim <https://github.com/folke/persistence.nvim.git> Don’t Save Current Session          │**n**       │
-│<leader>,          │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Switch Buffer                    │**n**       │
-│<leader>/          │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Find in Files (Grep)             │**n**       │
-│<leader>:          │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Command History                  │**n**       │
-│<leader><space>    │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Find Files (root dir)            │**n**       │
-│<leader>fb         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Buffers                          │**n**       │
-│<leader>ff         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Find Files (root dir)            │**n**       │
-│<leader>fF         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Find Files (cwd)                 │**n**       │
-│<leader>fr         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Recent                           │**n**       │
-│<leader>gc         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> commits                          │**n**       │
-│<leader>gs         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> status                           │**n**       │
-│<leader>sa         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Auto Commands                    │**n**       │
-│<leader>sb         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Buffer                           │**n**       │
-│<leader>sc         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Command History                  │**n**       │
-│<leader>sC         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Commands                         │**n**       │
-│<leader>sd         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Diagnostics                      │**n**       │
-│<leader>sg         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Grep (root dir)                  │**n**       │
-│<leader>sG         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Grep (cwd)                       │**n**       │
-│<leader>sh         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Help Pages                       │**n**       │
-│<leader>sH         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Search Highlight Groups          │**n**       │
-│<leader>sk         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Key Maps                         │**n**       │
-│<leader>sM         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Man Pages                        │**n**       │
-│<leader>sm         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Jump to Mark                     │**n**       │
-│<leader>so         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Options                          │**n**       │
-│<leader>sw         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Word (root dir)                  │**n**       │
-│<leader>sW         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Word (cwd)                       │**n**       │
-│<leader>uC         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Colorscheme with preview         │**n**       │
-│<leader>ss         │telescope.nvim <https://github.com/nvim-telescope/telescope.nvim.git> Goto Symbol                      │**n**       │
-│]t                 │todo-comments.nvim <https://github.com/folke/todo-comments.nvim.git> Next todo comment                 │**n**       │
-│[t                 │todo-comments.nvim <https://github.com/folke/todo-comments.nvim.git> Previous todo comment             │**n**       │
-│<leader>xt         │todo-comments.nvim <https://github.com/folke/todo-comments.nvim.git> Todo (Trouble)                    │**n**       │
-│<leader>xT         │todo-comments.nvim <https://github.com/folke/todo-comments.nvim.git> Todo/Fix/Fixme (Trouble)          │**n**       │
-│<leader>st         │todo-comments.nvim <https://github.com/folke/todo-comments.nvim.git> Todo                              │**n**       │
-│<leader>xx         │trouble.nvim <https://github.com/folke/trouble.nvim.git> Document Diagnostics (Trouble)                │**n**       │
-│<leader>xX         │trouble.nvim <https://github.com/folke/trouble.nvim.git> Workspace Diagnostics (Trouble)               │**n**       │
-│]]                 │vim-illuminate <https://github.com/RRethy/vim-illuminate.git> Next Reference                           │**n**       │
-│[[                 │vim-illuminate <https://github.com/RRethy/vim-illuminate.git> Prev Reference                           │**n**       │
-
-
-PLUGINS                                                      *LazyVim-plugins*
-
-Core
-
-
-- alpha-nvim <https://github.com/goolord/alpha-nvim>
-- catppuccin <https://github.com/catppuccin/nvim>
-- cmp-buffer <https://github.com/hrsh7th/cmp-buffer>
-- cmp-nvim-lsp <https://github.com/hrsh7th/cmp-nvim-lsp>
-- cmp-path <https://github.com/hrsh7th/cmp-path>
-- cmp_luasnip <https://github.com/saadparwaiz1/cmp_luasnip>
-- dressing.nvim <https://github.com/stevearc/dressing.nvim>
-- flit.nvim <https://github.com/ggandor/flit.nvim>
-- friendly-snippets <https://github.com/rafamadriz/friendly-snippets>
-- gitsigns.nvim <https://github.com/lewis6991/gitsigns.nvim>
-- indent-blankline.nvim <https://github.com/lukas-reineke/indent-blankline.nvim>
-- lazy.nvim <https://github.com/folke/lazy.nvim>
-- LazyVim <https://github.com/LazyVim/LazyVim>
-- leap.nvim <https://github.com/ggandor/leap.nvim>
-- lualine.nvim <https://github.com/nvim-lualine/lualine.nvim>
-- LuaSnip <https://github.com/L3MON4D3/LuaSnip>
-- mason-lspconfig.nvim <https://github.com/williamboman/mason-lspconfig.nvim>
-- mason.nvim <https://github.com/williamboman/mason.nvim>
-- mini.ai <https://github.com/echasnovski/mini.ai>
-- mini.bufremove <https://github.com/echasnovski/mini.bufremove>
-- mini.comment <https://github.com/echasnovski/mini.comment>
-- mini.indentscope <https://github.com/echasnovski/mini.indentscope>
-- mini.pairs <https://github.com/echasnovski/mini.pairs>
-- mini.surround <https://github.com/echasnovski/mini.surround>
-- neo-tree.nvim <https://github.com/nvim-neo-tree/neo-tree.nvim>
-- neoconf.nvim <https://github.com/folke/neoconf.nvim>
-- neodev.nvim <https://github.com/folke/neodev.nvim>
-- noice.nvim <https://github.com/folke/noice.nvim>
-- nui.nvim <https://github.com/MunifTanjim/nui.nvim>
-- null-ls.nvim <https://github.com/jose-elias-alvarez/null-ls.nvim>
-- nvim-bufferline.lua <https://github.com/akinsho/nvim-bufferline.lua>
-- nvim-cmp <https://github.com/hrsh7th/nvim-cmp>
-- nvim-lspconfig <https://github.com/neovim/nvim-lspconfig>
-- nvim-navic <https://github.com/SmiteshP/nvim-navic>
-- nvim-notify <https://github.com/rcarriga/nvim-notify>
-- nvim-spectre <https://github.com/windwp/nvim-spectre>
-- nvim-treesitter <https://github.com/nvim-treesitter/nvim-treesitter>
-- nvim-treesitter-textobjects <https://github.com/nvim-treesitter/nvim-treesitter-textobjects>
-- nvim-ts-context-commentstring <https://github.com/JoosepAlviste/nvim-ts-context-commentstring>
-- nvim-web-devicons <https://github.com/nvim-tree/nvim-web-devicons>
-- persistence.nvim <https://github.com/folke/persistence.nvim>
-- plenary.nvim <https://github.com/nvim-lua/plenary.nvim>
-- telescope.nvim <https://github.com/nvim-telescope/telescope.nvim>
-- todo-comments.nvim <https://github.com/folke/todo-comments.nvim>
-- tokyonight.nvim <https://github.com/folke/tokyonight.nvim>
-- trouble.nvim <https://github.com/folke/trouble.nvim>
-- vim-illuminate <https://github.com/RRethy/vim-illuminate>
-- vim-repeat <https://github.com/tpope/vim-repeat>
-- vim-startuptime <https://github.com/dstein64/vim-startuptime>
-- which-key.nvim <https://github.com/folke/which-key.nvim>
-
-
-Extras: <code>lang.json</code>
-
-To use this, add it to your **lazy.nvim** imports:
-
->lua
-    require("lazy").setup({
-      spec = {
-        { "folke/LazyVim", import = "lazyvim.plugins" },
-        { import = "lazyvim.plugins.extras.lang.json" },
-        { import = "plugins" },
-      },
-    })
-<
-
-
-
-- nvim-lspconfig <https://github.com/neovim/nvim-lspconfig>
-- nvim-treesitter <https://github.com/nvim-treesitter/nvim-treesitter>
-- SchemaStore.nvim <https://github.com/b0o/SchemaStore.nvim>
-
-
-Extras: <code>lang.typescript</code>
-
-To use this, add it to your **lazy.nvim** imports:
-
->lua
-    require("lazy").setup({
-      spec = {
-        { "folke/LazyVim", import = "lazyvim.plugins" },
-        { import = "lazyvim.plugins.extras.lang.typescript" },
-        { import = "plugins" },
-      },
-    })
-<
-
-
-
-- nvim-lspconfig <https://github.com/neovim/nvim-lspconfig>
-- nvim-treesitter <https://github.com/nvim-treesitter/nvim-treesitter>
-- typescript.nvim <https://github.com/jose-elias-alvarez/typescript.nvim>
-
-
-Extras: <code>ui.mini-starter</code>
-
-To use this, add it to your **lazy.nvim** imports:
-
->lua
-    require("lazy").setup({
-      spec = {
-        { "folke/LazyVim", import = "lazyvim.plugins" },
-        { import = "lazyvim.plugins.extras.ui.mini-starter" },
-        { import = "plugins" },
-      },
-    })
-<
-
-
-
-- mini.starter <https://github.com/echasnovski/mini.starter>
-
-
-
+Refer to the docs <https://lazyvim.github.io>
 
 Generated by panvimdoc <https://github.com/kdheepak/panvimdoc>
 
