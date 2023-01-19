@@ -27,13 +27,16 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
 
 -- buffers
-if not Util.has("nvim-bufferline.lua") then
+if Util.has("nvim-bufferline.lua") then
+  vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+  vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+  vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+  vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+else
   vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
   vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
   vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
   vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
-  vim.keymap.set("n", "<leader>b[", "<cmd>bprevious<cr>", { desc = "Previous" })
-  vim.keymap.set("n", "<leader>b]", "<cmd>bnext<cr>", { desc = "Next" })
 end
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })

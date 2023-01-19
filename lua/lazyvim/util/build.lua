@@ -101,7 +101,7 @@ function M.update2()
 
   Docs.save({
     plugins = Docs.plugins(core.plugins),
-  }, docs .. "/plugins/plugins.md")
+  }, docs .. "/plugins/index.md")
 
   ---@type string[]
   local plugins = {}
@@ -139,10 +139,10 @@ require("lazy").setup({
   local examples = vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/plugins/example.lua", ":p")
   Docs.save({
     examples = Util.read_file(examples):gsub("^[^\n]+\n[^\n]+\n[^\n]+\n", ""),
-  }, docs .. "/configuration/examples.md")
+  }, docs .. "/configuration/09-examples.md")
   Docs.save({
     config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})"),
-  }, docs .. "/configuration/lazyvim.md")
+  }, docs .. "/configuration/01-lazyvim.md")
 end
 
 function M.update()
