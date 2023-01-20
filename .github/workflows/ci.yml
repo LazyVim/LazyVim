@@ -55,7 +55,6 @@ jobs:
         with:
           release-type: simple
           package-name: LazyVim
-          release-as: "1.0.0"
       - uses: actions/checkout@v2
       - name: tag stable versions
         if: ${{ steps.release.outputs.release_created }}
