@@ -72,9 +72,9 @@ function M.keymaps()
     end)
 
     for _, m in ipairs(mappings) do
-      lines[#lines + 1] = "| ``"
-        .. m.keys:gsub("|", "\\|"):gsub("`$", "` ")
-        .. "`` | "
+      lines[#lines + 1] = "| <code>"
+        .. m.keys:gsub(">", "&gt;"):gsub("<", "&lt;"):gsub("|", "&vert;")
+        .. "</code> | "
         .. m.desc
         .. " | "
         .. table.concat(
