@@ -3,7 +3,7 @@ local Docs = require("lazy.docs")
 local Util = require("lazy.util")
 
 local M = {}
-local root = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h:h:h:h")
+local root = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":p:h:h:h:h")
 
 ---@return ReadmeBlock
 function M.keymaps()
@@ -90,34 +90,68 @@ function M.keymaps()
   return { content = table.concat(lines, "\n") }
 end
 
+function M.general()
+  local lines = {
+    [[
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+]],
+  } ---@type string[]
+  for _, entry in ipairs({
+    { name = "options", title = "Options" },
+    { name = "keymaps", title = "Keymaps" },
+    { name = "autocmds", title = "Auto Commands" },
+  }) do
+    local name, title = entry.name, entry.title
+    lines[#lines + 1] = "## " .. title
+    vim.list_extend(lines, {
+      "",
+      "<Tabs>",
+      ([[<TabItem value="custom" label="Custom %s">]]):format(title),
+      "",
+      ([[```lua title="lua/config/%s.lua"
+%s
+```]]):format(
+        name,
+        Util.read_file(vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/config/" .. name .. ".lua", ":p"))
+      ),
+      "",
+      "</TabItem>",
+      ([[<TabItem value="defaults" label="Default %s">]]):format(title),
+      "",
+      ([[```lua title="lazyvim.config.%s"
+%s
+```]]):format(name, Util.read_file(vim.fn.fnamemodify(root .. "/lua/lazyvim/config/" .. name .. ".lua", ":p"))),
+      "",
+      "</TabItem>",
+      "</Tabs>",
+      "",
+    })
+  end
+  return { content = table.concat(lines, "\n") }
+end
+
 function M.update2()
   local docs = vim.fs.normalize("~/projects/lazyvim.github.io/docs")
+
+  Docs.save({
+    general = M.general(),
+  }, docs .. "/configuration/general.md")
 
   Docs.save({
     keymaps = M.keymaps(),
   }, docs .. "/keymaps.md")
 
-  local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
-
-  Docs.save({
-    plugins = Docs.plugins(core.plugins),
-  }, docs .. "/plugins/index.md")
-
-  ---@type string[]
-  local plugins = {}
-
   Util.walk(root .. "/lua/lazyvim/plugins/extras", function(path, name, type)
     if type == "file" and name:find("%.lua$") then
       local modname = path:gsub(".*/lua/", ""):gsub("/", "."):gsub("%.lua$", "")
-      local spec = require("lazy.core.plugin").Spec.new({ import = modname })
-      spec:fix_disabled()
-      vim.list_extend(plugins, {
-        ("## <code>%s</code>"):format(modname:gsub(".*extras%.", "")),
+      local lines = {} ---@type string[]
+      vim.list_extend(lines, {
         "",
         ([[
 To use this, add it to your **lazy.nvim** imports:
 
-```lua
+```lua title="lua/config/lazy.lua"
 require("lazy").setup({
   spec = {
     { "folke/LazyVim", import = "lazyvim.plugins" },
@@ -127,77 +161,149 @@ require("lazy").setup({
 })
 ```
 ]]):format(modname),
-        Docs.plugins(spec.plugins).content,
+        M.plugins("extras/" .. path:gsub(".*/extras/", "")).content,
         "",
       })
+      Docs.save({
+        plugins = { content = table.concat(lines, "\n") },
+      }, docs .. "/plugins/extras/" .. modname:gsub(".*extras%.", "") .. ".md")
     end
   end)
-  Docs.save({
-    plugins = { content = table.concat(plugins, "\n") },
-  }, docs .. "/plugins/extras.md")
 
   local examples = vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/plugins/example.lua", ":p")
   Docs.save({
     examples = Util.read_file(examples):gsub("^[^\n]+\n[^\n]+\n[^\n]+\n", ""),
-  }, docs .. "/configuration/09-examples.md")
+  }, docs .. "/configuration/examples.md")
+
   Docs.save({
-    config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})"),
-  }, docs .. "/configuration/01-lazyvim.md")
+    plugins = M.plugins("lsp/init.lua"),
+  }, docs .. "/plugins/lsp.md")
+
+  for _, p in ipairs({ "coding", "colorscheme", "editor", "treesitter", "ui", "util" }) do
+    Docs.save({
+      plugins = M.plugins(p .. ".lua"),
+    }, docs .. "/plugins/" .. p .. ".md")
+  end
 end
 
-function M.update()
-  ---@type table<string, ReadmeBlock>
-  local data = {
-    keymaps = M.keymaps(),
-    config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})"),
+function M.plugins(path)
+  local test = root .. "/lua/lazyvim/plugins/" .. path
+  local spec = require("lazy.core.plugin").Spec.new(dofile(test))
+  local source = Util.read_file(test)
+  local parser = vim.treesitter.get_string_parser(source, "lua")
+
+  ---@type {code: string, opts: string, name: string, comment?:string, url: string}[]
+  local plugins = {}
+
+  local function get_text(node)
+    return Docs.fix_indent(vim.treesitter.get_node_text(node, source))
+  end
+
+  local function get_field(node, field)
+    for child in node:iter_children() do
+      if child:type() == "field" then
+        local name_node = child:field("name")[1]
+        if name_node and get_text(name_node) == field then
+          return child:field("value")[1]
+        end
+      end
+    end
+  end
+
+  local function find_plugins(node)
+    if node:type() == "string" then
+      local text = vim.treesitter.query.get_node_text(node, source):sub(2, -2)
+      if text:find("/") and #node:parent():field("name") == 0 then
+        local plugin_node = node:parent():parent()
+        if plugin_node:named_child(0):field("value")[1]:id() ~= node:id() then
+          plugin_node = node
+        end
+        local comment_node = plugin_node:parent():prev_named_sibling()
+        if comment_node and comment_node:type() ~= "comment" then
+          comment_node = nil
+        end
+
+        local opts_node = get_field(plugin_node, "opts")
+
+        local name_node = get_field(plugin_node, "name")
+        local name = name_node and get_text(name_node):sub(2, -2) or text:match("/(.*)$")
+
+        if spec.plugins[name] then
+          plugins[#plugins + 1] = {
+            name = name,
+            url = "https://github.com/" .. text,
+            code = get_text(plugin_node),
+            comment = comment_node and get_text(comment_node) or nil,
+            opts = opts_node and get_text(opts_node) or get_field(plugin_node, "config") and "{}" or nil,
+          }
+        end
+      end
+    end
+    for child in node:iter_children() do
+      find_plugins(child)
+    end
+  end
+
+  parser:parse()
+  parser:for_each_tree(function(tree)
+    local node = tree:root()
+    find_plugins(node)
+    -- print(vim.treesitter.query.get_node_text(node, str))
+  end)
+
+  ---@type string[]
+  local lines = {
+    [[
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+]],
   }
 
-  local examples = vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/plugins/example.lua", ":p")
-  data.examples = Util.read_file(examples):gsub("^[^\n]+\n[^\n]+\n[^\n]+\n", "")
-  Docs.save(data)
-end
+  for _, plugin in ipairs(plugins) do
+    lines[#lines + 1] = "## [" .. plugin.name .. "](" .. plugin.url .. ")"
 
-function M.extract_opts(plugin)
-  local code ---@type string
-  Util.lsmod("lazyvim.plugins", function(modname, modpath)
-    local data = Util.read_file(modpath)
-    if data:find('"' .. plugin .. '"', 1, true) then
-      code = data
+    if plugin.comment then
+      lines[#lines + 1] = ""
+      lines[#lines + 1] = table.concat(
+        vim.tbl_map(function(line)
+          return line:gsub("^%-+", "")
+        end, vim.split(plugin.comment, "\n")),
+        "\n"
+      )
+      lines[#lines + 1] = ""
     end
-  end)
-  if not code then
-    return
+    vim.list_extend(lines, {
+      "",
+      "<Tabs>",
+    })
+    vim.list_extend(lines, {
+      "",
+      [[<TabItem value="opts" label="Options">]],
+      "",
+      "```lua",
+      "opts = " .. (plugin.opts or "nil"),
+      "```",
+      "",
+      "</TabItem>",
+      "",
+    })
+    vim.list_extend(lines, {
+      "",
+      [[<TabItem value="code" label="Full Spec">]],
+      "",
+      "```lua",
+      plugin.code,
+      "```",
+      "",
+      "</TabItem>",
+      "",
+    })
+    vim.list_extend(lines, {
+      "</Tabs>",
+      "",
+    })
   end
-
-  local lines = vim.split(code, "\n")
-  local found_plugin = false
-  local found_opts = false
-  local indent = 0
-  local opts = {} ---@type string[]
-  local comments = {} ---@type string[]
-  for _, line in ipairs(lines) do
-    if line:find('"' .. plugin .. '"', 1, true) then
-      found_plugin = true
-    end
-    if found_plugin and line:find("^%s+opts = {") then
-      found_opts = true
-      indent = #line:match("^(%s+)")
-    elseif found_plugin and not found_opts and line:find("^%s+%-%-") then
-      comments[#comments + 1] = line
-    elseif found_plugin and not found_opts and not line:find("^%s+%-%-") then
-      comments = {}
-    elseif found_opts and line:find("^" .. string.rep(" ", indent) .. "}") then
-      break
-    elseif found_opts then
-      opts[#opts + 1] = line
-    end
-  end
-
-  local ret = "{\n" .. Docs.indent(Docs.fix_indent(table.concat(opts, "\n")), 2) .. "\n}"
-  if #comments > 0 then
-    ret = Docs.fix_indent(table.concat(comments, "\n")) .. "\n" .. ret
-  end
-  print(ret)
+  return { content = table.concat(lines, "\n") }
 end
 -- M.extract_opts("neovim/nvim-lspconfig")
 

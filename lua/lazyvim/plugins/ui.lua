@@ -1,5 +1,5 @@
 return {
-  -- better vim.notify
+  -- Better `vim.notify()`
   {
     "rcarriga/nvim-notify",
     keys = {
