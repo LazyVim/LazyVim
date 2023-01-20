@@ -47,10 +47,10 @@ function M.keymaps()
 
   local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
   Util.foreach(core.plugins, function(name, plugin)
+    group = ("[%s](%s)"):format(plugin.name, plugin.url)
     for _, key in ipairs(plugin.keys or {}) do
       if type(key) == "table" and key.desc then
         local desc = key.desc or ""
-        desc = ("[%s](%s)"):format(plugin.name, plugin.url) .. " " .. desc
         map(key.mode or "n", key[1], key[2], { desc = desc })
       end
     end
