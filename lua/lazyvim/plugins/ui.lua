@@ -153,7 +153,7 @@ return {
   -- indent guides for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
+    event = "BufReadPost",
     opts = {
       -- char = "▏",
       char = "│",
