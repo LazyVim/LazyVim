@@ -1,52 +1,61 @@
 local M = {}
 
-function M.on_attach(client, buffer)
-  local self = M.new(client, buffer)
+---@type PluginLspKeys
+M._keys = nil
 
-  self:map("<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-  self:map("<leader>cl", "LspInfo", { desc = "Lsp Info" })
-  self:map("gd", "Telescope lsp_definitions", { desc = "Goto Definition" })
-  self:map("gr", "Telescope lsp_references", { desc = "References" })
-  self:map("gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
-  self:map("gI", "Telescope lsp_implementations", { desc = "Goto Implementation" })
-  self:map("gt", "Telescope lsp_type_definitions", { desc = "Goto Type Definition" })
-  self:map("K", vim.lsp.buf.hover, { desc = "Hover" })
-  self:map("gK", vim.lsp.buf.signature_help, { desc = "Signature Help", has = "signatureHelp" })
-  self:map("<c-k>", vim.lsp.buf.signature_help, { mode = "i", desc = "Signature Help", has = "signatureHelp" })
-  self:map("]d", M.diagnostic_goto(true), { desc = "Next Diagnostic" })
-  self:map("[d", M.diagnostic_goto(false), { desc = "Prev Diagnostic" })
-  self:map("]e", M.diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-  self:map("[e", M.diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-  self:map("]w", M.diagnostic_goto(true, "WARNING"), { desc = "Next Warning" })
-  self:map("[w", M.diagnostic_goto(false, "WARNING"), { desc = "Prev Warning" })
-  self:map("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", mode = { "n", "v" }, has = "codeAction" })
-
+---@return (LazyKeys|{has?:string})[]
+function M.get()
   local format = require("lazyvim.plugins.lsp.format").format
-  self:map("<leader>cf", format, { desc = "Format Document", has = "documentFormatting" })
-  self:map("<leader>cf", format, { desc = "Format Range", mode = "v", has = "documentRangeFormatting" })
-  self:map("<leader>cr", M.rename, { expr = true, desc = "Rename", has = "rename" })
+  ---@class PluginLspKeys
+  -- stylua: ignore
+  M._keys = M._keys or {
+    { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+    { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+    { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition" },
+    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+    { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+    { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
+    { "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" },
+    { "K", vim.lsp.buf.hover, desc = "Hover" },
+    { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+    { "]d", M.diagnostic_goto(true), desc = "Next Diagnostic" },
+    { "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
+    { "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
+    { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
+    { "]w", M.diagnostic_goto(true, "WARNING"), desc = "Next Warning" },
+    { "[w", M.diagnostic_goto(false, "WARNING"), desc = "Prev Warning" },
+    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+    { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
+    { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
+    { "<leader>cr", M.rename, expr = true, desc = "Rename", has = "rename" },
+  }
+  return M._keys
 end
 
-function M.new(client, buffer)
-  return setmetatable({ client = client, buffer = buffer }, { __index = M })
-end
+function M.on_attach(client, buffer)
+  local Keys = require("lazy.core.handler.keys")
+  local keymaps = {} ---@type table<string,LazyKeys|{has?:string}>
 
-function M:has(cap)
-  return self.client.server_capabilities[cap .. "Provider"]
-end
-
-function M:map(lhs, rhs, opts)
-  opts = opts or {}
-  if opts.has and not self:has(opts.has) then
-    return
+  for _, value in ipairs(M.get()) do
+    local keys = Keys.parse(value)
+    if keys[2] == vim.NIL or keys[2] == false then
+      keymaps[keys.id] = nil
+    else
+      keymaps[keys.id] = keys
+    end
   end
-  vim.keymap.set(
-    opts.mode or "n",
-    lhs,
-    type(rhs) == "string" and ("<cmd>%s<cr>"):format(rhs) or rhs,
-    ---@diagnostic disable-next-line: no-unknown
-    { silent = true, buffer = self.buffer, expr = opts.expr, desc = opts.desc }
-  )
+
+  for _, keys in pairs(keymaps) do
+    if not keys.has or client.server_capabilities[keys.has .. "Provider"] then
+      local opts = Keys.opts(keys)
+      ---@diagnostic disable-next-line: no-unknown
+      opts.has = nil
+      opts.silent = true
+      opts.buffer = buffer
+      vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
+    end
+  end
 end
 
 function M.rename()
