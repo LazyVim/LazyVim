@@ -36,11 +36,9 @@ function M.keymaps()
   dofile(root .. "/lua/lazyvim/config/keymaps.lua")
   group = "LSP"
   local lsp = dofile(root .. "/lua/lazyvim/plugins/lsp/keymaps.lua")
-  lsp.has = function()
-    return true
+  for _, keys in ipairs(lsp.get()) do
+    map(keys.mode or "n", keys[1], keys[2], keys)
   end
-  lsp.on_attach({ name = "foobar" })
-
   vim.keymap.set = keymap_set
 
   group = "Plugins"
