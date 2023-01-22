@@ -5,5 +5,6 @@ if not require("lazyvim.config").has(">=9.1.0") then
 end
 
 return {
-  { "LazyVim/LazyVim", priority = 10000, lazy = false, config = true },
+  { "folke/lazy.nvim", version = "*" },
+  { "LazyVim/LazyVim", priority = 10000, lazy = false, config = true, version = "*" },
 }

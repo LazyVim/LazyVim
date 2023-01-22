@@ -137,6 +137,14 @@ function M.update2()
   }, docs .. "/configuration/general.md")
 
   Docs.save({
+    lazy = {
+      content = [[```lua title="lua/config/lazy.lua"]] .. "\n" .. Util.read_file(
+        vim.fn.fnamemodify(root .. "/../LazyVim-starter/lua/config/lazy.lua", ":p")
+      ) .. "\n```",
+    },
+  }, docs .. "/configuration/lazy.nvim.md")
+
+  Docs.save({
     keymaps = M.keymaps(),
   }, docs .. "/keymaps.md")
 
