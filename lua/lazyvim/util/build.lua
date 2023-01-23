@@ -157,7 +157,7 @@ function M.update2()
         ([[
 To use this, add it to your **lazy.nvim** imports:
 
-```lua title="lua/config/lazy.lua"
+```lua title="lua/config/lazy.lua" {4}
 require("lazy").setup({
   spec = {
     { "folke/LazyVim", import = "lazyvim.plugins" },
