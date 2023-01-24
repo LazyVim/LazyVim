@@ -106,10 +106,10 @@ return {
             ["<c-t>"] = function(...)
               return require("trouble.providers.telescope").open_with_trouble(...)
             end,
-            ["<C-i>"] = function()
+            ["<a-i>"] = function()
               Util.telescope("find_files", { no_ignore = true })()
             end,
-            ["<C-h>"] = function()
+            ["<a-h>"] = function()
               Util.telescope("find_files", { hidden = true })()
             end,
             ["<C-Down>"] = function(...)
