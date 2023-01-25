@@ -71,10 +71,6 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function(plugin)
-      if plugin.override then
-        require("lazyvim.util").deprecate("lualine.override", "lualine.opts")
-      end
-
       local icons = require("lazyvim.config").icons
 
       local function fg(name)
