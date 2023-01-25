@@ -36,7 +36,7 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
 
 -- buffers
-if Util.has("nvim-bufferline.lua") then
+if Util.has("bufferline.nvim") then
   map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
   map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
   map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })

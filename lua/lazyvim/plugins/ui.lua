@@ -42,7 +42,7 @@ return {
 
   -- bufferline
   {
-    "akinsho/nvim-bufferline.lua",
+    "akinsho/bufferline.nvim",
     event = "VeryLazy",
     opts = {
       options = {
