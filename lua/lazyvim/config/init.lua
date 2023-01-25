@@ -155,7 +155,7 @@ end
 setmetatable(M, {
   __index = function(_, key)
     if options == nil then
-      M.setup()
+      return vim.deepcopy(defaults)[key]
     end
     ---@cast options LazyVimConfig
     return options[key]
