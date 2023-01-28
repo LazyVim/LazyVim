@@ -92,7 +92,7 @@ function M.telescope(builtin, opts)
   end
 end
 
--- FIXME: create a togglable termiminal
+-- FIXME: create a togglable terminal
 -- Opens a floating terminal (interactive by default)
 ---@param cmd? string[]|string
 ---@param opts? LazyCmdOptions|{interactive?:boolean}
