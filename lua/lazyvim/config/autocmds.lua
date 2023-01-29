@@ -4,20 +4,25 @@
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
 -- Highlight on yank
+vim.api.nvim_create_augroup("_lazy_vim_highlight_on_yank", {})
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
   end,
+  group = "_lazy_vim_highlight_on_yank",
 })
 
 -- resize splits if window got resized
+vim.api.nvim_create_augroup("_lazy_vim_resize_splits", {})
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   callback = function()
     vim.cmd("tabdo wincmd =")
   end,
+  group = "_lazy_vim_resize_splits",
 })
 
 -- go to last loc when opening a buffer
+vim.api.nvim_create_augroup("_lazy_vim_go_to_last_loc_when_opening_a_buffer", {})
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
@@ -26,9 +31,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
   end,
+  group = "_lazy_vim_go_to_last_loc_when_opening_a_buffer",
 })
 
 -- close some filetypes with <q>
+vim.api.nvim_create_augroup("_lazy_vim_close_some_filetypes_with_q", {})
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "qf",
@@ -45,8 +52,11 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
+  group = "_lazy_vim_close_some_filetypes_with_q",
 })
 
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_augroup("_lazy_vim_wrap_and_spell_check_text_filetypes", {})
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "gitcommit", "markdown" },
   callback = function()
