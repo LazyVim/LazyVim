@@ -119,7 +119,8 @@ end
 ---@param name "autocmds" | "options" | "keymaps"
 function M.load(name)
   local Util = require("lazy.core.util")
-  local try_load = function(mod)
+  -- always load lazyvim, then user file
+  for _, mod in ipairs({ "lazyvim.config." .. name, "config." .. name }) do
     Util.try(function()
       require(mod)
     end, {
@@ -132,9 +133,6 @@ function M.load(name)
       end,
     })
   end
-  -- always load lazyvim, then user file
-  try_load("lazyvim.config." .. name)
-  try_load("config." .. name)
   if vim.bo.filetype == "lazy" then
     -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
     vim.cmd([[do VimResized]])
