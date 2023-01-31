@@ -79,7 +79,9 @@ function M.setup(opts)
     error("Exiting")
   end
 
-  if vim.fn.argc(-1) == 0 then
+  -- 
+  local file_argument = vim.fn.argc(-1) == 0
+  if file_argument then
     -- autocmds and keymaps can wait to load
     vim.api.nvim_create_autocmd("User", {
       group = vim.api.nvim_create_augroup("LazyVim", { clear = true }),
