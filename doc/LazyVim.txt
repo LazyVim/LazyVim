@@ -1,4 +1,4 @@
-*LazyVim.txt*         For Neovim >= 0.8.0        Last change: 2023 February 02
+*LazyVim.txt*         For Neovim >= 0.8.0        Last change: 2023 February 03
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
@@ -147,7 +147,7 @@ be automatically loaded by lazy.nvim <https://github.com/folke/lazy.nvim>
         spec1.lua
         
         spec2.lua
- init.toml
+ init.lua
 </pre>
 
 CONFIGURATION                                          *LazyVim-configuration*
