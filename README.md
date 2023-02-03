@@ -130,7 +130,7 @@ will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
 │       ├── spec1.lua
 │       ├── **
 │       └── spec2.lua
-└── init.toml
+└── init.lua
 </pre>
 
 ## ⚙️ Configuration
