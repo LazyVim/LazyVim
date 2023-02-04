@@ -91,8 +91,13 @@ map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
-map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
-map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
+if Util.has("trouble.nvim") then
+  map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { desc = "Open Location List (Trouble)" })
+  map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { desc = "Open Quickfix List (Trouble)" })
+else
+  map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
+  map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
+end
 
 -- stylua: ignore start
 
