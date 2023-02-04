@@ -42,9 +42,9 @@ Rather than having to choose between starting from scratch or using a
 pre-made distro, LazyVim offers the best of both worlds - the flexibility
 to tweak your config as needed, along with the convenience of a pre-configured setup.
 
-![image](https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png)
-
 ![image](https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png)
+
+![image](https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png)
 
 ## ✨ Features
 
@@ -61,6 +61,12 @@ to tweak your config as needed, along with the convenience of a pre-configured s
 - a [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
 
 ## 🚀 Getting Started
+
+There's a video created by [@elijahmanor](https://github.com/elijahmanor) with a walkthrough to get started.
+
+[![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
+
+---
 
 You can find a starter template for **LazyVim** [here](https://github.com/LazyVim/starter)
 
