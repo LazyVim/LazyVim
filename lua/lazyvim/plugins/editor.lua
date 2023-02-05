@@ -159,6 +159,7 @@ return {
     event = "VeryLazy",
     opts = {
       plugins = { spelling = true },
+      window = { border = "rounded" },
     },
     config = function(_, opts)
       local wk = require("which-key")
@@ -198,6 +199,7 @@ return {
         changedelete = { text = "▎" },
         untracked = { text = "▎" },
       },
+      preview_config = { border = "rounded" },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 

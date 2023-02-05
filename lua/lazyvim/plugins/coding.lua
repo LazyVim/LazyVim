@@ -40,6 +40,7 @@ return {
     },
     opts = function()
       local cmp = require("cmp")
+      local bordered = require("cmp.config.window").bordered
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -70,6 +71,10 @@ return {
             end
             return item
           end,
+        },
+        window = {
+          completion = bordered("rounded"),
+          documentation = bordered("rounded"),
         },
         experimental = {
           ghost_text = {

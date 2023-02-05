@@ -115,6 +115,7 @@ return {
         end
       end
 
+      require("lspconfig.ui.windows").default_options.border = "rounded"
       require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
       require("mason-lspconfig").setup_handlers({ setup })
     end,
@@ -133,6 +134,7 @@ return {
           nls.builtins.formatting.stylua,
           nls.builtins.diagnostics.flake8,
         },
+        border = "rounded",
       }
     end,
   },
@@ -150,6 +152,7 @@ return {
         "shfmt",
         "flake8",
       },
+      ui = { border = "rounded" },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(plugin, opts)
