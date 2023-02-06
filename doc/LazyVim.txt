@@ -58,12 +58,12 @@ flexibility to tweak your config as needed, along with the convenience of a
 pre-configured setup.
 
 <div class="figure">
-<img src="https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png" title="fig:"/>
+<img src="https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png" title="fig:"/>
 <p class="caption">image</p>
 </div>
 
 <div class="figure">
-<img src="https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png" title="fig:"/>
+<img src="https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png" title="fig:"/>
 <p class="caption">image</p>
 </div>
 
@@ -86,6 +86,14 @@ REQUIREMENTS                                            *LazyVim-requirements*
 
 
 GETTING STARTED                                      *LazyVim-getting-started*
+
+There’s a video created by elijahmano <https://github.com/elijahmanor> with a
+walkthrough to get started.
+
+<img src='https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg' title=''/>
+<https://www.youtube.com/watch?v=N93cTbtLCIM>
+
+------------------------------------------------------------------------------
 
 You can find a starter template for **LazyVim** here
 <https://github.com/LazyVim/starter>
