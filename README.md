@@ -62,12 +62,6 @@ to tweak your config as needed, along with the convenience of a pre-configured s
 
 ## 🚀 Getting Started
 
-There's a video created by [@elijahmanor](https://github.com/elijahmanor) with a walkthrough to get started.
-
-[![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
-
----
-
 You can find a starter template for **LazyVim** [here](https://github.com/LazyVim/starter)
 
 <details><summary>Try it with Docker</summary>
@@ -113,6 +107,12 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
   Refer to the comments in the files on how to customize **LazyVim**.
 
 </details>
+
+There's also a great video created by [@elijahmanor](https://github.com/elijahmanor) with a walkthrough to get started.
+
+[![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
+
+---
 
 ## 📂 File Structure
 
