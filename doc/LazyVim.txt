@@ -125,13 +125,13 @@ Install the <a href="https://github.com/LazyVim/starter">LazyVim Starter</a>
     Refer to the comments in the files on how to customize **LazyVim**.
 
 
-There’s also a great video created by elijahmano
-<https://github.com/elijahmanor> with a walkthrough to get started.
+------------------------------------------------------------------------------
+
+There’s a great video created by elijahmano <https://github.com/elijahmanor>
+with a walkthrough to get started.
 
 <img src='https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg' title=''/>
 <https://www.youtube.com/watch?v=N93cTbtLCIM>
-
-------------------------------------------------------------------------------
 
 FILE STRUCTURE                                        *LazyVim-file-structure*
 
