@@ -28,12 +28,12 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window wi
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- Move Lines
-map("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
-map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-map("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
-map("n", "<A-k>", ":m .-2<cr>==", { desc = "Move up" })
-map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-map("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+map("n", "<A-j>", "<cmd>silent! m .+1<cr>==", { desc = "Move down" })
+map("v", "<A-j>", "<cmd>silent! m '>+1<cr>gv=gv", { desc = "Move down" })
+map("i", "<A-j>", "<esc><cmd>silent! m .+1<cr>==gi", { desc = "Move down" })
+map("n", "<A-k>", "<cmd>silent! m .-2<cr>==", { desc = "Move up" })
+map("v", "<A-k>", "<cmd>silent! m '<-2<cr>gv=gv", { desc = "Move up" })
+map("i", "<A-k>", "<esc><cmd>silent! m .-2<cr>==gi", { desc = "Move up" })
 
 -- buffers
 if Util.has("bufferline.nvim") then
