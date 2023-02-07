@@ -129,12 +129,44 @@ import TabItem from '@theme/TabItem';
   return { content = table.concat(lines, "\n") }
 end
 
+function M.recipes()
+  local src = Util.read_file(vim.fs.normalize("~/projects/lazyvim.github.io/lua/recipes.lua"))
+  local lines = vim.split(src, "\n")
+  local ret = {}
+  local header = {} ---@type string[]
+  local block = {} ---@type string[]
+  for _, line in ipairs(lines) do
+    local comment = line:match("^  %-%- (.*)")
+    if comment then
+      header[#header + 1] = comment
+    elseif line:find("^  {") then
+      block = { "{" }
+    elseif line:find("^  }") then
+      block[#block + 1] = "  }"
+      vim.list_extend(ret, header)
+      ret[#ret + 1] = "\n```lua"
+      local code = Docs.fix_indent(table.concat(block, "\n"))
+      ret[#ret + 1] = code
+      ret[#ret + 1] = "```\n"
+      header = {}
+      block = {}
+    else
+      block[#block + 1] = line
+    end
+  end
+  return { content = table.concat(ret, "\n") }
+end
+
 function M.update2()
   local docs = vim.fs.normalize("~/projects/lazyvim.github.io/docs")
 
   Docs.save({
     general = M.general(),
   }, docs .. "/configuration/general.md")
+
+  Docs.save({
+    recipes = M.recipes(),
+  }, docs .. "/configuration/recipes.md")
 
   Docs.save({
     lazy = {
