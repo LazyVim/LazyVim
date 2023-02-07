@@ -188,7 +188,7 @@ return {
   -- git signs
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       signs = {
         add = { text = "▎" },
@@ -225,7 +225,7 @@ return {
   -- references
   {
     "RRethy/vim-illuminate",
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
     opts = { delay = 200 },
     config = function(_, opts)
       require("illuminate").configure(opts)
@@ -271,7 +271,7 @@ return {
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
     config = true,
     -- stylua: ignore
     keys = {
