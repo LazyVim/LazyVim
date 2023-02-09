@@ -44,7 +44,6 @@ function M.get()
     else
       M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
     end
-    dd(M._keys)
   end
   return M._keys
 end
