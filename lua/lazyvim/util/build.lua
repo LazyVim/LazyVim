@@ -136,7 +136,7 @@ function M.recipes()
   local header = {} ---@type string[]
   local block = {} ---@type string[]
   for _, line in ipairs(lines) do
-    local comment = line:match("^  %-%- (.*)")
+    local comment = line:match("^  %-%- ?(.*)")
     if comment then
       header[#header + 1] = comment
     elseif line:find("^  {") then
