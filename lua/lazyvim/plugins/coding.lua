@@ -173,40 +173,50 @@ return {
       }
     end,
     config = function(_, opts)
+      require("mini.ai").setup(opts)
       -- register all text objects with which-key
       if require("lazyvim.util").has("which-key.nvim") then
-        local text_objects = {
-          t = "tag",
-          b = "balanced ), ], }",
-          f = "function",
-          c = "class",
-          o = "block, conditional, loop",
-          a = "argument",
-          q = "quote `, \", '",
-          ["?"] = "user Prompt",
-          ["_"] = "underscore",
-          [" "] = "whitespace",
+        ---@type table<string, string|table>
+        local i = {
+          [" "] = "Whitespace",
+          ['"'] = 'Balanced "',
+          ["'"] = "Balanced '",
+          ["`"] = "Balanced `",
+          ["("] = "Balanced (",
+          [")"] = "Balanced ) including white-space",
+          [">"] = "Balanced > including white-space",
+          ["<lt>"] = "Balanced <",
+          ["]"] = "Balanced ] including white-space",
+          ["["] = "Balanced [",
+          ["}"] = "Balanced } including white-space",
+          ["{"] = "Balanced {",
+          ["?"] = "User Prompt",
+          _ = "Underscore",
+          a = "Argument",
+          b = "Balanced ), ], }",
+          c = "Class",
+          f = "Function",
+          o = "Block, conditional, loop",
+          q = "Quote `, \", '",
+          t = "Tag",
         }
-        for _, o in ipairs({ "(", ")", "[", "]", "{", "}", ">", "<", "'", "`", '"' }) do
-          local desc = "balanced " .. o
-          if vim.tbl_contains({ ")", "]", "}", ">" }, o) then
-            desc = desc .. " with inner space"
-          end
-          text_objects[o == "<" and "<lt>" or o] = desc
+        local a = vim.deepcopy(i)
+        for k, v in pairs(a) do
+          a[k] = v:gsub(" including.*", "")
         end
-        local text_objects_copy = vim.deepcopy(text_objects)
+
+        local ic = vim.deepcopy(i)
+        local ac = vim.deepcopy(a)
         for key, name in pairs({ n = "Next", l = "Last" }) do
-          ---@diagnostic disable-next-line: assign-type-mismatch
-          text_objects[key] = vim.tbl_extend("force", { name = name }, text_objects_copy)
+          i[key] = vim.tbl_extend("force", { name = "Inside " .. name .. " textobject" }, ic)
+          a[key] = vim.tbl_extend("force", { name = "Around " .. name .. " textobject" }, ac)
         end
         require("which-key").register({
           mode = { "o", "x" },
-          i = text_objects,
-          a = text_objects,
+          i = i,
+          a = a,
         })
       end
-
-      require("mini.ai").setup(opts)
     end,
   },
 }
