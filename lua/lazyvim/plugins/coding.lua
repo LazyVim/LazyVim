@@ -173,8 +173,40 @@ return {
       }
     end,
     config = function(_, opts)
-      local ai = require("mini.ai")
-      ai.setup(opts)
+      -- register all text objects with which-key
+      if require("lazyvim.util").has("which-key.nvim") then
+        local text_objects = {
+          t = "tag",
+          b = "balanced ), ], }",
+          f = "function",
+          c = "class",
+          o = "block, conditional, loop",
+          a = "argument",
+          q = "quote `, \", '",
+          ["?"] = "user Prompt",
+          ["_"] = "underscore",
+          [" "] = "whitespace",
+        }
+        for _, o in ipairs({ "(", ")", "[", "]", "{", "}", ">", "<", "'", "`", '"' }) do
+          local desc = "balanced " .. o
+          if vim.tbl_contains({ ")", "]", "}", ">" }, o) then
+            desc = desc .. " with inner space"
+          end
+          text_objects[o == "<" and "<lt>" or o] = desc
+        end
+        local text_objects_copy = vim.deepcopy(text_objects)
+        for key, name in pairs({ n = "Next", l = "Last" }) do
+          ---@diagnostic disable-next-line: assign-type-mismatch
+          text_objects[key] = vim.tbl_extend("force", { name = name }, text_objects_copy)
+        end
+        require("which-key").register({
+          mode = { "o", "x" },
+          i = text_objects,
+          a = text_objects,
+        })
+      end
+
+      require("mini.ai").setup(opts)
     end,
   },
 }
