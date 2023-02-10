@@ -139,11 +139,10 @@ return {
     },
   },
 
-  -- easily jump to any location and enhanced f/t motions for Leap
+  -- enhanced 2-char search motions
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",
-    dependencies = { { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } } },
     config = function(_, opts)
       local leap = require("leap")
       for k, v in pairs(opts) do
@@ -151,6 +150,12 @@ return {
       end
       leap.add_default_mappings(true)
     end,
+  },
+  -- easily jump to any location and enhanced f/t motions for Leap
+  {
+    "ggandor/flit.nvim",
+    dependencies = { { "ggandor/leap.nvim" } },
+    opts = { labeled_modes = "nv" },
   },
 
   -- which-key
