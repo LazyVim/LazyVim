@@ -160,6 +160,12 @@ end
 function M.update2()
   local docs = vim.fs.normalize("~/projects/lazyvim.github.io/docs")
 
+  local config = Docs.extract("lua/lazyvim/config/init.lua", "\nlocal defaults = ({.-\n})")
+
+  Docs.save({
+    config = config,
+  }, docs .. "/configuration/index.md")
+
   Docs.save({
     general = M.general(),
   }, docs .. "/configuration/general.md")

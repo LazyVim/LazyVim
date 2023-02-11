@@ -10,6 +10,12 @@ local defaults = {
   colorscheme = function()
     require("tokyonight").load()
   end,
+  -- load the default settings
+  defaults = {
+    autocmds = true, -- lazyvim.config.autocmds
+    keymaps = true, -- lazyvim.config.keymaps
+    options = true, -- lazyvim.config.options
+  },
   -- icons used by other plugins
   icons = {
     diagnostics = {
@@ -120,8 +126,7 @@ end
 ---@param name "autocmds" | "options" | "keymaps"
 function M.load(name)
   local Util = require("lazy.core.util")
-  -- always load lazyvim, then user file
-  for _, mod in ipairs({ "lazyvim.config." .. name, "config." .. name }) do
+  local function _load(mod)
     Util.try(function()
       require(mod)
     end, {
@@ -134,6 +139,11 @@ function M.load(name)
       end,
     })
   end
+  -- always load lazyvim, then user file
+  if M.defaults[name] then
+    _load("lazyvim.config." .. name)
+  end
+  _load("config." .. name)
   if vim.bo.filetype == "lazy" then
     -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
     vim.cmd([[do VimResized]])
