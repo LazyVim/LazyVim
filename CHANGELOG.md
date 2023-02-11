@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/LazyVim/LazyVim/compare/v1.8.0...v1.9.0) (2023-02-11)
+
+
+### Features
+
+* **config:** allow to disable loading of the default keymaps/autocmds/options. Fixes [#238](https://github.com/LazyVim/LazyVim/issues/238) ([6669e63](https://github.com/LazyVim/LazyVim/commit/6669e63368b88430ff574b8f392e8afb6cb434cb))
+
 ## [1.8.0](https://github.com/LazyVim/LazyVim/compare/v1.7.2...v1.8.0) (2023-02-10)
 
 
