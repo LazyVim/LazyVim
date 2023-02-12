@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.9.1](https://github.com/LazyVim/LazyVim/compare/v1.9.0...v1.9.1) (2023-02-12)
+
+
+### Bug Fixes
+
+* **cmp:** added `&lt;c-n&gt;` and `<c-p>` to make it more consistent ([31ad893](https://github.com/LazyVim/LazyVim/commit/31ad893788e0d207a75feaccd61632cdd95b49a0))
+* **lsp:** temp mason fix for sumenko_lua -&gt; lua_ls rename. See [#248](https://github.com/LazyVim/LazyVim/issues/248) ([5431268](https://github.com/LazyVim/LazyVim/commit/543126818e678509ee9e17836f0e7906146a1002))
+* **telescope:** make key bindings more consistent for telescope ([151bf12](https://github.com/LazyVim/LazyVim/commit/151bf12a9f9591bd324a359374e6c4a5fb65bbbc))
+
 ## [1.9.0](https://github.com/LazyVim/LazyVim/compare/v1.8.0...v1.9.0) (2023-02-11)
 
 
