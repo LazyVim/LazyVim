@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.2](https://github.com/LazyVim/LazyVim/compare/v1.9.1...v1.9.2) (2023-02-12)
+
+
+### Bug Fixes
+
+* **format:** dont format if client capaibilities disabled it. [#249](https://github.com/LazyVim/LazyVim/issues/249) ([fab6150](https://github.com/LazyVim/LazyVim/commit/fab6150da919a094614752f95f5fe4e7f55832f8))
+* **format:** nil check ([a3aeb27](https://github.com/LazyVim/LazyVim/commit/a3aeb27cbc2fa1f19d525b97ebb4cc1a56c7c538))
+
 ## [1.9.1](https://github.com/LazyVim/LazyVim/compare/v1.9.0...v1.9.1) (2023-02-12)
 
 
