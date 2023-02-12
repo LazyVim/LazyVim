@@ -39,7 +39,11 @@ end
 
 function M.on_attach(client, buf)
   -- dont format if client disabled it
-  if client.config.capabilities.documentFormattingProvider == false then
+  if
+    client.config
+    and client.config.capabilities
+    and client.config.capabilities.documentFormattingProvider == false
+  then
     return
   end
 
