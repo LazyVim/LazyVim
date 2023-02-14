@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.3](https://github.com/LazyVim/LazyVim/compare/v1.9.2...v1.9.3) (2023-02-14)
+
+
+### Bug Fixes
+
+* **notify:** install notify when noice is not enabled ([5d6f0d5](https://github.com/LazyVim/LazyVim/commit/5d6f0d58d5daf2f87ea9f0a49170103925d1b528))
+* **which-key:** only add noice group when noice is enabled ([38eb3bf](https://github.com/LazyVim/LazyVim/commit/38eb3bf115f1b550e853a04545932fad3fbffe5b))
+
 ## [1.9.2](https://github.com/LazyVim/LazyVim/compare/v1.9.1...v1.9.2) (2023-02-12)
 
 
