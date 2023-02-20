@@ -112,6 +112,24 @@ return {
         }),
         desc = "Goto Symbol",
       },
+      {
+        "<leader>sS",
+        Util.telescope("lsp_workspace_symbols", {
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        }),
+        desc = "Goto Symbol (Workspace)",
+      },
     },
     opts = {
       defaults = {
