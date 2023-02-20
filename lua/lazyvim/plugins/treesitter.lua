@@ -14,7 +14,8 @@ return {
           local enabled = false
           if opts.textobjects then
             for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-              if opts.textobjects[mod].enable then
+              local textobjects_opts = opts.textobjects[mod]
+              if textobjects_opts ~= nil and textobjects_opts.enable then
                 enabled = true
                 break
               end
