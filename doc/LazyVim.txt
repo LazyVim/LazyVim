@@ -1,13 +1,13 @@
-*LazyVim.txt*         For Neovim >= 0.8.0        Last change: 2023 February 20
+*LazyVim.txt*         For Neovim >= 0.8.0        Last change: 2023 February 27
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
 
-  - Features                                            |LazyVim-nil-features|
-  - Requirements                                    |LazyVim-nil-requirements|
-  - Getting Started                              |LazyVim-nil-getting-started|
-  - File Structure                                |LazyVim-nil-file-structure|
-  - Configuration                                  |LazyVim-nil-configuration|
+  - Features                                                |LazyVim-features|
+  - Requirements                                        |LazyVim-requirements|
+  - Getting Started                                  |LazyVim-getting-started|
+  - File Structure                                    |LazyVim-file-structure|
+  - Configuration                                      |LazyVim-configuration|
 
 Install
 ·
@@ -41,7 +41,7 @@ flexibility to tweak your config as needed, along with the convenience of a
 pre-configured setup.
 
 
-FEATURES                                                *LazyVim-nil-features*
+FEATURES                                                    *LazyVim-features*
 
 
 - Transform your Neovim into a full-fledged IDE
@@ -51,7 +51,7 @@ FEATURES                                                *LazyVim-nil-features*
 - Comes with a wealth of plugins pre-configured and ready to use
 
 
-REQUIREMENTS                                        *LazyVim-nil-requirements*
+REQUIREMENTS                                            *LazyVim-requirements*
 
 
 - Neovim >= **0.8.0** (needs to be built with **LuaJIT**)
@@ -59,7 +59,7 @@ REQUIREMENTS                                        *LazyVim-nil-requirements*
 - a Nerd Font <https://www.nerdfonts.com/> **(optional)**
 
 
-GETTING STARTED                                  *LazyVim-nil-getting-started*
+GETTING STARTED                                      *LazyVim-getting-started*
 
 You can find a starter template for **LazyVim** here
 <https://github.com/LazyVim/starter>
@@ -104,7 +104,7 @@ There’s a great video created by @elijahmanor
 <https://www.youtube.com/watch?v=N93cTbtLCIM>
 
 
-FILE STRUCTURE                                    *LazyVim-nil-file-structure*
+FILE STRUCTURE                                        *LazyVim-file-structure*
 
 The files under config will be automatically loaded at the appropriate time, so
 you don’t need to require those files manually. **LazyVim** comes with a set
@@ -115,7 +115,7 @@ You can add your custom plugin specs under `lua/plugins/`. All files there will
 be automatically loaded by lazy.nvim <https://github.com/folke/lazy.nvim>
 
 
-CONFIGURATION                                      *LazyVim-nil-configuration*
+CONFIGURATION                                          *LazyVim-configuration*
 
 Refer to the docs <https://lazyvim.github.io>
 
