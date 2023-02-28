@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.13.0](https://github.com/LazyVim/LazyVim/compare/v1.12.1...v1.13.0) (2023-02-28)
+
+
+### Features
+
+* **keymaps:** Add previous/next trouble/quickfix item keymap `[q`, `]q` ([#299](https://github.com/LazyVim/LazyVim/issues/299)) ([59fa836](https://github.com/LazyVim/LazyVim/commit/59fa83653f3d4f1911e220c2a96a7e47878a16bc))
+
+
+### Bug Fixes
+
+* **git-signs:** larger icons for delete ([4b37723](https://github.com/LazyVim/LazyVim/commit/4b37723558e45f14c3e8d05fc84ad3a701b9faf0))
+* **icons:** replace obsolete Nerd icons ([#331](https://github.com/LazyVim/LazyVim/issues/331)) ([588dc5d](https://github.com/LazyVim/LazyVim/commit/588dc5dd65aa3881122aa4e59710de6722423251))
+* **lsp:** only map lsp goto definition when client has definitionProvider ([#348](https://github.com/LazyVim/LazyVim/issues/348)) ([5abb10b](https://github.com/LazyVim/LazyVim/commit/5abb10b5ab3c2c5462f699fc98f618f39543f8f4))
+* **luasnips:** make install_jsregexp ([bd62cbe](https://github.com/LazyVim/LazyVim/commit/bd62cbe370a72525a29790c710d3f213c3e184e4))
+* **mini-indentscope:** disable indentscope for filetypes during init. Fixes [#318](https://github.com/LazyVim/LazyVim/issues/318) ([d97bf66](https://github.com/LazyVim/LazyVim/commit/d97bf66eed76c91eac11c81dad69aff9f632b214))
+* **treesitter:** always install all built-in treesitter parsers to prevent queriy issues ([fc765e9](https://github.com/LazyVim/LazyVim/commit/fc765e9e3d1fe8dc9f84087a73f12a2b3bbe60c4))
+
 ## [1.12.1](https://github.com/LazyVim/LazyVim/compare/v1.12.0...v1.12.1) (2023-02-20)
 
 
