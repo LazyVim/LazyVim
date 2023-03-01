@@ -187,7 +187,6 @@ return {
   },
   {
     "ggandor/leap.nvim",
-    commit = "9a69feb",
     keys = {
       { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
       { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
