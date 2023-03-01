@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/LazyVim/LazyVim/compare/v1.13.1...v1.14.0) (2023-03-01)
+
+
+### Features
+
+* **telescope:** Add open selected with trouble keymap ([#357](https://github.com/LazyVim/LazyVim/issues/357)) ([f9b7406](https://github.com/LazyVim/LazyVim/commit/f9b7406df96cf1fad5685865ffef5ec725573f1c))
+
 ## [1.13.1](https://github.com/LazyVim/LazyVim/compare/v1.13.0...v1.13.1) (2023-03-01)
 
 
