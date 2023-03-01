@@ -171,7 +171,7 @@ return {
 
   -- easily jump to any location and enhanced f/t motions for Leap
   {
-    "ggandor/flit.nvim",
+    "echasnovski/mini.jump",
     keys = function()
       ---@type LazyKeys[]
       local ret = {}
@@ -180,11 +180,15 @@ return {
       end
       return ret
     end,
-    opts = { labeled_modes = "nx" },
+    opts = {
+      delay = {
+        idle_stop = 3000,
+      },
+    },
+    main = "mini.jump",
   },
   {
     "ggandor/leap.nvim",
-    commit = "9a69feb",
     keys = {
       { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
       { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
