@@ -3,7 +3,7 @@ return {
   -- snippets
   {
     "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
+    build = (not jit.os:find("Windows")) and "make install_jsregexp" or nil,
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
