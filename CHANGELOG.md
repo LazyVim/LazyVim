@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.16.0](https://github.com/LazyVim/LazyVim/compare/v1.15.0...v1.16.0) (2023-03-03)
+
+
+### Features
+
+* **neo-tree:** added expanders ([57c2dcb](https://github.com/LazyVim/LazyVim/commit/57c2dcb3a35704a849ea8ba210f963c22fb6d1ce))
+
 ## [1.15.0](https://github.com/LazyVim/LazyVim/compare/v1.14.1...v1.15.0) (2023-03-03)
 
 
