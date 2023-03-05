@@ -43,6 +43,7 @@ return {
         "javascript",
         "json",
         "lua",
+        "luap",
         "markdown",
         "markdown_inline",
         "python",
