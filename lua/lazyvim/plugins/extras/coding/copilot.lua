@@ -35,7 +35,24 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local cmp = require("cmp")
+
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "copilot" } }))
+
+      local confirm = opts.mapping["<CR>"]
+      local confirm_copilot = cmp.mapping.confirm({
+        select = true,
+        behavior = cmp.ConfirmBehavior.Replace,
+      })
+
+      opts.mapping = vim.tbl_extend("force", opts.mapping, {
+        ["<CR>"] = function(...)
+          local entry = cmp.get_selected_entry()
+          if entry and entry.source.name == "copilot" then
+            return confirm_copilot(...)
+          end
+          return confirm(...)
+        end,
+      })
     end,
   },
 }
