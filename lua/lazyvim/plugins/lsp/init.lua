@@ -65,7 +65,7 @@ return {
       },
     },
     ---@param opts PluginLspOpts
-    config = function(plugin, opts)
+    config = function(_, opts)
       -- setup autoformat
       require("lazyvim.plugins.lsp.format").autoformat = opts.autoformat
       -- setup formatting and keymaps
@@ -141,6 +141,7 @@ return {
         sources = {
           -- nls.builtins.formatting.prettierd,
           nls.builtins.formatting.stylua,
+          nls.builtins.formatting.shfmt,
           nls.builtins.diagnostics.flake8,
         },
       }
@@ -156,11 +157,12 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
+        "shfmt",
         "flake8",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
-    config = function(plugin, opts)
+    config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
       for _, tool in ipairs(opts.ensure_installed) do
