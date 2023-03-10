@@ -1,11 +1,9 @@
 return {
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "prettierd",
-      },
-    },
+    opts = function(_, opts)
+      table.insert(opts.ensure_installed, "prettierd")
+    end,
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
