@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.18.0](https://github.com/LazyVim/LazyVim/compare/v1.17.1...v1.18.0) (2023-03-10)
+
+
+### Features
+
+* **copilot:** better sorting for cmp sources when using copilot ([23ba877](https://github.com/LazyVim/LazyVim/commit/23ba877bb07f17a44af60e341be9f246ece5c133))
+* **eslint:** added an extra for eslint lsp that runs EslintFixAll before saving a buffer ([75299da](https://github.com/LazyVim/LazyVim/commit/75299da24c4982f0d3ec6c9c3fbad7f94aa9eb72))
+* **null-ls:** added .neoconf.json to null-ls root_dir ([5aad574](https://github.com/LazyVim/LazyVim/commit/5aad5749a745f928b0a1954917467f04c84e8a07))
+* **null-ls:** added fish_indent and fish diag ([8f3834b](https://github.com/LazyVim/LazyVim/commit/8f3834bc13c6ca5acf82c1e44c5c250799d683a0))
+* **prettierd:** added an extra for prettierd with null-ls ([aa8bae0](https://github.com/LazyVim/LazyVim/commit/aa8bae07aea7a81e2f507e1920fd84a6b83c34ad))
+* **shfmt:** added shfmt to null-ls and mason ([c407ddf](https://github.com/LazyVim/LazyVim/commit/c407ddfe8ab36608ba1fe1c1d4f6723cce506a01))
+* **typescript:** added null-ls typescript code actions ([5bb2314](https://github.com/LazyVim/LazyVim/commit/5bb23147877b3fcbe4cc28c0a7d820bcb52bb141))
+
+
+### Bug Fixes
+
+* **eslint:** only run EslintFixAll on buffers where eslint is attached ([f1dbd09](https://github.com/LazyVim/LazyVim/commit/f1dbd097e4461c322d6982c925d605a6ed57a4b2))
+
 ## [1.17.1](https://github.com/LazyVim/LazyVim/compare/v1.17.0...v1.17.1) (2023-03-05)
 
 
