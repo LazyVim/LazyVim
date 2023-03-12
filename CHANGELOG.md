@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.2](https://github.com/LazyVim/LazyVim/compare/v1.18.1...v1.18.2) (2023-03-12)
+
+
+### Bug Fixes
+
+* **lsp:** allow `silent=false` for lsp keymaps. Fixes [#414](https://github.com/LazyVim/LazyVim/issues/414) ([a28885b](https://github.com/LazyVim/LazyVim/commit/a28885be3f2428c993a3133f283d5648b6fa6b94))
+
 ## [1.18.1](https://github.com/LazyVim/LazyVim/compare/v1.18.0...v1.18.1) (2023-03-10)
 
 
