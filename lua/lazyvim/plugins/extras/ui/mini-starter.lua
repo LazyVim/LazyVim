@@ -35,6 +35,7 @@ return {
           new_section("Lazy",         "Lazy",                 "Config"),
           new_section("New file",     "ene | startinsert",    "Built-in"),
           new_section("Quit",         "qa",                   "Built-in"),
+          new_section("Session restore", [[lua require("persistence").load()]], "Session"),
         },
         content_hooks = {
           starter.gen_hook.adding_bullet(pad .. "░ ", false),
