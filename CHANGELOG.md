@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.19.0](https://github.com/LazyVim/LazyVim/compare/v1.18.2...v1.19.0) (2023-03-14)
+
+
+### Features
+
+* **mini-starter:** add Session restore to starter menu ([#421](https://github.com/LazyVim/LazyVim/issues/421)) ([bcdcfab](https://github.com/LazyVim/LazyVim/commit/bcdcfab020308a90c8cb347cf63d318f4cb05941))
+
+
+### Bug Fixes
+
+* **core:** set `cond=true` for LazyVim ([df6ac59](https://github.com/LazyVim/LazyVim/commit/df6ac591baf8ab2ef40e3ddcaf34ed124f42469f))
+
 ## [1.18.2](https://github.com/LazyVim/LazyVim/compare/v1.18.1...v1.18.2) (2023-03-12)
 
 
