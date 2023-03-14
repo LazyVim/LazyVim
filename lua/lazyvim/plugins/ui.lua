@@ -170,6 +170,9 @@ return {
       show_trailing_blankline_indent = false,
       show_current_context = false,
     },
+    config = function(_, opts)
+      require("indent_blankline").setup(opts)
+    end,
   },
 
   -- active indent guide and indent text objects
