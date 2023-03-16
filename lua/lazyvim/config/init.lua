@@ -21,7 +21,7 @@ local defaults = {
     diagnostics = {
       Error = " ",
       Warn = " ",
-      Hint = "󰌶 ",
+      Hint = " ",
       Info = " ",
     },
     git = {
@@ -50,7 +50,7 @@ local defaults = {
       Method = " ",
       Module = " ",
       Namespace = " ",
-      Null = "󰟢 ",
+      Null = " ",
       Number = " ",
       Object = " ",
       Operator = " ",
