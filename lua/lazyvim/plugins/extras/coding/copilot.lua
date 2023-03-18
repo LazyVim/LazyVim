@@ -13,7 +13,7 @@ return {
 
   -- copilot cmp source
   {
-    "nvim-cmp",
+    "hrsh7th/nvim-cmp",
     dependencies = {
       {
         "zbirenbaum/copilot-cmp",
