@@ -15,8 +15,12 @@ jobs:
       - name: Install Neovim
         shell: bash
         run: |
-            wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -O /tmp/nvim.deb
-            sudo dpkg -i /tmp/nvim.deb
+          mkdir -p /tmp/nvim
+          wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -O /tmp/nvim/nvim.appimage
+          cd /tmp/nvim
+          chmod a+x ./nvim.appimage
+          ./nvim.appimage --appimage-extract
+          echo "/tmp/nvim/squashfs-root/usr/bin/" >> $GITHUB_PATH
       - name: Run Tests
         run: |
           nvim --version
@@ -55,7 +59,7 @@ jobs:
         with:
           release-type: simple
           package-name: LazyVim
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: tag stable versions
         if: ${{ steps.release.outputs.release_created }}
         run: |
