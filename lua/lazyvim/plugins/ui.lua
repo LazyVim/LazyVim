@@ -83,7 +83,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    opts = function(plugin)
+    opts = function()
       local icons = require("lazyvim.config").icons
 
       local function fg(name)
@@ -98,7 +98,7 @@ return {
         options = {
           theme = "auto",
           globalstatus = true,
-          disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
         },
         sections = {
           lualine_a = { "mode" },
@@ -154,7 +154,7 @@ return {
             end,
           },
         },
-        extensions = { "neo-tree" },
+        extensions = { "neo-tree", "lazy" },
       }
     end,
   },
