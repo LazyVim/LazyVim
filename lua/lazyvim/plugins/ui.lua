@@ -250,12 +250,12 @@ return {
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
       for _, button in ipairs(dashboard.section.buttons.val) do
-        button.opts.hl = "AlphaButtons"
-        button.opts.hl_shortcut = "AlphaShortcut"
+        button.opts.hl = "DashboardCenter"
+        button.opts.hl_shortcut = "DashboardShortCut"
       end
-      dashboard.section.header.opts.hl = "AlphaHeader"
-      dashboard.section.buttons.opts.hl = "AlphaButtons"
-      dashboard.section.footer.opts.hl = "AlphaFooter"
+      dashboard.section.header.opts.hl = "DashboardHeader"
+      dashboard.section.buttons.opts.hl = "DashboardCenter"
+      dashboard.section.footer.opts.hl = "DashboardFooter"
       dashboard.opts.layout[1].val = 8
       return dashboard
     end,
