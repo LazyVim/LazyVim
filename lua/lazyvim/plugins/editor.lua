@@ -122,7 +122,7 @@ return {
       },
       {
         "<leader>sS",
-        Util.telescope("lsp_workspace_symbols", {
+        Util.telescope("lsp_dynamic_workspace_symbols", {
           symbols = {
             "Class",
             "Function",
