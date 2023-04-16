@@ -218,11 +218,7 @@ return {
     event = "VeryLazy",
     opts = {
       plugins = { spelling = true },
-    },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      local keymaps = {
+      defaults = {
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
         ["gz"] = { name = "+surround" },
@@ -239,11 +235,12 @@ return {
         ["<leader>u"] = { name = "+ui" },
         ["<leader>w"] = { name = "+windows" },
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
-      }
-      if Util.has("noice.nvim") then
-        keymaps["<leader>sn"] = { name = "+noice" }
-      end
-      wk.register(keymaps)
+      },
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.register(opts.defaults)
     end,
   },
 
