@@ -1,5 +1,4 @@
 -- This file is automatically loaded by plugins.config
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -28,7 +27,7 @@ opt.scrolloff = 4 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
-opt.shortmess:append { W = true, I = true, c = true }
+opt.shortmess:append({ W = true, I = true, c = true })
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
@@ -49,7 +48,7 @@ opt.wrap = false -- Disable line wrap
 
 if vim.fn.has("nvim-0.9.0") == 1 then
   opt.splitkeep = "screen"
-  opt.shortmess:append { C = true }
+  opt.shortmess:append({ C = true })
 end
 
 -- Fix markdown indentation settings
