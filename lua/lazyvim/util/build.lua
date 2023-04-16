@@ -54,6 +54,23 @@ function M.keymaps()
     end
   end)
 
+  Util.walk(root .. "/lua/lazyvim/plugins/extras", function(path, name, t)
+    if t == "file" and name:find("%.lua$") then
+      local modname = path:gsub(".*/lua/", ""):gsub("/", "."):gsub("%.lua$", "")
+      local extra_doc = "/plugins/extras/" .. modname:gsub("lazyvim%.plugins%.extras%.", "")
+      local extra = require("lazy.core.plugin").Spec.new({ import = modname })
+      Util.foreach(extra.plugins, function(name, plugin)
+        group = ("[%s](%s)\nPart of [%s](%s)"):format(plugin.name, plugin.url, modname, extra_doc)
+        for _, key in ipairs(plugin.keys or {}) do
+          if type(key) == "table" and key.desc then
+            local desc = key.desc or ""
+            map(key.mode or "n", key[1], key[2], { desc = desc })
+          end
+        end
+      end)
+    end
+  end)
+
   ---@type string[]
   local lines = {}
 
