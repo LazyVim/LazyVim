@@ -256,7 +256,7 @@ function M.plugins(path)
 
   local function find_plugins(node)
     if node:type() == "string" then
-      local text = vim.treesitter.query.get_node_text(node, source):sub(2, -2)
+      local text = vim.treesitter.get_node_text(node, source):sub(2, -2)
       if text:find("/") and #node:parent():field("name") == 0 then
         local plugin_node = node:parent():parent()
         if plugin_node:named_child(0):field("value")[1]:id() ~= node:id() then
