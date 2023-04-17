@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/LazyVim/LazyVim/compare/v2.2.0...v2.2.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* **telescope:** typo ([a94f7af](https://github.com/LazyVim/LazyVim/commit/a94f7afdebc56338b5552de11561646d8ef4b5be))
+
 ## [2.2.0](https://github.com/LazyVim/LazyVim/compare/v2.1.0...v2.2.0) (2023-04-17)
 
 
