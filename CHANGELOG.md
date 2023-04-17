@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.0](https://github.com/LazyVim/LazyVim/compare/v2.1.0...v2.2.0) (2023-04-17)
+
+
+### Features
+
+* **noice:** added keymap to dismiss all noice messages ([0155de0](https://github.com/LazyVim/LazyVim/commit/0155de00ab76e7ffc1d8232c10121f24c4e84cd9))
+
+
+### Bug Fixes
+
+* **lsp:** gT =&gt; gy. keymap for goto type definition. Fixes [#554](https://github.com/LazyVim/LazyVim/issues/554) ([0cb8974](https://github.com/LazyVim/LazyVim/commit/0cb89742216d4c73fa944ab9e2fcd21793ed7a78))
+* **telescope:** consistent keymap description. Fixes [#600](https://github.com/LazyVim/LazyVim/issues/600) ([df9547f](https://github.com/LazyVim/LazyVim/commit/df9547f43223fd89ccc7c1fa5088623ca3c2cfd4))
+
 ## [2.1.0](https://github.com/LazyVim/LazyVim/compare/v2.0.0...v2.1.0) (2023-04-16)
 
 
