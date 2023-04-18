@@ -8,7 +8,8 @@ return {
       "rcarriga/nvim-dap-ui",
       -- stylua: ignore
       keys = {
-        { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" }
+        { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
       },
       opts = {},
       config = function(_, opts)
@@ -77,6 +78,14 @@ return {
     { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
     { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
     { "<leader>dr", function() require("dap").repl.open() end, desc = "Repl" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+    { "<leader>dk", function() require("dap").up() end, desc = "Up" },
+    { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+    { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+    { "<leader>drl", function() require("dap").run_last() end, desc = "Run Last" },
+    { "<leader>drc", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
   },
 
   config = function()
