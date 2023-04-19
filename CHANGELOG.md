@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.3](https://github.com/LazyVim/LazyVim/compare/v2.4.2...v2.4.3) (2023-04-19)
+
+
+### Bug Fixes
+
+* **treesitter:** de-duplicate langs in endure_installed. Fixes [#628](https://github.com/LazyVim/LazyVim/issues/628) ([1d2c97c](https://github.com/LazyVim/LazyVim/commit/1d2c97cbda099c76ee132ee5019a3f80fd88f8ed))
+
 ## [2.4.2](https://github.com/LazyVim/LazyVim/compare/v2.4.1...v2.4.2) (2023-04-19)
 
 
