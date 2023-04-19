@@ -14,7 +14,7 @@ return {
           local enabled = false
           if opts.textobjects then
             for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-              if opts.textobjects[mod].enable then
+              if opts.textobjects[mod] and opts.textobjects[mod].enable then
                 enabled = true
                 break
               end
@@ -28,20 +28,22 @@ return {
     },
     keys = {
       { "<c-space>", desc = "Increment selection" },
-      { "<bs>", desc = "Schrink selection", mode = "x" },
+      { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
-      indent = { enable = true, disable = { "python" } },
+      indent = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },
       ensure_installed = {
         "bash",
-        "help",
+        "c",
         "html",
         "javascript",
         "json",
         "lua",
+        "luadoc",
+        "luap",
         "markdown",
         "markdown_inline",
         "python",
@@ -50,6 +52,7 @@ return {
         "tsx",
         "typescript",
         "vim",
+        "vimdoc",
         "yaml",
       },
       incremental_selection = {
@@ -64,6 +67,17 @@ return {
     },
     ---@param opts TSConfig
     config = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        ---@type table<string, boolean>
+        local added = {}
+        opts.ensure_installed = vim.tbl_filter(function(lang)
+          if added[lang] then
+            return false
+          end
+          added[lang] = true
+          return true
+        end, opts.ensure_installed)
+      end
       require("nvim-treesitter.configs").setup(opts)
     end,
   },

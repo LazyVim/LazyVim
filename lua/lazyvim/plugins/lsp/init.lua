@@ -21,9 +21,18 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+          -- prefix = "icons",
+        },
         severity_sort = true,
       },
+      -- add any global capabilities here
+      capabilities = {},
       -- Automatically format on save
       autoformat = true,
       -- options for vim.lsp.buf.format
@@ -65,7 +74,7 @@ return {
       },
     },
     ---@param opts PluginLspOpts
-    config = function(plugin, opts)
+    config = function(_, opts)
       -- setup autoformat
       require("lazyvim.plugins.lsp.format").autoformat = opts.autoformat
       -- setup formatting and keymaps
@@ -79,10 +88,29 @@ return {
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
-      vim.diagnostic.config(opts.diagnostics)
+
+      if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
+        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
+          or function(diagnostic)
+            local icons = require("lazyvim.config").icons.diagnostics
+            for d, icon in pairs(icons) do
+              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                return icon
+              end
+            end
+          end
+      end
+
+      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       local servers = opts.servers
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities(),
+        opts.capabilities or {}
+      )
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
@@ -101,23 +129,19 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      -- temp fix for lspconfig rename
-      -- https://github.com/neovim/nvim-lspconfig/pull/2439
-      local mappings = require("mason-lspconfig.mappings.server")
-      if not mappings.lspconfig_to_package.lua_ls then
-        mappings.lspconfig_to_package.lua_ls = "lua-language-server"
-        mappings.package_to_lspconfig["lua-language-server"] = "lua_ls"
+      -- get all the servers that are available thourgh mason-lspconfig
+      local have_mason, mlsp = pcall(require, "mason-lspconfig")
+      local all_mslp_servers = {}
+      if have_mason then
+        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
       end
-
-      local mlsp = require("mason-lspconfig")
-      local available = mlsp.get_available_servers()
 
       local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
           -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(available, server) then
+          if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
             setup(server)
           else
             ensure_installed[#ensure_installed + 1] = server
@@ -125,8 +149,10 @@ return {
         end
       end
 
-      require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
-      require("mason-lspconfig").setup_handlers({ setup })
+      if have_mason then
+        mlsp.setup({ ensure_installed = ensure_installed })
+        mlsp.setup_handlers({ setup })
+      end
     end,
   },
 
@@ -138,10 +164,13 @@ return {
     opts = function()
       local nls = require("null-ls")
       return {
+        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
         sources = {
-          -- nls.builtins.formatting.prettierd,
+          nls.builtins.formatting.fish_indent,
+          nls.builtins.diagnostics.fish,
           nls.builtins.formatting.stylua,
-          nls.builtins.diagnostics.flake8,
+          nls.builtins.formatting.shfmt,
+          -- nls.builtins.diagnostics.flake8,
         },
       }
     end,
@@ -156,20 +185,26 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
-        "shellcheck",
         "shfmt",
-        "flake8",
+        -- "flake8",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
-    config = function(plugin, opts)
+    config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
-      for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
         end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
       end
     end,
   },

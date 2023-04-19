@@ -54,6 +54,23 @@ function M.keymaps()
     end
   end)
 
+  Util.walk(root .. "/lua/lazyvim/plugins/extras", function(path, name, t)
+    if t == "file" and name:find("%.lua$") then
+      local modname = path:gsub(".*/lua/", ""):gsub("/", "."):gsub("%.lua$", "")
+      local extra_doc = "/plugins/extras/" .. modname:gsub("lazyvim%.plugins%.extras%.", "")
+      local extra = require("lazy.core.plugin").Spec.new({ import = modname })
+      Util.foreach(extra.plugins, function(name, plugin)
+        group = ("[%s](%s)\nPart of [%s](%s)"):format(plugin.name, plugin.url, modname, extra_doc)
+        for _, key in ipairs(plugin.keys or {}) do
+          if type(key) == "table" and key.desc then
+            local desc = key.desc or ""
+            map(key.mode or "n", key[1], key[2], { desc = desc })
+          end
+        end
+      end)
+    end
+  end)
+
   ---@type string[]
   local lines = {}
 
@@ -256,7 +273,7 @@ function M.plugins(path)
 
   local function find_plugins(node)
     if node:type() == "string" then
-      local text = vim.treesitter.query.get_node_text(node, source):sub(2, -2)
+      local text = vim.treesitter.get_node_text(node, source):sub(2, -2)
       if text:find("/") and #node:parent():field("name") == 0 then
         local plugin_node = node:parent():parent()
         if plugin_node:named_child(0):field("value")[1]:id() ~= node:id() then
