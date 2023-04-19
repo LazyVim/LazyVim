@@ -99,7 +99,7 @@ return {
           end
       end
 
-      vim.diagnostic.config(opts.diagnostics)
+      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       local servers = opts.servers
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
