@@ -33,6 +33,7 @@ return {
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
+      auto_install = true,
       indent = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },
       ensure_installed = {
