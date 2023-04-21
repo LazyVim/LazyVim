@@ -76,7 +76,7 @@ return {
         ["<CR>"] = function(...)
           local entry = cmp.get_selected_entry()
           if entry and entry.source.name == "copilot" then
-            -- return confirm_copilot(...)
+            return confirm_copilot(...)
           end
           return confirm(...)
         end,
