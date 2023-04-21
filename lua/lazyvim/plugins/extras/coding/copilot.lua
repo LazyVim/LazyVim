@@ -28,8 +28,8 @@ return {
           return icon .. (status.message or "")
         end,
         cond = function()
-          local clients = vim.lsp.get_active_clients({ name = "copilot", bufnr = 0 })
-          return #clients > 0
+          local ok, clients = pcall(vim.lsp.get_active_clients, { name = "copilot", bufnr = 0 })
+          return ok and #clients > 0
         end,
         color = function()
           local status = require("copilot.api").status.data
@@ -76,7 +76,7 @@ return {
         ["<CR>"] = function(...)
           local entry = cmp.get_selected_entry()
           if entry and entry.source.name == "copilot" then
-            return confirm_copilot(...)
+            -- return confirm_copilot(...)
           end
           return confirm(...)
         end,
