@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.9.0](https://github.com/LazyVim/LazyVim/compare/v2.8.0...v2.9.0) (2023-04-21)
+
+
+### Features
+
+* **tsserver:** set some tsserver formatting settings to their Neovim equivalents. Also used for organize imports ([eb92903](https://github.com/LazyVim/LazyVim/commit/eb92903342a7ac12185c62bb63b5caa4c80ce7dc))
+
+
+### Bug Fixes
+
+* **copilot:** work-around Neovim bug. Fixes [#656](https://github.com/LazyVim/LazyVim/issues/656) ([4379ae8](https://github.com/LazyVim/LazyVim/commit/4379ae8ab9aec497e58eeae733a0a87c70289570))
+
 ## [2.8.0](https://github.com/LazyVim/LazyVim/compare/v2.7.0...v2.8.0) (2023-04-21)
 
 
