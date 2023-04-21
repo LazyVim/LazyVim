@@ -85,14 +85,7 @@ return {
     event = "VeryLazy",
     opts = function()
       local icons = require("lazyvim.config").icons
-
-      local function fg(name)
-        return function()
-          ---@type {foreground?:number}?
-          local hl = vim.api.nvim_get_hl_by_name(name, true)
-          return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
-        end
-      end
+      local Util = require("lazyvim.util")
 
       return {
         options = {
@@ -124,23 +117,23 @@ return {
           lualine_x = {
             -- stylua: ignore
             {
-              function() return "  " .. require("dap").status() end,
-              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = fg("Debug"),
-            },
-            -- stylua: ignore
-            {
               function() return require("noice").api.status.command.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = fg("Statement"),
+              color = Util.fg("Statement"),
             },
             -- stylua: ignore
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = fg("Constant"),
+              color = Util.fg("Constant"),
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = fg("Special") },
+            -- stylua: ignore
+            {
+              function() return "  " .. require("dap").status() end,
+              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
+              color = Util.fg("Debug"),
+            },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
             {
               "diff",
               symbols = {
