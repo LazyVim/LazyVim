@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.11.0](https://github.com/LazyVim/LazyVim/compare/v2.10.0...v2.11.0) (2023-04-23)
+
+
+### Features
+
+* **dap:** Change DAP REPL binding from open to toggle ([#663](https://github.com/LazyVim/LazyVim/issues/663)) ([3a718c5](https://github.com/LazyVim/LazyVim/commit/3a718c5c85e966e2751dade0006dcbeed72e8b00))
+* **lsp:** automatically resolve denols/tsserver conflicts if both are configured ([d565684](https://github.com/LazyVim/LazyVim/commit/d565684ade6e04eb77319ddb5becac9c5bd21cc4))
+* **plugins:** automatically handle plugin repo renames ([59f3b3e](https://github.com/LazyVim/LazyVim/commit/59f3b3e096280629a459054bc5538c058854dffc))
+
+
+### Bug Fixes
+
+* **health:** remove deprecated api warning ([#666](https://github.com/LazyVim/LazyVim/issues/666)) ([4fbb7a2](https://github.com/LazyVim/LazyVim/commit/4fbb7a280310a6ea500509aa73a4f7c7d06f6bea))
+
 ## [2.10.0](https://github.com/LazyVim/LazyVim/compare/v2.9.0...v2.10.0) (2023-04-21)
 
 
