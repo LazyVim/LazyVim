@@ -77,6 +77,10 @@ local defaults = {
   },
 }
 
+M.renames = {
+  ["windwp/nvim-spectre"] = "nvim-pack/nvim-spectre",
+}
+
 ---@type LazyVimConfig
 local options
 
@@ -170,6 +174,14 @@ function M.init()
     -- this is needed to make sure options will be correctly applied
     -- after installing missing plugins
     require("lazyvim.config").load("options")
+    local Plugin = require("lazy.core.plugin")
+    local add = Plugin.Spec.add
+    Plugin.Spec.add = function(self, plugin, ...)
+      if type(plugin) == "table" and M.renames[plugin[1]] then
+        plugin[1] = M.renames[plugin[1]]
+      end
+      return add(self, plugin, ...)
+    end
   end
 end
 
