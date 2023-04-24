@@ -60,9 +60,9 @@ return {
     opts = {
       options = {
         -- stylua: ignore
-        close_command = function(n) require("mini.bufremove").delete(n, true) end,
+        close_command = function(n) require("mini.bufremove").delete(n, false) end,
         -- stylua: ignore
-        right_mouse_command = function(n) require("mini.bufremove").delete(n, true) end,
+        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
