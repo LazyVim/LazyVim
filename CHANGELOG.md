@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.12.0](https://github.com/LazyVim/LazyVim/compare/v2.11.0...v2.12.0) (2023-04-24)
+
+
+### Features
+
+* **bufferline:** use `mini.bufremove` to close a buffer ([#670](https://github.com/LazyVim/LazyVim/issues/670)) ([3e46dd6](https://github.com/LazyVim/LazyVim/commit/3e46dd61cdc79bbb915f81e4188fc5337cd2f84b))
+* **telescope:** added keymap for recent files in the current directory. ([#669](https://github.com/LazyVim/LazyVim/issues/669)) ([6c334fe](https://github.com/LazyVim/LazyVim/commit/6c334fed6a59f6b1dc3a38f6253f2b4265557f30))
+
+
+### Bug Fixes
+
+* **spectre:** use new url by default ([7b9145c](https://github.com/LazyVim/LazyVim/commit/7b9145c12d15a81e40a721974a9a68994ccd8855))
+
 ## [2.11.0](https://github.com/LazyVim/LazyVim/compare/v2.10.0...v2.11.0) (2023-04-23)
 
 
