@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.1](https://github.com/LazyVim/LazyVim/compare/v2.12.0...v2.12.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* **format:** only do null-ls formatting logic when null-ls is availble. Fixes [#684](https://github.com/LazyVim/LazyVim/issues/684) ([eb143eb](https://github.com/LazyVim/LazyVim/commit/eb143ebe110995fb208fc480958a55858944c5f9))
+
 ## [2.12.0](https://github.com/LazyVim/LazyVim/compare/v2.11.0...v2.12.0) (2023-04-24)
 
 
