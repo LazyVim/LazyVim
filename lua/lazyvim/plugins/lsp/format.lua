@@ -25,7 +25,8 @@ function M.format(opts)
     return
   end
   local ft = vim.bo[buf].filetype
-  local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
+  local have_nls = package.loaded["null-ls"]
+    and (#require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0)
 
   vim.lsp.buf.format(vim.tbl_deep_extend("force", {
     bufnr = buf,
