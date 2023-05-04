@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.13.0](https://github.com/LazyVim/LazyVim/compare/v2.12.1...v2.13.0) (2023-05-04)
+
+
+### Features
+
+* **extras:** added extra for tailwindcss ([3f5c2c2](https://github.com/LazyVim/LazyVim/commit/3f5c2c283e30f7b4c4c290d7a731e7dfbc86d8b8))
+
+
+### Bug Fixes
+
+* **mason:** exclude filetype mason in indent-blankline.nvim ([#701](https://github.com/LazyVim/LazyVim/issues/701)) ([ea48588](https://github.com/LazyVim/LazyVim/commit/ea4858874b983e4b3a8a7078828d98533e386035))
+
 ## [2.12.1](https://github.com/LazyVim/LazyVim/compare/v2.12.0...v2.12.1) (2023-04-28)
 
 
