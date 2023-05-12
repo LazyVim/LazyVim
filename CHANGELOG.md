@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/LazyVim/LazyVim/compare/v2.13.1...v3.0.0) (2023-05-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **mini.comment:** removed ts-context-commentstring since mini.comment provides this functionality out of the box
+
+### Features
+
+* **mini.comment:** removed ts-context-commentstring since mini.comment provides this functionality out of the box ([d41ef05](https://github.com/LazyVim/LazyVim/commit/d41ef05cc00bf3502fb55512c265a02116127ca8))
+
 ## [2.13.1](https://github.com/LazyVim/LazyVim/compare/v2.13.0...v2.13.1) (2023-05-12)
 
 
