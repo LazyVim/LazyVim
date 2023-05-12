@@ -1,4 +1,4 @@
-*LazyVim.txt*           For Neovim >= 0.8.0           Last change: 2023 May 08
+*LazyVim.txt*           For Neovim >= 0.8.0           Last change: 2023 May 12
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
@@ -43,7 +43,6 @@ pre-configured setup.
 
 FEATURES                                                    *LazyVim-features*
 
-
 - Transform your Neovim into a full-fledged IDE
 - Easily customize and extend your config with lazy.nvim <https://github.com/folke/lazy.nvim>
 - Blazingly fast
@@ -52,7 +51,6 @@ FEATURES                                                    *LazyVim-features*
 
 
 REQUIREMENTS                                            *LazyVim-requirements*
-
 
 - Neovim >= **0.8.0** (needs to be built with **LuaJIT**)
 - Git >= **2.19.0** (for partial clones support)
@@ -76,7 +74,6 @@ Try it with Docker ~
 <
 
 Install the LazyVim Starter ~
-
 
 - Make a backup of your current Neovim files:
     >sh
