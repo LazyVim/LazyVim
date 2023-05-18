@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.3.0](https://github.com/LazyVim/LazyVim/compare/v3.2.0...v3.3.0) (2023-05-18)
+
+
+### Features
+
+* **telescope:** added `&lt;a-c&gt;` mapping for telescope pickers to switch to cwd instead of root ([c737f2b](https://github.com/LazyVim/LazyVim/commit/c737f2b6c265d2c82cebf9f999425a2bd008e692))
+
+
+### Bug Fixes
+
+* **telescope:** keep current prompt when switching to hidden/no_ignore ([78354a1](https://github.com/LazyVim/LazyVim/commit/78354a1e5e88c68a9d99b72af5a0844befee419b))
+
 ## [3.2.0](https://github.com/LazyVim/LazyVim/compare/v3.1.0...v3.2.0) (2023-05-18)
 
 
