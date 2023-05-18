@@ -166,10 +166,14 @@ return {
               return require("trouble.providers.telescope").open_selected_with_trouble(...)
             end,
             ["<a-i>"] = function()
-              Util.telescope("find_files", { no_ignore = true })()
+              local action_state = require("telescope.actions.state")
+              local line = action_state.get_current_line()
+              Util.telescope("find_files", { no_ignore = true, default_text = line })()
             end,
             ["<a-h>"] = function()
-              Util.telescope("find_files", { hidden = true })()
+              local action_state = require("telescope.actions.state")
+              local line = action_state.get_current_line()
+              Util.telescope("find_files", { hidden = true, default_text = line })()
             end,
             ["<C-Down>"] = function(...)
               return require("telescope.actions").cycle_history_next(...)
