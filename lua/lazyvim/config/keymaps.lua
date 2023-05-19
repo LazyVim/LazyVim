@@ -1,4 +1,4 @@
--- This file is automatically loaded by lazyvim.plugins.config
+-- This file is automatically loaded by lazyvim.config.init
 
 local Util = require("lazyvim.util")
 
