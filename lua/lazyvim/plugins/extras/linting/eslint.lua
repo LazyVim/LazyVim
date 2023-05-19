@@ -3,6 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     -- other settings removed for brevity
     opts = {
+      ---@type lspconfig.options
       servers = {
         eslint = {
           settings = {
@@ -15,8 +16,12 @@ return {
         eslint = function()
           vim.api.nvim_create_autocmd("BufWritePre", {
             callback = function(event)
-              if require("lspconfig.util").get_active_client_by_name(event.buf, "eslint") then
-                vim.cmd("EslintFixAll")
+              local client = vim.lsp.get_active_clients({ bufnr = event.buf, name = "eslint" })[1]
+              if client then
+                local diag = vim.diagnostic.get(event.buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+                if #diag > 0 then
+                  vim.cmd("EslintFixAll")
+                end
               end
             end,
           })
