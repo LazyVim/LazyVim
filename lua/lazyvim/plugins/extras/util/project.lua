@@ -20,6 +20,7 @@ return {
 
   {
     "goolord/alpha-nvim",
+    optional = true,
     opts = function(_, dashboard)
       local button = dashboard.button("p", " " .. " Projects", ":Telescope projects <CR>")
       button.opts.hl = "AlphaButtons"
@@ -29,6 +30,7 @@ return {
   },
   {
     "echasnovski/mini.starter",
+    optional = true,
     opts = function(_, opts)
       local items = {
         {
