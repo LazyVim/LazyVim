@@ -12,6 +12,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
       local Util = require("lazyvim.util")
