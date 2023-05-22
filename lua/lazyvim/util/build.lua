@@ -43,7 +43,7 @@ function M.keymaps()
 
   group = "Plugins"
 
-  local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" })
+  local core = require("lazy.core.plugin").Spec.new({ import = "lazyvim.plugins" }, { optional = true })
   Util.foreach(core.plugins, function(name, plugin)
     group = ("[%s](%s)"):format(plugin.name, plugin.url)
     for _, key in ipairs(plugin.keys or {}) do
@@ -58,7 +58,7 @@ function M.keymaps()
     if t == "file" and name:find("%.lua$") then
       local modname = path:gsub(".*/lua/", ""):gsub("/", "."):gsub("%.lua$", "")
       local extra_doc = "/plugins/extras/" .. modname:gsub("lazyvim%.plugins%.extras%.", "")
-      local extra = require("lazy.core.plugin").Spec.new({ import = modname })
+      local extra = require("lazy.core.plugin").Spec.new({ import = modname }, { optional = true })
       Util.foreach(extra.plugins, function(name, plugin)
         group = ("[%s](%s)\nPart of [%s](%s)"):format(plugin.name, plugin.url, modname, extra_doc)
         for _, key in ipairs(plugin.keys or {}) do
@@ -249,7 +249,7 @@ end
 
 function M.plugins(path)
   local test = root .. "/lua/lazyvim/plugins/" .. path
-  local spec = require("lazy.core.plugin").Spec.new(dofile(test))
+  local spec = require("lazy.core.plugin").Spec.new(dofile(test), { optional = true })
   local source = Util.read_file(test)
   local parser = vim.treesitter.get_string_parser(source, "lua")
 
@@ -306,11 +306,13 @@ function M.plugins(path)
   end
 
   parser:parse()
-  parser:for_each_tree(function(tree)
-    local node = tree:root()
-    find_plugins(node)
-    -- print(vim.treesitter.query.get_node_text(node, str))
-  end)
+  if path ~= "extras/vscode.lua" then
+    parser:for_each_tree(function(tree)
+      local node = tree:root()
+      find_plugins(node)
+      -- print(vim.treesitter.query.get_node_text(node, str))
+    end)
+  end
 
   ---@type string[]
   local lines = {
