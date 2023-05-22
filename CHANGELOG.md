@@ -1,5 +1,27 @@
 # Changelog
 
+## [3.4.0](https://github.com/LazyVim/LazyVim/compare/v3.3.0...v3.4.0) (2023-05-22)
+
+
+### Features
+
+* **project:** add to mini.starter ([#640](https://github.com/LazyVim/LazyVim/issues/640)) ([f898233](https://github.com/LazyVim/LazyVim/commit/f8982332be70499b74623f6ed44c1c58217eb546))
+* **tailwind:** don't enable tailwind in markdown files ([2955445](https://github.com/LazyVim/LazyVim/commit/29554455aa3e7d76377080869f0556389a05e321))
+* **tests:** added neotest ([#642](https://github.com/LazyVim/LazyVim/issues/642)) ([bb0d4d4](https://github.com/LazyVim/LazyVim/commit/bb0d4d4e7d2e0914cb2188cab7748d70b2ae5fa8))
+* **vscode:** added vscode extra with minimal functionality. Will only do something when vim.g.vscode is set ([c12835a](https://github.com/LazyVim/LazyVim/commit/c12835ab8683c68116503a1aab614e0d6ff68528))
+
+
+### Bug Fixes
+
+* **dap:** fix the mason-nvim-dap setting name ([#781](https://github.com/LazyVim/LazyVim/issues/781)) ([b4099a6](https://github.com/LazyVim/LazyVim/commit/b4099a64775e3e7722ebaf29612df43c46bf4f03))
+* make some extra deps optional ([183fd89](https://github.com/LazyVim/LazyVim/commit/183fd89d76b24c5e293d368a59c5db3a7c7f85d5))
+* **persistence:** dont add rtp to session ([99785ce](https://github.com/LazyVim/LazyVim/commit/99785ce36b523cca46c1f2fd6edeaf1189bcd934))
+
+
+### Performance Improvements
+
+* **eslint:** only run EslintFixAll for the current buffer when there are diagnostics from eslint ([b227d97](https://github.com/LazyVim/LazyVim/commit/b227d9727a7ae1f0ad48504d613fb099dc9c461b))
+
 ## [3.3.0](https://github.com/LazyVim/LazyVim/compare/v3.2.0...v3.3.0) (2023-05-18)
 
 
