@@ -10,6 +10,12 @@ return {
   },
   {
     "nvim-neotest/neotest",
+    opts = {
+      adapter_config = {
+        -- ["adapter_name"] = {} -- set adapter config here
+      },
+      adapters = {},
+    },
     config = function(_, opts)
       local neotest_ns = vim.api.nvim_create_namespace("neotest")
       vim.diagnostic.config({
@@ -21,6 +27,15 @@ return {
           end,
         },
       }, neotest_ns)
+
+      if opts.adapter_config then
+        for a, adapter in ipairs(opts.adapters or {}) do
+          local name = adapter.name
+          if opts.adapter_config[name] then
+            opts.adapters[a] = adapter(opts.adapter_config[name])
+          end
+        end
+      end
 
       require("neotest").setup(opts)
     end,
