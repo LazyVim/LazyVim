@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.5.0](https://github.com/LazyVim/LazyVim/compare/v3.4.0...v3.5.0) (2023-05-23)
+
+
+### Features
+
+* **mini.comment:** added ts-context-commentstring back and made it work with mini.comment ([89db015](https://github.com/LazyVim/LazyVim/commit/89db0157b1621deffc83a4e00cb2be13e2827a5d))
+* **test:** added easy way to configure adapters ([7443eff](https://github.com/LazyVim/LazyVim/commit/7443effe269ad3b2d491f43439b48f1d072c9210))
+
+
+### Bug Fixes
+
+* **vscode:** support older Neovim versions. Fixes [#798](https://github.com/LazyVim/LazyVim/issues/798) ([3dcc074](https://github.com/LazyVim/LazyVim/commit/3dcc074693c3560982d6e500aa073140a9c5c0ed))
+
 ## [3.4.0](https://github.com/LazyVim/LazyVim/compare/v3.3.0...v3.4.0) (2023-05-22)
 
 
