@@ -6,6 +6,7 @@ return {
         "go",
         "gomod",
         "gowork",
+        "gosum",
       })
     end,
   },
@@ -37,14 +38,13 @@ return {
     dependencies = {
       "nvim-neotest/neotest-go",
     },
-    -- Add custom options for neotest-go in nvim-neotest opts.adapter_config["neotest-go"]
-    opts = function(_, opts)
-      opts.adapters = vim.list_extend(opts.adapters, { require("neotest-go") })
-      opts.adapter_config = {
+    opts = {
+      adapters = {
         ["neotest-go"] = {
-          -- I.e. set opts.adapter_config["neotest-go"].args = { "-tags=integration" }
+          -- Here we can set options for neotest-go, e.g.
+          -- args = { "-tags=integration" }
         },
-      }
-    end,
+      },
+    },
   },
 }
