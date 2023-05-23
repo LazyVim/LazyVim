@@ -11,10 +11,16 @@ return {
   {
     "nvim-neotest/neotest",
     opts = {
-      adapter_config = {
-        -- ["adapter_name"] = {} -- set adapter config here
-      },
+      -- Can be a list of adapters like what neotest expects,
+      -- or a table of adapter names, mapped to adapter configs.
+      -- The adapter will then be automatically loaded with the config.
       adapters = {},
+      -- Example for loading neotest-go with a custom config
+      -- adapters = {
+      --   ["neotest-go"] = {
+      --     args = { "-tags=integration" },
+      --   },
+      -- },
     },
     config = function(_, opts)
       local neotest_ns = vim.api.nvim_create_namespace("neotest")
@@ -28,16 +34,22 @@ return {
         },
       }, neotest_ns)
 
-      if opts.adapter_config then
-        for a, adapter in ipairs(opts.adapters or {}) do
-          local name = adapter.name
-          if opts.adapter_config[name] then
-            opts.adapters[a] = adapter(opts.adapter_config[name])
+      local adapters = {}
+      if opts.adapters then
+        for name, config in pairs(opts.adapters or {}) do
+          if type(name) == "number" then
+            adapters[#adapters + 1] = config
+          elseif config ~= false then
+            local adapter = require(name)
+            if type(config) == "table" and not vim.tbl_isempty(config) then
+              adapter = adapter(config)
+            end
+            adapters[#adapters + 1] = adapter
           end
         end
       end
 
-      require("neotest").setup(opts)
+      require("neotest").setup({ adapters = adapters })
     end,
     -- stylua: ignore
     keys = {
