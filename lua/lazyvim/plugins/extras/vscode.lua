@@ -30,6 +30,13 @@ Plugin.update_state = function()
       Config.plugins[name] = nil
     end
   end
+  for _, plugin in pairs(Config.plugins) do
+    if plugin.dependencies then
+      plugin.dependencies = vim.tbl_filter(function(dep)
+        return Config.plugins[dep]
+      end, plugin.dependencies)
+    end
+  end
   update_state()
   Config.to_clean = {}
 end
