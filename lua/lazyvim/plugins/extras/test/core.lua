@@ -34,8 +34,8 @@ return {
         },
       }, neotest_ns)
 
-      local adapters = {}
       if opts.adapters then
+        local adapters = {}
         for name, config in pairs(opts.adapters or {}) do
           if type(name) == "number" then
             adapters[#adapters + 1] = config
@@ -47,9 +47,10 @@ return {
             adapters[#adapters + 1] = adapter
           end
         end
+        opts.adapters = adapters
       end
 
-      require("neotest").setup({ adapters = adapters })
+      require("neotest").setup(opts)
     end,
     -- stylua: ignore
     keys = {
