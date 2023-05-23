@@ -12,6 +12,7 @@ local enabled = {
   "mini.surround",
   "nvim-treesitter",
   "nvim-treesitter-textobjects",
+  "nvim-ts-context-commentstring",
   "vim-repeat",
 }
 
