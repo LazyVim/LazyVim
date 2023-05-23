@@ -27,6 +27,20 @@ function M.fg(name)
   return fg and { fg = string.format("#%06x", fg) }
 end
 
+function M.get_upvalue(func, name)
+  local i = 1
+  while true do
+    local n, v = debug.getupvalue(func, i)
+    if not n then
+      break
+    end
+    if n == name then
+      return v
+    end
+    i = i + 1
+  end
+end
+
 ---@param fn fun()
 function M.on_very_lazy(fn)
   vim.api.nvim_create_autocmd("User", {
