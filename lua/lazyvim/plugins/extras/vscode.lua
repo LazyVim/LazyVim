@@ -26,7 +26,7 @@ local update_state = Plugin.update_state
 Plugin.update_state = function()
   -- Config.spec.disabled = {}
   for name, plugin in pairs(Config.plugins) do
-    if not vim.tbl_contains(enabled, plugin.name) then
+    if not (vim.tbl_contains(enabled, plugin.name) or plugin.vscode) then
       Config.plugins[name] = nil
     end
   end
