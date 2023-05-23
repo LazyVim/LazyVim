@@ -13,7 +13,9 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        gopls = {},
+        gopls = {
+          semanticTokens = true,
+        },
       },
     },
   },
@@ -35,10 +37,10 @@ return {
     dependencies = {
       "nvim-neotest/neotest-go",
     },
-    opts = function(_, opts)
-      opts.adapters = vim.list_extend(opts.adapters or {}, {
-        require("neotest-go"),
-      })
-    end,
+    opts = {
+      adapter_config = {
+        ["neotest-go"] = {},
+      },
+    },
   },
 }
