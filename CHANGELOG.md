@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.6.0](https://github.com/LazyVim/LazyVim/compare/v3.5.0...v3.6.0) (2023-05-24)
+
+
+### Features
+
+* **go:** add go lang extras ([#795](https://github.com/LazyVim/LazyVim/issues/795)) ([163a4f9](https://github.com/LazyVim/LazyVim/commit/163a4f927514ad6ea1aa06db2ad754fb954d87f5))
+* **typescript:** added dap config for typescript. Will only be enabled when dap is also enabled ([e9fb81e](https://github.com/LazyVim/LazyVim/commit/e9fb81e94d7f461b63994e3111d5c17fc84dec80))
+* **vscode:** add `vscode=true` to any plugin spec you want to activate in vscode ([39fa636](https://github.com/LazyVim/LazyVim/commit/39fa63646d14665861558c4ee7704ef51eb1b7f6))
+* **vscode:** better vscode support ([5bf45e3](https://github.com/LazyVim/LazyVim/commit/5bf45e3139aa3a8cf8e1bf9fd2a2d422fe1c6cf7))
+
+
+### Bug Fixes
+
+* **go:** extend mason ensure_installed ([b172f47](https://github.com/LazyVim/LazyVim/commit/b172f47f278df105bbbf60b5c0e411fda01c1819))
+* **neotest:** pass opts to neotest ([bf66e71](https://github.com/LazyVim/LazyVim/commit/bf66e71adcf0346a3d6edd92a14e0fcd350f5b26))
+* remove debug notify ([#808](https://github.com/LazyVim/LazyVim/issues/808)) ([9cfe88c](https://github.com/LazyVim/LazyVim/commit/9cfe88c7ba1ff2b36a0cc32e96d5be1d6e5ee833))
+* **vscode:** added ts-context-commentstring ([e975f02](https://github.com/LazyVim/LazyVim/commit/e975f021eaf1eb33fb8793c8e922ab11a8b682f2))
+* **vscode:** properly cleanup disabled deps ([eba510e](https://github.com/LazyVim/LazyVim/commit/eba510ec6934a22f3654a83ed89216bb96e7374c))
+
 ## [3.5.0](https://github.com/LazyVim/LazyVim/compare/v3.4.0...v3.5.0) (2023-05-23)
 
 
