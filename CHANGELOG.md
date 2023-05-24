@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.1](https://github.com/LazyVim/LazyVim/compare/v3.6.0...v3.6.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* **go:** actually set semantic tokens ([#811](https://github.com/LazyVim/LazyVim/issues/811)) ([29632c6](https://github.com/LazyVim/LazyVim/commit/29632c6b294465e5abc6472fffc866ec1841e37a))
+
 ## [3.6.0](https://github.com/LazyVim/LazyVim/compare/v3.5.0...v3.6.0) (2023-05-24)
 
 
