@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/LazyVim/LazyVim/compare/v3.6.2...v3.7.0) (2023-05-24)
+
+
+### Features
+
+* **go:** add workaround to get semantic token highlighting ([#815](https://github.com/LazyVim/LazyVim/issues/815)) ([2b5ae7b](https://github.com/LazyVim/LazyVim/commit/2b5ae7b63c8233bbb11a922c852b8adeacd94b86))
+
 ## [3.6.2](https://github.com/LazyVim/LazyVim/compare/v3.6.1...v3.6.2) (2023-05-24)
 
 
