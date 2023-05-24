@@ -1,6 +1,4 @@
 -- This file is automatically loaded by lazyvim.config.init
-vim.notify("load")
-
 local Util = require("lazyvim.util")
 
 local function map(mode, lhs, rhs, opts)
