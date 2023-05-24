@@ -161,6 +161,8 @@ function M.load(name)
     -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
     vim.cmd([[do VimResized]])
   end
+  local pattern = "LazyVim" .. name:sub(1, 1):upper() .. name:sub(2)
+  vim.api.nvim_exec_autocmds("User", { pattern = pattern, modeline = false })
 end
 
 M.did_init = false

@@ -14,6 +14,7 @@ local enabled = {
   "nvim-treesitter-textobjects",
   "nvim-ts-context-commentstring",
   "vim-repeat",
+  "LazyVim",
 }
 
 local Config = require("lazy.core.config")
@@ -21,42 +22,44 @@ local Plugin = require("lazy.core.plugin")
 Config.options.checker.enabled = false
 Config.options.change_detection.enabled = false
 
-local update_state = Plugin.update_state
----@diagnostic disable-next-line: duplicate-set-field
-Plugin.update_state = function()
-  -- Config.spec.disabled = {}
-  for name, plugin in pairs(Config.plugins) do
+-- HACK: disable all plugins except the ones we want
+local fix_disabled = Plugin.Spec.fix_disabled
+function Plugin.Spec.fix_disabled(self)
+  for _, plugin in pairs(self.plugins) do
     if not (vim.tbl_contains(enabled, plugin.name) or plugin.vscode) then
-      Config.plugins[name] = nil
+      plugin.enabled = false
     end
   end
-  for _, plugin in pairs(Config.plugins) do
-    if plugin.dependencies then
-      plugin.dependencies = vim.tbl_filter(function(dep)
-        return Config.plugins[dep]
-      end, plugin.dependencies)
-    end
-  end
+  fix_disabled(self)
+end
+
+-- HACK: don't clean plugins in vscode
+local update_state = Plugin.update_state
+function Plugin.update_state()
   update_state()
   Config.to_clean = {}
 end
 
-local map = vim.keymap.set
-
-map("n", "<leader><space>", "<cmd>Find<cr>")
-map("n", "<leader>/", [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
-map("n", "<leader>ss", [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
-
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
-
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
+-- Add some vscode specific keymaps
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyVimKeymaps",
+  callback = function()
+    vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
+    vim.keymap.set("n", "<leader>/", [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
+    vim.keymap.set("n", "<leader>ss", [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
+  end,
+})
 
 return {
+  {
+    "LazyVim/LazyVim",
+    config = function(_, opts)
+      opts = opts or {}
+      -- disable the colorscheme
+      opts.colorscheme = function() end
+      require("lazyvim").setup(opts)
+    end,
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { highlight = { enable = false } },
