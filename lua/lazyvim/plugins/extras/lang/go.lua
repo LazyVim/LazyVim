@@ -15,7 +15,11 @@ return {
     opts = {
       servers = {
         gopls = {
-          semanticTokens = true,
+          settings = {
+            gopls = {
+              semanticTokens = true,
+            },
+          },
         },
       },
     },
