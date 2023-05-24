@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.6.2](https://github.com/LazyVim/LazyVim/compare/v3.6.1...v3.6.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* **tailwind:** nil check on filetypes_exclude. See [#816](https://github.com/LazyVim/LazyVim/issues/816) ([4b36795](https://github.com/LazyVim/LazyVim/commit/4b367952f6214e1ae213eba2ae706df691ff57fa))
+* **vscode:** only remap keybinds when running in vscode ([7c9abd7](https://github.com/LazyVim/LazyVim/commit/7c9abd7463a27b7a7fd8a0c7e59653a7602613b6))
+
 ## [3.6.1](https://github.com/LazyVim/LazyVim/compare/v3.6.0...v3.6.1) (2023-05-24)
 
 
