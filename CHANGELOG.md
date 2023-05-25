@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.2](https://github.com/LazyVim/LazyVim/compare/v3.7.1...v3.7.2) (2023-05-25)
+
+
+### Bug Fixes
+
+* **telescope:** use last-known telescope commit to work on Neovim 0.8.0 when running in Neovim 0.8.0 ([877e63c](https://github.com/LazyVim/LazyVim/commit/877e63ca8ee5efe1420744f7a843dd4fd0215764))
+
 ## [3.7.1](https://github.com/LazyVim/LazyVim/compare/v3.7.0...v3.7.1) (2023-05-25)
 
 
