@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/LazyVim/LazyVim/compare/v3.7.2...v4.0.0) (2023-05-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove nvim-colorizer.lua It actually wasn't even enabled and I'll add hipatterns with optional tailwind support soon
+
+### Features
+
+* added extra for mini.hipatterns with tailwind support ([7bc979a](https://github.com/LazyVim/LazyVim/commit/7bc979a7c1eacba16b60c324ae7bfab57b73a702))
+
+
+### Bug Fixes
+
+* remove nvim-colorizer.lua It actually wasn't even enabled and I'll add hipatterns with optional tailwind support soon ([9c7821e](https://github.com/LazyVim/LazyVim/commit/9c7821e681e264905d7f764aeddda78162a9d867))
+
 ## [3.7.2](https://github.com/LazyVim/LazyVim/compare/v3.7.1...v3.7.2) (2023-05-25)
 
 
