@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/LazyVim/LazyVim/compare/v4.0.0...v4.1.0) (2023-05-25)
+
+
+### Features
+
+* **hipatterns:** better tailwind fg colors ([c526ea3](https://github.com/LazyVim/LazyVim/commit/c526ea338b415a51fa78936b7044ec67d78528b2))
+
 ## [4.0.0](https://github.com/LazyVim/LazyVim/compare/v3.7.2...v4.0.0) (2023-05-25)
 
 
