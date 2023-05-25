@@ -276,7 +276,8 @@ function M.plugins(path)
       local text = vim.treesitter.get_node_text(node, source):sub(2, -2)
       if text:find("/") and #node:parent():field("name") == 0 then
         local plugin_node = node:parent():parent()
-        if plugin_node:named_child(0):field("value")[1]:id() ~= node:id() then
+        local first_child = plugin_node:named_child(0)
+        if first_child and first_child:field("value")[1] and first_child:field("value")[1]:id() ~= node:id() then
           plugin_node = node
         end
         local comment_node = plugin_node:parent():prev_named_sibling()
@@ -306,13 +307,13 @@ function M.plugins(path)
   end
 
   parser:parse()
-  if path ~= "extras/vscode.lua" then
-    parser:for_each_tree(function(tree)
-      local node = tree:root()
-      find_plugins(node)
-      -- print(vim.treesitter.query.get_node_text(node, str))
-    end)
-  end
+  -- if path ~= "extras/vscode.lua" then
+  parser:for_each_tree(function(tree)
+    local node = tree:root()
+    find_plugins(node)
+    -- print(vim.treesitter.query.get_node_text(node, str))
+  end)
+  -- end
 
   ---@type string[]
   local lines = {
