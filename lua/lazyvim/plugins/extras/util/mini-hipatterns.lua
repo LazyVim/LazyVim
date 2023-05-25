@@ -1,5 +1,8 @@
 local M = {}
 
+---@type table<string,true>
+M.hl = {}
+
 M.plugin = {
   "echasnovski/mini.hipatterns",
   event = "BufReadPre",
@@ -9,14 +12,12 @@ M.plugin = {
       -- custom LazyVim option to enable the tailwind integration
       tailwind = true,
       highlighters = {
-        hex_color = hi.gen_highlighter.hex_color({ priority = 5000 }),
+        hex_color = hi.gen_highlighter.hex_color({ priority = 2000 }),
       },
     }
   end,
   config = function(_, opts)
-    local hi = require("mini.hipatterns")
     if opts.tailwind then
-      local hex_color = opts.highlighters.hex_color or hi.gen_highlighter.hex_color({ priority = 5000 })
       local tailwind_ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" }
       opts.highlighters.tailwind = {
         pattern = function()
@@ -26,12 +27,20 @@ M.plugin = {
           return "%f[%w:-]()[%w:-]+%-[a-z%-]+%-%d+()%f[^%w:-]"
         end,
         group = function(_, match)
+          ---@type string,string
           local color, shade = match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
-          local hex = vim.tbl_get(M.colors, color, tonumber(shade))
-          if hex then
-            return hex_color.group(nil, nil, { full_match = "#" .. hex })
+          local bg = vim.tbl_get(M.colors, color, tonumber(shade))
+          if bg then
+            local hl = "MiniHipatternsTailwind" .. color .. shade
+            if not M.hl[hl] then
+              M.hl[hl] = true
+              local fg = vim.tbl_get(M.colors, color, tonumber(shade) >= 500 and 100 or 900)
+              vim.api.nvim_set_hl(0, hl, { bg = "#" .. bg, fg = "#" .. fg })
+            end
+            return hl
           end
         end,
+        priotity = 5000,
       }
     end
     require("mini.hipatterns").setup(opts)
