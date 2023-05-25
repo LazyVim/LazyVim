@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.1](https://github.com/LazyVim/LazyVim/compare/v3.7.0...v3.7.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* **mini.comment:** removed dirty upvalues hack for mini.comments. no longer needed ([b75ed59](https://github.com/LazyVim/LazyVim/commit/b75ed594a932e6e01d8c1ee5b23215221164d494))
+
 ## [3.7.0](https://github.com/LazyVim/LazyVim/compare/v3.6.2...v3.7.0) (2023-05-24)
 
 
