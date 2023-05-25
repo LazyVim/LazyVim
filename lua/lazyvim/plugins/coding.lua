@@ -135,15 +135,13 @@ return {
   {
     "echasnovski/mini.comment",
     event = "VeryLazy",
-    config = function(_, opts)
-      local c = require("mini.comment")
-      c.setup(opts)
-      local H = require("lazyvim.util").get_upvalue(c.setup, "H")
-      H.get_commentstring = function()
-        return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-      end
-    end,
-    opts = {},
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    },
   },
 
   -- better text-objects
