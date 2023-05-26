@@ -47,6 +47,44 @@ function M.format(opts)
   }, require("lazyvim.util").opts("nvim-lspconfig").format or {}))
 end
 
+---@param formatters LazyVimFormatters
+function M.notify(formatters)
+  local lines = { "# Active:" }
+
+  for _, client in ipairs(formatters.active) do
+    local line = "- **" .. client.name .. "**"
+    if client.name == "null-ls" then
+      line = line
+        .. " ("
+        .. table.concat(
+          vim.tbl_map(function(f)
+            return "`" .. f.name .. "`"
+          end, formatters.null_ls),
+          ", "
+        )
+        .. ")"
+    end
+    table.insert(lines, line)
+  end
+
+  if #formatters.available > 0 then
+    table.insert(lines, "")
+    table.insert(lines, "# Disabled:")
+    for _, client in ipairs(formatters.available) do
+      table.insert(lines, "- **" .. client.name .. "**")
+    end
+  end
+
+  vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO, {
+    title = "Formatting",
+    on_open = function(win)
+      vim.api.nvim_win_set_option(win, "conceallevel", 3)
+      vim.api.nvim_win_set_option(win, "spell", false)
+      local buf = vim.api.nvim_win_get_buf(win)
+      vim.treesitter.start(buf, "markdown")
+    end,
+  })
+end
 
 -- Gets all lsp clients that support formatting.
 -- When a null-ls formatter is available for the current filetype,
