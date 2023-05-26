@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.1.1](https://github.com/LazyVim/LazyVim/compare/v4.1.0...v4.1.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* **hipatterns:** make it work on stable ([33f61b5](https://github.com/LazyVim/LazyVim/commit/33f61b58de3519ef568bc9591fb877a71a203a6d))
+* **hipatterns:** make sure priority is higher than the one for references ([b027beb](https://github.com/LazyVim/LazyVim/commit/b027bebeab30308f26f5cafe1642f3aa0e541ca3))
+
 ## [4.1.0](https://github.com/LazyVim/LazyVim/compare/v4.0.0...v4.1.0) (2023-05-25)
 
 
