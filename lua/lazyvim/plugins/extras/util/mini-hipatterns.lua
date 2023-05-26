@@ -21,7 +21,7 @@ M.plugin = {
       local tailwind_ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" }
       opts.highlighters.tailwind = {
         pattern = function()
-          if not vim.list_contains(tailwind_ft, vim.bo.filetype) then
+          if not vim.tbl_contains(tailwind_ft, vim.bo.filetype) then
             return
           end
           return "%f[%w:-]()[%w:-]+%-[a-z%-]+%-%d+()%f[^%w:-]"
