@@ -40,7 +40,7 @@ M.plugin = {
             return hl
           end
         end,
-        priotity = 5000,
+        priority = 2000,
       }
     end
     require("mini.hipatterns").setup(opts)
