@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.3.0](https://github.com/LazyVim/LazyVim/compare/v4.2.0...v4.3.0) (2023-05-27)
+
+
+### Features
+
+* **neotest:** added `&lt;leader&gt;tt` and `<leader>tT` to run tests in file or all test files ([efc72b0](https://github.com/LazyVim/LazyVim/commit/efc72b06496f7540085928094808e9a0f45222b9))
+* **neotest:** allow adapter names as a list ([98e2ffc](https://github.com/LazyVim/LazyVim/commit/98e2ffcf14bb5f336ee2e4679d2b7d5699486bcc))
+* **noetest:** open trouble instead of quickfix on errors when available ([2c89770](https://github.com/LazyVim/LazyVim/commit/2c897705049cb89d6cd28b59be4bd7db872ffe6b))
+
+
+### Bug Fixes
+
+* **hipatterns:** default options ([3082436](https://github.com/LazyVim/LazyVim/commit/30824369c2c58647df170566766ea1dbda2730cc))
+* **neotest:** added some additional filetypes to close with q ([1288f0d](https://github.com/LazyVim/LazyVim/commit/1288f0d5a5cc5f5279678cc3c3d99abe20a1e052))
+* **neotest:** support neotest adapaters that use `setup()` for custom setup ([2a3bac7](https://github.com/LazyVim/LazyVim/commit/2a3bac769045abac76395fcabb36b17b68bc42fc))
+
 ## [4.2.0](https://github.com/LazyVim/LazyVim/compare/v4.1.1...v4.2.0) (2023-05-26)
 
 
