@@ -55,7 +55,13 @@ return {
           elseif config ~= false then
             local adapter = require(name)
             if type(config) == "table" and not vim.tbl_isempty(config) then
-              adapter = adapter(config)
+              if adapter.setup then
+                adapter.setup(config)
+              elseif adapter.__call then
+                adapter(config)
+              else
+                error("Adapter " .. name .. " does not support setup")
+              end
             end
             adapters[#adapters + 1] = adapter
           end
