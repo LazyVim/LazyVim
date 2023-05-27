@@ -12,6 +12,7 @@ return {
     "nvim-neotest/neotest",
     opts = {
       -- Can be a list of adapters like what neotest expects,
+      -- or a list of adapter names,
       -- or a table of adapter names, mapped to adapter configs.
       -- The adapter will then be automatically loaded with the config.
       adapters = {},
@@ -47,6 +48,9 @@ return {
         local adapters = {}
         for name, config in pairs(opts.adapters or {}) do
           if type(name) == "number" then
+            if type(config) == "string" then
+              config = require(config)
+            end
             adapters[#adapters + 1] = config
           elseif config ~= false then
             local adapter = require(name)
