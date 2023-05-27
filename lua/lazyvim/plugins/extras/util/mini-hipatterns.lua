@@ -25,8 +25,11 @@ M.plugin = {
   config = function(_, opts)
     -- backward compatibility
     if opts.tailwind == true then
-      opts.tailwind =
-        { enabled = true, ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" } }
+      opts.tailwind = {
+        enabled = true,
+        ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" },
+        style = "full",
+      }
     end
     if type(opts.tailwind) == "table" and opts.tailwind.enabled then
       -- reset hl groups when colorscheme changes
