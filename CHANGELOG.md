@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.3.1](https://github.com/LazyVim/LazyVim/compare/v4.3.0...v4.3.1) (2023-05-28)
+
+
+### Bug Fixes
+
+* **dashboard:** center the LazyVim logo ([#845](https://github.com/LazyVim/LazyVim/issues/845)) ([72b8155](https://github.com/LazyVim/LazyVim/commit/72b81553f378669b2cbad16662faed2a6b524df6))
+* **luasnip:** use `echo` instead of `echo -e` for build warning ([88238e2](https://github.com/LazyVim/LazyVim/commit/88238e2109e8340fae1424f693149ff2c334ae1c))
+* **neotest:** properly detect __call. Fixes [#847](https://github.com/LazyVim/LazyVim/issues/847) ([0e671ad](https://github.com/LazyVim/LazyVim/commit/0e671ad7fabdb3af181feda18951596a83167bc9))
+* **neotest:** removed `&lt;leader&gt;tR` in favor of `<leader>tt` ([a866c68](https://github.com/LazyVim/LazyVim/commit/a866c6801df058c6bef613acfb2eeea9cedb41b1))
+
 ## [4.3.0](https://github.com/LazyVim/LazyVim/compare/v4.2.0...v4.3.0) (2023-05-27)
 
 
