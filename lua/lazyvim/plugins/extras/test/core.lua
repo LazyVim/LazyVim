@@ -57,9 +57,10 @@ return {
           elseif config ~= false then
             local adapter = require(name)
             if type(config) == "table" and not vim.tbl_isempty(config) then
+              local meta = getmetatable(adapter)
               if adapter.setup then
                 adapter.setup(config)
-              elseif adapter.__call then
+              elseif meta and meta.__call then
                 adapter(config)
               else
                 error("Adapter " .. name .. " does not support setup")
