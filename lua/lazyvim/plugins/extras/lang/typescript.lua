@@ -92,25 +92,49 @@ return {
           },
         }
       end
-      for _, language in ipairs({ "typescript", "javascript" }) do
-        if not dap.configurations[language] then
-          dap.configurations[language] = {
-            {
-              type = "pwa-node",
-              request = "launch",
-              name = "Launch file",
-              program = "${file}",
-              cwd = "${workspaceFolder}",
-            },
-            {
-              type = "pwa-node",
-              request = "attach",
-              name = "Attach",
-              processId = require("dap.utils").pick_process,
-              cwd = "${workspaceFolder}",
-            },
-          }
-        end
+      for _, language in ipairs({ "typescript", "typescriptreact", "javascript", "javascriptreact" }) do
+        dap.configurations[language] = {
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch test file (pwa-node with jest)",
+            cwd = vim.fn.getcwd(),
+            runtimeArgs = { "${workspaceFolder}/node_modules/.bin/jest" },
+            runtimeExecutable = "node",
+            args = { "${file}", "--coverage", "false" },
+            rootPath = "${workspaceFolder}",
+            sourceMaps = true,
+            console = "integratedTerminal",
+            internalConsoleOptions = "neverOpen",
+            skipFiles = { "<node_internals>/**", "node_modules/**" },
+          },
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch test file (pwa-node with vitest)",
+            cwd = vim.fn.getcwd(),
+            program = "${workspaceFolder}/node_modules/vitest/vitest.mjs",
+            args = { "--inspect-brk", "--threads", "false", "run", "${file}" },
+            autoAttachChildProcesses = true,
+            smartStep = true,
+            console = "integratedTerminal",
+            skipFiles = { "<node_internals>/**", "node_modules/**" },
+          },
+        }
       end
     end,
   },
