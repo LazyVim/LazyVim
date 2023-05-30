@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.4.0](https://github.com/LazyVim/LazyVim/compare/v4.3.1...v4.4.0) (2023-05-29)
+
+
+### Features
+
+* **catppuccin:** enabled integration for plugins included with LazyVim ([0c05f8a](https://github.com/LazyVim/LazyVim/commit/0c05f8a185e61cc67199bf4b0b3b61933d292b0f))
+
+
+### Bug Fixes
+
+* **indent-blankline:** don't load indent-blankline for nvim-notify ([a94ef59](https://github.com/LazyVim/LazyVim/commit/a94ef5953a6f14731d9aea447e769c280db140ab))
+
 ## [4.3.1](https://github.com/LazyVim/LazyVim/compare/v4.3.0...v4.3.1) (2023-05-28)
 
 
