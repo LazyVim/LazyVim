@@ -15,6 +15,11 @@ return {
     optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
+      local ok, copilot_api = pcall(require, "copilot.api")
+      if not ok then
+        return opts
+      end
+
       local Util = require("lazyvim.util")
       local colors = {
         [""] = Util.fg("Special"),
@@ -25,7 +30,7 @@ return {
       table.insert(opts.sections.lualine_x, 2, {
         function()
           local icon = require("lazyvim.config").icons.kinds.Copilot
-          local status = require("copilot.api").status.data
+          local status = copilot_api.status.data
           return icon .. (status.message or "")
         end,
         cond = function()
@@ -33,7 +38,7 @@ return {
           return ok and #clients > 0
         end,
         color = function()
-          local status = require("copilot.api").status.data
+          local status = copilot_api.status.data
           return colors[status.status] or colors[""]
         end,
       })
