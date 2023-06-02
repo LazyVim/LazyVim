@@ -33,6 +33,9 @@ return {
           return ok and #clients > 0
         end,
         color = function()
+          if not package.loaded["copilot"] then
+            return
+          end
           local status = require("copilot.api").status.data
           return colors[status.status] or colors[""]
         end,
