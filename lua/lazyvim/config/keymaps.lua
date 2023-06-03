@@ -128,7 +128,14 @@ end
 -- floating terminal
 map("n", "<leader>ft", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
 map("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+
+-- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window"})
+map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window"})
+map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window"})
+map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window"})
+map('t', '<C-w>', [[<C-\><C-n><C-w>]], { desc = "Terminal Window Mappings"})
 
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
