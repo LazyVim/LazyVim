@@ -126,8 +126,10 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- floating terminal
-map("n", "<leader>ft", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
+local lazyterm = function() Util.float_term(nil, { cwd = Util.get_root() }) end
+map("n", "<leader>ft",  lazyterm, { desc = "Terminal (root dir)" })
 map("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
 
 -- Terminal Mappings
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -136,6 +138,7 @@ map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window"})
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window"})
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window"})
 map('t', '<C-w>', [[<C-\><C-n><C-w>]], { desc = "Terminal Window Mappings"})
+map("t", '<C-/>', "<cmd>close<cr>", {desc = "Hide Terminal"})
 
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
