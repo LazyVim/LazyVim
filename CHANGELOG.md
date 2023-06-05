@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.6.0](https://github.com/LazyVim/LazyVim/compare/v4.5.1...v4.6.0) (2023-06-05)
+
+
+### Features
+
+* added extra for edgy.nvim ([56f092f](https://github.com/LazyVim/LazyVim/commit/56f092f1a8f37036253a5c1f1253d0eebac6dd61))
+* **copilot:** enable copilot in markdown and help files ([b929413](https://github.com/LazyVim/LazyVim/commit/b929413ddd9afd64e12f0a6ec2969e3692284795))
+
 ## [4.5.1](https://github.com/LazyVim/LazyVim/compare/v4.5.0...v4.5.1) (2023-06-05)
 
 
