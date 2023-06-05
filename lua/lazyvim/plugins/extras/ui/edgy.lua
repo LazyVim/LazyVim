@@ -16,7 +16,14 @@ return {
         },
         "Trouble",
         { ft = "qf", title = "QuickFix" },
-        { ft = "help", size = { height = 20 } },
+        {
+          ft = "help",
+          size = { height = 20 },
+          -- only show help buffers
+          filter = function(buf)
+            return vim.bo[buf].buftype == "help"
+          end,
+        },
         { ft = "spectre_panel", size = { height = 0.4 } },
       },
       left = {
