@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.1](https://github.com/LazyVim/LazyVim/compare/v4.5.0...v4.5.1) (2023-06-05)
+
+
+### Bug Fixes
+
+* **keymaps:** remove `c-w` mapping ([952a0cf](https://github.com/LazyVim/LazyVim/commit/952a0cfb96e7258dcbe8c9f4d8bdfd978888f17c))
+
 ## [4.5.0](https://github.com/LazyVim/LazyVim/compare/v4.4.0...v4.5.0) (2023-06-03)
 
 
