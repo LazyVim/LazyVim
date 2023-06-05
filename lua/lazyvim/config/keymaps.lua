@@ -137,7 +137,6 @@ map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window"})
 map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window"})
 map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window"})
 map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window"})
-map('t', '<C-w>', [[<C-\><C-n><C-w>]], { desc = "Terminal Window Mappings"})
 map("t", '<C-/>', "<cmd>close<cr>", {desc = "Hide Terminal"})
 
 -- windows
