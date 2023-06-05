@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.6.1](https://github.com/LazyVim/LazyVim/compare/v4.6.0...v4.6.1) (2023-06-05)
+
+
+### Bug Fixes
+
+* **edgy:** dont edit help buffers in edgy ([ad6f6cf](https://github.com/LazyVim/LazyVim/commit/ad6f6cfffde6da9239d92a76f85544a7e2c4f63d))
+* **keymaps:** added c-_ mapped to c-/ to make it work in some terminals ([d31772f](https://github.com/LazyVim/LazyVim/commit/d31772f981d41ae84bb4b6e86c28d95f01100a37))
+
 ## [4.6.0](https://github.com/LazyVim/LazyVim/compare/v4.5.1...v4.6.0) (2023-06-05)
 
 
