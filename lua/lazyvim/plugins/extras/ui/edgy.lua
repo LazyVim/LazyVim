@@ -3,6 +3,10 @@ return {
   {
     "folke/edgy.nvim",
     event = "VeryLazy",
+    keys = {
+      -- stylua: ignore
+      { "<leader>ue", function() require("edgy").select() end, desc = "Edgy Select Window" },
+    },
     opts = {
       bottom = {
         { ft = "toggleterm", size = { height = 0.4 } },
@@ -19,7 +23,7 @@ return {
         {
           ft = "help",
           size = { height = 20 },
-          -- only show help buffers
+          -- don't open help files in edgy that we're editing
           filter = function(buf)
             return vim.bo[buf].buftype == "help"
           end,
