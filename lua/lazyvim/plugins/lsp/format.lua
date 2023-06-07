@@ -5,6 +5,10 @@ local M = {}
 ---@type PluginLspOpts
 M.opts = nil
 
+function M.enabled()
+  return M.opts.autoformat
+end
+
 function M.toggle()
   if vim.b.autoformat == false then
     vim.b.autoformat = nil
