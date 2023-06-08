@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.7.0](https://github.com/LazyVim/LazyVim/compare/v4.6.2...v4.7.0) (2023-06-08)
+
+
+### Features
+
+* **edgy:** added `&lt;leader&gt;ue` to quickly jump to an edgy window ([0731f08](https://github.com/LazyVim/LazyVim/commit/0731f08ee43138b61eaf02ac00110babf61be99d))
+* **edgy:** added noice ([47edc89](https://github.com/LazyVim/LazyVim/commit/47edc8918a8754ddd3008c106ebda87f2847373e))
+
+
+### Bug Fixes
+
+* **edgy:** dont layout toggleterm floats ([f7b0c85](https://github.com/LazyVim/LazyVim/commit/f7b0c853cc9b6bd035a637a85d3979f040e46c6f))
+* **format:** eslint should respect autoformat ([#897](https://github.com/LazyVim/LazyVim/issues/897)) ([2ec4da7](https://github.com/LazyVim/LazyVim/commit/2ec4da7fa525c2e1a8c3865d590a77c31f5c58e1))
+* **qf:** better error message. Fixes [#892](https://github.com/LazyVim/LazyVim/issues/892) ([448d502](https://github.com/LazyVim/LazyVim/commit/448d502947a3e8a81a2ed1f117f72f2e5361082f))
+
 ## [4.6.2](https://github.com/LazyVim/LazyVim/compare/v4.6.1...v4.6.2) (2023-06-06)
 
 
