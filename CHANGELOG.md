@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.8.0](https://github.com/LazyVim/LazyVim/compare/v4.7.0...v4.8.0) (2023-06-09)
+
+
+### Features
+
+* **edgy:** added leader-ue to toggle edgy sidebars ([04f17cb](https://github.com/LazyVim/LazyVim/commit/04f17cb86b7794fe74894e67bd09dafc0bc440d0))
+* **edgy:** neo-tree filessystem is now also a pinned view ([6ffc895](https://github.com/LazyVim/LazyVim/commit/6ffc89512e998f01b3dc1856a689de6ffdec0b9e))
+
+
+### Bug Fixes
+
+* **keymaps:** better j/k for visual mode ([#902](https://github.com/LazyVim/LazyVim/issues/902)) ([e049928](https://github.com/LazyVim/LazyVim/commit/e049928b8bb3a385a186617a97c56cfb8f74a6f8))
+
 ## [4.7.0](https://github.com/LazyVim/LazyVim/compare/v4.6.2...v4.7.0) (2023-06-08)
 
 
