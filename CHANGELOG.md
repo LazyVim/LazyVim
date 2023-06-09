@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.8.1](https://github.com/LazyVim/LazyVim/compare/v4.8.0...v4.8.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* **edgy:** make noice windows 0.4 height ([30d03ed](https://github.com/LazyVim/LazyVim/commit/30d03eda5b42a783fdb2ed294f6ec83d2825d2d0))
+* **keymaps:** dont map jk in visual. Use x instead of v. Fixes [#912](https://github.com/LazyVim/LazyVim/issues/912) ([d6bb907](https://github.com/LazyVim/LazyVim/commit/d6bb907cf042463073540f7334e4271a4d2fb108))
+
 ## [4.8.0](https://github.com/LazyVim/LazyVim/compare/v4.7.0...v4.8.0) (2023-06-09)
 
 
