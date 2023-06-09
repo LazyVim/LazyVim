@@ -6,6 +6,8 @@ return {
     keys = {
       -- stylua: ignore
       { "<leader>ue", function() require("edgy").select() end, desc = "Edgy Select Window" },
+      -- stylua: ignore
+      { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
     },
     opts = {
       bottom = {
