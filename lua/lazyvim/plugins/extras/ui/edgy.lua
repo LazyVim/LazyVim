@@ -49,6 +49,7 @@ return {
           end,
         },
         { ft = "spectre_panel", size = { height = 0.4 } },
+        { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
       },
       left = {
         {
@@ -63,6 +64,7 @@ return {
           end,
           size = { height = 0.5 },
         },
+        { title = "Neotest Summary", ft = "neotest-summary" },
         {
           title = "Neo-Tree Git",
           ft = "neo-tree",
