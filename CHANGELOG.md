@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.9.0](https://github.com/LazyVim/LazyVim/compare/v4.8.1...v4.9.0) (2023-06-17)
+
+
+### Features
+
+* **edgy:** added LazyVim resize keymaps to edgy ([ba49339](https://github.com/LazyVim/LazyVim/commit/ba49339fe314ec193ccd494be80818d7ebc5a3bd))
+* **edgy:** added support for neotest ([84986b3](https://github.com/LazyVim/LazyVim/commit/84986b37291c4c0874a6012ff9927d274bdaad0e))
+* **util:** LazyVim terminals can now be opened/reopened with a count ([41f515c](https://github.com/LazyVim/LazyVim/commit/41f515caae653b91a93f24f4811ebeccf3457766))
+
+
+### Bug Fixes
+
+* **keymaps:** disable ctrl-hjkl for lazygit. Fixes [#905](https://github.com/LazyVim/LazyVim/issues/905) ([ebd002f](https://github.com/LazyVim/LazyVim/commit/ebd002f135b02f38654d14ea8c46d831c9054b7e))
+* **which-key:** don't load which-key as a noice dep ([f54d95d](https://github.com/LazyVim/LazyVim/commit/f54d95d96511e1e8a575573b937a99338f178639))
+
 ## [4.8.1](https://github.com/LazyVim/LazyVim/compare/v4.8.0...v4.8.1) (2023-06-09)
 
 
