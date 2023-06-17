@@ -219,19 +219,16 @@ return {
 
   -- noicer ui
   {
+    "folke/which-key.nvim",
+    opts = function(_, opts)
+      if require("lazyvim.util").has("noice.nvim") then
+        opts.defaults["<leader>sn"] = { name = "+noice" }
+      end
+    end,
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
-    dependencies = {
-      -- which key integration
-      {
-        "folke/which-key.nvim",
-        opts = function(_, opts)
-          if require("lazyvim.util").has("noice.nvim") then
-            opts.defaults["<leader>sn"] = { name = "+noice" }
-          end
-        end,
-      },
-    },
     opts = {
       lsp = {
         override = {
