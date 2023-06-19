@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.10.0](https://github.com/LazyVim/LazyVim/compare/v4.9.0...v4.10.0) (2023-06-19)
+
+
+### Features
+
+* **extras:** add ruby as extras for languages ([#881](https://github.com/LazyVim/LazyVim/issues/881)) ([b37616c](https://github.com/LazyVim/LazyVim/commit/b37616c20385520c2a06faca1a2f8954b015af5d))
+* **treesitter:** allow run TSUpdateSync from command line ([#944](https://github.com/LazyVim/LazyVim/issues/944)) ([6b1efe7](https://github.com/LazyVim/LazyVim/commit/6b1efe78e2b7fd5c40850d771c339bebae39ee49))
+
 ## [4.9.0](https://github.com/LazyVim/LazyVim/compare/v4.8.1...v4.9.0) (2023-06-17)
 
 
