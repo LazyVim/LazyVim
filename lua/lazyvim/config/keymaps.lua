@@ -112,6 +112,9 @@ map("n", "<leader>ul", function() Util.toggle("relativenumber", true) Util.toggl
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
+if vim.lsp.buf.inlay_hint then
+  map("n", "<leader>uh", function() vim.lsp.buf.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
+end
 
 -- lazygit
 map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { cwd = Util.get_root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
