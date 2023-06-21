@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.12.0](https://github.com/LazyVim/LazyVim/compare/v4.11.0...v4.12.0) (2023-06-21)
+
+
+### Features
+
+* added extra for flash.nvim ([318a4c8](https://github.com/LazyVim/LazyVim/commit/318a4c8304091422dfdfcec44dae7a676d999ee1))
+
 ## [4.11.0](https://github.com/LazyVim/LazyVim/compare/v4.10.0...v4.11.0) (2023-06-21)
 
 
