@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.11.0](https://github.com/LazyVim/LazyVim/compare/v4.10.0...v4.11.0) (2023-06-21)
+
+
+### Features
+
+* added support for the new builtin inlay hints ([01c7eee](https://github.com/LazyVim/LazyVim/commit/01c7eeebd0641bd952e3c518dd28b178aed8e148))
+
 ## [4.10.0](https://github.com/LazyVim/LazyVim/compare/v4.9.0...v4.10.0) (2023-06-19)
 
 
