@@ -56,6 +56,16 @@ return {
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
         },
+        icon = {
+          folder_empty = "󰜌",
+          folder_empty_open = "󰜌",
+        },
+        git_status = {
+          symbols = {
+            renamed = "󰁕",
+            unstaged = "󰄱",
+          },
+        },
       },
     },
     config = function(_, opts)
