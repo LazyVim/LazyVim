@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.14.0](https://github.com/LazyVim/LazyVim/compare/v4.13.1...v4.14.0) (2023-06-22)
+
+
+### Features
+
+* **extras:** added extra for mini.files ([e624511](https://github.com/LazyVim/LazyVim/commit/e624511fa249bc3af58e61b0ee5fdd4426bc2977))
+
 ## [4.13.1](https://github.com/LazyVim/LazyVim/compare/v4.13.0...v4.13.1) (2023-06-22)
 
 
