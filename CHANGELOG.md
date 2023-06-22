@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.15.0](https://github.com/LazyVim/LazyVim/compare/v4.14.0...v4.15.0) (2023-06-22)
+
+
+### Features
+
+* **mini.files:** added extra keymap to open mini.files in the cwd ([5299522](https://github.com/LazyVim/LazyVim/commit/52995227808371a537f6d42ad2f0656571b92299))
+
 ## [4.14.0](https://github.com/LazyVim/LazyVim/compare/v4.13.1...v4.14.0) (2023-06-22)
 
 
