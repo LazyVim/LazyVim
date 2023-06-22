@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.13.0](https://github.com/LazyVim/LazyVim/compare/v4.12.0...v4.13.0) (2023-06-22)
+
+
+### Features
+
+* **flash:** add treesitter to normal mode as well ([aa28119](https://github.com/LazyVim/LazyVim/commit/aa28119aa6526d26920da25c35e83d856a8584fb))
+
+
+### Bug Fixes
+
+* **neo-tree:** updated some icons to use Nerd Fonts v3. Fixes [#957](https://github.com/LazyVim/LazyVim/issues/957) ([0b99c9f](https://github.com/LazyVim/LazyVim/commit/0b99c9f788f04d658b4370c8f553542563cd3482))
+
 ## [4.12.0](https://github.com/LazyVim/LazyVim/compare/v4.11.0...v4.12.0) (2023-06-21)
 
 
