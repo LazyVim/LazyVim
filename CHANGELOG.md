@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.13.1](https://github.com/LazyVim/LazyVim/compare/v4.13.0...v4.13.1) (2023-06-22)
+
+
+### Performance Improvements
+
+* **treesitter:** better way of loading treesitter-textobjects ([09fafb9](https://github.com/LazyVim/LazyVim/commit/09fafb946aefd8434f479656c22b90d9bc63c684))
+
 ## [4.13.0](https://github.com/LazyVim/LazyVim/compare/v4.12.0...v4.13.0) (2023-06-22)
 
 
