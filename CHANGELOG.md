@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.15.1](https://github.com/LazyVim/LazyVim/compare/v4.15.0...v4.15.1) (2023-06-23)
+
+
+### Bug Fixes
+
+* **edgy:** only add symbolsoutline to the sidebar if it is installed. ([ed89d01](https://github.com/LazyVim/LazyVim/commit/ed89d01113b7c8495224cb7a88fe5ccb3f001ac5))
+
 ## [4.15.0](https://github.com/LazyVim/LazyVim/compare/v4.14.0...v4.15.0) (2023-06-22)
 
 
