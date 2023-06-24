@@ -55,7 +55,7 @@ return {
           end,
         })
       end
-      opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
+      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
         mappings = {
           n = { s = flash },
           i = { ["<c-s>"] = flash },
