@@ -12,3 +12,5 @@ vim.api.nvim_echo({
 
 vim.fn.getchar()
 vim.cmd([[quit]])
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
