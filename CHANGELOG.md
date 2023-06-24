@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.17.0](https://github.com/LazyVim/LazyVim/compare/v4.16.0...v4.17.0) (2023-06-24)
+
+
+### Features
+
+* **flash:** telescope integration. Use `s` in normal and `&lt;c-s&gt;` in insert mode ([12b5723](https://github.com/LazyVim/LazyVim/commit/12b57235a9f8dd15914d0b2133817259e80d63a1))
+
+
+### Bug Fixes
+
+* **flash:** possible nil for telescope integration ([abfdab3](https://github.com/LazyVim/LazyVim/commit/abfdab37ce127268f6410b89022417d3fa90e0ae))
+
 ## [4.16.0](https://github.com/LazyVim/LazyVim/compare/v4.15.1...v4.16.0) (2023-06-23)
 
 
