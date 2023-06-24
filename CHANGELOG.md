@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.16.0](https://github.com/LazyVim/LazyVim/compare/v4.15.1...v4.16.0) (2023-06-23)
+
+
+### Features
+
+* **flash:** added remote flash ([c3477ed](https://github.com/LazyVim/LazyVim/commit/c3477ed81e8e26bce1eb53f9c04a8aa7adc1807a))
+* **mini.files:** "g." to toggle hidden files ([#964](https://github.com/LazyVim/LazyVim/issues/964)) ([a080bc7](https://github.com/LazyVim/LazyVim/commit/a080bc7667b6fadc175d782469b063fcf09b00ae))
+
 ## [4.15.1](https://github.com/LazyVim/LazyVim/compare/v4.15.0...v4.15.1) (2023-06-23)
 
 
