@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.18.0](https://github.com/LazyVim/LazyVim/compare/v4.17.0...v4.18.0) (2023-06-25)
+
+
+### Features
+
+* **flash:** enable flash in vscode ([f6f8436](https://github.com/LazyVim/LazyVim/commit/f6f8436fe8696a8934a28a1fd21bf28409fee7ab))
+
+
+### Bug Fixes
+
+* **edgy:** corrected filetype for symbols outline ([d5a9c54](https://github.com/LazyVim/LazyVim/commit/d5a9c54faf2a41355d4e2e14b050af188a49365a))
+* **keymaps:** remove redundant ':' on lazy keymap ([#977](https://github.com/LazyVim/LazyVim/issues/977)) ([e9358d9](https://github.com/LazyVim/LazyVim/commit/e9358d977a379e54d73dd29691d60f7a51ed6923))
+
 ## [4.17.0](https://github.com/LazyVim/LazyVim/compare/v4.16.0...v4.17.0) (2023-06-24)
 
 
