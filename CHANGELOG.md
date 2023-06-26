@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.19.0](https://github.com/LazyVim/LazyVim/compare/v4.18.0...v4.19.0) (2023-06-26)
+
+
+### Features
+
+* **flash:** added treesiter search to show ts node labels around search matches ([5e6a072](https://github.com/LazyVim/LazyVim/commit/5e6a07200c0cc0a21167a341c1f29bf27dc35f02))
+
 ## [4.18.0](https://github.com/LazyVim/LazyVim/compare/v4.17.0...v4.18.0) (2023-06-25)
 
 
