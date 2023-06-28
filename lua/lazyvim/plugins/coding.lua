@@ -44,6 +44,7 @@ return {
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
+      local defaults = require("cmp.config.default")()
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -86,6 +87,7 @@ return {
             hl_group = "CmpGhostText",
           },
         },
+        sorting = defaults.sorting,
       }
     end,
   },
