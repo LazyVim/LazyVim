@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.22.0](https://github.com/LazyVim/LazyVim/compare/v4.21.0...v4.22.0) (2023-06-30)
+
+
+### Features
+
+* **rust:** rust improvements ([#1015](https://github.com/LazyVim/LazyVim/issues/1015)) ([79b1c92](https://github.com/LazyVim/LazyVim/commit/79b1c92dd22020b2a5ed1dbd6e6bb86242207785))
+
+
+### Bug Fixes
+
+* **lang:** indentation in rust lang extra ([#1017](https://github.com/LazyVim/LazyVim/issues/1017)) ([c992ebe](https://github.com/LazyVim/LazyVim/commit/c992ebec468b2e60f1138fd85055118016c62165))
+
 ## [4.21.0](https://github.com/LazyVim/LazyVim/compare/v4.20.1...v4.21.0) (2023-06-30)
 
 
