@@ -66,7 +66,7 @@ return {
           local codelldb_path = extension_path .. "adapter/codelldb"
           local liblldb_path = vim.fn.has("mac") == 1 and extension_path .. "lldb/lib/liblldb.dylib"
             or extension_path .. "lldb/lib/liblldb.so"
-          local rust_tools_opts = vim.tbl_deep_extend("force", opts, {
+          local rust_tools_opts = {
             dap = {
               adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
             },
@@ -81,7 +81,7 @@ return {
                 ]])
               end,
             },
-            server = {
+            server = vim.tbl_deep_extend("force", opts, {
               settings = {
                 ["rust-analyzer"] = {
                   cargo = {
@@ -105,8 +105,8 @@ return {
                   },
                 },
               },
-            },
-          })
+            }),
+          }
           require("rust-tools").setup(rust_tools_opts)
           return true
         end,
