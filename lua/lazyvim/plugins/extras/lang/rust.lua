@@ -56,7 +56,7 @@ return {
       setup = {
         rust_analyzer = function(_, opts)
           require("lazyvim.util").on_attach(function(client, buffer)
-						-- stylua: ignore
+            -- stylua: ignore
             if client.name == "rust_analyzer" then
               vim.keymap.set("n", "K", "<cmd>RustHoverActions<cr>", { buffer = buffer, desc = "Hover Actions (Rust)" })
               vim.keymap.set( "n", "<leader>cR", "<cmd>RustCodeAction<cr>", { buffer = buffer, desc = "Code Action (Rust)" })
