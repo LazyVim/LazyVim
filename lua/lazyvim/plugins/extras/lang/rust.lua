@@ -42,7 +42,11 @@ return {
   -- Correctly setup lspconfig for Rust 🚀
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "simrat39/rust-tools.nvim" },
+    dependencies = {
+      "simrat39/rust-tools.nvim",
+      -- Avoid calling setup twice if user supplies `opts`
+      config = function() end,
+    },
     opts = {
       servers = {
         -- Ensure mason installs the server
@@ -52,7 +56,7 @@ return {
       setup = {
         rust_analyzer = function(_, opts)
           require("lazyvim.util").on_attach(function(client, buffer)
-						-- stylua: ignore
+            -- stylua: ignore
             if client.name == "rust_analyzer" then
               vim.keymap.set("n", "K", "<cmd>RustHoverActions<cr>", { buffer = buffer, desc = "Hover Actions (Rust)" })
               vim.keymap.set( "n", "<leader>cR", "<cmd>RustCodeAction<cr>", { buffer = buffer, desc = "Code Action (Rust)" })
@@ -66,7 +70,8 @@ return {
           local codelldb_path = extension_path .. "adapter/codelldb"
           local liblldb_path = vim.fn.has("mac") == 1 and extension_path .. "lldb/lib/liblldb.dylib"
             or extension_path .. "lldb/lib/liblldb.so"
-          local rust_tools_opts = vim.tbl_deep_extend("force", opts, {
+          local user_rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
+          local rust_tools_opts = vim.tbl_deep_extend("force", user_rust_tools_opts, {
             dap = {
               adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
             },
@@ -81,7 +86,7 @@ return {
                 ]])
               end,
             },
-            server = {
+            server = vim.tbl_deep_extend("force", opts, {
               settings = {
                 ["rust-analyzer"] = {
                   cargo = {
@@ -105,7 +110,7 @@ return {
                   },
                 },
               },
-            },
+            }),
           })
           require("rust-tools").setup(rust_tools_opts)
           return true
@@ -125,6 +130,19 @@ return {
           end)
           return false -- make sure the base implementation calls taplo.setup
         end,
+      },
+    },
+  },
+
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    dependencies = {
+      "rouge8/neotest-rust",
+    },
+    opts = {
+      adapters = {
+        ["neotest-rust"] = {},
       },
     },
   },
