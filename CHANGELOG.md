@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.21.0](https://github.com/LazyVim/LazyVim/compare/v4.20.1...v4.21.0) (2023-06-30)
+
+
+### Features
+
+* **extra:** Add Elixir support and config ([#993](https://github.com/LazyVim/LazyVim/issues/993)) ([3d0de23](https://github.com/LazyVim/LazyVim/commit/3d0de235eca0ea6987947e4a7c47f1393e42dfb2))
+* **lang:** Add Rust config ([#1012](https://github.com/LazyVim/LazyVim/issues/1012)) ([5a441f8](https://github.com/LazyVim/LazyVim/commit/5a441f897247b130c1ffb78bb37fd3a16d2250de))
+
+
+### Bug Fixes
+
+* **autocmds:** dont jump to last loc in gitcommit buffers ([65c70f6](https://github.com/LazyVim/LazyVim/commit/65c70f6ad7e386b54d2aa6dbe137c37ee1d3cb88))
+
 ## [4.20.1](https://github.com/LazyVim/LazyVim/compare/v4.20.0...v4.20.1) (2023-06-29)
 
 
