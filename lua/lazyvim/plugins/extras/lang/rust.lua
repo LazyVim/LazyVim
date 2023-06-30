@@ -42,7 +42,11 @@ return {
   -- Correctly setup lspconfig for Rust 🚀
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "simrat39/rust-tools.nvim" },
+    dependencies = {
+      "simrat39/rust-tools.nvim",
+      -- Avoid calling setup twice if user supplies `opts`
+      config = function() end,
+    },
     opts = {
       servers = {
         -- Ensure mason installs the server
@@ -66,7 +70,8 @@ return {
           local codelldb_path = extension_path .. "adapter/codelldb"
           local liblldb_path = vim.fn.has("mac") == 1 and extension_path .. "lldb/lib/liblldb.dylib"
             or extension_path .. "lldb/lib/liblldb.so"
-          local rust_tools_opts = {
+          local user_rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
+          local rust_tools_opts = vim.tbl_deep_extend("force", user_rust_tools_opts, {
             dap = {
               adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
             },
@@ -106,7 +111,7 @@ return {
                 },
               },
             }),
-          }
+          })
           require("rust-tools").setup(rust_tools_opts)
           return true
         end,
