@@ -116,36 +116,27 @@ return {
             },
           },
         },
-        taplo = {},
+        taplo = {
+          keys = {
+            {
+              "K",
+              function()
+                if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
+                  require("crates").show_popup()
+                else
+                  vim.lsp.buf.hover()
+                end
+              end,
+              desc = "Show Crate Documentation",
+            },
+          },
+        },
       },
       setup = {
         rust_analyzer = function(_, opts)
-          require("lazyvim.util").on_attach(function(client, buffer)
-            -- stylua: ignore
-            if client.name == "rust_analyzer" then
-              vim.keymap.set("n", "K", "<cmd>RustHoverActions<cr>", { buffer = buffer, desc = "Hover Actions (Rust)" })
-              vim.keymap.set( "n", "<leader>cR", "<cmd>RustCodeAction<cr>", { buffer = buffer, desc = "Code Action (Rust)" })
-              vim.keymap.set( "n", "<leader>dr", "<cmd>RustDebuggables<cr>", { buffer = buffer, desc = "Run Debuggables (Rust)" })
-            end
-          end)
           local rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
           require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
           return true
-        end,
-        taplo = function(_, _)
-          local function show_documentation()
-            if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-              require("crates").show_popup()
-            else
-              vim.lsp.buf.hover()
-            end
-          end
-          require("lazyvim.util").on_attach(function(client, buffer)
-            if client.name == "taplo" then
-              vim.keymap.set("n", "K", show_documentation, { buffer = buffer, desc = "Show Crate Documentation" })
-            end
-          end)
-          return false -- make sure the base implementation calls taplo.setup
         end,
       },
     },
