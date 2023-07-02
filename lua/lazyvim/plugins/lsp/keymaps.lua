@@ -89,6 +89,9 @@ function M.resolve(buffer)
       keymaps[keys.id] = keys
     end
   end
+  for _, keymap in ipairs(M.get()) do
+    add(keymap)
+  end
 
   local opts = require("lazyvim.util").opts("nvim-lspconfig")
   local clients = vim.lsp.get_active_clients({ bufnr = buffer })
