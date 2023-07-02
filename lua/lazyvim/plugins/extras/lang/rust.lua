@@ -78,11 +78,6 @@ return {
   -- Correctly setup lspconfig for Rust 🚀
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "simrat39/rust-tools.nvim",
-      -- Avoid calling setup twice if user supplies `opts`
-      config = function() end,
-    },
     opts = {
       servers = {
         -- Ensure mason installs the server
