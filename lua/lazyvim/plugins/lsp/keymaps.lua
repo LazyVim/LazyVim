@@ -83,7 +83,7 @@ function M.resolve(buffer)
 
   local function add(keymap)
     local keys = Keys.parse(keymap)
-    if keys[2] == vim.NIL or keys[2] == false then
+    if keys[2] == false then
       keymaps[keys.id] = nil
     else
       keymaps[keys.id] = keys
