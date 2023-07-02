@@ -54,7 +54,7 @@ M.plugin = {
           local match = m.full_match
           ---@type string, number
           local color, shade = match:match("[%w-]+%-([a-z%-]+)%-(%d+)")
-          shade = assert(tonumber(shade))
+          shade = tonumber(shade)
           local bg = vim.tbl_get(M.colors, color, shade)
           if bg then
             local hl = "MiniHipatternsTailwind" .. color .. shade
