@@ -1,4 +1,4 @@
--- This file is automatically loaded by lazyvim.config.init
+-- This file is automatically loaded by lazyvim.config.init.
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
