@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.25.1](https://github.com/LazyVim/LazyVim/compare/v4.25.0...v4.25.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* trigger ci ([755419f](https://github.com/LazyVim/LazyVim/commit/755419f39cf0ca0407a3a6a16dad35942c653572))
+
 ## [4.25.0](https://github.com/LazyVim/LazyVim/compare/v4.24.1...v4.25.0) (2023-07-03)
 
 
