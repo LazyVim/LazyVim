@@ -216,9 +216,6 @@ return {
   -- easily jump to any location and enhanced f/t motions for Leap
   {
     "ggandor/flit.nvim",
-    enabled = function()
-      return require("lazyvim.util").has("leap")
-    end,
     keys = function()
       ---@type LazyKeys[]
       local ret = {}
