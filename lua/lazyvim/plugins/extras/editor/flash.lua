@@ -49,7 +49,7 @@ return {
       local function flash(prompt_bufnr)
         require("flash").jump({
           pattern = "^",
-          highlight = { label = { after = { 0, 0 } } },
+          label = { after = { 0, 0 } },
           search = {
             mode = "search",
             exclude = {
