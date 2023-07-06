@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.27.0](https://github.com/LazyVim/LazyVim/compare/v4.26.0...v4.27.0) (2023-07-06)
+
+
+### Features
+
+* **extras:** add terraform extra ([#1030](https://github.com/LazyVim/LazyVim/issues/1030)) ([0db31c2](https://github.com/LazyVim/LazyVim/commit/0db31c2840af662c856d5b9a09d87bc266e7fa40))
+* **flash:** use c-s in the cmdline to toggle flash ([22c9477](https://github.com/LazyVim/LazyVim/commit/22c9477b9642b1a8abc303ffcb44c6989c7a5ca2))
+* **lang:** add python support ([#1031](https://github.com/LazyVim/LazyVim/issues/1031)) ([44cdb5e](https://github.com/LazyVim/LazyVim/commit/44cdb5eac556733db53afeebcdc6ef91408de0c3))
+
+
+### Bug Fixes
+
+* **autocmds:** jump to last loc in buffer ([#1061](https://github.com/LazyVim/LazyVim/issues/1061)) ([baa9614](https://github.com/LazyVim/LazyVim/commit/baa96140227a3727b2ea2053f37aa2b7253bb45a))
+
 ## [4.26.0](https://github.com/LazyVim/LazyVim/compare/v4.25.1...v4.26.0) (2023-07-06)
 
 
