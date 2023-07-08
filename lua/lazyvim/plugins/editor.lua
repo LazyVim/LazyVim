@@ -244,7 +244,6 @@ return {
     end,
   },
 
-  -- which-key
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -268,11 +267,15 @@ return {
         ["<leader>w"] = { name = "+windows" },
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
       },
+      mini_ai = nil, -- descriptions for mini.ai when enabled
     },
     config = function(_, opts)
       local wk = require("which-key")
       wk.setup(opts)
       wk.register(opts.defaults)
+      if opts.mini_ai then
+        wk.register(opts.mini_ai)
+      end
     end,
   },
 

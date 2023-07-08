@@ -1,3 +1,5 @@
+local Util = require("lazyvim.util")
+
 return {
 
   -- snippets
@@ -147,34 +149,13 @@ return {
     },
   },
 
-  -- better text-objects
+  -- add mini.ai descriptions to which-key.nvim
   {
-    "echasnovski/mini.ai",
-    -- keys = {
-    --   { "a", mode = { "x", "o" } },
-    --   { "i", mode = { "x", "o" } },
-    -- },
-    event = "VeryLazy",
-    dependencies = { "nvim-treesitter-textobjects" },
-    opts = function()
-      local ai = require("mini.ai")
-      return {
-        n_lines = 500,
-        custom_textobjects = {
-          o = ai.gen_spec.treesitter({
-            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-          }, {}),
-          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
-          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
-        },
-      }
-    end,
-    config = function(_, opts)
-      require("mini.ai").setup(opts)
-      -- register all text objects with which-key
-      if require("lazyvim.util").has("which-key.nvim") then
-        ---@type table<string, string|table>
+    "folke/which-key.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local function mini_ai_to_which_key()
+        -- register all text objects with which-key
         local i = {
           [" "] = "Whitespace",
           ['"'] = 'Balanced "',
@@ -209,12 +190,38 @@ return {
           i[key] = vim.tbl_extend("force", { name = "Inside " .. name .. " textobject" }, ic)
           a[key] = vim.tbl_extend("force", { name = "Around " .. name .. " textobject" }, ac)
         end
-        require("which-key").register({
+        return {
           mode = { "o", "x" },
           i = i,
           a = a,
-        })
+        }
       end
+
+      if Util.has("mini.ai") then
+        opts.mini_ai = mini_ai_to_which_key()
+      end
+      return opts
+    end,
+  },
+
+  -- better text-objects
+  {
+    "echasnovski/mini.ai",
+    event = "VeryLazy",
+    dependencies = { "nvim-treesitter-textobjects" },
+    opts = function()
+      local ai = require("mini.ai")
+      return {
+        n_lines = 500,
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }, {}),
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }, {}),
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }, {}),
+        },
+      }
     end,
   },
 }
