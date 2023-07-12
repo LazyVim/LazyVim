@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.28.0](https://github.com/LazyVim/LazyVim/compare/v4.27.0...v4.28.0) (2023-07-12)
+
+
+### Features
+
+* **catppuccin:** match navic bg with lualine ([#1085](https://github.com/LazyVim/LazyVim/issues/1085)) ([67d1cbf](https://github.com/LazyVim/LazyVim/commit/67d1cbfb01e84083649027a4b6356401f74d2d60))
+* **lang:** add docker support ([#1078](https://github.com/LazyVim/LazyVim/issues/1078)) ([a0c2014](https://github.com/LazyVim/LazyVim/commit/a0c2014b1045243d216b244235c6a545e92471a9))
+* **mini.ai:** decouple mini.ai from which-key. Closes [#1076](https://github.com/LazyVim/LazyVim/issues/1076) ([e212c16](https://github.com/LazyVim/LazyVim/commit/e212c166b4ce91bbd65a9f7fda17403ee91ed19c))
+* **util:** added util.on_load to execute code when a plugin loads ([9fd8970](https://github.com/LazyVim/LazyVim/commit/9fd89701da8bd3a5d9ffeae84fb2174a3f650797))
+
+
+### Bug Fixes
+
+* **lsp-config:** lsp-config error when nvim-cmp not enabled. ([#1095](https://github.com/LazyVim/LazyVim/issues/1095)) ([3f68f44](https://github.com/LazyVim/LazyVim/commit/3f68f44d725747339933298cdac02589b37ea76c))
+
 ## [4.27.0](https://github.com/LazyVim/LazyVim/compare/v4.26.0...v4.27.0) (2023-07-06)
 
 
