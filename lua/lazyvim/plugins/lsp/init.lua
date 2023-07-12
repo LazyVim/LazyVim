@@ -139,12 +139,14 @@ return {
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       local servers = opts.servers
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-      if ok then
-        capabilities = vim.tbl_deep_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
-      end
-      capabilities = vim.tbl_deep_extend("force", capabilities, opts.capabilities or {})
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+        opts.capabilities or {}
+      )
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
