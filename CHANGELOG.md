@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.28.1](https://github.com/LazyVim/LazyVim/compare/v4.28.0...v4.28.1) (2023-07-12)
+
+
+### Bug Fixes
+
+* **neoconf:** do neoconf setup in lspconfig setup. Fixes [#1070](https://github.com/LazyVim/LazyVim/issues/1070) ([9e8ce28](https://github.com/LazyVim/LazyVim/commit/9e8ce289d12eb65146be3cb1b3800440e208496d))
+
 ## [4.28.0](https://github.com/LazyVim/LazyVim/compare/v4.27.0...v4.28.0) (2023-07-12)
 
 
