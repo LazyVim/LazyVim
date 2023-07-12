@@ -28,6 +28,7 @@ function M.get()
       { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
       { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
       { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
+      { "<leader>cF", format, desc = "Toggle format", has = "documentFormatting" },
       { "<leader>cf", format, desc = "Format Document", has = "formatting" },
       { "<leader>cf", format, desc = "Format Range", mode = "v", has = "rangeFormatting" },
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
