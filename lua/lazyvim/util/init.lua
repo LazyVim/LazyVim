@@ -277,4 +277,12 @@ function M.on_load(name, fn)
   end
 end
 
+function M.changelog()
+  local lv = require("lazy.core.config").plugins.LazyVim
+  local float = require("lazy.util").open(lv.dir .. "/CHANGELOG.md")
+  vim.wo[float.win].spell = false
+  vim.wo[float.win].wrap = false
+  vim.diagnostic.disable(float.buf)
+end
+
 return M
