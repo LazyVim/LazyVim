@@ -213,34 +213,76 @@ return {
     },
   },
 
-  -- easily jump to any location and enhanced f/t motions for Leap
-  {
-    "ggandor/flit.nvim",
-    keys = function()
-      ---@type LazyKeys[]
-      local ret = {}
-      for _, key in ipairs({ "f", "F", "t", "T" }) do
-        ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
-      end
-      return ret
-    end,
-    opts = { labeled_modes = "nx" },
-  },
+  -- disable old installations of leap and flit. Optional so it doesn't appear under disabled plugins
   {
     "ggandor/leap.nvim",
+    enabled = function()
+      vim.schedule(function()
+        local Config = require("lazy.core.config")
+        if Config.spec.disabled["leap.nvim"] or Config.spec.disabled["flit.nvim"] then
+          require("lazy.core.util").warn(
+            [[`flash.nvim` is now the default **LazyVim** jump plugin.
+**leap.nvim** and **flit.nvim** have been disabled.
+Please remove the plugins from your config.
+If you rather use leap/flit instead, you can add the leap extra:
+`lazyvim.plugins.extras.editor.leap`
+]],
+            { title = "LazyVim" }
+          )
+        end
+      end)
+      return false
+    end,
+    optional = true,
+  },
+  { "ggandor/flit.nvim", enabled = false, optional = true },
+
+  -- Add Flash
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    vscode = true,
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-      { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
-      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
-    config = function(_, opts)
-      local leap = require("leap")
-      for k, v in pairs(opts) do
-        leap.opts[k] = v
+  },
+
+  -- Flash Telescope config
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    opts = function(_, opts)
+      if not require("lazyvim.util").has("flash.nvim") then
+        return
       end
-      leap.add_default_mappings(true)
-      vim.keymap.del({ "x", "o" }, "x")
-      vim.keymap.del({ "x", "o" }, "X")
+      local function flash(prompt_bufnr)
+        require("flash").jump({
+          pattern = "^",
+          label = { after = { 0, 0 } },
+          search = {
+            mode = "search",
+            exclude = {
+              function(win)
+                return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "TelescopeResults"
+              end,
+            },
+          },
+          action = function(match)
+            local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+            picker:set_selection(match.pos[1] - 1)
+          end,
+        })
+      end
+      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+        mappings = { n = { s = flash }, i = { ["<c-s>"] = flash } },
+      })
     end,
   },
 
