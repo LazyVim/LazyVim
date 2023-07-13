@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.0.0](https://github.com/LazyVim/LazyVim/compare/v4.28.1...v5.0.0) (2023-07-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **flash:** Make flash.nvim the default jump plugin for LazyVim
+
+### Features
+
+* added `leader-L` to show the LazyVim changelog ([9387ab3](https://github.com/LazyVim/LazyVim/commit/9387ab388ec43cae0689405fcb21bb4ecf67322c))
+* **flash:** Make flash.nvim the default jump plugin for LazyVim ([ae759b9](https://github.com/LazyVim/LazyVim/commit/ae759b947b1ef16d9814fcddfcafe2cdd767bc6a))
+
 ## [4.28.1](https://github.com/LazyVim/LazyVim/compare/v4.28.0...v4.28.1) (2023-07-12)
 
 
