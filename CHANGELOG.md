@@ -1,5 +1,14 @@
 # Changelog
 
+## [5.1.0](https://github.com/LazyVim/LazyVim/compare/v5.0.0...v5.1.0) (2023-07-16)
+
+
+### Features
+
+* **lang:** add null-ls tools to mason's ensure_installed ([#1133](https://github.com/LazyVim/LazyVim/issues/1133)) ([63e8985](https://github.com/LazyVim/LazyVim/commit/63e898599a00d8b1832de650ed67f63a44bf22e0))
+* **lsp:** add 'reuse_win' for reuse window in lsp definition keymap ([#1131](https://github.com/LazyVim/LazyVim/issues/1131)) ([1b0b6eb](https://github.com/LazyVim/LazyVim/commit/1b0b6eb0e13018196f0110b06149f00f2df5162f))
+* **neo-tree:** update to v3.x and change `follow_current_file` to a … ([#1143](https://github.com/LazyVim/LazyVim/issues/1143)) ([69bb891](https://github.com/LazyVim/LazyVim/commit/69bb89184f9297f1377f77a8b6bee2487df6ac00))
+
 ## [5.0.0](https://github.com/LazyVim/LazyVim/compare/v4.28.1...v5.0.0) (2023-07-13)
 
 
