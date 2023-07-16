@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.1](https://github.com/LazyVim/LazyVim/compare/v5.1.0...v5.1.1) (2023-07-16)
+
+
+### Bug Fixes
+
+* **mason:** add MasonUpdate to build ([b4b27e8](https://github.com/LazyVim/LazyVim/commit/b4b27e867c4d2ba2bddd1df4c144ccdf1b4bfabc))
+
 ## [5.1.0](https://github.com/LazyVim/LazyVim/compare/v5.0.0...v5.1.0) (2023-07-16)
 
 
