@@ -41,15 +41,7 @@ return {
     optional = true,
     opts = {
       servers = {
-        texlab = {
-          settings = {
-            texlab = {
-              chktex = {
-                onOpenAndSave = true,
-              },
-            },
-          },
-        },
+        texlab = {},
       },
     },
   },
