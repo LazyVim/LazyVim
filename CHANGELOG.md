@@ -586,7 +586,7 @@
 
 ### Features
 
-* **noice:** enable the inc_rename preset when inc_rename is availble ([a43d1b7](https://github.com/LazyVim/LazyVim/commit/a43d1b79f29deecc694bd409ab497f8a62091b11))
+* **noice:** enable the inc_rename preset when inc_rename is available ([a43d1b7](https://github.com/LazyVim/LazyVim/commit/a43d1b79f29deecc694bd409ab497f8a62091b11))
 
 
 ### Bug Fixes
@@ -643,7 +643,7 @@
 
 ### Bug Fixes
 
-* **format:** only do null-ls formatting logic when null-ls is availble. Fixes [#684](https://github.com/LazyVim/LazyVim/issues/684) ([eb143eb](https://github.com/LazyVim/LazyVim/commit/eb143ebe110995fb208fc480958a55858944c5f9))
+* **format:** only do null-ls formatting logic when null-ls is available. Fixes [#684](https://github.com/LazyVim/LazyVim/issues/684) ([eb143eb](https://github.com/LazyVim/LazyVim/commit/eb143ebe110995fb208fc480958a55858944c5f9))
 
 ## [2.12.0](https://github.com/LazyVim/LazyVim/compare/v2.11.0...v2.12.0) (2023-04-24)
 
