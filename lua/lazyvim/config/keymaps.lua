@@ -84,6 +84,9 @@ map("i", ";", ";<c-g>u")
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
+--keywordprg
+map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+
 -- better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
