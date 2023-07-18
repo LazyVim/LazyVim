@@ -26,10 +26,7 @@ return {
   {
     "lervag/vimtex",
     version = "*",
-    ft = { "bib", "tex" },
-    keys = {
-      { "<LocalLeader>ld", "<Cmd>VimtexDocPackage<CR>", desc = "Open Documentation" },
-    },
+    lazy = false, -- lazy-loading will disable inverse search
     config = function()
       vim.opt.conceallevel = 2
       vim.g.vimtex_complete_enabled = 0 -- use texlab for completion
