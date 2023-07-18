@@ -36,6 +36,14 @@ return {
         end,
       })
 
+      vim.api.nvim_create_autocmd({ "FileType" }, {
+        group = vim.api.nvim_create_augroup("lazyvim_vimtex_keymap", { clear = true }),
+        pattern = { "bib", "tex" },
+        callback = function()
+          vim.keymap.set("n", "<LocalLeader>ld", "<plug>(vimtex-doc-package)", { silent = true })
+        end,
+      })
+
       vim.g.vimtex_complete_enabled = 0 -- use texlab for completion
       vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover
       vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
