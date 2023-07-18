@@ -99,7 +99,10 @@ return {
     opts = {},
   },
 
-  -- surround
+  -- Fast and feature-rich surround actions. For text that includes
+  -- surrounding characters like brackets or quotes, this allows you
+  -- to select the text inside, change or modify the surrounding characters,
+  -- and more.
   {
     "echasnovski/mini.surround",
     keys = function(_, keys)
@@ -147,7 +150,7 @@ return {
     },
   },
 
-  -- better text-objects
+  -- Better text-objects
   {
     "echasnovski/mini.ai",
     -- keys = {
