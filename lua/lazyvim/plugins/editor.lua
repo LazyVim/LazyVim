@@ -227,7 +227,9 @@ If you rather use leap/flit instead, you can add the leap extra:
   },
   { "ggandor/flit.nvim", enabled = false, optional = true },
 
-  -- Add Flash
+  -- Flash enhances the built-in search functionality by showing labels
+  -- at the end of each match, letting you quickly jump to a specific
+  -- location.
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -276,7 +278,8 @@ If you rather use leap/flit instead, you can add the leap extra:
     end,
   },
 
-  -- which-key
+  -- which-key helps you remember key bindings by showing a popup
+  -- with the active keybindings of the command you started typing.
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -308,7 +311,9 @@ If you rather use leap/flit instead, you can add the leap extra:
     end,
   },
 
-  -- git signs
+  -- git signs highlights text that has changed since the list
+  -- git commit, and also lets you interactively stage & unstage
+  -- hunks in a commit.
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -345,7 +350,9 @@ If you rather use leap/flit instead, you can add the leap extra:
     },
   },
 
-  -- references
+  -- Automatically highlights other instances of the word under your cursor.
+  -- This works with LSP, Treesitter, and regexp matching to find the other
+  -- instances.
   {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
@@ -434,7 +441,8 @@ If you rather use leap/flit instead, you can add the leap extra:
     },
   },
 
-  -- todo comments
+  -- Finds and lists all of the TODO, HACK, BUG, etc comment
+  -- in your project and loads them into a browsable list.
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
