@@ -40,7 +40,7 @@ return {
         group = vim.api.nvim_create_augroup("lazyvim_vimtex_keymap", { clear = true }),
         pattern = { "bib", "tex" },
         callback = function()
-          vim.keymap.set("n", "<LocalLeader>ld", "<plug>(vimtex-doc-package)", { silent = true })
+          vim.keymap.set("n", "<Leader>K", "<plug>(vimtex-doc-package)", { desc = "Vimtex Docs", silent = true })
         end,
       })
 
