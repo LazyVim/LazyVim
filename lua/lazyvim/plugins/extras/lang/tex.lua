@@ -1,9 +1,10 @@
 return {
   {
     "folke/which-key.nvim",
+    optional = true,
     opts = {
       defaults = {
-        ["<LocalLeader>l"] = { name = "+vimtex" },
+        ["<localLeader>l"] = { name = "+vimtex" },
       },
     },
   },
@@ -25,7 +26,6 @@ return {
 
   {
     "lervag/vimtex",
-    version = "*",
     lazy = false, -- lazy-loading will disable inverse search
     config = function()
       vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -33,14 +33,6 @@ return {
         pattern = { "bib", "tex" },
         callback = function()
           vim.wo.conceallevel = 2
-        end,
-      })
-
-      vim.api.nvim_create_autocmd({ "FileType" }, {
-        group = vim.api.nvim_create_augroup("lazyvim_vimtex_keymap", { clear = true }),
-        pattern = { "bib", "tex" },
-        callback = function()
-          vim.keymap.set("n", "<Leader>K", "<plug>(vimtex-doc-package)", { desc = "Vimtex Docs", silent = true })
         end,
       })
 
@@ -55,7 +47,11 @@ return {
     optional = true,
     opts = {
       servers = {
-        texlab = {},
+        texlab = {
+          keys = {
+            { "<Leader>K", "<plug>(vimtex-doc-package)", desc = "Vimtex Docs", silent = true },
+          },
+        },
       },
     },
   },
