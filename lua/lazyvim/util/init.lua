@@ -166,22 +166,28 @@ function M.float_term(cmd, opts)
 end
 
 ---@param silent boolean?
----@param values? {[1]:any, [2]:any}
+---@param values? {[1]:any, [2]?:any}
 function M.toggle(option, silent, values)
   if values then
     if vim.opt_local[option]:get() == values[1] then
+      if values[2] == values[1] or values[2] == nil then
+        return -- Nothing to do
+      end
       vim.opt_local[option] = values[2]
     else
       vim.opt_local[option] = values[1]
     end
-    return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
-  end
-  vim.opt_local[option] = not vim.opt_local[option]:get()
-  if not silent then
-    if vim.opt_local[option]:get() then
-      Util.info("Enabled " .. option, { title = "Option" })
-    else
-      Util.warn("Disabled " .. option, { title = "Option" })
+    if not silent then
+      Util.info("Set " .. option .. " to " .. tostring(vim.opt_local[option]:get()), { title = "Option" })
+    end
+  else
+    vim.opt_local[option] = not vim.opt_local[option]:get()
+    if not silent then
+      if vim.opt_local[option]:get() then
+        Util.info("Enabled " .. option, { title = "Option" })
+      else
+        Util.warn("Disabled " .. option, { title = "Option" })
+      end
     end
   end
 end
