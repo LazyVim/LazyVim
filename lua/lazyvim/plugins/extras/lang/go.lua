@@ -83,6 +83,7 @@ return {
     opts = function(_, opts)
       if type(opts.sources) == "table" then
         local nls = require("null-ls")
+        opts.sources = opts.sources or {}
         vim.list_extend(opts.sources, {
           nls.builtins.code_actions.gomodifytags,
           nls.builtins.code_actions.impl,
