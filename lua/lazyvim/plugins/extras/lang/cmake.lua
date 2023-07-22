@@ -16,13 +16,13 @@ return {
         nls.builtins.diagnostics.cmake_lint,
       })
     end,
-    dependencies = {
-      "mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "cmakelint" })
-      end,
-    },
+  },
+  {
+    "mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "cmakelint" })
+    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -34,7 +34,7 @@ return {
   },
   {
     "Civitasv/cmake-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
     event = "BufRead",
   },
 }
