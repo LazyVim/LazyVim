@@ -1,5 +1,3 @@
--- NOTE: You might need to open a Python file, then manually run `:UpdateRemotePlugins`
--- since the build command might be run when semshi has not been loaded due to lazyness
 return {
   -- "numiras/semshi",
   "wookayin/semshi", -- use a maintained fork
@@ -13,12 +11,11 @@ return {
     vim.g["semshi#update_delay_factor"] = 0.001
 
     -- This autocmd must be defined in init to take effect
-    vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" },
-      {
-        group = vim.api.nvim_create_augroup("SemanticHighlight", {}),
-        callback = function()
-          -- Only add style, inherit or link to the LSP's colors
-          vim.cmd [[
+    vim.api.nvim_create_autocmd({ "VimEnter", "ColorScheme" }, {
+      group = vim.api.nvim_create_augroup("SemanticHighlight", {}),
+      callback = function()
+        -- Only add style, inherit or link to the LSP's colors
+        vim.cmd([[
             highlight! semshiGlobal gui=italic
             highlight! semshiImported gui=bold
             highlight! link semshiParameter @lsp.type.parameter
@@ -27,8 +24,8 @@ return {
             highlight! link semshiAttribute @attribute
             highlight! link semshiSelf @lsp.type.selfKeyword
             highlight! link semshiUnresolved @lsp.type.unresolvedReference
-            ]]
-        end
-      })
+            ]])
+      end,
+    })
   end,
 }
