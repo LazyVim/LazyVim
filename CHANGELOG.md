@@ -1,5 +1,22 @@
 # Changelog
 
+## [6.1.0](https://github.com/LazyVim/LazyVim/compare/v6.0.0...v6.1.0) (2023-07-22)
+
+
+### Features
+
+* **clangd:** better clangd root detection ([#1165](https://github.com/LazyVim/LazyVim/issues/1165)) ([d71ebea](https://github.com/LazyVim/LazyVim/commit/d71ebeab24565bb109adc68253c2da6614eb5dda))
+* **lang:** add cmake support ([#1032](https://github.com/LazyVim/LazyVim/issues/1032)) ([fa898b7](https://github.com/LazyVim/LazyVim/commit/fa898b7293c6c67b0ae2bae1d3be70413bcadd8d))
+* **lang:** add debug adapter plugin for go ([#1115](https://github.com/LazyVim/LazyVim/issues/1115)) ([02d673d](https://github.com/LazyVim/LazyVim/commit/02d673d37c6a097a43db877644e20db84f0880b1))
+* **lang:** add java ([#1132](https://github.com/LazyVim/LazyVim/issues/1132)) ([0411baa](https://github.com/LazyVim/LazyVim/commit/0411baab8985450a15a54a46c48197b704bc24cc))
+* **python:** add semantic highlighting ([#1149](https://github.com/LazyVim/LazyVim/issues/1149)) ([012ca50](https://github.com/LazyVim/LazyVim/commit/012ca50b2801cc1c4e5b886cc26ebe0da532e31d))
+* **telescope:** allow word and selection searches ([#1096](https://github.com/LazyVim/LazyVim/issues/1096)) ([6b2c648](https://github.com/LazyVim/LazyVim/commit/6b2c648878b8df538d719c06394bc430cc3ed48c))
+
+
+### Bug Fixes
+
+* **terraform:** configure commentstring ([#1171](https://github.com/LazyVim/LazyVim/issues/1171)) ([e5f53ee](https://github.com/LazyVim/LazyVim/commit/e5f53ee1931fdc8c0f0d3150cbb5742dcb8ff477))
+
 ## [6.0.0](https://github.com/LazyVim/LazyVim/compare/v5.1.1...v6.0.0) (2023-07-20)
 
 
