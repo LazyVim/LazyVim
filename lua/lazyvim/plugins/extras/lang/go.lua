@@ -15,6 +15,10 @@ return {
     opts = {
       servers = {
         gopls = {
+          keys = {
+            -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
+            { "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug Nearest (Go)" },
+          },
           settings = {
             gopls = {
               gofumpt = true,
@@ -102,6 +106,10 @@ return {
           opts.ensure_installed = opts.ensure_installed or {}
           vim.list_extend(opts.ensure_installed, { "gomodifytags", "impl", "gofumpt", "goimports-reviser", "delve" })
         end,
+      },
+      {
+        "leoluz/nvim-dap-go",
+        config = true,
       },
     },
   },
