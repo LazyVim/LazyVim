@@ -83,7 +83,7 @@ return {
               local project_name = root_dir and vim.fs.basename(root_dir)
               local cmd = { "jdtls" }
               if project_name then
-                local jdtls_cache_dir = vim.fs.joinpath(vim.fn.stdpath("cache"), "jdtls", project_name)
+                local jdtls_cache_dir = vim.fn.stdpath("cache") .. "/jdtls/" .. project_name
                 vim.list_extend(cmd, {
                   "-configuration",
                   vim.fs.joinpath(jdtls_cache_dir, "config"),
