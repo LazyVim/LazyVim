@@ -29,6 +29,7 @@ return {
           settings = {
             redhat = { telemetry = { enabled = false } },
             yaml = {
+              keyOrdering = false,
               format = {
                 enable = true,
               },
@@ -38,10 +39,10 @@ return {
                 -- schemas from SchemaStore.nvim plugin
                 enable = false,
               },
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
     },
-  }
+  },
 }
