@@ -1,5 +1,22 @@
 # Changelog
 
+## [6.2.0](https://github.com/LazyVim/LazyVim/compare/v6.1.0...v6.2.0) (2023-07-25)
+
+
+### Features
+
+* Enable flash.nvim highlight on catppuccin integration ([#1206](https://github.com/LazyVim/LazyVim/issues/1206)) ([76d33bb](https://github.com/LazyVim/LazyVim/commit/76d33bba2cc8bd691979ee8bc66f8ac36236c3ba))
+* **extra:** add yaml language extension ([#1198](https://github.com/LazyVim/LazyVim/issues/1198)) ([6dc6685](https://github.com/LazyVim/LazyVim/commit/6dc66852b8851f02b372e8a2882fddf04b3b6966))
+* **java:** add test and debug support for Java extension ([#1192](https://github.com/LazyVim/LazyVim/issues/1192)) ([f6d646a](https://github.com/LazyVim/LazyVim/commit/f6d646a3251efb39f7cb5de38b529c5dd1324f28))
+
+
+### Bug Fixes
+
+* [#1194](https://github.com/LazyVim/LazyVim/issues/1194) use cmakelang instead of cmakelint ([#1197](https://github.com/LazyVim/LazyVim/issues/1197)) ([b97ccb9](https://github.com/LazyVim/LazyVim/commit/b97ccb9e7390b6e73e3f1a4d63a443f6cec67f07))
+* fixes [#1207](https://github.com/LazyVim/LazyVim/issues/1207) ([#1213](https://github.com/LazyVim/LazyVim/issues/1213)) ([2e09051](https://github.com/LazyVim/LazyVim/commit/2e0905147269d92d58627303bcae60bbcb3807dd))
+* **lang_java:** fixes [#1215](https://github.com/LazyVim/LazyVim/issues/1215) other two entries of `vim.fs.joinpath` as well that were not changed in [#1213](https://github.com/LazyVim/LazyVim/issues/1213) ([#1216](https://github.com/LazyVim/LazyVim/issues/1216)) ([9fe89f5](https://github.com/LazyVim/LazyVim/commit/9fe89f5f8a5a50438276a4d2f757549ea2496ca0))
+* **lsp:** supports_method for checking inlay hint support ([#1195](https://github.com/LazyVim/LazyVim/issues/1195)) ([9a05435](https://github.com/LazyVim/LazyVim/commit/9a0543531d05a417ba63f3dd710530ba5765aca5))
+
 ## [6.1.0](https://github.com/LazyVim/LazyVim/compare/v6.0.0...v6.1.0) (2023-07-22)
 
 
