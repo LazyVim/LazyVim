@@ -14,11 +14,7 @@ function M.get()
     M._keys =  {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-      { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
-      { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
       { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-      { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
-      { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
       { "K", vim.lsp.buf.hover, desc = "Hover" },
       { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
       { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
@@ -47,6 +43,23 @@ function M.get()
         has = "codeAction",
       }
     }
+    if require("lazyvim.util").has("telescope.nvim") then
+      -- stylua: ignore
+      vim.list_extend(M._keys, {
+        { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
+        { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+        { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
+        { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
+      })
+    else
+      -- stylua: ignore
+      vim.list_extend(M._keys, {
+        { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+        { "gr", vim.lsp.buf.references, desc = "References" },
+        { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+        { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+      })
+    end
     if require("lazyvim.util").has("inc-rename.nvim") then
       M._keys[#M._keys + 1] = {
         "<leader>cr",
