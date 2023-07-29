@@ -153,7 +153,9 @@ function M.float_term(cmd, opts)
       vim.keymap.set("t", "<c-k>", "<c-k>", { buffer = buf, nowait = true })
       vim.keymap.set("t", "<c-l>", "<c-l>", { buffer = buf, nowait = true })
     end
-
+    if vim.g.mapleader == " " then
+      vim.keymap.set("t", "<space>", " ", { buffer = buf, nowait = true })
+    end
     vim.api.nvim_create_autocmd("BufEnter", {
       buffer = buf,
       callback = function()
