@@ -21,6 +21,7 @@ return {
     opts = {
       servers = {
         terraformls = {},
+        tflint = {},
       },
     },
   },
