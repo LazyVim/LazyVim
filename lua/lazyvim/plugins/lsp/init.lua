@@ -4,7 +4,7 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+      { "folke/neoconf.nvim" },
       { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -90,10 +90,6 @@ return {
     config = function(_, opts)
       local Util = require("lazyvim.util")
 
-      if Util.has("neoconf.nvim") then
-        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
-        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
-      end
       -- setup autoformat
       require("lazyvim.plugins.lsp.format").setup(opts)
       -- setup formatting and keymaps
