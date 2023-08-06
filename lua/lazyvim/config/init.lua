@@ -41,6 +41,7 @@ local defaults = {
       Array = " ",
       Boolean = " ",
       Class = " ",
+      Codeium = " ",
       Color = " ",
       Constant = " ",
       Constructor = " ",
