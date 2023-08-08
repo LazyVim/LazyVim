@@ -1,34 +1,36 @@
 return {
+  -- add Java to nvim-treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = {
-        "java",
-      },
-    },
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "java" })
+    end,
   },
+  -- install Java LSP
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "jdtls",
-      },
-    },
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "jdtls" })
+    end,
   },
+  -- install java-debug-adapter and java-test
+  -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
   {
     "mfussenegger/nvim-dap",
     dependencies = {
       {
         "jay-babu/mason-nvim-dap.nvim",
-        opts = {
-          ensure_installed = {
-            "javadbg",
-            "javatest",
-          },
-        },
+        opts = function(_, opts)
+          opts.ensure_installed = opts.ensure_installed or {}
+          vim.list_extend(opts.ensure_installed, { "javadbg", "javatest" })
+        end,
       },
     },
   },
+  -- don't setup jdtls with lspconfig
+  -- https://github.com/mfussenegger/nvim-jdtls#nvim-lspconfig-and-nvim-jdtls-differences
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -39,9 +41,10 @@ return {
       },
     },
   },
+  -- setup jdtls
   {
     "mfussenegger/nvim-jdtls",
-    dependencies = {
+    dependencies = { -- add all dependencies used below
       "neovim/nvim-lspconfig",
       "mfussenegger/nvim-dap",
       "hrsh7th/nvim-cmp",
@@ -87,6 +90,7 @@ return {
         settings = {
           java = {},
         },
+        -- silent setup
         handlers = {
           ["$/progress"] = function() end,
           ["language/status"] = function() end,
@@ -98,9 +102,10 @@ return {
           },
         },
         filetypes = { "java" },
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        capabilities = require("cmp_nvim_lsp").default_capabilities(), -- enable CMP capabilities
       }
 
+      -- attach every Java buffer
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "java",
         callback = function()
@@ -108,6 +113,9 @@ return {
         end,
       })
 
+      -- setup keymap and DAP after the LSP is fully attached
+      -- https://github.com/mfussenegger/nvim-jdtls#nvim-dap-configuration
+      -- https://neovim.io/doc/user/lsp.html#LspAttach
       vim.api.nvim_create_autocmd("LspAttach", {
         pattern = "*.java",
         callback = function(args)
