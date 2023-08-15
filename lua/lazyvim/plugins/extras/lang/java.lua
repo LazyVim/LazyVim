@@ -110,41 +110,44 @@ return {
       -- https://github.com/mfussenegger/nvim-jdtls#nvim-dap-configuration
       -- https://neovim.io/doc/user/lsp.html#LspAttach
       vim.api.nvim_create_autocmd("LspAttach", {
-        pattern = "*.java",
         callback = function(args)
-          require("which-key").register({
-            ["<leader>cx"] = { name = "+extract" },
-            ["<leader>cxv"] = { require("jdtls").extract_variable_all, "Extract Variable" },
-            ["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
-            ["gs"] = { require("jdtls").super_implementation, "Goto Super" },
-            ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
-            ["<leader>co"] = { require("jdtls").organize_imports, "Organize Imports" },
-          }, { mode = "n", buffer = args.buf })
-          require("which-key").register({
-            ["<leader>c"] = { name = "+code" },
-            ["<leader>cx"] = { name = "+extract" },
-            ["<leader>cxm"] = { [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], "Extract Method" },
-            ["<leader>cxv"] = {
-              [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
-              "Extract Variable",
-            },
-            ["<leader>cxc"] = { [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], "Extract Constant" },
-          }, { mode = "v", buffer = args.buf })
+          --  only after the jdtls client is attached
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client.name == "jdtls" then
+            require("which-key").register({
+              ["<leader>cx"] = { name = "+extract" },
+              ["<leader>cxv"] = { require("jdtls").extract_variable_all, "Extract Variable" },
+              ["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
+              ["gs"] = { require("jdtls").super_implementation, "Goto Super" },
+              ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
+              ["<leader>co"] = { require("jdtls").organize_imports, "Organize Imports" },
+            }, { mode = "n", buffer = args.buf })
+            require("which-key").register({
+              ["<leader>c"] = { name = "+code" },
+              ["<leader>cx"] = { name = "+extract" },
+              ["<leader>cxm"] = { [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], "Extract Method" },
+              ["<leader>cxv"] = {
+                [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
+                "Extract Variable",
+              },
+              ["<leader>cxc"] = { [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]], "Extract Constant" },
+            }, { mode = "v", buffer = args.buf })
 
-          if mason_registry.has_package("java-debug-adapter") then
-            -- custom init for Java debugger
-            require("jdtls").setup_dap({ hotcodereplace = "auto", config_overrides = {} })
-            require("jdtls.dap").setup_dap_main_class_configs()
+            if mason_registry.has_package("java-debug-adapter") then
+              -- custom init for Java debugger
+              require("jdtls").setup_dap({ hotcodereplace = "auto", config_overrides = {} })
+              require("jdtls.dap").setup_dap_main_class_configs()
 
-            -- Java Test require Java debugger to work
-            if mason_registry.has_package("java-test") then
-              -- custom keymaps for Java test runner (not yet compatible with neotest)
-              require("which-key").register({
-                ["<leader>t"] = { name = "+test" },
-                ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
-                ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
-                ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
-              }, { mode = "n", buffer = args.buf })
+              -- Java Test require Java debugger to work
+              if mason_registry.has_package("java-test") then
+                -- custom keymaps for Java test runner (not yet compatible with neotest)
+                require("which-key").register({
+                  ["<leader>t"] = { name = "+test" },
+                  ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
+                  ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
+                  ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
+                }, { mode = "n", buffer = args.buf })
+              end
             end
           end
         end,
