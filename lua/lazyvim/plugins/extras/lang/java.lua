@@ -44,7 +44,6 @@ return {
   {
     "mfussenegger/nvim-jdtls",
     dependencies = { "folke/which-key.nvim" },
-    ft = { "java" },
     config = function()
       -- The configuration for jdtls contains two useful items:
       -- 1. The list of filetypes on which to match.
@@ -72,36 +71,35 @@ return {
         end
       end
 
-      local fname = vim.api.nvim_buf_get_name(0)
-      local root_dir = find_java_project_root(fname)
-      local project_name = root_dir and vim.fs.basename(root_dir)
-      local cmd = { "jdtls" }
-      if project_name then
-        local jdtls_cache_dir = vim.fn.stdpath("cache") .. "/jdtls/" .. project_name
-        vim.list_extend(cmd, {
-          "-configuration",
-          jdtls_cache_dir .. "/config",
-          "-data",
-          jdtls_cache_dir .. "/workspace",
-        })
-      end
-      local jdtls_base_config = {
-        cmd = cmd,
-        root_dir = root_dir,
-        init_options = {
-          bundles = bundles,
-        },
-        -- enable CMP capabilities
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
-      }
-
       -- Attach jdtls for the proper filetypes (i.e. java).
       -- Existing server will be reused if the root_dir matches.
       vim.api.nvim_create_autocmd("FileType", {
         pattern = filetypes,
         callback = function()
+          local fname = vim.api.nvim_buf_get_name(0)
+          local root_dir = find_java_project_root(fname)
+          local project_name = root_dir and vim.fs.basename(root_dir)
+          local cmd = { "jdtls" }
+          if project_name then
+            local jdtls_cache_dir = vim.fn.stdpath("cache") .. "/jdtls/" .. project_name
+            vim.list_extend(cmd, {
+              "-configuration",
+              jdtls_cache_dir .. "/config",
+              "-data",
+              jdtls_cache_dir .. "/workspace",
+            })
+          end
+          local jdtls_base_config = {
+            cmd = cmd,
+            root_dir = root_dir,
+            init_options = {
+              bundles = bundles,
+            },
+            -- enable CMP capabilities
+            capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          }
           local jdtls_opts = require("lazyvim.util").opts("nvim-jdtls")
-          require("jdtls").start_or_attach(vim.tbl_deep_extend("force", jdtls_opts or {}, jdtls_base_config))
+          require("jdtls").start_or_attach(vim.tbl_deep_extend("force", jdtls_base_config, jdtls_opts or {}))
           -- not need to require("jdtls.setup").add_commands(), start automatically adds commands
         end,
       })
