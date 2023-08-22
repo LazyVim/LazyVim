@@ -9,22 +9,17 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        pyright = {},
-        ruff_lsp = {},
-      },
-    },
-    setup = {
-      ruff_lsp = function()
-        require("lazyvim.util").on_attach(function(client, _)
-          if client.name == "ruff_lsp" then
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-          end
-        end)
-      end,
-    },
+    opts = function(_, opts)
+      opts.servers["ruff_lsp"] = {}
+      opts.servers["pyright"] = {}
+
+      require("lazyvim.util").on_attach(function(client, _)
+        if client.name == "ruff_lsp" then
+          -- Disable hover in favor of Pyright
+          client.server_capabilities.hoverProvider = false
+        end
+      end)
+    end,
   },
   {
     "nvim-neotest/neotest",
