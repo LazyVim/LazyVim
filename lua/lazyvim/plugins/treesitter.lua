@@ -34,6 +34,7 @@ return {
         "c",
         "html",
         "javascript",
+        "jsdoc",
         "json",
         "lua",
         "luadoc",
