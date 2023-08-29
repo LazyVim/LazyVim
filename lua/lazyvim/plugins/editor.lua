@@ -466,11 +466,6 @@ If you rather use leap/flit instead, you can add the leap extra:
   {
     "folke/neoconf.nvim",
     cmd = "Neoconf",
-    config = function()
-      if Util.has("neoconf.nvim") then
-        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
-        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
-      end
-    end,
+    config = true,
   },
 }
