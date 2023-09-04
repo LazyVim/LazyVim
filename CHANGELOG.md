@@ -1,5 +1,27 @@
 # Changelog
 
+## [6.3.0](https://github.com/LazyVim/LazyVim/compare/v6.2.0...v6.3.0) (2023-09-04)
+
+
+### Features
+
+* **clangd:** remove CMakelists root_dir search ([#1230](https://github.com/LazyVim/LazyVim/issues/1230)) ([9264c54](https://github.com/LazyVim/LazyVim/commit/9264c54ae96d1d56f029ad9b561326c7b991c53b))
+* **python:** add more venv names ([#1381](https://github.com/LazyVim/LazyVim/issues/1381)) ([377c0e3](https://github.com/LazyVim/LazyVim/commit/377c0e397c3585cf7bae6afb8bd279a47954be0a))
+* **treesitter:** add jsdoc to ensure_installed ([#1252](https://github.com/LazyVim/LazyVim/issues/1252)) ([566049a](https://github.com/LazyVim/LazyVim/commit/566049aa4a26a86219dd1ad1624f9a1bf18831b6))
+
+
+### Bug Fixes
+
+* [#1305](https://github.com/LazyVim/LazyVim/issues/1305) rust debugging not working on windows due to missing liblldb path ([#1390](https://github.com/LazyVim/LazyVim/issues/1390)) ([6045a52](https://github.com/LazyVim/LazyVim/commit/6045a52d82ba4b0dcd0b050688302a22c2fc3991))
+* **autocmds:** restore tabpage on resize ([#1260](https://github.com/LazyVim/LazyVim/issues/1260)) ([f9dadc1](https://github.com/LazyVim/LazyVim/commit/f9dadc11b39fb0b027473caaab2200b35c9f0c8b))
+* **clangd:** update setup from upstream changes ([#1308](https://github.com/LazyVim/LazyVim/issues/1308)) ([73dc5a5](https://github.com/LazyVim/LazyVim/commit/73dc5a503f1f42fc12869688df1359ffd80da5d1))
+* **java:** don't accumulate on_attach, and make more configurable ([#1388](https://github.com/LazyVim/LazyVim/issues/1388)) ([15022f4](https://github.com/LazyVim/LazyVim/commit/15022f4892726f9899ce5eb3aed7a19df29f62ef))
+* **keymaps:** change `v` mode to `x` mode for `save file` ([#1262](https://github.com/LazyVim/LazyVim/issues/1262)) ([ec0ddd4](https://github.com/LazyVim/LazyVim/commit/ec0ddd481c785833c5caac9c9d22889b9e963883))
+* **keymaps:** remove gw keymap ([23e2b07](https://github.com/LazyVim/LazyVim/commit/23e2b073e6fa75dacaa58dc1fe63392af7f54598))
+* **python:** disable ruff hover correctly ([#1365](https://github.com/LazyVim/LazyVim/issues/1365)) ([451bde5](https://github.com/LazyVim/LazyVim/commit/451bde5b41ec410afbb2b5e75e339a3fc44c5587))
+* **yaml:** yaml validate and enable line folding ([#1251](https://github.com/LazyVim/LazyVim/issues/1251)) ([a62a594](https://github.com/LazyVim/LazyVim/commit/a62a5942deb281b9edce3673e656854805297199))
+* **yaml:** yaml: Fix TypeError undefined length ([#1229](https://github.com/LazyVim/LazyVim/issues/1229)) ([d7ca822](https://github.com/LazyVim/LazyVim/commit/d7ca822d41bc65e31dc1019a64d5d3518c8e2470))
+
 ## [6.2.0](https://github.com/LazyVim/LazyVim/compare/v6.1.0...v6.2.0) (2023-07-25)
 
 
