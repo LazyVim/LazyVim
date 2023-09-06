@@ -199,6 +199,7 @@ return {
               -- custom init for Java debugger
               require("jdtls").setup_dap(opts.dap)
               require("jdtls.dap").setup_dap_main_class_configs()
+              -- setup dap config by VsCode launch.json file
               require("dap.ext.vscode").load_launchjs()
 
               -- Java Test require Java debugger to work
