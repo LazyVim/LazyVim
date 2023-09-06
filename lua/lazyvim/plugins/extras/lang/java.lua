@@ -199,6 +199,7 @@ return {
               -- custom init for Java debugger
               require("jdtls").setup_dap(opts.dap)
               require("jdtls.dap").setup_dap_main_class_configs()
+              require("dap.ext.vscode").load_launchjs()
 
               -- Java Test require Java debugger to work
               if opts.test and mason_registry.is_installed("java-test") then
