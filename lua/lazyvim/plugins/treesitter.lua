@@ -1,18 +1,3 @@
----@param langs table<string>
----@return table<string>
-local function dedup(langs)
-  -- TODO: move this utility function to a better location
-  ---@type table<string, boolean>
-  local added = {}
-  return vim.tbl_filter(function(lang)
-    if added[lang] then
-      return false
-    end
-    added[lang] = true
-    return true
-  end, langs)
-end
-
 return {
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate
@@ -123,7 +108,15 @@ return {
     ---@param opts TSConfig
     config = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        opts.ensure_installed = dedup(opts.ensure_installed)
+        ---@type table<string, boolean>
+        local added = {}
+        opts.ensure_installed = vim.tbl_filter(function(lang)
+          if added[lang] then
+            return false
+          end
+          added[lang] = true
+          return true
+        end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
     end,

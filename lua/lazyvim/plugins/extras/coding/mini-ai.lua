@@ -1,24 +1,48 @@
 local load_textobjects = false
 
----@param langs table<string>
----@return table<string>
-local function dedup(langs)
-  -- TODO: move this utility function to a better location
-  ---@type table<string, boolean>
-  local added = {}
-  return vim.tbl_filter(function(lang)
-    if added[lang] then
-      return false
+---@param ts_opts PluginOpts
+local function source_runtime_textobjects(ts_opts)
+  -- PERF: no need to load the plugin, if we only need its queries for mini.ai
+
+  if ts_opts.textobjects then -- the user defines textobjects
+    for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+      if ts_opts.textobjects[mod] and ts_opts.textobjects[mod].enable then
+        local Loader = require("lazy.core.loader")
+        Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
+        local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
+        require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
+        break
+      end
     end
-    added[lang] = true
-    return true
-  end, langs)
+  end
+end
+
+local function spec_decorate_config_property()
+  -- avoid code duplication:
+  -- decorate config function defined in lazyvim.plugins.treesitter
+
+  local Config = require("lazy.core.config")
+
+  ---@type LazyPlugin
+  local spec_treesitter = Config.spec.plugins["nvim-treesitter"]
+  local config_to_decorate = spec_treesitter.config
+  spec_treesitter.config = function(_, opts)
+    if config_to_decorate then
+      config_to_decorate(spec_treesitter, opts)
+    end
+
+    if load_textobjects then
+      source_runtime_textobjects(opts)
+    end
+  end
 end
 
 return {
-
   {
     "nvim-treesitter/nvim-treesitter",
+    init = function()
+      spec_decorate_config_property()
+    end,
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -32,32 +56,10 @@ return {
       },
     },
     opts = function(_, opts)
-      -- override the default textobjects, set in plugins/treesitter.lua
+      -- override the default textobjects defined in lazyvim.plugins.treesitter.
       -- when using this extra, the user is expected to add textobjects
       -- on a need-to-have basis
       opts.textobjects = nil
-    end,
-    ---@param opts TSConfig
-    config = function(_, opts) -- override config in plugins/treesitter.lua
-      if type(opts.ensure_installed) == "table" then
-        opts.ensure_installed = dedup(opts.ensure_installed)
-      end
-      require("nvim-treesitter.configs").setup(opts)
-
-      if load_textobjects then
-        -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-        if opts.textobjects then
-          for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-            if opts.textobjects[mod] and opts.textobjects[mod].enable then
-              local Loader = require("lazy.core.loader")
-              Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
-              local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
-              require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
-              break
-            end
-          end
-        end
-      end
     end,
   },
 
