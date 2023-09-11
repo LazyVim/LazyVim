@@ -150,20 +150,19 @@ return {
     },
   },
 
-  -- disable old installations of mini.ai. Optional so it doesn't appear under disabled plugins
+  -- mini.ai has been moved from coding to extras.
+  -- if the config of the user contains mini.ai without the extra:
+  -- warn and disable
   {
     "echasnovski/mini.ai",
-    enabled = function()
+    enabled = function() -- the extra must override this function.
       vim.schedule(function()
         local Config = require("lazy.core.config")
         if Config.spec.disabled["mini.ai"] then
           require("lazy.core.util").warn(
-            [[ `mini.ai` has been moved to extras:
-The core config for nvim-treesitter now contains textobjects
-for `select`, `move` and `swap`.
-If you want to keep using mini.ai, you can add the mini-ai extra:
+            [[ `mini.ai` has been moved to **extras**.
+Please add the `mini.ai` **extra** to your config:
 `lazyvim.plugins.extras.coding.mini-ai`
-By doing so, your original mini.ai setup remains unchanged.
 ]],
             { title = "LazyVim" }
           )
@@ -171,6 +170,6 @@ By doing so, your original mini.ai setup remains unchanged.
       end)
       return false
     end,
-    optional = true,
+    optional = true, -- only warn if the config of the user contains mini.ai
   },
 }

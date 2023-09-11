@@ -4,7 +4,7 @@ local load_textobjects = false
 local function source_runtime_textobjects(ts_opts)
   -- PERF: no need to load the plugin, if we only need its queries for mini.ai
 
-  if ts_opts.textobjects then -- the user defines textobjects
+  if ts_opts.textobjects then -- the user defined textobjects
     for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
       if ts_opts.textobjects[mod] and ts_opts.textobjects[mod].enable then
         local Loader = require("lazy.core.loader")
@@ -17,20 +17,15 @@ local function source_runtime_textobjects(ts_opts)
   end
 end
 
-local function spec_decorate_config_property()
-  -- avoid code duplication:
-  -- decorate config function defined in lazyvim.plugins.treesitter
+---@param treesitter_plugin LazyPlugin
+local function decorate_config_function(treesitter_plugin)
+  -- the config function is defined in lazyvim.plugins.treesitter
+  local config_to_decorate = treesitter_plugin.config
 
-  local Config = require("lazy.core.config")
-
-  ---@type LazyPlugin
-  local spec_treesitter = Config.spec.plugins["nvim-treesitter"]
-  local config_to_decorate = spec_treesitter.config
-  spec_treesitter.config = function(_, opts)
+  treesitter_plugin.config = function(_, opts)
     if config_to_decorate then
-      config_to_decorate(spec_treesitter, opts)
+      config_to_decorate(treesitter_plugin, opts)
     end
-
     if load_textobjects then
       source_runtime_textobjects(opts)
     end
@@ -40,8 +35,8 @@ end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    init = function()
-      spec_decorate_config_property()
+    init = function(plugin)
+      decorate_config_function(plugin) -- avoiding code duplication
     end,
     dependencies = {
       {
@@ -66,7 +61,7 @@ return {
   -- Better text-objects
   {
     "echasnovski/mini.ai",
-    enabled = true,
+    enabled = true, -- overrides the function defined in lazyvim.plugins.coding
     -- keys = {
     --   { "a", mode = { "x", "o" } },
     --   { "i", mode = { "x", "o" } },
