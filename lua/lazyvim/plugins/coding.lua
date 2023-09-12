@@ -164,6 +164,11 @@ return {
       return {
         n_lines = 500,
         custom_textobjects = {
+          -- opt-out: using neovim's text object selection for tags:
+          t = false,
+          -- opt-in: use the following override in the "opts" function of your spec:
+          -- opts.custom_textobjects.t = nil -- opt-in to mini.ai's tag textobject
+
           o = ai.gen_spec.treesitter({
             a = { "@block.outer", "@conditional.outer", "@loop.outer" },
             i = { "@block.inner", "@conditional.inner", "@loop.inner" },
