@@ -165,45 +165,60 @@ return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
-        mappings = {
-          i = {
-            ["<c-t>"] = function(...)
-              return require("trouble.providers.telescope").open_with_trouble(...)
-            end,
-            ["<a-t>"] = function(...)
-              return require("trouble.providers.telescope").open_selected_with_trouble(...)
-            end,
-            ["<a-i>"] = function()
-              local action_state = require("telescope.actions.state")
-              local line = action_state.get_current_line()
-              Util.telescope("find_files", { no_ignore = true, default_text = line })()
-            end,
-            ["<a-h>"] = function()
-              local action_state = require("telescope.actions.state")
-              local line = action_state.get_current_line()
-              Util.telescope("find_files", { hidden = true, default_text = line })()
-            end,
-            ["<C-Down>"] = function(...)
-              return require("telescope.actions").cycle_history_next(...)
-            end,
-            ["<C-Up>"] = function(...)
-              return require("telescope.actions").cycle_history_prev(...)
-            end,
-            ["<C-f>"] = function(...)
-              return require("telescope.actions").preview_scrolling_down(...)
-            end,
-            ["<C-b>"] = function(...)
-              return require("telescope.actions").preview_scrolling_up(...)
-            end,
-          },
-          n = {
-            ["q"] = function(...)
-              return require("telescope.actions").close(...)
-            end,
-          },
-        },
       },
     },
+    config = function(_, opts)
+      local action_state = require("telescope.actions.state")
+      local telescope_actions = require("telescope.actions")
+
+      ---@diagnostic disable-next-line: unused-vararg
+      local find_files_no_ignore = function(...)
+        local line = action_state.get_current_line()
+        Util.telescope("find_files", { no_ignore = true, default_text = line })()
+      end
+
+      ---@diagnostic disable-next-line: unused-vararg
+      local find_files_hidden = function(...)
+        local line = action_state.get_current_line()
+        Util.telescope("find_files", { hidden = true, default_text = line })()
+      end
+
+      local cycle_history_next = function(...)
+        return telescope_actions.cycle_history_next(...)
+      end
+
+      local cycle_history_prev = function(...)
+        return telescope_actions.cycle_history_prev(...)
+      end
+
+      local preview_scrolling_down = function(...)
+        return telescope_actions.preview_scrolling_down(...)
+      end
+
+      local preview_scrolling_up = function(...)
+        return telescope_actions.preview_scrolling_up(...)
+      end
+
+      local close_telescope = function(...)
+        return telescope_actions.close(...)
+      end
+
+      opts.defaults.mappings = {
+        i = {
+          ["<a-i>"] = find_files_no_ignore,
+          ["<a-h>"] = find_files_hidden,
+          ["<C-Down>"] = cycle_history_next,
+          ["<C-Up>"] = cycle_history_prev,
+          ["<C-f>"] = preview_scrolling_down,
+          ["<C-b>"] = preview_scrolling_up,
+        },
+        n = {
+          ["q"] = close_telescope,
+        },
+      }
+
+      return opts
+    end,
   },
 
   -- disable old installations of leap and flit. Optional so it doesn't appear under disabled plugins
