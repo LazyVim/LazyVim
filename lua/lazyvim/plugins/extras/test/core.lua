@@ -10,6 +10,11 @@ return {
   },
   {
     "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+    },
     opts = {
       -- Can be a list of adapters like what neotest expects,
       -- or a list of adapter names,
