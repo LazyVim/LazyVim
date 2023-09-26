@@ -1,5 +1,24 @@
 # Changelog
 
+## [6.4.0](https://github.com/LazyVim/LazyVim/compare/v6.3.0...v6.4.0) (2023-09-26)
+
+
+### Features
+
+* **autocmds:** close InspectTree window with q ([e54d0dd](https://github.com/LazyVim/LazyVim/commit/e54d0dde623c206c4f7ed9a512785c9fc0de3a22))
+* **extras:** added simple csharp extra ([afdcec5](https://github.com/LazyVim/LazyVim/commit/afdcec5b4adccd94ff64774340a3ffd33a9d4ecf))
+* **java:** support vscode launch json in Java ([#1422](https://github.com/LazyVim/LazyVim/issues/1422)) ([5dc4ce3](https://github.com/LazyVim/LazyVim/commit/5dc4ce3e4a452438838c271330df156fd3640c60))
+* **mini-pairs:** add toggle mini pairs keymap and function ([#1456](https://github.com/LazyVim/LazyVim/issues/1456)) ([a7f971f](https://github.com/LazyVim/LazyVim/commit/a7f971f30ec89473482db4ab820d2afb25fa6abf))
+
+
+### Bug Fixes
+
+* always lazy load keymaps. fixes [#1485](https://github.com/LazyVim/LazyVim/issues/1485) ([f892ba5](https://github.com/LazyVim/LazyVim/commit/f892ba5cffe8fcac724ad6b801e0824b391fa037))
+* **dap:** move launchjs code from java to dap ([f1af34e](https://github.com/LazyVim/LazyVim/commit/f1af34e88525cc291b7bacc76d915b642aef192b))
+* disable context commentstring autocmd ([0bff29c](https://github.com/LazyVim/LazyVim/commit/0bff29c07a0d5fb4ef36ba4add2b9c4ee243f8a9))
+* **mini.comment:** better lua pattern for tags. Fixes [#1413](https://github.com/LazyVim/LazyVim/issues/1413) ([7c79cfe](https://github.com/LazyVim/LazyVim/commit/7c79cfe07314245decd73ec67e7247bba22abaa9))
+* **python:** use venv for DAP Python ([#1457](https://github.com/LazyVim/LazyVim/issues/1457)) ([ea930e3](https://github.com/LazyVim/LazyVim/commit/ea930e35457df4a367b537c472af8d5c6e8ae7eb))
+
 ## [6.3.0](https://github.com/LazyVim/LazyVim/compare/v6.2.0...v6.3.0) (2023-09-04)
 
 
