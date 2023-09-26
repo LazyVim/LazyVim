@@ -98,21 +98,22 @@ function M.setup(opts)
     error("Exiting")
   end
 
-  if vim.fn.argc(-1) == 0 then
-    -- autocmds and keymaps can wait to load
-    vim.api.nvim_create_autocmd("User", {
-      group = vim.api.nvim_create_augroup("LazyVim", { clear = true }),
-      pattern = "VeryLazy",
-      callback = function()
-        M.load("autocmds")
-        M.load("keymaps")
-      end,
-    })
-  else
-    -- load them now so they affect the opened buffers
+  -- autocmds can be loaded lazily when not opening a file
+  local lazy_autocmds = vim.fn.argc(-1) == 0
+  if not lazy_autocmds then
     M.load("autocmds")
-    M.load("keymaps")
   end
+
+  vim.api.nvim_create_autocmd("User", {
+    group = vim.api.nvim_create_augroup("LazyVim", { clear = true }),
+    pattern = "VeryLazy",
+    callback = function()
+      if lazy_autocmds then
+        M.load("autocmds")
+      end
+      M.load("keymaps")
+    end,
+  })
 
   require("lazy.core.util").try(function()
     if type(M.colorscheme) == "function" then
