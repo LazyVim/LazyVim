@@ -137,7 +137,13 @@ return {
   },
 
   -- comments
-  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    lazy = true,
+    opts = {
+      enable_autocmd = false,
+    },
+  },
   {
     "echasnovski/mini.comment",
     event = "VeryLazy",
