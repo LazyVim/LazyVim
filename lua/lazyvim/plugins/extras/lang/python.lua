@@ -14,16 +14,16 @@ return {
         pyright = {},
         ruff_lsp = {},
       },
-    },
-    setup = {
-      ruff_lsp = function()
-        require("lazyvim.util").on_attach(function(client, _)
-          if client.name == "ruff_lsp" then
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-          end
-        end)
-      end,
+      setup = {
+        ruff_lsp = function()
+          require("lazyvim.util").on_attach(function(client, _)
+            if client.name == "ruff_lsp" then
+              -- Disable hover in favor of Pyright
+              client.server_capabilities.hoverProvider = false
+            end
+          end)
+        end,
+      },
     },
   },
   {
@@ -61,7 +61,15 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     cmd = "VenvSelect",
-    opts = {},
+    opts = {
+      name = {
+        "venv",
+        ".venv",
+        "env",
+        ".env",
+      },
+      dap_enabled = true, -- Ensure that the venv selector affect PythonPath in nvim-dap as well!
+    },
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
   },
 }
