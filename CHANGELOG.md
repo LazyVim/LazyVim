@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.4.1](https://github.com/LazyVim/LazyVim/compare/v6.4.0...v6.4.1) (2023-09-27)
+
+
+### Bug Fixes
+
+* **dap:** revert loading vscode launch files. Add it to your own config when needed. Fixes [#1503](https://github.com/LazyVim/LazyVim/issues/1503) ([36d6a7f](https://github.com/LazyVim/LazyVim/commit/36d6a7fe4f4e7d5c9ffceca0496655a889df2ebc))
+
 ## [6.4.0](https://github.com/LazyVim/LazyVim/compare/v6.3.0...v6.4.0) (2023-09-26)
 
 
