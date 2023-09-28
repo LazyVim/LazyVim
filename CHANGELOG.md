@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.4.2](https://github.com/LazyVim/LazyVim/compare/v6.4.1...v6.4.2) (2023-09-28)
+
+
+### Bug Fixes
+
+* **indent-blankline:** upgrade ibl config to v3 ([db86635](https://github.com/LazyVim/LazyVim/commit/db86635e3276451f795da4f8af64eff94391fe48))
+
 ## [6.4.1](https://github.com/LazyVim/LazyVim/compare/v6.4.0...v6.4.1) (2023-09-27)
 
 
