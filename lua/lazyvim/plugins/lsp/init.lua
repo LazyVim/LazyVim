@@ -54,7 +54,6 @@ return {
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
-        jsonls = {},
         lua_ls = {
           -- mason = false, -- set to false if you don't want this server to be installed with mason
           -- Use this to add any additional keymaps
@@ -123,7 +122,7 @@ return {
 
       if opts.inlay_hints.enabled and inlay_hint then
         Util.on_attach(function(client, buffer)
-          if client.supports_method('textDocument/inlayHint') then
+          if client.supports_method("textDocument/inlayHint") then
             inlay_hint(buffer, true)
           end
         end)
