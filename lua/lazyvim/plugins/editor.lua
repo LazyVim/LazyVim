@@ -206,7 +206,7 @@ return {
           },
         },
       }
-    },
+    end,
   },
 
   -- disable old installations of leap and flit. Optional so it doesn't appear under disabled plugins
