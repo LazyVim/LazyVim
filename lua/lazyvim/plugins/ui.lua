@@ -221,7 +221,7 @@ return {
     end,
   },
 
-  -- noicer ui
+  -- Displays a popup with possible key bindings of the command you started typing
   {
     "folke/which-key.nvim",
     opts = function(_, opts)
@@ -230,6 +230,8 @@ return {
       end
     end,
   },
+
+  -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
   {
     "folke/noice.nvim",
     event = "VeryLazy",
