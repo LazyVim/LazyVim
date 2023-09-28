@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.4.3](https://github.com/LazyVim/LazyVim/compare/v6.4.2...v6.4.3) (2023-09-28)
+
+
+### Bug Fixes
+
+* **ibl:** use default hl groups ([74786c2](https://github.com/LazyVim/LazyVim/commit/74786c21d743db0fabed61b90bf7ecaab16bbf14))
+* **lsp:** don't install jsonls by default. It's part of the json extra ([fa6cbfc](https://github.com/LazyVim/LazyVim/commit/fa6cbfc6020efcd2168ffe09a209037599b91442))
+* **telescope:** add enums and consts to search symbols ([#1512](https://github.com/LazyVim/LazyVim/issues/1512)) ([b220e54](https://github.com/LazyVim/LazyVim/commit/b220e541594a0ef556d1515649cd99d45fe94058))
+* **telescope:** replace anonymous functions in mappings by named functions ([#1294](https://github.com/LazyVim/LazyVim/issues/1294)) ([13bf797](https://github.com/LazyVim/LazyVim/commit/13bf7977a4bae39a38ef6a3fad6303366c8b4bea))
+* **telescope:** typo ([017582c](https://github.com/LazyVim/LazyVim/commit/017582c05a2d87c73cfe794dd2e296cc0caf86cd))
+* **yamlls:** work-around for yaml formatting on Neovim &lt; 0.10. Fixes [#1435](https://github.com/LazyVim/LazyVim/issues/1435) ([7f5051e](https://github.com/LazyVim/LazyVim/commit/7f5051ef72cfe66eb50ddb7c973714aa8aea04ec))
+
 ## [6.4.2](https://github.com/LazyVim/LazyVim/compare/v6.4.1...v6.4.2) (2023-09-28)
 
 
