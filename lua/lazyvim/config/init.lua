@@ -79,6 +79,8 @@ local defaults = {
 
 M.renames = {
   ["windwp/nvim-spectre"] = "nvim-pack/nvim-spectre",
+  ["jose-elias-alvarez/null-ls.nvim"] = "nvimtools/none-ls.nvim",
+  ["null-ls.nvim"] = "none-ls.nvim",
 }
 
 ---@type LazyVimConfig
@@ -181,6 +183,14 @@ function M.init()
     local add = Plugin.Spec.add
     Plugin.Spec.add = function(self, plugin, ...)
       if type(plugin) == "table" and M.renames[plugin[1]] then
+        require("lazy.core.util").warn(
+          ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
+            plugin[1],
+            M.renames[plugin[1]],
+            self.importing or "LazyVim"
+          ),
+          { title = "LazyVim" }
+        )
         plugin[1] = M.renames[plugin[1]]
       end
       return add(self, plugin, ...)
