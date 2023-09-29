@@ -1,5 +1,30 @@
 # Changelog
 
+## [7.0.0](https://github.com/LazyVim/LazyVim/compare/v6.4.3...v7.0.0) (2023-09-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **typescript:** removed `typescript.nvim` since it's deprecated
+* **null-ls:** use none-ls instead of null-ls ([#1517](https://github.com/LazyVim/LazyVim/issues/1517))
+
+### Features
+
+* **extras:** added `conform.nvim` extra you can use instead of null-ls/none-ls ([f61a243](https://github.com/LazyVim/LazyVim/commit/f61a243d1aca582963aca3f2c2c7c2ae0be16b06))
+* **extras:** added extra for nvim-lint ([05f45bb](https://github.com/LazyVim/LazyVim/commit/05f45bb7200a6fd33ab7366553b957fa222e2cdf))
+* **neo-tree:** added support for LSP renaming to NeoTree ([9762e7e](https://github.com/LazyVim/LazyVim/commit/9762e7e43110013a0931b8470be2929b54b4b641))
+* **null-ls:** use none-ls instead of null-ls ([#1517](https://github.com/LazyVim/LazyVim/issues/1517)) ([7cac6f0](https://github.com/LazyVim/LazyVim/commit/7cac6f064c5b30f6b0ae4dffab62100aa6fe2568))
+
+
+### Bug Fixes
+
+* **conform:** use `formatters` for both custom and overriding formatters ([6bb0d1b](https://github.com/LazyVim/LazyVim/commit/6bb0d1b66ffe6d0a77ad96d0f945113ddcb9fdb3))
+* **docker:** put hadolint in its own spec ([718c5c6](https://github.com/LazyVim/LazyVim/commit/718c5c6036f2aff6534501e151dd3e5ff13a42fa))
+* **format:** wrap custom formatter with error handler ([0e5ff5c](https://github.com/LazyVim/LazyVim/commit/0e5ff5c0ab6930190122df086db5e3f91d8b38b8))
+* **nvim-lint:** use `linters` for both custom and overriding linters ([31d9136](https://github.com/LazyVim/LazyVim/commit/31d913697bc9b731bc941362021ce06617f627d3))
+* remove deprecated leap/flit code checks ([6b05ed7](https://github.com/LazyVim/LazyVim/commit/6b05ed7dcd729322e2e5b6752655a9491cd17f86))
+* **typescript:** removed `typescript.nvim` since it's deprecated ([aab365a](https://github.com/LazyVim/LazyVim/commit/aab365a9f8b6405c6c5a938cb4745e9b770f2261))
+
 ## [6.4.3](https://github.com/LazyVim/LazyVim/compare/v6.4.2...v6.4.3) (2023-09-28)
 
 
