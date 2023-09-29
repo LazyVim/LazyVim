@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.1](https://github.com/LazyVim/LazyVim/compare/v7.0.0...v7.0.1) (2023-09-29)
+
+
+### Bug Fixes
+
+* **nvim-lint:** dont use default configured linters from nvim-lint ([ff5f588](https://github.com/LazyVim/LazyVim/commit/ff5f5886db321679e3fdc5dbb82b12daf6075510))
+
 ## [7.0.0](https://github.com/LazyVim/LazyVim/compare/v6.4.3...v7.0.0) (2023-09-29)
 
 
