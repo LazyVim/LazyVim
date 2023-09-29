@@ -1,10 +1,3 @@
--- When `conform.nvim` is enabled, it will automatically be used as the
--- formatter for all files that it supports.
--- When no conform formatter is available for a filetype, LSP format
--- will be used instead.
---
--- LazyVim adds a custom `formatter_opts` option to allow overriding the
--- default options for each formatter.
 return {
   {
     "stevearc/conform.nvim",
@@ -25,9 +18,10 @@ return {
         fish = { "fish_indent" },
         sh = { "shfmt" },
       },
-      -- LazyVim extension to easily override formatter options
+      -- LazyVim will merge the options you set here with builtin formatters.
+      -- You can also define any custom formatters here.
       ---@type table<string,table>
-      formatter_opts = {
+      formatters = {
         -- -- Example of using dprint only when a dprint.json file is present
         -- dprint = {
         --   condition = function(ctx)
@@ -38,8 +32,9 @@ return {
     },
     config = function(_, opts)
       opts.formatters = opts.formatters or {}
-      for f, o in pairs(opts.formatter_opts or {}) do
-        opts.formatters[f] = vim.tbl_deep_extend("force", require("conform.formatters." .. f), o)
+      for f, o in pairs(opts.formatters) do
+        local ok, formatter = pcall(require, "conform.formatters." .. f)
+        opts.formatters[f] = vim.tbl_deep_extend("force", {}, ok and formatter or {}, o)
       end
       require("conform").setup(opts)
     end,
