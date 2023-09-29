@@ -54,6 +54,7 @@ return {
   },
   {
     "nvimtools/none-ls.nvim",
+    optional = true,
     opts = function(_, opts)
       table.insert(opts.sources, require("typescript.extensions.null-ls.code-actions"))
     end,

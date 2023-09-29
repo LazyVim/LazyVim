@@ -84,6 +84,7 @@ return {
   -- Ensure Go tools are installed
   {
     "nvimtools/none-ls.nvim",
+    optional = true,
     opts = function(_, opts)
       if type(opts.sources) == "table" then
         local nls = require("null-ls")
