@@ -8,6 +8,13 @@ return {
     end,
   },
   {
+    "mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "hadolint" })
+    end,
+  },
+  {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)
@@ -17,13 +24,6 @@ return {
         nls.builtins.diagnostics.hadolint,
       })
     end,
-    dependencies = {
-      "mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "hadolint" })
-      end,
-    },
   },
   {
     "mfussenegger/nvim-lint",
