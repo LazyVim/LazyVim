@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.0.2](https://github.com/LazyVim/LazyVim/compare/v7.0.1...v7.0.2) (2023-09-30)
+
+
+### Bug Fixes
+
+* **format:** allow `custom_format` to return early ([#1531](https://github.com/LazyVim/LazyVim/issues/1531)) ([1c878b9](https://github.com/LazyVim/LazyVim/commit/1c878b9d06fb116135419d098fe5dfde5304b709))
+* **python:** make venv-selector `dap_enabled` conditional on `nvim-dap-python` ([#1529](https://github.com/LazyVim/LazyVim/issues/1529)) ([7821c0e](https://github.com/LazyVim/LazyVim/commit/7821c0e85199205af98ceedfb2c4990c96900e46))
+
 ## [7.0.1](https://github.com/LazyVim/LazyVim/compare/v7.0.0...v7.0.1) (2023-09-29)
 
 
