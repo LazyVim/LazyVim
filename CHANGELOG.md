@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.3](https://github.com/LazyVim/LazyVim/compare/v7.0.2...v7.0.3) (2023-09-30)
+
+
+### Bug Fixes
+
+* **extras.go:** remove unneeded formatters since gopls handles them ([#1535](https://github.com/LazyVim/LazyVim/issues/1535)) ([964dd6c](https://github.com/LazyVim/LazyVim/commit/964dd6c4b2135399758c87afed7e1f3c8e30b487))
+
 ## [7.0.2](https://github.com/LazyVim/LazyVim/compare/v7.0.1...v7.0.2) (2023-09-30)
 
 
