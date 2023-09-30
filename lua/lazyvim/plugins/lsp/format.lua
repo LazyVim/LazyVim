@@ -35,9 +35,12 @@ function M.format(opts)
     return
   end
 
-  if M.custom_format and Util.try(function()
-    return M.custom_format(buf)
-  end, { msg = "Custom formatter failed" }) then
+  if
+    M.custom_format
+    and Util.try(function()
+      return M.custom_format(buf)
+    end, { msg = "Custom formatter failed" })
+  then
     return
   end
 
