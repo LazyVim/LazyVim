@@ -103,6 +103,11 @@ if not Util.has("trouble.nvim") then
   map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
 end
 
+-- formatting
+map({ "n", "v" }, "<leader>cf", function()
+  require("lazyvim.plugins.lsp.format").format({ force = true })
+end, { desc = "Format" })
+
 -- stylua: ignore start
 
 -- toggle options
