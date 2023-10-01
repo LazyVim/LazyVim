@@ -1,5 +1,32 @@
 # Changelog
 
+## [8.0.0](https://github.com/LazyVim/LazyVim/compare/v7.0.3...v8.0.0) (2023-10-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* LazyVim now requires Neovim >= 0.9.0
+
+### Features
+
+* replace Copilot icon with logo ([#1539](https://github.com/LazyVim/LazyVim/issues/1539)) ([9bb4e87](https://github.com/LazyVim/LazyVim/commit/9bb4e8755f5a822659ca1d8cb3689732435d90d0))
+* show error and exit Neovim when version is too old ([2aea5c7](https://github.com/LazyVim/LazyVim/commit/2aea5c7210882a2f98526ee29115fe2e1a41d7b4))
+
+
+### Bug Fixes
+
+* cleanup all Neovim &lt; 0.9.0 code ([9935dc3](https://github.com/LazyVim/LazyVim/commit/9935dc3944c4724d7ee7f70b6bc450f8c3b34a08))
+
+
+### Performance Improvements
+
+* dont't load schemastore as an lspconfig dep ([9d17c43](https://github.com/LazyVim/LazyVim/commit/9d17c4308713e8db7ec03871ba62ff80a3bfb79c))
+
+
+### Documentation
+
+* LazyVim now requires Neovim &gt;= 0.9.0 ([bfe0422](https://github.com/LazyVim/LazyVim/commit/bfe04222fe5585179f03197b01a6f6ed711d4421))
+
 ## [7.0.3](https://github.com/LazyVim/LazyVim/compare/v7.0.2...v7.0.3) (2023-09-30)
 
 
