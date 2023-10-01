@@ -54,7 +54,7 @@ LazyVim 提供了两全其美的方式 - 根据需要调整配置的灵活性，
 
 ## ⚡️ 要求
 
-- Neovim >= **0.8.0** (需要用 **LuaJIT** 构建)
+- Neovim >= **0.9.0** (需要用 **LuaJIT** 构建)
 - Git >= **2.19.0** (用于部分克隆支持)
 - 一个 [Nerd Font](https://www.nerdfonts.com/) 字体 **_(可选)_**
 - 一个用于 `nvim-treesitter` 的 **C** 编译器。看 [这里](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
