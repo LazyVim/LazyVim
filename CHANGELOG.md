@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.1.0](https://github.com/LazyVim/LazyVim/compare/v8.0.0...v8.1.0) (2023-10-01)
+
+
+### Features
+
+* **conform:** set vim.opt.formatexpr ([766d5e5](https://github.com/LazyVim/LazyVim/commit/766d5e5bf7a8e40910a00aef4dc30f36376e5652))
+* **elixir:** Add credo if none-ls is used ([#1546](https://github.com/LazyVim/LazyVim/issues/1546)) ([2ffd629](https://github.com/LazyVim/LazyVim/commit/2ffd629cc7a68e6e4a721ac8babe6b7cf612868e))
+* **format:** show warning when no formatter ran when using the format keymap ([e36f7d8](https://github.com/LazyVim/LazyVim/commit/e36f7d811c396b60bcbf65f962b3f52d2f75b0b3))
+* **go:** add goimports ([#1549](https://github.com/LazyVim/LazyVim/issues/1549)) ([e8ab2ff](https://github.com/LazyVim/LazyVim/commit/e8ab2ff5b6a75952943d3ba44586c7de5588be33))
+
+
+### Bug Fixes
+
+* **format:** moved formatting keymap to lua/lazyvim/config/keymaps.lua ([9b16770](https://github.com/LazyVim/LazyVim/commit/9b1677057377400ab292c51bbc085c82637a39d4))
+
 ## [8.0.0](https://github.com/LazyVim/LazyVim/compare/v7.0.3...v8.0.0) (2023-10-01)
 
 
