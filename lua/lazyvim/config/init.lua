@@ -89,6 +89,21 @@ local options
 ---@param opts? LazyVimConfig
 function M.setup(opts)
   options = vim.tbl_deep_extend("force", defaults, opts or {})
+
+  if vim.fn.has("nvim-0.9.0") == 0 then
+    vim.api.nvim_echo({
+      {
+        "LazyVim requires Neovim >= 0.9.0\n",
+        "ErrorMsg",
+      },
+      { "Press any key to exit", "MoreMsg" },
+    }, true, {})
+
+    vim.fn.getchar()
+    vim.cmd([[quit]])
+    return
+  end
+
   if not M.has() then
     require("lazy.core.util").error(
       "**LazyVim** needs **lazy.nvim** version "
