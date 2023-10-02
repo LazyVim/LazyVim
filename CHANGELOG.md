@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.2.0](https://github.com/LazyVim/LazyVim/compare/v8.1.0...v8.2.0) (2023-10-02)
+
+
+### Features
+
+* **mini.files:** added lsp rename support to mini.files ([4ff51cd](https://github.com/LazyVim/LazyVim/commit/4ff51cd678343ea32668eaf0c1103caacb4334a2))
+
 ## [8.1.0](https://github.com/LazyVim/LazyVim/compare/v8.0.0...v8.1.0) (2023-10-01)
 
 
