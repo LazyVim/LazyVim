@@ -224,16 +224,6 @@ return {
     end,
   },
 
-  -- Displays a popup with possible key bindings of the command you started typing
-  {
-    "folke/which-key.nvim",
-    opts = function(_, opts)
-      if require("lazyvim.util").has("noice.nvim") then
-        opts.defaults["<leader>sn"] = { name = "+noice" }
-      end
-    end,
-  },
-
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
   {
     "folke/noice.nvim",
