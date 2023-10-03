@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.4.3](https://github.com/LazyVim/LazyVim/compare/v8.4.2...v8.4.3) (2023-10-03)
+
+
+### Bug Fixes
+
+* **ui:** always pad to 2 cells for status column icons. Fixes [#1571](https://github.com/LazyVim/LazyVim/issues/1571) ([6cf6b0a](https://github.com/LazyVim/LazyVim/commit/6cf6b0a6241c659113f5646ff64fba7dbf5161b9))
+
 ## [8.4.2](https://github.com/LazyVim/LazyVim/compare/v8.4.1...v8.4.2) (2023-10-03)
 
 
