@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.4.4](https://github.com/LazyVim/LazyVim/compare/v8.4.3...v8.4.4) (2023-10-03)
+
+
+### Bug Fixes
+
+* **ui:** work-around for telescope issue with treesitter folds ([ccff868](https://github.com/LazyVim/LazyVim/commit/ccff8683ba957250d71ef66429fc877f0ee5cedb))
+
 ## [8.4.3](https://github.com/LazyVim/LazyVim/compare/v8.4.2...v8.4.3) (2023-10-03)
 
 
