@@ -1,5 +1,18 @@
 # Changelog
 
+## [8.4.2](https://github.com/LazyVim/LazyVim/compare/v8.4.1...v8.4.2) (2023-10-03)
+
+
+### Bug Fixes
+
+* **nvim-lint:** dont evaluate conditions for linter functions. Fixes [#1569](https://github.com/LazyVim/LazyVim/issues/1569) ([b1ad480](https://github.com/LazyVim/LazyVim/commit/b1ad48067e2c18747bedd7b7054c3ce97ef32890))
+* **ui:** fixed foldtext on Neovim &lt; 0.10 ([1b74d67](https://github.com/LazyVim/LazyVim/commit/1b74d67a0d5783e587dedc73a715cb0c9db6cd16))
+
+
+### Performance Improvements
+
+* **options:** better detection for foldtext,statuscolumn,folexpr support ([e105c9d](https://github.com/LazyVim/LazyVim/commit/e105c9daf6e973b4a294a17b4d2d1882f2188ac6))
+
 ## [8.4.1](https://github.com/LazyVim/LazyVim/compare/v8.4.0...v8.4.1) (2023-10-03)
 
 
