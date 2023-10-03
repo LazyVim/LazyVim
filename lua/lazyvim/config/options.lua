@@ -61,6 +61,8 @@ else
 end
 if vim.treesitter.foldtext then
   vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+if vim.fn.has("nvim-0.9.0") == 1 then
+  vim.opt.statuscolumn = [[%!v:lua.require'lazyvim.util.ui'.statuscolumn()]]
 end
 
 -- Fix markdown indentation settings
