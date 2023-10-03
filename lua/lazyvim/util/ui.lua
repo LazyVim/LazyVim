@@ -16,7 +16,7 @@ end
 function M.icon(sign, len)
   sign = sign or {}
   len = len or 1
-  local text = vim.fn.strcharpart(sign.text or "", 0, len, false) ---@type string
+  local text = vim.fn.strcharpart(sign.text or "", 0, len) ---@type string
   text = text .. string.rep(" ", len - vim.fn.strchars(text))
   return sign.texthl and ("%#" .. sign.texthl .. "#" .. text .. "%*") or text
 end
