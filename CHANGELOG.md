@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.4.1](https://github.com/LazyVim/LazyVim/compare/v8.4.0...v8.4.1) (2023-10-03)
+
+
+### Bug Fixes
+
+* **ui:** check folds of the statuscolumn win instead of current win ([13e9f6e](https://github.com/LazyVim/LazyVim/commit/13e9f6e6b5b085191b0ecf194ddf4c9e2d3ae6d7))
+
 ## [8.4.0](https://github.com/LazyVim/LazyVim/compare/v8.3.0...v8.4.0) (2023-10-03)
 
 
