@@ -15,7 +15,7 @@ end
 ---@param len? number
 function M.icon(sign, len)
   sign = sign or {}
-  len = len or 1
+  len = len or 2
   local text = vim.fn.strcharpart(sign.text or "", 0, len) ---@type string
   text = text .. string.rep(" ", len - vim.fn.strchars(text))
   return sign.texthl and ("%#" .. sign.texthl .. "#" .. text .. "%*") or text
@@ -71,7 +71,7 @@ function M.statuscolumn()
     M.icon(left),
     [[%=]],
     nu .. " ",
-    M.icon(fold or right, 2),
+    M.icon(fold or right),
   }, "")
 end
 
