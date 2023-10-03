@@ -22,7 +22,8 @@ function M.icon(sign, len)
 end
 
 function M.foldtext()
-  local ret = vim.treesitter.foldtext and vim.treesitter.foldtext()
+  local ok = pcall(vim.treesitter.get_parser, vim.api.nvim_get_current_buf())
+  local ret = ok and vim.treesitter.foldtext and vim.treesitter.foldtext()
   if not ret then
     ret = { { vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1], {} } }
   end
