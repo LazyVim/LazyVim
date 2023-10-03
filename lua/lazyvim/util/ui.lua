@@ -21,6 +21,15 @@ function M.icon(sign, len)
   return sign.texthl and ("%#" .. sign.texthl .. "#" .. text .. "%*") or text
 end
 
+function M.foldtext()
+  local ret = vim.treesitter.foldtext and vim.treesitter.foldtext()
+  if not ret then
+    ret = { { vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1], {} } }
+  end
+  table.insert(ret, { " " .. require("lazyvim.config").icons.misc.dots })
+  return ret
+end
+
 function M.statuscolumn()
   local win = vim.g.statusline_winid
   if vim.wo[win].signcolumn == "no" then

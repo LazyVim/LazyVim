@@ -46,6 +46,15 @@ opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
+opt.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  -- fold = "⸱",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
@@ -60,7 +69,9 @@ else
   vim.opt.foldmethod = "indent"
 end
 if vim.treesitter.foldtext then
-  vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+  vim.opt.foldtext = "v:lua.require'lazyvim.util.ui'.foldtext()"
+end
+
 if vim.fn.has("nvim-0.9.0") == 1 then
   vim.opt.statuscolumn = [[%!v:lua.require'lazyvim.util.ui'.statuscolumn()]]
 end
