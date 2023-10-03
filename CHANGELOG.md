@@ -1,5 +1,22 @@
 # Changelog
 
+## [8.4.0](https://github.com/LazyVim/LazyVim/compare/v8.3.0...v8.4.0) (2023-10-03)
+
+
+### Features
+
+* **keymaps:** added toggle for relative line numbers ([3f868aa](https://github.com/LazyVim/LazyVim/commit/3f868aa8254efbd494f6bf100c86a59c5a002c1c))
+* **options:** enable smoothscroll on nightly ([450e0c6](https://github.com/LazyVim/LazyVim/commit/450e0c6bebc5bb9a0c513cdffaf9c46d5f62d5fa))
+* **options:** enabled treesitter folding and foldtext when available ([19926d2](https://github.com/LazyVim/LazyVim/commit/19926d284862b5e58f29e73b71ec532ac29c54ba))
+* **ui:** fancy fold text ([f1ce075](https://github.com/LazyVim/LazyVim/commit/f1ce07510d2048e33fec2b609814d68a7175d591))
+* **ui:** fancy status column ([364bcf3](https://github.com/LazyVim/LazyVim/commit/364bcf325d91a06e6bd6516bdfed84399566cdb6))
+
+
+### Bug Fixes
+
+* **ui:** better fallback for foldtext when buffer does not have TreeSitter ([762017d](https://github.com/LazyVim/LazyVim/commit/762017dc35fc961bdcc7879a5527dbccced27792))
+* **ui:** Neovim &lt; 0.10 ([afbe204](https://github.com/LazyVim/LazyVim/commit/afbe2043a73b6c90476812f9cc0ca4759814e5ac))
+
 ## [8.3.0](https://github.com/LazyVim/LazyVim/compare/v8.2.0...v8.3.0) (2023-10-02)
 
 
