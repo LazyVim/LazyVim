@@ -1,11 +1,3 @@
-local fmt_opts = {
-  format = {
-    indentSize = vim.o.shiftwidth,
-    convertTabsToSpaces = vim.o.expandtab,
-    tabSize = vim.o.tabstop,
-  },
-}
-
 return {
 
   -- add typescript to treesitter
@@ -42,8 +34,20 @@ return {
             },
           },
           settings = {
-            typescript = fmt_opts,
-            javascript = fmt_opts,
+            typescript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
+            javascript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
             completions = {
               completeFunctionCalls = true,
             },
