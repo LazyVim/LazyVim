@@ -1,3 +1,11 @@
+local fmt_opts = {
+  format = {
+    indentSize = vim.o.shiftwidth,
+    convertTabsToSpaces = vim.o.expandtab,
+    tabSize = vim.o.tabstop,
+  },
+}
+
 return {
 
   -- add typescript to treesitter
@@ -34,20 +42,10 @@ return {
             },
           },
           settings = {
-            typescript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-            },
-            javascript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-            },
+            typescript = fmt_opts,
+            javascript = fmt_opts,
+            typescriptreact = fmt_opts,
+            javascriptreact = fmt_opts,
             completions = {
               completeFunctionCalls = true,
             },
@@ -86,7 +84,7 @@ return {
           },
         }
       end
-      for _, language in ipairs({ "typescript", "javascript" }) do
+      for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
         if not dap.configurations[language] then
           dap.configurations[language] = {
             {
