@@ -44,8 +44,6 @@ return {
           settings = {
             typescript = fmt_opts,
             javascript = fmt_opts,
-            typescriptreact = fmt_opts,
-            javascriptreact = fmt_opts,
             completions = {
               completeFunctionCalls = true,
             },
