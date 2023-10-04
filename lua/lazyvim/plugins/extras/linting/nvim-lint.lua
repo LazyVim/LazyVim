@@ -27,7 +27,9 @@ return {
 
       local lint = require("lint")
       for name, linter in pairs(opts.linters) do
-        lint.linters[name] = vim.tbl_deep_extend("force", lint.linters[name] or {}, linter)
+        if type(linter) == "table" and type(lint.linters) == "table" then
+          lint.linters[name] = vim.tbl_deep_extend("force", lint.linters[name], linter)
+        end
       end
       lint.linters_by_ft = opts.linters_by_ft
 
