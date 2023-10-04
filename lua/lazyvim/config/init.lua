@@ -1,9 +1,9 @@
----@type LazyVimConfig
+---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
 M.lazy_version = ">=9.1.0"
 
----@class LazyVimConfig
+---@class LazyVimOptions
 local defaults = {
   -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
   ---@type string|fun()
@@ -86,12 +86,12 @@ M.renames = {
   ["null-ls.nvim"] = "none-ls.nvim",
 }
 
----@type LazyVimConfig
+---@type LazyVimOptions
 local options
 
----@param opts? LazyVimConfig
+---@param opts? LazyVimOptions
 function M.setup(opts)
-  options = vim.tbl_deep_extend("force", defaults, opts or {})
+  options = vim.tbl_deep_extend("force", defaults, opts or {}) or {}
 
   if vim.fn.has("nvim-0.9.0") == 0 then
     vim.api.nvim_echo({
@@ -199,6 +199,7 @@ function M.init()
     require("lazyvim.config").load("options")
     local Plugin = require("lazy.core.plugin")
     local add = Plugin.Spec.add
+    ---@diagnostic disable-next-line: duplicate-set-field
     Plugin.Spec.add = function(self, plugin, ...)
       if type(plugin) == "table" and M.renames[plugin[1]] then
         require("lazy.core.util").warn(
