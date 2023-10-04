@@ -19,7 +19,7 @@ function M.get_mark(buf, lnum)
   local marks = vim.fn.getmarklist(buf)
   vim.list_extend(marks, vim.fn.getmarklist())
   for _, mark in ipairs(marks) do
-    if mark.pos[2] == lnum and mark.mark:match("[a-zA-Z]") then
+    if mark.pos[1] == buf and mark.pos[2] == lnum and mark.mark:match("[a-zA-Z]") then
       return { text = mark.mark:sub(2), texthl = "DiagnosticHint" }
     end
   end
