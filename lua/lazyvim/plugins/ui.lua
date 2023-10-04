@@ -53,7 +53,7 @@ return {
   -- tabs, which include filetype icons and close buttons.
   {
     "akinsho/bufferline.nvim",
-    event = "LazyFile",
+    event = "VeryLazy",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
