@@ -31,9 +31,9 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
-  callback = function()
+  callback = function(event)
     local exclude = { "gitcommit" }
-    local buf = vim.api.nvim_get_current_buf()
+    local buf = event.buf
     if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
       return
     end
