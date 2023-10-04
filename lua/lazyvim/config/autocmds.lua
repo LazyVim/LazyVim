@@ -32,6 +32,9 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function(event)
+    if event.data and event.data.lazy_file then
+      return
+    end
     local exclude = { "gitcommit" }
     local buf = event.buf
     if vim.tbl_contains(exclude, vim.bo[buf].filetype) then

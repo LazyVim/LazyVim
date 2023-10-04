@@ -168,9 +168,10 @@ function M.lazy_file()
         pattern = event.pattern,
         modeline = false,
         buffer = event.buf,
-        data = event.data,
+        data = { lazy_file = true },
       })
     end
+    vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false })
     events = {}
   end
 
