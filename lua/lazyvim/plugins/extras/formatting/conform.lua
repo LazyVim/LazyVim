@@ -44,8 +44,10 @@ return {
     config = function(_, opts)
       opts.formatters = opts.formatters or {}
       for f, o in pairs(opts.formatters) do
-        local ok, formatter = pcall(require, "conform.formatters." .. f)
-        opts.formatters[f] = vim.tbl_deep_extend("force", {}, ok and formatter or {}, o)
+        if type(o) ~= "function" then
+          local ok, formatter = pcall(require, "conform.formatters." .. f)
+          opts.formatters[f] = vim.tbl_deep_extend("force", {}, ok and formatter or {}, o)
+        end
       end
       require("conform").setup(opts)
     end,
