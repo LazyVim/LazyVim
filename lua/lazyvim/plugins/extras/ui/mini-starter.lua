@@ -2,6 +2,7 @@
 return {
   -- disable alpha
   { "goolord/alpha-nvim", enabled = false },
+  { "glepnir/dashboard-nvim", enabled = false },
 
   -- enable mini.starter
   {
