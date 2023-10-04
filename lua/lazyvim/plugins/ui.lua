@@ -296,14 +296,14 @@ return {
 
       dashboard.section.header.val = vim.split(logo, "\n")
       dashboard.section.buttons.val = {
-        dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
-        dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-        dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
-        dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-        dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
-        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-        dashboard.button("q", " " .. " Quit", ":qa<CR>"),
+        dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
+        dashboard.button("n", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
+        dashboard.button("r", " " .. " Recent files", "<cmd> Telescope oldfiles <cr>"),
+        dashboard.button("g", " " .. " Find text", "<cmd> Telescope live_grep <cr>"),
+        dashboard.button("c", " " .. " Config", "<cmd> e $MYVIMRC <cr>"),
+        dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
+        dashboard.button("l", "󰒲 " .. " Lazy", "<cmd> Lazy <cr>"),
+        dashboard.button("q", " " .. " Quit", "<cmd> qa <cr>"),
       }
       for _, button in ipairs(dashboard.section.buttons.val) do
         button.opts.hl = "AlphaButtons"
