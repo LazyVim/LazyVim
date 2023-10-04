@@ -1,5 +1,36 @@
 # Changelog
 
+## [9.0.0](https://github.com/LazyVim/LazyVim/compare/v8.4.4...v9.0.0) (2023-10-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **mini.surround:** default surround mappings are now gs instead of gz (unless you enabled the leap extra)
+
+### Features
+
+* **extras:** added extra for dashboard.nvim ([417de01](https://github.com/LazyVim/LazyVim/commit/417de0193dd0663100a8b1eaedc2bc4976712c61))
+* **mini.surround:** default surround mappings are now gs instead of gz (unless you enabled the leap extra) ([d28c69e](https://github.com/LazyVim/LazyVim/commit/d28c69e49eab62b45f7d1562b3bc00afee5fbb65))
+* **treesitter:** added ]f, [f, ]F, [F, ]c, ]C, [c, [C for treesitter-textobjects ([0e66ef8](https://github.com/LazyVim/LazyVim/commit/0e66ef83934eb62ee2237e331dcbc0a22b809aae))
+* **treesitter:** map `vim` to `[@namespace](https://github.com/namespace).builtin` ([5f0713d](https://github.com/LazyVim/LazyVim/commit/5f0713d2b612a814586bffec39700ab6a30dc0ea))
+* **typescript:** add typescriptreact/javascriptreact to types ([#1574](https://github.com/LazyVim/LazyVim/issues/1574)) ([626ae13](https://github.com/LazyVim/LazyVim/commit/626ae1338a88f6cd8962d6c20bd79953a67f0b72))
+* **ui:** show alpha marks in statuscolumn ([bd2ac54](https://github.com/LazyVim/LazyVim/commit/bd2ac542a0bb4c58237cd6ca8848063bd20a5282))
+
+
+### Bug Fixes
+
+* **autocmds:** retore last location for correct buffer ([afc8e7f](https://github.com/LazyVim/LazyVim/commit/afc8e7f8cac06335efd12ec5f71cabb1f38a09b0))
+* **conform:** dont try merging function formatters. Fixes [#1582](https://github.com/LazyVim/LazyVim/issues/1582) ([f475085](https://github.com/LazyVim/LazyVim/commit/f4750859f2c2c9a41b3974ac05962ce9648d6c16))
+* **conform:** dont try to merge formatter functions ([9f034ab](https://github.com/LazyVim/LazyVim/commit/9f034ab10650e306e178d5189ee9214a52f2e8e5))
+* **nvim-lint:** dont try merging function linters ([79010ae](https://github.com/LazyVim/LazyVim/commit/79010ae671035d8ed0040ce51df4fb59ec3962f8))
+* **ui:** use custom fold when treesitter foldtext returns a string ([3505329](https://github.com/LazyVim/LazyVim/commit/35053290bf957a230c8758d31ba3997c0699f5f9))
+
+
+### Performance Improvements
+
+* added support for `LazyFile` event that properly loads file based plugins without blocking the ui ([936d74b](https://github.com/LazyVim/LazyVim/commit/936d74bb6127721eeefa62e5f697d9693ab04fdd))
+* **config:** add LazyVim to the rtp early for faster spec loading ([2f16a7b](https://github.com/LazyVim/LazyVim/commit/2f16a7b2d96e912c9ab50ce99d9994413ff3678d))
+
 ## [8.4.4](https://github.com/LazyVim/LazyVim/compare/v8.4.3...v8.4.4) (2023-10-03)
 
 
