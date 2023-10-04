@@ -1,5 +1,14 @@
 # Changelog
 
+## [9.0.1](https://github.com/LazyVim/LazyVim/compare/v9.0.0...v9.0.1) (2023-10-04)
+
+
+### Bug Fixes
+
+* **alpha:** use `&lt;cmd&gt;` instead of `:` for shortcuts ([1abcffb](https://github.com/LazyVim/LazyVim/commit/1abcffbfd940588fa67cc7438ce2115df1c58e92))
+* **options:** only enable treesitter `foldexpr` on nightly. Fixes [#1581](https://github.com/LazyVim/LazyVim/issues/1581) ([d989ecc](https://github.com/LazyVim/LazyVim/commit/d989ecc943b3240db0be3aa0369b96089cee4b40))
+* **ui:** show global marks in the correct buffer only ([3849e01](https://github.com/LazyVim/LazyVim/commit/3849e0150b0a616dbd6e7e12ec5025aff6c81d39))
+
 ## [9.0.0](https://github.com/LazyVim/LazyVim/compare/v8.4.4...v9.0.0) (2023-10-04)
 
 
