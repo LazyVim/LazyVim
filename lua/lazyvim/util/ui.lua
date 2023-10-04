@@ -3,12 +3,26 @@ local M = {}
 ---@alias Sign {name:string, text:string, texthl:string}
 
 ---@return Sign[]
-function M.get_signs(win)
-  local buf = vim.api.nvim_win_get_buf(win)
+---@param buf number
+---@param lnum number
+function M.get_signs(buf, lnum)
   ---@diagnostic disable-next-line: no-unknown
   return vim.tbl_map(function(sign)
     return vim.fn.sign_getdefined(sign.name)[1]
-  end, vim.fn.sign_getplaced(buf, { group = "*", lnum = vim.v.lnum })[1].signs)
+  end, vim.fn.sign_getplaced(buf, { group = "*", lnum = lnum })[1].signs)
+end
+
+---@return Sign?
+---@param buf number
+---@param lnum number
+function M.get_mark(buf, lnum)
+  local marks = vim.fn.getmarklist(buf)
+  vim.list_extend(marks, vim.fn.getmarklist())
+  for _, mark in ipairs(marks) do
+    if mark.pos[2] == lnum and mark.mark:match("[a-zA-Z]") then
+      return { text = mark.mark:sub(2), texthl = "DiagnosticHint" }
+    end
+  end
 end
 
 ---@param sign? Sign
@@ -45,10 +59,11 @@ function M.statuscolumn()
   if vim.wo[win].signcolumn == "no" then
     return ""
   end
+  local buf = vim.api.nvim_win_get_buf(win)
 
   ---@type Sign?,Sign?,Sign?
   local left, right, fold
-  for _, s in ipairs(M.get_signs(win)) do
+  for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
     if s.name:find("GitSign") then
       right = s
     elseif not left then
@@ -68,7 +83,7 @@ function M.statuscolumn()
   end
 
   return table.concat({
-    M.icon(left),
+    M.icon(M.get_mark(buf, vim.v.lnum) or left),
     [[%=]],
     nu .. " ",
     M.icon(fold or right),
