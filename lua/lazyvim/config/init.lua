@@ -227,6 +227,7 @@ M.did_init = false
 function M.init()
   if not M.did_init then
     M.did_init = true
+    vim.opt.rtp:append(require("lazy.core.config").spec.plugins.LazyVim.dir)
     -- delay notifications till vim.notify was replaced or after 500ms
     require("lazyvim.util").lazy_notify()
 
