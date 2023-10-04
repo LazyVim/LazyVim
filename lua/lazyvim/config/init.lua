@@ -124,8 +124,9 @@ function M.setup(opts)
     M.load("autocmds")
   end
 
+  local group = vim.api.nvim_create_augroup("LazyVim", { clear = true })
   vim.api.nvim_create_autocmd("User", {
-    group = vim.api.nvim_create_augroup("LazyVim", { clear = true }),
+    group = group,
     pattern = "VeryLazy",
     callback = function()
       if lazy_autocmds then
@@ -134,6 +135,8 @@ function M.setup(opts)
       M.load("keymaps")
     end,
   })
+
+  M.lazy_file()
 
   require("lazy.core.util").try(function()
     if type(M.colorscheme) == "function" then
@@ -146,6 +149,40 @@ function M.setup(opts)
     on_error = function(msg)
       require("lazy.core.util").error(msg)
       vim.cmd.colorscheme("habamax")
+    end,
+  })
+end
+
+-- Properly load file based plugins without blocking the UI
+function M.lazy_file()
+  local events = {} ---@type {event: string, pattern?: string, buf: number, data?: any}[]
+
+  local function load()
+    if #events == 0 then
+      return
+    end
+    vim.api.nvim_del_augroup_by_name("lazy_file")
+    vim.api.nvim_exec_autocmds("User", { pattern = "LazyFile", modeline = false })
+    for _, event in ipairs(events) do
+      vim.api.nvim_exec_autocmds(event.event, {
+        pattern = event.pattern,
+        modeline = false,
+        buffer = event.buf,
+        data = event.data,
+      })
+    end
+    events = {}
+  end
+
+  -- schedule wrap so that nested autocmds are executed
+  -- and the UI can continue rendering without blocking
+  load = vim.schedule_wrap(load)
+
+  vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "BufNewFile" }, {
+    group = vim.api.nvim_create_augroup("lazy_file", { clear = true }),
+    callback = function(event)
+      table.insert(events, event)
+      load()
     end,
   })
 end
@@ -213,6 +250,14 @@ function M.init()
         plugin[1] = M.renames[plugin[1]]
       end
       return add(self, plugin, ...)
+    end
+
+    -- Add support for the LazyFile event
+    local Event = require("lazy.core.handler.event")
+    local _event = Event._event
+    ---@diagnostic disable-next-line: duplicate-set-field
+    Event._event = function(self, value)
+      return value == "LazyFile" and "User LazyFile" or _event(self, value)
     end
   end
 end

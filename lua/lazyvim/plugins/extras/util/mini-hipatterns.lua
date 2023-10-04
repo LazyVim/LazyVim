@@ -5,7 +5,7 @@ M.hl = {}
 
 M.plugin = {
   "echasnovski/mini.hipatterns",
-  event = "BufReadPre",
+  event = "LazyFile",
   opts = function()
     local hi = require("mini.hipatterns")
     return {
