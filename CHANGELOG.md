@@ -1,5 +1,19 @@
 # Changelog
 
+## [9.1.0](https://github.com/LazyVim/LazyVim/compare/v9.0.2...v9.1.0) (2023-10-05)
+
+
+### Features
+
+* **dashboard:** add projects if enabled ([#1595](https://github.com/LazyVim/LazyVim/issues/1595)) ([6f1cdfe](https://github.com/LazyVim/LazyVim/commit/6f1cdfe4bd2ec9a85c92a312fa52ba86e02d1a9f))
+
+
+### Bug Fixes
+
+* **dasboard:** disable alpha only once ([d6b56c0](https://github.com/LazyVim/LazyVim/commit/d6b56c075e88ce12e9e16fb2eeeea38fb7853600))
+* **options:** set default laststatus=3 and set it to 0 before loading dashboard to prevent flickering ([1eb0192](https://github.com/LazyVim/LazyVim/commit/1eb019274b5564e66ac6c7e119c140bae262e10c))
+* **tailwind:** allow overriding filetypes. Fixes [#1590](https://github.com/LazyVim/LazyVim/issues/1590) ([d3e7f77](https://github.com/LazyVim/LazyVim/commit/d3e7f7717e960bb883b35e9a75badfd5b938cace))
+
 ## [9.0.2](https://github.com/LazyVim/LazyVim/compare/v9.0.1...v9.0.2) (2023-10-04)
 
 
