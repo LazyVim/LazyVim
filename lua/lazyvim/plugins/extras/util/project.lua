@@ -42,4 +42,17 @@ return {
       vim.list_extend(opts.items, items)
     end,
   },
+  {
+    "glepnir/dashboard-nvim",
+    optional = true,
+    opts = function(_, opts)
+      local projects = {
+        action = "Telescope projects",
+        desc = " Projects",
+        icon = " ",
+        key = "p",
+      }
+      table.insert(opts.config.center, 3, projects)
+    end,
+  },
 }
