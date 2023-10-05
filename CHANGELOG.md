@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.1.1](https://github.com/LazyVim/LazyVim/compare/v9.1.0...v9.1.1) (2023-10-05)
+
+
+### Bug Fixes
+
+* **ui:** include extmark signs in signcolumn. Fixes [#1596](https://github.com/LazyVim/LazyVim/issues/1596) ([337cfdb](https://github.com/LazyVim/LazyVim/commit/337cfdbec43003cb2c269e59b27167aa752bf41f))
+
 ## [9.1.0](https://github.com/LazyVim/LazyVim/compare/v9.0.2...v9.1.0) (2023-10-05)
 
 
