@@ -1,15 +1,44 @@
 local M = {}
 
----@alias Sign {name:string, text:string, texthl:string}
+---@alias Sign {name:string, text:string, texthl:string, priority:number}
 
+-- Returns a list of regular and extmark signs sorted by priority (low to high)
 ---@return Sign[]
 ---@param buf number
 ---@param lnum number
 function M.get_signs(buf, lnum)
-  ---@diagnostic disable-next-line: no-unknown
-  return vim.tbl_map(function(sign)
-    return vim.fn.sign_getdefined(sign.name)[1]
+  -- Get regular signs
+  ---@type Sign[]
+  local signs = vim.tbl_map(function(sign)
+    ---@type Sign
+    local ret = vim.fn.sign_getdefined(sign.name)[1]
+    ret.priority = sign.priority
+    return ret
   end, vim.fn.sign_getplaced(buf, { group = "*", lnum = lnum })[1].signs)
+
+  -- Get extmark signs
+  local extmarks = vim.api.nvim_buf_get_extmarks(
+    buf,
+    -1,
+    { lnum - 1, 0 },
+    { lnum - 1, -1 },
+    { details = true, type = "sign" }
+  )
+  for _, extmark in pairs(extmarks) do
+    signs[#signs + 1] = {
+      name = extmark[4].sign_hl_group,
+      text = extmark[4].sign_text,
+      texthl = extmark[4].sign_hl_group,
+      priority = extmark[4].priority,
+    }
+  end
+
+  -- Sort by priority
+  table.sort(signs, function(a, b)
+    return (a.priority or 0) < (b.priority or 0)
+  end)
+
+  return signs
 end
 
 ---@return Sign?
@@ -66,7 +95,7 @@ function M.statuscolumn()
   for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
     if s.name:find("GitSign") then
       right = s
-    elseif not left then
+    else
       left = s
     end
   end
