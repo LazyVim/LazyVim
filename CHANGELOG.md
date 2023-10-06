@@ -1,5 +1,19 @@
 # Changelog
 
+## [9.2.0](https://github.com/LazyVim/LazyVim/compare/v9.1.1...v9.2.0) (2023-10-06)
+
+
+### Features
+
+* **conform:** ignore formatting errors for injected languages and fix condition example ([a1c5886](https://github.com/LazyVim/LazyVim/commit/a1c5886947e20059ad7802e71e0a82b413af6657))
+
+
+### Bug Fixes
+
+* **config:** fixed issues related to LazyFile. Fixes [#1601](https://github.com/LazyVim/LazyVim/issues/1601) ([6e0e01f](https://github.com/LazyVim/LazyVim/commit/6e0e01f5b4dd7e97abbb50241a207d36d0ce9cd5))
+* **elixir:** only enable credo when installed. Fixes [#1546](https://github.com/LazyVim/LazyVim/issues/1546) ([8a1de2b](https://github.com/LazyVim/LazyVim/commit/8a1de2b90a699bdfee704f3d4422e2ced18ae0f3))
+* **which-key:** change surround group key ([#1598](https://github.com/LazyVim/LazyVim/issues/1598)) ([f1ea518](https://github.com/LazyVim/LazyVim/commit/f1ea518e29a601b773d9c9c94489fc9d273c2dea))
+
 ## [9.1.1](https://github.com/LazyVim/LazyVim/compare/v9.1.0...v9.1.1) (2023-10-05)
 
 
