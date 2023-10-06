@@ -137,7 +137,6 @@ function M.setup(opts)
     end,
   })
 
-  M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
   if M.use_lazy_file then
     M.lazy_file()
   end
@@ -252,6 +251,10 @@ function M.init()
   if not M.did_init then
     M.did_init = true
     vim.opt.rtp:append(require("lazy.core.config").spec.plugins.LazyVim.dir)
+
+    ---@diagnostic disable-next-line: undefined-field
+    M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
+
     -- delay notifications till vim.notify was replaced or after 500ms
     require("lazyvim.util").lazy_notify()
 
@@ -263,19 +266,32 @@ function M.init()
     local add = Plugin.Spec.add
     ---@diagnostic disable-next-line: duplicate-set-field
     Plugin.Spec.add = function(self, plugin, ...)
-      if type(plugin) == "table" and M.renames[plugin[1]] then
-        require("lazy.core.util").warn(
-          ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
-            plugin[1],
-            M.renames[plugin[1]],
-            self.importing or "LazyVim"
-          ),
-          { title = "LazyVim" }
-        )
-        plugin[1] = M.renames[plugin[1]]
-      end
-      if not M.use_lazy_file and type(plugin) == "table" and plugin.event == "LazyFile" then
-        plugin.event = { "BufReadPost", "BufNewFile" }
+      if type(plugin) == "table" then
+        if M.renames[plugin[1]] then
+          require("lazy.core.util").warn(
+            ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
+              plugin[1],
+              M.renames[plugin[1]],
+              self.importing or "LazyVim"
+            ),
+            { title = "LazyVim" }
+          )
+          plugin[1] = M.renames[plugin[1]]
+        end
+        if not M.use_lazy_file and plugin.event then
+          if plugin.event == "LazyFile" then
+            plugin.event = { "BufReadPost", "BufNewFile" }
+          elseif type(plugin.event) == "table" then
+            local events = {} ---@type string[]
+            for i, event in ipairs(plugin.event) do
+              if event == "LazyFile" then
+                vim.list_extend(events, { "BufReadPost", "BufNewFile" })
+              else
+                events[#events + 1] = event
+              end
+            end
+          end
+        end
       end
       return add(self, plugin, ...)
     end
