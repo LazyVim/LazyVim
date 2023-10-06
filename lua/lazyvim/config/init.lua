@@ -3,6 +3,7 @@ local M = {}
 
 M.lazy_version = ">=9.1.0"
 M.use_lazy_file = true
+M.lazy_file_events = { "BufReadPost", "BufNewFile" }
 
 ---@class LazyVimOptions
 local defaults = {
@@ -168,7 +169,7 @@ function M.lazy_file()
     local Util = require("lazy.core.util")
     vim.api.nvim_del_augroup_by_name("lazy_file")
 
-    Util.track({ event = "LazyFile" })
+    Util.track({ event = "LazyVim.lazy_file" })
 
     ---@type table<string,string[]>
     local skips = { FileType = Event.get_augroups("FileType") }
@@ -201,7 +202,7 @@ function M.lazy_file()
   -- and the UI can continue rendering without blocking
   load = vim.schedule_wrap(load)
 
-  vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  vim.api.nvim_create_autocmd(M.lazy_file_events, {
     group = vim.api.nvim_create_augroup("lazy_file", { clear = true }),
     callback = function(event)
       table.insert(events, event)
@@ -252,6 +253,7 @@ function M.init()
     M.did_init = true
     vim.opt.rtp:append(require("lazy.core.config").spec.plugins.LazyVim.dir)
 
+    M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
     ---@diagnostic disable-next-line: undefined-field
     M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
 
@@ -280,12 +282,12 @@ function M.init()
         end
         if not M.use_lazy_file and plugin.event then
           if plugin.event == "LazyFile" then
-            plugin.event = { "BufReadPost", "BufNewFile" }
+            plugin.event = M.lazy_file_events
           elseif type(plugin.event) == "table" then
             local events = {} ---@type string[]
-            for i, event in ipairs(plugin.event) do
+            for _, event in ipairs(plugin.event) do
               if event == "LazyFile" then
-                vim.list_extend(events, { "BufReadPost", "BufNewFile" })
+                vim.list_extend(events, M.lazy_file_events)
               else
                 events[#events + 1] = event
               end
