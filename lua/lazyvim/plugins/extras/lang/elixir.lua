@@ -33,6 +33,9 @@ return {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)
+      if vim.fn.executable("credo") == 0 then
+        return
+      end
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
       vim.list_extend(opts.sources, {
@@ -43,10 +46,13 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    opts = {
-      linters_by_ft = {
+    opts = function(_, opts)
+      if vim.fn.executable("credo") == 0 then
+        return
+      end
+      opts.linters_by_ft = {
         elixir = { "credo" },
-      },
-    },
+      }
+    end,
   },
 }
