@@ -2,6 +2,7 @@
 local M = {}
 
 M.lazy_version = ">=9.1.0"
+M.use_lazy_file = true
 
 ---@class LazyVimOptions
 local defaults = {
@@ -136,7 +137,10 @@ function M.setup(opts)
     end,
   })
 
-  M.lazy_file()
+  M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
+  if M.use_lazy_file then
+    M.lazy_file()
+  end
 
   require("lazy.core.util").try(function()
     if type(M.colorscheme) == "function" then
@@ -155,31 +159,50 @@ end
 
 -- Properly load file based plugins without blocking the UI
 function M.lazy_file()
-  local events = {} ---@type {event: string, pattern?: string, buf: number, data?: any}[]
+  local events = {} ---@type {event: string, buf: number, data?: any}[]
 
   local function load()
     if #events == 0 then
       return
     end
+    local Event = require("lazy.core.handler.event")
+    local Util = require("lazy.core.util")
     vim.api.nvim_del_augroup_by_name("lazy_file")
+
+    Util.track({ event = "LazyFile" })
+
+    ---@type table<string,string[]>
+    local skips = { FileType = Event.get_augroups("FileType") }
+    for _, event in ipairs(events) do
+      skips[event.event] = skips[event.event] or Event.get_augroups(event.event)
+    end
+
     vim.api.nvim_exec_autocmds("User", { pattern = "LazyFile", modeline = false })
     for _, event in ipairs(events) do
-      vim.api.nvim_exec_autocmds(event.event, {
-        pattern = event.pattern,
-        modeline = false,
-        buffer = event.buf,
-        data = { lazy_file = true },
+      Event.trigger({
+        event = event.event,
+        exclude = skips[event.event],
+        data = event.data,
+        buf = event.buf,
       })
+      if vim.bo[event.buf].filetype then
+        Event.trigger({
+          event = "FileType",
+          exclude = skips.FileType,
+          buf = event.buf,
+        })
+      end
     end
     vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false })
     events = {}
+    Util.track()
   end
 
   -- schedule wrap so that nested autocmds are executed
   -- and the UI can continue rendering without blocking
   load = vim.schedule_wrap(load)
 
-  vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "BufNewFile" }, {
+  vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("lazy_file", { clear = true }),
     callback = function(event)
       table.insert(events, event)
@@ -250,6 +273,9 @@ function M.init()
           { title = "LazyVim" }
         )
         plugin[1] = M.renames[plugin[1]]
+      end
+      if not M.use_lazy_file and type(plugin) == "table" and plugin.event == "LazyFile" then
+        plugin.event = { "BufReadPost", "BufNewFile" }
       end
       return add(self, plugin, ...)
     end
