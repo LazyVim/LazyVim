@@ -36,7 +36,7 @@ return {
         injected = { options = { ignore_errors = true } },
         -- -- Example of using dprint only when a dprint.json file is present
         -- dprint = {
-        --   condition = function(self, ctx)
+        --   condition = function(ctx)
         --     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
         --   end,
         -- },
