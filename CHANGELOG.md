@@ -1,5 +1,22 @@
 # Changelog
 
+## [9.3.0](https://github.com/LazyVim/LazyVim/compare/v9.2.0...v9.3.0) (2023-10-06)
+
+
+### Features
+
+* **bufremove:** ask to save changes before trying to remove a buffer ([54df3e2](https://github.com/LazyVim/LazyVim/commit/54df3e26aca5c5c4da746f210e6f7e7de30673bb))
+
+
+### Bug Fixes
+
+* **tailwind:** nil check for filetypes_include. Fixes [#1607](https://github.com/LazyVim/LazyVim/issues/1607) ([d8f4382](https://github.com/LazyVim/LazyVim/commit/d8f4382dd3850550076b33d64a5f455daf7e6450))
+
+
+### Performance Improvements
+
+* **config:** only enable LazyFile when opening a file from the cmdline ([11c9084](https://github.com/LazyVim/LazyVim/commit/11c9084ec576c8735a87550f7975640eb75e6ff7))
+
 ## [9.2.0](https://github.com/LazyVim/LazyVim/compare/v9.1.1...v9.2.0) (2023-10-06)
 
 
