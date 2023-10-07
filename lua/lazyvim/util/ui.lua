@@ -26,7 +26,7 @@ function M.get_signs(buf, lnum)
   )
   for _, extmark in pairs(extmarks) do
     signs[#signs + 1] = {
-      name = extmark[4].sign_hl_group,
+      name = extmark[4].sign_hl_group or "",
       text = extmark[4].sign_text,
       texthl = extmark[4].sign_hl_group,
       priority = extmark[4].priority,
@@ -93,7 +93,7 @@ function M.statuscolumn()
   ---@type Sign?,Sign?,Sign?
   local left, right, fold
   for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
-    if s.name:find("GitSign") then
+    if s.name and s.name:find("GitSign") then
       right = s
     else
       left = s
