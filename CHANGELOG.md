@@ -1,5 +1,15 @@
 # Changelog
 
+## [9.3.1](https://github.com/LazyVim/LazyVim/compare/v9.3.0...v9.3.1) (2023-10-07)
+
+
+### Bug Fixes
+
+* **config:** trigger all buf filetype events on LazyFile ([862e140](https://github.com/LazyVim/LazyVim/commit/862e140a7ad8452cd5a103982687fca63a2f44da))
+* **rust:** explicitly enable nvim-cmp source registration for crates ([#1609](https://github.com/LazyVim/LazyVim/issues/1609)) ([237be9e](https://github.com/LazyVim/LazyVim/commit/237be9e3a7f5ca8165d4242d47df34d8d407f4cc))
+* **treesitter-textobjects:** use normal ]c,]C,[c,[C when in diff-mode instead of goto class. Fixes [#1610](https://github.com/LazyVim/LazyVim/issues/1610) ([1935486](https://github.com/LazyVim/LazyVim/commit/1935486ff143dd5cf100b8c89204dc01d8e06021))
+* **ui:** properly handly signs without name. Fixes [#1612](https://github.com/LazyVim/LazyVim/issues/1612) ([0fcdbe2](https://github.com/LazyVim/LazyVim/commit/0fcdbe20daf44f00252668b3866b19ac18b339df))
+
 ## [9.3.0](https://github.com/LazyVim/LazyVim/compare/v9.2.0...v9.3.0) (2023-10-06)
 
 
