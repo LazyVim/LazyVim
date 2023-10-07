@@ -172,7 +172,7 @@ function M.lazy_file()
     Util.track({ event = "LazyVim.lazy_file" })
 
     ---@type table<string,string[]>
-    local skips = { FileType = Event.get_augroups("FileType") }
+    local skips = {}
     for _, event in ipairs(events) do
       skips[event.event] = skips[event.event] or Event.get_augroups(event.event)
     end
@@ -188,7 +188,6 @@ function M.lazy_file()
       if vim.bo[event.buf].filetype then
         Event.trigger({
           event = "FileType",
-          exclude = skips.FileType,
           buf = event.buf,
         })
       end
