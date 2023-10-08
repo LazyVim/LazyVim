@@ -18,7 +18,7 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, 1, { name = "codeium", group_index = 1 })
-      opts.sorting = opts.sorting or require("cmp.config.default")().sorting
+      table.insert(opts.sorting.primary, "codeium")
     end,
   },
 }

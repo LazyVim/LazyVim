@@ -71,8 +71,7 @@ return {
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, 1, { name = "copilot", group_index = 1 })
-      opts.sorting = opts.sorting or require("cmp.config.default")().sorting
-      table.insert(opts.sorting.comparators, 1, require("copilot_cmp.comparators").prioritize)
+      table.insert(opts.sorting.primary, "copilot")
     end,
   },
 }

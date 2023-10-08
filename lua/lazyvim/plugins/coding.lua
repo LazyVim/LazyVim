@@ -45,6 +45,26 @@ return {
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
+
+      -- LazyVim extension to prioritise certain sources
+      defaults.sorting.primary = {}
+
+      ---@param entry Cmp.Entry
+      local function is_primary(entry)
+        local config = require("cmp.config").global
+        return vim.tbl_contains(config.sorting.primary or {}, entry.source:get_debug_name())
+      end
+
+      table.insert(defaults.sorting.comparators, 1, function(a, b)
+        local aa = is_primary(a)
+        local bb = is_primary(b)
+        if aa and not bb then
+          return true
+        end
+        if not aa and bb then
+          return false
+        end
+      end)
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
