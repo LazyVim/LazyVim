@@ -3,7 +3,7 @@ local M = {}
 
 M.lazy_version = ">=10.8.0"
 M.use_lazy_file = true
-M.lazy_file_events = { "BufReadPost", "BufNewFile" }
+M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
 ---@class LazyVimOptions
 local defaults = {
