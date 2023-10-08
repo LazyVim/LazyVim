@@ -8,7 +8,7 @@ M.root_patterns = { ".git", "lua" }
 function M.on_attach(on_attach)
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-      local buffer = args.buf
+      local buffer = args.buf ---@type number
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       on_attach(client, buffer)
     end,
@@ -22,9 +22,11 @@ end
 
 function M.fg(name)
   ---@type {foreground?:number}?
+  ---@diagnostic disable-next-line: deprecated
   local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or vim.api.nvim_get_hl_by_name(name, true)
-  local fg = hl and hl.fg or hl.foreground
-  return fg and { fg = string.format("#%06x", fg) }
+  ---@diagnostic disable-next-line: undefined-field
+  local fg = hl and (hl.fg or hl.foreground)
+  return fg and { fg = string.format("#%06x", fg) } or nil
 end
 
 ---@param fn fun()
@@ -47,6 +49,8 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
+M.get_clients = vim.lsp.get_clients or vim.lsp_get_active_clients
+
 -- returns the root directory based on:
 -- * lsp workspace folders
 -- * lsp root_dir
@@ -60,7 +64,7 @@ function M.get_root()
   ---@type string[]
   local roots = {}
   if path then
-    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+    for _, client in pairs(M.get_clients({ bufnr = 0 })) do
       local workspace = client.config.workspace_folders
       local paths = workspace and vim.tbl_map(function(ws)
         return vim.uri_to_fname(ws.uri)
@@ -227,7 +231,7 @@ function M.lazy_notify()
   vim.notify = temp
 
   local timer = vim.loop.new_timer()
-  local check = vim.loop.new_check()
+  local check = assert(vim.loop.new_check())
 
   local replay = function()
     timer:stop()
@@ -253,6 +257,7 @@ function M.lazy_notify()
   timer:start(500, 0, replay)
 end
 
+---@return _.lspconfig.options
 function M.lsp_get_config(server)
   local configs = require("lspconfig.configs")
   return rawget(configs, server)
@@ -263,6 +268,7 @@ end
 function M.lsp_disable(server, cond)
   local util = require("lspconfig.util")
   local def = M.lsp_get_config(server)
+  ---@diagnostic disable-next-line: undefined-field
   def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
     if cond(root_dir, config) then
       config.enabled = false
@@ -302,9 +308,10 @@ end
 ---@param from string
 ---@param to string
 function M.on_rename(from, to)
-  local clients = vim.lsp.get_active_clients()
+  local clients = M.get_clients()
   for _, client in ipairs(clients) do
     if client.supports_method("workspace/willRenameFiles") then
+      ---@diagnostic disable-next-line: invisible
       local resp = client.request_sync("workspace/willRenameFiles", {
         files = {
           {
@@ -312,7 +319,7 @@ function M.on_rename(from, to)
             newUri = vim.uri_from_fname(to),
           },
         },
-      }, 1000)
+      }, 1000, 0)
       if resp and resp.result ~= nil then
         vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
       end
@@ -328,8 +335,9 @@ function M.safe_keymap_set(mode, lhs, rhs, opts)
   ---@cast keys LazyKeysHandler
   local modes = type(mode) == "string" and { mode } or mode
 
-  modes = vim.tbl_filter(function(mode)
-    return not (keys.have and keys:have(lhs, mode))
+  ---@param m string
+  modes = vim.tbl_filter(function(m)
+    return not (keys.have and keys:have(lhs, m))
   end, modes)
 
   -- do not create the keymap if a lazy keys handler exists

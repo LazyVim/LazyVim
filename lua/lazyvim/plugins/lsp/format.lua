@@ -82,7 +82,7 @@ function M.get_formatters(bufnr)
   }
 
   ---@type lsp.Client[]
-  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+  local clients = require("lazyvim.util").get_clients({ bufnr = bufnr })
   for _, client in ipairs(clients) do
     if M.supports_format(client) then
       if (#null_ls > 0 and client.name == "null-ls") or #null_ls == 0 then
