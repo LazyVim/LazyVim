@@ -268,7 +268,10 @@ M.did_init = false
 function M.init()
   if not M.did_init then
     M.did_init = true
-    vim.opt.rtp:append(require("lazy.core.config").spec.plugins.LazyVim.dir)
+    local plugin = require("lazy.core.config").spec.plugins.LazyVim
+    if plugin then
+      vim.opt.rtp:append(plugin.dir)
+    end
 
     M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
     ---@diagnostic disable-next-line: undefined-field
