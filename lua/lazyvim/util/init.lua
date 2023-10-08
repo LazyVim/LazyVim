@@ -3,6 +3,10 @@ local Util = require("lazy.core.util")
 local M = {}
 
 M.root_patterns = { ".git", "lua" }
+function M.get_clients(...)
+  local fn = vim.lsp.get_clients or vim.lsp.get_active_clients
+  return fn(...)
+end
 
 ---@param on_attach fun(client, buffer)
 function M.on_attach(on_attach)
@@ -48,8 +52,6 @@ function M.opts(name)
   local Plugin = require("lazy.core.plugin")
   return Plugin.values(plugin, "opts", false)
 end
-
-M.get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
 
 -- returns the root directory based on:
 -- * lsp workspace folders
