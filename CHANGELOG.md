@@ -1,5 +1,18 @@
 # Changelog
 
+## [9.6.0](https://github.com/LazyVim/LazyVim/compare/v9.5.0...v9.6.0) (2023-10-08)
+
+
+### Features
+
+* **extra:** add extra `util.dot` that configures multiple ft and treesitter langs when needed ([639a6e7](https://github.com/LazyVim/LazyVim/commit/639a6e7545830602c09711b3757a28537baf8e75))
+
+
+### Bug Fixes
+
+* **config:** trigger LazyFile additionally on BufWritePre for saving unnamed files ([e11a3cb](https://github.com/LazyVim/LazyVim/commit/e11a3cbe800a1216062f7cefd25827f6fdad9daa))
+* **yaml:** yaml schemas are a dict, not a list, so merge properly. Fixes [#1636](https://github.com/LazyVim/LazyVim/issues/1636) ([33c677a](https://github.com/LazyVim/LazyVim/commit/33c677a55e97ee115ad7050856856df7cd96b3e1))
+
 ## [9.5.0](https://github.com/LazyVim/LazyVim/compare/v9.4.1...v9.5.0) (2023-10-08)
 
 
