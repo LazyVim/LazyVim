@@ -1,5 +1,13 @@
 # Changelog
 
+## [9.4.1](https://github.com/LazyVim/LazyVim/compare/v9.4.0...v9.4.1) (2023-10-08)
+
+
+### Bug Fixes
+
+* **config:** dont append LazyVim early to the rtp when bootstrapping ([4e0a058](https://github.com/LazyVim/LazyVim/commit/4e0a05808cb0997e0ac7d939421f68e9dfa5d74d))
+* **util:** fixed lsp willRenameFiles support check ([21ee35f](https://github.com/LazyVim/LazyVim/commit/21ee35f7108f4eefbce84d88a002572b168fc357))
+
 ## [9.4.0](https://github.com/LazyVim/LazyVim/compare/v9.3.1...v9.4.0) (2023-10-08)
 
 
