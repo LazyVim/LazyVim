@@ -1,5 +1,24 @@
 # Changelog
 
+## [9.4.0](https://github.com/LazyVim/LazyVim/compare/v9.3.1...v9.4.0) (2023-10-08)
+
+
+### Features
+
+* **codeium:** add codeium extra ([#1619](https://github.com/LazyVim/LazyVim/issues/1619)) ([af9e452](https://github.com/LazyVim/LazyVim/commit/af9e4528543d98bccce333d39eccc34e433ef6dc))
+* **keymaps:** added support for lazy's per-mode keymap disabling ([1bc7827](https://github.com/LazyVim/LazyVim/commit/1bc78272da28821479e98df528d399214a8cdbee))
+* **nlua:** make lua dap keybindings buffer-local ([9372d78](https://github.com/LazyVim/LazyVim/commit/9372d78e7e4ed46612de9818868373da81b6f4f1))
+
+
+### Bug Fixes
+
+* **alpha:** reset laststatus when alpha unloads. Fixes [#1623](https://github.com/LazyVim/LazyVim/issues/1623) ([30d5735](https://github.com/LazyVim/LazyVim/commit/30d573502a2f9264273a14143e6bddb0b876a391))
+
+
+### Performance Improvements
+
+* **navic:** enable lazy_update_context option to update context on "CursorHold" instead of of using default "CursorMove" ([#1620](https://github.com/LazyVim/LazyVim/issues/1620)) ([3c92fa4](https://github.com/LazyVim/LazyVim/commit/3c92fa4eb04f827c79c095905ca9391d540fea79))
+
 ## [9.3.1](https://github.com/LazyVim/LazyVim/compare/v9.3.0...v9.3.1) (2023-10-07)
 
 
