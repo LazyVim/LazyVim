@@ -139,6 +139,14 @@ return {
               return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
             end,
             cwd = "${workspaceFolder}",
+            args = function()
+              local s = vim.fn.input("Args to pass: ")
+              local t = {}
+              _ = string.gsub(s, "[^ ]+", function(w)
+                table.insert(t, w)
+              end)
+              return t
+            end,
           },
           {
             type = "codelldb",
