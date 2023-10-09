@@ -123,7 +123,7 @@ return {
     "nvim-telescope/telescope.nvim",
     opts = {
       defaults = {
-        get_selecition_window = function()
+        get_selection_window = function()
           require("edgy").goto_main()
           return 0
         end,
