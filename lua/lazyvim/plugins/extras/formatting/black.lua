@@ -18,7 +18,7 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        ["python"] = { { "blackd", "black" } },
+        ["python"] = { "black" },
       },
     },
   },
