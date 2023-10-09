@@ -1,5 +1,27 @@
 # Changelog
 
+## [9.8.0](https://github.com/LazyVim/LazyVim/compare/v9.7.0...v9.8.0) (2023-10-09)
+
+
+### Features
+
+* **cmp:** ctrl+CR will abort cmp and enter a new line ([d894556](https://github.com/LazyVim/LazyVim/commit/d894556c375c1c2398f170c21f9323c9c1eba9d4))
+* **dashboard:** show loaded/count plugins on dashboard instead of just count ([9670c8a](https://github.com/LazyVim/LazyVim/commit/9670c8a400100d38e15c9662f488232508bfb1bb))
+* **edgy:** when edgy is enabled, use edgy's main window for Telescope to open results in ([fb70170](https://github.com/LazyVim/LazyVim/commit/fb7017005809d6be06a1ece748ef2406c37a34d9))
+* **options:** set `virtualedit=block` by default ([6b857f1](https://github.com/LazyVim/LazyVim/commit/6b857f1de648292f2410f9beaa95318bd30454d5))
+* **telescope:** add telescope-fzf-native by default. Will only be enabled if `make` is on your system. ([44984dc](https://github.com/LazyVim/LazyVim/commit/44984dcbe25c13e0e1bc582d5a51ccc2a4be8f70))
+* **telescope:** smarter way to determine the window to open a file in ([c0ce89f](https://github.com/LazyVim/LazyVim/commit/c0ce89fe62bffc0fe35bf76d3e5f501c8b5276c2))
+
+
+### Bug Fixes
+
+* **autocmds:** extra check that we didn't do last_loc more than once for the buffer ([5d44c97](https://github.com/LazyVim/LazyVim/commit/5d44c976a746e29cfe52ceab93dd3de5db2eafa8))
+* **cmp:** set default group_index to 1 to prevent issues with custom sources ([0a05888](https://github.com/LazyVim/LazyVim/commit/0a05888d992b37749f9aae25c7f63f2534ec1024))
+* **edgy:** typo ([9357ea2](https://github.com/LazyVim/LazyVim/commit/9357ea2881fdd57b028256597c01e15601c29aaf))
+* **project:** make sure to load telescope extension after telescope ran setup ([0955129](https://github.com/LazyVim/LazyVim/commit/0955129796749651e1413006e36e9a1c6d3027f3))
+* **telescope:** remove telescope folding hack since PR with fix has been merged upstream ([02bc414](https://github.com/LazyVim/LazyVim/commit/02bc41412a14c1c0bb823421ef82ff5596f42571))
+* **util:** dont schedule on_load ([4e8a88f](https://github.com/LazyVim/LazyVim/commit/4e8a88fc1f28d0420aa3badb703296f344d89968))
+
 ## [9.7.0](https://github.com/LazyVim/LazyVim/compare/v9.6.0...v9.7.0) (2023-10-09)
 
 
