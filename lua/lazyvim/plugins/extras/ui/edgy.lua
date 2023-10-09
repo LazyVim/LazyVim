@@ -118,6 +118,19 @@ return {
     end,
   },
 
+  -- use edgy's selection window
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        get_selecition_window = function()
+          require("edgy").goto_main()
+          return 0
+        end,
+      },
+    },
+  },
+
   -- prevent neo-tree from opening files in edgy windows
   {
     "nvim-neo-tree/neo-tree.nvim",
