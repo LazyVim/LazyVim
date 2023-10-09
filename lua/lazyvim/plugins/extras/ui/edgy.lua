@@ -121,6 +121,7 @@ return {
   -- use edgy's selection window
   {
     "nvim-telescope/telescope.nvim",
+    optional = true,
     opts = {
       defaults = {
         get_selection_window = function()
