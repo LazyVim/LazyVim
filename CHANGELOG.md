@@ -1,5 +1,31 @@
 # Changelog
 
+## [9.7.0](https://github.com/LazyVim/LazyVim/compare/v9.6.0...v9.7.0) (2023-10-09)
+
+
+### Features
+
+* **black:** added an extra for black with none-ls & conform.nvim ([#1245](https://github.com/LazyVim/LazyVim/issues/1245)) ([5219cad](https://github.com/LazyVim/LazyVim/commit/5219cad564152337d5d48572466ac976f300a557))
+* **cmp:** added custom comparator to prioritize AI sources like copilot and codeium ([eddd3af](https://github.com/LazyVim/LazyVim/commit/eddd3af3512133f22eb26dda81c3c6f871453276))
+* **cmp:** removed priority comparator in favor of source priorities for copilot/codeium ([bff3a99](https://github.com/LazyVim/LazyVim/commit/bff3a996971c1f526eb893d8e778daa19a4245b5))
+* **codeium:** added lualine component with codeium status similar to copilot ([b05783d](https://github.com/LazyVim/LazyVim/commit/b05783de8c518c8a6e5c3f648448c3a6f00d0050))
+* **codeium:** use actual codeium icon ([302c1ff](https://github.com/LazyVim/LazyVim/commit/302c1ff66e5b1d7bbe95f29e81c2d642e2cd4468))
+
+
+### Bug Fixes
+
+* **black:** remove unknown blackd from conform ([#1640](https://github.com/LazyVim/LazyVim/issues/1640)) ([1779858](https://github.com/LazyVim/LazyVim/commit/177985842665921e11f9e9813348fd6bef852e27))
+* **bufferline:** fix bufferline when restoring a session ([838ce85](https://github.com/LazyVim/LazyVim/commit/838ce85ad6ae2dc2fa1d7518b0c5eb1eb8fe29b2))
+* **cmp:** properly set cmp `group_index` to fix issues with copilot and other sources ([#1639](https://github.com/LazyVim/LazyVim/issues/1639)) ([de93848](https://github.com/LazyVim/LazyVim/commit/de93848f584b3443204247f49b405b81b0a3d4c1))
+* **lualine:** only show statusline as soon as lualine loads ([dd55cbd](https://github.com/LazyVim/LazyVim/commit/dd55cbdc99021267bee8260c224582a053552dfe))
+* **options:** set sessionoptions the same as persistence ([502d324](https://github.com/LazyVim/LazyVim/commit/502d32490b29e7f52b2941cfa6a306b45633d63e))
+* **plugins:** make sure init specs are loaded first ([51e25a9](https://github.com/LazyVim/LazyVim/commit/51e25a94b4ff2339028bdded993756360145d1b3))
+
+
+### Performance Improvements
+
+* **util:** closure for get_clients to prevent loading vim.lsp cascade early ([1eac633](https://github.com/LazyVim/LazyVim/commit/1eac633c4f0621d5bd07db1ab7d563db5b342e82))
+
 ## [9.6.0](https://github.com/LazyVim/LazyVim/compare/v9.5.0...v9.6.0) (2023-10-08)
 
 
