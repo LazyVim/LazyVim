@@ -1,3 +1,5 @@
+local Util = require("lazy.core.util")
+
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
@@ -160,7 +162,8 @@ function M.setup(opts)
     M.lazy_file()
   end
 
-  require("lazy.core.util").try(function()
+  Util.track("colorscheme")
+  Util.try(function()
     if type(M.colorscheme) == "function" then
       M.colorscheme()
     else
@@ -169,10 +172,11 @@ function M.setup(opts)
   end, {
     msg = "Could not load your colorscheme",
     on_error = function(msg)
-      require("lazy.core.util").error(msg)
+      Util.error(msg)
       vim.cmd.colorscheme("habamax")
     end,
   })
+  Util.track()
 end
 
 -- Properly load file based plugins without blocking the UI
@@ -184,7 +188,6 @@ function M.lazy_file()
       return
     end
     local Event = require("lazy.core.handler.event")
-    local Util = require("lazy.core.util")
     vim.api.nvim_del_augroup_by_name("lazy_file")
 
     Util.track({ event = "LazyVim.lazy_file" })
@@ -236,7 +239,6 @@ end
 
 ---@param name "autocmds" | "options" | "keymaps"
 function M.load(name)
-  local Util = require("lazy.core.util")
   local function _load(mod)
     Util.try(function()
       require(mod)
@@ -290,7 +292,7 @@ function M.init()
     Plugin.Spec.add = function(self, plugin, ...)
       if type(plugin) == "table" then
         if M.renames[plugin[1]] then
-          require("lazy.core.util").warn(
+          Util.warn(
             ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
               plugin[1],
               M.renames[plugin[1]],
