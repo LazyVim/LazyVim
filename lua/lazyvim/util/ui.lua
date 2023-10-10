@@ -101,6 +101,10 @@ function M.statuscolumn()
     end
   end
 
+  if vim.v.virtnum ~= 0 then
+    left = nil
+  end
+
   vim.api.nvim_win_call(win, function()
     if vim.fn.foldclosed(vim.v.lnum) >= 0 then
       fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = "Folded" }
