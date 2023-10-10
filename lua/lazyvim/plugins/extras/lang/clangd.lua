@@ -141,11 +141,7 @@ return {
             cwd = "${workspaceFolder}",
             args = function()
               local s = vim.fn.input("Args to pass: ")
-              local t = {}
-              _ = string.gsub(s, "[^ ]+", function(w)
-                table.insert(t, w)
-              end)
-              return t
+              return vim.split(s, " ")
             end,
           },
           {
