@@ -11,7 +11,7 @@ return {
       {
         "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+          require("neo-tree.command").execute({ toggle = true, dir = Util.root.get() })
         end,
         desc = "Explorer NeoTree (root dir)",
       },
@@ -60,7 +60,7 @@ return {
     },
     config = function(_, opts)
       local function on_move(data)
-        Util.on_rename(data.source, data.destination)
+        Util.lsp.on_rename(data.source, data.destination)
       end
 
       local events = require("neo-tree.events")
@@ -270,7 +270,7 @@ return {
     "nvim-telescope/telescope.nvim",
     optional = true,
     opts = function(_, opts)
-      if not require("lazyvim.util").has("flash.nvim") then
+      if not Util.has("flash.nvim") then
         return
       end
       local function flash(prompt_bufnr)
