@@ -2,6 +2,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Enable LazyVim auto format
+vim.g.autoformat = true
+
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
