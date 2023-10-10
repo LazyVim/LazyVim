@@ -200,49 +200,6 @@ return {
     end,
   },
 
-  -- formatters
-  {
-    "nvimtools/none-ls.nvim",
-    event = "LazyFile",
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-        sources = {
-          nls.builtins.formatting.fish_indent,
-          nls.builtins.diagnostics.fish,
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.shfmt,
-        },
-      }
-    end,
-    config = function(_, opts)
-      require("null-ls").setup(opts)
-
-      -- register the formatter with LazyVim
-      require("lazyvim.util").format.register({
-        name = "none-ls.nvim",
-        priority = 50,
-        primary = true,
-        format = function(buf)
-          return Util.lsp.format({
-            bufnr = buf,
-            filter = function(client)
-              return client.name == "null-ls"
-            end,
-          })
-        end,
-        sources = function(buf)
-          local ret = require("null-ls.sources").get_available(vim.bo[buf].filetype, "NULL_LS_FORMATTING") or {}
-          return vim.tbl_map(function(source)
-            return source.name
-          end, ret)
-        end,
-      })
-    end,
-  },
-
   -- cmdline tools and lsp servers
   {
 
