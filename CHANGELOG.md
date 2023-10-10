@@ -1,5 +1,18 @@
 # Changelog
 
+## [9.9.0](https://github.com/LazyVim/LazyVim/compare/v9.8.0...v9.9.0) (2023-10-10)
+
+
+### Features
+
+* **dap:** added run with args `leader-ca`. Fixes [#1629](https://github.com/LazyVim/LazyVim/issues/1629) ([b1c9fd1](https://github.com/LazyVim/LazyVim/commit/b1c9fd15bdbc0bae5bf1ba1efd88ce7355e7f2c1))
+
+
+### Bug Fixes
+
+* **hypr:** automatically update/install hypr treesitter parser when needed ([88d465c](https://github.com/LazyVim/LazyVim/commit/88d465c3efac065f912e1de162c9a48bbae15316))
+* **treesitter:** typo with commands ([599798a](https://github.com/LazyVim/LazyVim/commit/599798a366d5fead7e8486e1b02dd2362d2e6bd1))
+
 ## [9.8.0](https://github.com/LazyVim/LazyVim/compare/v9.7.0...v9.8.0) (2023-10-09)
 
 
