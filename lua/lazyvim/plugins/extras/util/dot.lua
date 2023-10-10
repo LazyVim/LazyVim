@@ -13,6 +13,7 @@ return {
     "luckasRanarison/tree-sitter-hypr",
     enabled = have("hypr"),
     event = "BufRead */hypr/*.conf",
+    build = ":TSUpdate hypr",
     config = function()
       -- Fix ft detection for hyprland
       vim.filetype.add({
