@@ -35,8 +35,6 @@ return {
       },
       -- add any global capabilities here
       capabilities = {},
-      -- Automatically format on save
-      autoformat = true,
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
       -- but can be also overridden when specified
@@ -80,16 +78,20 @@ return {
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
-      local Util = require("lazyvim.util")
-
       if Util.has("neoconf.nvim") then
         local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
+
       -- setup autoformat
-      require("lazyvim.plugins.lsp.format").setup(opts)
-      -- setup formatting and keymaps
-      Util.on_attach(function(client, buffer)
+      Util.format.register(Util.lsp.formatter())
+
+      -- deprectaed options
+      if opts.autoformat ~= nil then
+        vim.g.autoformat = opts.autoformat
+        Util.deprecate("nvim-lspconfig.opts.autoformat", "vim.g.autoformat")
+      end
+
       -- setup keymaps
       Util.lsp.on_attach(function(client, buffer)
         require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
@@ -214,6 +216,30 @@ return {
           nls.builtins.formatting.shfmt,
         },
       }
+    end,
+    config = function(_, opts)
+      require("null-ls").setup(opts)
+
+      -- register the formatter with LazyVim
+      require("lazyvim.util").format.register({
+        name = "none-ls.nvim",
+        priority = 50,
+        primary = true,
+        format = function(buf)
+          return Util.lsp.format({
+            bufnr = buf,
+            filter = function(client)
+              return client.name == "null-ls"
+            end,
+          })
+        end,
+        sources = function(buf)
+          local ret = require("null-ls.sources").get_available(vim.bo[buf].filetype, "NULL_LS_FORMATTING") or {}
+          return vim.tbl_map(function(source)
+            return source.name
+          end, ret)
+        end,
+      })
     end,
   },
 
