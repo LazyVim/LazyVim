@@ -8,6 +8,7 @@ local LazyUtil = require("lazy.core.util")
 ---@field terminal lazyvim.util.terminal
 ---@field toggle lazyvim.util.toggle
 ---@field format lazyvim.util.format
+---@field plugin lazyvim.util.plugin
 local M = {}
 
 ---@type table<string, string|string[]>
