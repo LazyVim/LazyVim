@@ -105,8 +105,8 @@ map("n", "<leader>uf", require("lazyvim.plugins.lsp.format").toggle, { desc = "T
 map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
 map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
 map("n", "<leader>uL", function() Util.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>ul", function() Util.toggle_number() end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+map("n", "<leader>ul", function() Util.toggle.number() end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ud", function() Util.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
 if vim.lsp.inlay_hint then
@@ -114,8 +114,8 @@ if vim.lsp.inlay_hint then
 end
 
 -- lazygit
-map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { cwd = Util.get_root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() Util.float_term({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function() Util.terminal({ "lazygit" }, { cwd = Util.root.get(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function() Util.terminal({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -127,9 +127,9 @@ map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>L", Util.changelog, {desc = "LazyVim Changelog"})
 
 -- floating terminal
-local lazyterm = function() Util.float_term(nil, { cwd = Util.get_root() }) end
+local lazyterm = function() Util.terminal(nil, { cwd = Util.root.get() }) end
 map("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
-map("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+map("n", "<leader>fT", function() Util.terminal() end, { desc = "Terminal (cwd)" })
 map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
 map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 

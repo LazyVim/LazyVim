@@ -1,4 +1,4 @@
-local Util = require("lazy.core.util")
+local Util = require("lazyvim.util")
 
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
@@ -155,6 +155,7 @@ function M.setup(opts)
         M.load("autocmds")
       end
       M.load("keymaps")
+      Util.format.setup()
     end,
   })
 
@@ -240,18 +241,11 @@ end
 ---@param name "autocmds" | "options" | "keymaps"
 function M.load(name)
   local function _load(mod)
-    Util.try(function()
-      require(mod)
-    end, {
-      msg = "Failed loading " .. mod,
-      on_error = function(msg)
-        local info = require("lazy.core.cache").find(mod)
-        if info == nil or (type(info) == "table" and #info == 0) then
-          return
-        end
-        Util.error(msg)
-      end,
-    })
+    if require("lazy.core.cache").find(mod)[1] then
+      Util.try(function()
+        require(mod)
+      end, { msg = "Failed loading " .. mod })
+    end
   end
   -- always load lazyvim, then user file
   if M.defaults[name] or name == "options" then
@@ -275,6 +269,11 @@ function M.init()
       vim.opt.rtp:append(plugin.dir)
     end
 
+    package.preload["lazyvim.plugins.lsp.format"] = function()
+      Util.deprecate([[require("lazyvim.plugins.lsp.format")]], [[require("lazyvim.util").format]])
+      return Util.format
+    end
+
     M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
     ---@diagnostic disable-next-line: undefined-field
     M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
@@ -285,7 +284,7 @@ function M.init()
     -- load options here, before lazy init while sourcing plugin modules
     -- this is needed to make sure options will be correctly applied
     -- after installing missing plugins
-    require("lazyvim.config").load("options")
+    M.load("options")
     local Plugin = require("lazy.core.plugin")
     local add = Plugin.Spec.add
     ---@diagnostic disable-next-line: duplicate-set-field
