@@ -11,6 +11,7 @@ M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 M.deprecated_extras = {
   ["lazyvim.plugins.extras.formatting.conform"] = "`conform.nvim` is now the default **LazyVim** formatter.",
   ["lazyvim.plugins.extras.linting.nvim-lint"] = "`nvim-lint` is now the default **LazyVim** linter.",
+  ["lazyvim.plugins.extras.ui.dashboard"] = "`dashboard.nvim` is now the default **LazyVim** starter.",
 }
 
 ---@type table<string, string>
