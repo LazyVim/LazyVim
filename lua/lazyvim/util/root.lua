@@ -12,7 +12,9 @@ local M = setmetatable({}, {
 ---@field paths string[]
 ---@field spec LazyRootSpec
 
----@alias LazyRootSpec string|string[]
+---@alias LazyRootFn fun(buf: number): (string|string[])
+
+---@alias LazyRootSpec string|string[]|LazyRootFn
 
 ---@type LazyRootSpec[]
 M.spec = { "lsp", { ".git", "lua" }, "cwd" }
@@ -60,6 +62,19 @@ function M.realpath(path)
   return Util.norm(path)
 end
 
+---@param spec LazyRootSpec
+---@return LazyRootFn
+function M.resolve(spec)
+  if M.detectors[spec] then
+    return M.detectors[spec]
+  elseif type(spec) == "function" then
+    return spec
+  end
+  return function(buf)
+    return M.detectors.pattern(buf, spec)
+  end
+end
+
 ---@param opts? { buf?: number, spec?: LazyRootSpec[], all?: boolean }
 function M.detect(opts)
   opts = opts or {}
@@ -68,7 +83,9 @@ function M.detect(opts)
 
   local ret = {} ---@type LazyRoot[]
   for _, spec in ipairs(opts.spec) do
-    local paths = M.detectors[spec] and M.detectors[spec](opts.buf) or M.detectors.pattern(opts.buf, spec)
+    local paths = M.resolve(spec)(opts.buf)
+    paths = paths or {}
+    paths = type(paths) == "table" and paths or { paths }
     local roots = {} ---@type string[]
     for _, p in ipairs(paths) do
       local pp = M.realpath(p)
