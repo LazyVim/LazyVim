@@ -113,6 +113,10 @@ return {
       end
     end,
     opts = function()
+      -- PERF: we don't need this lualine require madness 🤷
+      local lualine_require = require("lualine_require")
+      lualine_require.require = require
+
       local icons = require("lazyvim.config").icons
       local Util = require("lazyvim.util")
 
