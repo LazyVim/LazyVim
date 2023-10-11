@@ -26,7 +26,8 @@ function M.detectors.cwd()
 end
 
 function M.detectors.lsp(buf)
-  if not M.bufpath(buf) then
+  local bufpath = M.bufpath(buf)
+  if not bufpath then
     return {}
   end
   local roots = {} ---@type string[]
@@ -39,7 +40,10 @@ function M.detectors.lsp(buf)
       roots[#roots + 1] = client.config.root_dir
     end
   end
-  return roots
+  return vim.tbl_filter(function(path)
+    path = Util.norm(path)
+    return path and bufpath:find(path, 1, true) == 1
+  end, roots)
 end
 
 ---@param patterns string[]|string
