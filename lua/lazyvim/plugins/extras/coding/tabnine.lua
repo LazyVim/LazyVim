@@ -1,3 +1,6 @@
+-- TODO: add TabNine icon if is available
+local tabnine_icon = ""
+
 return {
   -- Tabnine cmp source
   {
@@ -8,14 +11,14 @@ return {
         "tzachar/cmp-tabnine",
         build = "./install.sh",
         dependencies = "hrsh7th/nvim-cmp",
-        -- Only limit top 3 suggestions from Tabnine
-        config = function()
+        opts = {
+          max_lines = 1000,
+          max_num_results = 3,
+          sort = true,
+        },
+        config = function(_, opts)
           local tabnine = require("cmp_tabnine.config")
-          tabnine:setup({
-            max_lines = 1000,
-            max_num_results = 3,
-            sort = true,
-          })
+          tabnine:setup(opts)
         end,
       },
     },
@@ -26,6 +29,26 @@ return {
         group_index = 1,
         priority = 100,
       })
+
+      -- Format the completion menu, remove the percentage and add icons
+      opts.formatting.format = function(entry, vim_item)
+        local icons = require("lazyvim.config").icons.kinds
+        if icons[vim_item.kind] then
+          vim_item.kind = icons[vim_item.kind] .. vim_item.kind
+        end
+
+        -- Add tabnine icon and hide percentage in the menu
+        if entry.source.name == "cmp_tabnine" then
+          vim_item.kind = tabnine_icon .. " TabNine"
+          vim_item.menu = ""
+
+          if (entry.completion_item.data or {}).multiline then
+            vim_item.kind = vim_item.kind .. " " .. "[ML]"
+          end
+        end
+
+        return vim_item
+      end
     end,
   },
   -- Show TabNine status in lualine
@@ -62,8 +85,7 @@ return {
       }
       table.insert(opts.sections.lualine_x, 3, {
         function()
-          -- TODO: return TabNine icon if TabNine is available
-          return ""
+          return tabnine_icon
         end,
         cond = function()
           return status() ~= nil
