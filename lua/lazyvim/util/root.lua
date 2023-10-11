@@ -106,12 +106,6 @@ function M.detect(opts)
   return ret
 end
 
-function M.setup()
-  vim.api.nvim_create_user_command("LazyRoot", function()
-    M.info()
-  end, { desc = "LazyVim roots for the current buffer" })
-end
-
 function M.info()
   local spec = type(vim.g.root_spec) == "table" and vim.g.root_spec or M.spec
 
