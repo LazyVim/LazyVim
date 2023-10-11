@@ -19,6 +19,9 @@ return {
       max_width = function()
         return math.floor(vim.o.columns * 0.75)
       end,
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { zindex = 100 })
+      end,
     },
     init = function()
       -- when noice is not enabled, install notify on VeryLazy
