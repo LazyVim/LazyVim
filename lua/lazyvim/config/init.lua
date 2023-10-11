@@ -278,7 +278,6 @@ function M.init()
     M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
     ---@diagnostic disable-next-line: undefined-field
     M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
-    M.use_lazy_file = false -- disablle for now till v10.0
 
     -- delay notifications till vim.notify was replaced or after 500ms
     require("lazyvim.util").lazy_notify()
@@ -315,7 +314,6 @@ function M.init()
                 events[#events + 1] = event
               end
             end
-            plugin.event = events
           end
         end
       end
