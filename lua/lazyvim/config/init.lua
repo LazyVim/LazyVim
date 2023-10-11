@@ -3,6 +3,8 @@ local Util = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
+M.version = "10.0.0" -- x-release-please-version
+
 ---@class LazyVimOptions
 local defaults = {
   -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
