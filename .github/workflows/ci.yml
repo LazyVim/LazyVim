@@ -59,6 +59,8 @@ jobs:
         with:
           release-type: simple
           package-name: LazyVim
+          extra-files: |
+            lua/lazyvim/config/init.lua
       - uses: actions/checkout@v3
       - name: tag stable versions
         if: ${{ steps.release.outputs.release_created }}
