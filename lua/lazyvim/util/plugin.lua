@@ -21,6 +21,12 @@ M.renames = {
   ["null-ls.nvim"] = "none-ls.nvim",
 }
 
+function M.setup()
+  M.fix_imports()
+  M.fix_renames()
+  M.lazy_file()
+end
+
 -- Properly load file based plugins without blocking the UI
 function M.lazy_file()
   M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
@@ -86,23 +92,18 @@ function M.lazy_file()
 end
 
 function M.fix_imports()
-  local import = Plugin.Spec.import
-  ---@diagnostic disable-next-line: duplicate-set-field
-  function Plugin.Spec:import(spec)
+  Plugin.Spec.import = Util.inject.args(Plugin.Spec.import, function(_, spec)
     local dep = M.deprecated_extras[spec and spec.import]
     if dep then
       dep = dep .. "\n" .. "Please remove the extra to hide this warning."
       Util.warn(dep, { title = "LazyVim", once = true, stacktrace = true, stacklevel = 6 })
-      return
+      return false
     end
-    return import(self, spec)
-  end
+  end)
 end
 
 function M.fix_renames()
-  local add = Plugin.Spec.add
-  ---@diagnostic disable-next-line: duplicate-set-field
-  Plugin.Spec.add = function(self, plugin, ...)
+  Plugin.Spec.add = Util.inject.args(Plugin.Spec.add, function(self, plugin)
     if type(plugin) == "table" then
       if M.renames[plugin[1]] then
         Util.warn(
@@ -116,8 +117,7 @@ function M.fix_renames()
         plugin[1] = M.renames[plugin[1]]
       end
     end
-    return add(self, plugin, ...)
-  end
+  end)
 end
 
 return M

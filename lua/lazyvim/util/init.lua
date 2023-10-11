@@ -10,6 +10,7 @@ local LazyUtil = require("lazy.core.util")
 ---@field format lazyvim.util.format
 ---@field plugin lazyvim.util.plugin
 ---@field extras lazyvim.util.extras
+---@field inject lazyvim.util.inject
 local M = {}
 
 ---@type table<string, string|string[]>

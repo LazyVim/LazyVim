@@ -210,9 +210,7 @@ function M.init()
   -- after installing missing plugins
   M.load("options")
 
-  Util.plugin.fix_imports()
-  Util.plugin.fix_renames()
-  Util.plugin.lazy_file()
+  Util.plugin.setup()
   M.json.load()
 end
 
