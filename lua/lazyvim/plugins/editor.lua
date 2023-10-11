@@ -150,42 +150,20 @@ return {
       { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
       {
         "<leader>ss",
-        Util.telescope("lsp_document_symbols", {
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-            "Enum",
-            "Constant",
-          },
-        }),
+        function()
+          require("telescope.builtin").lsp_document_symbols({
+            symbols = require("lazyvim.config").get_kind_filter(),
+          })
+        end,
         desc = "Goto Symbol",
       },
       {
         "<leader>sS",
-        Util.telescope("lsp_dynamic_workspace_symbols", {
-          symbols = {
-            "Class",
-            "Function",
-            "Method",
-            "Constructor",
-            "Interface",
-            "Module",
-            "Struct",
-            "Trait",
-            "Field",
-            "Property",
-            "Enum",
-            "Constant",
-          },
-        }),
+        function()
+          require("telescope.builtin").lsp_dynamic_workspace_symbols({
+            symbols = require("lazyvim.config").get_kind_filter(),
+          })
+        end,
         desc = "Goto Symbol (Workspace)",
       },
     },

@@ -84,6 +84,26 @@ local defaults = {
       Variable      = "󰀫 ",
     },
   },
+  ---@type table<string, string[]>?
+  kind_filter = {
+    default = {
+      "Class",
+      "Constructor",
+      "Enum",
+      "Field",
+      "Function",
+      "Interface",
+      "Method",
+      "Module",
+      "Property",
+      "Struct",
+      "Trait",
+    },
+    -- you can specify a different filter for each filetype
+    -- lua = {
+    --   "Function",
+    -- },
+  },
 }
 
 M.json = {
@@ -165,6 +185,17 @@ function M.setup(opts)
     end,
   })
   Util.track()
+end
+
+---@param buf? number
+---@return string[]?
+function M.get_kind_filter(buf)
+  buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
+  local ft = vim.bo[buf].filetype
+  if M.kind_filter == false then
+    return
+  end
+  return M.kind_filter[ft] or M.kind_filter.default
 end
 
 ---@param name "autocmds" | "options" | "keymaps"
