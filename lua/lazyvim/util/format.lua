@@ -67,7 +67,7 @@ function M.info(buf)
     end
   end
   if not have then
-    lines = { "\nNo formatters available for this buffer" }
+    lines[#lines+1] =  "\n***No formatters available for this buffer.***" 
   end
   Util[enabled and "info" or "warn"](
     table.concat(lines, "\n"),
