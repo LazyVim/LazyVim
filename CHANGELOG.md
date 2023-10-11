@@ -1,5 +1,12 @@
 # Changelog
 
+## [9.9.1](https://github.com/LazyVim/LazyVim/compare/v9.9.0...v9.9.1) (2023-10-11)
+
+
+### Bug Fixes
+
+* **config:** disable LazyFile till v10.0 ([ee7a401](https://github.com/LazyVim/LazyVim/commit/ee7a401388f2933729afcd7090fb8e69631b912f))
+
 ## [9.9.0](https://github.com/LazyVim/LazyVim/compare/v9.8.0...v9.9.0) (2023-10-10)
 
 
