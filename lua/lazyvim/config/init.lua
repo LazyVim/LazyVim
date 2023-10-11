@@ -83,6 +83,35 @@ local defaults = {
   },
 }
 
+M.json = {
+  data = {
+    version = nil, ---@type string?
+    extras = {}, ---@type string[]
+  },
+}
+
+function M.json.load()
+  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
+  local f = io.open(path, "r")
+  if f then
+    local data = f:read("*a")
+    f:close()
+    local ok, json = pcall(vim.json.decode, data, { luanil = { object = true, array = true } })
+    if ok then
+      M.json.data = vim.tbl_deep_extend("force", M.json.data, json or {})
+    end
+  end
+end
+
+function M.json.save()
+  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
+  local f = io.open(path, "w")
+  if f then
+    f:write(vim.json.encode(M.json.data))
+    f:close()
+  end
+end
+
 ---@type LazyVimOptions
 local options
 
@@ -176,6 +205,7 @@ function M.init()
   Util.plugin.fix_imports()
   Util.plugin.fix_renames()
   Util.plugin.lazy_file()
+  M.json.load()
 end
 
 setmetatable(M, {
