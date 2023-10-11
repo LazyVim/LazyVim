@@ -5,6 +5,10 @@ vim.g.maplocalleader = "\\"
 -- Enable LazyVim auto format
 vim.g.autoformat = true
 
+-- LazyVim root dir detection
+-- Each entry can be a detector function like `lsp` or `cwd`, or a pattern like `.git` or `lua`.
+vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
