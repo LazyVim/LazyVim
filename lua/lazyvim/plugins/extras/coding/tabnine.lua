@@ -1,14 +1,22 @@
 return {
+  -- Tabnine cmp source
   {
     "nvim-cmp",
     dependencies = {
-      -- Add TabNine source, make sure you run :CmpTabnineHub after installation.
+      -- Add TabNine support, make sure you run :CmpTabnineHub after installation.
       {
         "tzachar/cmp-tabnine",
         build = "./install.sh",
         dependencies = "hrsh7th/nvim-cmp",
-        -- Only limit top 3 sources, refer https://github.com/tzachar/cmp-tabnine?tab=readme-ov-file#setup
-        opts = { max_lines = 1000, max_num_results = 3, sort = true },
+        -- Only limit top 3 suggestions from Tabnine
+        config = function()
+          local tabnine = require("cmp_tabnine.config")
+          tabnine:setup({
+            max_lines = 1000,
+            max_num_results = 3,
+            sort = true,
+          })
+        end,
       },
     },
     ---@param opts cmp.ConfigSchema
@@ -20,7 +28,7 @@ return {
       })
     end,
   },
-
+  -- Show TabNine status in lualine
   {
     "nvim-lualine/lualine.nvim",
     optional = true,
