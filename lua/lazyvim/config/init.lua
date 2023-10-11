@@ -134,8 +134,16 @@ function M.setup(opts)
         M.load("autocmds")
       end
       M.load("keymaps")
+
       Util.format.setup()
-      Util.root.setup()
+
+      vim.api.nvim_create_user_command("LazyRoot", function()
+        Util.root.info()
+      end, { desc = "LazyVim roots for the current buffer" })
+
+      vim.api.nvim_create_user_command("LazyExtras", function()
+        Util.extras.show()
+      end, { desc = "Manage LazyVim extras" })
     end,
   })
 
