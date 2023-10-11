@@ -24,12 +24,18 @@ M.renames = {
 -- Properly load file based plugins without blocking the UI
 function M.lazy_file()
   M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
-  ---@diagnostic disable-next-line: undefined-field
-  M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
 
-  M.fix_lazy_file()
+  -- Add support for the LazyFile event
+  local Event = require("lazy.core.handler.event")
 
-  if not M.use_lazy_file then
+  if M.use_lazy_file then
+    -- We'll handle delayed execution of events ourselves
+    Event.mappings.LazyFile = { id = "LazyFile", event = "User", pattern = "LazyFile" }
+    Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+  else
+    -- Don't delay execution of LazyFile events, but let lazy know about the mapping
+    Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
+    Event.mappings["User LazyFile"] = Event.mappings.LazyFile
     return
   end
 
@@ -39,10 +45,7 @@ function M.lazy_file()
     if #events == 0 then
       return
     end
-    local Event = require("lazy.core.handler.event")
     vim.api.nvim_del_augroup_by_name("lazy_file")
-
-    Util.track({ event = "LazyVim.lazy_file" })
 
     ---@type table<string,string[]>
     local skips = {}
@@ -67,7 +70,6 @@ function M.lazy_file()
     end
     vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false })
     events = {}
-    Util.track()
   end
 
   -- schedule wrap so that nested autocmds are executed
@@ -115,33 +117,6 @@ function M.fix_renames()
       end
     end
     return add(self, plugin, ...)
-  end
-end
-
-function M.fix_lazy_file()
-  local Config = require("lazyvim.config")
-  -- Add support for the LazyFile event
-  local Handler = require("lazy.core.handler")
-  local Event = require("lazy.core.handler.event")
-  if M.use_lazy_file then
-    local _event = Event._event
-    ---@diagnostic disable-next-line: duplicate-set-field
-    Event._event = function(self, value)
-      return value == "LazyFile" and "User LazyFile" or _event(self, value)
-    end
-  else
-    ---@param plugin LazyPlugin
-    function Event:values(plugin)
-      local ret = Handler.values(self, plugin)
-      if ret["LazyFile"] or ret["User LazyFile"] then
-        for _, event in ipairs(M.lazy_file_events) do
-          ret[event] = event
-        end
-        ret["LazyFile"] = nil
-        ret["User LazyFile"] = nil
-      end
-      return ret
-    end
   end
 end
 
