@@ -27,6 +27,15 @@ function M.setup()
   M.lazy_file()
 end
 
+function M.extra_idx(name)
+  local Config = require("lazy.core.config")
+  for i, extra in ipairs(Config.spec.modules) do
+    if extra == "lazyvim.plugins.extras." .. name then
+      return i
+    end
+  end
+end
+
 -- Properly load file based plugins without blocking the UI
 function M.lazy_file()
   M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
