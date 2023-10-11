@@ -26,7 +26,6 @@ function M.lazy_file()
   M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
   ---@diagnostic disable-next-line: undefined-field
   M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
-  M.use_lazy_file = false
 
   M.fix_lazy_file()
 
