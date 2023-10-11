@@ -383,6 +383,7 @@ return {
             { action = "Telescope live_grep", desc = " Find text", icon = " ", key = "g" },
             { action = "e $MYVIMRC", desc = " Config", icon = " ", key = "c" },
             { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
+            { action = "LazyExtras", desc = " LazyExtras", icon = " ", key = "e" },
             { action = "Lazy", desc = " Lazy", icon = "󰒲 ", key = "l" },
             { action = "qa", desc = " Quit", icon = " ", key = "q" },
           },
