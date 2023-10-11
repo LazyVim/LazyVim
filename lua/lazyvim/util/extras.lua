@@ -11,6 +11,7 @@ local Util = require("lazyvim.util")
 ---@field managed boolean
 ---@field row? number
 ---@field plugins string[]
+---@field optional string[]
 
 ---@class lazyvim.util.extras
 local M = {}
@@ -43,12 +44,25 @@ function M.get()
   return vim.tbl_map(function(extra)
     local modname = "lazyvim.plugins.extras." .. extra
     local enabled = vim.tbl_contains(M.state, modname)
-    local spec = Plugin.Spec.new({ import = "lazyvim.plugins.extras." .. extra }, { optional = false })
+    local spec = Plugin.Spec.new({ import = "lazyvim.plugins.extras." .. extra }, { optional = true })
+    local plugins = {} ---@type string[]
+    local optional = {} ---@type string[]
+    for _, p in pairs(spec.plugins) do
+      if p.optional then
+        optional[#optional + 1] = p.name
+      else
+        plugins[#plugins + 1] = p.name
+      end
+    end
+    table.sort(plugins)
+    table.sort(optional)
+
     return {
       name = extra,
       enabled = enabled,
       managed = vim.tbl_contains(Config.json.data.extras, extra) or not enabled,
-      plugins = vim.tbl_keys(spec.plugins),
+      plugins = plugins,
+      optional = optional,
     }
   end, extras)
 end
@@ -151,6 +165,10 @@ end
 function X:render()
   self.text:nl():nl():append("LazyVim Extras", "LazyH1"):nl():nl()
   self.text
+    :append("This is a list of all enabled/disabled LazyVim extras.", "LazyComment")
+    :nl()
+    :append("Each extra shows the required and optional plugins it may install.", "LazyComment")
+    :nl()
     :append("Enable/disable extras with the ", "LazyComment")
     :append("<x>", "LazySpecial")
     :append(" key", "LazyComment")
@@ -177,6 +195,9 @@ function X:extra(extra)
   self.text:append(extra.name)
   for _, plugin in ipairs(extra.plugins) do
     self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonPlugin")
+  end
+  for _, plugin in ipairs(extra.optional) do
+    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonRequire")
   end
   self.text:nl()
 end
