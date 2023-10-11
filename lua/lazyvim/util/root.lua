@@ -1,9 +1,122 @@
 local Util = require("lazyvim.util")
 
 ---@class lazyvim.util.root
-local M = {}
+---@overload fun(): string
+local M = setmetatable({}, {
+  __call = function(m)
+    return m.get()
+  end,
+})
 
-M.patterns = { ".git", "lua" }
+---@class LazyRoot
+---@field paths string[]
+---@field spec LazyRootSpec
+
+---@alias LazyRootSpec string|string[]
+
+---@type LazyRootSpec[]
+M.spec = { "lsp", { ".git", "lua" }, "cwd" }
+
+M.detectors = {}
+
+function M.detectors.cwd()
+  return { vim.loop.cwd() }
+end
+
+function M.detectors.lsp(buf)
+  if not M.bufpath(buf) then
+    return {}
+  end
+  local roots = {} ---@type string[]
+  for _, client in pairs(Util.lsp.get_clients({ bufnr = buf })) do
+    local workspace = client.config.workspace_folders
+    for _, ws in pairs(workspace or {}) do
+      roots[#roots + 1] = vim.uri_to_fname(ws.uri)
+    end
+    if client.config.root_dir then
+      roots[#roots + 1] = client.config.root_dir
+    end
+  end
+  return roots
+end
+
+---@param patterns string[]|string
+function M.detectors.pattern(buf, patterns)
+  patterns = type(patterns) == "string" and { patterns } or patterns
+  local path = M.bufpath(buf) or vim.loop.cwd()
+  local pattern = vim.fs.find(patterns, { path = path, upward = true })[1]
+  return pattern and { vim.fs.dirname(pattern) } or {}
+end
+
+function M.bufpath(buf)
+  return M.realpath(vim.api.nvim_buf_get_name(assert(buf)))
+end
+
+function M.realpath(path)
+  if path == "" or path == nil then
+    return nil
+  end
+  path = vim.loop.fs_realpath(path) or path
+  return Util.norm(path)
+end
+
+---@param opts? { buf?: number, spec?: LazyRootSpec[], all?: boolean }
+function M.detect(opts)
+  opts = opts or {}
+  opts.spec = opts.spec or type(vim.g.root_spec) == "table" and vim.g.root_spec or M.spec
+  opts.buf = (opts.buf == nil or opts.buf == 0) and vim.api.nvim_get_current_buf() or opts.buf
+
+  local ret = {} ---@type LazyRoot[]
+  for _, spec in ipairs(opts.spec) do
+    local paths = M.detectors[spec] and M.detectors[spec](opts.buf) or M.detectors.pattern(opts.buf, spec)
+    local roots = {} ---@type string[]
+    for _, p in ipairs(paths) do
+      local pp = M.realpath(p)
+      if pp and not vim.tbl_contains(roots, pp) then
+        roots[#roots + 1] = pp
+      end
+    end
+    table.sort(roots, function(a, b)
+      return #a > #b
+    end)
+    if #roots > 0 then
+      ret[#ret + 1] = { spec = spec, paths = roots }
+      if opts.all == false then
+        break
+      end
+    end
+  end
+  return ret
+end
+
+function M.setup()
+  vim.api.nvim_create_user_command("LazyRoot", function()
+    M.info()
+  end, { desc = "LazyVim roots for the current buffer" })
+end
+
+function M.info()
+  local spec = type(vim.g.root_spec) == "table" and vim.g.root_spec or M.spec
+
+  local roots = M.detect({ all = true })
+  local lines = {} ---@type string[]
+  local first = true
+  for _, root in ipairs(roots) do
+    for _, path in ipairs(root.paths) do
+      lines[#lines + 1] = ("- [%s] `%s` **(%s)**"):format(
+        first and "x" or " ",
+        path,
+        type(root.spec) == "table" and table.concat(root.spec, ", ") or root.spec
+      )
+      first = false
+    end
+  end
+  lines[#lines + 1] = "```lua"
+  lines[#lines + 1] = "vim.g.root_spec = " .. vim.inspect(spec)
+  lines[#lines + 1] = "```"
+  require("lazyvim.util").info(lines, { title = "LazyVim Roots" })
+  return roots[1] and roots[1].paths[1] or vim.loop.cwd()
+end
 
 -- returns the root directory based on:
 -- * lsp workspace folders
@@ -12,38 +125,8 @@ M.patterns = { ".git", "lua" }
 -- * root pattern of cwd
 ---@return string
 function M.get()
-  ---@type string?
-  local path = vim.api.nvim_buf_get_name(0)
-  path = path ~= "" and vim.loop.fs_realpath(path) or nil
-  ---@type string[]
-  local roots = {}
-  if path then
-    for _, client in pairs(Util.lsp.get_clients({ bufnr = 0 })) do
-      local workspace = client.config.workspace_folders
-      local paths = workspace and vim.tbl_map(function(ws)
-        return vim.uri_to_fname(ws.uri)
-      end, workspace) or client.config.root_dir and { client.config.root_dir } or {}
-      for _, p in ipairs(paths) do
-        local r = vim.loop.fs_realpath(p)
-        if path:find(r, 1, true) then
-          roots[#roots + 1] = r
-        end
-      end
-    end
-  end
-  table.sort(roots, function(a, b)
-    return #a > #b
-  end)
-  ---@type string?
-  local root = roots[1]
-  if not root then
-    path = path and vim.fs.dirname(path) or vim.loop.cwd()
-    ---@type string?
-    root = vim.fs.find(M.patterns, { path = path, upward = true })[1]
-    root = root and vim.fs.dirname(root) or vim.loop.cwd()
-  end
-  ---@cast root string
-  return root
+  local roots = M.detect({ all = false })
+  return roots[1] and roots[1].paths[1] or vim.loop.cwd()
 end
 
 return M

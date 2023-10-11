@@ -104,6 +104,7 @@ function M.setup(opts)
       end
       M.load("keymaps")
       Util.format.setup()
+      Util.root.setup()
     end,
   })
 
