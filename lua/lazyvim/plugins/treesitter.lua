@@ -103,6 +103,15 @@ return {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
+
+  -- Show context of the current function
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "LazyFile",
+    enabled = true,
+    opts = { mode = "cursor" },
+  },
+
   -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
