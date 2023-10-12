@@ -23,7 +23,6 @@ local deprecated = {
   root_patterns = { "root", "patterns" },
   get_root = { "root", "get" },
   float_term = { "terminal", "open" },
-  toggle = { "toggle", "option" },
   toggle_diagnostics = { "toggle", "diagnostics" },
   toggle_number = { "toggle", "number" },
   fg = "ui",
