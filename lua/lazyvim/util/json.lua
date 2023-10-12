@@ -1,3 +1,4 @@
+local Config = require("lazyvim.config")
 local Util = require("lazyvim.util")
 
 ---@class lazyvim.util.json
@@ -43,6 +44,35 @@ end
 
 function M.encode(value)
   return encode(value, "")
+end
+
+function M.save()
+  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
+  local f = io.open(path, "w")
+  if f then
+    f:write(Util.json.encode(Config.json.data))
+    f:close()
+  end
+end
+
+function M.migrate()
+  Util.info("Migrating `lazyvim.json` to version `" .. Config.json.version .. "`")
+  local json = Config.json
+
+  -- v0
+  if not json.data.version then
+    if json.data.hashes then
+      ---@diagnostic disable-next-line: no-unknown
+      json.data.hashes = nil
+    end
+    json.data.extras = vim.tbl_map(function(extra)
+      return "lazyvim.plugins.extras." .. extra
+    end, json.data.extras or {})
+  end
+
+  json.data.version = Config.json.version
+
+  M.save()
 end
 
 return M

@@ -60,7 +60,7 @@ function M.open(file, opts)
       return
     end
     Config.json.data.news[ref] = hash
-    Config.json.save()
+    Util.json.save()
   end
 
   local float = require("lazy.util").float({

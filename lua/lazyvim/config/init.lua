@@ -128,6 +128,7 @@ local defaults = {
 }
 
 M.json = {
+  version = 1,
   data = {
     version = nil, ---@type string?
     news = {}, ---@type table<string, string>
@@ -144,21 +145,10 @@ function M.json.load()
     local ok, json = pcall(vim.json.decode, data, { luanil = { object = true, array = true } })
     if ok then
       M.json.data = vim.tbl_deep_extend("force", M.json.data, json or {})
-      if M.json.data.hashes then
-        ---@diagnostic disable-next-line: no-unknown
-        M.json.data.hashes = nil
-        M.json.save()
+      if M.json.data.version ~= M.json.version then
+        Util.json.migrate()
       end
     end
-  end
-end
-
-function M.json.save()
-  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
-  local f = io.open(path, "w")
-  if f then
-    f:write(Util.json.encode(M.json.data))
-    f:close()
   end
 end
 
