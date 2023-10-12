@@ -19,6 +19,7 @@ M.renames = {
   ["windwp/nvim-spectre"] = "nvim-pack/nvim-spectre",
   ["jose-elias-alvarez/null-ls.nvim"] = "nvimtools/none-ls.nvim",
   ["null-ls.nvim"] = "none-ls.nvim",
+  ["romgrk/nvim-treesitter-context"] = "nvim-treesitter/nvim-treesitter-context",
 }
 
 function M.setup()
