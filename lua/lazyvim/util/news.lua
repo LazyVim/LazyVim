@@ -38,6 +38,7 @@ end
 ---@param file string
 ---@param opts? {plugin?:string, rtp?:boolean, when_changed?:boolean}
 function M.open(file, opts)
+  local ref = file
   opts = opts or {}
   if opts.plugin then
     local plugin = require("lazy.core.config").plugins[opts.plugin] --[[@as LazyPlugin?]]
@@ -55,10 +56,10 @@ function M.open(file, opts)
 
   if opts.when_changed then
     local hash = M.hash(file)
-    if hash == Config.json.data.hashes[file] then
+    if hash == Config.json.data.news[ref] then
       return
     end
-    Config.json.data.hashes[file] = hash
+    Config.json.data.news[ref] = hash
     Config.json.save()
   end
 
