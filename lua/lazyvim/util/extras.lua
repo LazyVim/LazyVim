@@ -16,12 +16,6 @@ local Util = require("lazyvim.util")
 ---@class lazyvim.util.extras
 local M = {}
 
-M.prios = {
-  ["editor.aerial"] = 100,
-  ["test.core"] = 1,
-  ["dap.core"] = 1,
-}
-
 M.ns = vim.api.nvim_create_namespace("lazyvim.extras")
 ---@type string[]
 M.state = nil
@@ -115,14 +109,7 @@ function X:toggle()
         table.insert(Config.json.data.extras, extra.name)
         M.state[#M.state + 1] = "lazyvim.plugins.extras." .. extra.name
       end
-      table.sort(Config.json.data.extras, function(a, b)
-        local pa = M.prios[a] or 10
-        local pb = M.prios[b] or 10
-        if pa == pb then
-          return a < b
-        end
-        return pa < pb
-      end)
+      table.sort(Config.json.data.extras)
       Config.json.save()
       Util.info(
         "`"
