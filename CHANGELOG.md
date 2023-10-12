@@ -1,5 +1,20 @@
 # Changelog
 
+## [10.1.0](https://github.com/LazyVim/LazyVim/compare/v10.0.1...v10.1.0) (2023-10-12)
+
+
+### Features
+
+* **config:** `lazyvim.json` is now versioned and migrates to a newer version when needed ([c989265](https://github.com/LazyVim/LazyVim/commit/c9892652d271663f52edd7b0d88d2565d8f65a52))
+* **extras:** LazyExtras can now manage user extras `lua/plugins/extras`. Fixes [#1681](https://github.com/LazyVim/LazyVim/issues/1681) ([1bcf6b9](https://github.com/LazyVim/LazyVim/commit/1bcf6b9a282bc839d4fde92a94b800185ad58118))
+* **neot-ree:** add keymaps to toggle git & buffer ([#1339](https://github.com/LazyVim/LazyVim/issues/1339)) ([b31d71d](https://github.com/LazyVim/LazyVim/commit/b31d71da9d6ca6c290a8ee7e7cc7ad5ccb3cc0bd))
+
+
+### Bug Fixes
+
+* **nvim-lint:** check on linter name instead of linter. Fixes [#1685](https://github.com/LazyVim/LazyVim/issues/1685) ([cdae38d](https://github.com/LazyVim/LazyVim/commit/cdae38ddd44edbf5e124129fc94e9d1038592760))
+* **nvim-lint:** make sure to set custom linters. Fixes [#1687](https://github.com/LazyVim/LazyVim/issues/1687) ([8e71968](https://github.com/LazyVim/LazyVim/commit/8e71968c2bd9e59e535cdac0a99e667f8f120322))
+
 ## [10.0.1](https://github.com/LazyVim/LazyVim/compare/v10.0.0...v10.0.1) (2023-10-12)
 
 
