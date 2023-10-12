@@ -172,6 +172,8 @@ function M.setup(opts)
       end
       M.load("keymaps")
 
+      Util.warn("This branch has been merged on main. Please update your config.")
+
       Util.format.setup()
 
       vim.api.nvim_create_user_command("LazyRoot", function()
