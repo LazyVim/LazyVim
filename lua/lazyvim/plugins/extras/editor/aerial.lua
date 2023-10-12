@@ -57,7 +57,7 @@ return {
       return opts
     end,
     keys = {
-      { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
+      { "<leader>cs", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
     },
   },
 
