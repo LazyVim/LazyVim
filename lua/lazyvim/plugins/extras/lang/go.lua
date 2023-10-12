@@ -105,6 +105,7 @@ return {
         nls.builtins.code_actions.gomodifytags,
         nls.builtins.code_actions.impl,
         nls.builtins.formatting.goimports,
+        nls.builtins.formatting.gofumpt,
       })
     end,
   },
@@ -113,7 +114,7 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        go = { "goimports" },
+        go = { "goimports", "gofumpt" },
       },
     },
   },
