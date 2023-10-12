@@ -1,24 +1,5 @@
-local Util = require("lazyvim.util")
-
 return {
   "mfussenegger/nvim-dap",
-
-  launch = function(host, port)
-    if vim.g.nlua then
-      return
-    end
-    vim.o.cmdheight = 10
-    local osv = require("osv")
-    osv.launch({
-      port = port,
-      host = host,
-      args = { "--cmd", "lua vim.g.nlua = true", "--cmd", "set cmdheight=10" },
-    })
-    vim.defer_fn(function()
-      vim.cmd([[luafile %]])
-    end, 2000)
-  end,
-
   dependencies = {
     {
       "jbyuki/one-small-step-for-vimkind",
