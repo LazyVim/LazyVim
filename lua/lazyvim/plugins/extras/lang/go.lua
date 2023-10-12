@@ -92,12 +92,14 @@ return {
   {
     "nvimtools/none-ls.nvim",
     optional = true,
-    {
-      "williamboman/mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "gomodifytags", "impl" })
-      end,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = function(_, opts)
+          opts.ensure_installed = opts.ensure_installed or {}
+          vim.list_extend(opts.ensure_installed, { "gomodifytags", "impl" })
+        end,
+      },
     },
     opts = function(_, opts)
       local nls = require("null-ls")
@@ -123,7 +125,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "mason.nvim",
+        "williamboman/mason.nvim",
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
           vim.list_extend(opts.ensure_installed, { "delve" })
