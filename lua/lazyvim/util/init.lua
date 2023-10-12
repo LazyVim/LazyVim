@@ -11,6 +11,7 @@ local LazyUtil = require("lazy.core.util")
 ---@field plugin lazyvim.util.plugin
 ---@field extras lazyvim.util.extras
 ---@field inject lazyvim.util.inject
+---@field news lazyvim.util.news
 local M = {}
 
 ---@type table<string, string|string[]>
@@ -135,14 +136,6 @@ function M.on_load(name, fn)
       end,
     })
   end
-end
-
-function M.changelog()
-  local lv = require("lazy.core.config").plugins.LazyVim
-  local float = require("lazy.util").open(lv.dir .. "/CHANGELOG.md")
-  vim.wo[float.win].spell = false
-  vim.wo[float.win].wrap = false
-  vim.diagnostic.disable(float.buf)
 end
 
 -- Wrapper around vim.keymap.set that will
