@@ -2,6 +2,9 @@
 
 ## 10.x
 
+- User extras under `lua/plugins/extras` can now also be managed
+  with **LazyExtras**
+
 - `nvim-ts-autotag` is now included by default
 
 - `nvim-treesitter-context` is now included by default

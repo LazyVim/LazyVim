@@ -5,8 +5,16 @@ local Plugin = require("lazy.core.plugin")
 local Text = require("lazy.view.text")
 local Util = require("lazyvim.util")
 
+---@class LazyExtraSource
+---@field name string
+---@field desc? string
+---@field module string
+
 ---@class LazyExtra
 ---@field name string
+---@field source LazyExtraSource
+---@field module string
+---@field desc? string
 ---@field enabled boolean
 ---@field managed boolean
 ---@field row? number
@@ -16,6 +24,12 @@ local Util = require("lazyvim.util")
 ---@class lazyvim.util.extras
 local M = {}
 
+---@type LazyExtraSource[]
+M.sources = {
+  { name = "LazyVim", desc = "LazyVim extras", module = "lazyvim.plugins.extras" },
+  { name = "User", desc = "User extras", module = "plugins.extras" },
+}
+
 M.ns = vim.api.nvim_create_namespace("lazyvim.extras")
 ---@type string[]
 M.state = nil
@@ -23,42 +37,52 @@ M.state = nil
 ---@return LazyExtra[]
 function M.get()
   M.state = M.state or LazyConfig.spec.modules
-  local root = LazyConfig.plugins.LazyVim.dir .. "/lua/lazyvim/plugins/extras"
-  local extras = {} ---@type string[]
-
-  Util.walk(root, function(path, name, type)
-    if type == "file" and name:match("%.lua$") then
-      local extra = path:sub(#root + 2, -5):gsub("/", ".")
-      extras[#extras + 1] = extra
+  local extras = {} ---@type LazyExtra[]
+  for _, source in ipairs(M.sources) do
+    local root = Util.find_root(source.module)
+    if root then
+      Util.walk(root, function(path, name, type)
+        if type == "file" and name:match("%.lua$") then
+          name = path:sub(#root + 2, -5):gsub("/", ".")
+          extras[#extras + 1] = M.get_extra(source, source.module .. "." .. name)
+        end
+      end)
     end
+  end
+  table.sort(extras, function(a, b)
+    return a.name < b.name
   end)
-  table.sort(extras)
+  return extras
+end
 
-  ---@param extra string
-  return vim.tbl_map(function(extra)
-    local modname = "lazyvim.plugins.extras." .. extra
-    local enabled = vim.tbl_contains(M.state, modname)
-    local spec = Plugin.Spec.new({ import = "lazyvim.plugins.extras." .. extra }, { optional = true })
-    local plugins = {} ---@type string[]
-    local optional = {} ---@type string[]
-    for _, p in pairs(spec.plugins) do
-      if p.optional then
-        optional[#optional + 1] = p.name
-      else
-        plugins[#plugins + 1] = p.name
-      end
+---@param modname string
+---@param source LazyExtraSource
+function M.get_extra(source, modname)
+  local enabled = vim.tbl_contains(M.state, modname)
+  local spec = Plugin.Spec.new({ import = modname }, { optional = true })
+  local plugins = {} ---@type string[]
+  local optional = {} ---@type string[]
+  for _, p in pairs(spec.plugins) do
+    if p.optional then
+      optional[#optional + 1] = p.name
+    else
+      plugins[#plugins + 1] = p.name
     end
-    table.sort(plugins)
-    table.sort(optional)
+  end
+  table.sort(plugins)
+  table.sort(optional)
 
-    return {
-      name = extra,
-      enabled = enabled,
-      managed = vim.tbl_contains(Config.json.data.extras, extra) or not enabled,
-      plugins = plugins,
-      optional = optional,
-    }
-  end, extras)
+  ---@type LazyExtra
+  return {
+    source = source,
+    name = modname:sub(#source.module + 2),
+    module = modname,
+    enabled = enabled,
+    desc = require(modname).desc,
+    managed = vim.tbl_contains(Config.json.data.extras, modname) or not enabled,
+    plugins = plugins,
+    optional = optional,
+  }
 end
 
 ---@class LazyExtraView
@@ -100,17 +124,17 @@ function X:toggle()
       end
       extra.enabled = not extra.enabled
       Config.json.data.extras = vim.tbl_filter(function(name)
-        return name ~= extra.name
+        return name ~= extra.module
       end, Config.json.data.extras)
       M.state = vim.tbl_filter(function(name)
-        return name ~= "lazyvim.plugins.extras." .. extra.name
+        return name ~= extra.module
       end, M.state)
       if extra.enabled then
-        table.insert(Config.json.data.extras, extra.name)
-        M.state[#M.state + 1] = "lazyvim.plugins.extras." .. extra.name
+        table.insert(Config.json.data.extras, extra.module)
+        M.state[#M.state + 1] = extra.module
       end
       table.sort(Config.json.data.extras)
-      Config.json.save()
+      Util.json.save()
       Util.info(
         "`"
           .. extra.name
@@ -180,11 +204,17 @@ function X:extra(extra)
     self.text:append("  " .. LazyConfig.options.ui.icons.not_loaded .. " ", hl)
   end
   self.text:append(extra.name)
+  if extra.source.name ~= "LazyVim" then
+    self.text:append(" "):append(LazyConfig.options.ui.icons.event .. " " .. extra.source.name, "LazyReasonEvent")
+  end
   for _, plugin in ipairs(extra.plugins) do
     self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonPlugin")
   end
   for _, plugin in ipairs(extra.optional) do
     self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonRequire")
+  end
+  if extra.desc then
+    self.text:nl():append("    " .. extra.desc, "LazyComment")
   end
   self.text:nl()
 end
