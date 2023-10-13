@@ -61,10 +61,14 @@ return {
         --     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
         --   end,
         -- },
+        shfmt = {
+          extra_args = { "-i", "2", "-ci" },
+        },
       },
     },
     ---@param opts ConformOpts
     config = function(_, opts)
+      local util = require("conform.util")
       opts.formatters = opts.formatters or {}
       for name, formatter in pairs(opts.formatters) do
         if type(formatter) == "table" then
@@ -72,8 +76,13 @@ return {
           if ok and type(defaults) == "table" then
             opts.formatters[name] = vim.tbl_deep_extend("force", {}, defaults, formatter)
           end
+          if opts.formatters[name].extra_args then
+            opts.formatters[name].args =
+              util.extend_args(opts.formatters[name].args or {}, opts.formatters[name].extra_args)
+          end
         end
       end
+
       for _, key in ipairs({ "format_on_save", "format_after_save" }) do
         if opts[key] then
           Util.warn(
