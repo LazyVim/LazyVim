@@ -47,6 +47,7 @@ function M.encode(value)
 end
 
 function M.save()
+  Config.json.data.version = Config.json.version
   local path = vim.fn.stdpath("config") .. "/lazyvim.json"
   local f = io.open(path, "w")
   if f then
@@ -68,9 +69,12 @@ function M.migrate()
     json.data.extras = vim.tbl_map(function(extra)
       return "lazyvim.plugins.extras." .. extra
     end, json.data.extras or {})
+  elseif json.data.version == 1 then
+    json.data.extras = vim.tbl_map(function(extra)
+      -- replace double extras module name
+      return extra:gsub("^lazyvim%.plugins%.extras%.lazyvim%.plugins%.extras%.", "lazyvim.plugins.extras.")
+    end, json.data.extras or {})
   end
-
-  json.data.version = Config.json.version
 
   M.save()
 end
