@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.1.1](https://github.com/LazyVim/LazyVim/compare/v10.1.0...v10.1.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* **aerial:** use new sep_icon option for aerial lualine component ([bd1928b](https://github.com/LazyVim/LazyVim/commit/bd1928ba597d777ca79f9f2f4b14217de4c291bc))
+* **json:** always write version to prevent spurious migrations. Fixes [#1692](https://github.com/LazyVim/LazyVim/issues/1692) ([01dbd07](https://github.com/LazyVim/LazyVim/commit/01dbd070738a9448ffbdc63602ed9eb5421158da))
+
 ## [10.1.0](https://github.com/LazyVim/LazyVim/compare/v10.0.1...v10.1.0) (2023-10-12)
 
 
