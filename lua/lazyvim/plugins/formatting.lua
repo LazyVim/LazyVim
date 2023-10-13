@@ -1,3 +1,8 @@
+local Util = require("lazyvim.util")
+
+---@type ConformOpts
+local format_opts = {}
+
 return {
   {
     "stevearc/conform.nvim",
@@ -23,7 +28,7 @@ return {
           priority = 100,
           primary = true,
           format = function(buf)
-            require("conform").format({ bufnr = buf })
+            require("conform").format(Util.merge(format_opts, { bufnr = buf }))
           end,
           sources = function(buf)
             local ret = require("conform").list_formatters(buf)
@@ -34,7 +39,12 @@ return {
         })
       end)
     end,
+    ---@class ConformOpts
     opts = {
+      -- LazyVim will use these options when formatting with the conform.nvim formatter
+      format = {
+        timeout_ms = 1000,
+      },
       formatters_by_ft = {
         lua = { "stylua" },
         fish = { "fish_indent" },
@@ -53,6 +63,7 @@ return {
         -- },
       },
     },
+    ---@param opts ConformOpts
     config = function(_, opts)
       opts.formatters = opts.formatters or {}
       for name, formatter in pairs(opts.formatters) do
@@ -63,6 +74,17 @@ return {
           end
         end
       end
+      for _, key in ipairs({ "format_on_save", "format_after_save" }) do
+        if opts[key] then
+          Util.warn(
+            ("Don't set `opts.%s` for `conform.nvim`.\n**LazyVim** will use the conform formatter automatically"):format(
+              key
+            )
+          )
+          opts[key] = nil
+        end
+      end
+      format_opts = opts.format
       require("conform").setup(opts)
     end,
   },
