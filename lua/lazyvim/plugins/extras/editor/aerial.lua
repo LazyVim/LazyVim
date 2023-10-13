@@ -2,22 +2,11 @@ local Config = require("lazyvim.config")
 local Util = require("lazyvim.util")
 
 return {
+  desc = "Aerial Symbol Browser",
   {
     "stevearc/aerial.nvim",
     event = "LazyFile",
     opts = function()
-      ---@diagnostic disable-next-line: no-unknown
-      local lualine = require("lualine.components.aerial")
-
-      -- Strip trailing spaces from symbols in statusline
-      ---@param _ any
-      ---@param symbols {icon?:string}[]
-      lualine.format_status = Util.inject.args(lualine.format_status, function(_, symbols)
-        for _, s in ipairs(symbols) do
-          s.icon = s.icon and s.icon:gsub("%s*$", "") or nil
-        end
-      end)
-
       local icons = vim.deepcopy(Config.icons.kinds)
 
       -- HACK: fix lua's weird choice for `Package` for control
@@ -110,8 +99,8 @@ return {
     opts = function(_, opts)
       table.insert(opts.sections.lualine_c, {
         "aerial",
-        -- The separator to be used to separate symbols in status line.
-        sep = " ",
+        sep = " ", -- separator between symbols
+        sep_icon = "", -- separator between icon and symbol
 
         -- The number of symbols to render top-down. In order to render only 'N' last
         -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
