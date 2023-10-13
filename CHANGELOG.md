@@ -259,7 +259,7 @@
 
 ### Bug Fixes
 
-* **dasboard:** disable alpha only once ([d6b56c0](https://github.com/LazyVim/LazyVim/commit/d6b56c075e88ce12e9e16fb2eeeea38fb7853600))
+* **dashboard:** disable alpha only once ([d6b56c0](https://github.com/LazyVim/LazyVim/commit/d6b56c075e88ce12e9e16fb2eeeea38fb7853600))
 * **options:** set default laststatus=3 and set it to 0 before loading dashboard to prevent flickering ([1eb0192](https://github.com/LazyVim/LazyVim/commit/1eb019274b5564e66ac6c7e119c140bae262e10c))
 * **tailwind:** allow overriding filetypes. Fixes [#1590](https://github.com/LazyVim/LazyVim/issues/1590) ([d3e7f77](https://github.com/LazyVim/LazyVim/commit/d3e7f7717e960bb883b35e9a75badfd5b938cace))
 
@@ -300,7 +300,7 @@
 
 ### Bug Fixes
 
-* **autocmds:** retore last location for correct buffer ([afc8e7f](https://github.com/LazyVim/LazyVim/commit/afc8e7f8cac06335efd12ec5f71cabb1f38a09b0))
+* **autocmds:** restore last location for correct buffer ([afc8e7f](https://github.com/LazyVim/LazyVim/commit/afc8e7f8cac06335efd12ec5f71cabb1f38a09b0))
 * **conform:** dont try merging function formatters. Fixes [#1582](https://github.com/LazyVim/LazyVim/issues/1582) ([f475085](https://github.com/LazyVim/LazyVim/commit/f4750859f2c2c9a41b3974ac05962ce9648d6c16))
 * **conform:** dont try to merge formatter functions ([9f034ab](https://github.com/LazyVim/LazyVim/commit/9f034ab10650e306e178d5189ee9214a52f2e8e5))
 * **nvim-lint:** dont try merging function linters ([79010ae](https://github.com/LazyVim/LazyVim/commit/79010ae671035d8ed0040ce51df4fb59ec3962f8))
@@ -1023,7 +1023,7 @@
 
 * **hipatterns:** default options ([3082436](https://github.com/LazyVim/LazyVim/commit/30824369c2c58647df170566766ea1dbda2730cc))
 * **neotest:** added some additional filetypes to close with q ([1288f0d](https://github.com/LazyVim/LazyVim/commit/1288f0d5a5cc5f5279678cc3c3d99abe20a1e052))
-* **neotest:** support neotest adapaters that use `setup()` for custom setup ([2a3bac7](https://github.com/LazyVim/LazyVim/commit/2a3bac769045abac76395fcabb36b17b68bc42fc))
+* **neotest:** support neotest adapters that use `setup()` for custom setup ([2a3bac7](https://github.com/LazyVim/LazyVim/commit/2a3bac769045abac76395fcabb36b17b68bc42fc))
 
 ## [4.2.0](https://github.com/LazyVim/LazyVim/compare/v4.1.1...v4.2.0) (2023-05-26)
 
@@ -1630,7 +1630,7 @@
 
 ### Bug Fixes
 
-* **illuminate:** always set refernce keymaps on the buffer as well to properly overwrite ftplugin mappings. Fixes [#292](https://github.com/LazyVim/LazyVim/issues/292) ([a0cf00c](https://github.com/LazyVim/LazyVim/commit/a0cf00c81b3a4a352cdc26c94112d9a5827881e1))
+* **illuminate:** always set reference keymaps on the buffer as well to properly overwrite ftplugin mappings. Fixes [#292](https://github.com/LazyVim/LazyVim/issues/292) ([a0cf00c](https://github.com/LazyVim/LazyVim/commit/a0cf00c81b3a4a352cdc26c94112d9a5827881e1))
 * **mini.surround:** don't create empty keymaps. Fixes [#296](https://github.com/LazyVim/LazyVim/issues/296) ([8e84dcf](https://github.com/LazyVim/LazyVim/commit/8e84dcf85c8a73ebcf6ade6b7b77544f468f1dfa))
 * **treesitter:** disable indent only for python right now ([de6a28b](https://github.com/LazyVim/LazyVim/commit/de6a28b781e8a06e4f70c913539c97260392131a))
 * **treesitter:** disable treesitter indent by default, since it has too many issues. See [#297](https://github.com/LazyVim/LazyVim/issues/297) ([329a2da](https://github.com/LazyVim/LazyVim/commit/329a2daff493abd2bd5c8fedbf0dfa13039d3931))
@@ -1774,7 +1774,7 @@
 
 ### Bug Fixes
 
-* **mini.ai:** load ai on VeryLazy. Keymaps interfer with which-key. [#155](https://github.com/LazyVim/LazyVim/issues/155) ([3b5f363](https://github.com/LazyVim/LazyVim/commit/3b5f36307438ad05beae6796ca005f6b56d6a360))
+* **mini.ai:** load ai on VeryLazy. Keymaps interfere with which-key. [#155](https://github.com/LazyVim/LazyVim/issues/155) ([3b5f363](https://github.com/LazyVim/LazyVim/commit/3b5f36307438ad05beae6796ca005f6b56d6a360))
 * **noice:** scroll doc window in normal, insert and select mode ([c5b22c0](https://github.com/LazyVim/LazyVim/commit/c5b22c0832603198f571ff68b6fb9d0c17f73d33))
 * **nvim-navic:** use kinds icons for navic. Fixes [#164](https://github.com/LazyVim/LazyVim/issues/164) ([b81ecf9](https://github.com/LazyVim/LazyVim/commit/b81ecf9f7ac78e3f87a4d9b305fa0d3cfd6decf2))
 
@@ -1949,7 +1949,7 @@
 * **lsp:** allow overriding options for vim.lsp.buf.format. Fixes [#51](https://github.com/LazyVim/LazyVim/issues/51) ([40d363c](https://github.com/LazyVim/LazyVim/commit/40d363cf3f468a1cc4ea482eaabbd5c7e224f397))
 * **lsp:** make diagnostics configurable with `{"neovim/nvim-lspconfig", opts = {diagnostics = {}}}`. Fixes [#55](https://github.com/LazyVim/LazyVim/issues/55) ([1efc925](https://github.com/LazyVim/LazyVim/commit/1efc925d16b57659cbb9af5a1579cb1b9ee9643f))
 * **neo-tree:** added `&lt;leader&gt;e` and `<leader>E` to toggle neo-tree ([542920f](https://github.com/LazyVim/LazyVim/commit/542920fb8249d45d1e9ddbf6517a8f8539769eda))
-* **neo-tree:** load neo-tree when specifying a direcory on the cmdline ([81d798f](https://github.com/LazyVim/LazyVim/commit/81d798fdaa5bf49737969e0f15af4a90621a0a61))
+* **neo-tree:** load neo-tree when specifying a directory on the cmdline ([81d798f](https://github.com/LazyVim/LazyVim/commit/81d798fdaa5bf49737969e0f15af4a90621a0a61))
 * **notify:** delay notifs till replaced or at most 500ms to prevent more prompts ([701337f](https://github.com/LazyVim/LazyVim/commit/701337fac8cb1de0f3e31400cef30b053762320f))
 * **notify:** lazy-load nvim-notify to show proper notifs before Noice loads ([7406313](https://github.com/LazyVim/LazyVim/commit/74063135d838b0ed9fe1a8d0e777c8cfe83ae28f))
 * **util:** use lazy's notify instead of `vim.notify` ([48d1e8d](https://github.com/LazyVim/LazyVim/commit/48d1e8df12795cf559f704223b63e76259998582))
