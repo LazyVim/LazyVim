@@ -15,12 +15,19 @@ end
 function M.setup()
   vim.schedule(function()
     if Config.news.lazyvim then
+      if not Config.json.data.news["NEWS.md"] then
+        M.welcome()
+      end
       M.lazyvim(true)
     end
     if Config.news.neovim then
       M.neovim(true)
     end
   end)
+end
+
+function M.welcome()
+  Util.info("Welcome to LazyVim!")
 end
 
 function M.changelog()
@@ -55,23 +62,28 @@ function M.open(file, opts)
   end
 
   if opts.when_changed then
+    local is_new = not Config.json.data.news[ref]
     local hash = M.hash(file)
     if hash == Config.json.data.news[ref] then
       return
     end
     Config.json.data.news[ref] = hash
     Util.json.save()
+    -- don't open if file has never been opened
+    if is_new then
+      return
+    end
   end
 
   local float = require("lazy.util").float({
     file = file,
     size = { width = 0.6, height = 0.6 },
   })
-  vim.wo[float.win].spell = false
-  vim.wo[float.win].wrap = false
-  vim.wo[float.win].signcolumn = "yes"
-  vim.wo[float.win].statuscolumn = " "
-  vim.wo[float.win].conceallevel = 3
+  vim.opt_local.spell = false
+  vim.opt_local.wrap = false
+  vim.opt_local.signcolumn = "yes"
+  vim.opt_local.statuscolumn = " "
+  vim.opt_local.conceallevel = 3
   vim.diagnostic.disable(float.buf)
 end
 
