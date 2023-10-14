@@ -331,7 +331,7 @@ return {
     end,
   },
   {
-    "glepnir/dashboard-nvim",
+    "nvimdev/dashboard-nvim",
     event = "VimEnter",
     opts = function()
       local logo = [[
