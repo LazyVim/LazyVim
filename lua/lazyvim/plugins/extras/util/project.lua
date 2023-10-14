@@ -45,7 +45,7 @@ return {
     end,
   },
   {
-    "glepnir/dashboard-nvim",
+    "nvimdev/dashboard-nvim",
     optional = true,
     opts = function(_, opts)
       local projects = {

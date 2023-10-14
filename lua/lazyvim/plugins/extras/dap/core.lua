@@ -1,6 +1,7 @@
 ---@param config {args?:string[]|fun():string[]?}
 local function get_args(config)
   local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
+  config = vim.deepcopy(config)
   ---@cast args string[]
   config.args = function()
     local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
@@ -54,7 +55,6 @@ return {
       opts = {
         defaults = {
           ["<leader>d"] = { name = "+debug" },
-          ["<leader>da"] = { name = "+adapters" },
         },
       },
     },

@@ -1,11 +1,9 @@
-local Util = require("lazy.core.util")
+local Util = require("lazyvim.util")
 
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.lazy_version = ">=10.8.0"
-M.use_lazy_file = true
-M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
+M.version = "10.1.1" -- x-release-please-version
 
 ---@class LazyVimOptions
 local defaults = {
@@ -21,124 +19,145 @@ local defaults = {
     -- lazyvim.config.options can't be configured here since that's loaded before lazyvim setup
     -- if you want to disable loading options, add `package.loaded["lazyvim.config.options"] = true` to the top of your init.lua
   },
+  news = {
+    -- When enabled, NEWS.md will be shown when changed.
+    -- This only contains big new features and breaking changes.
+    lazyvim = true,
+    -- Same but for Neovim's news.txt
+    neovim = false,
+  },
   -- icons used by other plugins
+  -- stylua: ignore
   icons = {
     misc = {
       dots = "󰇘",
     },
     dap = {
-      Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-      Breakpoint = " ",
+      Stopped             = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+      Breakpoint          = " ",
       BreakpointCondition = " ",
-      BreakpointRejected = { " ", "DiagnosticError" },
-      LogPoint = ".>",
+      BreakpointRejected  = { " ", "DiagnosticError" },
+      LogPoint            = ".>",
     },
     diagnostics = {
       Error = " ",
-      Warn = " ",
-      Hint = " ",
-      Info = " ",
+      Warn  = " ",
+      Hint  = " ",
+      Info  = " ",
     },
     git = {
-      added = " ",
+      added    = " ",
       modified = " ",
-      removed = " ",
+      removed  = " ",
     },
     kinds = {
-      Array = " ",
-      Boolean = " ",
-      Class = " ",
-      Codeium = "󰘦 ",
-      Color = " ",
-      Constant = " ",
-      Constructor = " ",
-      Copilot = " ",
-      Enum = " ",
-      EnumMember = " ",
-      Event = " ",
-      Field = " ",
-      File = " ",
-      Folder = " ",
-      Function = " ",
-      Interface = " ",
-      Key = " ",
-      Keyword = " ",
-      Method = " ",
-      Module = " ",
-      Namespace = " ",
-      Null = " ",
-      Number = " ",
-      Object = " ",
-      Operator = " ",
-      Package = " ",
-      Property = " ",
-      Reference = " ",
-      Snippet = " ",
-      String = " ",
-      Struct = " ",
-      Text = " ",
+      Array         = " ",
+      Boolean       = "󰨙 ",
+      Class         = " ",
+      Codeium       = "󰘦 ",
+      Color         = " ",
+      Control       = " ",
+      Collapsed     = " ",
+      Constant      = "󰏿 ",
+      Constructor   = " ",
+      Copilot       = " ",
+      Enum          = " ",
+      EnumMember    = " ",
+      Event         = " ",
+      Field         = " ",
+      File          = " ",
+      Folder        = " ",
+      Function      = "󰊕 ",
+      Interface     = " ",
+      Key           = " ",
+      Keyword       = " ",
+      Method        = "󰊕 ",
+      Module        = " ",
+      Namespace     = "󰦮 ",
+      Null          = " ",
+      Number        = "󰎠 ",
+      Object        = " ",
+      Operator      = " ",
+      Package       = " ",
+      Property      = " ",
+      Reference     = " ",
+      Snippet       = " ",
+      String        = " ",
+      Struct        = "󰆼 ",
+      Text          = " ",
       TypeParameter = " ",
-      Unit = " ",
-      Value = " ",
-      Variable = " ",
+      Unit          = " ",
+      Value         = " ",
+      Variable      = "󰀫 ",
+    },
+  },
+  ---@type table<string, string[]>?
+  kind_filter = {
+    default = {
+      "Class",
+      "Constructor",
+      "Enum",
+      "Field",
+      "Function",
+      "Interface",
+      "Method",
+      "Module",
+      "Namespace",
+      "Package",
+      "Property",
+      "Struct",
+      "Trait",
+    },
+    -- you can specify a different filter for each filetype
+    lua = {
+      "Class",
+      "Constructor",
+      "Enum",
+      "Field",
+      "Function",
+      "Interface",
+      "Method",
+      "Module",
+      "Namespace",
+      -- "Package", -- remove package since luals uses it for control flow structures
+      "Property",
+      "Struct",
+      "Trait",
     },
   },
 }
 
-M.renames = {
-  ["windwp/nvim-spectre"] = "nvim-pack/nvim-spectre",
-  ["jose-elias-alvarez/null-ls.nvim"] = "nvimtools/none-ls.nvim",
-  ["null-ls.nvim"] = "none-ls.nvim",
+M.json = {
+  version = 2,
+  data = {
+    version = nil, ---@type string?
+    news = {}, ---@type table<string, string>
+    extras = {}, ---@type string[]
+  },
 }
+
+function M.json.load()
+  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
+  local f = io.open(path, "r")
+  if f then
+    local data = f:read("*a")
+    f:close()
+    local ok, json = pcall(vim.json.decode, data, { luanil = { object = true, array = true } })
+    if ok then
+      M.json.data = vim.tbl_deep_extend("force", M.json.data, json or {})
+      if M.json.data.version ~= M.json.version then
+        Util.json.migrate()
+      end
+    end
+  end
+end
 
 ---@type LazyVimOptions
 local options
 
----@param lines {[1]:string, [2]:string}[]
-function M.msg(lines)
-  vim.cmd([[clear]])
-  vim.api.nvim_echo(lines, true, {})
-  vim.fn.getchar()
-end
-
 ---@param opts? LazyVimOptions
 function M.setup(opts)
   options = vim.tbl_deep_extend("force", defaults, opts or {}) or {}
-
-  if vim.fn.has("nvim-0.9.0") == 0 then
-    M.msg({
-      {
-        "LazyVim requires Neovim >= 0.9.0\n",
-        "ErrorMsg",
-      },
-      { "Press any key to exit", "MoreMsg" },
-    })
-    vim.cmd([[quit]])
-    return
-  end
-
-  if not M.has() then
-    M.msg({
-      {
-        "LazyVim requires lazy.nvim " .. M.lazy_version .. "\n",
-        "WarningMsg",
-      },
-      { "Press any key to attempt an upgrade", "MoreMsg" },
-    })
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "LazyVimStarted",
-      callback = function()
-        require("lazy").update({ plugins = { "lazy.nvim" }, wait = true })
-        M.msg({
-          {
-            "**lazy.nvim** has been upgraded.\nPlease restart **Neovim**",
-            "WarningMsg",
-          },
-        })
-      end,
-    })
-  end
 
   -- autocmds can be loaded lazily when not opening a file
   local lazy_autocmds = vim.fn.argc(-1) == 0
@@ -155,12 +174,19 @@ function M.setup(opts)
         M.load("autocmds")
       end
       M.load("keymaps")
+
+      Util.format.setup()
+      Util.news.setup()
+
+      vim.api.nvim_create_user_command("LazyRoot", function()
+        Util.root.info()
+      end, { desc = "LazyVim roots for the current buffer" })
+
+      vim.api.nvim_create_user_command("LazyExtras", function()
+        Util.extras.show()
+      end, { desc = "Manage LazyVim extras" })
     end,
   })
-
-  if M.use_lazy_file then
-    M.lazy_file()
-  end
 
   Util.track("colorscheme")
   Util.try(function()
@@ -179,79 +205,25 @@ function M.setup(opts)
   Util.track()
 end
 
--- Properly load file based plugins without blocking the UI
-function M.lazy_file()
-  local events = {} ---@type {event: string, buf: number, data?: any}[]
-
-  local function load()
-    if #events == 0 then
-      return
-    end
-    local Event = require("lazy.core.handler.event")
-    vim.api.nvim_del_augroup_by_name("lazy_file")
-
-    Util.track({ event = "LazyVim.lazy_file" })
-
-    ---@type table<string,string[]>
-    local skips = {}
-    for _, event in ipairs(events) do
-      skips[event.event] = skips[event.event] or Event.get_augroups(event.event)
-    end
-
-    vim.api.nvim_exec_autocmds("User", { pattern = "LazyFile", modeline = false })
-    for _, event in ipairs(events) do
-      Event.trigger({
-        event = event.event,
-        exclude = skips[event.event],
-        data = event.data,
-        buf = event.buf,
-      })
-      if vim.bo[event.buf].filetype then
-        Event.trigger({
-          event = "FileType",
-          buf = event.buf,
-        })
-      end
-    end
-    vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false })
-    events = {}
-    Util.track()
+---@param buf? number
+---@return string[]?
+function M.get_kind_filter(buf)
+  buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
+  local ft = vim.bo[buf].filetype
+  if M.kind_filter == false then
+    return
   end
-
-  -- schedule wrap so that nested autocmds are executed
-  -- and the UI can continue rendering without blocking
-  load = vim.schedule_wrap(load)
-
-  vim.api.nvim_create_autocmd(M.lazy_file_events, {
-    group = vim.api.nvim_create_augroup("lazy_file", { clear = true }),
-    callback = function(event)
-      table.insert(events, event)
-      load()
-    end,
-  })
-end
-
----@param range? string
-function M.has(range)
-  local Semver = require("lazy.manage.semver")
-  return Semver.range(range or M.lazy_version):matches(require("lazy.core.config").version or "0.0.0")
+  return M.kind_filter[ft] or M.kind_filter.default
 end
 
 ---@param name "autocmds" | "options" | "keymaps"
 function M.load(name)
   local function _load(mod)
-    Util.try(function()
-      require(mod)
-    end, {
-      msg = "Failed loading " .. mod,
-      on_error = function(msg)
-        local info = require("lazy.core.cache").find(mod)
-        if info == nil or (type(info) == "table" and #info == 0) then
-          return
-        end
-        Util.error(msg)
-      end,
-    })
+    if require("lazy.core.cache").find(mod)[1] then
+      Util.try(function()
+        require(mod)
+      end, { msg = "Failed loading " .. mod })
+    end
   end
   -- always load lazyvim, then user file
   if M.defaults[name] or name == "options" then
@@ -268,66 +240,30 @@ end
 
 M.did_init = false
 function M.init()
-  if not M.did_init then
-    M.did_init = true
-    local plugin = require("lazy.core.config").spec.plugins.LazyVim
-    if plugin then
-      vim.opt.rtp:append(plugin.dir)
-    end
-
-    M.use_lazy_file = M.use_lazy_file and vim.fn.argc(-1) > 0
-    ---@diagnostic disable-next-line: undefined-field
-    M.use_lazy_file = M.use_lazy_file and require("lazy.core.handler.event").trigger_events == nil
-
-    -- delay notifications till vim.notify was replaced or after 500ms
-    require("lazyvim.util").lazy_notify()
-
-    -- load options here, before lazy init while sourcing plugin modules
-    -- this is needed to make sure options will be correctly applied
-    -- after installing missing plugins
-    require("lazyvim.config").load("options")
-    local Plugin = require("lazy.core.plugin")
-    local add = Plugin.Spec.add
-    ---@diagnostic disable-next-line: duplicate-set-field
-    Plugin.Spec.add = function(self, plugin, ...)
-      if type(plugin) == "table" then
-        if M.renames[plugin[1]] then
-          Util.warn(
-            ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
-              plugin[1],
-              M.renames[plugin[1]],
-              self.importing or "LazyVim"
-            ),
-            { title = "LazyVim" }
-          )
-          plugin[1] = M.renames[plugin[1]]
-        end
-        if not M.use_lazy_file and plugin.event then
-          if plugin.event == "LazyFile" then
-            plugin.event = M.lazy_file_events
-          elseif type(plugin.event) == "table" then
-            local events = {} ---@type string[]
-            for _, event in ipairs(plugin.event) do
-              if event == "LazyFile" then
-                vim.list_extend(events, M.lazy_file_events)
-              else
-                events[#events + 1] = event
-              end
-            end
-          end
-        end
-      end
-      return add(self, plugin, ...)
-    end
-
-    -- Add support for the LazyFile event
-    local Event = require("lazy.core.handler.event")
-    local _event = Event._event
-    ---@diagnostic disable-next-line: duplicate-set-field
-    Event._event = function(self, value)
-      return value == "LazyFile" and "User LazyFile" or _event(self, value)
-    end
+  if M.did_init then
+    return
   end
+  M.did_init = true
+  local plugin = require("lazy.core.config").spec.plugins.LazyVim
+  if plugin then
+    vim.opt.rtp:append(plugin.dir)
+  end
+
+  package.preload["lazyvim.plugins.lsp.format"] = function()
+    Util.deprecate([[require("lazyvim.plugins.lsp.format")]], [[require("lazyvim.util").format]])
+    return Util.format
+  end
+
+  -- delay notifications till vim.notify was replaced or after 500ms
+  require("lazyvim.util").lazy_notify()
+
+  -- load options here, before lazy init while sourcing plugin modules
+  -- this is needed to make sure options will be correctly applied
+  -- after installing missing plugins
+  M.load("options")
+
+  Util.plugin.setup()
+  M.json.load()
 end
 
 setmetatable(M, {
