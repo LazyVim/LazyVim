@@ -110,6 +110,23 @@ return {
     event = "LazyFile",
     enabled = true,
     opts = { mode = "cursor" },
+    keys = {
+      {
+        "<leader>ut",
+        function()
+          local Util = require("lazy.core.util")
+          require("treesitter-context").toggle()
+          if require("treesitter-context.config").enable then
+            require("treesitter-context.config").enable = false
+            Util.warn("Disabled Treesitter Context", { title = "Option" })
+          else
+            require("treesitter-context.config").enable = true
+            Util.info("Enabled Treesitter Context", { title = "Option" })
+          end
+        end,
+        desc = "Toggle Treesitter Context",
+      },
+    },
   },
 
   -- Automatically add closing tags for HTML and JSX
