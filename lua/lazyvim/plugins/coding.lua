@@ -83,6 +83,7 @@ return {
             local icons = require("lazyvim.config").icons.kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
+              item.menu = ""
             end
             return item
           end,

@@ -1,5 +1,4 @@
--- TODO: add TabNine icon if is available
-local tabnine_icon = ""
+local Util = require("lazyvim.util")
 
 return {
   -- Tabnine cmp source
@@ -30,25 +29,12 @@ return {
         priority = 100,
       })
 
-      -- Format the completion menu, remove the percentage and add icons
-      opts.formatting.format = function(entry, vim_item)
-        local icons = require("lazyvim.config").icons.kinds
-        if icons[vim_item.kind] then
-          vim_item.kind = icons[vim_item.kind] .. vim_item.kind
-        end
-
-        -- Add tabnine icon and hide percentage in the menu
+      opts.formatting.format = Util.inject.args(opts.formatting.format, function(entry, item)
+        -- Hide percentage in the menu
         if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = tabnine_icon .. " TabNine"
-          vim_item.menu = ""
-
-          if (entry.completion_item.data or {}).multiline then
-            vim_item.kind = vim_item.kind .. " " .. "[ML]"
-          end
+          item.menu = ""
         end
-
-        return vim_item
-      end
+      end)
     end,
   },
   -- Show TabNine status in lualine
@@ -57,43 +43,8 @@ return {
     optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
-      local started = false
-      local function status()
-        if not package.loaded["cmp"] then
-          return
-        end
-        for _, s in ipairs(require("cmp").core.sources) do
-          if s.name == "cmp_tabnine" then
-            if s.source:is_available() then
-              started = true
-            else
-              return started and "error" or nil
-            end
-            if s.status == s.SourceStatus.FETCHING then
-              return "pending"
-            end
-            return "ok"
-          end
-        end
-      end
-
-      local Util = require("lazyvim.util")
-      local colors = {
-        ok = Util.ui.fg("Special"),
-        error = Util.ui.fg("DiagnosticError"),
-        pending = Util.ui.fg("DiagnosticWarn"),
-      }
-      table.insert(opts.sections.lualine_x, 3, {
-        function()
-          return tabnine_icon
-        end,
-        cond = function()
-          return status() ~= nil
-        end,
-        color = function()
-          return colors[status()] or colors.ok
-        end,
-      })
+      local icon = require("lazyvim.config").icons.kinds.TabNine
+      table.insert(opts.sections.lualine_x, 2, require("lazyvim.util").lualine.cmp_source("cmp_tabnine", icon))
     end,
   },
 }

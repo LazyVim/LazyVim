@@ -84,6 +84,7 @@ local defaults = {
       Snippet       = " ",
       String        = " ",
       Struct        = "󰆼 ",
+      TabNine       = "󰏚 ",
       Text          = " ",
       TypeParameter = " ",
       Unit          = " ",
