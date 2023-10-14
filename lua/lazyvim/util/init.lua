@@ -13,6 +13,7 @@ local LazyUtil = require("lazy.core.util")
 ---@field inject lazyvim.util.inject
 ---@field news lazyvim.util.news
 ---@field json lazyvim.util.json
+---@field lualine lazyvim.util.lualine
 local M = {}
 
 ---@type table<string, string|string[]>
