@@ -1,5 +1,30 @@
 # Changelog
 
+## [10.2.0](https://github.com/LazyVim/LazyVim/compare/v10.1.1...v10.2.0) (2023-10-14)
+
+
+### Features
+
+* **conform:** make it easier to add `extra_args` ([3eb91c6](https://github.com/LazyVim/LazyVim/commit/3eb91c64b5960ccd84bd8e6a3318a1ee79cb85c5))
+* **conform:** show error when user overwrites conform config function ([b6e68fa](https://github.com/LazyVim/LazyVim/commit/b6e68fa2bf829753be86ba8cc56baafd47b7da67))
+* **conform:** use conform.nvim `opts.format` options for formatting with conform ([6fd66f4](https://github.com/LazyVim/LazyVim/commit/6fd66f486e210e35b4c375691fbfd61a611b6027))
+* **extras:** added TabNine ([#1651](https://github.com/LazyVim/LazyVim/issues/1651)) ([95ff5aa](https://github.com/LazyVim/LazyVim/commit/95ff5aaa6245244d45609916b0a623c5e8c79d16))
+* **format:** use conform as lsp formatter since it has better format diffs ([4584410](https://github.com/LazyVim/LazyVim/commit/4584410e76bf8a6ba426270bef8eca5a100d4cce))
+* **go:** add gofumpt formatter with conform/none-ls ([#1683](https://github.com/LazyVim/LazyVim/issues/1683)) ([385c99d](https://github.com/LazyVim/LazyVim/commit/385c99dbb7ccdcf53276086892cceee65b85fa21))
+* **lang:** add markdown support ([#1718](https://github.com/LazyVim/LazyVim/issues/1718)) ([b3d46bc](https://github.com/LazyVim/LazyVim/commit/b3d46bc0141c23bfd4302718ff42dfa172c6952b))
+* **python:** add key binding for organize imports ([#1670](https://github.com/LazyVim/LazyVim/issues/1670)) ([8f42733](https://github.com/LazyVim/LazyVim/commit/8f42733ce526b6c866b26824d78a1822730c2852))
+* **toggle:** add keymap to toggle treesitter context ([#1711](https://github.com/LazyVim/LazyVim/issues/1711)) ([5e1a86d](https://github.com/LazyVim/LazyVim/commit/5e1a86d3b257db37c8b443deea6ca1fefcb0b1aa))
+
+
+### Bug Fixes
+
+* **dashboard-nvim:** repository has moved to nvimdev/dashboard-nvim ([#1715](https://github.com/LazyVim/LazyVim/issues/1715)) ([ff9bf00](https://github.com/LazyVim/LazyVim/commit/ff9bf005b6957bb46a5541188925f32a1d86365d))
+* dont lazy-load on ft. Load on cmd or keys only ([3a93757](https://github.com/LazyVim/LazyVim/commit/3a93757bb1ee28c3e1b59c6c47ea5c4e74d8f1b2))
+* **keymaps:** no diagnostic keymaps w/o lsp attached ([#1698](https://github.com/LazyVim/LazyVim/issues/1698)) ([873ff89](https://github.com/LazyVim/LazyVim/commit/873ff892843898033be0b59cee8130c6b1b29d85))
+* **lsp:** trigger FileType commands after installing LSP servers ([5b89bc8](https://github.com/LazyVim/LazyVim/commit/5b89bc8cbf990edec201d07c146a3fe28db3302f))
+* **news:** dont show news when it has never been viewed (new install) ([6b9ee96](https://github.com/LazyVim/LazyVim/commit/6b9ee963e2684e7b37120b86bab5049918e14899))
+* **spectre:** add title to Spectre panel in edgy ([#1703](https://github.com/LazyVim/LazyVim/issues/1703)) ([7fe68d9](https://github.com/LazyVim/LazyVim/commit/7fe68d9f055fd34d95f19a8711e281ab40629482))
+
 ## [10.1.1](https://github.com/LazyVim/LazyVim/compare/v10.1.0...v10.1.1) (2023-10-13)
 
 
