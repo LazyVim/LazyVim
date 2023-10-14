@@ -114,14 +114,13 @@ return {
       {
         "<leader>ut",
         function()
-          local Util = require("lazy.core.util")
-          require("treesitter-context").toggle()
-          if require("treesitter-context.config").enable then
-            require("treesitter-context.config").enable = false
-            Util.warn("Disabled Treesitter Context", { title = "Option" })
-          else
-            require("treesitter-context.config").enable = true
+          local Util = require("lazyvim.util")
+          local tsc = require("treesitter-context")
+          tsc.toggle()
+          if Util.inject.get_upvalue(tsc.toggle, "enabled") then
             Util.info("Enabled Treesitter Context", { title = "Option" })
+          else
+            Util.warn("Disabled Treesitter Context", { title = "Option" })
           end
         end,
         desc = "Toggle Treesitter Context",

@@ -6,7 +6,7 @@ local M = {}
 local format_opts = {}
 
 ---@param opts ConformOpts
-function M.setup(plugin, opts)
+function M.setup(_, opts)
   local util = require("conform.util")
   opts.formatters = opts.formatters or {}
   for name, formatter in pairs(opts.formatters) do
