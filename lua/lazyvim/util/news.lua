@@ -16,7 +16,9 @@ function M.setup()
   vim.schedule(function()
     if Config.news.lazyvim then
       if not Config.json.data.news["NEWS.md"] then
-        M.welcome()
+        if Config.news.welcome then
+          M.welcome()
+        end
       end
       M.lazyvim(true)
     end
