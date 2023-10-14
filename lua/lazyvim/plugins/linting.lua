@@ -7,6 +7,10 @@ return {
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
       linters_by_ft = {
         fish = { "fish" },
+        -- Use the "*" filetype to run linters on all filetypes.
+        -- ['*'] = { 'global linter' },
+        -- Use the "_" filetype to run linters on filetypes that don't have other linters configured.
+        -- ['_'] = { 'fallback linter' },
       },
       -- LazyVim extension to easily override linter options
       -- or add custom linters.
@@ -47,7 +51,11 @@ return {
       end
 
       function M.lint()
-        local names = lint.linters_by_ft[vim.bo.filetype] or {}
+        local names = vim.tbl_flatten({ lint.linters_by_ft[vim.bo.filetype], lint.linters_by_ft["*"] }) or {}
+        if #names == 0 then
+          names = lint.linters_by_ft["_"] or {}
+        end
+
         local ctx = { filename = vim.api.nvim_buf_get_name(0) }
         ctx.dirname = vim.fn.fnamemodify(ctx.filename, ":h")
         names = vim.tbl_filter(function(name)
