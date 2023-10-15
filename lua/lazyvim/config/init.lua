@@ -92,7 +92,7 @@ local defaults = {
       Variable      = "󰀫 ",
     },
   },
-  ---@type table<string, string[]>?
+  ---@type table<string, string[]|boolean>?
   kind_filter = {
     default = {
       "Class",
@@ -109,6 +109,8 @@ local defaults = {
       "Struct",
       "Trait",
     },
+    markdown = false,
+    help = false,
     -- you can specify a different filter for each filetype
     lua = {
       "Class",
@@ -214,7 +216,11 @@ function M.get_kind_filter(buf)
   if M.kind_filter == false then
     return
   end
-  return M.kind_filter[ft] or M.kind_filter.default
+  if M.kind_filter[ft] == false then
+    return
+  end
+  ---@diagnostic disable-next-line: return-type-mismatch
+  return type(M.kind_filter) == "table" and type(M.kind_filter.default) == "table" and M.kind_filter.default or nil
 end
 
 ---@param name "autocmds" | "options" | "keymaps"
