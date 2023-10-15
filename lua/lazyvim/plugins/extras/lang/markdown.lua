@@ -54,7 +54,7 @@ return {
         "<leader>cp",
         ft = "markdown",
         "<cmd>MarkdownPreviewToggle<cr>",
-        desc = "Peek (Markdown Preview)",
+        desc = "Markdown Preview",
       },
     },
     config = function()
