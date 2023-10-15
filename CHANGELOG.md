@@ -1,5 +1,24 @@
 # Changelog
 
+## [10.3.0](https://github.com/LazyVim/LazyVim/compare/v10.2.0...v10.3.0) (2023-10-15)
+
+
+### Features
+
+* **dashboard:** `c` on dahboard now opens telescope for config dir instead of useless `init.lua` ([53e1637](https://github.com/LazyVim/LazyVim/commit/53e1637a864cb7e8f21af107b8073bc8b24acd11))
+* disable kind_filter for markdown and help ([782fe0b](https://github.com/LazyVim/LazyVim/commit/782fe0bef0789c8f090284df80c00799471bc16f))
+* **linting:** ability to configure global and fallback linters ([#1727](https://github.com/LazyVim/LazyVim/issues/1727)) ([6e0e352](https://github.com/LazyVim/LazyVim/commit/6e0e352fea4cd930ea7fc42a0252c2c70b279bee))
+* **lualine:** new root dir component that only shows when cwd != root_dir ([dfdfcad](https://github.com/LazyVim/LazyVim/commit/dfdfcad1aab0ee39ac3876e47cbeb727eb4f1e95))
+* **lualine:** pretty_path now highlights file basename when modified ([8af7309](https://github.com/LazyVim/LazyVim/commit/8af7309c7e31f55125eaade5fe86d04d63133999))
+* **tabnine:** add build cmd for Windows ([#1737](https://github.com/LazyVim/LazyVim/issues/1737)) ([c8e5501](https://github.com/LazyVim/LazyVim/commit/c8e5501ee5ecd1a7b27ff3aa5f41e54c2e98ff0b))
+
+
+### Bug Fixes
+
+* **prettier:** use prettier instead of prettierd. Too many people get truncated files. Fixes [#712](https://github.com/LazyVim/LazyVim/issues/712). See [#1735](https://github.com/LazyVim/LazyVim/issues/1735) ([57b504b](https://github.com/LazyVim/LazyVim/commit/57b504b9e8ae95c294c17e97e7f017f6f802ebbc))
+* **python:** add `ft` to Python keymaps, and fix "Markdown Preview" toggle description ([#1729](https://github.com/LazyVim/LazyVim/issues/1729)) ([7c60431](https://github.com/LazyVim/LazyVim/commit/7c60431c58a050cf4badced0609f3179bd284137))
+* **root:** dont use single-file lsps for root detection. use workspaces only ([6f88b8b](https://github.com/LazyVim/LazyVim/commit/6f88b8b36f8d4fd0e958e59b4e37e1a9ed2acb78))
+
 ## [10.2.0](https://github.com/LazyVim/LazyVim/compare/v10.1.1...v10.2.0) (2023-10-14)
 
 
