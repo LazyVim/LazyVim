@@ -1,5 +1,13 @@
 local Util = require("lazyvim.util")
 
+local function tabnine_build_cmd()
+  if vim.loop.os_uname().sysname == "Windows_NT" then
+    return "pwsh -noni .\\install.ps1"
+  else
+    return "./install.sh"
+  end
+end
+
 return {
   -- Tabnine cmp source
   {
@@ -8,7 +16,7 @@ return {
       -- Add TabNine support, make sure you run :CmpTabnineHub after installation.
       {
         "tzachar/cmp-tabnine",
-        build = "./install.sh",
+        build = tabnine_build_cmd(),
         dependencies = "hrsh7th/nvim-cmp",
         opts = {
           max_lines = 1000,
