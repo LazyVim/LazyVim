@@ -2,9 +2,7 @@ return {
   {
     "NTBBloodbath/zig-tools.nvim",
     ft = "zig",
-    opts = function(_, opts)
-      require("zig-tools").setup(opts)
-    end,
+    opts = {},
     dependencies = {
       {
         "akinsho/toggleterm.nvim",
