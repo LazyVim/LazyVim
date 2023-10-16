@@ -50,7 +50,6 @@ return {
       },
     },
     init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
       -- Install the conform formatter on VeryLazy
       require("lazyvim.util").on_very_lazy(function()
         require("lazyvim.util").format.register({

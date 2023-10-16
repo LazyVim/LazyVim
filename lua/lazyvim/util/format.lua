@@ -25,6 +25,13 @@ function M.register(formatter)
   end)
 end
 
+function M.formatexpr()
+  if Util.has("conform.nvim") then
+    return require("conform").formatexpr()
+  end
+  return vim.lsp.formatexpr({ timeout_ms = 3000 })
+end
+
 ---@param buf? number
 ---@return (LazyFormatter|{active:boolean,resolved:string[]})[]
 function M.resolve(buf)
@@ -67,7 +74,7 @@ function M.info(buf)
     end
   end
   if not have then
-    lines[#lines+1] =  "\n***No formatters available for this buffer.***" 
+    lines[#lines + 1] = "\n***No formatters available for this buffer.***"
   end
   Util[enabled and "info" or "warn"](
     table.concat(lines, "\n"),
