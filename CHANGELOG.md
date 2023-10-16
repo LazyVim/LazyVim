@@ -1,5 +1,13 @@
 # Changelog
 
+## [10.4.1](https://github.com/LazyVim/LazyVim/compare/v10.4.0...v10.4.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* **format:** set formatexpr in options so users can override it. Fixes [#1759](https://github.com/LazyVim/LazyVim/issues/1759) ([ff64cc5](https://github.com/LazyVim/LazyVim/commit/ff64cc53992b966a2558e95afc449e1da29dd44d))
+* **ui:** fix BufferLineClose commands ([#1756](https://github.com/LazyVim/LazyVim/issues/1756)) ([fef0b3f](https://github.com/LazyVim/LazyVim/commit/fef0b3f7564e64f92df129cd86bc904afc19b976))
+
 ## [10.4.0](https://github.com/LazyVim/LazyVim/compare/v10.3.0...v10.4.0) (2023-10-16)
 
 
