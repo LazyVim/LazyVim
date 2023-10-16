@@ -7,15 +7,7 @@ return {
       {
         "akinsho/toggleterm.nvim",
       },
-      {
-        "nvim-lua/plenary.nvim",
-        module_pattern = "plenary.*",
-      },
     },
-  },
-  {
-    "ziglang/zig.vim",
-    lazy = false,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -54,8 +46,6 @@ return {
     optional = true,
     dependencies = {
       "lawrence-laz/neotest-zig",
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
     },
     opts = {
       adapters = {
