@@ -2,8 +2,8 @@ return {
   {
     "NTBBloodbath/zig-tools.nvim",
     ft = "zig",
-    config = function()
-      require("zig-tools").setup()
+    opts = function(_, opts)
+      require("zig-tools").setup(opts)
     end,
     dependencies = {
       {
