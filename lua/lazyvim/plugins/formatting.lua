@@ -3,21 +3,17 @@ local Util = require("lazyvim.util")
 local M = {}
 
 ---@type ConformOpts
-local format_opts = {}
+local conform_opts = {}
 
 ---@param opts ConformOpts
 function M.setup(_, opts)
-  local util = require("conform.util")
-  opts.formatters = opts.formatters or {}
-  for name, formatter in pairs(opts.formatters) do
+  for name, formatter in pairs(opts.formatters or {}) do
     if type(formatter) == "table" then
-      local ok, defaults = pcall(require, "conform.formatters." .. name)
-      if ok and type(defaults) == "table" then
-        opts.formatters[name] = vim.tbl_deep_extend("force", {}, defaults, formatter)
-      end
-      if opts.formatters[name].extra_args then
-        opts.formatters[name].args =
-          util.extend_args(opts.formatters[name].args or {}, opts.formatters[name].extra_args)
+      ---@diagnostic disable-next-line: undefined-field
+      if formatter.extra_args then
+        ---@diagnostic disable-next-line: undefined-field
+        formatter.prepend_args = formatter.extra_args
+        Util.deprecate(("opts.formatters.%s.extra_args"):format(name), ("opts.formatters.%s.prepend_args"):format(name))
       end
     end
   end
@@ -29,10 +25,11 @@ function M.setup(_, opts)
           key
         )
       )
+      ---@diagnostic disable-next-line: no-unknown
       opts[key] = nil
     end
   end
-  format_opts = opts.format
+  conform_opts = opts
   require("conform").setup(opts)
 end
 
@@ -61,10 +58,15 @@ return {
           priority = 100,
           primary = true,
           format = function(buf)
-            require("conform").format(Util.merge(format_opts, { bufnr = buf }))
+            require("conform").format(Util.merge({
+              timeout_ms = conform_opts.format.timeout_ms,
+              async = conform_opts.format.async,
+              quiet = conform_opts.format.quiet,
+            }, { bufnr = buf }))
           end,
           sources = function(buf)
             local ret = require("conform").list_formatters(buf)
+            ---@param v conform.FormatterInfo
             return vim.tbl_map(function(v)
               return v.name
             end, ret)
@@ -82,11 +84,14 @@ return {
         }, { title = "LazyVim" })
       end
       ---@class ConformOpts
-      return {
+      local opts = {
         -- LazyVim will use these options when formatting with the conform.nvim formatter
         format = {
-          timeout_ms = 1000,
+          timeout_ms = 3000,
+          async = false, -- not recommended to change
+          quiet = false, -- not recommended to change
         },
+        ---@type table<string, conform.FormatterUnit[]>
         formatters_by_ft = {
           lua = { "stylua" },
           fish = { "fish_indent" },
@@ -94,7 +99,7 @@ return {
         },
         -- LazyVim will merge the options you set here with builtin formatters.
         -- You can also define any custom formatters here.
-        ---@type table<string,table>
+        ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
         formatters = {
           injected = { options = { ignore_errors = true } },
           -- # Example of using dprint only when a dprint.json file is present
@@ -110,6 +115,7 @@ return {
           -- },
         },
       }
+      return opts
     end,
     config = M.setup,
   },
