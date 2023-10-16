@@ -1,5 +1,27 @@
 # Changelog
 
+## [10.4.0](https://github.com/LazyVim/LazyVim/compare/v10.3.0...v10.4.0) (2023-10-16)
+
+
+### Features
+
+* **keymaps:** added toggle for treesitter highlights ([be5eea4](https://github.com/LazyVim/LazyVim/commit/be5eea476c98d46aefbbaee04b7f2bc82bb51c27))
+* **lualine:** use gitsigns for diff source ([#1744](https://github.com/LazyVim/LazyVim/issues/1744)) ([8c726cd](https://github.com/LazyVim/LazyVim/commit/8c726cd16638f51308f479f26143d94a6c3013ea))
+* **markdown:** added headlines.nvim to markdown extra ([152e1c6](https://github.com/LazyVim/LazyVim/commit/152e1c6692566a2e2a3968fbfc6eca69d33ba02c))
+* **ui:** add keymap to close other buffers ([#1743](https://github.com/LazyVim/LazyVim/issues/1743)) ([c3daced](https://github.com/LazyVim/LazyVim/commit/c3daced11ce33875059ad5dd74832bf4a232f195))
+
+
+### Bug Fixes
+
+* **conform:** remove LazyVim's conform config changes since that's now merged in conform ([982c8e3](https://github.com/LazyVim/LazyVim/commit/982c8e301bb432f44a85d915a8268442c7db05fa))
+* **markdown:** add marksman to mason install ([3dbeda9](https://github.com/LazyVim/LazyVim/commit/3dbeda9d96a2225875c4991116cb834f20588ddb))
+* **root:** root dir for windows. Fixes [#1749](https://github.com/LazyVim/LazyVim/issues/1749) ([9517e64](https://github.com/LazyVim/LazyVim/commit/9517e64009a1a547f5e5b96a8fc78bf5ea0bbb6e))
+
+
+### Performance Improvements
+
+* **root:** cache root detection. Fixes [#1753](https://github.com/LazyVim/LazyVim/issues/1753) ([98db7ec](https://github.com/LazyVim/LazyVim/commit/98db7ec0d287adcd8eaf6a93c4a392f588b5615a))
+
 ## [10.3.0](https://github.com/LazyVim/LazyVim/compare/v10.2.0...v10.3.0) (2023-10-15)
 
 
