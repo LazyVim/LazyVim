@@ -141,10 +141,16 @@ end
 -- * lsp root_dir
 -- * root pattern of filename of the current buffer
 -- * root pattern of cwd
+---@param opts {normalize?:boolean}
 ---@return string
-function M.get()
+function M.get(opts)
+  opts = opts or {}
   local roots = M.detect({ all = false })
-  return roots[1] and roots[1].paths[1] or vim.loop.cwd()
+  local ret = roots[1] and roots[1].paths[1] or vim.loop.cwd()
+  if opts.normalize then
+    return ret
+  end
+  return Util.is_win() and ret:gsub("/", "\\") or ret
 end
 
 ---@param opts? {hl_last?: string}
