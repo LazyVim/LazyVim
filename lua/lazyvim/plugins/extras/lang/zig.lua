@@ -30,15 +30,16 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        zls = {},
+        zls = {
+          setup = {
+            zls = function(_, opts)
+              local zig_tools_opts = require("lazyvim.util").opts("zig-tools.nvim")
+              require("zig-tools").setup(vim.tbl_deep_extend("force", zig_tools_opts or {}, { server = opts }))
+              return true
+            end,
+          },
+        },
       },
-    },
-    setup = {
-      zls = function(_, opts)
-        local zig_tools_opts = require("lazyvim.util").opts("zig-tools.nvim")
-        require("zig-tools").setup(vim.tbl_deep_extend("force", zig_tools_opts or {}, { server = opts }))
-        return true
-      end,
     },
   },
   {
