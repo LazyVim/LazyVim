@@ -1,4 +1,4 @@
-*LazyVim.txt*         For Neovim >= 0.8.0         Last change: 2023 October 15
+*LazyVim.txt*         For Neovim >= 0.8.0         Last change: 2023 October 16
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
