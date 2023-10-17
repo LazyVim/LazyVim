@@ -86,42 +86,50 @@ end
 
 function M.statuscolumn()
   local win = vim.g.statusline_winid
-  if vim.wo[win].signcolumn == "no" then
-    return ""
-  end
   local buf = vim.api.nvim_win_get_buf(win)
+  local is_file = vim.bo[buf].buftype == ""
+  local show_signs = vim.wo[win].signcolumn ~= "no"
 
-  ---@type Sign?,Sign?,Sign?
-  local left, right, fold
-  for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
-    if s.name and s.name:find("GitSign") then
-      right = s
+  local components = { "", "", "" } -- left, middle, right
+
+  if show_signs then
+    ---@type Sign?,Sign?,Sign?
+    local left, right, fold
+    for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
+      if s.name and s.name:find("GitSign") then
+        right = s
+      else
+        left = s
+      end
+    end
+    if vim.v.virtnum ~= 0 then
+      left = nil
+    end
+    vim.api.nvim_win_call(win, function()
+      if vim.fn.foldclosed(vim.v.lnum) >= 0 then
+        fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = "Folded" }
+      end
+    end)
+    -- Left: mark or non-git sign
+    components[1] = M.icon(M.get_mark(buf, vim.v.lnum) or left)
+    -- Right: fold icon or git sign (only if file)
+    components[3] = is_file and M.icon(fold or right) or ""
+  end
+
+  -- Numbers in Neovim are weird
+  -- They show when either number or relativenumber is true
+  local is_num = vim.wo[win].number
+  local is_relnum = vim.wo[win].relativenumber
+  if (is_num or is_relnum) and vim.v.virtnum == 0 then
+    if vim.v.relnum == 0 then
+      components[2] = is_num and "%l" or "%r" -- the current line
     else
-      left = s
+      components[2] = is_relnum and "%r" or "%l" -- other lines
     end
+    components[2] = "%=" .. components[2] .. " " -- right align
   end
 
-  if vim.v.virtnum ~= 0 then
-    left = nil
-  end
-
-  vim.api.nvim_win_call(win, function()
-    if vim.fn.foldclosed(vim.v.lnum) >= 0 then
-      fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = "Folded" }
-    end
-  end)
-
-  local nu = ""
-  if vim.wo[win].number and vim.v.virtnum == 0 then
-    nu = vim.wo[win].relativenumber and vim.v.relnum ~= 0 and vim.v.relnum or vim.v.lnum
-  end
-
-  return table.concat({
-    M.icon(M.get_mark(buf, vim.v.lnum) or left),
-    [[%=]],
-    nu .. " ",
-    M.icon(fold or right),
-  }, "")
+  return table.concat(components, "")
 end
 
 function M.fg(name)
