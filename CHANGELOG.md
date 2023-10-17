@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.4.2](https://github.com/LazyVim/LazyVim/compare/v10.4.1...v10.4.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* **statuscolumn:** correct line numbers & respect more options ([315df37](https://github.com/LazyVim/LazyVim/commit/315df373f2d0c354b08acd607f6227b07436ce03))
+
 ## [10.4.1](https://github.com/LazyVim/LazyVim/compare/v10.4.0...v10.4.1) (2023-10-16)
 
 
