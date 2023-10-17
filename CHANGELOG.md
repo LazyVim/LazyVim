@@ -1,5 +1,15 @@
 # Changelog
 
+## [10.4.3](https://github.com/LazyVim/LazyVim/compare/v10.4.2...v10.4.3) (2023-10-17)
+
+
+### Bug Fixes
+
+* **dashboard:** config shortcut when opening dashboard again. Fixes [#1768](https://github.com/LazyVim/LazyVim/issues/1768) ([5c16567](https://github.com/LazyVim/LazyVim/commit/5c1656729aeb39fbb8dc29d4f3d6d86d0836f8b4))
+* **dot:** treesitter langs in dot extra were not added ([b0ded5c](https://github.com/LazyVim/LazyVim/commit/b0ded5c015a68f07a32fab64a2cd0f27f4d69870))
+* **keymaps:** let keymap n and N opens folds ([#1298](https://github.com/LazyVim/LazyVim/issues/1298)) ([1d4fbd3](https://github.com/LazyVim/LazyVim/commit/1d4fbd3b2e48eaae448073af020ca2617ab7bd5c))
+* **neotest:** better integration with trouble: no longer steals focus and hides when all ok ([2e308d5](https://github.com/LazyVim/LazyVim/commit/2e308d5440c830bb37531d03a0313af3a5c94bb5))
+
 ## [10.4.2](https://github.com/LazyVim/LazyVim/compare/v10.4.1...v10.4.2) (2023-10-17)
 
 
