@@ -20,7 +20,7 @@ return {
 
           local formatter = require("lazyvim.util").lsp.formatter({
             name = "eslint: lsp",
-            primary = false,
+            primary = true,
             priority = 200,
             filter = "eslint",
           })
