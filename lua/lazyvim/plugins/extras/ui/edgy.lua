@@ -49,7 +49,7 @@ return {
               return vim.bo[buf].buftype == "help"
             end,
           },
-          { ft = "spectre_panel", size = { height = 0.4 } },
+          { title = "Spectre", ft = "spectre_panel", size = { height = 0.4 } },
           { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
         },
         left = {
@@ -105,17 +105,22 @@ return {
           end,
         },
       }
-      local Util = require("lazyvim.util")
-      if Util.has("symbols-outline.nvim") then
-        table.insert(opts.left, {
-          title = "Outline",
-          ft = "Outline",
-          pinned = true,
-          open = "SymbolsOutline",
-        })
-      end
       return opts
     end,
+  },
+
+  -- use edgy's selection window
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        get_selection_window = function()
+          require("edgy").goto_main()
+          return 0
+        end,
+      },
+    },
   },
 
   -- prevent neo-tree from opening files in edgy windows
