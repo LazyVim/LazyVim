@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.4.4](https://github.com/LazyVim/LazyVim/compare/v10.4.3...v10.4.4) (2023-10-18)
+
+
+### Bug Fixes
+
+* **project:** don't let `project.nvim` change the cwd. Leads to too much confusion ([7d8b3e8](https://github.com/LazyVim/LazyVim/commit/7d8b3e8ef96f91f96c8e3a0ba62dfab270debf9f))
+
 ## [10.4.3](https://github.com/LazyVim/LazyVim/compare/v10.4.2...v10.4.3) (2023-10-17)
 
 
