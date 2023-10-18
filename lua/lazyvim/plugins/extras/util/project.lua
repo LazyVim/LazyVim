@@ -5,7 +5,9 @@ return {
       -- project management
       {
         "ahmedkhalf/project.nvim",
-        opts = {},
+        opts = {
+          manual_mode = true,
+        },
         event = "VeryLazy",
         config = function(_, opts)
           require("project_nvim").setup(opts)
