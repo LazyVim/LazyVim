@@ -6,6 +6,22 @@
 ### Features
 
 * **dashboard:** remove unnecessary brackets from keys ([#1791](https://github.com/LazyVim/LazyVim/issues/1791)) ([d73aee4](https://github.com/LazyVim/LazyVim/commit/d73aee4a934b0aa12e07039da9e2df0215ba2cba))
+* **typescript:** added remove unused imports ([#1794](https://github.com/LazyVim/LazyVim/issues/1794)) ([8df44b3](https://github.com/LazyVim/LazyVim/commit/8df44b3bb54483e42a27dc30a8b343acc5d5d242))
+
+
+### Bug Fixes
+
+* **conform:** allow overriding all conform format options. Fixes [#1790](https://github.com/LazyVim/LazyVim/issues/1790) ([ea3155a](https://github.com/LazyVim/LazyVim/commit/ea3155aef6d47e744cb2b4a7a3b567288d780f8d))
+* **nvim-ts-autotag:** make it actually work :) ([82da244](https://github.com/LazyVim/LazyVim/commit/82da2440e4c9d7e604cf998aee0655f78ddfdd5c))
+* **tabnine:** run `:CmpTabnineHub` automatically on build ([#1788](https://github.com/LazyVim/LazyVim/issues/1788)) ([fad3777](https://github.com/LazyVim/LazyVim/commit/fad37772967f06c65d6f0b52c2ea6f190b3218ee))
+* **treesitter-context:** set default max_lines=3 ([0ac8f6f](https://github.com/LazyVim/LazyVim/commit/0ac8f6fb3b1705c2b675a0e3cbee4968370f047a))
+
+## [10.5.0](https://github.com/LazyVim/LazyVim/compare/v10.4.4...v10.5.0) (2023-10-19)
+
+
+### Features
+
+* **dashboard:** remove unnecessary brackets from keys ([#1791](https://github.com/LazyVim/LazyVim/issues/1791)) ([d73aee4](https://github.com/LazyVim/LazyVim/commit/d73aee4a934b0aa12e07039da9e2df0215ba2cba))
 
 
 ### Bug Fixes
