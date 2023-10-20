@@ -389,6 +389,11 @@ return {
         },
       }
 
+      for _, button in ipairs(opts.config.center) do
+        button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
+        button.key_format = "  %s"
+      end
+
       -- close Lazy and re-open when the dashboard is ready
       if vim.o.filetype == "lazy" then
         vim.cmd.close()
@@ -401,13 +406,6 @@ return {
       end
 
       return opts
-    end,
-    config = function(_, opts)
-      for _, button in ipairs(opts.config.center) do
-        button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-        button.key_format = "  %s"
-      end
-      require("dashboard").setup(opts)
     end,
   },
 }
