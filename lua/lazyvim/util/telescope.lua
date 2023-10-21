@@ -50,4 +50,8 @@ function M.telescope(builtin, opts)
   end
 end
 
+function M.config_files()
+  return Util.telescope("find_files", { cwd = vim.fn.stdpath("config") })
+end
+
 return M
