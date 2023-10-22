@@ -52,6 +52,10 @@ return {
     end,
     opts = {
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      source_selector = {
+        winbar = true,
+        content_layout = "center",
+      },
       open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
       filesystem = {
         bind_to_cwd = false,
