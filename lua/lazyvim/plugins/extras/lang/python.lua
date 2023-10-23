@@ -47,6 +47,7 @@ return {
     optional = true,
     dependencies = {
       "nvim-neotest/neotest-python",
+      "nvim-treesitter/nvim-treesitter",
     },
     opts = {
       adapters = {
