@@ -50,7 +50,7 @@ end
 
 local function prompt_title(picker, o)
   if picker == "oldfiles" then
-    return string.format("oldfiles: [%s]", o.cwd)
+    return string.format("oldfiles: [%s]", o.cwd or "*")
   elseif picker == "frecency" then
     return string.format("frecency: [%s]", o.workspace)
   end
@@ -71,7 +71,7 @@ local actions = {}
 local function picker_config(picker, opts)
   opts = vim.tbl_deep_extend("force", FrecencyIntegration.config.pickers[picker], opts)
 
-  opts.cwd = opts.cwd and opts.cwd or vim.loop.cwd()
+  -- opts.cwd = opts.cwd and opts.cwd or vim.loop.cwd()
   if not opts.prompt_title then
     opts.prompt_title = prompt_title(picker, opts)
   end
