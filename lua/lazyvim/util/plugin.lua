@@ -80,7 +80,7 @@ function M.lazy_file()
     if #events == 0 then
       return
     end
-    vim.api.nvim_del_augroup_by_name("lazy_file")
+    pcall(vim.api.nvim_del_augroup_by_name, "lazy_file")
 
     ---@type table<string,string[]>
     local skips = {}
