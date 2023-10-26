@@ -1,5 +1,47 @@
 # Changelog
 
+## [10.7.1](https://github.com/LazyVim/LazyVim/compare/v10.7.0...v10.7.1) (2023-10-25)
+
+
+### Bug Fixes
+
+* **catppuccin:** trouble integration. Fixes [#1872](https://github.com/LazyVim/LazyVim/issues/1872) ([f589154](https://github.com/LazyVim/LazyVim/commit/f589154268dfcb3e8f91075791a0a618c97fe59d))
+* **util:** pcall deletion of lazy_file augroup. See [#1863](https://github.com/LazyVim/LazyVim/issues/1863) ([60e5707](https://github.com/LazyVim/LazyVim/commit/60e57070131f4c544e17541610415d4d51769d62))
+
+## [10.7.0](https://github.com/LazyVim/LazyVim/compare/v10.6.0...v10.7.0) (2023-10-25)
+
+
+### Features
+
+* **nvim:** extend j/k enhancements to up/down arrows ([#1833](https://github.com/LazyVim/LazyVim/issues/1833)) ([9e1f835](https://github.com/LazyVim/LazyVim/commit/9e1f83522396d141455de8f2d5e0b3e8beca8d0a))
+
+
+### Bug Fixes
+
+* **extras.python-semshi:** improve highlights ([#1845](https://github.com/LazyVim/LazyVim/issues/1845)) ([3795358](https://github.com/LazyVim/LazyVim/commit/37953585bb06b3ffbdb37b40bb586590fde2b2a9))
+* fix jdtls not spwaning in windows ([#1864](https://github.com/LazyVim/LazyVim/issues/1864)) ([61fae7d](https://github.com/LazyVim/LazyVim/commit/61fae7d23f5689a9112b265f4bfb8468a131ae66))
+* **lang:** add cmakelint to ensure installed list ([#1826](https://github.com/LazyVim/LazyVim/issues/1826)) ([58ddf40](https://github.com/LazyVim/LazyVim/commit/58ddf405e09da967eca29169571114b01172fff3))
+
+## [10.6.0](https://github.com/LazyVim/LazyVim/compare/v10.5.0...v10.6.0) (2023-10-25)
+
+
+### Features
+
+* **telescope:** sort buffers with lastused and mru ([99598ef](https://github.com/LazyVim/LazyVim/commit/99598ef7c7c15c980b6d5c36f8e9cefd745fcf34))
+
+
+### Bug Fixes
+
+* **markdown:** create default numbered Headline groups for colorschemes that dont support them. Fixes [#1822](https://github.com/LazyVim/LazyVim/issues/1822) ([eab464d](https://github.com/LazyVim/LazyVim/commit/eab464d52d28d4e24e5d189ee627c96e720e057c))
+* **mini.hipatterns:** use `extmark_opts` instead of soft deprecated `priority` ([#1841](https://github.com/LazyVim/LazyVim/issues/1841)) ([e55ab41](https://github.com/LazyVim/LazyVim/commit/e55ab411b42c75919b33b87e19714b5c595316d4))
+* **treesitter:** make treesitter queries available at startup. See [#1816](https://github.com/LazyVim/LazyVim/issues/1816) Fixes [#1858](https://github.com/LazyVim/LazyVim/issues/1858) ([1e1b68d](https://github.com/LazyVim/LazyVim/commit/1e1b68d633d4bd4faa912ba5f49ab6b8601dc0c9))
+
+
+### Performance Improvements
+
+* **markdown:** prevent headlines.nvim slowing down initial rendering with `nvim README.md` ([b651560](https://github.com/LazyVim/LazyVim/commit/b651560ad0ee750c96bca6866cfdc008e75d397c))
+* **ui:** wrap treesitter.foldexpr and cache get_parser during a event loop tick. Fixes [#1846](https://github.com/LazyVim/LazyVim/issues/1846) ([a5c9708](https://github.com/LazyVim/LazyVim/commit/a5c9708736f6ecd3e3413ad0ca34b7b1fa3d4862))
+
 ## [10.5.0](https://github.com/LazyVim/LazyVim/compare/v10.4.4...v10.5.0) (2023-10-19)
 
 
