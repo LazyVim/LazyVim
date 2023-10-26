@@ -143,3 +143,4 @@ will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
 ## ⚙️ Configuration
 
 Refer to the [docs](https://lazyvim.github.io)
+"ptiver"  
