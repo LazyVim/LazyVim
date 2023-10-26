@@ -96,7 +96,7 @@ function M.lazy_file()
         data = event.data,
         buf = event.buf,
       })
-      if vim.bo[event.buf].filetype then
+      if pcall(vim.bo[event.buf], "filetype") then
         Event.trigger({
           event = "FileType",
           buf = event.buf,
