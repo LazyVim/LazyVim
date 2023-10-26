@@ -43,7 +43,7 @@ function M.telescope(builtin, opts)
       end
       opts.attach_mappings = function(_, map)
         -- opts.desc is overridden by telescope, until it's changed there is this fix
-        map("i", "<a-c>", open_cwd_dir, { desc = "Open root directory" })
+        map("i", "<a-c>", open_cwd_dir, { desc = "Open cwd directory" })
         return true
       end
     end
