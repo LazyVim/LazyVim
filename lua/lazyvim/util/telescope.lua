@@ -33,7 +33,7 @@ function M.telescope(builtin, opts)
     end
     if opts.cwd and opts.cwd ~= vim.loop.cwd() then
       ---@diagnostic disable-next-line: inject-field
-      local function open_git_files()
+      local function open_cwd_dir()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
         M.telescope(
@@ -43,7 +43,7 @@ function M.telescope(builtin, opts)
       end
       opts.attach_mappings = function(_, map)
         -- opts.desc is overridden by telescope, until it's changed there is this fix
-        map("i", "<a-c>", open_git_files, { desc = "Open git_files" })
+        map("i", "<a-c>", open_cwd_dir, { desc = "Open root directory" })
         return true
       end
     end
