@@ -44,7 +44,10 @@ function M.get()
       Util.walk(root, function(path, name, type)
         if type == "file" and name:match("%.lua$") then
           name = path:sub(#root + 2, -5):gsub("/", ".")
-          extras[#extras + 1] = M.get_extra(source, source.module .. "." .. name)
+          local ok, extra = pcall(M.get_extra, source, source.module .. "." .. name)
+          if ok then
+            extras[#extras + 1] = extra
+          end
         end
       end)
     end
