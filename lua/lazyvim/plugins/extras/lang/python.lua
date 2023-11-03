@@ -12,11 +12,27 @@ return {
     opts = {
       servers = {
         pyright = {},
-        ruff_lsp = {},
+        ruff_lsp = {
+          keys = {
+            {
+              "<leader>co",
+              function()
+                vim.lsp.buf.code_action({
+                  apply = true,
+                  context = {
+                    only = { "source.organizeImports" },
+                    diagnostics = {},
+                  },
+                })
+              end,
+              desc = "Organize Imports",
+            },
+          },
+        },
       },
       setup = {
         ruff_lsp = function()
-          require("lazyvim.util").on_attach(function(client, _)
+          require("lazyvim.util").lsp.on_attach(function(client, _)
             if client.name == "ruff_lsp" then
               -- Disable hover in favor of Pyright
               client.server_capabilities.hoverProvider = false
@@ -49,8 +65,8 @@ return {
       "mfussenegger/nvim-dap-python",
       -- stylua: ignore
       keys = {
-        { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
-        { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class" },
+        { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+        { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
       },
       config = function()
         local path = require("mason-registry").get_package("debugpy"):get_install_path()
@@ -61,14 +77,19 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     cmd = "VenvSelect",
-    opts = {
-      name = {
-        "venv",
-        ".venv",
-        "env",
-        ".env",
-      },
-    },
+    opts = function(_, opts)
+      if require("lazyvim.util").has("nvim-dap-python") then
+        opts.dap_enabled = true
+      end
+      return vim.tbl_deep_extend("force", opts, {
+        name = {
+          "venv",
+          ".venv",
+          "env",
+          ".env",
+        },
+      })
+    end,
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
   },
 }

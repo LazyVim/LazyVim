@@ -7,7 +7,11 @@ return {
       {
         "Saecki/crates.nvim",
         event = { "BufRead Cargo.toml" },
-        config = true,
+        opts = {
+          src = {
+            cmp = { enabled = true },
+          },
+        },
       },
     },
     ---@param opts cmp.ConfigSchema

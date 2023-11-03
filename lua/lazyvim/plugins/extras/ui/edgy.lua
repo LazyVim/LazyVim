@@ -40,6 +40,12 @@ return {
             end,
           },
           "Trouble",
+          {
+            ft = "trouble",
+            filter = function(buf, win)
+              return vim.api.nvim_win_get_config(win).relative == ""
+            end,
+          },
           { ft = "qf", title = "QuickFix" },
           {
             ft = "help",
@@ -49,7 +55,7 @@ return {
               return vim.bo[buf].buftype == "help"
             end,
           },
-          { ft = "spectre_panel", size = { height = 0.4 } },
+          { title = "Spectre", ft = "spectre_panel", size = { height = 0.4 } },
           { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
         },
         left = {
@@ -105,17 +111,22 @@ return {
           end,
         },
       }
-      local Util = require("lazyvim.util")
-      if Util.has("symbols-outline.nvim") then
-        table.insert(opts.left, {
-          title = "Outline",
-          ft = "Outline",
-          pinned = true,
-          open = "SymbolsOutline",
-        })
-      end
       return opts
     end,
+  },
+
+  -- use edgy's selection window
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        get_selection_window = function()
+          require("edgy").goto_main()
+          return 0
+        end,
+      },
+    },
   },
 
   -- prevent neo-tree from opening files in edgy windows
@@ -124,7 +135,7 @@ return {
     optional = true,
     opts = function(_, opts)
       opts.open_files_do_not_replace_types = opts.open_files_do_not_replace_types
-        or { "terminal", "Trouble", "qf", "Outline" }
+        or { "terminal", "Trouble", "qf", "Outline", "trouble" }
       table.insert(opts.open_files_do_not_replace_types, "edgy")
     end,
   },

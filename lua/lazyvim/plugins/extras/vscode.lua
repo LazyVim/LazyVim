@@ -18,7 +18,6 @@ local enabled = {
 }
 
 local Config = require("lazy.core.config")
-local Plugin = require("lazy.core.plugin")
 Config.options.checker.enabled = false
 Config.options.change_detection.enabled = false
 Config.options.defaults.cond = function(plugin)
