@@ -123,6 +123,16 @@ if vim.lsp.inlay_hint then
   map("n", "<leader>uh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
 end
 map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
+local mouse = vim.o.mouse ~= "" and vim.o.mouse or "a"
+map("n", "<leader>um", function()
+  if vim.o.mouse == "" then
+    vim.o.mouse = mouse
+    Util.info("Enabled mouse", { title = "Option" })
+  else
+    vim.o.mouse = ""
+    Util.warn("Disabled mouse", { title = "Option" })
+  end
+end, { desc = "Toggle Mouse" })
 
 -- lazygit
 map("n", "<leader>gg", function() Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
