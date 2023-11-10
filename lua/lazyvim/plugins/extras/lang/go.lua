@@ -114,11 +114,11 @@ return {
   {
     "stevearc/conform.nvim",
     optional = true,
-    opts = {
-      formatters_by_ft = {
-        go = { "goimports", "gofumpt" },
-      },
-    },
+    opts = function(_, opts)
+      opts.formatters_by_ft.go = opts.formatters_by_ft.go or {}
+      vim.table_extend(opts.formatters_by_ft.go, { "goimports", "gofumpt" })
+      return opts
+    end,
   },
   {
     "mfussenegger/nvim-dap",

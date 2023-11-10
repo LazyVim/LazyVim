@@ -17,8 +17,20 @@ return {
   {
     "stevearc/conform.nvim",
     optional = true,
-    opts = {
-      formatters_by_ft = {
+    opts = function(_, opts)
+      --- Extend the conform plugin config and add given formatters
+      ---@param tbl table<string, conform.FormatterUnit[]> Table of filetype to formatters mappings
+      local function add_formatters(tbl)
+        for ft, formatters in pairs(tbl) do
+          if opts.formatters_by_ft[ft] == nil then
+            opts.formatters_by_ft[ft] = formatters
+          else
+            vim.list_extend(opts.formatters_by_ft[ft], formatters)
+          end
+        end
+      end
+
+      add_formatters({
         ["javascript"] = { "prettier" },
         ["javascriptreact"] = { "prettier" },
         ["typescript"] = { "prettier" },
@@ -35,7 +47,7 @@ return {
         ["markdown.mdx"] = { "prettier" },
         ["graphql"] = { "prettier" },
         ["handlebars"] = { "prettier" },
-      },
-    },
+      })
+    end,
   },
 }

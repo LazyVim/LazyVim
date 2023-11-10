@@ -27,11 +27,11 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    opts = {
-      linters_by_ft = {
-        dockerfile = { "hadolint" },
-      },
-    },
+    opts = function(_, opts)
+      opts.linters_by_ft.dockerfile = opts.linters_by_ft.dockerfile or {}
+      table.insert(opts.linters_by_ft.dockerfile, "hadolint")
+      return opts
+    end,
   },
   {
     "neovim/nvim-lspconfig",

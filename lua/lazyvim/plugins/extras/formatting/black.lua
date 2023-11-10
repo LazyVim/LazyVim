@@ -17,10 +17,10 @@ return {
   {
     "stevearc/conform.nvim",
     optional = true,
-    opts = {
-      formatters_by_ft = {
-        ["python"] = { "black" },
-      },
-    },
+    opts = function(_, opts)
+      opts.formatters_by_ft.python = opts.formatters_by_ft.python or {}
+      table.insert(opts.formatters_by_ft.python, "black")
+      return opts
+    end,
   },
 }

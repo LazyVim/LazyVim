@@ -49,9 +49,10 @@ return {
       if vim.fn.executable("credo") == 0 then
         return
       end
-      opts.linters_by_ft = {
-        elixir = { "credo" },
-      }
+
+      opts.linters_by_ft.elixir = opts.linters_by_ft.elixir or {}
+      table.insert(opts.linters_by_ft.elixir, "credo")
+      return opts
     end,
   },
 }

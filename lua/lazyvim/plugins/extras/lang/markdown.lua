@@ -27,11 +27,11 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    opts = {
-      linters_by_ft = {
-        markdown = { "markdownlint" },
-      },
-    },
+    opts = function(_, opts)
+      opts.linters_by_ft.markdown = opts.linters_by_ft.markdown or {}
+      table.insert(opts.linters_by_ft.markdown, "markdownlint")
+      return opts
+    end,
   },
   {
     "neovim/nvim-lspconfig",

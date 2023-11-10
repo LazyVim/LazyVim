@@ -38,22 +38,28 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    opts = {
-      linters_by_ft = {
-        terraform = { "terraform_validate" },
-        tf = { "terraform_validate" },
-      },
-    },
+    opts = function(_, opts)
+      opts.linters_by_ft.terraform = opts.linters_by_ft.terraform or {}
+      table.insert(opts.linters_by_ft.terraform, "terraform_validate")
+
+      opts.linters_by_ft.tf = opts.linters_by_ft.tf or {}
+      table.insert(opts.linters_by_ft.tf, "terraform_validate")
+      return opts
+    end,
   },
   {
     "stevearc/conform.nvim",
     optional = true,
-    opts = {
-      formatters_by_ft = {
-        terraform = { "terraform_fmt" },
-        tf = { "terraform_fmt" },
-        ["terraform-vars"] = { "terraform_fmt" },
-      },
-    },
+    opts = function(_, opts)
+      opts.formatters_by_ft.terraform = opts.formatters_by_ft.terraform or {}
+      table.insert(opts.formatters_by_ft.terraform, "terraform_fmt")
+
+      opts.formatters_by_ft.tf = opts.formatters_by_ft.tf or {}
+      table.insert(opts.formatters_by_ft.tf, "terraform_fmt")
+
+      opts.formatters_by_ft["terraform-vars"] = opts.formatters_by_ft["terraform-vars"] or {}
+      table.insert(opts.formatters_by_ft["terraform-vars"], "terraform_fmt")
+      return opts
+    end,
   },
 }

@@ -20,11 +20,11 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    opts = {
-      linters_by_ft = {
-        cmake = { "cmakelint" },
-      },
-    },
+    opts = function(_, opts)
+      opts.linters_by_ft.cmake = opts.linters_by_ft.cmake or {}
+      table.insert(opts.linters_by_ft.cmake, "cmakelint")
+      return opts
+    end,
   },
   {
     "mason.nvim",

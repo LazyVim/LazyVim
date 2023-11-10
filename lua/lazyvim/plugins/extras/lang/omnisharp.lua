@@ -20,17 +20,18 @@ return {
   {
     "stevearc/conform.nvim",
     optional = true,
-    opts = {
-      formatters_by_ft = {
-        cs = { "csharpier" },
-      },
-      formatters = {
+    opts = function(_, opts)
+      opts.formatters_by_ft.cs = opts.formatters_by_ft.cs or {}
+      table.insert(opts.formatters_by_ft.cs, "csharpier")
+
+      opts.formatters = {
         csharpier = {
           command = "dotnet-csharpier",
           args = { "--write-stdout" },
         },
-      },
-    },
+      }
+      return opts
+    end,
   },
   {
     "williamboman/mason.nvim",
