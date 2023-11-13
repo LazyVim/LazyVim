@@ -120,7 +120,11 @@ return {
       if opts.inlay_hints.enabled and inlay_hint then
         Util.lsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
-            inlay_hint(buffer, true)
+            if vim.fn.has("nvim-0.10") == 1 then
+              inlay_hint.enable(buffer, true)
+            else
+              inlay_hint(buffer, true)
+            end
           end
         end)
       end
