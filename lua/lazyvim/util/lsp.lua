@@ -125,12 +125,9 @@ end
 ---@param bufnr? number
 function M.toggle_inline_hint(bufnr)
   bufnr = bufnr or 0
-  if vim.fn.has("nvim-0.10") then
-    if vim.lsp.inlay_hint.is_enabled() then
-      vim.lsp.inlay_hint.enable(bufnr, false)
-    else
-      vim.lsp.inlay_hint.enable(bufnr, true)
-    end
+  local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+  if inlay_hint.enable then
+    vim.lsp.inlay_hint.enable(bufnr, not inlay_hint.is_enabled())
   else
     vim.lsp.inlay_hint(bufnr, nil)
   end
