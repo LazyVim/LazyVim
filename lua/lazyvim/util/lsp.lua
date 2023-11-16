@@ -122,4 +122,18 @@ function M.format(opts)
   end
 end
 
+---@param bufnr? number
+function M.toggle_inline_hint(bufnr)
+  bufnr = bufnr or 0
+  if vim.fn.has("nvim-0.10") then
+    if vim.lsp.inlay_hint.is_enabled() then
+      vim.lsp.inlay_hint.enable(bufnr, false)
+    else
+      vim.lsp.inlay_hint.enable(bufnr, true)
+    end
+  else
+    vim.lsp.inlay_hint(bufnr, nil)
+  end
+end
+
 return M
