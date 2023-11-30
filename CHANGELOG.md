@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.8.2](https://github.com/LazyVim/LazyVim/compare/v10.8.1...v10.8.2) (2023-11-30)
+
+
+### Bug Fixes
+
+* **lsp:** fix inlay hints for older nightlies. See [#2007](https://github.com/LazyVim/LazyVim/issues/2007) ([8baf9b5](https://github.com/LazyVim/LazyVim/commit/8baf9b5459a903c783a1d34ad438e64036a8e15e))
+
 ## [10.8.1](https://github.com/LazyVim/LazyVim/compare/v10.8.0...v10.8.1) (2023-11-30)
 
 
