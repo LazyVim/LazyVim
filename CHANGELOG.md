@@ -1,5 +1,14 @@
 # Changelog
 
+## [10.8.1](https://github.com/LazyVim/LazyVim/compare/v10.8.0...v10.8.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* **lsp:** detect if using nvim-0.10 and use new inlay_hint.enable method ([#2007](https://github.com/LazyVim/LazyVim/issues/2007)) ([6853b78](https://github.com/LazyVim/LazyVim/commit/6853b785d9916be6ffe4965aefd8554ed276f802))
+* **lsp:** inlay hints on stable. See [#2007](https://github.com/LazyVim/LazyVim/issues/2007) ([e229988](https://github.com/LazyVim/LazyVim/commit/e229988a98a81b000fda3aadbb4fc404aeaa599e))
+* **ui:** signcolumn signs on nightly. Fixes [#2039](https://github.com/LazyVim/LazyVim/issues/2039) ([11a8a6b](https://github.com/LazyVim/LazyVim/commit/11a8a6bea7a26ca5257fa4cbef90e0abdb22c349))
+
 ## [10.8.0](https://github.com/LazyVim/LazyVim/compare/v10.7.1...v10.8.0) (2023-11-04)
 
 
