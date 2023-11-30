@@ -115,7 +115,7 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
-      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint.enable
+      local inlay_hint = vim.lsp.buf.inlay_hint or (vim.lsp.inlay_hint and vim.lsp.inlay_hint.enable)
 
       if opts.inlay_hints.enabled and inlay_hint then
         Util.lsp.on_attach(function(client, buffer)
