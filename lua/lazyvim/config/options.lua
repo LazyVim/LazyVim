@@ -49,7 +49,6 @@ opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
-opt.timeoutlen = 300
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
@@ -91,3 +90,9 @@ vim.o.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
+
+-- wierd tmux esc-j/k line switch issue fix
+-- https://github.com/LazyVim/LazyVim/discussions/163
+opt.timeoutlen = 1000
+opt.ttimeoutlen = 0
+
