@@ -34,7 +34,7 @@ opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 4 -- Lines of context
-opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
@@ -82,10 +82,12 @@ end
 -- HACK: causes freezes on <= 0.9, so only enable on >= 0.10 for now
 if vim.fn.has("nvim-0.10") == 1 then
   vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
 else
   vim.opt.foldmethod = "indent"
 end
+
+vim.o.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

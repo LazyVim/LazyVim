@@ -2,9 +2,6 @@ local Util = require("lazyvim.util")
 
 local M = {}
 
----@type ConformOpts
-local conform_opts = {}
-
 ---@param opts ConformOpts
 function M.setup(_, opts)
   for name, formatter in pairs(opts.formatters or {}) do
@@ -29,7 +26,6 @@ function M.setup(_, opts)
       opts[key] = nil
     end
   end
-  conform_opts = opts
   require("conform").setup(opts)
 end
 
@@ -50,7 +46,6 @@ return {
       },
     },
     init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
       -- Install the conform formatter on VeryLazy
       require("lazyvim.util").on_very_lazy(function()
         require("lazyvim.util").format.register({
@@ -58,11 +53,10 @@ return {
           priority = 100,
           primary = true,
           format = function(buf)
-            require("conform").format(Util.merge({
-              timeout_ms = conform_opts.format.timeout_ms,
-              async = conform_opts.format.async,
-              quiet = conform_opts.format.quiet,
-            }, { bufnr = buf }))
+            local plugin = require("lazy.core.config").plugins["conform.nvim"]
+            local Plugin = require("lazy.core.plugin")
+            local opts = Plugin.values(plugin, "opts", false)
+            require("conform").format(Util.merge(opts.format, { bufnr = buf }))
           end,
           sources = function(buf)
             local ret = require("conform").list_formatters(buf)
@@ -97,7 +91,7 @@ return {
           fish = { "fish_indent" },
           sh = { "shfmt" },
         },
-        -- LazyVim will merge the options you set here with builtin formatters.
+        -- The options you set here will be merged with the builtin formatters.
         -- You can also define any custom formatters here.
         ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride>
         formatters = {
@@ -111,7 +105,7 @@ return {
           --
           -- # Example of using shfmt with extra args
           -- shfmt = {
-          --   extra_args = { "-i", "2", "-ci" },
+          --   prepend_args = { "-i", "2", "-ci" },
           -- },
         },
       }

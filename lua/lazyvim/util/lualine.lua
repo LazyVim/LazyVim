@@ -75,7 +75,7 @@ function M.pretty_path(opts)
     if path == "" then
       return ""
     end
-    local root = Util.root.get()
+    local root = Util.root.get({ normalize = true })
     local cwd = Util.root.cwd()
 
     if opts.relative == "cwd" and path:find(cwd, 1, true) == 1 then
@@ -111,7 +111,7 @@ function M.root_dir(opts)
 
   local function get()
     local cwd = Util.root.cwd()
-    local root = Util.root.get()
+    local root = Util.root.get({ normalize = true })
     local name = vim.fs.basename(root)
 
     if root == cwd then

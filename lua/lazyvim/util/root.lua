@@ -136,15 +136,41 @@ function M.info()
   return roots[1] and roots[1].paths[1] or vim.loop.cwd()
 end
 
+---@type table<number, string>
+M.cache = {}
+
+function M.setup()
+  vim.api.nvim_create_user_command("LazyRoot", function()
+    Util.root.info()
+  end, { desc = "LazyVim roots for the current buffer" })
+
+  vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost" }, {
+    group = vim.api.nvim_create_augroup("lazyvim_root_cache", { clear = true }),
+    callback = function(event)
+      M.cache[event.buf] = nil
+    end,
+  })
+end
+
 -- returns the root directory based on:
 -- * lsp workspace folders
 -- * lsp root_dir
 -- * root pattern of filename of the current buffer
 -- * root pattern of cwd
+---@param opts? {normalize?:boolean}
 ---@return string
-function M.get()
-  local roots = M.detect({ all = false })
-  return roots[1] and roots[1].paths[1] or vim.loop.cwd()
+function M.get(opts)
+  local buf = vim.api.nvim_get_current_buf()
+  local ret = M.cache[buf]
+  if not ret then
+    local roots = M.detect({ all = false })
+    ret = roots[1] and roots[1].paths[1] or vim.loop.cwd()
+    M.cache[buf] = ret
+  end
+  if opts and opts.normalize then
+    return ret
+  end
+  return Util.is_win() and ret:gsub("/", "\\") or ret
 end
 
 ---@param opts? {hl_last?: string}

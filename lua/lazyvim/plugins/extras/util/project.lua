@@ -5,7 +5,9 @@ return {
       -- project management
       {
         "ahmedkhalf/project.nvim",
-        opts = {},
+        opts = {
+          manual_mode = true,
+        },
         event = "VeryLazy",
         config = function(_, opts)
           require("project_nvim").setup(opts)
@@ -54,6 +56,10 @@ return {
         icon = " ",
         key = "p",
       }
+
+      projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
+      projects.key_format = "  %s"
+
       table.insert(opts.config.center, 3, projects)
     end,
   },
