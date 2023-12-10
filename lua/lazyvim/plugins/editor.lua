@@ -22,8 +22,10 @@ return {
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
-      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      -- { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
+      -- { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      { "<leader>a", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
+      { "<leader>A", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
       {
         "<leader>ge",
         function()
@@ -44,7 +46,7 @@ return {
     end,
     init = function()
       if vim.fn.argc(-1) == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        local stat = vim.loop.fs_stat(vim.f.argv(0))
         if stat and stat.type == "directory" then
           require("neo-tree")
         end
@@ -133,13 +135,16 @@ return {
         "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
         desc = "Switch Buffer",
       },
-      { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+      -- { "<leader>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>fw", Util.telescope("live_grep"), desc = "Grep (root dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
       -- find
-      { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      -- { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "bu", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", Util.telescope.config_files(), desc = "Find Config File" },
-      { "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
+      -- { "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
+      { "<C-p>", Util.telescope("files"), desc = "Find Files (root dir)" },
       { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
@@ -289,8 +294,20 @@ return {
           end,
         })
       end
+      local actions = require("telescope.actions")
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
-        mappings = { n = { s = flash }, i = { ["<c-s>"] = flash } },
+        mappings = {
+          n = { s = flash },
+          i = {
+            ["<c-s>"] = flash,
+            ["<C-n>"] = actions.cycle_history_next,
+            ["<C-p>"] = actions.cycle_history_prev,
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-c>"] = actions.close,
+            ["<esc>"] = actions.close,
+          },
+        },
       })
     end,
   },
@@ -487,9 +504,11 @@ return {
     keys = {
       { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
       { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      -- { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>tt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
       { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      -- { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      { "<leader>tl", "<cmd>TodoTelescope<cr>", desc = "Todo" },
       { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
   },

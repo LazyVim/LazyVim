@@ -11,6 +11,7 @@ return {
       local opts = {
         symbols = {},
         symbol_blacklist = {},
+        width = 30,
       }
       local filter = Config.kind_filter
 

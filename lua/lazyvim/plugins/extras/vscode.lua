@@ -3,9 +3,9 @@ if not vim.g.vscode then
 end
 
 local enabled = {
-  "flit.nvim",
+  -- "flit.nvim",
   "lazy.nvim",
-  "leap.nvim",
+  -- "leap.nvim",
   "mini.ai",
   "mini.comment",
   "mini.pairs",

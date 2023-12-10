@@ -50,7 +50,8 @@ return {
               },
               usePlaceholders = true,
               completeUnimported = true,
-              staticcheck = true,
+              -- TODO: gopls 版本问题,临时屏蔽
+              staticcheck = false,
               directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
               semanticTokens = true,
             },

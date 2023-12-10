@@ -75,7 +75,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- lazy
-map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+-- map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -135,7 +135,7 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 -- LazyVim Changelog
-map("n", "<leader>L", function() Util.news.changelog() end, { desc = "LazyVim Changelog" })
+-- map("n", "<leader>L", function() Util.news.changelog() end, { desc = "LazyVim Changelog" })
 
 -- floating terminal
 local lazyterm = function() Util.terminal(nil, { cwd = Util.root() }) end

@@ -4,6 +4,7 @@ return {
   -- Better `vim.notify()`
   {
     "rcarriga/nvim-notify",
+    enabled = false,
     keys = {
       {
         "<leader>un",
@@ -287,8 +288,11 @@ return {
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     opts = {
+      notify = {
+        enabled = false,
+      },
       lsp = {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,

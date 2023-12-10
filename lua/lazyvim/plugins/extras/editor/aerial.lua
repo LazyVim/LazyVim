@@ -22,6 +22,8 @@ return {
       end
 
       local opts = {
+        min_width = 100,
+        max_width = { 100, 0.2 },
         attach_mode = "global",
         backends = { "lsp", "treesitter", "markdown", "man" },
         show_guides = true,
@@ -46,7 +48,7 @@ return {
       return opts
     end,
     keys = {
-      { "<leader>cs", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
+      { "<leader>l", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
     },
   },
 

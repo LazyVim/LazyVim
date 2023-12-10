@@ -7,6 +7,9 @@ return {
     opts = { style = "moon" },
   },
 
+  -- nightfox
+  { "EdenEast/nightfox.nvim", lazy = true, name = "nightfox" },
+
   -- catppuccin
   {
     "catppuccin/nvim",
