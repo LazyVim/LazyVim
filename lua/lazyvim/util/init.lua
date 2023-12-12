@@ -12,6 +12,8 @@ local LazyUtil = require("lazy.core.util")
 ---@field extras lazyvim.util.extras
 ---@field inject lazyvim.util.inject
 ---@field news lazyvim.util.news
+---@field json lazyvim.util.json
+---@field lualine lazyvim.util.lualine
 local M = {}
 
 ---@type table<string, string|string[]>
@@ -22,7 +24,6 @@ local deprecated = {
   root_patterns = { "root", "patterns" },
   get_root = { "root", "get" },
   float_term = { "terminal", "open" },
-  toggle = { "toggle", "option" },
   toggle_diagnostics = { "toggle", "diagnostics" },
   toggle_number = { "toggle", "number" },
   fg = "ui",
@@ -47,6 +48,10 @@ setmetatable(M, {
     return t[k]
   end,
 })
+
+function M.is_win()
+  return vim.loop.os_uname().sysname:find("Windows") ~= nil
+end
 
 ---@param plugin string
 function M.has(plugin)

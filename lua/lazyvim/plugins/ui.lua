@@ -1,3 +1,5 @@
+local Util = require("lazyvim.util")
+
 return {
   -- Better `vim.notify()`
   {
@@ -25,7 +27,6 @@ return {
     },
     init = function()
       -- when noice is not enabled, install notify on VeryLazy
-      local Util = require("lazyvim.util")
       if not Util.has("noice.nvim") then
         Util.on_very_lazy(function()
           vim.notify = require("notify")
@@ -60,6 +61,13 @@ return {
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
+      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
+      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
+      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
     },
     opts = {
       options = {
@@ -118,7 +126,6 @@ return {
       lualine_require.require = require
 
       local icons = require("lazyvim.config").icons
-      local Util = require("lazyvim.util")
 
       vim.o.laststatus = vim.g.lualine_laststatus
 
@@ -131,7 +138,9 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch" },
+
           lualine_c = {
+            Util.lualine.root_dir(),
             {
               "diagnostics",
               symbols = {
@@ -142,11 +151,7 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            {
-              function()
-                return Util.root.pretty_path()
-              end,
-            },
+            { Util.lualine.pretty_path() },
           },
           lualine_x = {
             -- stylua: ignore
@@ -179,6 +184,16 @@ return {
                 modified = icons.git.modified,
                 removed = icons.git.removed,
               },
+              source = function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns then
+                  return {
+                    added = gitsigns.added,
+                    modified = gitsigns.changed,
+                    removed = gitsigns.removed,
+                  }
+                end
+              end,
             },
           },
           lualine_y = {
@@ -213,6 +228,7 @@ return {
           "dashboard",
           "neo-tree",
           "Trouble",
+          "trouble",
           "lazy",
           "mason",
           "notify",
@@ -244,6 +260,7 @@ return {
           "dashboard",
           "neo-tree",
           "Trouble",
+          "trouble",
           "lazy",
           "mason",
           "notify",
@@ -331,7 +348,7 @@ return {
     end,
   },
   {
-    "glepnir/dashboard-nvim",
+    "nvimdev/dashboard-nvim",
     event = "VimEnter",
     opts = function()
       local logo = [[
@@ -356,15 +373,15 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
-            { action = "Telescope find_files",              desc = " Find file",       icon = " ", key = "f" },
-            { action = "ene | startinsert",                 desc = " New file",        icon = " ", key = "n" },
-            { action = "Telescope oldfiles",                desc = " Recent files",    icon = " ", key = "r" },
-            { action = "Telescope live_grep",               desc = " Find text",       icon = " ", key = "g" },
-            { action = "e $MYVIMRC",                        desc = " Config",          icon = " ", key = "c" },
-            { action = 'lua require("persistence").load()', desc = " Restore Session", icon = " ", key = "s" },
-            { action = "LazyExtras",                        desc = " Lazy Extras",     icon = " ", key = "e" },
-            { action = "Lazy",                              desc = " Lazy",            icon = "󰒲 ", key = "l" },
-            { action = "qa",                                desc = " Quit",            icon = " ", key = "q" },
+            { action = "Telescope find_files",                                     desc = " Find file",       icon = " ", key = "f" },
+            { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
+            { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
+            { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "g" },
+            { action = [[lua require("lazyvim.util").telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
+            { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
+            { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
+            { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
+            { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
           },
           footer = function()
             local stats = require("lazy").stats()
@@ -376,6 +393,7 @@ return {
 
       for _, button in ipairs(opts.config.center) do
         button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
+        button.key_format = "  %s"
       end
 
       -- close Lazy and re-open when the dashboard is ready

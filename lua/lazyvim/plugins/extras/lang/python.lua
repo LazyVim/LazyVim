@@ -12,7 +12,23 @@ return {
     opts = {
       servers = {
         pyright = {},
-        ruff_lsp = {},
+        ruff_lsp = {
+          keys = {
+            {
+              "<leader>co",
+              function()
+                vim.lsp.buf.code_action({
+                  apply = true,
+                  context = {
+                    only = { "source.organizeImports" },
+                    diagnostics = {},
+                  },
+                })
+              end,
+              desc = "Organize Imports",
+            },
+          },
+        },
       },
       setup = {
         ruff_lsp = function()
@@ -49,8 +65,8 @@ return {
       "mfussenegger/nvim-dap-python",
       -- stylua: ignore
       keys = {
-        { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
-        { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class" },
+        { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+        { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
       },
       config = function()
         local path = require("mason-registry").get_package("debugpy"):get_install_path()

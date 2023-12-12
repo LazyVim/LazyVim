@@ -3,7 +3,7 @@ local Util = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "10.0.0" -- x-release-please-version
+M.version = "10.8.2" -- x-release-please-version
 
 ---@class LazyVimOptions
 local defaults = {
@@ -84,6 +84,7 @@ local defaults = {
       Snippet       = " ",
       String        = " ",
       Struct        = "󰆼 ",
+      TabNine       = "󰏚 ",
       Text          = " ",
       TypeParameter = " ",
       Unit          = " ",
@@ -91,7 +92,7 @@ local defaults = {
       Variable      = "󰀫 ",
     },
   },
-  ---@type table<string, string[]>?
+  ---@type table<string, string[]|boolean>?
   kind_filter = {
     default = {
       "Class",
@@ -108,6 +109,8 @@ local defaults = {
       "Struct",
       "Trait",
     },
+    markdown = false,
+    help = false,
     -- you can specify a different filter for each filetype
     lua = {
       "Class",
@@ -128,9 +131,10 @@ local defaults = {
 }
 
 M.json = {
+  version = 2,
   data = {
     version = nil, ---@type string?
-    hashes = {}, ---@type table<string, string>
+    news = {}, ---@type table<string, string>
     extras = {}, ---@type string[]
   },
 }
@@ -144,16 +148,10 @@ function M.json.load()
     local ok, json = pcall(vim.json.decode, data, { luanil = { object = true, array = true } })
     if ok then
       M.json.data = vim.tbl_deep_extend("force", M.json.data, json or {})
+      if M.json.data.version ~= M.json.version then
+        Util.json.migrate()
+      end
     end
-  end
-end
-
-function M.json.save()
-  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
-  local f = io.open(path, "w")
-  if f then
-    f:write(vim.json.encode(M.json.data))
-    f:close()
   end
 end
 
@@ -182,10 +180,7 @@ function M.setup(opts)
 
       Util.format.setup()
       Util.news.setup()
-
-      vim.api.nvim_create_user_command("LazyRoot", function()
-        Util.root.info()
-      end, { desc = "LazyVim roots for the current buffer" })
+      Util.root.setup()
 
       vim.api.nvim_create_user_command("LazyExtras", function()
         Util.extras.show()
@@ -218,7 +213,11 @@ function M.get_kind_filter(buf)
   if M.kind_filter == false then
     return
   end
-  return M.kind_filter[ft] or M.kind_filter.default
+  if M.kind_filter[ft] == false then
+    return
+  end
+  ---@diagnostic disable-next-line: return-type-mismatch
+  return type(M.kind_filter) == "table" and type(M.kind_filter.default) == "table" and M.kind_filter.default or nil
 end
 
 ---@param name "autocmds" | "options" | "keymaps"
