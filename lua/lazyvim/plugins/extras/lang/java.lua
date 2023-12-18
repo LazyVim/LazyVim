@@ -35,6 +35,10 @@ return {
       {
         "williamboman/mason.nvim",
         opts = function(_, opts)
+          opts.registries = {
+            "github:nvim-java/mason-registry",
+            "github:mason-org/mason-registry",
+          }
           opts.ensure_installed = opts.ensure_installed or {}
           vim.list_extend(opts.ensure_installed, { "java-test", "java-debug-adapter" })
         end,
@@ -202,13 +206,19 @@ return {
 
               -- Java Test require Java debugger to work
               if opts.test and mason_registry.is_installed("java-test") then
-                -- custom keymaps for Java test runner (not yet compatible with neotest)
+                -- custom keymaps for Java debug test runner (not yet compatible with neotest)
                 wk.register({
-                  ["<leader>t"] = { name = "+test" },
-                  ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
-                  ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
-                  ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
+                  ["<leader>td"] = { require("jdtls.dap").test_nearest_method, "Debug Nearest (Java)" },
                 }, { mode = "n", buffer = args.buf })
+                -- custom keymaps if no neotest is there
+                if not Util.has("neotest") then
+                  wk.register({
+                    ["<leader>t"] = { name = "+test" },
+                    ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
+                    ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
+                    ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
+                  }, { mode = "n", buffer = args.buf })
+                end
               end
             end
 
@@ -224,4 +234,18 @@ return {
       attach_jdtls()
     end,
   },
+
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    dependencies = {
+      "rcasia/neotest-java",
+    },
+    opts = {
+      adapters = {
+        ["neotest-java"] = {},
+      },
+    },
+  },
+
 }
