@@ -37,6 +37,7 @@ return {
         opts = function(_, opts)
           opts.registries = opts.registries or {}
           table.insert(opts.registries, 1, "github:nvim-java/mason-registry")
+          table.insert(opts.registries, "github:mason-org/mason-registry")
           opts.ensure_installed = opts.ensure_installed or {}
           vim.list_extend(opts.ensure_installed, { "java-test", "java-debug-adapter" })
         end,
