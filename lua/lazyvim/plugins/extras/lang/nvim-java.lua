@@ -48,7 +48,7 @@ return {
             jdtls = {
               keys = {
                 -- Workaround for the lack of a DAP strategy in neotest-java
-                { "<leader>td", "<cmd>lua require('java').test.debug_current_method()<CR>", desc = "Debug Nearest (Java)" },
+                { "<leader>td", function() require('java').dap.config_dap(); require('java').test.debug_current_method() end, desc = "Debug Nearest (Java)" },
               }
             },
           },
