@@ -63,7 +63,6 @@ return {
     dependencies = {
       {
         "ANGkeith/telescope-terraform-doc.nvim",
-        event = "VeryLazy",
         config = function()
           Util.on_load("telescope.nvim", function()
             require("telescope").load_extension("terraform_doc")
@@ -72,7 +71,6 @@ return {
       },
       {
         "cappyzawa/telescope-terraform.nvim",
-        event = "VeryLazy",
         config = function()
           Util.on_load("telescope.nvim", function()
             require("telescope").load_extension("terraform")
