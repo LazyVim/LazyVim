@@ -1,5 +1,9 @@
 return {
   {
+    "raimon49/requirements.txt.vim",
+    event = { "BufRead *req*.txt" },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
