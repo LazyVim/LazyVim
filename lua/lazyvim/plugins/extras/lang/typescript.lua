@@ -17,7 +17,6 @@ return {
       -- make sure mason installs the server
       servers = {
         ---@type lspconfig.options.tsserver
-        ---@diagnostic disable-next-line: missing-fields
         tsserver = {
           keys = {
             {
@@ -45,6 +44,12 @@ return {
                 })
               end,
               desc = "Remove Unused Imports",
+            },
+          },
+          ---@diagnostic disable-next-line: missing-fields
+          settings = {
+            completions = {
+              completeFunctionCalls = true,
             },
           },
         },
