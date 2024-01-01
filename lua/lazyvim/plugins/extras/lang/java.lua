@@ -62,7 +62,7 @@ return {
   -- Set up nvim-jdtls to attach to java files.
   {
     "mfussenegger/nvim-jdtls",
-    dependencies = { "folke/which-key.nvim" },
+    dependencies = { { "folke/which-key.nvim", optional = true } },
     ft = java_filetypes,
     opts = function()
       return {
@@ -169,39 +169,44 @@ return {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client and client.name == "jdtls" then
-            local wk = require("which-key")
-            wk.register({
-              ["<leader>cx"] = { name = "+extract" },
-              ["<leader>cxv"] = { require("jdtls").extract_variable_all, "Extract Variable" },
-              ["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
-              ["gs"] = { require("jdtls").super_implementation, "Goto Super" },
-              ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
-              ["<leader>co"] = { require("jdtls").organize_imports, "Organize Imports" },
-            }, { mode = "n", buffer = args.buf })
-            wk.register({
-              ["<leader>c"] = { name = "+code" },
-              ["<leader>cx"] = { name = "+extract" },
-              ["<leader>cxm"] = {
-                [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-                "Extract Method",
-              },
-              ["<leader>cxv"] = {
-                [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
-                "Extract Variable",
-              },
-              ["<leader>cxc"] = {
-                [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
-                "Extract Constant",
-              },
-            }, { mode = "v", buffer = args.buf })
-
+            local ok, wk = pcall(require, "which-key")
+            local keys = vim.tbl_extend("force", {
+              action = ok,
+              test = ok,
+            }, opts.keys or {})
+            if keys.action then
+              wk.register({
+                ["<leader>cx"] = { name = "+extract" },
+                ["<leader>cxv"] = { require("jdtls").extract_variable_all, "Extract Variable" },
+                ["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
+                ["gs"] = { require("jdtls").super_implementation, "Goto Super" },
+                ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
+                ["<leader>co"] = { require("jdtls").organize_imports, "Organize Imports" },
+              }, { mode = "n", buffer = args.buf })
+              wk.register({
+                ["<leader>c"] = { name = "+code" },
+                ["<leader>cx"] = { name = "+extract" },
+                ["<leader>cxm"] = {
+                  [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
+                  "Extract Method",
+                },
+                ["<leader>cxv"] = {
+                  [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
+                  "Extract Variable",
+                },
+                ["<leader>cxc"] = {
+                  [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
+                  "Extract Constant",
+                },
+              }, { mode = "v", buffer = args.buf })
+            end
             if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
               -- custom init for Java debugger
               require("jdtls").setup_dap(opts.dap)
               require("jdtls.dap").setup_dap_main_class_configs()
 
               -- Java Test require Java debugger to work
-              if opts.test and mason_registry.is_installed("java-test") then
+              if opts.test and keys.test and mason_registry.is_installed("java-test") then
                 -- custom keymaps for Java test runner (not yet compatible with neotest)
                 wk.register({
                   ["<leader>t"] = { name = "+test" },
