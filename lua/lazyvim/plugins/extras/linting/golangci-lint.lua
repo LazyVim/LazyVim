@@ -14,6 +14,8 @@ return {
     opts = {
       linters_by_ft = {
         go = { "golangcilint" },
+        gomod = { "golangcilint" },
+        gowork = { "golangcilint" },
       },
     },
   },
