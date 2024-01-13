@@ -9,11 +9,13 @@ return {
     end,
   },
 
-  -- session management
+  -- Session management. This saves your session in the background,
+  -- keeping track of open buffers, window arrangement, and more.
+  -- You can restore sessions when returning through the dashboard.
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
-    opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" } },
+    opts = { options = vim.opt.sessionoptions:get() },
     -- stylua: ignore
     keys = {
       { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
@@ -24,7 +26,4 @@ return {
 
   -- library used by other plugins
   { "nvim-lua/plenary.nvim", lazy = true },
-
-  -- makes some plugins dot-repeatable like leap
-  { "tpope/vim-repeat", event = "VeryLazy" },
 }
