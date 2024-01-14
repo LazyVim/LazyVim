@@ -36,7 +36,8 @@ function M.setup()
   table.insert(package.loaders, function(module)
     if M.deprecated_modules[module] then
       Util.warn(
-        ("`%s` is no longer included by default in **LazyVim**.\nPlease install the `%s` extra if you still want to use it."):format(
+        ("`%s` is no longer included by default in **LazyVim**.\nPlease install the `%s` extra if you still want to use it.")
+        :format(
           module,
           M.deprecated_modules[module]
         ),
