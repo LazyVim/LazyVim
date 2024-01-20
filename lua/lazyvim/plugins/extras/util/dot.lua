@@ -10,7 +10,7 @@ return {
 
   -- Add Hyprland Parser
   {
-    "luckasRanarison/tree-sitter-hypr",
+    "luckasRanarison/tree-sitter-hyprlang",
     enabled = function()
       return have("hypr")
     end,
@@ -19,11 +19,11 @@ return {
     config = function()
       -- Fix ft detection for hyprland
       vim.filetype.add({
-        pattern = { [".*/hypr/.*%.conf"] = "hypr" },
+        pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
       })
-      require("nvim-treesitter.parsers").get_parser_configs().hypr = {
+      require("nvim-treesitter.parsers").get_parser_configs().hyprlang = {
         install_info = {
-          url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+          url = "https://github.com/luckasRanarison/tree-sitter-hyprlang",
           files = { "src/parser.c" },
           branch = "master",
         },
