@@ -17,6 +17,10 @@ local function extend_or_override(config, custom, ...)
   return config
 end
 
+local env = {
+  JDTLS_JVM_ARGS = os.getenv("JDTLS_JVM_ARGS"),
+}
+
 return {
   -- Add java to treesitter.
   {
@@ -75,6 +79,17 @@ return {
           return root_dir and vim.fs.basename(root_dir)
         end,
 
+         -- get shell JDTLS_JVM_ARGS environment  see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#java_language_server
+        get_jdtls_jvm_args = function()
+          local args = {}
+          for a in string.gmatch((env.JDTLS_JVM_ARGS or ""), "%S+") do
+            local arg = string.format("--jvm-arg=%s", a)
+            table.insert(args, arg)
+          end
+          return unpack(args)
+        end,
+
+
         -- Where are the config and workspace dirs for a project?
         jdtls_config_dir = function(project_name)
           return vim.fn.stdpath("cache") .. "/jdtls/" .. project_name .. "/config"
@@ -97,6 +112,7 @@ return {
               opts.jdtls_config_dir(project_name),
               "-data",
               opts.jdtls_workspace_dir(project_name),
+              opts.get_jdtls_jvm_args(),
             })
           end
           return cmd
