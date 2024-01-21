@@ -94,7 +94,7 @@ return {
       -- setup autoformat
       Util.format.register(Util.lsp.formatter())
 
-      -- deprectaed options
+      -- deprecated options
       if opts.autoformat ~= nil then
         vim.g.autoformat = opts.autoformat
         Util.deprecate("nvim-lspconfig.opts.autoformat", "vim.g.autoformat")
