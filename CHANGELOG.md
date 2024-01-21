@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.9.1](https://github.com/LazyVim/LazyVim/compare/v10.9.0...v10.9.1) (2024-01-21)
+
+
+### Bug Fixes
+
+* fixup for [#2137](https://github.com/LazyVim/LazyVim/issues/2137) ([fbe478a](https://github.com/LazyVim/LazyVim/commit/fbe478ae3f84ff842d18ff880af5842a50ee8e50))
+
 ## [10.9.0](https://github.com/LazyVim/LazyVim/compare/v10.8.2...v10.9.0) (2024-01-21)
 
 
