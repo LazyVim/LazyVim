@@ -57,17 +57,15 @@ return {
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
-        commands = {
-          copy_file_name = function(state)
-            local node = state.tree:get_node()
-            vim.fn.setreg("*", node.name, "c")
-          end,
-        },
       },
       window = {
         mappings = {
           ["<space>"] = "none",
-          ["Y"] = "copy_file_name",
+          ["Y"] = function(state)
+            local node = state.tree:get_node()
+            local path = node:get_id()
+            vim.fn.setreg("+", path, "c")
+          end,
         },
       },
       default_component_configs = {
