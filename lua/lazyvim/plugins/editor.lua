@@ -62,6 +62,7 @@ return {
             local node = state.tree:get_node()
             vim.fn.setreg("*", node.name, "c")
           end,
+        },
       },
       window = {
         mappings = {
