@@ -185,6 +185,11 @@ function M.setup(opts)
       vim.api.nvim_create_user_command("LazyExtras", function()
         Util.extras.show()
       end, { desc = "Manage LazyVim extras" })
+
+      vim.api.nvim_create_user_command("LazyHealth", function()
+        vim.cmd([[Lazy! load all]])
+        vim.cmd([[checkhealth]])
+      end, { desc = "Load all plugins and run :checkhealth" })
     end,
   })
 
