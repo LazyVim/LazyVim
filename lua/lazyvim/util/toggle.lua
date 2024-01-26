@@ -41,13 +41,15 @@ function M.number()
   end
 end
 
-local enabled = true
+local enabled
+-- if this Neovim version supports checking if diagnostics are enabled
+-- then use that for the current state
+if vim.diagnostic.is_disabled then
+  enabled = not vim.diagnostic.is_disabled()
+else
+  enabled = true
+end
 function M.diagnostics()
-  -- if this Neovim version supports checking if diagnostics are enabled
-  -- then use that for the current state
-  if vim.diagnostic.is_disabled then
-    enabled = not vim.diagnostic.is_disabled()
-  end
   enabled = not enabled
 
   if enabled then
