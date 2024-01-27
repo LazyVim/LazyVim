@@ -1,4 +1,5 @@
 -- This file is automatically loaded by lazyvim.config.init.
+local Util = require("lazyvim.util")
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
@@ -98,7 +99,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
-    if event.match:match("^%w%w+://") then
+    local pattern = "^%w%w+://"
+    if Util.is_win() then
+      pattern = pattern:gsub("/", "\\")
+    end
+    if event.match:match(pattern) then
       return
     end
     local file = vim.loop.fs_realpath(event.match) or event.match
