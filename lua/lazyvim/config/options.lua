@@ -60,7 +60,6 @@ opt.wrap = false -- Disable line wrap
 opt.fillchars = {
   foldopen = "",
   foldclose = "",
-  -- fold = "⸱",
   fold = " ",
   foldsep = " ",
   diff = "╱",
