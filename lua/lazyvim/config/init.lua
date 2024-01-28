@@ -3,7 +3,7 @@ local Util = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "10.8.2" -- x-release-please-version
+M.version = "10.9.1" -- x-release-please-version
 
 ---@class LazyVimOptions
 local defaults = {
@@ -185,6 +185,11 @@ function M.setup(opts)
       vim.api.nvim_create_user_command("LazyExtras", function()
         Util.extras.show()
       end, { desc = "Manage LazyVim extras" })
+
+      vim.api.nvim_create_user_command("LazyHealth", function()
+        vim.cmd([[Lazy! load all]])
+        vim.cmd([[checkhealth]])
+      end, { desc = "Load all plugins and run :checkhealth" })
     end,
   })
 

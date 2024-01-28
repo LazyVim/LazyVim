@@ -1,5 +1,30 @@
 # Changelog
 
+## [10.9.1](https://github.com/LazyVim/LazyVim/compare/v10.9.0...v10.9.1) (2024-01-21)
+
+
+### Bug Fixes
+
+* fixup for [#2137](https://github.com/LazyVim/LazyVim/issues/2137) ([fbe478a](https://github.com/LazyVim/LazyVim/commit/fbe478ae3f84ff842d18ff880af5842a50ee8e50))
+
+## [10.9.0](https://github.com/LazyVim/LazyVim/compare/v10.8.2...v10.9.0) (2024-01-21)
+
+
+### Features
+
+* **autocmds:** dont use conceal for json files ([23fe52a](https://github.com/LazyVim/LazyVim/commit/23fe52acd78c8e8f7c35c3ce4c1bae830adfa357))
+* **gitsigns:** update gitsigns.nvim preview command ([#2178](https://github.com/LazyVim/LazyVim/issues/2178)) ([f4ddb16](https://github.com/LazyVim/LazyVim/commit/f4ddb16b262e5ba14b417dc53bfd09d5b21f8a73))
+* **keymaps:** add function to toggle between light/dark backgrounds ([#2088](https://github.com/LazyVim/LazyVim/issues/2088)) ([fa6158a](https://github.com/LazyVim/LazyVim/commit/fa6158a59500c816b652e0fcb4c343270be54b6c))
+* **lsp:** add diagnostic signs to lsp options ([#2192](https://github.com/LazyVim/LazyVim/issues/2192)) ([33830f1](https://github.com/LazyVim/LazyVim/commit/33830f1e7d2e5a54fec676ce6e43a4a61882aaa9))
+* **neo-tree:** Adds copy file name command to Neo-Tree with 'Y' binding ([#2137](https://github.com/LazyVim/LazyVim/issues/2137)) ([5296d42](https://github.com/LazyVim/LazyVim/commit/5296d42e6ab4f6df80e801542382a3d774298364))
+* **test:** Add &lt;leader&gt;tl to neotest.run_last() ([#1968](https://github.com/LazyVim/LazyVim/issues/1968)) ([b71feb7](https://github.com/LazyVim/LazyVim/commit/b71feb7e45420a6e6dcac2f4491b73b70c32e5c7))
+
+
+### Bug Fixes
+
+* **dot:** treesitter for hypr was renamed to hyprlang ([979bb95](https://github.com/LazyVim/LazyVim/commit/979bb952a69d7dafac125da69cb27b70d5403f52))
+* **eslint:** correct working directories name ([#2071](https://github.com/LazyVim/LazyVim/issues/2071)) ([71a73e8](https://github.com/LazyVim/LazyVim/commit/71a73e8334a3692c549a09169e0f7a33923520f1))
+
 ## [10.8.2](https://github.com/LazyVim/LazyVim/compare/v10.8.1...v10.8.2) (2023-11-30)
 
 
