@@ -1,5 +1,62 @@
 # Changelog
 
+## [10.9.1](https://github.com/LazyVim/LazyVim/compare/v10.9.0...v10.9.1) (2024-01-21)
+
+
+### Bug Fixes
+
+* fixup for [#2137](https://github.com/LazyVim/LazyVim/issues/2137) ([fbe478a](https://github.com/LazyVim/LazyVim/commit/fbe478ae3f84ff842d18ff880af5842a50ee8e50))
+
+## [10.9.0](https://github.com/LazyVim/LazyVim/compare/v10.8.2...v10.9.0) (2024-01-21)
+
+
+### Features
+
+* **autocmds:** dont use conceal for json files ([23fe52a](https://github.com/LazyVim/LazyVim/commit/23fe52acd78c8e8f7c35c3ce4c1bae830adfa357))
+* **gitsigns:** update gitsigns.nvim preview command ([#2178](https://github.com/LazyVim/LazyVim/issues/2178)) ([f4ddb16](https://github.com/LazyVim/LazyVim/commit/f4ddb16b262e5ba14b417dc53bfd09d5b21f8a73))
+* **keymaps:** add function to toggle between light/dark backgrounds ([#2088](https://github.com/LazyVim/LazyVim/issues/2088)) ([fa6158a](https://github.com/LazyVim/LazyVim/commit/fa6158a59500c816b652e0fcb4c343270be54b6c))
+* **lsp:** add diagnostic signs to lsp options ([#2192](https://github.com/LazyVim/LazyVim/issues/2192)) ([33830f1](https://github.com/LazyVim/LazyVim/commit/33830f1e7d2e5a54fec676ce6e43a4a61882aaa9))
+* **neo-tree:** Adds copy file name command to Neo-Tree with 'Y' binding ([#2137](https://github.com/LazyVim/LazyVim/issues/2137)) ([5296d42](https://github.com/LazyVim/LazyVim/commit/5296d42e6ab4f6df80e801542382a3d774298364))
+* **test:** Add &lt;leader&gt;tl to neotest.run_last() ([#1968](https://github.com/LazyVim/LazyVim/issues/1968)) ([b71feb7](https://github.com/LazyVim/LazyVim/commit/b71feb7e45420a6e6dcac2f4491b73b70c32e5c7))
+
+
+### Bug Fixes
+
+* **dot:** treesitter for hypr was renamed to hyprlang ([979bb95](https://github.com/LazyVim/LazyVim/commit/979bb952a69d7dafac125da69cb27b70d5403f52))
+* **eslint:** correct working directories name ([#2071](https://github.com/LazyVim/LazyVim/issues/2071)) ([71a73e8](https://github.com/LazyVim/LazyVim/commit/71a73e8334a3692c549a09169e0f7a33923520f1))
+
+## [10.8.2](https://github.com/LazyVim/LazyVim/compare/v10.8.1...v10.8.2) (2023-11-30)
+
+
+### Bug Fixes
+
+* **lsp:** fix inlay hints for older nightlies. See [#2007](https://github.com/LazyVim/LazyVim/issues/2007) ([8baf9b5](https://github.com/LazyVim/LazyVim/commit/8baf9b5459a903c783a1d34ad438e64036a8e15e))
+
+## [10.8.1](https://github.com/LazyVim/LazyVim/compare/v10.8.0...v10.8.1) (2023-11-30)
+
+
+### Bug Fixes
+
+* **lsp:** detect if using nvim-0.10 and use new inlay_hint.enable method ([#2007](https://github.com/LazyVim/LazyVim/issues/2007)) ([6853b78](https://github.com/LazyVim/LazyVim/commit/6853b785d9916be6ffe4965aefd8554ed276f802))
+* **lsp:** inlay hints on stable. See [#2007](https://github.com/LazyVim/LazyVim/issues/2007) ([e229988](https://github.com/LazyVim/LazyVim/commit/e229988a98a81b000fda3aadbb4fc404aeaa599e))
+* **ui:** signcolumn signs on nightly. Fixes [#2039](https://github.com/LazyVim/LazyVim/issues/2039) ([11a8a6b](https://github.com/LazyVim/LazyVim/commit/11a8a6bea7a26ca5257fa4cbef90e0abdb22c349))
+
+## [10.8.0](https://github.com/LazyVim/LazyVim/compare/v10.7.1...v10.8.0) (2023-11-04)
+
+
+### Features
+
+* **catppuccin:** enable more integrations ([#1922](https://github.com/LazyVim/LazyVim/issues/1922)) ([4312e5e](https://github.com/LazyVim/LazyVim/commit/4312e5e28348560e018da4535de27dfcc675c32b))
+
+
+### Bug Fixes
+
+* **extras:** dont show extras that give errors (user's extras). Fixes [#1895](https://github.com/LazyVim/LazyVim/issues/1895) ([b32b4fd](https://github.com/LazyVim/LazyVim/commit/b32b4fd581018cf14bf30ae4cd8d94cd43552813))
+* **mini.indentscope:** remove duplicated filetype ([#1871](https://github.com/LazyVim/LazyVim/issues/1871)) ([09eafc6](https://github.com/LazyVim/LazyVim/commit/09eafc60eff2ba7d7b78c1717d07ce26b762a8a8))
+* **plugin:** LazyFile now properly deals with deleted buffers. Fixes [#1877](https://github.com/LazyVim/LazyVim/issues/1877) ([4558407](https://github.com/LazyVim/LazyVim/commit/4558407574d0cdbe55720ab349df201bd4d5f5de))
+* **sessions:** added folds to sessions ([e01ad51](https://github.com/LazyVim/LazyVim/commit/e01ad513aa4f50bdb385a7454c9e1ec3a0d5dc94))
+* **spectre:** don't build nvim-spectre ([3986169](https://github.com/LazyVim/LazyVim/commit/39861698235c03d30096b3fb315ce38eeaef95e2))
+
 ## [10.7.1](https://github.com/LazyVim/LazyVim/compare/v10.7.0...v10.7.1) (2023-10-25)
 
 
