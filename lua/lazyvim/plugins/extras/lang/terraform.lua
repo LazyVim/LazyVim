@@ -1,8 +1,9 @@
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "hcl", "terraform" },
+  pattern = { "hcl", "terraform", "terraform-vars" },
   desc = "terraform/hcl commentstring configuration",
   command = "setlocal commentstring=#\\ %s",
 })
+vim.treesitter.language.register("terraform", "terraform-vars")
 
 return {
   {
