@@ -27,9 +27,8 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "ron", "rust", "toml" })
-      end
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "ron", "rust", "toml" })
     end,
   },
 
@@ -38,15 +37,14 @@ return {
     "williamboman/mason.nvim",
     optional = true,
     opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "codelldb" })
-      end
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "codelldb" })
     end,
   },
 
   {
     "mrcjkb/rustaceanvim",
-    version = "^3", -- Recommended
+    version = '^4', -- Recommended
     ft = { "rust" },
     opts = {
       server = {
@@ -124,14 +122,12 @@ return {
   {
     "nvim-neotest/neotest",
     optional = true,
-    dependencies = {
-      "rouge8/neotest-rust",
-    },
-    opts = {
-      adapters = {
-        ["neotest-rust"] = {},
-      },
-    },
+    opts = function(_, opts)
+      opts.adapters = opts.adapters or {}
+      vim.list_extend(opts.adapters, {
+        require('rustaceanvim.neotest'),
+      })
+    end
   },
 
 }
