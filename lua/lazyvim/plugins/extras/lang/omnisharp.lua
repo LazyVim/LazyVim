@@ -68,12 +68,13 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
+    optional = true,
     opts = function()
       local dap = require("dap")
       if not dap.adapters["netcoredbg"] then
         require("dap").adapters["netcoredbg"] = {
           type = "executable",
-          command = require("mason-registry").get_package("netcoredbg"):get_install_path() .. "/netcoredbg",
+          command = vim.fn.exepath("netcoredbg"),
           args = { "--interpreter=vscode" },
         }
       end
