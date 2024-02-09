@@ -56,7 +56,7 @@ return {
             ["<leader>dr"] = { function() vim.cmd.RustLsp("debuggables") end, "Rust debuggables" },
           }, { mode = "n", buffer = bufnr })
         end,
-        settings = {
+        default_settings = {
           -- rust-analyzer language server configuration
           ["rust-analyzer"] = {
             cargo = {
