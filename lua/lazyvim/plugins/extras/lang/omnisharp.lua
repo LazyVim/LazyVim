@@ -35,8 +35,9 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      table.insert(opts.ensure_installed, "csharpier")
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "netcoredbg", "csharpier" })
+      end
     end,
   },
   {
