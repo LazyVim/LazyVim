@@ -1,5 +1,26 @@
 # Changelog
 
+## [10.10.0](https://github.com/LazyVim/LazyVim/compare/v10.9.1...v10.10.0) (2024-01-23)
+
+
+### Features
+
+* added `LazyHealth` that loads all plugins and runs `:checkhealth` ([d928739](https://github.com/LazyVim/LazyVim/commit/d9287391b7ca7153320d4654e148c33463eba3a6))
+* **snippets:** added extra to use native snippets instead of LuaSnip. ([7f92191](https://github.com/LazyVim/LazyVim/commit/7f9219162b54a717b7da5cb543ab1e778c9a124b))
+* **telescope:** add &lt;leader&gt;fg for finding files using git-files ([#2353](https://github.com/LazyVim/LazyVim/issues/2353)) ([54ae77e](https://github.com/LazyVim/LazyVim/commit/54ae77e164e62ae9f45e864dfd727bfe1809a419))
+* **toggle:** use `vim.diagnostic.is_disabled` when available ([#2217](https://github.com/LazyVim/LazyVim/issues/2217)) ([93342f1](https://github.com/LazyVim/LazyVim/commit/93342f15badc6e7a3c213e27979b2ff31e0b393e))
+
+
+### Bug Fixes
+
+* **autocmds:** apply conceal level change to local buffer options ([#2409](https://github.com/LazyVim/LazyVim/issues/2409)) ([591f850](https://github.com/LazyVim/LazyVim/commit/591f850f8a30a08066022392fe3b23eb217dbb81))
+* **autocmds:** avoid checktime when buftype=nofile ([#2270](https://github.com/LazyVim/LazyVim/issues/2270)) ([8e2046f](https://github.com/LazyVim/LazyVim/commit/8e2046f3d02a80558802b6cbcd4c8f7d44f7b6b4))
+* **hyprlang:** use lazyvim way to install ([#2404](https://github.com/LazyVim/LazyVim/issues/2404)) ([1dffb1d](https://github.com/LazyVim/LazyVim/commit/1dffb1d853df39e2232fd39d3cf47ba3da2e8b6c))
+* **neo-tree:** better copy file name with `Y` ([eccf3b5](https://github.com/LazyVim/LazyVim/commit/eccf3b5e68035516c879b3e2b4d6bf8512c87976))
+* **options:** change default conceal level to 2 ([#2053](https://github.com/LazyVim/LazyVim/issues/2053)) ([a43d8cf](https://github.com/LazyVim/LazyVim/commit/a43d8cf35857fae4aaf1ebbd3c280cdf5b5f9d10))
+* **rust:** avoid resetting cmp group_index to 1 ([#2332](https://github.com/LazyVim/LazyVim/issues/2332)) ([f799b39](https://github.com/LazyVim/LazyVim/commit/f799b39eafedf58cdd7b123870a2c87d96eddb68))
+* **typescript:** don't hardcode values in lua table ([#2254](https://github.com/LazyVim/LazyVim/issues/2254)) ([cbd9d70](https://github.com/LazyVim/LazyVim/commit/cbd9d700dc964cf8c90759f8482911d03c72edc4))
+
 ## [10.9.1](https://github.com/LazyVim/LazyVim/compare/v10.9.0...v10.9.1) (2024-01-21)
 
 
