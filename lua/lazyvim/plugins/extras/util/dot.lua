@@ -49,6 +49,7 @@ return {
           [".*/waybar/config"] = "jsonc",
           [".*/mako/config"] = "dosini",
           [".*/kitty/*.conf"] = "bash",
+          [".*/hyprland%.conf"] = "hyprlang", 
         },
       })
 
