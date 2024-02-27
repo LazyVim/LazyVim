@@ -24,7 +24,11 @@ function M.telescope(builtin, opts)
     opts = params.opts
     opts = vim.tbl_deep_extend("force", { cwd = Util.root() }, opts or {}) --[[@as lazyvim.util.telescope.opts]]
     if builtin == "files" then
-      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
+      if
+        vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git")
+        and not vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.ignore")
+        and not vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.rgignore")
+      then
         opts.show_untracked = true
         builtin = "git_files"
       else
