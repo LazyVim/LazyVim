@@ -149,6 +149,7 @@ return {
           },
         }
       end
+      require("dap.ext.vscode").load_launchjs(nil, { codelldb = {'c', 'cpp'} })
     end,
   },
 }
