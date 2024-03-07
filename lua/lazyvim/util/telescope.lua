@@ -36,16 +36,18 @@ function M.telescope(builtin, opts)
       end
     end
     if opts.cwd and opts.cwd ~= vim.loop.cwd() then
+      local function open_cwd_dir()
+        local action_state = require("telescope.actions.state")
+        local line = action_state.get_current_line()
+        M.telescope(
+          params.builtin,
+          vim.tbl_deep_extend("force", {}, params.opts or {}, { cwd = false, default_text = line })
+        )()
+      end
       ---@diagnostic disable-next-line: inject-field
       opts.attach_mappings = function(_, map)
-        map("i", "<a-c>", function()
-          local action_state = require("telescope.actions.state")
-          local line = action_state.get_current_line()
-          M.telescope(
-            params.builtin,
-            vim.tbl_deep_extend("force", {}, params.opts or {}, { cwd = false, default_text = line })
-          )()
-        end)
+        -- opts.desc is overridden by telescope, until it's changed there is this fix
+        map("i", "<a-c>", open_cwd_dir, { desc = "Open cwd directory" })
         return true
       end
     end
