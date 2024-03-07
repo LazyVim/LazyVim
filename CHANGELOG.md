@@ -1,5 +1,17 @@
 # Changelog
 
+## [10.12.0](https://github.com/LazyVim/LazyVim/compare/v10.11.1...v10.12.0) (2024-03-07)
+
+
+### Features
+
+* **lang:** replace rust-tools.nvim with rustacean.nvim [#2198](https://github.com/LazyVim/LazyVim/issues/2198) ([139c41c](https://github.com/LazyVim/LazyVim/commit/139c41c18ed7bde8dbaf5ef18afc063a96092954))
+
+
+### Bug Fixes
+
+* **extras:** set correct priority for outline extra. Fixes [#2666](https://github.com/LazyVim/LazyVim/issues/2666) ([4745314](https://github.com/LazyVim/LazyVim/commit/474531407454cb69f1d09e4bc1120b9571dc8697))
+
 ## [10.11.1](https://github.com/LazyVim/LazyVim/compare/v10.11.0...v10.11.1) (2024-03-07)
 
 
