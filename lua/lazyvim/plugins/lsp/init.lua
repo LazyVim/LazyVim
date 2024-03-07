@@ -41,6 +41,12 @@ return {
       inlay_hints = {
         enabled = false,
       },
+      -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the code lenses.
+      codelens = {
+        enabled = false,
+      },
       -- add any global capabilities here
       capabilities = {},
       -- options for vim.lsp.buf.format
@@ -63,6 +69,9 @@ return {
             Lua = {
               workspace = {
                 checkThirdParty = false,
+              },
+              codeLens = {
+                enable = true,
               },
               completion = {
                 callSnippet = "Replace",
@@ -123,10 +132,25 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
+      -- inlay hints
       if opts.inlay_hints.enabled then
         Util.lsp.on_attach(function(client, buffer)
           if client.supports_method("textDocument/inlayHint") then
             Util.toggle.inlay_hints(buffer, true)
+          end
+        end)
+      end
+
+      -- code lens
+      if opts.codelens.enabled and vim.lsp.codelens then
+        Util.lsp.on_attach(function(client, buffer)
+          if client.supports_method("textDocument/codeLens") then
+            vim.lsp.codelens.refresh()
+            --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+              buffer = buffer,
+              callback = vim.lsp.codelens.refresh,
+            })
           end
         end)
       end
