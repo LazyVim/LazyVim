@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.11.1](https://github.com/LazyVim/LazyVim/compare/v10.11.0...v10.11.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* **extras:** show rename of symbols-outline =&gt; outline ([c6736ef](https://github.com/LazyVim/LazyVim/commit/c6736ef2b8962a9b0a8d5cb5916f1b11835ac090))
+
 ## [10.11.0](https://github.com/LazyVim/LazyVim/compare/v10.10.0...v10.11.0) (2024-03-07)
 
 
