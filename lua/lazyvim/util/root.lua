@@ -144,7 +144,7 @@ function M.setup()
     Util.root.info()
   end, { desc = "LazyVim roots for the current buffer" })
 
-  vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost" }, {
+  vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost", "DirChanged" }, {
     group = vim.api.nvim_create_augroup("lazyvim_root_cache", { clear = true }),
     callback = function(event)
       M.cache[event.buf] = nil
