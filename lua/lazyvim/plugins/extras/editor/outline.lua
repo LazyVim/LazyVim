@@ -2,12 +2,12 @@ local Util = require("lazyvim.util")
 
 return {
   {
-    "simrat39/symbols-outline.nvim",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    cmd = "SymbolsOutline",
+    "hedyhli/outline.nvim",
+    keys = { { "<leader>cs", "<cmd>Outline<cr>", desc = "Toggle Outline" } },
+    cmd = "Outline",
     opts = function()
       local Config = require("lazyvim.config")
-      local defaults = require("symbols-outline.config").defaults
+      local defaults = require("outline.config").defaults
       local opts = {
         symbols = {},
         symbol_blacklist = {},
@@ -38,23 +38,21 @@ return {
     optional = true,
     opts = function(_, opts)
       local edgy_idx = Util.plugin.extra_idx("ui.edgy")
-      local symbols_idx = Util.plugin.extra_idx("editor.symbols-outline")
+      local symbols_idx = Util.plugin.extra_idx("editor.outline")
 
       if edgy_idx and edgy_idx > symbols_idx then
         Util.warn(
-          "The `edgy.nvim` extra must be **imported** before the `symbols-outline.nvim` extra to work properly.",
-          {
-            title = "LazyVim",
-          }
+          "The `edgy.nvim` extra must be **imported** before the `outline.nvim` extra to work properly.",
+          { title = "LazyVim" }
         )
       end
 
       opts.right = opts.right or {}
       table.insert(opts.right, {
-        title = "Symbols Outline",
+        title = "Outline",
         ft = "Outline",
         pinned = true,
-        open = "SymbolsOutline",
+        open = "Outline",
       })
     end,
   },
