@@ -74,6 +74,11 @@ function M.migrate()
       -- replace double extras module name
       return extra:gsub("^lazyvim%.plugins%.extras%.lazyvim%.plugins%.extras%.", "lazyvim.plugins.extras.")
     end, json.data.extras or {})
+  elseif json.data.version == 2 then
+    json.data.extras = vim.tbl_map(function(extra)
+      return extra == "lazyvim.plugins.extras.editor.symbols-outline" and "lazyvim.plugins.extras.editor.outline"
+        or extra
+    end, json.data.extras or {})
   end
 
   M.save()
