@@ -1,5 +1,15 @@
 # Changelog
 
+## [10.12.1](https://github.com/LazyVim/LazyVim/compare/v10.12.0...v10.12.1) (2024-03-08)
+
+
+### Bug Fixes
+
+* **extras:** automatically rename extra symbols-outline =&gt; outline. Fixes [#2675](https://github.com/LazyVim/LazyVim/issues/2675) ([ee2e876](https://github.com/LazyVim/LazyVim/commit/ee2e876252c82458d47617b6d87d827ea442ddcd))
+* **extras:** prevent duplicate extra imports ([935bc22](https://github.com/LazyVim/LazyVim/commit/935bc2283f9968a8fb1fc2466a14618a838cb904))
+* **haskell:** Make Haskell-snippets lazy load for performance ([#2676](https://github.com/LazyVim/LazyVim/issues/2676)) ([04bc571](https://github.com/LazyVim/LazyVim/commit/04bc5718a51364dddf365ba9163b2a1c7d74071d))
+* **hi-patterns:** correct regex for shorthand hex colors. See #[#2562](https://github.com/LazyVim/LazyVim/issues/2562) ([7415231](https://github.com/LazyVim/LazyVim/commit/7415231855f8173e9664c035a1a631da8c664948))
+
 ## [10.12.0](https://github.com/LazyVim/LazyVim/compare/v10.11.1...v10.12.0) (2024-03-07)
 
 
