@@ -23,8 +23,6 @@ function M.get()
       { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
       { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-      { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
       {
         "<leader>cA",
         function()
@@ -41,6 +39,10 @@ function M.get()
         has = "codeAction",
       }
     }
+  if require("lazyvim.util").opts("nvim-lspconfig").codelens.enabled then
+    M._keys[#M._keys + 1] = { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" }
+    M._keys[#M._keys + 1] = { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" }
+  end
   if require("lazyvim.util").has("inc-rename.nvim") then
     M._keys[#M._keys + 1] = {
       "<leader>cr",
