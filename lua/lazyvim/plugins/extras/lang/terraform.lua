@@ -1,11 +1,5 @@
 local Util = require("lazyvim.util")
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "hcl", "terraform" },
-  desc = "terraform/hcl commentstring configuration",
-  command = "setlocal commentstring=#\\ %s",
-})
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -55,27 +49,6 @@ return {
         terraform = { "terraform_fmt" },
         tf = { "terraform_fmt" },
         ["terraform-vars"] = { "terraform_fmt" },
-      },
-    },
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      {
-        "ANGkeith/telescope-terraform-doc.nvim",
-        config = function()
-          Util.on_load("telescope.nvim", function()
-            require("telescope").load_extension("terraform_doc")
-          end)
-        end,
-      },
-      {
-        "cappyzawa/telescope-terraform.nvim",
-        config = function()
-          Util.on_load("telescope.nvim", function()
-            require("telescope").load_extension("terraform")
-          end)
-        end,
       },
     },
   },
