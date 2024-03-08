@@ -20,7 +20,7 @@ M.plugin = {
       highlighters = {
         hex_color = hi.gen_highlighter.hex_color({ priority = 2000 }),
         shorthand = {
-          pattern = "#%x%x%x%f[%X]",
+          pattern = "()#%x%x%x()%f[^%x%w]",
           group = function(_, _, data)
             ---@type string
             local match = data.full_match
