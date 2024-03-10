@@ -48,7 +48,7 @@ end
 ---@param hl_group? string
 ---@return string
 function M.format(component, text, hl_group)
-  if not hl_group then
+  if not hl_group or hl_group == "" then
     return text
   end
   ---@type table<string, string>
@@ -56,36 +56,30 @@ function M.format(component, text, hl_group)
   local lualine_hl_group = component.hl_cache[hl_group]
   if not lualine_hl_group then
     local utils = require("lualine.utils.utils")
-    local mygui = function()
-      local mybold = utils.extract_highlight_colors(hl_group, "bold") and "bold"
-      local myitalic = utils.extract_highlight_colors(hl_group, "italic") and "italic"
-      if mybold and myitalic then
-        return mybold .. "," .. myitalic
-      elseif mybold then
-        return mybold
-      elseif myitalic then
-        return myitalic
-      else
-        return ""
-      end
-    end
+    ---@type string[]
+    local gui = vim.tbl_filter(function(x)
+      return x
+    end, {
+      utils.extract_highlight_colors(hl_group, "bold") and "bold",
+      utils.extract_highlight_colors(hl_group, "italic") and "italic",
+    })
 
     lualine_hl_group = component:create_hl({
       fg = utils.extract_highlight_colors(hl_group, "fg"),
-      gui = mygui(),
-    }, "LV_" .. hl_group)
+      gui = #gui > 0 and table.concat(gui, ",") or nil,
+    }, "LV_" .. hl_group) --[[@as string]]
     component.hl_cache[hl_group] = lualine_hl_group
   end
   return component:format_hl(lualine_hl_group) .. text .. component:get_default_hl()
 end
 
----@param opts? {relative: "cwd"|"root", modified_hl: string?, dirpath_hl: string?, filename_hl: string?}
+---@param opts? {relative: "cwd"|"root", modified_hl: string?, directory_hl: string?, filename_hl: string?}
 function M.pretty_path(opts)
   opts = vim.tbl_extend("force", {
     relative = "cwd",
-    modified_hl = "Constant",
-    dirpath_hl = "",
-    filename_hl = "",
+    modified_hl = "MatchParen",
+    directory_hl = "",
+    filename_hl = "Bold",
   }, opts or {})
 
   return function(self)
@@ -117,12 +111,12 @@ function M.pretty_path(opts)
       parts[#parts] = M.format(self, parts[#parts], opts.filename_hl)
     end
 
-    local dirpath = ""
+    local dir = ""
     if #parts > 1 then
-      dirpath = table.concat({ unpack(parts, 1, #parts - 1) }, sep)
-      dirpath = M.format(self, dirpath .. sep, opts.dirpath_hl)
+      dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep)
+      dir = M.format(self, dir .. sep, opts.directory_hl)
     end
-    return dirpath .. parts[#parts]
+    return dir .. parts[#parts]
   end
 end
 
