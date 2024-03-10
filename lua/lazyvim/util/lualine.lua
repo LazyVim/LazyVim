@@ -48,7 +48,7 @@ end
 ---@param hl_group? string
 ---@return string
 function M.format(component, text, hl_group)
-  if not hl_group then
+  if not hl_group or hl_group == "" then
     return text
   end
   ---@type table<string, string>
@@ -56,17 +56,30 @@ function M.format(component, text, hl_group)
   local lualine_hl_group = component.hl_cache[hl_group]
   if not lualine_hl_group then
     local utils = require("lualine.utils.utils")
-    lualine_hl_group = component:create_hl({ fg = utils.extract_highlight_colors(hl_group, "fg") }, "LV_" .. hl_group)
+    ---@type string[]
+    local gui = vim.tbl_filter(function(x)
+      return x
+    end, {
+      utils.extract_highlight_colors(hl_group, "bold") and "bold",
+      utils.extract_highlight_colors(hl_group, "italic") and "italic",
+    })
+
+    lualine_hl_group = component:create_hl({
+      fg = utils.extract_highlight_colors(hl_group, "fg"),
+      gui = #gui > 0 and table.concat(gui, ",") or nil,
+    }, "LV_" .. hl_group) --[[@as string]]
     component.hl_cache[hl_group] = lualine_hl_group
   end
   return component:format_hl(lualine_hl_group) .. text .. component:get_default_hl()
 end
 
----@param opts? {relative: "cwd"|"root", modified_hl: string?}
+---@param opts? {relative: "cwd"|"root", modified_hl: string?, directory_hl: string?, filename_hl: string?}
 function M.pretty_path(opts)
   opts = vim.tbl_extend("force", {
     relative = "cwd",
-    modified_hl = "Constant",
+    modified_hl = "MatchParen",
+    directory_hl = "",
+    filename_hl = "Bold",
   }, opts or {})
 
   return function(self)
@@ -75,6 +88,7 @@ function M.pretty_path(opts)
     if path == "" then
       return ""
     end
+
     local root = Util.root.get({ normalize = true })
     local cwd = Util.root.cwd()
 
@@ -86,15 +100,23 @@ function M.pretty_path(opts)
 
     local sep = package.config:sub(1, 1)
     local parts = vim.split(path, "[\\/]")
+
     if #parts > 3 then
       parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
     end
 
     if opts.modified_hl and vim.bo.modified then
       parts[#parts] = M.format(self, parts[#parts], opts.modified_hl)
+    else
+      parts[#parts] = M.format(self, parts[#parts], opts.filename_hl)
     end
 
-    return table.concat(parts, sep)
+    local dir = ""
+    if #parts > 1 then
+      dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep)
+      dir = M.format(self, dir .. sep, opts.directory_hl)
+    end
+    return dir .. parts[#parts]
   end
 end
 
