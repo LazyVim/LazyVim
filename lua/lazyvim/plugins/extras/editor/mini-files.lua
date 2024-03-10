@@ -117,5 +117,5 @@ return {
         require("lazyvim.util").lsp.on_rename(event.data.from, event.data.to)
       end,
     })
-  end
+  end,
 }
