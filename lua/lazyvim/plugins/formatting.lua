@@ -90,6 +90,8 @@ return {
           lua = { "stylua" },
           fish = { "fish_indent" },
           sh = { "shfmt" },
+          -- yamlls doesn't respect your prettier config
+          yaml = { { "prettierd", "prettier", "yamlfix" } },
         },
         -- The options you set here will be merged with the builtin formatters.
         -- You can also define any custom formatters here.
