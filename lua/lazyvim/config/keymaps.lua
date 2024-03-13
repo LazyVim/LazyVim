@@ -129,17 +129,9 @@ map("n", "<leader>ub", function() Util.toggle("background", false, {"light", "da
 map("n", "<leader>gg", function() Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gG", function() Util.terminal({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
 
-local current_file_path_from_git_root = function()
-  local path = vim.fn.expand("%:p")
-  local root = vim.fn.system("git -C " .. path .. " rev-parse --show-toplevel"):gsub("\n$", "")
-  if not path:find(root, 1, true) then
-    return path
-  end
-  return path:sub(#root + 2)
-end
-
 map("n", "<leader>gf", function()
-  Util.terminal({ "lazygit", "-f", current_file_path_from_git_root() }, { esc_esc = false, ctrl_hjkl = false })
+  local git_path = vim.fn.system("git ls-files --full-name " .. vim.api.nvim_buf_get_name(0))
+  Util.terminal({ "lazygit", "-f", vim.trim(git_path) }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Lazygit current file history" })
 
 -- quit
