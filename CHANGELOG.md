@@ -1,5 +1,25 @@
 # Changelog
 
+## [10.13.0](https://github.com/LazyVim/LazyVim/compare/v10.12.1...v10.13.0) (2024-03-14)
+
+
+### Features
+
+* **git:** add &lt;leader&gt;gf for lazygit commit history on current file ([#2728](https://github.com/LazyVim/LazyVim/issues/2728)) ([0ec7a90](https://github.com/LazyVim/LazyVim/commit/0ec7a9040b60943597649940619f23bfa4b46990))
+* **lualine:** add more hl options to pretty_path ([#2687](https://github.com/LazyVim/LazyVim/issues/2687)) ([d3761ed](https://github.com/LazyVim/LazyVim/commit/d3761eded733b5f00e1ee14fef3fb2ce0dfb7dd0))
+
+
+### Bug Fixes
+
+* **conform:** make `lsp_fallback` option user configurable ([#2616](https://github.com/LazyVim/LazyVim/issues/2616)) ([afca0b7](https://github.com/LazyVim/LazyVim/commit/afca0b7876abf9022ee0754270f603e981ea42a5))
+* **markdown:** disable headlines.nvim bullets for now ([843032e](https://github.com/LazyVim/LazyVim/commit/843032ef1c751abf732b6f1d989584c199f049fb))
+* **markdown:** disable headlines.nvim in insert mode. Fixes [#2717](https://github.com/LazyVim/LazyVim/issues/2717) ([0ba731a](https://github.com/LazyVim/LazyVim/commit/0ba731a87977e98f2420e2c6d2c4cabbcedaff60))
+* **mini.files:** description for `g.` keybinding in mini.files ([#2693](https://github.com/LazyVim/LazyVim/issues/2693)) ([9915234](https://github.com/LazyVim/LazyVim/commit/991523431ff779b3bfe8ae133fa8109d8950d361))
+* **options:** dont set clipboard in an SSH session, so that OSC52 can be enabled (when supported) ([1c9f416](https://github.com/LazyVim/LazyVim/commit/1c9f4160a22dbdca2db36169460fcf28641607e7))
+* **rust:** don't overwrite `vim.g.rustaceanvim` if it is defined ([#2720](https://github.com/LazyVim/LazyVim/issues/2720)) ([2a666ac](https://github.com/LazyVim/LazyVim/commit/2a666ac5f2d91f0a1f1b711281dd72725f9759a1))
+* **terraform-extra:** Drop unnecessary commentstring config for terraform ([#2680](https://github.com/LazyVim/LazyVim/issues/2680)) ([b12e742](https://github.com/LazyVim/LazyVim/commit/b12e7424580d4b524755eec33006d4517fa3182e))
+* **which-key:** add group description for folds ([#2496](https://github.com/LazyVim/LazyVim/issues/2496)) ([623297e](https://github.com/LazyVim/LazyVim/commit/623297efa688283b54f1b9ad169feca69aaaae67))
+
 ## [10.12.1](https://github.com/LazyVim/LazyVim/compare/v10.12.0...v10.12.1) (2024-03-08)
 
 
