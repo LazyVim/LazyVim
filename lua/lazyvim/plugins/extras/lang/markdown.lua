@@ -69,6 +69,8 @@ return {
       for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
         opts[ft] = {
           headline_highlights = {},
+          -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
+          bullets = {},
         }
         for i = 1, 6 do
           local hl = "Headline" .. i
@@ -82,20 +84,8 @@ return {
     config = function(_, opts)
       -- PERF: schedule to prevent headlines slowing down opening a file
       vim.schedule(function()
-        local hl = require("headlines")
-        hl.setup(opts)
-        local md = hl.config.markdown
-        hl.refresh()
-
-        -- Toggle markdown headlines on insert enter/leave
-        vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
-          callback = function(data)
-            if vim.bo.filetype == "markdown" then
-              hl.config.markdown = data.event == "InsertLeave" and md or nil
-              hl.refresh()
-            end
-          end,
-        })
+        require("headlines").setup(opts)
+        require("headlines").refresh()
       end)
     end,
   },
