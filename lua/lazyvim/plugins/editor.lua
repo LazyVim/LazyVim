@@ -315,6 +315,7 @@ return {
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
         ["gs"] = { name = "+surround" },
+        ["z"] = { name = "+fold" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
         ["<leader><tab>"] = { name = "+tabs" },

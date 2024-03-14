@@ -109,13 +109,18 @@ end
 
 ---@param opts? lsp.Client.format
 function M.format(opts)
-  opts = vim.tbl_deep_extend("force", {}, opts or {}, require("lazyvim.util").opts("nvim-lspconfig").format or {})
+  opts = vim.tbl_deep_extend(
+    "force",
+    {},
+    opts or {},
+    require("lazyvim.util").opts("nvim-lspconfig").format or {},
+    require("lazyvim.util").opts("conform.nvim").format or {}
+  )
   local ok, conform = pcall(require, "conform")
   -- use conform for formatting with LSP when available,
   -- since it has better format diffing
   if ok then
     opts.formatters = {}
-    opts.lsp_fallback = true
     conform.format(opts)
   else
     vim.lsp.buf.format(opts)
