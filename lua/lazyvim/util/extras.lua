@@ -42,7 +42,7 @@ function M.get()
     local root = Util.find_root(source.module)
     if root then
       Util.walk(root, function(path, name, type)
-        if type == "file" and name:match("%.lua$") then
+        if (type == "file" or type == "link") and name:match("%.lua$") then
           name = path:sub(#root + 2, -5):gsub("/", ".")
           local ok, extra = pcall(M.get_extra, source, source.module .. "." .. name)
           if ok then
