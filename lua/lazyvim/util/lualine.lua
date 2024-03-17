@@ -80,6 +80,7 @@ function M.pretty_path(opts)
     modified_hl = "MatchParen",
     directory_hl = "",
     filename_hl = "Bold",
+    modified_sign = "",
   }, opts or {})
 
   return function(self)
@@ -106,6 +107,7 @@ function M.pretty_path(opts)
     end
 
     if opts.modified_hl and vim.bo.modified then
+      parts[#parts] = parts[#parts] .. opts.modified_sign
       parts[#parts] = M.format(self, parts[#parts], opts.modified_hl)
     else
       parts[#parts] = M.format(self, parts[#parts], opts.filename_hl)
