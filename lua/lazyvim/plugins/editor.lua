@@ -72,8 +72,23 @@ return {
           ["O"] = {
             command = function(state)
               local filepath = state.tree:get_node().path
-
-              os.execute("open " .. string.format("'%s'", filepath))
+              local uname = vim.loop.os_uname()
+              local OS = uname.sysname
+              local is_mac = OS == "Darwin"
+              local is_linux = OS == "Linux"
+              local is_windows = OS:find("Windows") and true or false
+              local is_wsl = is_linux and uname.release:lower():find("microsoft") and true or false
+              if is_mac then
+                os.execute("open " .. string.format("'%s'", filepath))
+              elseif is_wsl then
+                os.execute("wslview " .. string.format("'%s'", filepath))
+              elseif is_linux then
+                os.execute("xdg-open " .. string.format("'%s'", filepath))
+              elseif is_windows then
+                os.execute("start " .. string.format("'%s'", filepath))
+              else
+                vim.notify("neo-tree: OS not detected", "error")
+              end
             end,
             desc = "open_with_system_defaults",
           },
