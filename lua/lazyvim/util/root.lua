@@ -173,6 +173,13 @@ function M.get(opts)
   return Util.is_win() and ret:gsub("/", "\\") or ret
 end
 
+function M.git()
+  local root = M.get()
+  local git_root = vim.fs.find(".git", { path = root, upward = true })[1]
+  local ret = git_root and vim.fn.fnamemodify(git_root, ":h") or root
+  return ret
+end
+
 ---@param opts? {hl_last?: string}
 function M.pretty_path(opts)
   return ""
