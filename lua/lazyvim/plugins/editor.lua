@@ -72,6 +72,12 @@ return {
           ["O"] = {
             command = function(state)
               local filepath = state.tree:get_node().path
+
+              if vim.ui.open then
+                vim.ui.open(filepath)
+                return
+              end
+
               local uname = vim.loop.os_uname()
               local OS = uname.sysname
               local is_mac = OS == "Darwin"
