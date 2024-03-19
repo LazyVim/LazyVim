@@ -1,5 +1,22 @@
 # Changelog
 
+## [10.14.0](https://github.com/LazyVim/LazyVim/compare/v10.13.0...v10.14.0) (2024-03-19)
+
+
+### Features
+
+* **lualine:** add `modified_sign` to `pretty_path` ([#2754](https://github.com/LazyVim/LazyVim/issues/2754)) ([ed44b24](https://github.com/LazyVim/LazyVim/commit/ed44b246b443939ca7755bef1522c68df94c2a76))
+* **mini.ai:** add more objects d,e,g,u,U ([#2769](https://github.com/LazyVim/LazyVim/issues/2769)) ([f655139](https://github.com/LazyVim/LazyVim/commit/f65513928127ec4e2e4187af36ec49255bd0f5fb))
+
+
+### Bug Fixes
+
+* **extras:** accept symlinks in User `extras` directory ([#2745](https://github.com/LazyVim/LazyVim/issues/2745)) ([6a37171](https://github.com/LazyVim/LazyVim/commit/6a37171df6391482a3440cf607c173525bc875ba))
+* **format:** format injected langs does not wait 300ms ([#2737](https://github.com/LazyVim/LazyVim/issues/2737)) ([52ee7ef](https://github.com/LazyVim/LazyVim/commit/52ee7ef6962f499114f8e91230ef5558444e3a0c))
+* **git:** use compatible function for windows and linux ([#2740](https://github.com/LazyVim/LazyVim/issues/2740)) ([42a7e79](https://github.com/LazyVim/LazyVim/commit/42a7e79d5a09936ee521cab29d601d336c396c18))
+* **lazygit:** make sure we start lazygit in a valid git root ([d8d380a](https://github.com/LazyVim/LazyVim/commit/d8d380a60e7dc396fcf2fee90ace77760585d685))
+* **neotest:** add required nvim-nio to test and dap extra (neotest and nvim-dap-ui respectively) ([#2763](https://github.com/LazyVim/LazyVim/issues/2763)) ([393a9c7](https://github.com/LazyVim/LazyVim/commit/393a9c7c7ab2c37a69a9b5da609c27fa2fd3816c))
+
 ## [10.13.0](https://github.com/LazyVim/LazyVim/compare/v10.12.1...v10.13.0) (2024-03-14)
 
 
