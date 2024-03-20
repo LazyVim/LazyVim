@@ -1,3 +1,9 @@
+if lazyvim_docs then
+  -- LSP Server to use for Python.
+  -- Set to "basedpyright" to use basedpyright instead of pyright.
+  vim.g.lazyvim_python_lsp = "pyright"
+end
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -7,11 +13,28 @@ return {
       end
     end,
   },
+  -- basedpyright support.
+  -- Remove when merged: https://github.com/williamboman/mason-lspconfig.nvim/pull/379
+  {
+    "williamboman/mason.nvim",
+    optional = true,
+    opts = function(_, opts)
+      if vim.g.lazyvim_python_lsp == "basedpyright" then
+        opts.ensure_installed = opts.ensure_installed or {}
+        table.insert(opts.ensure_installed, "basedpyright")
+      end
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {},
+        pyright = {
+          enabled = vim.g.lazyvim_python_lsp ~= "basedpyright",
+        },
+        basedpyright = {
+          enabled = vim.g.lazyvim_python_lsp == "basedpyright",
+        },
         ruff_lsp = {
           keys = {
             {
