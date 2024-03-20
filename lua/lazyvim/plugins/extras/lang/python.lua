@@ -13,18 +13,6 @@ return {
       end
     end,
   },
-  -- basedpyright support.
-  -- Remove when merged: https://github.com/williamboman/mason-lspconfig.nvim/pull/379
-  {
-    "williamboman/mason.nvim",
-    optional = true,
-    opts = function(_, opts)
-      if vim.g.lazyvim_python_lsp == "basedpyright" then
-        opts.ensure_installed = opts.ensure_installed or {}
-        table.insert(opts.ensure_installed, "basedpyright")
-      end
-    end,
-  },
   {
     "neovim/nvim-lspconfig",
     opts = {
