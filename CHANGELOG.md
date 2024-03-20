@@ -1,5 +1,17 @@
 # Changelog
 
+## [10.15.0](https://github.com/LazyVim/LazyVim/compare/v10.14.0...v10.15.0) (2024-03-20)
+
+
+### Features
+
+* **python:** added option to configure basedpyright as lsp. Check the python extra docs. Fixes [#2787](https://github.com/LazyVim/LazyVim/issues/2787) ([f055265](https://github.com/LazyVim/LazyVim/commit/f055265bff24f047320bca1a402ab55a32b35111))
+
+
+### Bug Fixes
+
+* **lsp:** dont auto install disabled lsp servers ([fa0e538](https://github.com/LazyVim/LazyVim/commit/fa0e538838f2bd3b429a98a6d676dacb7b0916af))
+
 ## [10.14.0](https://github.com/LazyVim/LazyVim/compare/v10.13.0...v10.14.0) (2024-03-19)
 
 
