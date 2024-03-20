@@ -29,7 +29,9 @@ function M.telescope(builtin, opts)
         and not vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.ignore")
         and not vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.rgignore")
       then
-        opts.show_untracked = true
+        if opts.show_untracked == nil then
+          opts.show_untracked = true
+        end
         builtin = "git_files"
       else
         builtin = "find_files"
