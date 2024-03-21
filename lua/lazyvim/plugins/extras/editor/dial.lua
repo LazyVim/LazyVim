@@ -192,7 +192,6 @@ return {
       for _, pattern in ipairs(patterns) do
         vim.notify(pattern .. " in " .. vim.inspect(patterns) .. ". Current filetype: " .. vim.bo.filetype)
         if vim.bo.filetype == pattern then
-          print("Use", lang, "mappings")
           set_dial_group(lang)
           return
         end
@@ -201,6 +200,5 @@ return {
 
     -- if we haven't returned from function that means that we are in filetype without mappings
     set_dial_group("default")
-    print("No language found for current file. Use default dial mappings")
   end,
 }
