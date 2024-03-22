@@ -145,7 +145,7 @@ return {
             bundles = bundles,
           },
           -- enable CMP capabilities
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          capabilities = LazyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
 
         -- Existing server will be reused if the root_dir matches.
