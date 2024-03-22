@@ -71,29 +71,14 @@ return {
           },
           ["O"] = {
             command = function(state)
-              local function open_file(filepath)
-                if vim.fn.has("mac") == 1 then
-                  os.execute("open " .. string.format("'%s'", filepath))
-                elseif vim.fn.has("win32") == 1 then
-                  if vim.fn.executable("rundll32") == 1 then
-                    os.execute("rundll32 " .. string.format("'%s'", filepath))
-                  end
-                elseif vim.fn.executable("wslview") == 1 then
-                  os.execute("wslview " .. string.format("'%s'", filepath))
-                elseif vim.fn.executable("xdg-open") == 1 then
-                  os.execute("xdg-open " .. string.format("'%s'", filepath))
-                else
-                  vim.notify("neo-tree: OS not detected", "error")
-                end
-              end
-              local filepath = state.tree:get_node().path
               if vim.ui.open then
+                local filepath = state.tree:get_node().path
                 vim.ui.open(filepath)
               else
-                open_file(filepath)
+                require("lazyvim.util").error("vim.ui.open is not available")
               end
             end,
-            desc = "open_with_system_defaults",
+            desc = "open_with_system_default",
           },
         },
       },
