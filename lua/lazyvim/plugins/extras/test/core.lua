@@ -27,7 +27,7 @@ return {
       output = { open_on_run = true },
       quickfix = {
         open = function()
-          if require("lazyvim.util").has("trouble.nvim") then
+          if LazyVim.has("trouble.nvim") then
             require("trouble").open({ mode = "quickfix", focus = false })
           else
             vim.cmd("copen")
@@ -47,7 +47,7 @@ return {
         },
       }, neotest_ns)
 
-      if require("lazyvim.util").has("trouble.nvim") then
+      if LazyVim.has("trouble.nvim") then
         opts.consumers = opts.consumers or {}
         -- Refresh and auto close trouble after running tests
         ---@type neotest.Consumer

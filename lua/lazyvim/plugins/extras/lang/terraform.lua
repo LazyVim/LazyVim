@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -58,7 +56,7 @@ return {
       {
         "ANGkeith/telescope-terraform-doc.nvim",
         config = function()
-          Util.on_load("telescope.nvim", function()
+          LazyVim.on_load("telescope.nvim", function()
             require("telescope").load_extension("terraform_doc")
           end)
         end,
@@ -66,7 +64,7 @@ return {
       {
         "cappyzawa/telescope-terraform.nvim",
         config = function()
-          Util.on_load("telescope.nvim", function()
+          LazyVim.on_load("telescope.nvim", function()
             require("telescope").load_extension("terraform")
           end)
         end,

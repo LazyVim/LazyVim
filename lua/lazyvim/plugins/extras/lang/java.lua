@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 -- This is the same as in lspconfig.server_configurations.jdtls, but avoids
 -- needing to require that when this module loads.
 local java_filetypes = { "java" }
@@ -109,13 +107,13 @@ return {
       }
     end,
     config = function()
-      local opts = Util.opts("nvim-jdtls") or {}
+      local opts = LazyVim.opts("nvim-jdtls") or {}
 
       -- Find the extra bundles that should be passed on the jdtls command-line
       -- if nvim-dap is enabled with java debug/test.
       local mason_registry = require("mason-registry")
       local bundles = {} ---@type string[]
-      if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+      if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
         local java_dbg_pkg = mason_registry.get_package("java-debug-adapter")
         local java_dbg_path = java_dbg_pkg:get_install_path()
         local jar_patterns = {
@@ -196,7 +194,7 @@ return {
               },
             }, { mode = "v", buffer = args.buf })
 
-            if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+            if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
               -- custom init for Java debugger
               require("jdtls").setup_dap(opts.dap)
               require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)

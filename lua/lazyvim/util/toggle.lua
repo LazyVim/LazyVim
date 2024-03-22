@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 ---@class lazyvim.util.toggle
 local M = {}
 
@@ -14,15 +12,15 @@ function M.option(option, silent, values)
       ---@diagnostic disable-next-line: no-unknown
       vim.opt_local[option] = values[1]
     end
-    return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
+    return LazyVim.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
   end
   ---@diagnostic disable-next-line: no-unknown
   vim.opt_local[option] = not vim.opt_local[option]:get()
   if not silent then
     if vim.opt_local[option]:get() then
-      Util.info("Enabled " .. option, { title = "Option" })
+      LazyVim.info("Enabled " .. option, { title = "Option" })
     else
-      Util.warn("Disabled " .. option, { title = "Option" })
+      LazyVim.warn("Disabled " .. option, { title = "Option" })
     end
   end
 end
@@ -33,11 +31,11 @@ function M.number()
     nu = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
-    Util.warn("Disabled line numbers", { title = "Option" })
+    LazyVim.warn("Disabled line numbers", { title = "Option" })
   else
     vim.opt_local.number = nu.number
     vim.opt_local.relativenumber = nu.relativenumber
-    Util.info("Enabled line numbers", { title = "Option" })
+    LazyVim.info("Enabled line numbers", { title = "Option" })
   end
 end
 
@@ -52,10 +50,10 @@ function M.diagnostics()
 
   if enabled then
     vim.diagnostic.enable()
-    Util.info("Enabled diagnostics", { title = "Diagnostics" })
+    LazyVim.info("Enabled diagnostics", { title = "Diagnostics" })
   else
     vim.diagnostic.disable()
-    Util.warn("Disabled diagnostics", { title = "Diagnostics" })
+    LazyVim.warn("Disabled diagnostics", { title = "Diagnostics" })
   end
 end
 

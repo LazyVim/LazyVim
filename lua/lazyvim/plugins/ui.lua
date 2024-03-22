@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
   -- Better `vim.notify()`
   {
@@ -27,8 +25,8 @@ return {
     },
     init = function()
       -- when noice is not enabled, install notify on VeryLazy
-      if not Util.has("noice.nvim") then
-        Util.on_very_lazy(function()
+      if not LazyVim.has("noice.nvim") then
+        LazyVim.on_very_lazy(function()
           vim.notify = require("notify")
         end)
       end
@@ -140,7 +138,7 @@ return {
           lualine_b = { "branch" },
 
           lualine_c = {
-            Util.lualine.root_dir(),
+            LazyVim.lualine.root_dir(),
             {
               "diagnostics",
               symbols = {
@@ -151,31 +149,31 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { Util.lualine.pretty_path() },
+            { LazyVim.lualine.pretty_path() },
           },
           lualine_x = {
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = Util.ui.fg("Statement"),
+              color = LazyVim.ui.fg("Statement"),
             },
             -- stylua: ignore
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = Util.ui.fg("Constant"),
+              color = LazyVim.ui.fg("Constant"),
             },
             -- stylua: ignore
             {
               function() return "  " .. require("dap").status() end,
               cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = Util.ui.fg("Debug"),
+              color = LazyVim.ui.fg("Debug"),
             },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = Util.ui.fg("Special"),
+              color = LazyVim.ui.fg("Special"),
             },
             {
               "diff",
@@ -278,7 +276,7 @@ return {
   {
     "folke/which-key.nvim",
     opts = function(_, opts)
-      if require("lazyvim.util").has("noice.nvim") then
+      if LazyVim.has("noice.nvim") then
         opts.defaults["<leader>sn"] = { name = "+noice" }
       end
     end,
@@ -338,7 +336,7 @@ return {
     "goolord/alpha-nvim",
     optional = true,
     enabled = function()
-      require("lazyvim.util").warn({
+      LazyVim.warn({
         "`dashboard.nvim` is now the default LazyVim starter plugin.",
         "",
         "To keep using `alpha.nvim`, please enable the `lazyvim.plugins.extras.ui.alpha` extra.",
@@ -373,11 +371,11 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
-            { action = Util.telescope("files"),                                    desc = " Find file",       icon = " ", key = "f" },
+            { action = LazyVim.telescope("files"),                                    desc = " Find file",       icon = " ", key = "f" },
             { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
             { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
             { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "g" },
-            { action = [[lua require("lazyvim.util").telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
+            { action = [[lua LazyVim.telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
             { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
             { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
             { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },

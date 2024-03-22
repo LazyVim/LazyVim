@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
   -- none-ls
   {
@@ -7,14 +5,14 @@ return {
     event = "LazyFile",
     dependencies = { "mason.nvim" },
     init = function()
-      Util.on_very_lazy(function()
+      LazyVim.on_very_lazy(function()
         -- register the formatter with LazyVim
-        require("lazyvim.util").format.register({
+        LazyVim.format.register({
           name = "none-ls.nvim",
           priority = 200, -- set higher than conform, the builtin formatter
           primary = true,
           format = function(buf)
-            return Util.lsp.format({
+            return LazyVim.lsp.format({
               bufnr = buf,
               filter = function(client)
                 return client.name == "null-ls"

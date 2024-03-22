@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
   {
     "hedyhli/outline.nvim",
@@ -37,11 +35,11 @@ return {
     "folke/edgy.nvim",
     optional = true,
     opts = function(_, opts)
-      local edgy_idx = Util.plugin.extra_idx("ui.edgy")
-      local symbols_idx = Util.plugin.extra_idx("editor.outline")
+      local edgy_idx = LazyVim.plugin.extra_idx("ui.edgy")
+      local symbols_idx = LazyVim.plugin.extra_idx("editor.outline")
 
       if edgy_idx and edgy_idx > symbols_idx then
-        Util.warn(
+        LazyVim.warn(
           "The `edgy.nvim` extra must be **imported** before the `outline.nvim` extra to work properly.",
           { title = "LazyVim" }
         )

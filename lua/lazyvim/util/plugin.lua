@@ -1,5 +1,4 @@
 local Plugin = require("lazy.core.plugin")
-local Util = require("lazyvim.util")
 
 ---@class lazyvim.util.plugin
 local M = {}
@@ -35,7 +34,7 @@ function M.setup()
   M.lazy_file()
   table.insert(package.loaders, function(module)
     if M.deprecated_modules[module] then
-      Util.warn(
+      LazyVim.warn(
         ("`%s` is no longer included by default in **LazyVim**.\nPlease install the `%s` extra if you still want to use it."):format(
           module,
           M.deprecated_modules[module]
@@ -125,21 +124,21 @@ function M.lazy_file()
 end
 
 function M.fix_imports()
-  Plugin.Spec.import = Util.inject.args(Plugin.Spec.import, function(_, spec)
+  Plugin.Spec.import = LazyVim.inject.args(Plugin.Spec.import, function(_, spec)
     local dep = M.deprecated_extras[spec and spec.import]
     if dep then
       dep = dep .. "\n" .. "Please remove the extra to hide this warning."
-      Util.warn(dep, { title = "LazyVim", once = true, stacktrace = true, stacklevel = 6 })
+      LazyVim.warn(dep, { title = "LazyVim", once = true, stacktrace = true, stacklevel = 6 })
       return false
     end
   end)
 end
 
 function M.fix_renames()
-  Plugin.Spec.add = Util.inject.args(Plugin.Spec.add, function(self, plugin)
+  Plugin.Spec.add = LazyVim.inject.args(Plugin.Spec.add, function(self, plugin)
     if type(plugin) == "table" then
       if M.renames[plugin[1]] then
-        Util.warn(
+        LazyVim.warn(
           ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
             plugin[1],
             M.renames[plugin[1]],

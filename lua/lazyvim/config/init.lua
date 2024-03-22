@@ -1,6 +1,4 @@
-local Util = require("lazyvim.util")
-
-_G.LazyVim = Util
+_G.LazyVim = require("lazyvim.util")
 
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
@@ -151,7 +149,7 @@ function M.json.load()
     if ok then
       M.json.data = vim.tbl_deep_extend("force", M.json.data, json or {})
       if M.json.data.version ~= M.json.version then
-        Util.json.migrate()
+        LazyVim.json.migrate()
       end
     end
   end
@@ -180,12 +178,12 @@ function M.setup(opts)
       end
       M.load("keymaps")
 
-      Util.format.setup()
-      Util.news.setup()
-      Util.root.setup()
+      LazyVim.format.setup()
+      LazyVim.news.setup()
+      LazyVim.root.setup()
 
       vim.api.nvim_create_user_command("LazyExtras", function()
-        Util.extras.show()
+        LazyVim.extras.show()
       end, { desc = "Manage LazyVim extras" })
 
       vim.api.nvim_create_user_command("LazyHealth", function()
@@ -195,8 +193,8 @@ function M.setup(opts)
     end,
   })
 
-  Util.track("colorscheme")
-  Util.try(function()
+  LazyVim.track("colorscheme")
+  LazyVim.try(function()
     if type(M.colorscheme) == "function" then
       M.colorscheme()
     else
@@ -205,11 +203,11 @@ function M.setup(opts)
   end, {
     msg = "Could not load your colorscheme",
     on_error = function(msg)
-      Util.error(msg)
+      LazyVim.error(msg)
       vim.cmd.colorscheme("habamax")
     end,
   })
-  Util.track()
+  LazyVim.track()
 end
 
 ---@param buf? number
@@ -231,7 +229,7 @@ end
 function M.load(name)
   local function _load(mod)
     if require("lazy.core.cache").find(mod)[1] then
-      Util.try(function()
+      LazyVim.try(function()
         require(mod)
       end, { msg = "Failed loading " .. mod })
     end
@@ -261,19 +259,19 @@ function M.init()
   end
 
   package.preload["lazyvim.plugins.lsp.format"] = function()
-    Util.deprecate([[require("lazyvim.plugins.lsp.format")]], [[require("lazyvim.util").format]])
-    return Util.format
+    LazyVim.deprecate([[require("lazyvim.plugins.lsp.format")]], [[LazyVim.format]])
+    return LazyVim.format
   end
 
   -- delay notifications till vim.notify was replaced or after 500ms
-  require("lazyvim.util").lazy_notify()
+  LazyVim.lazy_notify()
 
   -- load options here, before lazy init while sourcing plugin modules
   -- this is needed to make sure options will be correctly applied
   -- after installing missing plugins
   M.load("options")
 
-  Util.plugin.setup()
+  LazyVim.plugin.setup()
   M.json.load()
 end
 

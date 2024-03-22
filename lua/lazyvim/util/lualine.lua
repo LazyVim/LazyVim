@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 ---@class lazyvim.util.lualine
 local M = {}
 
@@ -25,9 +23,9 @@ function M.cmp_source(name, icon)
   end
 
   local colors = {
-    ok = Util.ui.fg("Special"),
-    error = Util.ui.fg("DiagnosticError"),
-    pending = Util.ui.fg("DiagnosticWarn"),
+    ok = LazyVim.ui.fg("Special"),
+    error = LazyVim.ui.fg("DiagnosticError"),
+    pending = LazyVim.ui.fg("DiagnosticWarn"),
   }
 
   return {
@@ -90,8 +88,8 @@ function M.pretty_path(opts)
       return ""
     end
 
-    local root = Util.root.get({ normalize = true })
-    local cwd = Util.root.cwd()
+    local root = LazyVim.root.get({ normalize = true })
+    local cwd = LazyVim.root.cwd()
 
     if opts.relative == "cwd" and path:find(cwd, 1, true) == 1 then
       path = path:sub(#cwd + 2)
@@ -130,12 +128,12 @@ function M.root_dir(opts)
     parent = true,
     other = true,
     icon = "󱉭 ",
-    color = Util.ui.fg("Special"),
+    color = LazyVim.ui.fg("Special"),
   }, opts or {})
 
   local function get()
-    local cwd = Util.root.cwd()
-    local root = Util.root.get({ normalize = true })
+    local cwd = LazyVim.root.cwd()
+    local root = LazyVim.root.get({ normalize = true })
     local name = vim.fs.basename(root)
 
     if root == cwd then

@@ -15,10 +15,10 @@ return {
       setup = {
         eslint = function()
           local function get_client(buf)
-            return require("lazyvim.util").lsp.get_clients({ name = "eslint", bufnr = buf })[1]
+            return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
           end
 
-          local formatter = require("lazyvim.util").lsp.formatter({
+          local formatter = LazyVim.lsp.formatter({
             name = "eslint: lsp",
             primary = false,
             priority = 200,
@@ -44,7 +44,7 @@ return {
           end
 
           -- register the formatter with LazyVim
-          require("lazyvim.util").format.register(formatter)
+          LazyVim.format.register(formatter)
         end,
       },
     },
