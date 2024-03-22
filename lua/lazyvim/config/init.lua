@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "10.15.0" -- x-release-please-version
+M.version = "10.16.0" -- x-release-please-version
 
 ---@class LazyVimOptions
 local defaults = {

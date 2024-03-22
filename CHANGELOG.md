@@ -1,5 +1,26 @@
 # Changelog
 
+## [10.16.0](https://github.com/LazyVim/LazyVim/compare/v10.15.0...v10.16.0) (2024-03-22)
+
+
+### Features
+
+* added LazyVim global. Will refactor specs later to use that ([6e57e86](https://github.com/LazyVim/LazyVim/commit/6e57e86c9952986a0e90055e13aa86dcde5e478e))
+* **lazyterm:** optional shell setup, mainly for pwsh. Fixes [#2151](https://github.com/LazyVim/LazyVim/issues/2151) ([3d4ab4e](https://github.com/LazyVim/LazyVim/commit/3d4ab4eb2634c9280676a7efdfb2753e5b2f8536))
+* **telescope-fzf-native:** added support for building with cmake. Fixes [#2132](https://github.com/LazyVim/LazyVim/issues/2132) ([1c13a5c](https://github.com/LazyVim/LazyVim/commit/1c13a5c10b745f741ebbb08d3963862e9d4e307e))
+* use `vim.uv` everywhere instead of `vim.loop` ([3a87c08](https://github.com/LazyVim/LazyVim/commit/3a87c08cdadb23ae88bd6eb193e8392e986df6bb))
+* use LazyVim everywhere instead of `require("lazyvim.util")` ([7a5dbea](https://github.com/LazyVim/LazyVim/commit/7a5dbeae75b553b489af8074e9a87207edf1395c))
+
+
+### Bug Fixes
+
+* add shim for vim.uv just in case someone upgrades lazyvim before lazy ([4b8fe44](https://github.com/LazyVim/LazyVim/commit/4b8fe44c08610be7a0603d84ae03ca81a98cbeee))
+* **cmake:** lazy load cmake-tools. Fixes [#2767](https://github.com/LazyVim/LazyVim/issues/2767) ([69aedc2](https://github.com/LazyVim/LazyVim/commit/69aedc265724c71711753333e3b7506fbeab78ef))
+* **format:** Don't leak bufnr into opts tables ([#2794](https://github.com/LazyVim/LazyVim/issues/2794)) ([213493e](https://github.com/LazyVim/LazyVim/commit/213493e766df7a5405050205f6050ff24e5a2d6d))
+* **java:** dont error when not using cmp. Fixes [#2038](https://github.com/LazyVim/LazyVim/issues/2038) ([8d31bf2](https://github.com/LazyVim/LazyVim/commit/8d31bf230cf9ad872ad50251d405ed628c9e69ae))
+* **python:** basedpyright is now supported by mason-lspconfig ([4187417](https://github.com/LazyVim/LazyVim/commit/4187417158a22ff80a059a73f2eddb113f59c113))
+* **util.telescope:** make `show_untracked` configurable ([#2789](https://github.com/LazyVim/LazyVim/issues/2789)) ([1661759](https://github.com/LazyVim/LazyVim/commit/1661759d3358dbaa4be834f0022d53071b6fb21c))
+
 ## [10.15.0](https://github.com/LazyVim/LazyVim/compare/v10.14.0...v10.15.0) (2024-03-20)
 
 
