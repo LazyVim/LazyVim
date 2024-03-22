@@ -69,16 +69,12 @@ return {
             end,
             desc = "copy path to clipboard",
           },
-          ["O"] = vim.ui.open and {
+          ["O"] = {
             function(state)
-              local path = state.tree:get_node().path
-              local ret = vim.ui.open(path)
-              if ret and ret.code ~= 0 then
-                require("lazyvim.util").error("Failed to open file: " .. ret.stderr .. "\n .. " .. ret.stdout)
-              end
+              require("lazy.util").open(state.tree:get_node().path, { system = true })
             end,
-            desc = "open with system default application",
-          } or nil,
+            desc = "open with system application",
+          },
         },
       },
       default_component_configs = {
