@@ -124,8 +124,9 @@ return {
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        enabled = vim.fn.executable("make") == 1,
+        build = vim.fn.executable("make") == 1 and "make"
+          or "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        enabled = vim.fn.executable("make") == 1 or vim.fn.executable("cmake") == 1,
         config = function()
           LazyVim.on_load("telescope.nvim", function()
             require("telescope").load_extension("fzf")
