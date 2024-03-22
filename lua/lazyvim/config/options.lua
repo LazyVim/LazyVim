@@ -12,6 +12,12 @@ vim.g.autoformat = true
 -- * a function with signature `function(buf) -> string|string[]`
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
+-- Optionally setup the terminal to use
+-- This sets `vim.o.shell` and does some additional configuration for:
+-- * pwsh
+-- * powershell
+-- LazyVim.terminal.setup("pwsh")
+
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
