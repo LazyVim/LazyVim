@@ -178,6 +178,7 @@ return {
     end
 
     local dial_augroup = vim.api.nvim_create_augroup("DialFileType", { clear = true })
+    local is_current_buffer_has_group = false
 
     for lang, patterns in pairs(opts.groups_by_filetypes) do
       vim.api.nvim_create_autocmd("FileType", {
@@ -193,12 +194,12 @@ return {
         vim.notify(pattern .. " in " .. vim.inspect(patterns) .. ". Current filetype: " .. vim.bo.filetype)
         if vim.bo.filetype == pattern then
           set_dial_group(lang)
-          return
+          is_current_buffer_has_group = true
         end
       end
     end
-
-    -- if we haven't returned from function that means that we are in filetype without mappings
-    set_dial_group("default")
+    if not is_current_buffer_has_group then
+      set_dial_group("default")
+    end
   end,
 }
