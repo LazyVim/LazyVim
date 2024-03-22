@@ -150,7 +150,7 @@ function M.fg(name)
 end
 
 M.skip_foldexpr = {} ---@type table<number,boolean>
-local skip_check = assert(vim.loop.new_check())
+local skip_check = assert(vim.uv.new_check())
 
 function M.foldexpr()
   local buf = vim.api.nvim_get_current_buf()

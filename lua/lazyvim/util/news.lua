@@ -5,7 +5,7 @@ local Util = require("lazyvim.util")
 local M = {}
 
 function M.hash(file)
-  local stat = vim.loop.fs_stat(file)
+  local stat = vim.uv.fs_stat(file)
   if not stat then
     return
   end

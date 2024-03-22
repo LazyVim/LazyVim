@@ -25,9 +25,9 @@ function M.telescope(builtin, opts)
     opts = vim.tbl_deep_extend("force", { cwd = Util.root() }, opts or {}) --[[@as lazyvim.util.telescope.opts]]
     if builtin == "files" then
       if
-        vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git")
-        and not vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.ignore")
-        and not vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.rgignore")
+        vim.uv.fs_stat((opts.cwd or vim.uv.cwd()) .. "/.git")
+        and not vim.uv.fs_stat((opts.cwd or vim.uv.cwd()) .. "/.ignore")
+        and not vim.uv.fs_stat((opts.cwd or vim.uv.cwd()) .. "/.rgignore")
       then
         if opts.show_untracked == nil then
           opts.show_untracked = true
@@ -37,7 +37,7 @@ function M.telescope(builtin, opts)
         builtin = "find_files"
       end
     end
-    if opts.cwd and opts.cwd ~= vim.loop.cwd() then
+    if opts.cwd and opts.cwd ~= vim.uv.cwd() then
       local function open_cwd_dir()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
