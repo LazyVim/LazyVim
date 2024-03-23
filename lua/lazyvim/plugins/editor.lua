@@ -67,6 +67,12 @@ return {
             end,
             desc = "copy path to clipboard",
           },
+          ["O"] = {
+            function(state)
+              require("lazy.util").open(state.tree:get_node().path, { system = true })
+            end,
+            desc = "open with system application",
+          },
         },
       },
       default_component_configs = {
