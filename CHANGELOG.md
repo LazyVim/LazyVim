@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.17.2](https://github.com/LazyVim/LazyVim/compare/v10.17.1...v10.17.2) (2024-03-26)
+
+
+### Bug Fixes
+
+* **lazygit:** dont error when setting ansi color fails. Fixes [#2829](https://github.com/LazyVim/LazyVim/issues/2829) ([a26ca7b](https://github.com/LazyVim/LazyVim/commit/a26ca7bf56790f6bc35134a5037df0405437a1be))
+
 ## [10.17.1](https://github.com/LazyVim/LazyVim/compare/v10.17.0...v10.17.1) (2024-03-26)
 
 
