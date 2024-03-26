@@ -1,11 +1,24 @@
+local M = {}
+---@type table<string, table<string, string[]>>
+M.dials_by_ft = {}
+
+---@param increment boolean
+---@param g? boolean
+function M.dial(increment, g)
+  local is_visual = vim.fn.mode(true):sub(1, 1) == "v"
+  local func = (increment and "inc" or "dec") .. (g and "_g" or "_") .. (is_visual and "visual" or "normal")
+  local group = M.dials_by_ft[vim.bo.filetype] or "default"
+  return require("dial.map")[func](group)
+end
+
 return {
   "monaqa/dial.nvim",
+  -- stylua: ignore
   keys = {
-    { "<C-a>", "<Plug>(dial-increment)", mode = { "n", "v" } },
-    { "<C-x>", "<Plug>(dial-decrement)", mode = { "n", "v" } },
-    -- there was some issue without remap = true
-    { "g<C-a>", "g<Plug>(dial-increment)", mode = { "n", "v" }, remap = true },
-    { "g<C-x>", "g<Plug>(dial-decrement)", mode = { "n", "v" }, remap = true },
+    { "<C-a>", function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
+    { "<C-x>", function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
+    { "g<C-a>", function() return M.dial(true, true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
+    { "g<C-x>", function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
   },
   opts = function()
     local augend = require("dial.augend")
@@ -81,18 +94,18 @@ return {
     })
 
     return {
-      groups_by_filetypes = {
-        typescript = {
-          "typescript",
-          "typescriptreact",
-          "javascript",
-          "javascriptreact",
-        },
-        css = { "css", "scss", "sass" },
-        markdown = { "markdown" },
-        json = { "json" },
-        lua = { "lua" },
-        python = { "python" },
+      dials_by_ft = {
+        css = "css",
+        javascript = "typescript",
+        javascriptreact = "typescript",
+        json = "json",
+        lua = "lua",
+        markdown = "markdown",
+        python = "python",
+        sass = "css",
+        scss = "css",
+        typescript = "typescript",
+        typescriptreact = "typescript",
       },
       groups = {
         default = {
@@ -153,53 +166,6 @@ return {
   end,
   config = function(_, opts)
     require("dial.config").augends:register_group(opts.groups)
-
-    -- autocmd
-    local set_dial_group = function(lang)
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "n", "<C-a>", require("dial.map").inc_normal(lang), {})
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "v", "<C-a>", require("dial.map").inc_visual(lang), {})
-
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "n", "<C-x>", require("dial.map").dec_normal(lang), {})
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "v", "<C-x>", require("dial.map").dec_visual(lang), {})
-
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "n", "g<C-a>", require("dial.map").inc_gnormal(lang), {})
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "v", "g<C-a>", require("dial.map").inc_gvisual(lang), {})
-
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "n", "g<C-x>", require("dial.map").dec_gnormal(lang), {})
-      -- stylua: ignore
-      vim.api.nvim_buf_set_keymap(0, "v", "g<C-x>", require("dial.map").dec_gvisual(lang), {})
-    end
-
-    local dial_augroup = vim.api.nvim_create_augroup("DialFileType", { clear = true })
-    local is_current_buffer_has_group = false
-
-    for lang, patterns in pairs(opts.groups_by_filetypes) do
-      vim.api.nvim_create_autocmd("FileType", {
-        group = dial_augroup,
-        pattern = patterns,
-        callback = function()
-          set_dial_group(lang)
-        end,
-      })
-      vim.notify(vim.inspect(opts.groups_by_filetypes))
-
-      for _, pattern in ipairs(patterns) do
-        vim.notify(pattern .. " in " .. vim.inspect(patterns) .. ". Current filetype: " .. vim.bo.filetype)
-        if vim.bo.filetype == pattern then
-          set_dial_group(lang)
-          is_current_buffer_has_group = true
-        end
-      end
-    end
-    if not is_current_buffer_has_group then
-      set_dial_group("default")
-    end
+    M.dials_by_ft = opts.dials_by_ft
   end,
 }
