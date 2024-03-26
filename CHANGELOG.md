@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.17.1](https://github.com/LazyVim/LazyVim/compare/v10.17.0...v10.17.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* **lazygit:** allow overriding default terminal options ([bfe8c60](https://github.com/LazyVim/LazyVim/commit/bfe8c608a33255511fa3e79bf77fd7257022a525))
+
 ## [10.17.0](https://github.com/LazyVim/LazyVim/compare/v10.16.0...v10.17.0) (2024-03-26)
 
 
