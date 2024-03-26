@@ -2,11 +2,19 @@
 
 ## 10.x
 
+- The **lazygit** integration now configures:
+
+  - the theme based on the colorscheme
+  - nerd font icons (v3)
+  - editor preset is set to `nvim-remote` for better interop with Neovim
+
+- The option `vim.g.lazygit_theme` was renamed to `vim.g.lazygit_config`
+
 - **lazygit** now automatically uses the colors of your current colorscheme.
   This is enabled by default. To disable, add the below to your `options.lua`:
 
   ```lua
-  vim.g.lazygit_theme = false
+  vim.g.lazygit_config = false
   ```
 
 - Added support for `basedpyright` to the **python** extra.
