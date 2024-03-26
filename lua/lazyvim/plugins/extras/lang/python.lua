@@ -4,6 +4,8 @@ if lazyvim_docs then
   vim.g.lazyvim_python_lsp = "pyright"
 end
 
+local lsp = vim.g.lazyvim_python_lsp or "pyright"
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -18,10 +20,13 @@ return {
     opts = {
       servers = {
         pyright = {
-          enabled = vim.g.lazyvim_python_lsp ~= "basedpyright",
+          enabled = lsp == "pyright",
         },
         basedpyright = {
-          enabled = vim.g.lazyvim_python_lsp == "basedpyright",
+          enabled = lsp == "basedpyright",
+        },
+        [lsp] = {
+          enabled = true,
         },
         ruff_lsp = {
           keys = {
