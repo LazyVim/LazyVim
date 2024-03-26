@@ -44,7 +44,8 @@ end
 
 function M.update_theme()
   -- LazyGit uses color 241 a lot, so also set it to a nice color
-  M.set_ansi_color(241, LazyVim.ui.color("Special") or "blue")
+  -- pcall, since some terminals don't like this
+  pcall(M.set_ansi_color, 241, LazyVim.ui.color("Special") or "blue")
 
   local theme = {
     activeBorderColor = { LazyVim.ui.color("MatchParen") or "orange", "bold" },
