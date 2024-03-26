@@ -1,5 +1,18 @@
 # Changelog
 
+## [10.18.0](https://github.com/LazyVim/LazyVim/compare/v10.17.3...v10.18.0) (2024-03-26)
+
+
+### Features
+
+* **extras:** add dial extra ([#2798](https://github.com/LazyVim/LazyVim/issues/2798)) ([76b037d](https://github.com/LazyVim/LazyVim/commit/76b037dcc1105f23b92fe6211d747f97705413fa))
+* **lazygit:** configure lazygit nvim-remote as editor and enable nerdfont icons ([426cd3e](https://github.com/LazyVim/LazyVim/commit/426cd3ed91b90e5304802904d14dc3826da317c9))
+
+
+### Bug Fixes
+
+* **terminal:** dont use backdrop for edgy terminal windows ([fd0677f](https://github.com/LazyVim/LazyVim/commit/fd0677fb9a512c4a4a6bae534a018f361a9bfe30))
+
 ## [10.17.3](https://github.com/LazyVim/LazyVim/compare/v10.17.2...v10.17.3) (2024-03-26)
 
 
