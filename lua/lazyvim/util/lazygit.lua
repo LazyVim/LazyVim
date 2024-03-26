@@ -22,10 +22,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 -- Opens lazygit
 ---@param opts? LazyTermOpts | {args?: string[]}
 function M.open(opts)
-  opts = vim.tbl_deep_extend("force", {}, opts or {}, {
+  opts = vim.tbl_deep_extend("force", {}, {
     esc_esc = false,
     ctrl_hjkl = false,
-  })
+  }, opts or {})
   local cmd = { "lazygit" }
   if vim.g.lazygit_theme then
     if M.dirty then
