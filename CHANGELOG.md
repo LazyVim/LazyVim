@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.17.3](https://github.com/LazyVim/LazyVim/compare/v10.17.2...v10.17.3) (2024-03-26)
+
+
+### Performance Improvements
+
+* **notify:** disable animation notifications. too big impact on performance for too little benefit ([f3655c3](https://github.com/LazyVim/LazyVim/commit/f3655c33a3239b67ce9c5e5a8cc384691fd8126c))
+
 ## [10.17.2](https://github.com/LazyVim/LazyVim/compare/v10.17.1...v10.17.2) (2024-03-26)
 
 
