@@ -1,5 +1,16 @@
 # Changelog
 
+## [10.17.0](https://github.com/LazyVim/LazyVim/compare/v10.16.0...v10.17.0) (2024-03-26)
+
+
+### Features
+
+* **lazygit:** lazygit now automatically uses colors from your Neovim colorscheme ([7d0dbc6](https://github.com/LazyVim/LazyVim/commit/7d0dbc6dedc2d6cb4c3bc77fa296dc07ce5927c9))
+* **neo-tree:** add mapping "O" to open with system default ([#2758](https://github.com/LazyVim/LazyVim/issues/2758)) ([b74ef23](https://github.com/LazyVim/LazyVim/commit/b74ef23a27dc4efc1cf76f14eb5ecced963d694d))
+* **options:** Disable foldtext for nightly ([#2447](https://github.com/LazyVim/LazyVim/issues/2447)) ([7ab6285](https://github.com/LazyVim/LazyVim/commit/7ab628501150b6dbaa6daae4a8ac7b864318677f))
+* **python:** allow configuring other python lsp servers than pyright, basedpyright ([3e5a5dd](https://github.com/LazyVim/LazyVim/commit/3e5a5dd621438cff4dbe29df227585b46ede7e44))
+* **util:** added util function to get a fg/bg color from the active colorscheme ([c00e3aa](https://github.com/LazyVim/LazyVim/commit/c00e3aa6b1d053e5bea7bfdfbfd3b5aedb6cb5be))
+
 ## [10.16.0](https://github.com/LazyVim/LazyVim/compare/v10.15.0...v10.16.0) (2024-03-22)
 
 
