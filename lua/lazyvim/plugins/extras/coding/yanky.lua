@@ -2,10 +2,10 @@ return {
   -- better yank/paste
   {
     "gbprod/yanky.nvim",
-    dependencies = not jit.os:find("Windows") and { "kkharji/sqlite.lua" } or {},
+    dependencies = not LazyVim.is_win() and { "kkharji/sqlite.lua" } or {},
     opts = {
       highlight = { timer = 250 },
-      ring = { storage = jit.os:find("Windows") and "shada" or "sqlite" },
+      ring = { storage = LazyVim.is_win() and "shada" or "sqlite" },
     },
     keys = {
         -- stylua: ignore
