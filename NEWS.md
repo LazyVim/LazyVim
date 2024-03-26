@@ -2,6 +2,23 @@
 
 ## 10.x
 
+- **lazygit** now automatically uses the colors of your current colorscheme.
+  This is enabled by default. To disable, add the below to your `options.lua`:
+
+  ```lua
+  vim.g.lazygit_theme = false
+  ```
+
+- Added support for `basedpyright` to the **python** extra.
+  Enable in your `options.lua` with:
+
+  ```lua
+  vim.g.lazyvim_python_lsp = "basedpyright"
+  ```
+
+  Be aware that `basedpyright` is still in development and
+  may not work exactly the same as `pyright`.
+
 - User extras under `lua/plugins/extras` can now also be managed
   with **LazyExtras**
 
