@@ -76,7 +76,7 @@ function M.update_config()
     inactiveBorderColor = { LazyVim.ui.color("FloatBorder") or "blue" },
     optionsTextColor = { "blue" },
     searchingActiveBorderColor = { LazyVim.ui.color("MatchParen") or "orange", "bold" },
-    selectedLineBgColor = { LazyVim.ui.color("CursorLine", true) }, -- set to `default` to have no background colour
+    selectedLineBgColor = { LazyVim.ui.color("Visual", true) }, -- set to `default` to have no background colour
     unstagedChangesColor = { "red" },
   }
   local config = [[
