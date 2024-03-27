@@ -47,7 +47,7 @@ function M.telescope(builtin, opts)
       ---@diagnostic disable-next-line: inject-field
       opts.attach_mappings = function(_, map)
         -- opts.desc is overridden by telescope, until it's changed there is this fix
-        map("i", "<a-c>", open_cwd_dir, { desc = "Open cwd directory" })
+        map("i", "<a-c>", open_cwd_dir, { desc = "Open cwd Directory" })
         return true
       end
     end

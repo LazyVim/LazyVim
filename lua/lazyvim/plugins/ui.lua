@@ -8,7 +8,7 @@ return {
         function()
           require("notify").dismiss({ silent = true, pending = true })
         end,
-        desc = "Dismiss all Notifications",
+        desc = "Dismiss All Notifications",
       },
     },
     opts = {
@@ -58,15 +58,15 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     },
     opts = {
       options = {
@@ -322,8 +322,8 @@ return {
       { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
       { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
       { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
-      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
+      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
     },
   },
 
@@ -372,10 +372,10 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
-            { action = LazyVim.telescope("files"),                                    desc = " Find file",       icon = " ", key = "f" },
-            { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
-            { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
-            { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "g" },
+            { action = LazyVim.telescope("files"),                                    desc = " Find File",       icon = " ", key = "f" },
+            { action = "ene | startinsert",                                        desc = " New File",        icon = " ", key = "n" },
+            { action = "Telescope oldfiles",                                       desc = " Recent Files",    icon = " ", key = "r" },
+            { action = "Telescope live_grep",                                      desc = " Find Text",       icon = " ", key = "g" },
             { action = [[lua LazyVim.telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
             { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
             { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },

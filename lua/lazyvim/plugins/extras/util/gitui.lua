@@ -8,12 +8,12 @@ return {
         function()
           LazyVim.terminal.open({ "gitui" }, { esc_esc = false, ctrl_hjkl = false })
         end,
-        desc = "gitui (cwd)" },
+        desc = "GitUi (cwd)" },
       { "<leader>gg",
         function()
           LazyVim.terminal.open({ "gitui" }, { cwd = LazyVim.root.get(), esc_esc = false, ctrl_hjkl = false })
         end,
-        desc = "gitui (root dir)" }
+        desc = "GitUi (Root Dir)" }
     },
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
