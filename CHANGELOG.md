@@ -1,5 +1,21 @@
 # Changelog
 
+## [10.19.0](https://github.com/LazyVim/LazyVim/compare/v10.18.0...v10.19.0) (2024-03-27)
+
+
+### Features
+
+* **lazygit:** allow customizing the lazygit theme. Check the code to change the hl group mapping. Fixes [#2846](https://github.com/LazyVim/LazyVim/issues/2846) ([bb1480a](https://github.com/LazyVim/LazyVim/commit/bb1480a6b9ca9e524450192423eac88ba2a32e18))
+
+
+### Bug Fixes
+
+* **autocmds:** auto create directory on windows for uris. Fixes [#2442](https://github.com/LazyVim/LazyVim/issues/2442) ([7d570fa](https://github.com/LazyVim/LazyVim/commit/7d570fad7949288711c6238468add594963cabaa))
+* **keymaps:** update all keymap descriptions to be Title Case ([#2844](https://github.com/LazyVim/LazyVim/issues/2844)) ([eb9f9a8](https://github.com/LazyVim/LazyVim/commit/eb9f9a8862983abe1c7dd51f5f6bf2bd6978346f))
+* **lazygit:** error handling for getting lazygit's config path ([ce5917a](https://github.com/LazyVim/LazyVim/commit/ce5917a58965b47ed09462ddb5d160dee2b130ae))
+* **lazygit:** use `Visual` instead of `CursorLine` for selected line. Fixes [#2846](https://github.com/LazyVim/LazyVim/issues/2846) ([6ed771d](https://github.com/LazyVim/LazyVim/commit/6ed771de9dd3b14de78e83ed1c62b4f4fcee3c03))
+* **python-semshi:** better highlights ([#2839](https://github.com/LazyVim/LazyVim/issues/2839)) ([d945137](https://github.com/LazyVim/LazyVim/commit/d945137a323c6c0200af50444981c7d05ed93f3f))
+
 ## [10.18.0](https://github.com/LazyVim/LazyVim/compare/v10.17.3...v10.18.0) (2024-03-26)
 
 
