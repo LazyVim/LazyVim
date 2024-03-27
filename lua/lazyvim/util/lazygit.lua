@@ -38,8 +38,22 @@ function M.open(opts)
     if M.dirty then
       M.update_config()
     end
-    M.config_dir = M.config_dir or vim.trim(vim.fn.system("lazygit -cd"))
-    vim.env.LG_CONFIG_FILE = M.config_dir .. "/config.yml" .. "," .. M.theme_path
+
+    if not M.config_dir then
+      local Process = require("lazy.manage.process")
+      local ok, lines = pcall(Process.exec, { "lazygit", "-cd" })
+      if ok then
+        M.config_dir = lines[1]
+        vim.env.LG_CONFIG_FILE = M.config_dir .. "/config.yml" .. "," .. M.theme_path
+      else
+        ---@diagnostic disable-next-line: cast-type-mismatch
+        ---@cast lines string
+        LazyVim.error(
+          { "Failed to get **lazygit** config directory.", "Will not apply **lazygit** config.", "", "# Error:", lines },
+          { title = "lazygit" }
+        )
+      end
+    end
   end
 
   return LazyVim.terminal(cmd, opts)
