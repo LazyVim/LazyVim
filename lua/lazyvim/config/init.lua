@@ -32,6 +32,12 @@ local defaults = {
     misc = {
       dots = "󰇘",
     },
+    overseer = {
+      Canceled = " ",
+      Failure  = " ",
+      Success  = " ",
+      Running  = " ",
+    },
     dap = {
       Stopped             = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
       Breakpoint          = " ",
