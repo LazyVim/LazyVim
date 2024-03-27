@@ -4,6 +4,7 @@ local Config = require("lazyvim.config")
 local prios = {
   ["lazyvim.plugins.extras.editor.aerial"] = 100,
   ["lazyvim.plugins.extras.editor.outline"] = 100,
+  ["lazyvim.plugins.extras.repl.slime"] = 100,
   ["lazyvim.plugins.extras.test.core"] = 1,
   ["lazyvim.plugins.extras.dap.core"] = 1,
 }
