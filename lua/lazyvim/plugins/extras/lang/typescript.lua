@@ -1,3 +1,15 @@
+local source_action = function(name)
+  return function()
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = {
+        only = { string.format("source.%s.ts", name) },
+        diagnostics = {},
+      },
+    })
+  end
+end
+
 return {
 
   -- add typescript to treesitter
@@ -21,28 +33,17 @@ return {
           keys = {
             {
               "<leader>co",
-              function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports.ts" },
-                    diagnostics = {},
-                  },
-                })
-              end,
+              source_action("organizeImports"),
               desc = "Organize Imports",
             },
             {
+              "<leader>cM",
+              source_action("addMissingImports"),
+              desc = "Add Missing Imports",
+            },
+            {
               "<leader>cR",
-              function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.removeUnused.ts" },
-                    diagnostics = {},
-                  },
-                })
-              end,
+              source_action("removeUnused"),
               desc = "Remove Unused Imports",
             },
           },
