@@ -2,6 +2,10 @@
 
 ## 10.x
 
+- added new extra for [mini.diff](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md)
+  This is a plugin similar to gitsigns but with a neat diff overlay
+  that can be toggled with `<leader>go`.
+
 - **trouble.nvim** has been rewritten from scratch and is now in beta.
   I've added a new extra for it (`trouble-v3`) for those of you who want to try it out.
   You can find the updated docs [here](https://github.com/folke/trouble.nvim/tree/dev)
