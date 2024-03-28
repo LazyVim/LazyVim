@@ -2,6 +2,10 @@
 
 ## 10.x
 
+- **trouble.nvim** has been rewritten from scratch and is now in beta.
+  I've added a new extra for it (`trouble-v3`) for those of you who want to try it out.
+  You can find the updated docs [here](https://github.com/folke/trouble.nvim/tree/dev)
+
 - The **lazygit** integration now configures:
 
   - the theme based on the colorscheme
