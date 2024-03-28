@@ -26,8 +26,6 @@ return {
       },
       opts = {},
       config = function(_, opts)
-        -- setup dap config by VsCode launch.json file
-        -- require("dap.ext.vscode").load_launchjs()
         local dap = require("dap")
         local dapui = require("dapui")
         dapui.setup(opts)
@@ -81,6 +79,11 @@ return {
         },
       },
     },
+
+    -- VsCode launch.json parser
+    {
+      "folke/neoconf.nvim",
+    },
   },
 
   -- stylua: ignore
@@ -115,5 +118,10 @@ return {
         { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
       )
     end
+
+    -- setup dap config by VsCode launch.json file
+    local vscode = require("dap.ext.vscode")
+    vscode.json_decode = require("neoconf.json.jsonc").decode_jsonc
+    vscode.load_launchjs()
   end,
 }
