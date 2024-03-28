@@ -1,4 +1,4 @@
-*LazyVim.txt*          For Neovim >= 0.9.0          Last change: 2024 March 27
+*LazyVim.txt*          For Neovim >= 0.9.0          Last change: 2024 March 28
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
@@ -8,6 +8,7 @@ Table of Contents                                  *LazyVim-table-of-contents*
   - Getting Started                                  |LazyVim-getting-started|
   - File Structure                                    |LazyVim-file-structure|
   - Configuration                                      |LazyVim-configuration|
+1. Links                                                       |LazyVim-links|
 
 Install
 ·
