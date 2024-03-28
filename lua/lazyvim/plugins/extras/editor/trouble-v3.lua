@@ -37,7 +37,7 @@ return {
       end
 
       local symbols = trouble.statusline({
-        mode = "lsp_document_symbols",
+        mode = "symbols",
         groups = {},
         title = false,
         filter = { range = true },
