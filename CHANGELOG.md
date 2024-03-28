@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.20.1](https://github.com/LazyVim/LazyVim/compare/v10.20.0...v10.20.1) (2024-03-28)
+
+
+### Bug Fixes
+
+* **trouble-v3:** use the filtered symbols list for lualine ([4ca0bf6](https://github.com/LazyVim/LazyVim/commit/4ca0bf69dd1e4a359af6894490f794bd5fc12cf0))
+
 ## [10.20.0](https://github.com/LazyVim/LazyVim/compare/v10.19.0...v10.20.0) (2024-03-28)
 
 
