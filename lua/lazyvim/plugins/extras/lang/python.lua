@@ -8,6 +8,10 @@ local lsp = vim.g.lazyvim_python_lsp or "pyright"
 
 return {
   {
+    "raimon49/requirements.txt.vim",
+    event = { "BufRead *req*.txt", "BufNewFile *req*.txt" },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
