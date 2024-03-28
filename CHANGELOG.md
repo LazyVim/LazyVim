@@ -1,5 +1,24 @@
 # Changelog
 
+## [10.20.0](https://github.com/LazyVim/LazyVim/compare/v10.19.0...v10.20.0) (2024-03-28)
+
+
+### Features
+
+* **cmp:** added option `auto_brackets` that adds brackets to functions/methods in configured filetypes ([bf8ce80](https://github.com/LazyVim/LazyVim/commit/bf8ce8076e283ecabce6b2f2a04995b3deeeb593))
+* **extras:** added extra for mini.diff ([e29c7ac](https://github.com/LazyVim/LazyVim/commit/e29c7acd2d149da8166f2f44c920cc7d5c89971a))
+* **extras:** added extra for the `trouble.nvim` v3 beta ([bb6aa98](https://github.com/LazyVim/LazyVim/commit/bb6aa98cbfe0547150be89dc42f35e3b3eef8b5d))
+* **extras:** use mini.move instead of native move ([#2865](https://github.com/LazyVim/LazyVim/issues/2865)) ([8f1fb60](https://github.com/LazyVim/LazyVim/commit/8f1fb60f0a78cb2e83b485e1f946822812c5ff50))
+* **python:** enable auto_brackets for python, since pyright and basedpyright dont support this natively ([d95c2ba](https://github.com/LazyVim/LazyVim/commit/d95c2ba1dc75307b154c870aa808f322debc6070))
+
+
+### Bug Fixes
+
+* **config:** type filter was broken for telescope symbols ([e3075b0](https://github.com/LazyVim/LazyVim/commit/e3075b05ef9646e07639ae896bd8896f68ad5d5f))
+* **nvim-lint:** don't duplicate linters. Fixes [#2852](https://github.com/LazyVim/LazyVim/issues/2852) ([cfbd358](https://github.com/LazyVim/LazyVim/commit/cfbd3582736286433ee5532e1ea3a8d05a1e2649))
+* **statuscolumn:** right align signs when virtnum &gt; 0 ([a786c47](https://github.com/LazyVim/LazyVim/commit/a786c471df5c048690618b6ff17fa2bc9648891d))
+* **trouble:** show message if use hasnt updated with Lazy yet after enabling the extra ([9a2f773](https://github.com/LazyVim/LazyVim/commit/9a2f7730907fd9124ec536f8dc2ad0a253f18f36))
+
 ## [10.19.0](https://github.com/LazyVim/LazyVim/compare/v10.18.0...v10.19.0) (2024-03-27)
 
 
