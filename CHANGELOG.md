@@ -1,5 +1,19 @@
 # Changelog
 
+## [10.21.0](https://github.com/LazyVim/LazyVim/compare/v10.20.1...v10.21.0) (2024-03-29)
+
+
+### Features
+
+* **trouble:** added `&lt;leader&gt;cS` to open a trouble list of all references / definitions / ... of the item under the cursor ([7544675](https://github.com/LazyVim/LazyVim/commit/754467525b420c85150f13b2cd9e280570c7556c))
+* **trouble:** enabled edgy ([80a8b18](https://github.com/LazyVim/LazyVim/commit/80a8b18be6577dcea35748eb563ebef7cf1b3c15))
+
+
+### Bug Fixes
+
+* **mini.move:** default mini.move setup already maps the correct keys ([3166236](https://github.com/LazyVim/LazyVim/commit/3166236ff88a13e7e5b7579ae780b682f2356d62))
+* **tex:** don't override conceallevel for tex. Not sure why that was added ([914f26d](https://github.com/LazyVim/LazyVim/commit/914f26d04e6b9a61f7d4fc80ad433d75dac3f14b))
+
 ## [10.20.1](https://github.com/LazyVim/LazyVim/compare/v10.20.0...v10.20.1) (2024-03-28)
 
 
