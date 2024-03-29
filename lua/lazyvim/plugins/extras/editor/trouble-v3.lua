@@ -59,10 +59,6 @@ return {
     "folke/edgy.nvim",
     optional = true,
     opts = function(_, opts)
-      -- disable for now
-      do
-        return
-      end
       for _, pos in ipairs({ "top", "bottom", "left", "right" }) do
         opts[pos] = opts[pos] or {}
         table.insert(opts[pos], {
