@@ -1,5 +1,15 @@
 # Changelog
 
+## [10.21.1](https://github.com/LazyVim/LazyVim/compare/v10.21.0...v10.21.1) (2024-03-29)
+
+
+### Bug Fixes
+
+* **lsp:** better support for diagnostics icons on Neovim nightly/stable ([aaa10e7](https://github.com/LazyVim/LazyVim/commit/aaa10e717dbe76c5b6b0ab302698f1d151863dc6))
+* **lsp:** dont define diagnostics signs on &gt;= 0.10.0 ([64f8614](https://github.com/LazyVim/LazyVim/commit/64f86147f9f4c67548185798f755c80e03c2098a))
+* merge conflict ([349ae03](https://github.com/LazyVim/LazyVim/commit/349ae03f0997d20aa6b4a23315e62dfeab77d559))
+* **native_snippets:** don't try to enable native snippets on Neovim &lt; 0.10.0 and show warning ([f308867](https://github.com/LazyVim/LazyVim/commit/f3088675703986b6d37061ebcf0a417c132fd45f))
+
 ## [10.21.0](https://github.com/LazyVim/LazyVim/compare/v10.20.1...v10.21.0) (2024-03-29)
 
 
