@@ -1,3 +1,8 @@
+if not vim.snippet then
+  LazyVim.warn("Native snippets are only supported on Neovim >= 0.10.0")
+  return {}
+end
+
 return {
   desc = "Use native snippets instead of LuaSnip. Only works on Neovim >= 0.10!",
   {
