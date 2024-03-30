@@ -10,9 +10,6 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    init = function()
-      require("lspconfig").gleam.setup({})
-    end,
     opts = {
       servers = {
         gleam = {},
