@@ -13,5 +13,10 @@ return {
     init = function()
       require("lspconfig").gleam.setup({})
     end,
+    opts = {
+      servers = {
+        gleam = {},
+      },
+    },
   },
 }
