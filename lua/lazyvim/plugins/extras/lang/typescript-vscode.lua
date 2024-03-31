@@ -20,57 +20,58 @@ return {
       -- ---@type lspconfig.options.vtsls
       opts.servers.vtsls = {
         -- you can view all keys here: https://github.com/yioneko/nvim-vtsls#commands
-        -- keys = {
-        --   {
-        --     "<leader>cto",
-        --     function()
-        --       require("vtsls").commands.organize_imports(0)
-        --     end,
-        --     desc = "Organize Imports",
-        --   },
-        --   {
-        --     "<leader>ctm",
-        --     function()
-        --       require("vtsls").commands.add_missing_imports(0)
-        --     end,
-        --     desc = "Add missing imports",
-        --   },
-        --   {
-        --     "<leader>ctd",
-        --     function()
-        --       require("vtsls").commands.fix_all(0)
-        --     end,
-        --     desc = "Fix all diagnostics",
-        --   },
-        --   {
-        --     "<leader>ctl",
-        --     function()
-        --       require("vtsls").commands.open_tsserver_log()
-        --     end,
-        --     desc = "Open Log",
-        --   },
-        --   {
-        --     "<leader>ctR",
-        --     function()
-        --       require("vtsls").commands.rename_file(0)
-        --     end,
-        --     desc = "Rename File",
-        --   },
-        --   {
-        --     "<leader>ctr",
-        --     function()
-        --       require("vtsls").commands.file_references(0)
-        --     end,
-        --     desc = "Show Rile References",
-        --   },
-        --   {
-        --     "<leader>ctc",
-        --     function()
-        --       require("vtsls").commands.goto_project_config(0)
-        --     end,
-        --     desc = "Open project config",
-        --   },
-        -- },
+        -- this keymaps will only appear at the lsp filetype (TypeScript, JavaScript). So they won't interfere with your other keymaps
+        keys = {
+          {
+            "<leader>co",
+            function()
+              require("vtsls").commands.organize_imports(0)
+            end,
+            desc = "Organize Imports",
+          },
+          {
+            "<leader>cM",
+            function()
+              require("vtsls").commands.add_missing_imports(0)
+            end,
+            desc = "Add missing imports",
+          },
+          {
+            "<leader>cD",
+            function()
+              require("vtsls").commands.fix_all(0)
+            end,
+            desc = "Fix all diagnostics",
+          },
+          {
+            "<leader>cLL",
+            function()
+              require("vtsls").commands.open_tsserver_log()
+            end,
+            desc = "Open Vtsls Log",
+          },
+          {
+            "<leader>cR",
+            function()
+              require("vtsls").commands.rename_file(0)
+            end,
+            desc = "Rename File",
+          },
+          {
+            "<leader>cu",
+            function()
+              require("vtsls").commands.file_references(0)
+            end,
+            desc = "Show File Uses(References)",
+          },
+          {
+            "<leader>ctc",
+            function()
+              require("vtsls").commands.goto_project_config(0)
+            end,
+            desc = "Open Project Config",
+          },
+        },
         settings = {
           vtsls = {
             experimental = {
