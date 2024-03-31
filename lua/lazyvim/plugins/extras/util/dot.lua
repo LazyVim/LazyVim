@@ -19,11 +19,15 @@ return {
 
       vim.filetype.add({
         extension = { rasi = "rasi" },
+        filename = {
+          [".env"] = "dotenv",
+        },
         pattern = {
           [".*/waybar/config"] = "jsonc",
           [".*/mako/config"] = "dosini",
           [".*/kitty/*.conf"] = "bash",
           [".*/hypr/.*%.conf"] = "hyprlang",
+          ["%.env%.[%w_.-]+"] = "dotenv",
         },
       })
 
