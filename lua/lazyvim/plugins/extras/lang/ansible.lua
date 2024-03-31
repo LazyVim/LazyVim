@@ -27,11 +27,12 @@ return {
     "mfussenegger/nvim-ansible",
     keys = {
       {
-        "<leader>tr",
+        "<leader>tR",
         function()
           require("ansible").run()
         end,
         silent = true,
+        desc = "Run Ansible",
       },
     },
   },
