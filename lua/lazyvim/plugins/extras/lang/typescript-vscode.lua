@@ -14,57 +14,122 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      vim.list_extend(opts.servers, {
-        -- ---@type lspconfig.options.vtsls
-        vtsls = {
-          settings = {
-            vtsls = {
-              experimental = {
-                completion = {
-                  enableServerSideFuzzyMatch = true,
-                },
+      -- set default server config to use nvim-vtsls one, which would allow use to use the plugin
+      require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+
+      -- ---@type lspconfig.options.vtsls
+      opts.servers.vtsls = {
+        -- you can view all keys here: https://github.com/yioneko/nvim-vtsls#commands
+        -- keys = {
+        --   {
+        --     "<leader>cto",
+        --     function()
+        --       require("vtsls").commands.organize_imports(0)
+        --     end,
+        --     desc = "Organize Imports",
+        --   },
+        --   {
+        --     "<leader>ctm",
+        --     function()
+        --       require("vtsls").commands.add_missing_imports(0)
+        --     end,
+        --     desc = "Add missing imports",
+        --   },
+        --   {
+        --     "<leader>ctd",
+        --     function()
+        --       require("vtsls").commands.fix_all(0)
+        --     end,
+        --     desc = "Fix all diagnostics",
+        --   },
+        --   {
+        --     "<leader>ctl",
+        --     function()
+        --       require("vtsls").commands.open_tsserver_log()
+        --     end,
+        --     desc = "Open Log",
+        --   },
+        --   {
+        --     "<leader>ctR",
+        --     function()
+        --       require("vtsls").commands.rename_file(0)
+        --     end,
+        --     desc = "Rename File",
+        --   },
+        --   {
+        --     "<leader>ctr",
+        --     function()
+        --       require("vtsls").commands.file_references(0)
+        --     end,
+        --     desc = "Show Rile References",
+        --   },
+        --   {
+        --     "<leader>ctc",
+        --     function()
+        --       require("vtsls").commands.goto_project_config(0)
+        --     end,
+        --     desc = "Open project config",
+        --   },
+        -- },
+        settings = {
+          vtsls = {
+            experimental = {
+              completion = {
+                enableServerSideFuzzyMatch = true,
               },
             },
-            javascript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-              -- otherwise it would ask every time if you want to update imports, which is a bit annoying
-              updateImportsOnFileMove = {
-                enabled = "always",
-              },
+          },
+          javascript = {
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
             },
-            typescript = {
-              format = {
-                indentSize = vim.o.shiftwidth,
-                convertTabsToSpaces = vim.o.expandtab,
-                tabSize = vim.o.tabstop,
-              },
-              inlayHints = {
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                enumMemberValues = { enabled = true },
-              },
-              updateImportsOnFileMove = {
-                enabled = "always",
-              },
-              -- cool feature, but increases ram usage a lot
-              -- referencesCodeLens = {
-              --   enabled = true,
-              --   showOnAllFunctions = true,
-              -- },
+            -- enables inline hints
+            inlayHints = {
+              parameterNames = { enabled = "literals" },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+            -- otherwise it would ask every time if you want to update imports, which is a bit annoying
+            updateImportsOnFileMove = {
+              enabled = "always",
+            },
+            -- cool feature, but increases ram usage
+            -- referencesCodeLens = {
+            --   enabled = true,
+            --   showOnAllFunctions = true,
+            -- },
+          },
+          typescript = {
+            format = {
+              indentSize = vim.o.shiftwidth,
+              convertTabsToSpaces = vim.o.expandtab,
+              tabSize = vim.o.tabstop,
+            },
+            updateImportsOnFileMove = {
+              enabled = "always",
+            },
+            inlayHints = {
+              parameterNames = { enabled = "literals" },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
             },
           },
         },
-      })
+      }
     end,
     dependencies = {
-      "yioneko/nvim-vtsls",
+      {
+        "yioneko/nvim-vtsls",
+        handlers = {},
+      },
     },
   },
   {
