@@ -35,9 +35,10 @@ return {
       end
 
       vim.filetype.add({
-        extension = { rasi = "rasi" },
+        extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
         filename = {
           [".env"] = "dotenv",
+          ["vifmrc"] = "vim",
         },
         pattern = {
           [".*/waybar/config"] = "jsonc",
