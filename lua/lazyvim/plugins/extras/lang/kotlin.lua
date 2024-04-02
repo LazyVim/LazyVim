@@ -2,16 +2,20 @@ return {
   -- Add linting, debug adapter, language server
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = { "ktlint", "kotlin-language-server", "kotlin-debug-adapter" },
-    },
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed or {}, {
+        "ktlint",
+        "kotlin-language-server",
+        "kotlin-debug-adapter",
+      })
+    end,
   },
   -- Add syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = { "kotlin" },
-    },
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed or {}, { "kotlin" })
+    end,
   },
   -- Add language server
   {
