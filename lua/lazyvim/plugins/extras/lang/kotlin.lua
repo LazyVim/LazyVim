@@ -22,7 +22,7 @@ return {
       },
     },
   },
-  -- Add linting
+  -- Add linting as optional
   {
     "mfussenegger/nvim-lint",
     optional = true,
