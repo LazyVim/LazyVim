@@ -1,13 +1,9 @@
 return {
-  -- Add linting, debug adapter, language server
+  -- Add packages(linting, debug adapter)
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, {
-        "ktlint",
-        "kotlin-language-server",
-        "kotlin-debug-adapter",
-      })
+      vim.list_extend(opts.ensure_installed or {}, { "ktlint", "kotlin-debug-adapter" })
     end,
   },
   -- Add syntax highlighting
@@ -20,7 +16,6 @@ return {
   -- Add language server
   {
     "neovim/nvim-lspconfig",
-    dependencies = "williamboman/mason.nvim",
     opts = {
       servers = {
         kotlin_language_server = {},
@@ -30,24 +25,37 @@ return {
   -- Add linting
   {
     "mfussenegger/nvim-lint",
+    optional = true,
     dependencies = "williamboman/mason.nvim",
     opts = {
       linters_by_ft = { kotlin = { "ktlint" } },
     },
   },
-  -- Add formatting
+  -- Add formatting as optional
   {
     "stevearc/conform.nvim",
-    dependencies = "williamboman/mason.nvim",
+    optional = true,
     opts = {
       formatters_by_ft = { kotlin = { "ktlint" } },
     },
   },
+  -- Add formatting and linting as optional
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.formatting.ktlint,
+        nls.builtins.diagnostics.ktlint,
+      })
+    end,
+  },
   -- Add debugger
   {
     "mfussenegger/nvim-dap",
+    optional = true,
     dependencies = "williamboman/mason.nvim",
-
     opts = function()
       local dap = require("dap")
       if not dap.adapters.kotlin then
