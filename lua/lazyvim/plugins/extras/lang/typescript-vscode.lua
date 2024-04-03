@@ -122,6 +122,12 @@ return {
               functionLikeReturnTypes = { enabled = true },
               enumMemberValues = { enabled = true },
             },
+            -- enables project wide error reporting similar to vscode
+            -- tsserver = {
+            --   experimental = {
+            --     enableProjectDiagnostics = true,
+            --   },
+            -- },
           },
         },
       }
