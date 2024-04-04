@@ -101,10 +101,11 @@ function M.statuscolumn()
 
   if show_signs then
     ---@type Sign?,Sign?,Sign?
-    local left, right, fold
+    local left, right, fold, githl
     for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
       if s.name and (s.name:find("GitSign") or s.name:find("MiniDiffSign")) then
         right = s
+        githl = s["texthl"]
       else
         left = s
       end
@@ -114,7 +115,9 @@ function M.statuscolumn()
     end
     vim.api.nvim_win_call(win, function()
       if vim.fn.foldclosed(vim.v.lnum) >= 0 then
-        fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = "Folded" }
+        fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = githl or "Folded" }
+      elseif not LazyVim.ui.skip_foldexpr[buf] and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">" then -- fold start
+        fold = { text = vim.opt.fillchars:get().foldopen or "", texthl = githl }
       end
     end)
     -- Left: mark or non-git sign
