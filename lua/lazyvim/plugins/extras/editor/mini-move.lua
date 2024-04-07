@@ -1,7 +1,7 @@
 return {
   {
     "echasnovski/mini.move",
-    event = "VeryLazy",
+    event = "LazyFile",
     opts = {},
   },
 }
