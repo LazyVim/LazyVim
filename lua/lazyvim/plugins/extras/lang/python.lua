@@ -2,9 +2,11 @@ if lazyvim_docs then
   -- LSP Server to use for Python.
   -- Set to "basedpyright" to use basedpyright instead of pyright.
   vim.g.lazyvim_python_lsp = "pyright"
+  vim.g.lazyvim_python_lsp_auto_brackets = true
 end
 
 local lsp = vim.g.lazyvim_python_lsp or "pyright"
+local lsp_brackets = vim.g.lazyvim_python_lsp_auto_brackets == nil and true or false
 
 return {
   {
@@ -111,8 +113,10 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
-      opts.auto_brackets = opts.auto_brackets or {}
-      table.insert(opts.auto_brackets, "python")
+      if lsp_brackets then
+        opts.auto_brackets = opts.auto_brackets or {}
+        table.insert(opts.auto_brackets, "python")
+      end
     end,
   },
 }
