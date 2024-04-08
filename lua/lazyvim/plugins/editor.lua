@@ -158,7 +158,6 @@ return {
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", LazyVim.telescope("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
-      { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
       -- search
       { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
