@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
   -- Better `vim.notify()`
   {
@@ -10,10 +8,11 @@ return {
         function()
           require("notify").dismiss({ silent = true, pending = true })
         end,
-        desc = "Dismiss all Notifications",
+        desc = "Dismiss All Notifications",
       },
     },
     opts = {
+      stages = "static",
       timeout = 3000,
       max_height = function()
         return math.floor(vim.o.lines * 0.75)
@@ -27,8 +26,8 @@ return {
     },
     init = function()
       -- when noice is not enabled, install notify on VeryLazy
-      if not Util.has("noice.nvim") then
-        Util.on_very_lazy(function()
+      if not LazyVim.has("noice.nvim") then
+        LazyVim.on_very_lazy(function()
           vim.notify = require("notify")
         end)
       end
@@ -59,15 +58,15 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     },
     opts = {
       options = {
@@ -140,7 +139,7 @@ return {
           lualine_b = { "branch" },
 
           lualine_c = {
-            Util.lualine.root_dir(),
+            LazyVim.lualine.root_dir(),
             {
               "diagnostics",
               symbols = {
@@ -151,31 +150,31 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { Util.lualine.pretty_path() },
+            { LazyVim.lualine.pretty_path() },
           },
           lualine_x = {
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = Util.ui.fg("Statement"),
+              color = LazyVim.ui.fg("Statement"),
             },
             -- stylua: ignore
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = Util.ui.fg("Constant"),
+              color = LazyVim.ui.fg("Constant"),
             },
             -- stylua: ignore
             {
               function() return "  " .. require("dap").status() end,
               cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = Util.ui.fg("Debug"),
+              color = LazyVim.ui.fg("Debug"),
             },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = Util.ui.fg("Special"),
+              color = LazyVim.ui.fg("Special"),
             },
             {
               "diff",
@@ -278,7 +277,7 @@ return {
   {
     "folke/which-key.nvim",
     opts = function(_, opts)
-      if require("lazyvim.util").has("noice.nvim") then
+      if LazyVim.has("noice.nvim") then
         opts.defaults["<leader>sn"] = { name = "+noice" }
       end
     end,
@@ -323,8 +322,8 @@ return {
       { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
       { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
       { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
-      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
+      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
     },
   },
 
@@ -338,7 +337,7 @@ return {
     "goolord/alpha-nvim",
     optional = true,
     enabled = function()
-      require("lazyvim.util").warn({
+      LazyVim.warn({
         "`dashboard.nvim` is now the default LazyVim starter plugin.",
         "",
         "To keep using `alpha.nvim`, please enable the `lazyvim.plugins.extras.ui.alpha` extra.",
@@ -373,11 +372,11 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
-            { action = "Telescope find_files",                                     desc = " Find file",       icon = " ", key = "f" },
-            { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
-            { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
-            { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "g" },
-            { action = [[lua require("lazyvim.util").telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
+            { action = LazyVim.telescope("files"),                                    desc = " Find File",       icon = " ", key = "f" },
+            { action = "ene | startinsert",                                        desc = " New File",        icon = " ", key = "n" },
+            { action = "Telescope oldfiles",                                       desc = " Recent Files",    icon = " ", key = "r" },
+            { action = "Telescope live_grep",                                      desc = " Find Text",       icon = " ", key = "g" },
+            { action = [[lua LazyVim.telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
             { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
             { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
             { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },

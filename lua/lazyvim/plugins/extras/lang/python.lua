@@ -1,3 +1,11 @@
+if lazyvim_docs then
+  -- LSP Server to use for Python.
+  -- Set to "basedpyright" to use basedpyright instead of pyright.
+  vim.g.lazyvim_python_lsp = "pyright"
+end
+
+local lsp = vim.g.lazyvim_python_lsp or "pyright"
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -11,7 +19,15 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {},
+        pyright = {
+          enabled = lsp == "pyright",
+        },
+        basedpyright = {
+          enabled = lsp == "basedpyright",
+        },
+        [lsp] = {
+          enabled = true,
+        },
         ruff_lsp = {
           keys = {
             {
@@ -32,7 +48,7 @@ return {
       },
       setup = {
         ruff_lsp = function()
-          require("lazyvim.util").lsp.on_attach(function(client, _)
+          LazyVim.lsp.on_attach(function(client, _)
             if client.name == "ruff_lsp" then
               -- Disable hover in favor of Pyright
               client.server_capabilities.hoverProvider = false
@@ -78,7 +94,7 @@ return {
     "linux-cultist/venv-selector.nvim",
     cmd = "VenvSelect",
     opts = function(_, opts)
-      if require("lazyvim.util").has("nvim-dap-python") then
+      if LazyVim.has("nvim-dap-python") then
         opts.dap_enabled = true
       end
       return vim.tbl_deep_extend("force", opts, {
@@ -91,5 +107,12 @@ return {
       })
     end,
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.auto_brackets = opts.auto_brackets or {}
+      table.insert(opts.auto_brackets, "python")
+    end,
   },
 }

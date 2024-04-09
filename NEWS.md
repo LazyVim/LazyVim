@@ -2,6 +2,39 @@
 
 ## 10.x
 
+- added new extra for [mini.diff](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md)
+  This is a plugin similar to gitsigns but with a neat diff overlay
+  that can be toggled with `<leader>go`.
+
+- **trouble.nvim** has been rewritten from scratch and is now in beta.
+  I've added a new extra for it (`trouble-v3`) for those of you who want to try it out.
+  You can find the updated docs [here](https://github.com/folke/trouble.nvim/tree/dev)
+
+- The **lazygit** integration now configures:
+
+  - the theme based on the colorscheme
+  - nerd font icons (v3)
+  - editor preset is set to `nvim-remote` for better interop with Neovim
+
+- The option `vim.g.lazygit_theme` was renamed to `vim.g.lazygit_config`
+
+- **lazygit** now automatically uses the colors of your current colorscheme.
+  This is enabled by default. To disable, add the below to your `options.lua`:
+
+  ```lua
+  vim.g.lazygit_config = false
+  ```
+
+- Added support for `basedpyright` to the **python** extra.
+  Enable in your `options.lua` with:
+
+  ```lua
+  vim.g.lazyvim_python_lsp = "basedpyright"
+  ```
+
+  Be aware that `basedpyright` is still in development and
+  may not work exactly the same as `pyright`.
+
 - User extras under `lua/plugins/extras` can now also be managed
   with **LazyExtras**
 

@@ -69,6 +69,8 @@ return {
       for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
         opts[ft] = {
           headline_highlights = {},
+          -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
+          bullets = {},
         }
         for i = 1, 6 do
           local hl = "Headline" .. i

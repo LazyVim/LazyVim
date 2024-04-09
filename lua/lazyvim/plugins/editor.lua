@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
 
   -- file explorer
@@ -11,32 +9,32 @@ return {
       {
         "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = Util.root() })
+          require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
         end,
-        desc = "Explorer NeoTree (root dir)",
+        desc = "Explorer NeoTree (Root Dir)",
       },
       {
         "<leader>fE",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
-      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)",      remap = true },
+      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
+      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
       {
         "<leader>ge",
         function()
           require("neo-tree.command").execute({ source = "git_status", toggle = true })
         end,
-        desc = "Git explorer",
+        desc = "Git Explorer",
       },
       {
         "<leader>be",
         function()
           require("neo-tree.command").execute({ source = "buffers", toggle = true })
         end,
-        desc = "Buffer explorer",
+        desc = "Buffer Explorer",
       },
     },
     deactivate = function()
@@ -44,7 +42,7 @@ return {
     end,
     init = function()
       if vim.fn.argc(-1) == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        local stat = vim.uv.fs_stat(vim.fn.argv(0))
         if stat and stat.type == "directory" then
           require("neo-tree")
         end
@@ -61,6 +59,20 @@ return {
       window = {
         mappings = {
           ["<space>"] = "none",
+          ["Y"] = {
+            function(state)
+              local node = state.tree:get_node()
+              local path = node:get_id()
+              vim.fn.setreg("+", path, "c")
+            end,
+            desc = "Copy Path to Clipboard",
+          },
+          ["O"] = {
+            function(state)
+              require("lazy.util").open(state.tree:get_node().path, { system = true })
+            end,
+            desc = "Open with System Application",
+          },
         },
       },
       default_component_configs = {
@@ -74,7 +86,7 @@ return {
     },
     config = function(_, opts)
       local function on_move(data)
-        Util.lsp.on_rename(data.source, data.destination)
+        LazyVim.lsp.on_rename(data.source, data.destination)
       end
 
       local events = require("neo-tree.events")
@@ -103,7 +115,7 @@ return {
     opts = { open_cmd = "noswapfile vnew" },
     -- stylua: ignore
     keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in Files (Spectre)" },
     },
   },
 
@@ -118,10 +130,11 @@ return {
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        enabled = vim.fn.executable("make") == 1,
+        build = vim.fn.executable("make") == 1 and "make"
+          or "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+        enabled = vim.fn.executable("make") == 1 or vim.fn.executable("cmake") == 1,
         config = function()
-          Util.on_load("telescope.nvim", function()
+          LazyVim.on_load("telescope.nvim", function()
             require("telescope").load_extension("fzf")
           end)
         end,
@@ -133,41 +146,45 @@ return {
         "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
         desc = "Switch Buffer",
       },
-      { "<leader>/",       Util.telescope("live_grep"),                                       desc = "Grep (root dir)" },
-      { "<leader>:",       "<cmd>Telescope command_history<cr>",                              desc = "Command History" },
-      { "<leader><space>", Util.telescope("files"),                                           desc = "Find Files (root dir)" },
+      { "<leader>/", LazyVim.telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader><space>", LazyVim.telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>/", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
+      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader><space>", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
       -- find
-      { "<leader>fb",      "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",     desc = "Buffers" },
-      { "<leader>fc",      Util.telescope.config_files(),                                     desc = "Find Config File" },
-      { "<leader>ff",      Util.telescope("files"),                                           desc = "Find Files (root dir)" },
-      { "<leader>fF",      Util.telescope("files", { cwd = false }),                          desc = "Find Files (cwd)" },
-      { "<leader>fr",      "<cmd>Telescope oldfiles<cr>",                                     desc = "Recent" },
-      { "<leader>fR",      Util.telescope("oldfiles", { cwd = vim.loop.cwd() }),              desc = "Recent (cwd)" },
+      { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { "<leader>fc", LazyVim.telescope.config_files(), desc = "Find Config File" },
+      { "<leader>ff", LazyVim.telescope("files"), desc = "Find Files (Root Dir)" },
+      { "<leader>fF", LazyVim.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>fR", LazyVim.telescope("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
-      { "<leader>gc",      "<cmd>Telescope git_commits<CR>",                                  desc = "commits" },
-      { "<leader>gs",      "<cmd>Telescope git_status<CR>",                                   desc = "status" },
+      { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
+      { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
       -- search
-      { '<leader>s"',      "<cmd>Telescope registers<cr>",                                    desc = "Registers" },
-      { "<leader>sa",      "<cmd>Telescope autocommands<cr>",                                 desc = "Auto Commands" },
-      { "<leader>sb",      "<cmd>Telescope current_buffer_fuzzy_find<cr>",                    desc = "Buffer" },
-      { "<leader>sc",      "<cmd>Telescope command_history<cr>",                              desc = "Command History" },
-      { "<leader>sC",      "<cmd>Telescope commands<cr>",                                     desc = "Commands" },
-      { "<leader>sd",      "<cmd>Telescope diagnostics bufnr=0<cr>",                          desc = "Document diagnostics" },
-      { "<leader>sD",      "<cmd>Telescope diagnostics<cr>",                                  desc = "Workspace diagnostics" },
-      { "<leader>sg",      Util.telescope("live_grep"),                                       desc = "Grep (root dir)" },
-      { "<leader>sG",      Util.telescope("live_grep", { cwd = false }),                      desc = "Grep (cwd)" },
-      { "<leader>sh",      "<cmd>Telescope help_tags<cr>",                                    desc = "Help Pages" },
-      { "<leader>sH",      "<cmd>Telescope highlights<cr>",                                   desc = "Search Highlight Groups" },
-      { "<leader>sk",      "<cmd>Telescope keymaps<cr>",                                      desc = "Key Maps" },
-      { "<leader>sM",      "<cmd>Telescope man_pages<cr>",                                    desc = "Man Pages" },
-      { "<leader>sm",      "<cmd>Telescope marks<cr>",                                        desc = "Jump to Mark" },
-      { "<leader>so",      "<cmd>Telescope vim_options<cr>",                                  desc = "Options" },
-      { "<leader>sR",      "<cmd>Telescope resume<cr>",                                       desc = "Resume" },
-      { "<leader>sw",      Util.telescope("grep_string", { word_match = "-w" }),              desc = "Word (root dir)" },
-      { "<leader>sW",      Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
-      { "<leader>sw",      Util.telescope("grep_string"),                                     mode = "v",                       desc = "Selection (root dir)" },
-      { "<leader>sW",      Util.telescope("grep_string", { cwd = false }),                    mode = "v",                       desc = "Selection (cwd)" },
-      { "<leader>uC",      Util.telescope("colorscheme", { enable_preview = true }),          desc = "Colorscheme with preview" },
+      { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
+      { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+      { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+      { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
+      { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+      { "<leader>sg", LazyVim.telescope("live_grep"), desc = "Grep (Root Dir)" },
+      { "<leader>sG", LazyVim.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+      { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+      { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+      { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+      { "<leader>sw", LazyVim.telescope("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
+      { "<leader>sW", LazyVim.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
+      { "<leader>sw", LazyVim.telescope("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
+      { "<leader>sW", LazyVim.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
+      { "<leader>uC", LazyVim.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
       {
         "<leader>ss",
         function()
@@ -199,12 +216,12 @@ return {
       local find_files_no_ignore = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { no_ignore = true, default_text = line })()
+        LazyVim.telescope("find_files", { no_ignore = true, default_text = line })()
       end
       local find_files_with_hidden = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { hidden = true, default_text = line })()
+        LazyVim.telescope("find_files", { hidden = true, default_text = line })()
       end
 
       return {
@@ -268,7 +285,7 @@ return {
     "nvim-telescope/telescope.nvim",
     optional = true,
     opts = function(_, opts)
-      if not Util.has("flash.nvim") then
+      if not LazyVim.has("flash.nvim") then
         return
       end
       local function flash(prompt_bufnr)
@@ -306,6 +323,7 @@ return {
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
         ["gs"] = { name = "+surround" },
+        ["z"] = { name = "+fold" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
         ["<leader><tab>"] = { name = "+tabs" },
@@ -358,7 +376,7 @@ return {
         map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
         map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
         map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-        map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
+        map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
         map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
@@ -457,7 +475,7 @@ return {
             end
           end
         end,
-        desc = "Previous trouble/quickfix item",
+        desc = "Previous Trouble/Quickfix Item",
       },
       {
         "]q",
@@ -471,7 +489,7 @@ return {
             end
           end
         end,
-        desc = "Next trouble/quickfix item",
+        desc = "Next Trouble/Quickfix Item",
       },
     },
   },
@@ -485,12 +503,12 @@ return {
     config = true,
     -- stylua: ignore
     keys = {
-      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
   },
 }

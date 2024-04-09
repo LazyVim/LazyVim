@@ -23,6 +23,8 @@ function M.get()
       { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
       { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+      { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+      { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
       {
         "<leader>cA",
         function()
@@ -39,7 +41,7 @@ function M.get()
         has = "codeAction",
       }
     }
-  if require("lazyvim.util").has("inc-rename.nvim") then
+  if LazyVim.has("inc-rename.nvim") then
     M._keys[#M._keys + 1] = {
       "<leader>cr",
       function()
@@ -59,7 +61,7 @@ end
 ---@param method string
 function M.has(buffer, method)
   method = method:find("/") and method or "textDocument/" .. method
-  local clients = require("lazyvim.util").lsp.get_clients({ bufnr = buffer })
+  local clients = LazyVim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     if client.supports_method(method) then
       return true
@@ -75,8 +77,8 @@ function M.resolve(buffer)
     return {}
   end
   local spec = M.get()
-  local opts = require("lazyvim.util").opts("nvim-lspconfig")
-  local clients = require("lazyvim.util").lsp.get_clients({ bufnr = buffer })
+  local opts = LazyVim.opts("nvim-lspconfig")
+  local clients = LazyVim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
     vim.list_extend(spec, maps)

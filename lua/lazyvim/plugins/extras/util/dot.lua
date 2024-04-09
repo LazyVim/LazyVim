@@ -3,35 +3,27 @@ local xdg_config = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
 
 ---@param path string
 local function have(path)
-  return vim.loop.fs_stat(xdg_config .. "/" .. path) ~= nil
+  return vim.uv.fs_stat(xdg_config .. "/" .. path) ~= nil
 end
 
 return {
-
-  -- Add Hyprland Parser
   {
-    "luckasRanarison/tree-sitter-hypr",
-    enabled = function()
-      return have("hypr")
-    end,
-    event = "BufRead */hypr/*.conf",
-    build = ":TSUpdate hypr",
-    config = function()
-      -- Fix ft detection for hyprland
-      vim.filetype.add({
-        pattern = { [".*/hypr/.*%.conf"] = "hypr" },
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        bashls = {},
+      },
+    },
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed or {}, {
+        "shfmt",
+        "shellcheck",
       })
-      require("nvim-treesitter.parsers").get_parser_configs().hypr = {
-        install_info = {
-          url = "https://github.com/luckasRanarison/tree-sitter-hypr",
-          files = { "src/parser.c" },
-          branch = "master",
-        },
-        filetype = "hypr",
-      }
     end,
   },
-
   -- add some stuff to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -48,10 +40,15 @@ return {
           [".*/waybar/config"] = "jsonc",
           [".*/mako/config"] = "dosini",
           [".*/kitty/*.conf"] = "bash",
+          [".*/hypr/.*%.conf"] = "hyprlang",
         },
       })
 
       add("git_config")
+
+      if have("hypr") then
+        add("hyprlang")
+      end
 
       if have("fish") then
         add("fish")

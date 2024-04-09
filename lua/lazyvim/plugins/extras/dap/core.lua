@@ -18,6 +18,7 @@ return {
     -- fancy UI for the debugger
     {
       "rcarriga/nvim-dap-ui",
+      dependencies = { "nvim-neotest/nvim-nio" },
       -- stylua: ignore
       keys = {
         { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
@@ -89,7 +90,7 @@ return {
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
     { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
     { "<leader>dj", function() require("dap").down() end, desc = "Down" },
     { "<leader>dk", function() require("dap").up() end, desc = "Up" },
