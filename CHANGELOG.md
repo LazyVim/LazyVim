@@ -1,5 +1,19 @@
 # Changelog
 
+## [10.22.0](https://github.com/LazyVim/LazyVim/compare/v10.21.1...v10.22.0) (2024-04-11)
+
+
+### Features
+
+* **dot:** add bashls and shellcheck ([#2879](https://github.com/LazyVim/LazyVim/issues/2879)) ([97480dc](https://github.com/LazyVim/LazyVim/commit/97480dc5d2dbb717b45a351e0b04835f138a9094))
+* **git:** `&lt;leader&gt;gb` for Git Blame Line ([9e3af10](https://github.com/LazyVim/LazyVim/commit/9e3af1070fc1932da322105708ebb32a2cd9572b))
+
+
+### Bug Fixes
+
+* **harpoon:** optimizes harpoon keys ([#2877](https://github.com/LazyVim/LazyVim/issues/2877)) ([50b7f42](https://github.com/LazyVim/LazyVim/commit/50b7f426f287ecfc542dd9c197e430b0aca8af04))
+* **mini.pairs:** better default for ```` ([32eacde](https://github.com/LazyVim/LazyVim/commit/32eacde793fddcca0bcfbbd494b6aa8b2c870d0f))
+
 ## [10.21.1](https://github.com/LazyVim/LazyVim/compare/v10.21.0...v10.21.1) (2024-03-29)
 
 
