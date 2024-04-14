@@ -114,8 +114,8 @@ return {
             list_definitions = false,
             list_definitions_toc = false,
 
-            goto_next_usage = { ["]]"] = "Next reference" },
-            goto_previous_usage = { ["[["] = "Previous reference" },
+            goto_next_usage = "]]",
+            goto_previous_usage = "[[",
           },
         },
       },
