@@ -61,7 +61,8 @@ return {
             end,
             pinned = true,
             open = function()
-              vim.api.nvim_input("<esc><space>e")
+              local leader = vim.g.mapleader
+              vim.api.nvim_input('<esc>' .. leader .. 'e')
             end,
             size = { height = 0.5 },
           },
