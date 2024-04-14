@@ -42,6 +42,9 @@ return {
           end
         end,
       },
+      {
+        "nvim-treesitter/nvim-treesitter-refactor",
+      },
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
@@ -94,6 +97,26 @@ return {
           goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
           goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
           goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+        },
+      },
+      refactor = {
+        highlight_definitions = { enable = true },
+        smart_rename = {
+          enable = true,
+          keymaps = {
+            smart_rename = "grr",
+          },
+        },
+        navigation = {
+          enable = true,
+          keymaps = {
+            goto_definition = false,
+            list_definitions = false,
+            list_definitions_toc = false,
+
+            goto_next_usage = { ["]]"] = "Next reference" },
+            goto_previous_usage = { ["[["] = "Previous reference" },
+          },
         },
       },
     },
