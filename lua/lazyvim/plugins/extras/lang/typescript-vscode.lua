@@ -139,6 +139,15 @@ return {
       },
     },
   },
+    {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        ["<leader>ct"] = { name = "+Project", ["🚫"] = "which_key_ignore" },
+        ["<leader>cL"] = { name = "+Log", ["🚫"] = "which_key_ignore" },
+      },
+    },
+  },
   {
     "mfussenegger/nvim-dap",
     optional = true,
