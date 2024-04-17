@@ -11,7 +11,7 @@ return {
       {
         "<leader>H",
         function()
-          require("harpoon"):list():append()
+          require("harpoon"):list():add()
         end,
         desc = "Harpoon File",
       },
@@ -22,7 +22,7 @@ return {
           harpoon.ui:toggle_quick_menu(harpoon:list())
         end,
         desc = "Harpoon Quick Menu",
-      }
+      },
     }
 
     for i = 1, 5 do
@@ -35,5 +35,5 @@ return {
       })
     end
     return keys
-  end
+  end,
 }
