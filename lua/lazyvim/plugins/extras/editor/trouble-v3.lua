@@ -1,14 +1,16 @@
 local Config = require("lazyvim.config")
 
-for _, other in ipairs({ "aerial", "outline" }) do
-  local extra = "lazyvim.plugins.extras.editor." .. other
-  if vim.tbl_contains(Config.json.data.extras, extra) then
-    other = other:gsub("^%l", string.upper)
-    LazyVim.error({
-      "**Trouble v3** includes support for document symbols.",
-      ("You currently have the **%s** extra enabled."):format(other),
-      "Please disable it in your config.",
-    })
+if vim.tbl_contains(Config.json.data.extras, "lazyvim.plugins.extras.editor.trouble-v3") then
+  for _, other in ipairs({ "aerial", "outline" }) do
+    local extra = "lazyvim.plugins.extras.editor." .. other
+    if vim.tbl_contains(Config.json.data.extras, extra) then
+      other = other:gsub("^%l", string.upper)
+      LazyVim.error({
+        "**Trouble v3** includes support for document symbols.",
+        ("You currently have the **%s** extra enabled."):format(other),
+        "Please disable it in your config.",
+      })
+    end
   end
 end
 
