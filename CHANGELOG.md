@@ -1,5 +1,27 @@
 # Changelog
 
+## [10.22.0](https://github.com/LazyVim/LazyVim/compare/v10.21.1...v10.22.0) (2024-04-22)
+
+
+### Features
+
+* **dot:** add bashls and shellcheck ([#2879](https://github.com/LazyVim/LazyVim/issues/2879)) ([97480dc](https://github.com/LazyVim/LazyVim/commit/97480dc5d2dbb717b45a351e0b04835f138a9094))
+* **dot:** add more filetypes ([#2987](https://github.com/LazyVim/LazyVim/issues/2987)) ([15b09e8](https://github.com/LazyVim/LazyVim/commit/15b09e800ba7fb0c9ca8270a77e71083396e9db1))
+* **git:** `&lt;leader&gt;gb` for Git Blame Line ([9e3af10](https://github.com/LazyVim/LazyVim/commit/9e3af1070fc1932da322105708ebb32a2cd9572b))
+* **python:** use new `ruff` instead of `ruff_lsp` ([#3016](https://github.com/LazyVim/LazyVim/issues/3016)) ([cd04b58](https://github.com/LazyVim/LazyVim/commit/cd04b58fe3f7299fbca75e7eb47287617ac23fcf))
+
+
+### Bug Fixes
+
+* **edgy:** proper way of opening neo-tree. Fixes [#2984](https://github.com/LazyVim/LazyVim/issues/2984) ([6fdbc62](https://github.com/LazyVim/LazyVim/commit/6fdbc623e0a59220e754800df3b86788eca0813d))
+* **harpoon:** harpoon2 deprecated message  ([#2920](https://github.com/LazyVim/LazyVim/issues/2920)) ([79fed97](https://github.com/LazyVim/LazyVim/commit/79fed97f2357b2969cb23d106137978ca7cdffb4))
+* **harpoon:** optimizes harpoon keys ([#2877](https://github.com/LazyVim/LazyVim/issues/2877)) ([50b7f42](https://github.com/LazyVim/LazyVim/commit/50b7f426f287ecfc542dd9c197e430b0aca8af04))
+* **mini.pairs:** better default for ```` ([32eacde](https://github.com/LazyVim/LazyVim/commit/32eacde793fddcca0bcfbbd494b6aa8b2c870d0f))
+* **toggle:** use new `inlay_hint.enable()` signature ([#3013](https://github.com/LazyVim/LazyVim/issues/3013)) ([5f92dc5](https://github.com/LazyVim/LazyVim/commit/5f92dc5304b99a3e76dca878d9b47557fb64f384))
+* **trouble_v3:** keymap `previous` is deprecated, use `prev` instead ([#2968](https://github.com/LazyVim/LazyVim/issues/2968)) ([0fa6360](https://github.com/LazyVim/LazyVim/commit/0fa63603afcb9b478c49a54d94314d20af00ae95))
+* **trouble_v3:** show error only when `trouble_v3` is enabled ([#2989](https://github.com/LazyVim/LazyVim/issues/2989)) ([ceb4855](https://github.com/LazyVim/LazyVim/commit/ceb4855b434c8e7095bbf47cfc3b3647532d6a2c))
+* **trouble-v3:** fix telescope integration ([9da13ef](https://github.com/LazyVim/LazyVim/commit/9da13ef7e8a0b6c07e8e35f7c93dc77f3408d38b))
+
 ## [10.21.1](https://github.com/LazyVim/LazyVim/compare/v10.21.0...v10.21.1) (2024-03-29)
 
 
