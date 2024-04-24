@@ -69,6 +69,12 @@ function M.inlay_hints(buf, value)
     end
     ih.enable(value, { bufnr = buf })
   end
+  
+  if value then
+    LazyVim.info("Enabled inlay_hints", { title = "inlay_hints" })
+  else
+    LazyVim.warn("Disabled inlay_hints", { title = "inlay_hints" })
+  end
 end
 
 setmetatable(M, {
