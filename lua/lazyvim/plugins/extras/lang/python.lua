@@ -2,9 +2,11 @@ if lazyvim_docs then
   -- LSP Server to use for Python.
   -- Set to "basedpyright" to use basedpyright instead of pyright.
   vim.g.lazyvim_python_lsp = "pyright"
+  vim.g.lazyvim_ruff = "ruff_lsp"
 end
 
 local lsp = vim.g.lazyvim_python_lsp or "pyright"
+local ruff = vim.g.lazyvim_ruff or "ruff_lsp"
 
 return {
   {
@@ -28,7 +30,26 @@ return {
         [lsp] = {
           enabled = true,
         },
+        ruff_lsp = {
+          enabled = ruff == "ruff_lsp",
+          keys = {
+            {
+              "<leader>co",
+              function()
+                vim.lsp.buf.code_action({
+                  apply = true,
+                  context = {
+                    only = { "source.organizeImports" },
+                    diagnostics = {},
+                  },
+                })
+              end,
+              desc = "Organize Imports",
+            },
+          },
+        },
         ruff = {
+          enabled = ruff == "ruff",
           keys = {
             {
               "<leader>co",
@@ -47,6 +68,14 @@ return {
         },
       },
       setup = {
+        ruff_lsp = function()
+          LazyVim.lsp.on_attach(function(client, _)
+            if client.name == "ruff_lsp" then
+              -- Disable hover in favor of Pyright
+              client.server_capabilities.hoverProvider = false
+            end
+          end)
+        end,
         ruff = function()
           LazyVim.lsp.on_attach(function(client, _)
             if client.name == "ruff" then
