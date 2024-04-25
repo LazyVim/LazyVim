@@ -28,7 +28,7 @@ return {
         [lsp] = {
           enabled = true,
         },
-        ruff = {
+        ruff_lsp = {
           keys = {
             {
               "<leader>co",
@@ -47,9 +47,9 @@ return {
         },
       },
       setup = {
-        ruff = function()
+        ruff_lsp = function()
           LazyVim.lsp.on_attach(function(client, _)
-            if client.name == "ruff" then
+            if client.name == "ruff_lsp" then
               -- Disable hover in favor of Pyright
               client.server_capabilities.hoverProvider = false
             end
