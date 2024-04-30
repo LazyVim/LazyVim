@@ -1,7 +1,7 @@
 -- This file is automatically loaded by lazyvim.config.init
 
--- DO NOT USE THIS IN YOU OWN CONFIG!!
--- use `local map = vim.keymap.set` instead
+-- DO NOT USE `LazyVim.safe_keymap_set` IN YOU OWN CONFIG!!
+-- use `vim.keymap.set` instead
 local map = LazyVim.safe_keymap_set
 
 -- better up/down
