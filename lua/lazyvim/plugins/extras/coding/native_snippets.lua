@@ -22,7 +22,7 @@ return {
       {
         "<Tab>",
         function()
-          if vim.snippet.jumpable(1) then
+          if vim.snippet.active({direction = 1}) then
             vim.schedule(function()
               vim.snippet.jump(1)
             end)
@@ -47,7 +47,7 @@ return {
       {
         "<S-Tab>",
         function()
-          if vim.snippet.jumpable(-1) then
+          if vim.snippet.active({ direction = -1 }) then
             vim.schedule(function()
               vim.snippet.jump(-1)
             end)
