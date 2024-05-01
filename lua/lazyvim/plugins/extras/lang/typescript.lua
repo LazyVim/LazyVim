@@ -1,3 +1,7 @@
+local debugtypePreferred = {
+  ['node'] = 'pwa-node',
+}
+
 return {
 
   -- add typescript to treesitter
@@ -87,6 +91,18 @@ return {
           },
         }
       end
+      if not dap.adapters['node'] then
+        dap.adapters['node'] = function (cb, config)
+          config.type = debugtypePreferred[config.type] or config.type
+          local nativeAdapter = dap.adapters['pwa-node']
+          if type(nativeAdapter) == 'function' then
+            nativeAdapter(cb, config )
+          else
+            cb(nativeAdapter)
+          end
+        end
+      end
+
       for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
         if not dap.configurations[language] then
           dap.configurations[language] = {
