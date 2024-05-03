@@ -1,5 +1,21 @@
 # Changelog
 
+## [10.23.0](https://github.com/LazyVim/LazyVim/compare/v10.22.0...v10.23.0) (2024-05-03)
+
+
+### Features
+
+* **lualine:** make path trimming configurable by user ([#3062](https://github.com/LazyVim/LazyVim/issues/3062)) ([b8475f5](https://github.com/LazyVim/LazyVim/commit/b8475f51949acf195729a1c4d057a06208a9add9))
+
+
+### Bug Fixes
+
+* **dot:** can't match kitty conf file ([#3042](https://github.com/LazyVim/LazyVim/issues/3042)) ([5fb4cf0](https://github.com/LazyVim/LazyVim/commit/5fb4cf0d365b65cb9b7afa8be047973b5fc1747a))
+* **dot:** install when list is empty ([#3052](https://github.com/LazyVim/LazyVim/issues/3052)) ([3086bf0](https://github.com/LazyVim/LazyVim/commit/3086bf03e96bfc0048e5b27f8d65a9170bca3f67))
+* **extras:** Rust-Analyzer cargo option ([#3061](https://github.com/LazyVim/LazyVim/issues/3061)) ([a96348d](https://github.com/LazyVim/LazyVim/commit/a96348d7b076819f7580ea0c0ce467630bfc7cc5))
+* **native_snippets:** Fix native_snippets for `vim.snippet api` changes ([#3083](https://github.com/LazyVim/LazyVim/issues/3083)) ([6004e8d](https://github.com/LazyVim/LazyVim/commit/6004e8d4f60549bd2c5d6f3187a28d72b21e3261))
+* **python:** make both `ruff` and `ruff_lsp` available to user ([#3060](https://github.com/LazyVim/LazyVim/issues/3060)) ([34183a2](https://github.com/LazyVim/LazyVim/commit/34183a2759828001b08679659f7d5170d7ec367e))
+
 ## [10.22.0](https://github.com/LazyVim/LazyVim/compare/v10.21.1...v10.22.0) (2024-04-22)
 
 
