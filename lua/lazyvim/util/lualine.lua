@@ -99,7 +99,7 @@ function M.pretty_path(opts)
     end
 
     local sep = package.config:sub(1, 1)
-    local parts = vim.split(path, sep)
+    local parts = vim.split(path, "[\\/]")
 
     if opts.length == 0 then
       parts = parts
