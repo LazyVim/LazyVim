@@ -18,10 +18,8 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, {
-        "shfmt",
-        "shellcheck",
-      })
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "shellcheck" })
     end,
   },
   -- add some stuff to treesitter
