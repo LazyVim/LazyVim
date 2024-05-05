@@ -47,6 +47,7 @@ return {
                 unusedparams = true,
                 unusedwrite = true,
                 useany = true,
+                shadow = true,
               },
               usePlaceholders = true,
               completeUnimported = true,
