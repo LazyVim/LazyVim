@@ -56,7 +56,7 @@ return {
   -- tabs, which include filetype icons and close buttons.
   {
     "akinsho/bufferline.nvim",
-    event = "VeryLazy",
+    event = "UIEnter",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
