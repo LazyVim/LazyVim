@@ -1,5 +1,18 @@
 # Changelog
 
+## [10.24.0](https://github.com/LazyVim/LazyVim/compare/v10.23.0...v10.24.0) (2024-05-12)
+
+
+### Features
+
+* **mason-lspconfig:** allow `opts.ensure_installed` to be taken into account ([#3134](https://github.com/LazyVim/LazyVim/issues/3134)) ([8968c9e](https://github.com/LazyVim/LazyVim/commit/8968c9e9ea76f3a7616d9e249a3c9307a75fffad))
+
+
+### Bug Fixes
+
+* **neo-tree:** correctly set up `cwd` ([#3097](https://github.com/LazyVim/LazyVim/issues/3097)) ([30ce84f](https://github.com/LazyVim/LazyVim/commit/30ce84f7a7fb4e88b47ddf2f569b2ea9b7d56717))
+* **ui:** don't lazy-load dashboard-nvim ([#3107](https://github.com/LazyVim/LazyVim/issues/3107)) ([30c9e47](https://github.com/LazyVim/LazyVim/commit/30c9e4718a127f7d5a32f11c4d8dbba6b01f9858))
+
 ## [10.23.0](https://github.com/LazyVim/LazyVim/compare/v10.22.0...v10.23.0) (2024-05-03)
 
 
