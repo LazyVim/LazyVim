@@ -113,8 +113,8 @@ return {
       printf_statements = {},
       print_var_statements = {},
     },
-    config = function(_, options)
-      require("refactoring").setup(options)
+    config = function(_, opts)
+      require("refactoring").setup(opts)
       require("telescope").load_extension("refactoring")
     end,
   },
