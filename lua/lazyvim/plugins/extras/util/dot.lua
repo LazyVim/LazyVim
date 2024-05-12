@@ -47,6 +47,14 @@ return {
         },
       })
 
+      -- add syntax highlighting for new filetype
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "dotenv",
+        callback = function()
+          vim.bo.syntax = "sh"
+        end,
+      })
+
       add("git_config")
 
       if have("hypr") then
