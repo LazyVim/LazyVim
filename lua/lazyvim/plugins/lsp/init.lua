@@ -212,7 +212,14 @@ return {
       end
 
       if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
+        mlsp.setup({
+          ensure_installed = vim.tbl_deep_extend(
+            "force",
+            ensure_installed,
+            LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}
+          ),
+          handlers = { setup },
+        })
       end
 
       if LazyVim.lsp.get_config("denols") and LazyVim.lsp.get_config("tsserver") then

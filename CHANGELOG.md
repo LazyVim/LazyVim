@@ -1,5 +1,34 @@
 # Changelog
 
+## [10.24.0](https://github.com/LazyVim/LazyVim/compare/v10.23.0...v10.24.0) (2024-05-12)
+
+
+### Features
+
+* **mason-lspconfig:** allow `opts.ensure_installed` to be taken into account ([#3134](https://github.com/LazyVim/LazyVim/issues/3134)) ([8968c9e](https://github.com/LazyVim/LazyVim/commit/8968c9e9ea76f3a7616d9e249a3c9307a75fffad))
+
+
+### Bug Fixes
+
+* **neo-tree:** correctly set up `cwd` ([#3097](https://github.com/LazyVim/LazyVim/issues/3097)) ([30ce84f](https://github.com/LazyVim/LazyVim/commit/30ce84f7a7fb4e88b47ddf2f569b2ea9b7d56717))
+* **ui:** don't lazy-load dashboard-nvim ([#3107](https://github.com/LazyVim/LazyVim/issues/3107)) ([30c9e47](https://github.com/LazyVim/LazyVim/commit/30c9e4718a127f7d5a32f11c4d8dbba6b01f9858))
+
+## [10.23.0](https://github.com/LazyVim/LazyVim/compare/v10.22.0...v10.23.0) (2024-05-03)
+
+
+### Features
+
+* **lualine:** make path trimming configurable by user ([#3062](https://github.com/LazyVim/LazyVim/issues/3062)) ([b8475f5](https://github.com/LazyVim/LazyVim/commit/b8475f51949acf195729a1c4d057a06208a9add9))
+
+
+### Bug Fixes
+
+* **dot:** can't match kitty conf file ([#3042](https://github.com/LazyVim/LazyVim/issues/3042)) ([5fb4cf0](https://github.com/LazyVim/LazyVim/commit/5fb4cf0d365b65cb9b7afa8be047973b5fc1747a))
+* **dot:** install when list is empty ([#3052](https://github.com/LazyVim/LazyVim/issues/3052)) ([3086bf0](https://github.com/LazyVim/LazyVim/commit/3086bf03e96bfc0048e5b27f8d65a9170bca3f67))
+* **extras:** Rust-Analyzer cargo option ([#3061](https://github.com/LazyVim/LazyVim/issues/3061)) ([a96348d](https://github.com/LazyVim/LazyVim/commit/a96348d7b076819f7580ea0c0ce467630bfc7cc5))
+* **native_snippets:** Fix native_snippets for `vim.snippet api` changes ([#3083](https://github.com/LazyVim/LazyVim/issues/3083)) ([6004e8d](https://github.com/LazyVim/LazyVim/commit/6004e8d4f60549bd2c5d6f3187a28d72b21e3261))
+* **python:** make both `ruff` and `ruff_lsp` available to user ([#3060](https://github.com/LazyVim/LazyVim/issues/3060)) ([34183a2](https://github.com/LazyVim/LazyVim/commit/34183a2759828001b08679659f7d5170d7ec367e))
+
 ## [10.22.0](https://github.com/LazyVim/LazyVim/compare/v10.21.1...v10.22.0) (2024-04-22)
 
 
