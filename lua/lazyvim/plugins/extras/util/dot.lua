@@ -35,7 +35,6 @@ return {
       vim.filetype.add({
         extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
         filename = {
-          [".env"] = "sh",
           ["vifmrc"] = "vim",
         },
         pattern = {
