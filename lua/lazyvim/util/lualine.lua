@@ -46,6 +46,7 @@ end
 ---@param hl_group? string
 ---@return string
 function M.format(component, text, hl_group)
+  text = text:gsub("%%", "%%%%")
   if not hl_group or hl_group == "" then
     return text
   end
