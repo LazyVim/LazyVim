@@ -88,7 +88,7 @@ function M.lazy_file()
     for _, event in ipairs(events) do
       local augroups = Event.get_augroups(event.event)
       local groups = vim.tbl_filter(function(t)
-        return not vim.tbl_contains({ t }, "filetypedetect")
+        return not vim.tbl_contains({ t }, "filetypedetect") and not vim.tbl_contains({ t }, "editorconfig")
       end, augroups)
       skips[event.event] = skips[event.event] or groups
     end
@@ -96,18 +96,18 @@ function M.lazy_file()
     vim.api.nvim_exec_autocmds("User", { pattern = "LazyFile", modeline = false })
     for _, event in ipairs(events) do
       if vim.api.nvim_buf_is_valid(event.buf) then
-        Event.trigger({
-          event = event.event,
-          exclude = skips[event.event],
-          data = event.data,
-          buf = event.buf,
-        })
         if vim.bo[event.buf].filetype then
           Event.trigger({
             event = "FileType",
             buf = event.buf,
           })
         end
+        Event.trigger({
+          event = event.event,
+          exclude = skips[event.event],
+          data = event.data,
+          buf = event.buf,
+        })
       end
     end
     vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false })
