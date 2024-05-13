@@ -86,7 +86,11 @@ function M.lazy_file()
     ---@type table<string,string[]>
     local skips = {}
     for _, event in ipairs(events) do
-      skips[event.event] = skips[event.event] or Event.get_augroups(event.event)
+      local augroups = Event.get_augroups(event.event)
+      local groups = vim.tbl_filter(function(t)
+        return not vim.tbl_contains({ t }, "filetypedetect")
+      end, augroups)
+      skips[event.event] = skips[event.event] or groups
     end
 
     vim.api.nvim_exec_autocmds("User", { pattern = "LazyFile", modeline = false })
