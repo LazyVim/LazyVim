@@ -72,7 +72,6 @@ function M.lazy_file()
         local lang = vim.treesitter.language.get_lang(ft)
         if not (lang and pcall(vim.treesitter.start, event.buf, lang)) then
           vim.bo[event.buf].syntax = ft
-          vim.notify("Could not load treesitter for " .. ft, "warn", { title = "LazyVim" })
         end
 
         -- Trigger early redraw
