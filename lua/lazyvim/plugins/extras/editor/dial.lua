@@ -5,7 +5,9 @@ M.dials_by_ft = {}
 ---@param increment boolean
 ---@param g? boolean
 function M.dial(increment, g)
-  local is_visual = vim.fn.mode(true):sub(1, 1) == "v"
+  local mode = vim.fn.mode(true)
+  -- Use visual commands for VISUAL 'v', VISUAL LINE 'V' and VISUAL BLOCK '\22'
+  local is_visual = mode == "v" or mode == "V" or mode == "\22"
   local func = (increment and "inc" or "dec") .. (g and "_g" or "_") .. (is_visual and "visual" or "normal")
   local group = M.dials_by_ft[vim.bo.filetype] or "default"
   return require("dial.map")[func](group)

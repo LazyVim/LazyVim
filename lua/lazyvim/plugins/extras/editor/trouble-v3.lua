@@ -1,14 +1,16 @@
 local Config = require("lazyvim.config")
 
-for _, other in ipairs({ "aerial", "outline" }) do
-  local extra = "lazyvim.plugins.extras.editor." .. other
-  if vim.tbl_contains(Config.json.data.extras, extra) then
-    other = other:gsub("^%l", string.upper)
-    LazyVim.error({
-      "**Trouble v3** includes support for document symbols.",
-      ("You currently have the **%s** extra enabled."):format(other),
-      "Please disable it in your config.",
-    })
+if vim.tbl_contains(Config.json.data.extras, "lazyvim.plugins.extras.editor.trouble-v3") then
+  for _, other in ipairs({ "aerial", "outline" }) do
+    local extra = "lazyvim.plugins.extras.editor." .. other
+    if vim.tbl_contains(Config.json.data.extras, extra) then
+      other = other:gsub("^%l", string.upper)
+      LazyVim.error({
+        "**Trouble v3** includes support for document symbols.",
+        ("You currently have the **%s** extra enabled."):format(other),
+        "Please disable it in your config.",
+      })
+    end
   end
 end
 
@@ -27,6 +29,20 @@ return {
       },
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+      {
+        "[q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").prev({ skip_groups = true, jump = true })
+          else
+            local ok, err = pcall(vim.cmd.cprev)
+            if not ok then
+              vim.notify(err, vim.log.levels.ERROR)
+            end
+          end
+        end,
+        desc = "Previous Trouble/Quickfix Item",
+      },
     },
   },
 
@@ -72,6 +88,24 @@ return {
           end,
         })
       end
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local open_with_trouble = require("trouble.sources.telescope").open
+      return vim.tbl_deep_extend("force", opts, {
+        defaults = {
+          mappings = {
+            i = {
+              ["<c-t>"] = open_with_trouble,
+              ["<a-t>"] = open_with_trouble,
+            },
+          },
+        },
+      })
     end,
   },
 }

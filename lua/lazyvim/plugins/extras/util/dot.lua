@@ -18,10 +18,8 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, {
-        "shfmt",
-        "shellcheck",
-      })
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "shellcheck" })
     end,
   },
   -- add some stuff to treesitter
@@ -35,12 +33,16 @@ return {
       end
 
       vim.filetype.add({
-        extension = { rasi = "rasi" },
+        extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
+        filename = {
+          ["vifmrc"] = "vim",
+        },
         pattern = {
           [".*/waybar/config"] = "jsonc",
           [".*/mako/config"] = "dosini",
-          [".*/kitty/*.conf"] = "bash",
-          [".*/hypr/.*%.conf"] = "hyprlang",
+          [".*/kitty/.+%.conf"] = "bash",
+          [".*/hypr/.+%.conf"] = "hyprlang",
+          ["%.env%.[%w_.-]+"] = "sh",
         },
       })
 

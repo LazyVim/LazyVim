@@ -8,7 +8,7 @@ return {
         "Saecki/crates.nvim",
         event = { "BufRead Cargo.toml" },
         opts = {
-          src = {
+          completion = {
             cmp = { enabled = true },
           },
         },
@@ -60,7 +60,9 @@ return {
             cargo = {
               allFeatures = true,
               loadOutDirsFromCheck = true,
-              runBuildScripts = true,
+              buildScripts = {
+                enable = true,
+              },
             },
             -- Add clippy lints for Rust.
             checkOnSave = {

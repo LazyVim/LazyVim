@@ -75,6 +75,17 @@ return {
               completion = {
                 callSnippet = "Replace",
               },
+              doc = {
+                privateName = { "^_" },
+              },
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
+              },
             },
           },
         },
@@ -120,10 +131,12 @@ return {
 
       -- diagnostics signs
       if vim.fn.has("nvim-0.10.0") == 0 then
-        for severity, icon in pairs(opts.diagnostics.signs.text) do
-          local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-          name = "DiagnosticSign" .. name
-          vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+        if type(opts.diagnostics.signs) ~= "boolean" then
+          for severity, icon in pairs(opts.diagnostics.signs.text) do
+            local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
+            name = "DiagnosticSign" .. name
+            vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+          end
         end
       end
 
@@ -212,7 +225,14 @@ return {
       end
 
       if have_mason then
-        mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
+        mlsp.setup({
+          ensure_installed = vim.tbl_deep_extend(
+            "force",
+            ensure_installed,
+            LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}
+          ),
+          handlers = { setup },
+        })
       end
 
       if LazyVim.lsp.get_config("denols") and LazyVim.lsp.get_config("tsserver") then

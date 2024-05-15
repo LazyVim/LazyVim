@@ -46,6 +46,7 @@ end
 ---@param hl_group? string
 ---@return string
 function M.format(component, text, hl_group)
+  text = text:gsub("%%", "%%%%")
   if not hl_group or hl_group == "" then
     return text
   end
@@ -79,6 +80,7 @@ function M.pretty_path(opts)
     directory_hl = "",
     filename_hl = "Bold",
     modified_sign = "",
+    length = 3,
   }, opts or {})
 
   return function(self)
@@ -100,8 +102,10 @@ function M.pretty_path(opts)
     local sep = package.config:sub(1, 1)
     local parts = vim.split(path, "[\\/]")
 
-    if #parts > 3 then
-      parts = { parts[1], "…", parts[#parts - 1], parts[#parts] }
+    if opts.length == 0 then
+      parts = parts
+    elseif #parts > opts.length then
+      parts = { parts[1], "…", table.concat({ unpack(parts, #parts - opts.length + 2, #parts) }, sep) }
     end
 
     if opts.modified_hl and vim.bo.modified then
