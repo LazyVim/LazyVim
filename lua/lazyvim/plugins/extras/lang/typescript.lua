@@ -1,13 +1,12 @@
----@diagnostic disable: missing-fields
 local inlay_hints_settings = {
-  includeInlayParameterNameHints = "all",
-  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-  includeInlayFunctionParameterTypeHints = true,
-  includeInlayVariableTypeHints = true,
-  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-  includeInlayPropertyDeclarationTypeHints = true,
-  includeInlayFunctionLikeReturnTypeHints = true,
   includeInlayEnumMemberValueHints = true,
+  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayFunctionParameterTypeHints = true,
+  includeInlayParameterNameHints = "literal",
+  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+  includeInlayPropertyDeclarationTypeHints = true,
+  includeInlayVariableTypeHints = false,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
 }
 
 return {
