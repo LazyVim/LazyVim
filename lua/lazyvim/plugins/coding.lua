@@ -84,8 +84,11 @@ return {
         local entry = event.entry
         local item = entry:get_completion_item()
         if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) then
-          local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
-          vim.api.nvim_feedkeys(keys, "i", true)
+          local prev_char = vim.fn.getline("."):sub(vim.fn.col(".") - 1, vim.fn.col("."))
+          if prev_char ~= "(" and prev_char ~= ")" then
+            local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
+            vim.api.nvim_feedkeys(keys, "i", true)
+          end
         end
       end)
     end,
