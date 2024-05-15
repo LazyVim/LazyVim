@@ -1,5 +1,49 @@
 # Changelog
 
+## [10.25.0](https://github.com/LazyVim/LazyVim/compare/v10.24.0...v10.25.0) (2024-05-15)
+
+
+### Features
+
+* **extras:** add refactoring.nvim ([#3040](https://github.com/LazyVim/LazyVim/issues/3040)) ([73de8dd](https://github.com/LazyVim/LazyVim/commit/73de8dde2bb513337426d5ead862e4fc6dbb8fdf))
+* **lua_ls:** configure default lua_ls inlay hint settings ([91ead22](https://github.com/LazyVim/LazyVim/commit/91ead221167a722a8dd8651cb5c53bf5db4d1b4d))
+* **lua:** added `LazyVim` as a treesitter builtin ([a97fa3b](https://github.com/LazyVim/LazyVim/commit/a97fa3b7563eb2c5305c8f32461bb150d17e45ae))
+* **noice:** added keymap `&lt;leader&gt;snt` to show Noice messages in telescope. Fixes [#1306](https://github.com/LazyVim/LazyVim/issues/1306) ([914ca4a](https://github.com/LazyVim/LazyVim/commit/914ca4a455169916da4614d76c15d1d1bf22e9bc))
+* **omnisharp:** support neotest dotnet ([#3051](https://github.com/LazyVim/LazyVim/issues/3051)) ([a8659d0](https://github.com/LazyVim/LazyVim/commit/a8659d02b954ca320088aab48aad8a95b3bbb86c))
+* **snippet:** add friendly-snippets to native extra ([#2944](https://github.com/LazyVim/LazyVim/issues/2944)) ([12a48b8](https://github.com/LazyVim/LazyVim/commit/12a48b8ce1521fcac01b89099a4ca8bbc3547769))
+* **terraform:** ensure tflint is installed ([#2336](https://github.com/LazyVim/LazyVim/issues/2336)) ([16e6c86](https://github.com/LazyVim/LazyVim/commit/16e6c86b2778ba35696de5067ff033cc5bdbe6db))
+* **typescript:** configure inlayHint ([#2995](https://github.com/LazyVim/LazyVim/issues/2995)) ([2c86da7](https://github.com/LazyVim/LazyVim/commit/2c86da7c2df61c23366e4073312ab12fa6d7e424))
+* **vue:** add Vue.js support to LazyVim ([#3094](https://github.com/LazyVim/LazyVim/issues/3094)) ([f449025](https://github.com/LazyVim/LazyVim/commit/f4490252fb2262208923ba197eb521732a602ac1))
+
+
+### Bug Fixes
+
+* **ansible:** ansiblels not loading, keymap desc. ([#2739](https://github.com/LazyVim/LazyVim/issues/2739)) ([abb1ff0](https://github.com/LazyVim/LazyVim/commit/abb1ff0d600b3446b612390f0482cf92bdc84ab0))
+* **autocmds:** remove query from q-to-quit autocmd ([#2838](https://github.com/LazyVim/LazyVim/issues/2838)) ([9337db1](https://github.com/LazyVim/LazyVim/commit/9337db17c2f6082e10c97456185d8ba3fa473769))
+* **clangd:** update the attribute name for process ID ([#3047](https://github.com/LazyVim/LazyVim/issues/3047)) ([3c04789](https://github.com/LazyVim/LazyVim/commit/3c04789ef15bba15e8c0c71ef31db38c76b2ad67))
+* **cmp:** dont add autobrackets if prev char is a bracket. Closes [#2949](https://github.com/LazyVim/LazyVim/issues/2949) ([c70a78e](https://github.com/LazyVim/LazyVim/commit/c70a78e63137ec48e1c78b23413332716f572590))
+* **dap:** load vscode launch files with jsonc parser ([#1839](https://github.com/LazyVim/LazyVim/issues/1839)) ([543dead](https://github.com/LazyVim/LazyVim/commit/543dead590a949255fbbada9e1775c31ad654682))
+* **dial:** Fix dial commands in Visual line+block ([#2933](https://github.com/LazyVim/LazyVim/issues/2933)) ([1df3c5d](https://github.com/LazyVim/LazyVim/commit/1df3c5d70b2265f8582b0ed414f085e9066960da))
+* **dot:** remove `.env` =&gt; `sh` since this is already the default ([a0afe8f](https://github.com/LazyVim/LazyVim/commit/a0afe8fef9dc76b469a78435cdd3f2c5ee01f282))
+* **dot:** use syntax `sh` for dotenv files. Closes [#3145](https://github.com/LazyVim/LazyVim/issues/3145) ([42010d1](https://github.com/LazyVim/LazyVim/commit/42010d1dfbb0ba9c74c1ec0c93c5c9db21ebee47))
+* **extras.lang.typescript:** support `node` debug type along with `pwa-node` ([#2983](https://github.com/LazyVim/LazyVim/issues/2983)) ([d36e3a5](https://github.com/LazyVim/LazyVim/commit/d36e3a5c73c07f54b31c4ec5334f68ed5492123e))
+* **fzf-native:** try rebuilding fzf-native when needed. Fixes [#2464](https://github.com/LazyVim/LazyVim/issues/2464) ([39901c1](https://github.com/LazyVim/LazyVim/commit/39901c1f00eca36beb211978164744ae41be7781))
+* **gitsigns:** update deprecated hunk nav mappings ([#2935](https://github.com/LazyVim/LazyVim/issues/2935)) ([fc5ee49](https://github.com/LazyVim/LazyVim/commit/fc5ee49495093fe8e63b1648f81af371c2930129))
+* **keymaps:** better up/down keymaps description ([#1909](https://github.com/LazyVim/LazyVim/issues/1909)) ([36802fe](https://github.com/LazyVim/LazyVim/commit/36802fea198f536ac20c0e2514fc4f54cee2904b))
+* **lazyfile:** exclude `filetypedetect` from skips ([#3004](https://github.com/LazyVim/LazyVim/issues/3004)) ([c54eeb5](https://github.com/LazyVim/LazyVim/commit/c54eeb53905e8da27814f52eaf1ad63aeff4cbe4))
+* **lsp:** check if `diagnostics.signs` is disabled by user ([#2897](https://github.com/LazyVim/LazyVim/issues/2897)) ([6a25450](https://github.com/LazyVim/LazyVim/commit/6a2545025eb6fcc78998b8a4c6d121729980925b))
+* **pretty_path:** properly escape `%` characters ([e89653f](https://github.com/LazyVim/LazyVim/commit/e89653f4107724f53964a379337947490117a7dc))
+* **rust:** update creates.nvim src option to completion ([#3149](https://github.com/LazyVim/LazyVim/issues/3149)) ([8087283](https://github.com/LazyVim/LazyVim/commit/8087283fea62e5673764dfa13906eadb24110622))
+
+
+### Performance Improvements
+
+* **startup:** render a file opened from the cmdline as soon as possible and get rid of lazy_file logic ([965a469](https://github.com/LazyVim/LazyVim/commit/965a469ca8cb1d58b49c4e5d8b85430e8c6c0a25))
+* **treesitter:** dont let nvim-treesitter-textobjects stall loading treesitter ([8301096](https://github.com/LazyVim/LazyVim/commit/8301096c31f9855c74d5b732367b679bc8721b5e))
+* **treesitter:** load treesitter early during startup when opening a file from the cmdline ([b29d169](https://github.com/LazyVim/LazyVim/commit/b29d169afb7560ed4a9276e4379e28ffaed1a171))
+* **yanky:** `schedule_wrap` sqlite push to history to prevent blocking Neovim on copy/paste ([9047d04](https://github.com/LazyVim/LazyVim/commit/9047d041a8296e34ed7236e5344f5b927cd28f8b))
+* **yanky:** remove performance optim for sqlite since it has been merged upstream ([f25ac50](https://github.com/LazyVim/LazyVim/commit/f25ac504b896a522c645d456766adac2afa28801))
+
 ## [10.24.0](https://github.com/LazyVim/LazyVim/compare/v10.23.0...v10.24.0) (2024-05-12)
 
 
