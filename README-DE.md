@@ -5,11 +5,11 @@
 <hr>
 
 <h4 align="center">
-  <a href="https://lazyvim.github.io/installation">Install</a>
+  <a href="https://lazyvim.github.io/installation">Installieren</a>
   ·
-  <a href="https://lazyvim.github.io/configuration">Configure</a>
+  <a href="https://lazyvim.github.io/configuration">Konfigurieren</a>
   ·
-  <a href="https://lazyvim.github.io">Docs</a>
+  <a href="https://lazyvim.github.io">Dokumentation</a>
 </h4>
 
 <div align="center"><p>
@@ -36,8 +36,8 @@
     </a>
 </div>
 
-LazyVim ist ein Neovim setup aufgebaut auf [💤 lazy.nvim](https://github.com/folke/lazy.nvim). 
-Es erleichter das Anpassen und erweitern von Ihrer Konfiguration.
+LazyVim ist ein Neovim-Setup aufgebaut auf [💤 lazy.nvim](https://github.com/folke/lazy.nvim). 
+Es erleichtert das Anpassen und Erweitern von Ihrer Konfiguration.
 Anstatt von vorne anzufangen oder eine vorgefertigte Distro zu verwenden, gibt LazyVim das beste aus 
 beiden Welten - die Flexibilität Ihre Konfiguration zu verändern und einzustellen wie Sie es wollen
 und die Einfachheit von einem vorgefertigten Setup.
@@ -52,7 +52,7 @@ und die Einfachheit von einem vorgefertigten Setup.
 - 💤 Passe deine Konfiguration einfach an und erweitere diese mit [lazy.nvim](https://github.com/folke/lazy.nvim)
 - 🚀 Extrem schnell
 - 🧹 Logische Voreinstellungen für optionen, autocmds und keymaps
-- 📦 Kommt mit einem Haufen vor Konfigurierten, ready to use Plugins
+- 📦 Kommt mit einem Haufen vorkonfigurierter, ready-to-use Plugins
 
 ## ⚡️ Vorraussetzungen
 
@@ -108,15 +108,15 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 </details>
 
-## 📂 File Structure
+## 📂 Dateistruktur
 
-The files under config will be automatically loaded at the appropriate time,
-so you don't need to require those files manually.
-**LazyVim** comes with a set of default config files that will be loaded
-**_before_** your own. See [here](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
-
-You can add your custom plugin specs under `lua/plugins/`. All files there
-will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
+Die Dateien unter `config` werden automatisch und zur richtigen Zeit geladen,
+sodass ein manuelles `require` nicht nötig ist.
+**LazyVim** bringt Konfigurationsdatein mit, die **_vor_** Ihren eigenen geladen werden -
+siehe [hier](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
+Sie können eigene Plugins unter `lua/plugins/` hinzufügen. Alle Dateien innerhalb
+dieses Ordners werden automatisch mit [lazy.nvim](https://github.com/folke/lazy.nvim)
+geladen.
 
 <pre>
 ~/.config/nvim
@@ -133,6 +133,6 @@ will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
 └── init.toml
 </pre>
 
-## ⚙️ Configuration
+## ⚙️ Konfiguration
 
-Refer to the [docs](https://lazyvim.github.io)
+Siehe [Dokumentation](https://lazyvim.github.io).
