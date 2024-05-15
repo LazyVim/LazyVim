@@ -1,3 +1,14 @@
+local inlay_hints_settings = {
+  includeInlayEnumMemberValueHints = true,
+  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayFunctionParameterTypeHints = true,
+  includeInlayParameterNameHints = "literal",
+  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+  includeInlayPropertyDeclarationTypeHints = true,
+  includeInlayVariableTypeHints = false,
+  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+}
+
 return {
 
   -- add typescript to treesitter
@@ -46,8 +57,13 @@ return {
               desc = "Remove Unused Imports",
             },
           },
-          ---@diagnostic disable-next-line: missing-fields
           settings = {
+            typescript = {
+              inlayHints = inlay_hints_settings,
+            },
+            javascript = {
+              inlayHints = inlay_hints_settings,
+            },
             completions = {
               completeFunctionCalls = true,
             },
