@@ -11,13 +11,18 @@ return {
   },
   {
     "nvim-cmp",
-    opts = {
-      snippet = {
+    dependencies = {
+      { "rafamadriz/friendly-snippets" },
+      { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
+    },
+    opts = function(_, opts)
+      opts.snippet = {
         expand = function(args)
           vim.snippet.expand(args.body)
         end,
-      },
-    },
+      }
+      table.insert(opts.sources, { name = "snippets" })
+    end,
     keys = {
       {
         "<Tab>",
