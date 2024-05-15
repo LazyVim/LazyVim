@@ -1,7 +1,3 @@
-local debugtypePreferred = {
-  ['node'] = 'pwa-node',
-}
-
 local inlay_hints_settings = {
   includeInlayEnumMemberValueHints = true,
   includeInlayFunctionLikeReturnTypeHints = true,
@@ -107,12 +103,14 @@ return {
           },
         }
       end
-      if not dap.adapters['node'] then
-        dap.adapters['node'] = function (cb, config)
-          config.type = debugtypePreferred[config.type] or config.type
-          local nativeAdapter = dap.adapters['pwa-node']
-          if type(nativeAdapter) == 'function' then
-            nativeAdapter(cb, config )
+      if not dap.adapters["node"] then
+        dap.adapters["node"] = function(cb, config)
+          if config.type == "node" then
+            config.type = "pwa-node"
+          end
+          local nativeAdapter = dap.adapters["pwa-node"]
+          if type(nativeAdapter) == "function" then
+            nativeAdapter(cb, config)
           else
             cb(nativeAdapter)
           end
