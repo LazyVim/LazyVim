@@ -72,7 +72,7 @@ end
 
 ---@param name string
 function M.opts(name)
-  local plugin = require("lazy.core.config").plugins[name]
+  local plugin = require("lazy.core.config").spec.plugins[name]
   if not plugin then
     return {}
   end
