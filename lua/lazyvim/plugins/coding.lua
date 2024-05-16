@@ -83,8 +83,9 @@ return {
         end
         local entry = event.entry
         local item = entry:get_completion_item()
-        if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) then
-          local prev_char = vim.fn.getline("."):sub(vim.fn.col(".") - 1, vim.fn.col("."))
+        if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) and item.insertTextFormat ~= 2 then
+          local cursor = vim.api.nvim_win_get_cursor(0)
+          local prev_char = vim.api.nvim_buf_get_text(0, cursor[1] - 1, cursor[2], cursor[1] - 1, cursor[2] + 1, {})[1]
           if prev_char ~= "(" and prev_char ~= ")" then
             local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
             vim.api.nvim_feedkeys(keys, "i", true)
