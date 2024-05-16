@@ -1,5 +1,14 @@
 # Changelog
 
+## [11.0.1](https://github.com/LazyVim/LazyVim/compare/v11.0.0...v11.0.1) (2024-05-16)
+
+
+### Bug Fixes
+
+* **news.md:** correct phrase to disable `inlay_hints` ([58cf6f9](https://github.com/LazyVim/LazyVim/commit/58cf6f971b78170aef5f26ccb79149213f4a692d))
+* **treesitter-rewrite:** show error in Extras only when enabled ([#3178](https://github.com/LazyVim/LazyVim/issues/3178)) ([639dfce](https://github.com/LazyVim/LazyVim/commit/639dfce0101cc6c0174e116872df91ccb30cb597))
+* **util:** get opts from parsing specs instead of plugins ([14872fa](https://github.com/LazyVim/LazyVim/commit/14872fa816fd770eba0f2b5efc69d5b29d4073fb))
+
 ## [11.0.0](https://github.com/LazyVim/LazyVim/compare/v10.25.0...v11.0.0) (2024-05-16)
 
 
