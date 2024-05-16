@@ -1,5 +1,41 @@
 # Changelog
 
+## [11.0.0](https://github.com/LazyVim/LazyVim/compare/v10.25.0...v11.0.0) (2024-05-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **util:** move `vim-startuptime` to an extra
+* **coding:** move `mini.ai` to an extra
+* **mini.surround:** move `mini.surround` to an extra
+* **ui:** move `mini.indentscope` to an extra
+* **ui:** moved treesitter-context to an extra. No longer a core plugin
+* **coding:** native snippets are now the default on Neovim 0.10. Install the luasnip extra to get luasnip back
+* **coding:** use native comments on 0.10, with support for ts_context_commentstring
+
+### Features
+
+* **coding:** move `mini.ai` to an extra ([4f4911f](https://github.com/LazyVim/LazyVim/commit/4f4911ff95bc35438a2b8dd2d058b15f105f2ff1))
+* **coding:** native snippets are now the default on Neovim 0.10. Install the luasnip extra to get luasnip back ([3c4ebd5](https://github.com/LazyVim/LazyVim/commit/3c4ebd522e7c475cfedcee5dfa7a008e798c404c))
+* **coding:** use native comments on 0.10, with support for ts_context_commentstring ([d999be7](https://github.com/LazyVim/LazyVim/commit/d999be7401783e0f3a610319fa1b327d38fa3e52))
+* **extras:** added extra for the `nvim-treesitter` rewrite. Some plugins are not compatible and will be disabled. ([2008146](https://github.com/LazyVim/LazyVim/commit/20081460b65bc7a117933b0dcebbcaa4dcb82b23))
+* **keymaps:** added leader-uI to open InspectTree ([3b74ef7](https://github.com/LazyVim/LazyVim/commit/3b74ef793fb7cd8964231393a57b9e3c846b7d1e))
+* **lsp:** enable inlay hints by default on Neovim 0.10 ([960e958](https://github.com/LazyVim/LazyVim/commit/960e958548adce7d96ff2e0c014ce2249897125e))
+* **mini.surround:** move `mini.surround` to an extra ([e37a699](https://github.com/LazyVim/LazyVim/commit/e37a699096ccb209c1babc29c1d5eeeab74102a1))
+* **ui:** move `mini.indentscope` to an extra ([69e6daa](https://github.com/LazyVim/LazyVim/commit/69e6daae2ccb4b7b7180e439c1b05d72d3c64e11))
+* **ui:** moved treesitter-context to an extra. No longer a core plugin ([03704e2](https://github.com/LazyVim/LazyVim/commit/03704e22998be9db17f114acc4060d714fe652fb))
+* **util:** move `vim-startuptime` to an extra ([66dc9c0](https://github.com/LazyVim/LazyVim/commit/66dc9c09d6356ddc7e5870a4aa74824d3623d315))
+* **util:** set_upvalue ([f02507b](https://github.com/LazyVim/LazyVim/commit/f02507b1598379250baab293c423f79c393e28e5))
+
+
+### Bug Fixes
+
+* **cmp:** never auto bracket for snippets and correct prev char check. Fixes [#2949](https://github.com/LazyVim/LazyVim/issues/2949) ([6e7ba50](https://github.com/LazyVim/LazyVim/commit/6e7ba50141b1cda415c9391fd345a1e428bad9b6))
+* **dap:** add debugger to filetypes mapping for launch.json ([#3165](https://github.com/LazyVim/LazyVim/issues/3165)) ([183d6ee](https://github.com/LazyVim/LazyVim/commit/183d6eea606556c8bd7f80a70660c54670e04649))
+* **dap:** use jsonc support from plenary. Same as the code from neoconf. Fixes [#3174](https://github.com/LazyVim/LazyVim/issues/3174) ([8dae76c](https://github.com/LazyVim/LazyVim/commit/8dae76c1fd6fb90199b56cda8b6ec21576d02eb5))
+* **health:** add warning when not using 0.10.0 ([9fe8b15](https://github.com/LazyVim/LazyVim/commit/9fe8b15928077cb0c20aeea111b42f9698c78330))
+* **treesitter-rewrite:** disable vim-illuminate ([b739eb3](https://github.com/LazyVim/LazyVim/commit/b739eb35033acaf20423920d103d5ad3e8350f23))
+
 ## [10.25.0](https://github.com/LazyVim/LazyVim/compare/v10.24.0...v10.25.0) (2024-05-15)
 
 
