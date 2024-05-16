@@ -225,7 +225,10 @@ return {
     opts = {
       enable_autocmd = false,
     },
-    init = function()
+  },
+  {
+    import = "lazyvim.plugins.extras.coding.mini-comment",
+    enabled = function()
       if vim.fn.has("nvim-0.10") == 1 then
         -- Majestically override the native `get_commentstring` function.
         vim.schedule(function()
@@ -237,10 +240,11 @@ return {
             end
           )
         end)
+      else
+        return true
       end
     end,
   },
-  { import = "lazyvim.plugins.extras.coding.mini-comment", enabled = vim.fn.has("nvim-0.10") == 0 },
 
   -- Better text-objects
   {
