@@ -96,50 +96,65 @@ return {
   },
 
   -- snippets
-  {
-    "L3MON4D3/LuaSnip",
-    build = (not LazyVim.is_win())
-        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-      or nil,
-    dependencies = {
-      {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
-      {
+  vim.snippet
+      and {
         "nvim-cmp",
         dependencies = {
-          "saadparwaiz1/cmp_luasnip",
+          { "rafamadriz/friendly-snippets" },
+          { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
         },
         opts = function(_, opts)
           opts.snippet = {
             expand = function(args)
-              require("luasnip").lsp_expand(args.body)
+              vim.snippet.expand(args.body)
             end,
           }
-          table.insert(opts.sources, { name = "luasnip" })
+          table.insert(opts.sources, { name = "snippets" })
         end,
-      },
-    },
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
-    -- stylua: ignore
-    keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-        end,
-        expr = true, silent = true, mode = "i",
-      },
-      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    },
-  },
+        keys = {
+          {
+            "<Tab>",
+            function()
+              if vim.snippet.active({ direction = 1 }) then
+                vim.schedule(function()
+                  vim.snippet.jump(1)
+                end)
+                return
+              end
+              return "<Tab>"
+            end,
+            expr = true,
+            silent = true,
+            mode = "i",
+          },
+          {
+            "<Tab>",
+            function()
+              vim.schedule(function()
+                vim.snippet.jump(1)
+              end)
+            end,
+            silent = true,
+            mode = "s",
+          },
+          {
+            "<S-Tab>",
+            function()
+              if vim.snippet.active({ direction = -1 }) then
+                vim.schedule(function()
+                  vim.snippet.jump(-1)
+                end)
+                return
+              end
+              return "<S-Tab>"
+            end,
+            expr = true,
+            silent = true,
+            mode = { "i", "s" },
+          },
+        },
+      }
+    or { import = "lazyvim.plugins.extras.coding.luasnip", enabled = vim.fn.has("nvim-0.10") == 0 },
 
   -- auto pairs
   {

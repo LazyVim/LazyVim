@@ -10,6 +10,7 @@ M.deprecated_extras = {
   ["lazyvim.plugins.extras.formatting.conform"] = "`conform.nvim` is now the default **LazyVim** formatter.",
   ["lazyvim.plugins.extras.linting.nvim-lint"] = "`nvim-lint` is now the default **LazyVim** linter.",
   ["lazyvim.plugins.extras.ui.dashboard"] = "`dashboard.nvim` is now the default **LazyVim** starter.",
+  ["lazyvim.plugins.extras.coding.native_snippets"] = "Native snippets are now the default for **Neovim >= 0.10**",
 }
 
 M.deprecated_modules = {
@@ -91,7 +92,7 @@ function M.fix_imports()
   Plugin.Spec.import = LazyVim.inject.args(Plugin.Spec.import, function(_, spec)
     local dep = M.deprecated_extras[spec and spec.import]
     if dep then
-      dep = dep .. "\n" .. "Please remove the extra to hide this warning."
+      dep = dep .. "\n" .. "Please remove the extra from `lazyvim.json` to hide this warning."
       LazyVim.warn(dep, { title = "LazyVim", once = true, stacktrace = true, stacklevel = 6 })
       return false
     end
