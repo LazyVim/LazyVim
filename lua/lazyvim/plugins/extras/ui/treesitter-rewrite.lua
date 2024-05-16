@@ -8,14 +8,16 @@ local function patch()
   })
 end
 
-if vim.fn.executable("tree-sitter") == 0 then
-  LazyVim.error("**treesitter-rewrite** requires the `tree-sitter` executable to be installed")
-  return {}
-end
+if vim.tbl_contains(Config.json.data.extras, "lazyvim.plugins.extras.ui.treesitter-rewrite") then
+  if vim.fn.executable("tree-sitter") == 0 then
+    LazyVim.error("**treesitter-rewrite** requires the `tree-sitter` executable to be installed")
+    return {}
+  end
 
-if vim.fn.has("nvim-0.10") == 0 then
-  LazyVim.error("**treesitter-rewrite** requires Neovim >= 0.10")
-  return {}
+  if vim.fn.has("nvim-0.10") == 0 then
+    LazyVim.error("**treesitter-rewrite** requires Neovim >= 0.10")
+    return {}
+  end
 end
 
 return {
