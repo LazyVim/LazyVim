@@ -15,13 +15,13 @@ Additionally, some core plugins have been moved to extras.
   `nvim-ts-context-commentstring` has been integrated in the native comments.
 
 - `inlay hints` have been in **LazyVim** for a while, but are now
-  enabled by default. To disable then:
+  enabled by default. To disable them:
 
   ```lua
   {
     "nvim-lspconfig",
     opts = {
-      inlay_hints = { enabled = true },
+      inlay_hints = { enabled = false },
     }
   }
   ```
