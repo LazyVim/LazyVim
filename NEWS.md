@@ -1,5 +1,30 @@
 # What's new?
 
+## 11.x
+
+Since Neovim 0.10 has been released, I've been working on a new version of **LazyVim**
+that is fully compatible with all the latest Neovim features.
+
+Additionally, some core plugins have been moved to extras.
+
+- `native snippets` are not the default on Neovim 0.10
+  Older versions of Neovim will use the new `luasnip` extra.
+
+- `native comments` are now the default on Neovim 0.10
+  Older versions of Neovim will use the new `mini-comment` extra.
+  `nvim-ts-context-commentstring` has been integrated in the native comments.
+
+- plugins moved to extras:
+
+  - `mini.ai` which I couldn't live without, but not everyone needs it
+  - `mini.surround`
+  - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
+  - `nvim-treesitter-context`
+
+- There's a new extra for the `nvim-treesitter` **rewrite**.
+  Since the rewrite is not backward compatible, some plugins will be disabled
+  when you enable this extra: `vim-illuminate`, `nvim-ts-autotag`, and `nvim-ts-autotag`.
+
 ## 10.x
 
 - added new extra for [mini.diff](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md)
