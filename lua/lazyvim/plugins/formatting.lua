@@ -54,9 +54,7 @@ return {
           priority = 100,
           primary = true,
           format = function(buf)
-            local plugin = require("lazy.core.config").plugins["conform.nvim"]
-            local Plugin = require("lazy.core.plugin")
-            local opts = Plugin.values(plugin, "opts", false)
+            local opts = LazyVim.opts("conform.nvim")
             require("conform").format(LazyVim.merge({}, opts.format, { bufnr = buf }))
           end,
           sources = function(buf)

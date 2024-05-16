@@ -106,8 +106,7 @@ return {
     ---@param opts PluginLspOpts
     config = function(_, opts)
       if LazyVim.has("neoconf.nvim") then
-        local plugin = require("lazy.core.config").spec.plugins["neoconf.nvim"]
-        require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
+        require("neoconf").setup(LazyVim.opts("neoconf.nvim"))
       end
 
       -- setup autoformat
