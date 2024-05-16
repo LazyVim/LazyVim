@@ -13,6 +13,11 @@ if vim.fn.executable("tree-sitter") == 0 then
   return {}
 end
 
+if vim.fn.has("nvim-0.10") == 0 then
+  LazyVim.error("**treesitter-rewrite** requires Neovim >= 0.10")
+  return {}
+end
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -88,6 +93,10 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
+    enabled = false,
+  },
+  {
+    "RRethy/vim-illuminate",
     enabled = false,
   },
 }
