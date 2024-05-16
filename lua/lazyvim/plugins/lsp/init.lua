@@ -38,7 +38,7 @@ return {
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the inlay hints.
       inlay_hints = {
-        enabled = false,
+        enabled = true,
       },
       -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
       -- Be aware that you also will need to properly configure your LSP server to
@@ -140,27 +140,29 @@ return {
         end
       end
 
-      -- inlay hints
-      if opts.inlay_hints.enabled then
-        LazyVim.lsp.on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
-            LazyVim.toggle.inlay_hints(buffer, true)
-          end
-        end)
-      end
+      if vim.fn.has("nvim-0.10") == 1 then
+        -- inlay hints
+        if opts.inlay_hints.enabled then
+          LazyVim.lsp.on_attach(function(client, buffer)
+            if client.supports_method("textDocument/inlayHint") then
+              LazyVim.toggle.inlay_hints(buffer, true)
+            end
+          end)
+        end
 
-      -- code lens
-      if opts.codelens.enabled and vim.lsp.codelens then
-        LazyVim.lsp.on_attach(function(client, buffer)
-          if client.supports_method("textDocument/codeLens") then
-            vim.lsp.codelens.refresh()
-            --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-              buffer = buffer,
-              callback = vim.lsp.codelens.refresh,
-            })
-          end
-        end)
+        -- code lens
+        if opts.codelens.enabled and vim.lsp.codelens then
+          LazyVim.lsp.on_attach(function(client, buffer)
+            if client.supports_method("textDocument/codeLens") then
+              vim.lsp.codelens.refresh()
+              --- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+              vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                buffer = buffer,
+                callback = vim.lsp.codelens.refresh,
+              })
+            end
+          end)
+        end
       end
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
