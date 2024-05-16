@@ -210,18 +210,22 @@ return {
     opts = {
       enable_autocmd = false,
     },
+    init = function()
+      if vim.fn.has("nvim-0.10") == 1 then
+        -- Majestically override the native `get_commentstring` function.
+        vim.schedule(function()
+          LazyVim.inject.set_upvalue(
+            LazyVim.inject.get_upvalue(require("vim._comment").textobject, "get_comment_parts"),
+            "get_commentstring",
+            function()
+              return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+            end
+          )
+        end)
+      end
+    end,
   },
-  {
-    "echasnovski/mini.comment",
-    event = "VeryLazy",
-    opts = {
-      options = {
-        custom_commentstring = function()
-          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-        end,
-      },
-    },
-  },
+  { import = "lazyvim.plugins.extras.coding.mini-comment", enabled = vim.fn.has("nvim-0.10") == 0 },
 
   -- Better text-objects
   {
