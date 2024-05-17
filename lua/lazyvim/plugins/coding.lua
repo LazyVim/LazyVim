@@ -96,7 +96,7 @@ return {
   },
 
   -- snippets
-  vim.snippet
+  vim.fn.has("nvim-0.10") == 1
       and {
         "nvim-cmp",
         dependencies = {
