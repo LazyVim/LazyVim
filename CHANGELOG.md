@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.1.2](https://github.com/LazyVim/LazyVim/compare/v11.1.1...v11.1.2) (2024-05-17)
+
+
+### Bug Fixes
+
+* **util:** use `bdelete` for buf remove ([19674e8](https://github.com/LazyVim/LazyVim/commit/19674e804787e205c587d153e8e9c4a3988e7f6c))
+
 ## [11.1.1](https://github.com/LazyVim/LazyVim/compare/v11.1.0...v11.1.1) (2024-05-17)
 
 
