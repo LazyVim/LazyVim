@@ -53,7 +53,16 @@ return {
         vim.api.nvim_create_autocmd("User", {
           pattern = "MiniStarterOpened",
           callback = function()
-            require("lazy").show()
+            -- INFO: schedule_wrap this because if you are missing a plugin
+            -- and the Lazy UI opens to install the missing plugin the
+            -- notification `buf_id in refresh() is not an identifier of valid
+            -- Starter buffer` shows up again
+            -- `vim.schedule` also seems to work but prefered `vim.schedule_wrap`
+            -- because on my understanding it triggers even later than `vim.schedule`
+            -- just to be on the safe side
+            vim.schedule_wrap(function()
+              require("lazy").show()
+            end)
           end,
         })
       end
@@ -62,7 +71,7 @@ return {
       starter.setup(config)
 
       vim.api.nvim_create_autocmd("User", {
-        pattern = "LazyVimStarted",
+        pattern = "MiniStarterOpened",
         callback = function()
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
