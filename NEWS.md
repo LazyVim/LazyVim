@@ -32,6 +32,7 @@ Additionally, some core plugins have been moved to extras.
   - `mini.surround`
   - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
   - `nvim-treesitter-context`
+  - `vim-illuminate`: document highlights now use native lsp functionality by default
 
 - There's a new extra for the `nvim-treesitter` **rewrite**.
   Since the rewrite is not backward compatible, some plugins will be disabled
