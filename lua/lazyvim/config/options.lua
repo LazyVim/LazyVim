@@ -25,6 +25,9 @@ vim.g.lazygit_config = true
 -- * powershell
 -- LazyVim.terminal.setup("pwsh")
 
+-- Hide deprecation warnings
+vim.g.deprecation_warnings = false
+
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
