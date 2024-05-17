@@ -2,6 +2,12 @@
 
 ## 11.x
 
+- new option `vim.g.deprecation_warnings` to disable deprecation warnings
+  Defaults to `false`. To disable, set it to `true` in your `options.lua`
+
+- `vim-illuminate` move to extras
+  Document highlights now use native lsp functionality by default
+
 Since Neovim 0.10 has been released, I've been working on a new version of **LazyVim**
 that is fully compatible with all the latest Neovim features.
 
@@ -32,7 +38,6 @@ Additionally, some core plugins have been moved to extras.
   - `mini.surround`
   - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
   - `nvim-treesitter-context`
-  - `vim-illuminate`: document highlights now use native lsp functionality by default
 
 - There's a new extra for the `nvim-treesitter` **rewrite**.
   Since the rewrite is not backward compatible, some plugins will be disabled
