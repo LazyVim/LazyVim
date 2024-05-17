@@ -7,7 +7,7 @@ that is fully compatible with all the latest Neovim features.
 
 Additionally, some core plugins have been moved to extras.
 
-- `native snippets` are not the default on Neovim 0.10
+- `native snippets` are now the default on Neovim 0.10
   Older versions of Neovim will use the new `luasnip` extra.
 
 - `native comments` are now the default on Neovim 0.10
