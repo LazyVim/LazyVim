@@ -43,7 +43,9 @@ local enabled = true
 function M.diagnostics()
   -- if this Neovim version supports checking if diagnostics are enabled
   -- then use that for the current state
-  if vim.diagnostic.is_disabled then
+  if vim.diagnostic.is_enabled then
+    enabled = vim.diagnostic.is_enabled()
+  elseif vim.diagnostic.is_disabled then
     enabled = not vim.diagnostic.is_disabled()
   end
   enabled = not enabled

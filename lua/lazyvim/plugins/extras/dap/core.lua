@@ -121,7 +121,15 @@ return {
 
     -- setup dap config by VsCode launch.json file
     local vscode = require("dap.ext.vscode")
-    vscode.json_decode = require("neoconf.json.jsonc").decode_jsonc
-    vscode.load_launchjs()
+    local _filetypes = require("mason-nvim-dap.mappings.filetypes")
+    local filetypes = vim.tbl_deep_extend("force", _filetypes, {
+      ["node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
+      ["pwa-node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
+    })
+    local json = require("plenary.json")
+    vscode.json_decode = function(str)
+      return vim.json.decode(json.json_strip_comments(str))
+    end
+    vscode.load_launchjs(nil, filetypes)
   end,
 }

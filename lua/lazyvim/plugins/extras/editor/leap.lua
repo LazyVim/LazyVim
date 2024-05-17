@@ -38,6 +38,7 @@ return {
   -- rename surround mappings from gs to gz to prevent conflict with leap
   {
     "echasnovski/mini.surround",
+    optional = true,
     opts = {
       mappings = {
         add = "gza", -- Add surrounding in Normal and Visual modes
