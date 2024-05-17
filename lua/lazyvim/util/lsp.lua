@@ -135,6 +135,14 @@ function M.words.setup(opts)
   if not opts.enabled then
     return
   end
+  local handler = vim.lsp.handlers["textDocument/documentHighlight"]
+  vim.lsp.handlers["textDocument/documentHighlight"] = function(err, result, ctx, config)
+    if not vim.api.nvim_buf_is_loaded(ctx.bufnr) then
+      return
+    end
+    return handler(err, result, ctx, config)
+  end
+
   M.on_attach(function(client, buf)
     if client.supports_method("textDocument/documentHighlight") then
       vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "CursorMoved", "CursorMovedI" }, {
