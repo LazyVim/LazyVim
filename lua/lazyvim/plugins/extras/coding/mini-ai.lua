@@ -1,6 +1,7 @@
 -- Better text-objects
 return {
   "echasnovski/mini.ai",
+  desc = "Enhanced text objects",
   -- keys = {
   --   { "a", mode = { "x", "o" } },
   --   { "i", mode = { "x", "o" } },

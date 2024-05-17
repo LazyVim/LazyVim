@@ -39,11 +39,6 @@ Additionally, some core plugins have been moved to extras.
   - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
   - `nvim-treesitter-context`
 
-- There's a new extra for the `nvim-treesitter` **rewrite**.
-  Since the rewrite is not backward compatible, some plugins will be disabled
-  when you enable this extra: `vim-illuminate`, `nvim-ts-autotag`, and `nvim-ts-autotag`.
-  I would **NOT** recommend enabling this extra for now.
-
 ## 10.x
 
 - added new extra for [mini.diff](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md)
