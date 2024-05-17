@@ -1,5 +1,22 @@
 # Changelog
 
+## [11.1.0](https://github.com/LazyVim/LazyVim/compare/v11.0.1...v11.1.0) (2024-05-17)
+
+
+### Features
+
+* **lsp:** document highlights now use native lsp. `vim-illuminate` is available as an extra ([cc99b21](https://github.com/LazyVim/LazyVim/commit/cc99b219ded16ec60120698d6e8f453c2f37132c))
+* **options:** new option to disable deprecation warnings. warnings will be hidden bydefault ([f8de965](https://github.com/LazyVim/LazyVim/commit/f8de965d3ec5712444a643b507bc9ddc7cb19d01))
+* **util:** `mini.bufremove` is no longer needed ([779de26](https://github.com/LazyVim/LazyVim/commit/779de263f173f7e6f181d1e8faa475be8b05167d))
+
+
+### Bug Fixes
+
+* deprecation warning on diagnostic.is_disabled ([960ec80](https://github.com/LazyVim/LazyVim/commit/960ec8079bb5960a510595dff21725ff403b2753))
+* **lsp:** dont try to highlight refs for deleted buffers ([87493af](https://github.com/LazyVim/LazyVim/commit/87493af2378fac7b518fd2c4db903cd3a2c27095))
+* **treesitter-rewrite:** add missed local Config ([#3188](https://github.com/LazyVim/LazyVim/issues/3188)) ([ec673a8](https://github.com/LazyVim/LazyVim/commit/ec673a83ff387e29ca42367b3aab3c311950a024))
+* **util.lsp:** add `desc` for keymaps reference ([#3193](https://github.com/LazyVim/LazyVim/issues/3193)) ([b1ea356](https://github.com/LazyVim/LazyVim/commit/b1ea356e6c676571907ce654ec3878c530c636ad))
+
 ## [11.0.1](https://github.com/LazyVim/LazyVim/compare/v11.0.0...v11.0.1) (2024-05-16)
 
 
