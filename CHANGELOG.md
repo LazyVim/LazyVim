@@ -1,5 +1,17 @@
 # Changelog
 
+## [11.1.1](https://github.com/LazyVim/LazyVim/compare/v11.1.0...v11.1.1) (2024-05-17)
+
+
+### Bug Fixes
+
+* **bufferline:** correctly configure bufferline to use the new bufremove util ([2e1c945](https://github.com/LazyVim/LazyVim/commit/2e1c945f61821eec818a1512bc05b45366c0dfeb))
+
+
+### Performance Improvements
+
+* **coding:** dont load `vim.snippet` early ([289c2f8](https://github.com/LazyVim/LazyVim/commit/289c2f81c43d39b31a8b46a4a84ab9feb61bb235))
+
 ## [11.1.0](https://github.com/LazyVim/LazyVim/compare/v11.0.1...v11.1.0) (2024-05-17)
 
 
