@@ -1,3 +1,5 @@
+local Config = require("lazyvim.config")
+
 -- backwards compatibility with the old treesitter config for adding custom parsers
 local function patch()
   local parsers = require("nvim-treesitter.parsers")
