@@ -2,6 +2,14 @@
 
 ## 11.x
 
+- `:LazyExtras` now has multiple new sections:
+
+  - **Enabled**: extras that are currently enabled
+  - **Recommended Languages**: language extras recommended for the current buffer / directory
+  - **Recommended Plugins**: extras that are recommended for most users
+  - **Plugins**: other plugin extras
+  - **Languages**: other language extras
+
 - new option `vim.g.deprecation_warnings` to disable deprecation warnings
   Defaults to `false`. To disable, set it to `true` in your `options.lua`
 
