@@ -22,6 +22,8 @@ if vim.tbl_contains(Config.json.data.extras, "lazyvim.plugins.extras.editor.trou
 end
 
 return {
+  desc = "Trouble rewrite including document symbols and a lualine component",
+  recommended = true,
   {
     "folke/trouble.nvim",
     branch = "dev",

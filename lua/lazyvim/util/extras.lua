@@ -219,10 +219,10 @@ function X:render()
     extra.section = nil
   end
   self:section({ enabled = true, title = "Enabled" })
-  self:section({ recommended = true, filter = "^lang%.", title = "Recommended Languages", empty = false })
+  self:section({ recommended = true, include = "^lang%.", title = "Recommended Languages", empty = false })
   self:section({ recommended = true, title = "Recommended Plugins", empty = false })
-  self:section({ title = "Languages", filter = "^lang%." })
-  self:section({ title = "Plugins" })
+  self:section({ title = "Plugins", exclude = "^lang%." })
+  self:section({ title = "Languages" })
 end
 
 ---@param extra LazyExtra
@@ -259,7 +259,7 @@ function X:extra(extra)
   self.text:nl()
 end
 
----@param opts {enabled?:boolean, title:string, recommended?:boolean, filter?:string, empty?:boolean}
+---@param opts {enabled?:boolean, title:string, recommended?:boolean, include?:string, exclude?:string, empty?:boolean}
 function X:section(opts)
   opts = opts or {}
   ---@type LazyExtra[]
@@ -267,7 +267,8 @@ function X:section(opts)
     return extra.section == nil
       and (opts.enabled == nil or extra.enabled == opts.enabled)
       and (opts.recommended == nil or extra.recommended == opts.recommended)
-      and (opts.filter == nil or extra.name:find(opts.filter))
+      and (opts.include == nil or extra.name:find(opts.include))
+      and (opts.exclude == nil or not extra.name:find(opts.exclude))
   end, self.extras)
 
   if opts.empty == false and #extras == 0 then
