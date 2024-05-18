@@ -237,6 +237,13 @@ return {
       },
     },
     main = "ibl",
+    config = function(_, opts)
+      if vim.fn.has("nvim-0.10.0") == 0 then
+        local utils = require("ibl.utils")
+        utils.tbl_join = vim.tbl_flatten
+      end
+      require("ibl").setup(opts)
+    end,
   },
 
   -- Displays a popup with possible key bindings of the command you started typing
