@@ -188,24 +188,18 @@ return {
     opts = {
       enable_autocmd = false,
     },
+    init = function()
+      if vim.fn.has("nvim-0.10") == 1 then
+        local get_option = vim.filetype.get_option
+        vim.filetype.get_option = function(filetype, option)
+          return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+            or get_option(filetype, option)
+        end
+      end
+    end,
   },
   {
     import = "lazyvim.plugins.extras.coding.mini-comment",
-    enabled = function()
-      if vim.fn.has("nvim-0.10") == 1 then
-        -- Majestically override the native `get_commentstring` function.
-        vim.schedule(function()
-          LazyVim.inject.set_upvalue(
-            LazyVim.inject.get_upvalue(require("vim._comment").textobject, "get_comment_parts"),
-            "get_commentstring",
-            function()
-              return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-            end
-          )
-        end)
-      else
-        return true
-      end
-    end,
+    enabled = vim.fn.has("nvim-0.10") == 0,
   },
 }
