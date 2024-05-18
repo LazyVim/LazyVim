@@ -158,12 +158,6 @@ function M.words.setup(opts)
           end
         end,
       })
-      vim.keymap.set("n", "]]", function()
-        M.words.jump(vim.v.count1)
-      end, { buffer = buf, desc = "Next reference" })
-      vim.keymap.set("n", "[[", function()
-        M.words.jump(-vim.v.count1)
-      end, { buffer = buf, desc = "Previous reference" })
     end
   end)
 end
