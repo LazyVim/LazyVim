@@ -1,5 +1,24 @@
 # Changelog
 
+## [11.3.0](https://github.com/LazyVim/LazyVim/compare/v11.2.0...v11.3.0) (2024-05-18)
+
+
+### Features
+
+* **cmp:** create undo point right before confirming a completion ([673975e](https://github.com/LazyVim/LazyVim/commit/673975ebbe9870ded302bf3621e249bb4cd5f4f8))
+* **mini.ai:** `mini.ai` is back in core with some improved features. Removing it was a mistake. ([d8644c4](https://github.com/LazyVim/LazyVim/commit/d8644c47158fd28b88f5e3a90af6e5e6a0df2eba))
+* **util:** added Util.is_loaded ([4105c0a](https://github.com/LazyVim/LazyVim/commit/4105c0ad3a441da3a31cc7d8e53305a6117f6ee5))
+
+
+### Bug Fixes
+
+* **ibl:** remove ibl fix since it's been fixed upstream ([4614666](https://github.com/LazyVim/LazyVim/commit/4614666d1ee5864e95a08eb5b85808d7834ce85f))
+* **keymaps:** delete lazygit keymap when using gitui ([#2986](https://github.com/LazyVim/LazyVim/issues/2986)) ([649fa9d](https://github.com/LazyVim/LazyVim/commit/649fa9d52188e0c28733402f2f65014fa73308bc))
+* **lsp:** move next/prev reference keymaps to lsp keymaps. See [#3220](https://github.com/LazyVim/LazyVim/issues/3220) ([a4d8352](https://github.com/LazyVim/LazyVim/commit/a4d83524a7179274c17414ebeb0a4e4b8d9a8706))
+* **mini.starter:** changes based on echasnovski's recommendation ([#3223](https://github.com/LazyVim/LazyVim/issues/3223)) ([eb6c9fb](https://github.com/LazyVim/LazyVim/commit/eb6c9fb5784a8001c876203de174cd79e96bb637))
+* **plugin:** typo ([#3225](https://github.com/LazyVim/LazyVim/issues/3225)) ([96aa4b8](https://github.com/LazyVim/LazyVim/commit/96aa4b8877faa2fea30d2d4e2d3d117d9d3851f8))
+* **treesitter:** refactored treesitter code and fixed nvim-treesitter-textobjects ([fe55285](https://github.com/LazyVim/LazyVim/commit/fe552853f5c065df2d79092c0cbac6745f8ea8fc))
+
 ## [11.2.0](https://github.com/LazyVim/LazyVim/compare/v11.1.2...v11.2.0) (2024-05-18)
 
 
