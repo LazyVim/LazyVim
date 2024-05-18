@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.3.1](https://github.com/LazyVim/LazyVim/compare/v11.3.0...v11.3.1) (2024-05-18)
+
+
+### Bug Fixes
+
+* **util:** fixup ([3a4672d](https://github.com/LazyVim/LazyVim/commit/3a4672de3f8b6410de9fbd5b7134d5108d86f46c))
+
 ## [11.3.0](https://github.com/LazyVim/LazyVim/compare/v11.2.0...v11.3.0) (2024-05-18)
 
 
