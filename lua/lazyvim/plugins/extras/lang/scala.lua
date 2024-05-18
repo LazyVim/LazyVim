@@ -3,6 +3,12 @@
 -- If you like you can setup your own key bindings.
 -- For minimalistic setup have a look at https://github.com/scalameta/nvim-metals/discussions/39
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "scala",
+      root = { "build.sbt", "build.sc", "build.gradle", "pom.xml" },
+    })
+  end,
   {
     "hrsh7th/nvim-cmp",
     requires = {

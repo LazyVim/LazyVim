@@ -1,4 +1,11 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "cs", "vb" },
+      root = { "*.sln", "*.csproj", "omnisharp.json", "function.json" },
+    })
+  end,
+
   { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -95,5 +102,19 @@ return {
         end
       end
     end,
+  },
+  {
+    "nvim-neotest/neotest",
+    optional = true,
+    dependencies = {
+      "Issafalcon/neotest-dotnet",
+    },
+    opts = {
+      adapters = {
+        ["neotest-dotnet"] = {
+          -- Here we can set options for neotest-dotnet
+        },
+      },
+    },
   },
 }

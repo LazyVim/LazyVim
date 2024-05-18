@@ -275,6 +275,10 @@ function M.init()
   -- after installing missing plugins
   M.load("options")
 
+  if vim.g.deprecation_warnings == false then
+    vim.deprecate = function() end
+  end
+
   LazyVim.plugin.setup()
   M.json.load()
 end

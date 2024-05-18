@@ -1,4 +1,9 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "json", "jsonc", "json5" },
+    })
+  end,
 
   -- add json to treesitter
   {

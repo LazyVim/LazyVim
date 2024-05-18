@@ -71,9 +71,9 @@ return {
     opts = {
       options = {
         -- stylua: ignore
-        close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        close_command = function(n) LazyVim.ui.bufremove(n) end,
         -- stylua: ignore
-        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        right_mouse_command = function(n) LazyVim.ui.bufremove(n) end,
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
@@ -95,7 +95,7 @@ return {
     config = function(_, opts)
       require("bufferline").setup(opts)
       -- Fix bufferline when restoring a session
-      vim.api.nvim_create_autocmd("BufAdd", {
+      vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
         callback = function()
           vim.schedule(function()
             pcall(nvim_bufferline)
@@ -219,7 +219,7 @@ return {
         char = "│",
         tab_char = "│",
       },
-      scope = { enabled = false },
+      scope = { show_start = false, show_end = false },
       exclude = {
         filetypes = {
           "help",
@@ -237,39 +237,12 @@ return {
       },
     },
     main = "ibl",
-  },
-
-  -- Active indent guide and indent text objects. When you're browsing
-  -- code, this highlights the current level of indentation, and animates
-  -- the highlighting.
-  {
-    "echasnovski/mini.indentscope",
-    version = false, -- wait till new 0.7.0 release to put it back on semver
-    event = "LazyFile",
-    opts = {
-      -- symbol = "▏",
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-        },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
+    config = function(_, opts)
+      if vim.fn.has("nvim-0.10.0") == 0 then
+        local utils = require("ibl.utils")
+        utils.tbl_join = vim.tbl_flatten
+      end
+      require("ibl").setup(opts)
     end,
   },
 
@@ -322,6 +295,7 @@ return {
       { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
       { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
       { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
+      { "<leader>snt", function() require("noice").cmd("telescope") end, desc = "Noice Telescope" },
       { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
     },

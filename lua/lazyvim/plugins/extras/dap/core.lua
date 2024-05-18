@@ -12,6 +12,8 @@ end
 
 return {
   "mfussenegger/nvim-dap",
+  recommended = true,
+  desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
 
   dependencies = {
 
@@ -26,8 +28,6 @@ return {
       },
       opts = {},
       config = function(_, opts)
-        -- setup dap config by VsCode launch.json file
-        -- require("dap.ext.vscode").load_launchjs()
         local dap = require("dap")
         local dapui = require("dapui")
         dapui.setup(opts)
@@ -81,6 +81,11 @@ return {
         },
       },
     },
+
+    -- VsCode launch.json parser
+    {
+      "folke/neoconf.nvim",
+    },
   },
 
   -- stylua: ignore
@@ -115,5 +120,18 @@ return {
         { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
       )
     end
+
+    -- setup dap config by VsCode launch.json file
+    local vscode = require("dap.ext.vscode")
+    local _filetypes = require("mason-nvim-dap.mappings.filetypes")
+    local filetypes = vim.tbl_deep_extend("force", _filetypes, {
+      ["node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
+      ["pwa-node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
+    })
+    local json = require("plenary.json")
+    vscode.json_decode = function(str)
+      return vim.json.decode(json.json_strip_comments(str))
+    end
+    vscode.load_launchjs(nil, filetypes)
   end,
 }

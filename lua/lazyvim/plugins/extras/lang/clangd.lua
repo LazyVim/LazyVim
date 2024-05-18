@@ -1,4 +1,17 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+      root = {
+        ".clangd",
+        ".clang-tidy",
+        ".clang-format",
+        "compile_commands.json",
+        "compile_flags.txt",
+        "configure.ac", -- AutoTools
+      },
+    })
+  end,
 
   -- Add C/C++ to treesitter
   {
@@ -144,7 +157,7 @@ return {
             type = "codelldb",
             request = "attach",
             name = "Attach to process",
-            processId = require("dap.utils").pick_process,
+            pid = require("dap.utils").pick_process,
             cwd = "${workspaceFolder}",
           },
         }

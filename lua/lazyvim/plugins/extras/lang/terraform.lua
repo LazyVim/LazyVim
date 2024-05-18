@@ -1,4 +1,11 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "terraform", "hcl" },
+      root = ".terraform",
+    })
+  end,
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -17,6 +24,14 @@ return {
         terraformls = {},
       },
     },
+  },
+  -- ensure terraform tools are installed
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "tflint" })
+    end,
   },
   {
     "nvimtools/none-ls.nvim",

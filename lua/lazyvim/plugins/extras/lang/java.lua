@@ -16,6 +16,20 @@ local function extend_or_override(config, custom, ...)
 end
 
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "java",
+      root = {
+        "build.gradle",
+        "build.gradle.kts",
+        "build.xml", -- Ant
+        "pom.xml", -- Maven
+        "settings.gradle", -- Gradle
+        "settings.gradle.kts", -- Gradle
+      },
+    })
+  end,
+
   -- Add java to treesitter.
   {
     "nvim-treesitter/nvim-treesitter",

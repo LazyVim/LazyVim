@@ -38,6 +38,7 @@ return {
   -- rename surround mappings from gs to gz to prevent conflict with leap
   {
     "echasnovski/mini.surround",
+    optional = true,
     opts = {
       mappings = {
         add = "gza", -- Add surrounding in Normal and Visual modes
@@ -47,6 +48,15 @@ return {
         highlight = "gzh", -- Highlight surrounding
         replace = "gzr", -- Replace surrounding
         update_n_lines = "gzn", -- Update `n_lines`
+      },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["gz"] = { name = "+surround" },
       },
     },
   },

@@ -1,4 +1,10 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "tex", "plaintex", "bib" },
+      root = { ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
+    })
+  end,
   {
     "folke/which-key.nvim",
     optional = true,
