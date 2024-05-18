@@ -2,6 +2,9 @@
 
 ## 11.x
 
+- `mini.ai` is back as a default plugin! Removing it was a mistake.
+  It's a great plugin that enhances the native text objects.
+
 - `:LazyExtras` now has multiple new sections:
 
   - **Enabled**: extras that are currently enabled
@@ -42,7 +45,6 @@ Additionally, some core plugins have been moved to extras.
 
 - plugins moved to extras:
 
-  - `mini.ai` which I couldn't live without, but not everyone needs it
   - `mini.surround`
   - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
   - `nvim-treesitter-context`
