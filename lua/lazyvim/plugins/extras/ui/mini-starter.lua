@@ -53,16 +53,7 @@ return {
         vim.api.nvim_create_autocmd("User", {
           pattern = "MiniStarterOpened",
           callback = function()
-            -- INFO: schedule_wrap this because if you are missing a plugin
-            -- and the Lazy UI opens to install the missing plugin the
-            -- notification `buf_id in refresh() is not an identifier of valid
-            -- Starter buffer` shows up again
-            -- `vim.schedule` also seems to work but prefered `vim.schedule_wrap`
-            -- because on my understanding it triggers even later than `vim.schedule`
-            -- just to be on the safe side
-            vim.schedule_wrap(function()
-              require("lazy").show()
-            end)
+            require("lazy").show()
           end,
         })
       end
@@ -71,13 +62,15 @@ return {
       starter.setup(config)
 
       vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniStarterOpened",
+        pattern = "LazyVimStarted",
         callback = function()
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           local pad_footer = string.rep(" ", 8)
           starter.config.footer = pad_footer .. "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-          pcall(starter.refresh)
+          -- INFO: Use `VimResized` to avoid the `buf_id in refresh() is not an identifier of valid Starter buffer`,
+          -- since `starter.refresh` executes on every `VimResized` see https://github.com/echasnovski/mini.starter/blob/f0c491032dcda485ee740716217cd4d5c25b6014/lua/mini/starter.lua#L352-L353
+          vim.cmd([[do VimResized]])
         end,
       })
     end,
