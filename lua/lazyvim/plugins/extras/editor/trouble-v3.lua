@@ -12,6 +12,13 @@ if vim.tbl_contains(Config.json.data.extras, "lazyvim.plugins.extras.editor.trou
       })
     end
   end
+  if vim.fn.has("nvim-0.9.2") == 0 then
+    LazyVim.error({
+      "Trouble v3 requires Neovim >= 0.9.2",
+      "Please update your Neovim version.",
+    })
+    return {}
+  end
 end
 
 return {
