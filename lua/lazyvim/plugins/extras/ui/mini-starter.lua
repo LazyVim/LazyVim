@@ -68,7 +68,9 @@ return {
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           local pad_footer = string.rep(" ", 8)
           starter.config.footer = pad_footer .. "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-          pcall(starter.refresh)
+          -- INFO: Use `VimResized` to avoid the `buf_id in refresh() is not an identifier of valid Starter buffer`,
+          -- since `starter.refresh` executes on every `VimResized` see https://github.com/echasnovski/mini.starter/blob/f0c491032dcda485ee740716217cd4d5c25b6014/lua/mini/starter.lua#L352-L353
+          vim.cmd([[do VimResized]])
         end,
       })
     end,
