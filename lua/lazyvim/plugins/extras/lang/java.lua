@@ -163,18 +163,14 @@ return {
         }, opts.jdtls)
 
         if opts.enableInlayHints == true then
-          local inlayHintsConfig = function()
-            local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+          local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 
-            return {
-              extendedClientCapabilities = extendedClientCapabilities,
-              parameterNames = {
-                enabled = "all",
-              },
-            }
-          end
-
-          extend_or_override(config, inlayHintsConfig())
+          extend_or_override(config, {
+            extendedClientCapabilities = extendedClientCapabilities,
+            parameterNames = {
+              enabled = "all",
+            },
+          })
         end
 
         -- Existing server will be reused if the root_dir matches.
