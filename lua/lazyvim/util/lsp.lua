@@ -51,20 +51,23 @@ function M.setup_dynamic_capability()
   end
 end
 
----@param fn fun(client:vim.lsp.Client, buffer)
----@param buf? number
-function M.on_dynamic_capability(fn, buf)
-  vim.api.nvim_create_autocmd("User", {
+---@param fn fun(client:vim.lsp.Client, buffer):boolean?
+---@param opts? {group?: integer}
+function M.on_dynamic_capability(fn, opts)
+  return vim.api.nvim_create_autocmd("User", {
     pattern = "LspDynamicCapability",
+    group = opts and opts.group or nil,
     callback = function(args)
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       local buffer = args.data.buffer ---@type number
-      if client and (buf == nil or buf == buffer) then
+      if client then
         return fn(client, buffer)
       end
     end,
   })
 end
+
+M._on_supports_method_id = 0
 
 ---@param method string
 ---@param fn fun(client:vim.lsp.Client, buffer)
@@ -73,12 +76,22 @@ function M.on_supports_method(method, fn)
     if client.supports_method(method, { bufnr = buffer }) then
       fn(client, buffer)
     else
-      M.on_dynamic_capability(function()
-        if client.supports_method(method, { bufnr = buffer }) then
+      M._on_supports_method_id = M._on_supports_method_id + 1
+      local id = M._on_supports_method_id
+      local group = vim.api.nvim_create_augroup("on_supports_method_" .. id, { clear = true })
+      M.on_dynamic_capability(function(c, b)
+        if c == client and b == buffer and client.supports_method(method, { bufnr = buffer }) then
           fn(client, buffer)
-          return false
+          pcall(vim.api.nvim_del_augroup_by_id, group)
         end
-      end, buffer)
+      end, { group = group })
+      vim.api.nvim_create_autocmd({ "LspDetach", "BufDelete" }, {
+        group = group,
+        buffer = buffer,
+        callback = function()
+          pcall(vim.api.nvim_del_augroup_by_id, group)
+        end,
+      })
     end
   end)
 end
