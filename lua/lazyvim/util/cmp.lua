@@ -16,4 +16,24 @@ function M.auto_brackets(entry)
   end
 end
 
+-- This function adds missing documentation to snippets.
+-- The documentation is a preview of the snippet.
+---@param window cmp.CustomEntriesView|cmp.NativeEntriesView
+function M.add_missing_snippet_docs(window)
+  local cmp = require("cmp")
+  local Kind = cmp.lsp.CompletionItemKind
+  local entries = window:get_entries()
+  for _, entry in ipairs(entries) do
+    if entry:get_kind() == Kind.Snippet then
+      local item = entry:get_completion_item()
+      if not item.documentation and item.insertText then
+        item.documentation = {
+          kind = cmp.lsp.MarkupKind.Markdown,
+          value = string.format("```%s\n%s\n```", vim.bo.filetype, item.insertText),
+        }
+      end
+    end
+  end
+end
+
 return M

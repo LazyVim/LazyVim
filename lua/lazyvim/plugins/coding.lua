@@ -89,6 +89,9 @@ return {
           LazyVim.cmp.auto_brackets(event.entry)
         end
       end)
+      cmp.event:on("menu_opened", function(event)
+        LazyVim.cmp.add_missing_snippet_docs(event.window)
+      end)
     end,
   },
 
