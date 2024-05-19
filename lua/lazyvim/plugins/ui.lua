@@ -56,6 +56,7 @@ return {
   -- tabs, which include filetype icons and close buttons.
   {
     "akinsho/bufferline.nvim",
+    commit = vim.fn.has("nvim-0.10") == 0 and "73540cb95f8d95aa1af3ed57713c6720c78af915" or nil,
     event = "VeryLazy",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
