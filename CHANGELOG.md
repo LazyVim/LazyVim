@@ -1,5 +1,17 @@
 # Changelog
 
+## [11.3.2](https://github.com/LazyVim/LazyVim/compare/v11.3.1...v11.3.2) (2024-05-19)
+
+
+### Bug Fixes
+
+* **bufferline:** pin bufferline to older version on 0.9.x for now ([573aa22](https://github.com/LazyVim/LazyVim/commit/573aa226f9f9b9fb9c9886381d3fd06746b7ae6a))
+* **cmp:** only complete on `&lt;cr&gt;` when cmp is really visible. Dont wait till it might be visible. Faster and more correct imho ([ad22ada](https://github.com/LazyVim/LazyVim/commit/ad22adab7d446018875de2dc96168295cad9298e))
+* **git:** off-by-one issue in lazygit blame line ([#3230](https://github.com/LazyVim/LazyVim/issues/3230)) ([4208a09](https://github.com/LazyVim/LazyVim/commit/4208a09df8cd20fe491a5fdcc722c12fb07588dc))
+* **gitui:** properly delete lazygit keymap at the correct time. Fixes [#3227](https://github.com/LazyVim/LazyVim/issues/3227) ([e346d17](https://github.com/LazyVim/LazyVim/commit/e346d17812de516ad0789ede49b49a8b7ba213fe))
+* show refactored success msg ([#3233](https://github.com/LazyVim/LazyVim/issues/3233)) ([4a41012](https://github.com/LazyVim/LazyVim/commit/4a41012483e67ffe5ff65f31934ed668325ea131))
+* **yanky:** load yanky earlier to avoid losing deleted lines ([#3234](https://github.com/LazyVim/LazyVim/issues/3234)) ([93c156a](https://github.com/LazyVim/LazyVim/commit/93c156a0a54e5400436a950263dd140ca591d3e5))
+
 ## [11.3.1](https://github.com/LazyVim/LazyVim/compare/v11.3.0...v11.3.1) (2024-05-18)
 
 
