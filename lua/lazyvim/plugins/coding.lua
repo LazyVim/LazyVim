@@ -37,7 +37,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = function(fallback)
-            if cmp.visible() then
+            if cmp.core.view:visible() or vim.fn.pumvisible() == 1 then
               LazyVim.create_undo()
               if cmp.confirm({ select = true }) then
                 return
