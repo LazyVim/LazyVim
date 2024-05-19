@@ -193,8 +193,9 @@ return {
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client and client.name == "jdtls" then
             -- INFO: without this the inlay hints start toggled off by default.
-            -- Maybe because `nvim-jdtls` attaches on a `FileType` event??
-            -- Still with this the inlay hints are toggled on by default
+            -- Probably because `nvim-lspconfig` is not used to set up `nvim-jdtls`
+            -- and `LazyVim.toggle.inlay_hints` doesn't execute, so we have
+            -- to execute it again ourselves in this autocmd in `LspAttach`
             LazyVim.toggle.inlay_hints(args.buf, true)
             local wk = require("which-key")
             wk.register({
