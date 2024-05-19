@@ -14,7 +14,7 @@
   - **Languages**: other language extras
 
 - new option `vim.g.deprecation_warnings` to disable deprecation warnings
-  Defaults to `false`. To disable, set it to `true` in your `options.lua`
+  Defaults to `false`. To enable deprecation warnings, set it to `true` in your `options.lua`
 
 - `vim-illuminate` move to extras
   Document highlights now use native lsp functionality by default
