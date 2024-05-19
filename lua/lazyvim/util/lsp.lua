@@ -5,14 +5,14 @@ local M = {}
 
 ---@param opts? lsp.Client.filter
 function M.get_clients(opts)
-  local ret = {} ---@type lsp.Client[]
+  local ret = {} ---@type vim.lsp.Client[]
   if vim.lsp.get_clients then
     ret = vim.lsp.get_clients(opts)
   else
     ---@diagnostic disable-next-line: deprecated
     ret = vim.lsp.get_active_clients(opts)
     if opts and opts.method then
-      ---@param client lsp.Client
+      ---@param client vim.lsp.Client
       ret = vim.tbl_filter(function(client)
         return client.supports_method(opts.method, { bufnr = opts.bufnr })
       end, ret)
@@ -21,15 +21,64 @@ function M.get_clients(opts)
   return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
 end
 
----@param on_attach fun(client:lsp.Client, buffer)
+---@param on_attach fun(client:vim.lsp.Client, buffer)
 function M.on_attach(on_attach)
-  vim.api.nvim_create_autocmd("LspAttach", {
+  return vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local buffer = args.buf ---@type number
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
+      if client then
+        return on_attach(client, buffer)
+      end
     end,
   })
+end
+
+M._dynamic_handlers = {} ---@type fun(client:vim.lsp.Client, buffer)[]
+
+function M.setup_dynamic_capability()
+  local register_capability = vim.lsp.handlers["client/registerCapability"]
+
+  vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
+    ---@diagnostic disable-next-line: no-unknown
+    local ret = register_capability(err, res, ctx)
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    local buffer = vim.api.nvim_get_current_buf()
+    if client then
+      M._dynamic_handlers = vim.tbl_filter(function(handler)
+        return handler(client, buffer) ~= false
+      end, M._dynamic_handlers)
+    end
+    return ret
+  end
+end
+
+---@param fn fun(client:vim.lsp.Client, buffer)
+function M.on_dynamic_capability(fn)
+  table.insert(M._dynamic_handlers, fn)
+end
+
+---@type table<string,table<vim.lsp.Client, table<number,boolean>>>
+M._on_supports_method = {}
+
+---@param method string
+---@param fn fun(client:vim.lsp.Client, buffer)
+function M.on_supports_method(method, fn)
+  M._on_supports_method[method] = M._on_supports_method[method] or setmetatable({}, { __mode = "k" })
+
+  ---@param client vim.lsp.Client
+  local function check(client, buffer)
+    M._on_supports_method[method][client] = M._on_supports_method[method][client] or {}
+    if M._on_supports_method[method][client][buffer] then
+      return
+    end
+    if client.supports_method(method, { bufnr = buffer }) then
+      M._on_supports_method[method][client][buffer] = true
+      fn(client, buffer)
+    end
+  end
+  M.on_attach(check)
+  M.on_dynamic_capability(check)
 end
 
 ---@param from string
@@ -89,12 +138,12 @@ function M.formatter(opts)
     end,
     sources = function(buf)
       local clients = M.get_clients(LazyVim.merge({}, filter, { bufnr = buf }))
-      ---@param client lsp.Client
+      ---@param client vim.lsp.Client
       local ret = vim.tbl_filter(function(client)
         return client.supports_method("textDocument/formatting")
           or client.supports_method("textDocument/rangeFormatting")
       end, clients)
-      ---@param client lsp.Client
+      ---@param client vim.lsp.Client
       return vim.tbl_map(function(client)
         return client.name
       end, ret)
@@ -143,22 +192,26 @@ function M.words.setup(opts)
     return handler(err, result, ctx, config)
   end
 
-  M.on_attach(function(client, buf)
-    if client.supports_method("textDocument/documentHighlight") then
-      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "CursorMoved", "CursorMovedI" }, {
-        group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true }),
-        buffer = buf,
-        callback = function(ev)
-          if not M.words.at() then
-            if ev.event:find("CursorMoved") then
-              vim.lsp.buf.clear_references()
-            else
-              vim.lsp.buf.document_highlight()
-            end
+  M.on_supports_method("textDocument/documentHighlight", function(client, buf)
+    local group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true })
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "CursorMoved", "CursorMovedI" }, {
+      group = group,
+      buffer = buf,
+      callback = function(ev)
+        if not M.words.at() then
+          if ev.event:find("CursorMoved") then
+            vim.lsp.buf.clear_references()
+          else
+            vim.lsp.buf.document_highlight()
           end
-        end,
-      })
-    end
+        end
+      end,
+    })
+    vim.api.nvim_create_autocmd("LspDetach", {
+      callback = function()
+        vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true })
+      end,
+    })
   end)
 end
 
