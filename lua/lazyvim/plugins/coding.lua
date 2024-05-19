@@ -93,6 +93,11 @@ return {
           { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
         },
         opts = function(_, opts)
+          opts.snippet = {
+            expand = function(item)
+              return LazyVim.cmp.expand(item.body)
+            end,
+          }
           table.insert(opts.sources, { name = "snippets" })
         end,
         keys = {

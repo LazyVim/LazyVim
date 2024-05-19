@@ -18,6 +18,13 @@ function M.snippet_resolve(snippet)
   end):gsub("%$0", "")
 end
 
+-- This function replaces nested placeholders in a snippet with LSP placeholders.
+function M.snippet_fix(snippet)
+  return M.snippet_replace(snippet, function(placeholder)
+    return "${" .. placeholder.n .. ":" .. M.snippet_resolve(placeholder.text) .. "}"
+  end)
+end
+
 ---@param entry cmp.Entry
 function M.auto_brackets(entry)
   local cmp = require("cmp")
@@ -74,4 +81,23 @@ function M.confirm(opts)
     return fallback()
   end
 end
+
+function M.expand(snippet)
+  local ok = pcall(vim.snippet.expand, snippet)
+  if not ok then
+    local fixed = M.snippet_fix(snippet)
+    ok = pcall(vim.snippet.expand, fixed)
+
+    local msg = ok and "Failed to parse snippet,\nbut was able to fix it automatically." or "Failed to parse snippet."
+
+    LazyVim[ok and "warn" or "error"](
+      ([[%s
+```%s
+%s
+```]]):format(msg, vim.bo.filetype, snippet),
+      { title = "vim.snippet" }
+    )
+  end
+end
+
 return M
