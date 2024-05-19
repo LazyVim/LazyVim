@@ -34,51 +34,53 @@ function M.on_attach(on_attach)
   })
 end
 
-M._dynamic_handlers = {} ---@type fun(client:vim.lsp.Client, buffer)[]
-
 function M.setup_dynamic_capability()
   local register_capability = vim.lsp.handlers["client/registerCapability"]
-
   vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
     ---@diagnostic disable-next-line: no-unknown
     local ret = register_capability(err, res, ctx)
     local client = vim.lsp.get_client_by_id(ctx.client_id)
     local buffer = vim.api.nvim_get_current_buf()
     if client then
-      M._dynamic_handlers = vim.tbl_filter(function(handler)
-        return handler(client, buffer) ~= false
-      end, M._dynamic_handlers)
+      vim.api.nvim_exec_autocmds("User", {
+        pattern = "LspDynamicCapability",
+        data = { client_id = client.id, buffer = buffer },
+      })
     end
     return ret
   end
 end
 
 ---@param fn fun(client:vim.lsp.Client, buffer)
-function M.on_dynamic_capability(fn)
-  table.insert(M._dynamic_handlers, fn)
+---@param buf? number
+function M.on_dynamic_capability(fn, buf)
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "LspDynamicCapability",
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local buffer = args.data.buffer ---@type number
+      if client and (buf == nil or buf == buffer) then
+        return fn(client, buffer)
+      end
+    end,
+  })
 end
-
----@type table<string,table<vim.lsp.Client, table<number,boolean>>>
-M._on_supports_method = {}
 
 ---@param method string
 ---@param fn fun(client:vim.lsp.Client, buffer)
 function M.on_supports_method(method, fn)
-  M._on_supports_method[method] = M._on_supports_method[method] or setmetatable({}, { __mode = "k" })
-
-  ---@param client vim.lsp.Client
-  local function check(client, buffer)
-    M._on_supports_method[method][client] = M._on_supports_method[method][client] or {}
-    if M._on_supports_method[method][client][buffer] then
-      return
-    end
+  M.on_attach(function(client, buffer)
     if client.supports_method(method, { bufnr = buffer }) then
-      M._on_supports_method[method][client][buffer] = true
       fn(client, buffer)
+    else
+      M.on_dynamic_capability(function()
+        if client.supports_method(method, { bufnr = buffer }) then
+          fn(client, buffer)
+          return false
+        end
+      end, buffer)
     end
-  end
-  M.on_attach(check)
-  M.on_dynamic_capability(check)
+  end)
 end
 
 ---@param from string
