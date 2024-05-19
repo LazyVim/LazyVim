@@ -118,6 +118,15 @@ return {
         dap = { hotcodereplace = "auto", config_overrides = {} },
         dap_main = {},
         test = true,
+        settings = {
+          java = {
+            inlayHints = {
+              parameterNames = {
+                enabled = "all",
+              },
+            },
+          },
+        },
       }
     end,
     config = function()
@@ -158,22 +167,10 @@ return {
           init_options = {
             bundles = bundles,
           },
+          settings = opts.settings,
           -- enable CMP capabilities
           capabilities = LazyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
-
-        if opts.enableInlayHints == true then
-          local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
-
-          extend_or_override(config, {
-            extendedClientCapabilities = extendedClientCapabilities,
-            inlayHints = {
-              parameterNames = {
-                enabled = "all",
-              },
-            },
-          })
-        end
 
         -- Existing server will be reused if the root_dir matches.
         require("jdtls").start_or_attach(config)
@@ -195,6 +192,10 @@ return {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client and client.name == "jdtls" then
+            -- INFO: without this the inlay hints start toggled off by default.
+            -- Maybe because `nvim-jdtls` attaches on a `FileType` event??
+            -- Still with this the inlay hints are toggled on by default
+            LazyVim.toggle.inlay_hints(args.buf, true)
             local wk = require("which-key")
             wk.register({
               ["<leader>cx"] = { name = "+extract" },
