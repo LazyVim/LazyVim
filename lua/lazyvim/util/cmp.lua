@@ -1,6 +1,23 @@
 ---@class lazyvim.util.cmp
 local M = {}
 
+---@param snippet string
+---@param fn fun(placeholder:Placeholder):string
+---@return string
+function M.snippet_replace(snippet, fn)
+  return snippet:gsub("%$%b{}", function(m)
+    local n, name = m:match("^%${(%d+):(.+)}$")
+    return n and fn({ n = n, text = name }) or m
+  end) or snippet
+end
+
+-- This function resolves nested placeholders in a snippet.
+function M.snippet_resolve(snippet)
+  return M.snippet_replace(snippet, function(placeholder)
+    return M.snippet_resolve(placeholder.text)
+  end):gsub("%$0", "")
+end
+
 ---@param entry cmp.Entry
 function M.auto_brackets(entry)
   local cmp = require("cmp")
@@ -29,7 +46,7 @@ function M.add_missing_snippet_docs(window)
       if not item.documentation and item.insertText then
         item.documentation = {
           kind = cmp.lsp.MarkupKind.Markdown,
-          value = string.format("```%s\n%s\n```", vim.bo.filetype, item.insertText),
+          value = string.format("```%s\n%s\n```", vim.bo.filetype, M.snippet_resolve(item.insertText)),
         }
       end
     end
