@@ -167,8 +167,10 @@ return {
 
           extend_or_override(config, {
             extendedClientCapabilities = extendedClientCapabilities,
-            parameterNames = {
-              enabled = "all",
+            inlayHints = {
+              parameterNames = {
+                enabled = "all",
+              },
             },
           })
         end
