@@ -162,7 +162,7 @@ return {
           capabilities = LazyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
 
-        if opts.enableInlayHints then
+        if opts.enableInlayHints == true then
           local inlayHintsConfig = function()
             local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
 
