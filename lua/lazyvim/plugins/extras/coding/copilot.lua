@@ -1,5 +1,5 @@
 return {
-
+  recommended = true,
   -- copilot
   {
     "zbirenbaum/copilot.lua",

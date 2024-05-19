@@ -1,4 +1,10 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "markdown",
+      root = "README.md",
+    })
+  end,
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)

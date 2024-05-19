@@ -208,8 +208,10 @@ function M.foldexpr()
   return "0"
 end
 
-function M.bufremove()
-  local buf = vim.api.nvim_get_current_buf()
+---@param buf number?
+function M.bufremove(buf)
+  buf = buf or 0
+  buf = buf == 0 and vim.api.nvim_get_current_buf() or buf
 
   if vim.bo.modified then
     local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
@@ -244,7 +246,9 @@ function M.bufremove()
       vim.api.nvim_win_set_buf(win, new_buf)
     end)
   end
-  vim.api.nvim_buf_delete(buf, { force = true })
+  if vim.api.nvim_buf_is_valid(buf) then
+    pcall(vim.cmd, "bdelete! " .. buf)
+  end
 end
 
 return M

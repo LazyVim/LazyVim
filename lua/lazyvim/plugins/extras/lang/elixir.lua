@@ -1,4 +1,10 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "elixir", "eelixir", "heex", "surface" },
+      root = "mix.exs",
+    })
+  end,
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)

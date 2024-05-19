@@ -1,4 +1,6 @@
 return {
+  recommended = true,
+  desc = "Neotest support. Requires language specific adapters to be configured. (see lang extras)",
   {
     "folke/which-key.nvim",
     optional = true,

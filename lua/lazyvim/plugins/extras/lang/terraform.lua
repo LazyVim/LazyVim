@@ -1,4 +1,11 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "terraform", "hcl" },
+      root = ".terraform",
+    })
+  end,
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)

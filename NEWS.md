@@ -2,8 +2,19 @@
 
 ## 11.x
 
+- `mini.ai` is back as a default plugin! Removing it was a mistake.
+  It's a great plugin that enhances the native text objects.
+
+- `:LazyExtras` now has multiple new sections:
+
+  - **Enabled**: extras that are currently enabled
+  - **Recommended Languages**: language extras recommended for the current buffer / directory
+  - **Recommended Plugins**: extras that are recommended for most users
+  - **Plugins**: other plugin extras
+  - **Languages**: other language extras
+
 - new option `vim.g.deprecation_warnings` to disable deprecation warnings
-  Defaults to `false`. To disable, set it to `true` in your `options.lua`
+  Defaults to `false`. To enable deprecation warnings, set it to `true` in your `options.lua`
 
 - `vim-illuminate` move to extras
   Document highlights now use native lsp functionality by default
@@ -34,15 +45,9 @@ Additionally, some core plugins have been moved to extras.
 
 - plugins moved to extras:
 
-  - `mini.ai` which I couldn't live without, but not everyone needs it
   - `mini.surround`
   - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
   - `nvim-treesitter-context`
-
-- There's a new extra for the `nvim-treesitter` **rewrite**.
-  Since the rewrite is not backward compatible, some plugins will be disabled
-  when you enable this extra: `vim-illuminate`, `nvim-ts-autotag`, and `nvim-ts-autotag`.
-  I would **NOT** recommend enabling this extra for now.
 
 ## 10.x
 

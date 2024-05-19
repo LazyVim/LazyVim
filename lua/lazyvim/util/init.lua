@@ -16,6 +16,7 @@ local LazyUtil = require("lazy.core.util")
 ---@field news lazyvim.util.news
 ---@field json lazyvim.util.json
 ---@field lualine lazyvim.util.lualine
+---@field mini lazyvim.util.mini
 local M = {}
 
 ---@type table<string, string|string[]>
@@ -126,11 +127,15 @@ function M.lazy_notify()
   timer:start(500, 0, replay)
 end
 
+function M.is_loaded(name)
+  local Config = require("lazy.core.config")
+  return Config.plugins[name] and Config.plugins[name]._.loaded
+end
+
 ---@param name string
 ---@param fn fun(name:string)
 function M.on_load(name, fn)
-  local Config = require("lazy.core.config")
-  if Config.plugins[name] and Config.plugins[name]._.loaded then
+  if M.is_loaded(name) then
     fn(name)
   else
     vim.api.nvim_create_autocmd("User", {
@@ -183,6 +188,13 @@ function M.dedup(list)
     end
   end
   return ret
+end
+
+M.CREATE_UNDO = vim.api.nvim_replace_termcodes("<c-G>u", true, true, true)
+function M.create_undo()
+  if vim.api.nvim_get_mode().mode == "i" then
+    vim.api.nvim_feedkeys(M.CREATE_UNDO, "n", false)
+  end
 end
 
 return M

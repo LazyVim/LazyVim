@@ -1,4 +1,10 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "ruby",
+      root = "Gemfile",
+    })
+  end,
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)

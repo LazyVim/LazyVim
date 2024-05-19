@@ -1,4 +1,9 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "yaml",
+    })
+  end,
 
   -- add yaml specific modules to treesitter
   {

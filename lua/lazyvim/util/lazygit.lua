@@ -152,7 +152,7 @@ function M.blame_line(opts)
     border = "rounded",
   }, opts or {})
   local cursor = vim.api.nvim_win_get_cursor(0)
-  local line = cursor[1] - 1
+  local line = cursor[1]
   local file = vim.api.nvim_buf_get_name(0)
   local cmd = { "git", "log", "-n", opts.count, "-u", "-L", line .. ",+1:" .. file }
   return require("lazy.util").float_cmd(cmd, opts)

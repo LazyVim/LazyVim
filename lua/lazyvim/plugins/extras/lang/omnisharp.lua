@@ -1,4 +1,11 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "cs", "vb" },
+      root = { "*.sln", "*.csproj", "omnisharp.json", "function.json" },
+    })
+  end,
+
   { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
   {
     "nvim-treesitter/nvim-treesitter",

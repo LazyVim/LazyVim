@@ -78,6 +78,13 @@ function M.migrate()
       return extra == "lazyvim.plugins.extras.editor.symbols-outline" and "lazyvim.plugins.extras.editor.outline"
         or extra
     end, json.data.extras or {})
+  elseif json.data.version == 3 then
+    json.data.extras = vim.tbl_filter(function(extra)
+      return not (
+        extra == "lazyvim.plugins.extras.coding.mini-ai"
+        or extra == "lazyvim.plugins.extras.ui.treesitter-rewrite"
+      )
+    end, json.data.extras or {})
   end
 
   M.save()
