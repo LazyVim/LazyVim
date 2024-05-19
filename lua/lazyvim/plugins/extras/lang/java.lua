@@ -162,6 +162,21 @@ return {
           capabilities = LazyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
 
+        if opts.enableInlayHints then
+          local inlayHintsConfig = function()
+            local extendedClientCapabilities = require("jdtls").extendedClientCapabilities
+
+            return {
+              extendedClientCapabilities = extendedClientCapabilities,
+              parameterNames = {
+                enabled = "all",
+              },
+            }
+          end
+
+          extend_or_override(config, inlayHintsConfig())
+        end
+
         -- Existing server will be reused if the root_dir matches.
         require("jdtls").start_or_attach(config)
         -- not need to require("jdtls.setup").add_commands(), start automatically adds commands
