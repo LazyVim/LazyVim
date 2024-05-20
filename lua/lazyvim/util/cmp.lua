@@ -12,16 +12,19 @@ function M.snippet_replace(snippet, fn)
 end
 
 -- This function resolves nested placeholders in a snippet.
-function M.snippet_resolve(snippet)
-  return M.snippet_replace(snippet, function(placeholder)
-    return M.snippet_resolve(placeholder.text)
+---@param snippet string
+---@return string
+function M.snippet_preview(snippet)
+  local ret = M.snippet_replace(snippet, function(placeholder)
+    return M.snippet_preview(placeholder.text)
   end):gsub("%$0", "")
+  return ret
 end
 
 -- This function replaces nested placeholders in a snippet with LSP placeholders.
 function M.snippet_fix(snippet)
   return M.snippet_replace(snippet, function(placeholder)
-    return "${" .. placeholder.n .. ":" .. M.snippet_resolve(placeholder.text) .. "}"
+    return "${" .. placeholder.n .. ":" .. M.snippet_preview(placeholder.text) .. "}"
   end)
 end
 
@@ -53,7 +56,7 @@ function M.add_missing_snippet_docs(window)
       if not item.documentation and item.insertText then
         item.documentation = {
           kind = cmp.lsp.MarkupKind.Markdown,
-          value = string.format("```%s\n%s\n```", vim.bo.filetype, M.snippet_resolve(item.insertText)),
+          value = string.format("```%s\n%s\n```", vim.bo.filetype, M.snippet_preview(item.insertText)),
         }
       end
     end
