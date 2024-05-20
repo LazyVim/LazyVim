@@ -36,9 +36,9 @@
     </a>
 </div>
 
-LazyVim ist ein Neovim-Setup aufgebaut auf [💤 lazy.nvim](https://github.com/folke/lazy.nvim). 
+LazyVim ist ein Neovim-Setup aufgebaut auf [💤 lazy.nvim](https://github.com/folke/lazy.nvim).
 Es erleichtert das Anpassen und Erweitern von Ihrer Konfiguration.
-Anstatt von vorne anzufangen oder eine vorgefertigte Distro zu verwenden, gibt LazyVim das beste aus 
+Anstatt von vorne anzufangen oder eine vorgefertigte Distro zu verwenden, gibt LazyVim das beste aus
 beiden Welten - die Flexibilität Ihre Konfiguration zu verändern und einzustellen wie Sie es wollen
 und die Einfachheit von einem vorgefertigten Setup.
 

@@ -36,19 +36,8 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = function(fallback)
-            if cmp.core.view:visible() or vim.fn.pumvisible() == 1 then
-              LazyVim.create_undo()
-              if cmp.confirm({ select = true }) then
-                return
-              end
-            end
-            return fallback()
-          end,
-          ["<S-CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<CR>"] = LazyVim.cmp.confirm(),
+          ["<S-CR>"] = LazyVim.cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<C-CR>"] = function(fallback)
             cmp.abort()
             fallback()
@@ -83,22 +72,14 @@ return {
         source.group_index = source.group_index or 1
       end
       local cmp = require("cmp")
-      local Kind = cmp.lsp.CompletionItemKind
       cmp.setup(opts)
       cmp.event:on("confirm_done", function(event)
-        if not vim.tbl_contains(opts.auto_brackets or {}, vim.bo.filetype) then
-          return
+        if vim.tbl_contains(opts.auto_brackets or {}, vim.bo.filetype) then
+          LazyVim.cmp.auto_brackets(event.entry)
         end
-        local entry = event.entry
-        local item = entry:get_completion_item()
-        if vim.tbl_contains({ Kind.Function, Kind.Method }, item.kind) and item.insertTextFormat ~= 2 then
-          local cursor = vim.api.nvim_win_get_cursor(0)
-          local prev_char = vim.api.nvim_buf_get_text(0, cursor[1] - 1, cursor[2], cursor[1] - 1, cursor[2] + 1, {})[1]
-          if prev_char ~= "(" and prev_char ~= ")" then
-            local keys = vim.api.nvim_replace_termcodes("()<left>", false, false, true)
-            vim.api.nvim_feedkeys(keys, "i", true)
-          end
-        end
+      end)
+      cmp.event:on("menu_opened", function(event)
+        LazyVim.cmp.add_missing_snippet_docs(event.window)
       end)
     end,
   },
@@ -113,8 +94,8 @@ return {
         },
         opts = function(_, opts)
           opts.snippet = {
-            expand = function(args)
-              vim.snippet.expand(args.body)
+            expand = function(item)
+              return LazyVim.cmp.expand(item.body)
             end,
           }
           table.insert(opts.sources, { name = "snippets" })

@@ -17,6 +17,7 @@ local LazyUtil = require("lazy.core.util")
 ---@field json lazyvim.util.json
 ---@field lualine lazyvim.util.lualine
 ---@field mini lazyvim.util.mini
+---@field cmp lazyvim.util.cmp
 local M = {}
 
 ---@type table<string, string|string[]>
