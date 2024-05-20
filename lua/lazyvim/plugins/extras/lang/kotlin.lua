@@ -1,4 +1,17 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "kotlin",
+      root = {
+        "settings.gradle", -- Gradle (multi-project)
+        "settings.gradle.kts", -- Gradle (multi-project)
+        "build.xml", -- Ant
+        "pom.xml", -- Maven
+        "build.gradle", -- Gradle
+        "build.gradle.kts", -- Gradle
+      },
+    })
+  end,
   -- Add packages(linting, debug adapter)
   {
     "williamboman/mason.nvim",
