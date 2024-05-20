@@ -121,7 +121,7 @@ return {
         require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
-      LazyVim.lsp.setup_dynamic_capability()
+      LazyVim.lsp.setup()
       LazyVim.lsp.on_dynamic_capability(require("lazyvim.plugins.lsp.keymaps").on_attach)
 
       LazyVim.lsp.words.setup(opts.document_highlight)

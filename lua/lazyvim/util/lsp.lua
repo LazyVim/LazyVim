@@ -34,7 +34,10 @@ function M.on_attach(on_attach)
   })
 end
 
-function M.setup_dynamic_capability()
+---@type table<string, table<vim.lsp.Client, table<number, boolean>>>
+M._supports_method = {}
+
+function M.setup()
   local register_capability = vim.lsp.handlers["client/registerCapability"]
   vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
     ---@diagnostic disable-next-line: no-unknown
@@ -48,6 +51,24 @@ function M.setup_dynamic_capability()
       })
     end
     return ret
+  end
+  M.on_attach(M._check_methods)
+  M.on_dynamic_capability(M._check_methods)
+end
+
+---@param client vim.lsp.Client
+function M._check_methods(client, buffer)
+  for method, clients in pairs(M._supports_method) do
+    clients[client] = clients[client] or {}
+    if not clients[client][buffer] then
+      if client.supports_method(method, { bufnr = buffer }) then
+        clients[client][buffer] = true
+        vim.api.nvim_exec_autocmds("User", {
+          pattern = "LspSupportsMethod",
+          data = { client_id = client.id, buffer = buffer, method = method },
+        })
+      end
+    end
   end
 end
 
@@ -67,33 +88,20 @@ function M.on_dynamic_capability(fn, opts)
   })
 end
 
-M._on_supports_method_id = 0
-
 ---@param method string
 ---@param fn fun(client:vim.lsp.Client, buffer)
 function M.on_supports_method(method, fn)
-  M.on_attach(function(client, buffer)
-    if client.supports_method(method, { bufnr = buffer }) then
-      fn(client, buffer)
-    else
-      M._on_supports_method_id = M._on_supports_method_id + 1
-      local id = M._on_supports_method_id
-      local group = vim.api.nvim_create_augroup("on_supports_method_" .. id, { clear = true })
-      M.on_dynamic_capability(function(c, b)
-        if c == client and b == buffer and client.supports_method(method, { bufnr = buffer }) then
-          fn(client, buffer)
-          pcall(vim.api.nvim_del_augroup_by_id, group)
-        end
-      end, { group = group })
-      vim.api.nvim_create_autocmd({ "LspDetach", "BufDelete" }, {
-        group = group,
-        buffer = buffer,
-        callback = function()
-          pcall(vim.api.nvim_del_augroup_by_id, group)
-        end,
-      })
-    end
-  end)
+  M._supports_method[method] = M._supports_method[method] or setmetatable({}, { __mode = "k" })
+  return vim.api.nvim_create_autocmd("User", {
+    pattern = "LspSupportsMethod",
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local buffer = args.data.buffer ---@type number
+      if client and method == args.data.method then
+        return fn(client, buffer)
+      end
+    end,
+  })
 end
 
 ---@param from string
@@ -207,10 +215,9 @@ function M.words.setup(opts)
     return handler(err, result, ctx, config)
   end
 
-  M.on_supports_method("textDocument/documentHighlight", function(client, buf)
-    local group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true })
+  M.on_supports_method("textDocument/documentHighlight", function(_, buf)
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI", "CursorMoved", "CursorMovedI" }, {
-      group = group,
+      group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true }),
       buffer = buf,
       callback = function(ev)
         if not M.words.at() then
@@ -220,11 +227,6 @@ function M.words.setup(opts)
             vim.lsp.buf.document_highlight()
           end
         end
-      end,
-    })
-    vim.api.nvim_create_autocmd("LspDetach", {
-      callback = function()
-        vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true })
       end,
     })
   end)
