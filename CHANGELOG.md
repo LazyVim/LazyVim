@@ -1,5 +1,30 @@
 # Changelog
 
+## [11.4.0](https://github.com/LazyVim/LazyVim/compare/v11.3.2...v11.4.0) (2024-05-20)
+
+
+### Features
+
+* **cmp:** add missing documentation to snippets when needed ([24a2a9f](https://github.com/LazyVim/LazyVim/commit/24a2a9fb0ba60e0e7c6c8c4ee95a5db7ea0e123e))
+* **cmp:** better error handling and automatic fixing of snippets that fail to parse with native Neovim snippets ([97862f4](https://github.com/LazyVim/LazyVim/commit/97862f425997bf89f581e6aeceed9aac85d90432))
+* **cmp:** move cmp autobracket support to util class ([39f3ebc](https://github.com/LazyVim/LazyVim/commit/39f3ebcadf49b285d8ae06270ed0c2098e7f03bd))
+* **cmp:** resolve placeholders in generated missing snippet documentation ([7d72436](https://github.com/LazyVim/LazyVim/commit/7d72436193b3624a9198a5e57ec1bd7e90260c00))
+* **extras.lang:** Add kotlin ([#2890](https://github.com/LazyVim/LazyVim/issues/2890)) ([94c9f4c](https://github.com/LazyVim/LazyVim/commit/94c9f4cf379e472fbd1a342ef28687dfa418dec0))
+* **java:** enable inlay hints. Fixes [#3244](https://github.com/LazyVim/LazyVim/issues/3244) ([e5ea8ab](https://github.com/LazyVim/LazyVim/commit/e5ea8abd38c4b93edccd69c9ef4462377103a9c3))
+* **kotlin:** added recommended checks ([dd417c3](https://github.com/LazyVim/LazyVim/commit/dd417c36cd14b5b347b4f82e9e7683b085c768fb))
+* **lang:** add toml ([#3022](https://github.com/LazyVim/LazyVim/issues/3022)) ([e0c67f6](https://github.com/LazyVim/LazyVim/commit/e0c67f6776a5e6f1b72852567ce4fec16598b2da))
+* **lsp:** properly update certain Neovim functionlity based on dynamic capabilities. See [#3244](https://github.com/LazyVim/LazyVim/issues/3244). Fixes [#3246](https://github.com/LazyVim/LazyVim/issues/3246) ([20e002f](https://github.com/LazyVim/LazyVim/commit/20e002f9f0e9bfdff1ffc638987fbd46b31e5f9b))
+* **toml:** also recommend toml when theres toml files in the cwd ([c264253](https://github.com/LazyVim/LazyVim/commit/c264253d8fd4f068c7c2ddb5ea3c63596ab5d23f))
+* **vscode:** enable more compatible plugins ([#3250](https://github.com/LazyVim/LazyVim/issues/3250)) ([5726f39](https://github.com/LazyVim/LazyVim/commit/5726f3966df7c1e9b350d24aa94f621d0ea484da))
+
+
+### Bug Fixes
+
+* **bufferline:** unpin bufferline with 0.9.x compatibility ([#3252](https://github.com/LazyVim/LazyVim/issues/3252)) ([ea1c3ad](https://github.com/LazyVim/LazyVim/commit/ea1c3ad6b46dfaeca9ff4564499b4cdc8f839610))
+* **cmp:** no need to setup native snippets with latest cmp ([57a31c3](https://github.com/LazyVim/LazyVim/commit/57a31c3920bcb9baec9a6d3915506a638b0801b8))
+* **cmp:** use better cmp.confirm ([2961162](https://github.com/LazyVim/LazyVim/commit/2961162ebaef96e4ffbc1e6c97dba0dc32efbbb0))
+* **config:** add some extra LazyVim keys to lazy health ([76033c6](https://github.com/LazyVim/LazyVim/commit/76033c6aa92e633de968b515d3fd5f9e0447a74f))
+
 ## [11.3.2](https://github.com/LazyVim/LazyVim/compare/v11.3.1...v11.3.2) (2024-05-19)
 
 
