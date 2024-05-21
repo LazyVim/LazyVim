@@ -96,6 +96,12 @@ return {
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
         },
+        git_status = {
+          symbols = {
+            unstaged = "󰄱",
+            staged = "󰱒",
+          },
+        },
       },
     },
     config = function(_, opts)
