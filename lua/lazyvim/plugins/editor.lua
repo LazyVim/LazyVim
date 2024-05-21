@@ -203,6 +203,7 @@ return {
       { "<leader>sG", LazyVim.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+      { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
       { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
       { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
       { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
