@@ -1,5 +1,24 @@
 # Changelog
 
+## [11.5.0](https://github.com/LazyVim/LazyVim/compare/v11.4.1...v11.5.0) (2024-05-21)
+
+
+### Features
+
+* **comments:** use ts-comments.nvim instead of nvim-ts-context-commentstring on Neovim 0.10 ([8ba7c64](https://github.com/LazyVim/LazyVim/commit/8ba7c64a7da9e46f2ac601919508803824208935))
+* **telescope:** add quickfix and telescope keymaps ([#3077](https://github.com/LazyVim/LazyVim/issues/3077)) ([ab4e57a](https://github.com/LazyVim/LazyVim/commit/ab4e57a4bfe6107c21a25450292ef69537a2b37b))
+
+
+### Bug Fixes
+
+* **cmp:** fix cmp's broken snippet parsing functionality. Fixes [#3266](https://github.com/LazyVim/LazyVim/issues/3266) ([2bae438](https://github.com/LazyVim/LazyVim/commit/2bae438570aa96904836e56d8dad7f33eb3204ee))
+* **lsp:** sometimes lsp client is not fully initialized and doesnt yet have client.supports_method on 0.9.5. Fixes [#3263](https://github.com/LazyVim/LazyVim/issues/3263) ([8c94842](https://github.com/LazyVim/LazyVim/commit/8c94842b4a613995bf4c0c79febcd74c310439d0))
+* **neo-tree:** better icons for git staged/unstaged ([e46dd4e](https://github.com/LazyVim/LazyVim/commit/e46dd4e9b2ac68a5058447ef73b413605d15ae62))
+* **nvim-snippets:** enable global friendly-snippets. See [#3240](https://github.com/LazyVim/LazyVim/issues/3240) ([55b07de](https://github.com/LazyVim/LazyVim/commit/55b07dee21ee5306624e16dd90c2b3c9c0f3ddde))
+* **snippets:** fixes custom snippets. use my branch till nvim-snippets PR is merged. Fixes [#3240](https://github.com/LazyVim/LazyVim/issues/3240) ([cb1e1b9](https://github.com/LazyVim/LazyVim/commit/cb1e1b9c82b405fa277f1869cd04dcd9c4507412))
+* **snippets:** make friendly snippets a dep of nvim-snippets ([d73397c](https://github.com/LazyVim/LazyVim/commit/d73397c4aaac74d95970ac06caffa25abd7c2af4))
+* **snippets:** my nvim-snippets PR is merged, so remove work-around. That was quick :) ([027d6bc](https://github.com/LazyVim/LazyVim/commit/027d6bc2e896d453153f48a8c15db2a627698dc8))
+
 ## [11.4.1](https://github.com/LazyVim/LazyVim/compare/v11.4.0...v11.4.1) (2024-05-20)
 
 
