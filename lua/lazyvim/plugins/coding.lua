@@ -90,7 +90,13 @@ return {
         "nvim-cmp",
         dependencies = {
           { "rafamadriz/friendly-snippets" },
-          { "garymjr/nvim-snippets", opts = { friendly_snippets = true } },
+          {
+            "garymjr/nvim-snippets",
+            opts = {
+              friendly_snippets = true,
+              global_snippets = { "all", "global" },
+            },
+          },
         },
         opts = function(_, opts)
           opts.snippet = {
