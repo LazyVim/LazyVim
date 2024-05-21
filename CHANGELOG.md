@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.4.1](https://github.com/LazyVim/LazyVim/compare/v11.4.0...v11.4.1) (2024-05-20)
+
+
+### Bug Fixes
+
+* **java:** properly pass settings to jdtls ([8e67bb1](https://github.com/LazyVim/LazyVim/commit/8e67bb124009e0dbf29f8e78d701d07756670278))
+
 ## [11.4.0](https://github.com/LazyVim/LazyVim/compare/v11.3.2...v11.4.0) (2024-05-20)
 
 
