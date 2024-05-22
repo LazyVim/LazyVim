@@ -127,7 +127,7 @@ return {
         },
       })
     end,
-    keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
+    keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" } },
   },
   {
     "hrsh7th/nvim-cmp",
