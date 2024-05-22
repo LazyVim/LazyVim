@@ -82,7 +82,7 @@ return {
     "lukas-reineke/headlines.nvim",
     opts = function()
       local opts = {}
-      for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
+      for _, ft in ipairs({ "markdown", "norg", "rmd", "qmd", "org" }) do
         opts[ft] = {
           headline_highlights = {},
           -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
@@ -96,7 +96,7 @@ return {
       end
       return opts
     end,
-    ft = { "markdown", "norg", "rmd", "org" },
+    ft = { "markdown", "norg", "rmd", "qmd", "org" },
     config = function(_, opts)
       -- PERF: schedule to prevent headlines slowing down opening a file
       vim.schedule(function()
