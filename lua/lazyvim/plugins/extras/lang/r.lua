@@ -1,5 +1,3 @@
--- Config made by Ben10164
--- Based on existing configs included in LazyVim for extras
 return {
     recommended = function()
         return LazyVim.extras.wants({
