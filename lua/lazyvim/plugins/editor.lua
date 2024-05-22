@@ -96,6 +96,12 @@ return {
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
         },
+        git_status = {
+          symbols = {
+            unstaged = "󰄱",
+            staged = "󰱒",
+          },
+        },
       },
     },
     config = function(_, opts)
@@ -197,11 +203,14 @@ return {
       { "<leader>sG", LazyVim.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+      { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
       { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
       { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+      { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
       { "<leader>sw", LazyVim.telescope("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
       { "<leader>sW", LazyVim.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
       { "<leader>sw", LazyVim.telescope("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
