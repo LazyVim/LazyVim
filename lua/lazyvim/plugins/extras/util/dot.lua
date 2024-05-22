@@ -36,6 +36,7 @@ return {
         extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
         filename = {
           ["vifmrc"] = "vim",
+          ["LICENSE"] = "markdown",
         },
         pattern = {
           [".*/waybar/config"] = "jsonc",
