@@ -141,7 +141,9 @@ return {
         -- inlay hints
         if opts.inlay_hints.enabled then
           LazyVim.lsp.on_supports_method("textDocument/inlayHint", function(client, buffer)
-            LazyVim.toggle.inlay_hints(buffer, true)
+            if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
+              LazyVim.toggle.inlay_hints(buffer, true)
+            end
           end)
         end
 
