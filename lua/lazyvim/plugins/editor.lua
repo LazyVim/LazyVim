@@ -87,6 +87,26 @@ return {
             end,
             desc = "Open with System Application",
           },
+          ["h"] = function(state)
+            local node = state.tree:get_node()
+            if node:has_children() and node:is_expanded() then
+              state.commands.toggle_node(state)
+            else
+              require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
+            end
+          end,
+          ["l"] = function(state)
+            local node = state.tree:get_node()
+            if node:has_children() then
+              if not node:is_expanded() then
+                state.commands.toggle_node(state)
+              else
+                require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
+              end
+            else
+              state.commands.open(state)
+            end
+          end,
         },
       },
       default_component_configs = {
