@@ -1,5 +1,21 @@
 # Changelog
 
+## [11.6.0](https://github.com/LazyVim/LazyVim/compare/v11.5.0...v11.6.0) (2024-05-23)
+
+
+### Features
+
+* **markdown:** add formatter for mdx ([ae6d8f1](https://github.com/LazyVim/LazyVim/commit/ae6d8f1a34fff49f9f1abf9fdd8a559c95b85cf3))
+* **markdown:** configure conform for markdown files ([#2308](https://github.com/LazyVim/LazyVim/issues/2308)) ([9eec03d](https://github.com/LazyVim/LazyVim/commit/9eec03d890f7846e6f47e12ebbe369c7177fd5f1))
+* **telescope:** add telescope jumplist keymap ([#3268](https://github.com/LazyVim/LazyVim/issues/3268)) ([79608fb](https://github.com/LazyVim/LazyVim/commit/79608fbc4fe7d5fbd2d238e8d8ebfce7d576b7c2))
+
+
+### Bug Fixes
+
+* **lsp:** only enableinlay hints for when buffer is an actual file. See [#3284](https://github.com/LazyVim/LazyVim/issues/3284) ([46cf534](https://github.com/LazyVim/LazyVim/commit/46cf5347b5649e856a69b9f52ccad8a671ddefc6))
+* **python:** extras.lang.python to enable venv select keys on ft ([#3280](https://github.com/LazyVim/LazyVim/issues/3280)) ([f9b3137](https://github.com/LazyVim/LazyVim/commit/f9b31372aef9f1f862bf24879ba388f0d89c2349))
+* set markdown for LICENSE file ([#3276](https://github.com/LazyVim/LazyVim/issues/3276)) ([1eea516](https://github.com/LazyVim/LazyVim/commit/1eea51606e1ec1035c440a4ca9b3eab053337a7d))
+
 ## [11.5.0](https://github.com/LazyVim/LazyVim/compare/v11.4.1...v11.5.0) (2024-05-21)
 
 
