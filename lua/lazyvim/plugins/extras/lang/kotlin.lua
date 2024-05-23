@@ -72,7 +72,7 @@ return {
     opts = function()
       local dap = require("dap")
       if not dap.adapters.kotlin then
-        require("dap").adapters.kotlin = {
+        dap.adapters.kotlin = {
           type = "executable",
           command = "kotlin-debug-adapter",
           options = { auto_continue_if_many_stopped = false },
