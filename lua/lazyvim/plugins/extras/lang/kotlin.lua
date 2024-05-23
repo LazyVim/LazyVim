@@ -35,7 +35,7 @@ return {
       },
     },
   },
-  -- Add linting as optional
+  -- Add linting
   {
     "mfussenegger/nvim-lint",
     optional = true,
@@ -44,7 +44,7 @@ return {
       linters_by_ft = { kotlin = { "ktlint" } },
     },
   },
-  -- Add formatting as optional
+  -- Add formatting
   {
     "stevearc/conform.nvim",
     optional = true,
@@ -52,7 +52,7 @@ return {
       formatters_by_ft = { kotlin = { "ktlint" } },
     },
   },
-  -- Add formatting and linting as optional
+  -- Add formatting and linting
   {
     "nvimtools/none-ls.nvim",
     optional = true,
