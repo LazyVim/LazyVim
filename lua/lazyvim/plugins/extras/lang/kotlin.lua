@@ -16,7 +16,7 @@ return {
   {
     "williamboman/mason.nvim",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, { "ktlint", "kotlin-debug-adapter" })
+      vim.list_extend(opts.ensure_installed or {}, { "ktlint" })
     end,
   },
   -- Add syntax highlighting
