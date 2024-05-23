@@ -1,5 +1,12 @@
 # Changelog
 
+## [11.6.1](https://github.com/LazyVim/LazyVim/compare/v11.6.0...v11.6.1) (2024-05-23)
+
+
+### Bug Fixes
+
+* **lsp:** use proper buffer for dynamic capabilities. Fixes [#3246](https://github.com/LazyVim/LazyVim/issues/3246) ([10ed308](https://github.com/LazyVim/LazyVim/commit/10ed3082a415b525628dfaebdcd007c7e96a5b87))
+
 ## [11.6.0](https://github.com/LazyVim/LazyVim/compare/v11.5.0...v11.6.0) (2024-05-23)
 
 
