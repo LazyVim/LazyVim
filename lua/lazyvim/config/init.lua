@@ -132,7 +132,7 @@ local defaults = {
 }
 
 M.json = {
-  version = 4,
+  version = 5,
   data = {
     version = nil, ---@type string?
     news = {}, ---@type table<string, string>
