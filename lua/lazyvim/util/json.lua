@@ -85,6 +85,10 @@ function M.migrate()
         or extra == "lazyvim.plugins.extras.ui.treesitter-rewrite"
       )
     end, json.data.extras or {})
+  elseif json.data.version == 4 then
+    json.data.extras = vim.tbl_filter(function(extra)
+      return not (extra == "lazyvim.plugins.extras.lazyrc")
+    end, json.data.extras or {})
   end
 
   M.save()
