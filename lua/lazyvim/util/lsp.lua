@@ -44,7 +44,7 @@ function M.setup()
     local ret = register_capability(err, res, ctx)
     local client = vim.lsp.get_client_by_id(ctx.client_id)
     if client then
-      for buffer in ipairs(client.attached_buffers) do
+      for buffer in pairs(client.attached_buffers) do
         vim.api.nvim_exec_autocmds("User", {
           pattern = "LspDynamicCapability",
           data = { client_id = client.id, buffer = buffer },
