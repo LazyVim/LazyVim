@@ -42,6 +42,8 @@ function M.get()
       },
       { "]]", function() LazyVim.lsp.words.jump(vim.v.count1) end, has = "documentHighlight", desc = "Next Reference" },
       { "[[", function() LazyVim.lsp.words.jump(-vim.v.count1) end, has = "documentHighlight", desc = "Prev Reference" },
+      { "<a-n>", function() LazyVim.lsp.words.jump(vim.v.count1) end, has = "documentHighlight", desc = "Next Reference" },
+      { "<a-p>", function() LazyVim.lsp.words.jump(-vim.v.count1) end, has = "documentHighlight", desc = "Prev Reference" },
     }
   if LazyVim.has("inc-rename.nvim") then
     M._keys[#M._keys + 1] = {
