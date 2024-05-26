@@ -1,5 +1,21 @@
 # Changelog
 
+## [11.7.0](https://github.com/LazyVim/LazyVim/compare/v11.6.1...v11.7.0) (2024-05-26)
+
+
+### Features
+
+* lazyrc files are now a lazy.nvim feature ([3a30070](https://github.com/LazyVim/LazyVim/commit/3a30070a4cd4465699d1fdd384d95bdb9935376b))
+
+
+### Bug Fixes
+
+* **illuminate:** s/enabed/enabled ([#3313](https://github.com/LazyVim/LazyVim/issues/3313)) ([c9ab822](https://github.com/LazyVim/LazyVim/commit/c9ab8224f54fb6e93050fab1043b9d1efb917c23))
+* **lsp:** added a-n, a-p for document highlights and cycling. Closes [#3320](https://github.com/LazyVim/LazyVim/issues/3320) ([b3373f3](https://github.com/LazyVim/LazyVim/commit/b3373f3428f8ded19f8162a46bf9f2784299b43b))
+* **lspconfig:** make `opts` a function ([#3311](https://github.com/LazyVim/LazyVim/issues/3311)) ([7aa3706](https://github.com/LazyVim/LazyVim/commit/7aa37064a2421f044c61d4baf42f71a923fab94b))
+* **lsp:** correct previous reference keymap description ([#3314](https://github.com/LazyVim/LazyVim/issues/3314)) ([cdff9de](https://github.com/LazyVim/LazyVim/commit/cdff9de17226701f37069744a402b7afd9942f66))
+* **lsp:** properly get buffer for dynamic capabilities ([#3315](https://github.com/LazyVim/LazyVim/issues/3315)) ([07a1371](https://github.com/LazyVim/LazyVim/commit/07a137199cde87f089776b3f992bd9ed08889cac))
+
 ## [11.6.1](https://github.com/LazyVim/LazyVim/compare/v11.6.0...v11.6.1) (2024-05-23)
 
 
