@@ -154,7 +154,8 @@ function M.blame_line(opts)
   local cursor = vim.api.nvim_win_get_cursor(0)
   local line = cursor[1]
   local file = vim.api.nvim_buf_get_name(0)
-  local cmd = { "git", "log", "-n", opts.count, "-u", "-L", line .. ",+1:" .. file }
+  local root = LazyVim.root.detectors.pattern(0, { ".git" })[1]
+  local cmd = { "git", "-C", root, "log", "-n", opts.count, "-u", "-L", line .. ",+1:" .. file }
   return require("lazy.util").float_cmd(cmd, opts)
 end
 
