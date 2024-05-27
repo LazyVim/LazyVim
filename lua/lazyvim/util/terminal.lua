@@ -73,6 +73,14 @@ function M.open(cmd, opts)
       vim.keymap.set("t", "<c-l>", "<c-l>", { buffer = buf, nowait = true })
     end
 
+    vim.keymap.set("n", "gf", function()
+      local f = vim.fn.findfile(vim.fn.expand("<cfile>"))
+      if f ~= "" then
+        vim.cmd("close")
+        vim.cmd("e " .. f)
+      end
+    end, { buffer = buf })
+
     vim.api.nvim_create_autocmd("BufEnter", {
       buffer = buf,
       callback = function()
