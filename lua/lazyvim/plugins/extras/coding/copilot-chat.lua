@@ -27,7 +27,7 @@ return {
       {
         "<leader>ax",
         function()
-          return require("CopilotChat").clear()
+          return require("CopilotChat").reset()
         end,
         desc = "Clear (CopilotChat)",
         mode = { "n", "v" },
