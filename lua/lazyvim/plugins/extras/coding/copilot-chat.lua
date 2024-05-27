@@ -12,7 +12,6 @@ return {
         show_help = true,
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
-        separator = "---",
         window = {
           width = 0.4,
         },
@@ -67,30 +66,6 @@ return {
         callback = function(ev)
           vim.opt_local.relativenumber = false
           vim.opt_local.number = false
-
-          vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
-            group = vim.api.nvim_create_augroup("copilot-chat-text-" .. ev.buf, { clear = true }),
-            buffer = ev.buf,
-            callback = function()
-              vim.api.nvim_buf_clear_namespace(ev.buf, ns, 0, -1)
-              local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
-              for l, line in ipairs(lines) do
-                if line:match(opts.separator .. "$") then
-                  local sep = vim.fn.strwidth(line) - vim.fn.strwidth(opts.separator)
-                  vim.api.nvim_buf_set_extmark(ev.buf, ns, l - 1, sep, {
-                    virt_text_win_col = sep,
-                    virt_text = { { string.rep("─", vim.go.columns), "@punctuation.special.markdown" } },
-                    priority = 100,
-                  })
-                  vim.api.nvim_buf_set_extmark(ev.buf, ns, l - 1, 0, {
-                    end_col = sep + 1,
-                    hl_group = "@markup.heading.2.markdown",
-                    priority = 100,
-                  })
-                end
-              end
-            end,
-          })
         end,
       })
 
