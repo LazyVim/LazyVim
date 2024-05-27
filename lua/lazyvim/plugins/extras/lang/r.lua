@@ -16,16 +16,11 @@ return {
           -- This function will be called at the FileType event
           -- of files supported by R.nvim. This is an
           -- opportunity to create mappings local to buffers.
-          vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
-          vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
+          vim.keymap.set("n", "<Enter>", "<Plug>RDSendLine", { buffer = true })
+          vim.keymap.set("v", "<Enter>", "<Plug>RSendSelection", { buffer = true })
 
           -- Increase the width of which-key to handle the longer r-nvim descriptions
           local wk = require("which-key")
-          wk.setup({
-            layout = {
-              width = { min = 20, max = 100 }, -- min and max width of the columns
-            },
-          })
           -- Workaround from https://github.com/folke/which-key.nvim/issues/514#issuecomment-1987286901
           wk.register({
             ["<localleader>"] = {
@@ -44,20 +39,15 @@ return {
           })
         end,
       },
-      pdfviewer = (function()
-        if vim.loop.os_uname().sysname:find("Windows", 1, true) then
-          return "open" -- according to @Aman9das on Github
-        elseif vim.loop.os_uname().sysname:find("Darwin", 1, true) then
-          return "open"
-        else
-          return "xdg-open" -- according to @Aman9das on Github
-        end
-      end)(),
     },
+    config = function(_, opts)
+      require("r").setup(opts)
+      require("r.pdf.generic").open = vim.ui.open
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
-    dependencies = { "R-nvim/cmp-r" },
+    optional = true,
     opts = function(_, opts)
       opts.sources = opts.sources or {}
       table.insert(opts.sources, { name = "cmp_r" })
