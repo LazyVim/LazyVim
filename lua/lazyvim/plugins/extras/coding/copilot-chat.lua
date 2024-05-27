@@ -6,6 +6,7 @@ return {
     opts = {
       model = "gpt-4",
       auto_insert_mode = true,
+      show_help = true,
       window = {
         width = 0.4,
       },
@@ -21,6 +22,7 @@ return {
           return require("CopilotChat").toggle()
         end,
         desc = "Toggle (CopilotChat)",
+        mode = { "n", "v" },
       },
       {
         "<leader>ax",
@@ -28,16 +30,18 @@ return {
           return require("CopilotChat").clear()
         end,
         desc = "Clear (CopilotChat)",
+        mode = { "n", "v" },
       },
       {
         "<leader>aq",
         function()
           local input = vim.fn.input("Quick Chat: ")
           if input ~= "" then
-            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+            require("CopilotChat").ask(input)
           end
         end,
         desc = "Quick Chat (CopilotChat)",
+        mode = { "n", "v" },
       },
     },
     init = function()
@@ -48,6 +52,7 @@ return {
       end)
     end,
     config = function(_, opts)
+      local chat = require("CopilotChat")
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = "copilot-chat",
         callback = function()
@@ -55,10 +60,11 @@ return {
           vim.opt_local.number = false
         end,
       })
-      require("CopilotChat").setup(opts)
+      chat.setup(opts)
     end,
   },
 
+  -- Telescope integration
   {
     "nvim-telescope/telescope.nvim",
     optional = true,
@@ -76,6 +82,7 @@ return {
           require("CopilotChat.integrations.telescope").pick(help)
         end,
         desc = "Diagnostic Help (CopilotChat)",
+        mode = { "n", "v" },
       },
       -- Show prompts actions with telescope
       {
@@ -85,7 +92,22 @@ return {
           require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
         end,
         desc = "Prompt Actions (CopilotChat)",
+        mode = { "n", "v" },
       },
     },
+  },
+
+  -- Edgy integration
+  {
+    "folke/edgy.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.right = opts.right or {}
+      table.insert(opts.right, {
+        ft = "copilot-chat",
+        title = "Copilot Chat",
+        size = { width = 50 },
+      })
+    end,
   },
 }
