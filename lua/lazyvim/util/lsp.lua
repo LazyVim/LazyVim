@@ -236,6 +236,9 @@ function M.words.setup(opts)
       group = vim.api.nvim_create_augroup("lsp_word_" .. buf, { clear = true }),
       buffer = buf,
       callback = function(ev)
+        if not require("lazyvim.plugins.lsp.keymaps").has(buf, "documentHighlight") then
+          return false
+        end
         if not ({ M.words.get() })[2] then
           if ev.event:find("CursorMoved") then
             vim.lsp.buf.clear_references()
