@@ -98,7 +98,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        rust_analyzer = {},
         taplo = {
           keys = {
             {
@@ -114,11 +113,6 @@ return {
             },
           },
         },
-      },
-      setup = {
-        rust_analyzer = function()
-          return true
-        end,
       },
     },
   },
