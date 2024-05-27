@@ -1,5 +1,22 @@
 # Changelog
 
+## [11.9.0](https://github.com/LazyVim/LazyVim/compare/v11.8.0...v11.9.0) (2024-05-27)
+
+
+### Features
+
+* **copilot-chat:** enhanced rendering of the chat window ([a23e8c1](https://github.com/LazyVim/LazyVim/commit/a23e8c15f50a176f0decf054ecbfc38c7570b9b0))
+* **copilot-chat:** make keymaps work in visual mode ([2695fc7](https://github.com/LazyVim/LazyVim/commit/2695fc7dfc9972da9c3d7e1d3b4a138f54f1dcbb))
+
+
+### Bug Fixes
+
+* **copilot-chat:** clear -&gt; reset ([02b240c](https://github.com/LazyVim/LazyVim/commit/02b240cea56a5547f2b0729e09decfc228475c8b))
+* **edgy:** load edgy spec early ([163f7ea](https://github.com/LazyVim/LazyVim/commit/163f7ea3036caf48eed9e9c7b0da8680475612a7))
+* **lsp:** double check for documentHighlight. See [#3246](https://github.com/LazyVim/LazyVim/issues/3246) ([0a63734](https://github.com/LazyVim/LazyVim/commit/0a63734b783509407530eae789258fcf9a6f2219))
+* **terminal:** make `gf` behave. Fixes [#3335](https://github.com/LazyVim/LazyVim/issues/3335) ([eb1c04b](https://github.com/LazyVim/LazyVim/commit/eb1c04bd31d518377538ac228788b6a0be194c1b))
+* **typescript:** invalid value in inlayHints options ([#3331](https://github.com/LazyVim/LazyVim/issues/3331)) ([54d7cea](https://github.com/LazyVim/LazyVim/commit/54d7cea30567577bf926765e9282d7736e951941))
+
 ## [11.8.0](https://github.com/LazyVim/LazyVim/compare/v11.7.0...v11.8.0) (2024-05-27)
 
 
