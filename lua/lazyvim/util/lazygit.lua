@@ -32,7 +32,7 @@ M.theme = {
   unstagedChangesColor = { fg = "DiagnosticError" },
 }
 
-M.theme_path = vim.fn.stdpath("cache") .. "/lazygit-theme.yml"
+M.theme_path = LazyVim.norm(vim.fn.stdpath("cache") .. "/lazygit-theme.yml")
 
 -- re-create config file on startup
 M.dirty = true
@@ -69,7 +69,7 @@ function M.open(opts)
       local ok, lines = pcall(Process.exec, { "lazygit", "-cd" })
       if ok then
         M.config_dir = lines[1]
-        vim.env.LG_CONFIG_FILE = M.config_dir .. "/config.yml" .. "," .. M.theme_path
+        vim.env.LG_CONFIG_FILE = LazyVim.norm(M.config_dir .. "/config.yml" .. "," .. M.theme_path)
       else
         ---@diagnostic disable-next-line: cast-type-mismatch
         ---@cast lines string
