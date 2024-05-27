@@ -1,5 +1,22 @@
 # Changelog
 
+## [11.8.0](https://github.com/LazyVim/LazyVim/compare/v11.7.0...v11.8.0) (2024-05-27)
+
+
+### Features
+
+* **extras:** added extra for CopilotChat.nvim ([4678552](https://github.com/LazyVim/LazyVim/commit/46785526a63b401d812de79fbbecca26414dc8e8))
+* **git:** Change Commit Log to use Lazygit ([#2959](https://github.com/LazyVim/LazyVim/issues/2959)) ([9ccdbf6](https://github.com/LazyVim/LazyVim/commit/9ccdbf644cc6f38ade7fdd7e554e8da8b38091ac))
+
+
+### Bug Fixes
+
+* **lang/rust:** Remove `rust-analyzer` from `nvim-lspconfig` ([#2755](https://github.com/LazyVim/LazyVim/issues/2755)) ([f48d55a](https://github.com/LazyVim/LazyVim/commit/f48d55a653cc829e7dfecc3c01bf1ccbdf337257))
+* **laygit:** normalize paths. Fixes [#3327](https://github.com/LazyVim/LazyVim/issues/3327) ([dbed614](https://github.com/LazyVim/LazyVim/commit/dbed614655fdf13436654356c0ba156d45ee7cc4))
+* **laygit:** use correct .git root for git blame ([d23e857](https://github.com/LazyVim/LazyVim/commit/d23e8572e8ccc96b686ef8187aadf56ad47edd67))
+* **rust:** show error when rust-analyzer not found ([d3500a4](https://github.com/LazyVim/LazyVim/commit/d3500a4a33ab87c6225d991302a72012c54b26fe))
+* **snippet:** always use top-level snippet session. Fixes [#3199](https://github.com/LazyVim/LazyVim/issues/3199) ([5391174](https://github.com/LazyVim/LazyVim/commit/53911748ddc7f92793c6fec6348a9cde32159ef3))
+
 ## [11.7.0](https://github.com/LazyVim/LazyVim/compare/v11.6.1...v11.7.0) (2024-05-26)
 
 
