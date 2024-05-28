@@ -77,6 +77,7 @@ return {
           require("telescope").extensions.metals.commands()
         end,
         desc = "Metals commands",
+        ft = { "scala", "sbt", "java" },
       },
       {
         "<leader>mc",
@@ -84,6 +85,7 @@ return {
           require("metals").compile_cascade()
         end,
         desc = "Metals compile cascade",
+        ft = { "scala", "sbt", "java" },
       },
     },
   },
