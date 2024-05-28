@@ -22,7 +22,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "mfussenegger/nvim-dap",
-      "j-hui/fidget.nvim",
     },
     ft = { "scala", "sbt", "java" },
     init = function()
