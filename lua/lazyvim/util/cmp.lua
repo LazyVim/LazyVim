@@ -1,6 +1,8 @@
 ---@class lazyvim.util.cmp
 local M = {}
 
+---@alias Placeholder {n:number, text:string}
+
 ---@param snippet string
 ---@param fn fun(placeholder:Placeholder):string
 ---@return string
@@ -15,10 +17,13 @@ end
 ---@param snippet string
 ---@return string
 function M.snippet_preview(snippet)
-  local ret = M.snippet_replace(snippet, function(placeholder)
-    return M.snippet_preview(placeholder.text)
-  end):gsub("%$0", "")
-  return ret
+  local ok, parsed = pcall(function()
+    return vim.lsp._snippet_grammar.parse(snippet)
+  end)
+  return ok and tostring(parsed)
+    or M.snippet_replace(snippet, function(placeholder)
+      return M.snippet_preview(placeholder.text)
+    end):gsub("%$0", "")
 end
 
 -- This function replaces nested placeholders in a snippet with LSP placeholders.
