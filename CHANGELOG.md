@@ -1,5 +1,19 @@
 # Changelog
 
+## [11.11.0](https://github.com/LazyVim/LazyVim/compare/v11.10.0...v11.11.0) (2024-05-28)
+
+
+### Features
+
+* **snippets:** try to use the snippet parse to get a preview ([eb0da3c](https://github.com/LazyVim/LazyVim/commit/eb0da3c92f2aee00ce951410ec820ce2f63490d8))
+
+
+### Bug Fixes
+
+* **nvim-snippets:** no longer needed to set global_snippets ([9149358](https://github.com/LazyVim/LazyVim/commit/91493588a8580cc216ee63cdc98b4462c54b45a7))
+* **snippets:** fix snippets with multiple placeholders for the same tabstop ([1b86d7b](https://github.com/LazyVim/LazyVim/commit/1b86d7b2ade1dc934165fb1de8e5a3b211bc5ee0))
+* **snippets:** show actual error for failed snippet ([425dade](https://github.com/LazyVim/LazyVim/commit/425dadef72e2af17eb45faf7bf45f7d74276ad72))
+
 ## [11.10.0](https://github.com/LazyVim/LazyVim/compare/v11.9.0...v11.10.0) (2024-05-28)
 
 
