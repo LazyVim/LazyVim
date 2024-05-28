@@ -31,6 +31,7 @@ return {
               g = { name = "+(g)oto", ["🚫"] = "which_key_ignore" },
               k = { name = "+(k)nit", ["🚫"] = "which_key_ignore" },
               p = { name = "+(p)aragraph", ["🚫"] = "which_key_ignore" },
+              q = { name = "+(q)uarto", ["🚫"] = "which_key_ignore" },
               r = { name = "+(r) general", ["🚫"] = "which_key_ignore" },
               s = { name = "+(s)plit or (s)end", ["🚫"] = "which_key_ignore" },
               t = { name = "+(t)erminal", ["🚫"] = "which_key_ignore" },
