@@ -59,11 +59,10 @@ return {
     end,
     config = function(_, opts)
       local chat = require("CopilotChat")
-      local ns = vim.api.nvim_create_namespace("copilot-chat-text-hl")
 
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = "copilot-chat",
-        callback = function(ev)
+        callback = function()
           vim.opt_local.relativenumber = false
           vim.opt_local.number = false
         end,
