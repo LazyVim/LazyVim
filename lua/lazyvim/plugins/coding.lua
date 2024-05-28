@@ -104,11 +104,6 @@ return {
             opts = {
               friendly_snippets = true,
               global_snippets = { "all", "global" },
-              extended_filetypes = {
-                typescript = { "javascript" },
-                typescriptreact = { "javascript" },
-                javascriptreact = { "javascript" },
-              },
             },
             dependencies = { "rafamadriz/friendly-snippets" },
           },
