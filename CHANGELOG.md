@@ -1,5 +1,24 @@
 # Changelog
 
+## [11.10.0](https://github.com/LazyVim/LazyVim/compare/v11.9.0...v11.10.0) (2024-05-28)
+
+
+### Features
+
+* **keymaps:** add comment above/below current line with gco/gcO ([47a8736](https://github.com/LazyVim/LazyVim/commit/47a8736278d246769069dd1013560f1a122b0316))
+* **lang:** add R ([#3272](https://github.com/LazyVim/LazyVim/issues/3272)) ([80c9dca](https://github.com/LazyVim/LazyVim/commit/80c9dcaabe97a2e07d4fbc060820d8eb3ae6a044))
+* **lsp:** config option to exclude certain filetypes from inlay hints. Closes [#3202](https://github.com/LazyVim/LazyVim/issues/3202) ([e68ff68](https://github.com/LazyVim/LazyVim/commit/e68ff6897eb8e90ec08f7400d3271a8b4fb1da1e))
+* **scala-extra:** Use noice for progress and add minimal keybinding ([#3348](https://github.com/LazyVim/LazyVim/issues/3348)) ([de57894](https://github.com/LazyVim/LazyVim/commit/de5789415855eafa24f399ee11a5e96bee7c6f9e))
+* **snippets:** re-number tabstops for invalid snippets ([cf43748](https://github.com/LazyVim/LazyVim/commit/cf4374867d39b590f1add8c654dbb2d3578cf24f))
+
+
+### Bug Fixes
+
+* **copilot-chat:** enhanced chat view is now merged upstream, so update your plugins! ([08481c2](https://github.com/LazyVim/LazyVim/commit/08481c2c9272b8863611d5f3e79876674bfc570e))
+* **nvim-snippets:** also enable for tsx/jsx files ([025ba33](https://github.com/LazyVim/LazyVim/commit/025ba33dc3e7899b26233f05cb650dbecb234441))
+* **nvim-snippets:** load js snippets for ts. See [#3344](https://github.com/LazyVim/LazyVim/issues/3344) ([99f0a1c](https://github.com/LazyVim/LazyVim/commit/99f0a1cb40cbfc099503bfa05fbd6c26370cada3))
+* **nvim-snippets:** remove extra filetypes since thats no longer needed with merged PR ([a6e6d4d](https://github.com/LazyVim/LazyVim/commit/a6e6d4dabd60ab12546f56989811e58b19efb5a1))
+
 ## [11.9.0](https://github.com/LazyVim/LazyVim/compare/v11.8.0...v11.9.0) (2024-05-27)
 
 
