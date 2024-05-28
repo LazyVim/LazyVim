@@ -28,10 +28,10 @@ end
 
 -- This function replaces nested placeholders in a snippet with LSP placeholders.
 function M.snippet_fix(snippet)
-  local nn = 0
+  local texts = {} ---@type table<number, string>
   return M.snippet_replace(snippet, function(placeholder)
-    nn = nn + 1
-    return "${" .. nn .. ":" .. M.snippet_preview(placeholder.text) .. "}"
+    texts[placeholder.n] = texts[placeholder.n] or M.snippet_preview(placeholder.text)
+    return "${" .. placeholder.n .. ":" .. texts[placeholder.n] .. "}"
   end)
 end
 
