@@ -40,6 +40,7 @@ return {
           })
         end,
       },
+      pdfviewer = ""
     },
     config = function(_, opts)
       require("r").setup(opts)
