@@ -23,8 +23,10 @@ end
 
 -- This function replaces nested placeholders in a snippet with LSP placeholders.
 function M.snippet_fix(snippet)
+  local nn = 0
   return M.snippet_replace(snippet, function(placeholder)
-    return "${" .. placeholder.n .. ":" .. M.snippet_preview(placeholder.text) .. "}"
+    nn = nn + 1
+    return "${" .. nn .. ":" .. M.snippet_preview(placeholder.text) .. "}"
   end)
 end
 
