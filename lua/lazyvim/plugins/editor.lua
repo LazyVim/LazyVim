@@ -25,16 +25,6 @@ return {
       },
       { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
       {
-        "<Leader>B",
-        function()
-          local function buffer_dir()
-            return vim.fn.expand("%:p:h")
-          end
-          require("neo-tree.command").execute({ toggle = true, dir = buffer_dir() })
-        end,
-        desc = "Explorer NeoTree (Buffer Dir)",
-      },
-      {
         "<Leader>fB",
         function()
           local function buffer_dir()
@@ -44,6 +34,7 @@ return {
         end,
         desc = "Explorer NeoTree (Buffer Dir)",
       },
+      { "<leader>B", "<leader>fB", desc = "Explorer NeoTree (Buffer Dir)", remap = true },
       { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
       {
         "<leader>ge",
