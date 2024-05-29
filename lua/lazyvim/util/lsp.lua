@@ -179,6 +179,11 @@ function M.get_config(server)
   return rawget(configs, server)
 end
 
+function M.is_enabled(server)
+  local c = M.get_config(server)
+  return c and c.enabled ~= false
+end
+
 ---@param server string
 ---@param cond fun( root_dir, config): boolean
 function M.disable(server, cond)
