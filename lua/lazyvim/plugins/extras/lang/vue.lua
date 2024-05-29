@@ -26,14 +26,18 @@ return {
         volar = {},
         -- Volar 2.0 has discontinued their "take over mode" which in previous version provided support for typescript in vue files.
         -- The new approach to get typescript support involves using the typescript language server along side volar.
-        tsserver = {
-          init_options = {
-            plugins = {
-              -- Use typescript language server along with vue typescript plugin
-              {
-                name = "@vue/typescript-plugin",
-                location = vue_typescript_plugin,
-                languages = { "javascript", "typescript", "vue" },
+        vtsls = {
+          settings = {
+            vtsls = {
+              tsserver = {
+                globalPlugins = {
+                  -- Use typescript language server along with vue typescript plugin
+                  {
+                    name = "@vue/typescript-plugin",
+                    location = vue_typescript_plugin,
+                    languages = { "vue" },
+                  },
+                },
               },
             },
           },
