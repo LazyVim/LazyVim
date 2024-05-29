@@ -117,9 +117,36 @@ function M.on_supports_method(method, fn)
   })
 end
 
+function M.rename_file()
+  local buf = vim.api.nvim_get_current_buf()
+  local old = assert(LazyVim.root.realpath(vim.api.nvim_buf_get_name(buf)))
+  local root = assert(LazyVim.root.realpath(LazyVim.root.get({ normalize = true })))
+  assert(old:find(root, 1, true) == 1, "File not in project root")
+
+  local extra = old:sub(#root + 2)
+
+  vim.ui.input({
+    prompt = "New File Name: ",
+    default = extra,
+  }, function(new)
+    if not new or new == "" or new == extra then
+      return
+    end
+    new = LazyVim.norm(root .. "/" .. new)
+    vim.fn.mkdir(vim.fs.dirname(new), "p")
+    M.on_rename(old, new, function()
+      vim.fn.rename(old, new)
+      vim.cmd.edit(new)
+      vim.api.nvim_buf_delete(buf, { force = true })
+      vim.fn.delete(old)
+    end)
+  end)
+end
+
 ---@param from string
 ---@param to string
-function M.on_rename(from, to)
+---@param rename? fun()
+function M.on_rename(from, to, rename)
   local changes = { files = { {
     oldUri = vim.uri_from_fname(from),
     newUri = vim.uri_from_fname(to),
@@ -133,6 +160,13 @@ function M.on_rename(from, to)
         vim.lsp.util.apply_workspace_edit(resp.result, client.offset_encoding)
       end
     end
+  end
+
+  if rename then
+    rename()
+  end
+
+  for _, client in ipairs(clients) do
     if client.supports_method("workspace/didRenameFiles") then
       client.notify("workspace/didRenameFiles", changes)
     end
