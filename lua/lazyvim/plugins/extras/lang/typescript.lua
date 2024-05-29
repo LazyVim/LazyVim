@@ -1,14 +1,3 @@
-local inlay_hints_settings = {
-  includeInlayEnumMemberValueHints = true,
-  includeInlayFunctionLikeReturnTypeHints = true,
-  includeInlayFunctionParameterTypeHints = true,
-  includeInlayParameterNameHints = "literals",
-  includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-  includeInlayPropertyDeclarationTypeHints = true,
-  includeInlayVariableTypeHints = false,
-  includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-}
-
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -24,13 +13,12 @@ return {
     })
   end,
 
-  -- add typescript to treesitter
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
-      end
+    "yioneko/nvim-vtsls",
+    lazy = true,
+    opts = {},
+    config = function(_, opts)
+      require("vtsls").config(opts)
     end,
   },
 
@@ -40,50 +28,83 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
-        ---@type lspconfig.options.tsserver
         tsserver = {
+          enabled = false,
+        },
+        vtsls = {
+          settings = {
+            complete_function_calls = true,
+            typescript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              enableMoveToFileCodeAction = true,
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                parameterNames = { enabled = "literals" },
+                parameterTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = false },
+              },
+            },
+          },
           keys = {
+            {
+              "gD",
+              function()
+                require("vtsls").commands.goto_source_definition(0)
+              end,
+              desc = "Goto Source Definition",
+            },
             {
               "<leader>co",
               function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports.ts" },
-                    diagnostics = {},
-                  },
-                })
+                require("vtsls").commands.organize_imports(0)
               end,
               desc = "Organize Imports",
             },
             {
-              "<leader>cR",
+              "<leader>cM",
               function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.removeUnused.ts" },
-                    diagnostics = {},
-                  },
-                })
+                require("vtsls").commands.add_missing_imports(0)
               end,
-              desc = "Remove Unused Imports",
+              desc = "Add missing imports",
             },
-          },
-          settings = {
-            typescript = {
-              inlayHints = inlay_hints_settings,
-            },
-            javascript = {
-              inlayHints = inlay_hints_settings,
-            },
-            completions = {
-              completeFunctionCalls = true,
+            {
+              "<leader>cD",
+              function()
+                require("vtsls").commands.fix_all(0)
+              end,
+              desc = "Fix all diagnostics",
             },
           },
         },
       },
+      setup = {
+        tsserver = function()
+          -- disable tsserver
+          return true
+        end,
+      },
     },
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      -- copy typescript settings to javascript
+      opts.servers.vtsls.settings.javascript = vim.deepcopy(opts.servers.vtsls.settings.typescript)
+
+      -- add vtsls to lspconfig
+      require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+    end,
   },
 
   {
