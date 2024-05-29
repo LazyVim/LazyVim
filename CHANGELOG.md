@@ -1,5 +1,30 @@
 # Changelog
 
+## [12.0.0](https://github.com/LazyVim/LazyVim/compare/v11.11.0...v12.0.0) (2024-05-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **typescript:** the typescript extra now uses vtsls instead of tsserver. You may want to update your lsp settings.
+
+### Features
+
+* **keymaps:** new keymap to toggle mazimize of current window leader-m or leader-wm ([3ace827](https://github.com/LazyVim/LazyVim/commit/3ace8277e54370c0aa3d17e61018cf039c42d69b))
+* **lsp:** added leader-cR to rename the current file and to lsp rename operations ([b949dba](https://github.com/LazyVim/LazyVim/commit/b949dba489abae54ba28540da06f360d6fb2788d))
+* **typescript:** added `gR` to goto file references ([38b8736](https://github.com/LazyVim/LazyVim/commit/38b8736b81870a01f4464c9dd07d545ea57b95fc))
+* **typescript:** the typescript extra now uses vtsls instead of tsserver. You may want to update your lsp settings. ([fba06ce](https://github.com/LazyVim/LazyVim/commit/fba06ce9f522b91be8a342f9c028948c2733132d))
+* **vscode:** added ts-comments to allow list for vscode ([0975eeb](https://github.com/LazyVim/LazyVim/commit/0975eeb9add54b1dc65f4c3874edd8e35e527099))
+
+
+### Bug Fixes
+
+* **lsp:** added support for `has` as array for lsp keymaps ([01e6718](https://github.com/LazyVim/LazyVim/commit/01e6718e034d4a66bbdecef35f12c71bbde519fe))
+* **lsp:** create `gr` with `nowait=true` ([4dfd5c2](https://github.com/LazyVim/LazyVim/commit/4dfd5c2596ff427a1232e6624add093d5b4da82e))
+* **lsp:** fix LazyVim's `on_file_rename` to work according to the lsp spec ([4bbeb37](https://github.com/LazyVim/LazyVim/commit/4bbeb37a18b02fc0c1bb5050dce4358b51583968))
+* **lsp:** fix ts/deno both attaching ([f6bcf6f](https://github.com/LazyVim/LazyVim/commit/f6bcf6f12c9a9f5ac256b394155d8a9649c6beda))
+* **lsp:** remove duplicate keymap ([8047562](https://github.com/LazyVim/LazyVim/commit/804756209e314d9bd466584e75aee37912b75223))
+* **trouble_v3:** set correct lualine section background color ([a13457e](https://github.com/LazyVim/LazyVim/commit/a13457eea3edf9b409e93e0391a5c206e0260022))
+
 ## [11.11.0](https://github.com/LazyVim/LazyVim/compare/v11.10.0...v11.11.0) (2024-05-28)
 
 
