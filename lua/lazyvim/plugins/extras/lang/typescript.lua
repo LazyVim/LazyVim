@@ -34,9 +34,11 @@ return {
         vtsls = {
           settings = {
             complete_function_calls = true,
+            vtsls = {
+              enableMoveToFileCodeAction = true,
+            },
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
-              enableMoveToFileCodeAction = true,
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
@@ -62,6 +64,13 @@ return {
                 require("vtsls").commands.goto_source_definition(0)
               end,
               desc = "Goto Source Definition",
+            },
+            {
+              "gR",
+              function()
+                require("vtsls").commands.file_references(0)
+              end,
+              desc = "File References",
             },
             {
               "<leader>co",
@@ -101,9 +110,6 @@ return {
     opts = function(_, opts)
       -- copy typescript settings to javascript
       opts.servers.vtsls.settings.javascript = vim.deepcopy(opts.servers.vtsls.settings.typescript)
-
-      -- add vtsls to lspconfig
-      require("lspconfig.configs").vtsls = require("vtsls").lspconfig
     end,
   },
 
