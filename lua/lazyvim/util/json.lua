@@ -89,6 +89,10 @@ function M.migrate()
     json.data.extras = vim.tbl_filter(function(extra)
       return not (extra == "lazyvim.plugins.extras.lazyrc")
     end, json.data.extras or {})
+  elseif json.data.version == 5 then
+    json.data.extras = vim.tbl_filter(function(extra)
+      return not (extra == "lazyvim.plugins.extras.editor.trouble-v3")
+    end, json.data.extras or {})
   end
 
   M.save()

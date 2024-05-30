@@ -128,6 +128,17 @@ return {
 
       vim.o.laststatus = vim.g.lualine_laststatus
 
+      local trouble = require("trouble")
+      local symbols = trouble.statusline
+        and trouble.statusline({
+          mode = "symbols",
+          groups = {},
+          title = false,
+          filter = { range = true },
+          format = "{kind_icon}{symbol.name:Normal}",
+          hl_group = "lualine_c_normal",
+        })
+
       return {
         options = {
           theme = "auto",
@@ -151,6 +162,10 @@ return {
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { LazyVim.lualine.pretty_path() },
+            {
+              symbols and symbols.get,
+              cond = symbols and symbols.has,
+            },
           },
           lualine_x = {
             -- stylua: ignore
