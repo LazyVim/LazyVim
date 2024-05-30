@@ -20,6 +20,9 @@ local defaults = {
     -- lazyvim.config.options can't be configured here since that's loaded before lazyvim setup
     -- if you want to disable loading options, add `package.loaded["lazyvim.config.options"] = true` to the top of your init.lua
   },
+  -- module containing autocmds, keymaps and options
+  ---@type string
+  modname = "config",
   news = {
     -- When enabled, NEWS.md will be shown when changed.
     -- This only contains big new features and breaking changes.
@@ -249,7 +252,7 @@ function M.load(name)
   if M.defaults[name] or name == "options" then
     _load("lazyvim.config." .. name)
   end
-  _load("config." .. name)
+  _load(M.modname .. "." .. name)
   if vim.bo.filetype == "lazy" then
     -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
     vim.cmd([[do VimResized]])
