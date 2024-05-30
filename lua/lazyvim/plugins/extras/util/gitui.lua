@@ -26,6 +26,7 @@ return {
         once = true,
         callback = function()
           pcall(vim.keymap.del, "n", "<leader>gf")
+          pcall(vim.keymap.del, "n", "<leader>gl")
         end,
       })
     end,
