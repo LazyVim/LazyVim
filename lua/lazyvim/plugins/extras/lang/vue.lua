@@ -32,7 +32,7 @@ return {
               tsserver = {
                 globalPlugins = {
                   -- Use typescript language server along with vue typescript plugin
-                  {
+                  vue = {
                     name = "@vue/typescript-plugin",
                     location = vue_typescript_plugin,
                     languages = { "vue" },

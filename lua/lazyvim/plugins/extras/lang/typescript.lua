@@ -108,16 +108,19 @@ return {
           -- disable tsserver
           return true
         end,
+        vtsls = function(_, opts)
+          -- copy typescript settings to javascript
+          opts.settings.javascript =
+            vim.tbl_deep_extend("force", {}, opts.settings.typescript, opts.settings.javascript or {})
+          local plugins = vim.tbl_get(opts.settings, "vtsls", "tsserver", "globalPlugins")
+          -- allow plugins to have a key for proper merging
+          -- remove the key here
+          if plugins then
+            opts.settings.vtsls.tsserver.globalPlugins = vim.tbl_values(plugins)
+          end
+        end,
       },
     },
-  },
-
-  {
-    "neovim/nvim-lspconfig",
-    opts = function(_, opts)
-      -- copy typescript settings to javascript
-      opts.servers.vtsls.settings.javascript = vim.deepcopy(opts.servers.vtsls.settings.typescript)
-    end,
   },
 
   {
