@@ -93,6 +93,13 @@ return {
               end,
               desc = "Fix all diagnostics",
             },
+            {
+              "<leader>cV",
+              function()
+                require("vtsls").commands.select_ts_version(0)
+              end,
+              desc = "Select TS workspace version",
+            },
           },
         },
       },
