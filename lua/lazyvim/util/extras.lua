@@ -200,7 +200,7 @@ function X:update()
       diag.lnum = diag.row - 1
       return diag
     end, self.diag),
-    { signs = false, virtual_text = true }
+    { signs = false, virtual_text = true, underline = false }
   )
 end
 
