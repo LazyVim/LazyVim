@@ -21,7 +21,20 @@ return {
       require("vtsls").config(opts)
     end,
   },
-
+  -- add typescript to treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
+      end
+      vim.filetype.add({
+        pattern = {
+          ["tsconfig.tsbuildinfo"] = "json",
+        },
+      })
+    end,
+  },
   -- correctly setup lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -92,6 +105,13 @@ return {
                 require("vtsls").commands.fix_all(0)
               end,
               desc = "Fix all diagnostics",
+            },
+            {
+              "<leader>cV",
+              function()
+                require("vtsls").commands.select_ts_version(0)
+              end,
+              desc = "Select TS workspace version",
             },
           },
         },
