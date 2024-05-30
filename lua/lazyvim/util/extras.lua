@@ -218,8 +218,14 @@ function X:render()
   for _, extra in ipairs(self.extras) do
     extra.section = nil
   end
+  self:section({
+    recommended = true,
+    enabled = false,
+    include = "^lang%.",
+    title = "Recommended Languages",
+    empty = false,
+  })
   self:section({ enabled = true, title = "Enabled" })
-  self:section({ recommended = true, include = "^lang%.", title = "Recommended Languages", empty = false })
   self:section({ recommended = true, title = "Recommended Plugins", empty = false })
   self:section({ title = "Plugins", exclude = "^lang%." })
   self:section({ title = "Languages" })
