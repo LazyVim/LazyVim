@@ -36,14 +36,14 @@ return {
             complete_function_calls = true,
             vtsls = {
               enableMoveToFileCodeAction = true,
-            },
-            typescript = {
-              updateImportsOnFileMove = { enabled = "always" },
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
                 },
               },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = "always" },
               suggest = {
                 completeFunctionCalls = true,
               },
