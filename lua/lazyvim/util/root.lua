@@ -52,7 +52,7 @@ function M.detectors.pattern(buf, patterns)
       if name == p then
         return true
       end
-      if p:sub(1, 1) == "*" and name:find(p:sub(2) .. "$") then
+      if p:sub(1, 1) == "*" and name:find(vim.pesc(p:sub(2)) .. "$") then
         return true
       end
     end
