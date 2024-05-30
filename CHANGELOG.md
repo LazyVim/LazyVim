@@ -1,5 +1,25 @@
 # Changelog
 
+## [12.1.0](https://github.com/LazyVim/LazyVim/compare/v12.0.0...v12.1.0) (2024-05-30)
+
+
+### Features
+
+* **copilot-chat:** add cmp integration ([2a7d163](https://github.com/LazyVim/LazyVim/commit/2a7d163a8a6de2a5ad58b240770d90e6e5947638))
+* **extras:** simple extra for astro ([e7d4b39](https://github.com/LazyVim/LazyVim/commit/e7d4b397b291ec8854673e813ae67103bc75e15d))
+* trouble v3 ([95d055d](https://github.com/LazyVim/LazyVim/commit/95d055dcf7bbad34f6b8aaf94d285314ceaf6f0c))
+* **typescript:** vtls add select ts version ([#3366](https://github.com/LazyVim/LazyVim/issues/3366)) ([b285a46](https://github.com/LazyVim/LazyVim/commit/b285a46dfcde44aa2ab4f5acbbc4a2a18cc1f16b))
+
+
+### Bug Fixes
+
+* **clangd:** switch source/header is now leader-ch. Fixes [#3363](https://github.com/LazyVim/LazyVim/issues/3363) ([a224ef2](https://github.com/LazyVim/LazyVim/commit/a224ef2a73dd1e8b358179aab8fa36c1b6745b26))
+* **extras:** show recommended languages above enabled plugins ([c4b7505](https://github.com/LazyVim/LazyVim/commit/c4b75059697a85c77e4d85e18e37ebb6f278cf2a))
+* remove lazygit log gl keymap when on gitui ([#3371](https://github.com/LazyVim/LazyVim/issues/3371)) ([c2ef092](https://github.com/LazyVim/LazyVim/commit/c2ef09227ee59692f931fd7d4183759d1a82ac02))
+* **root:** escape glob expressions ([7414e84](https://github.com/LazyVim/LazyVim/commit/7414e84af96941fbe74555951ca6f5a58530775d))
+* **typescript:** allow easier merging of ts plugins ([cf6775a](https://github.com/LazyVim/LazyVim/commit/cf6775a959de7df314a8db1c208daed33a70f0c4))
+* **typescript:** vtsls server expe settings ([#3372](https://github.com/LazyVim/LazyVim/issues/3372)) ([ae098d6](https://github.com/LazyVim/LazyVim/commit/ae098d67d6842ccc097f5a10616369b60dfe6701))
+
 ## [12.0.0](https://github.com/LazyVim/LazyVim/compare/v11.11.0...v12.0.0) (2024-05-29)
 
 
