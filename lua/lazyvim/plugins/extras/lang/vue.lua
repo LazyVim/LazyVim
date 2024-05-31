@@ -39,12 +39,10 @@ return {
         },
       })
       LazyVim.extend(opts.servers.vtsls.settings.vtsls.tsserver.globalPlugins, {
-        {
-          name = "@vue/typescript-plugin",
-          location = vue_typescript_plugin,
-          languages = { "vue" },
-          configNamespace = "typescript",
-        },
+        name = "@vue/typescript-plugin",
+        location = vue_typescript_plugin,
+        languages = { "vue" },
+        configNamespace = "typescript",
       })
     end,
 
