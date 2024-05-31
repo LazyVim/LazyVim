@@ -53,7 +53,7 @@ return {
     init = function()
       LazyVim.on_load("which-key.nvim", function()
         vim.schedule(function()
-          require("which-key").register({ a = { name = "+CopilotChat (AI)" } }, { prefix = "<leader>" })
+          require("which-key").register({ a = { name = "+ai" } }, { prefix = "<leader>" })
         end)
       end)
     end,
