@@ -67,6 +67,8 @@ return {
       { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
       { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
       { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "<C-,>", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Left" },
+      { "<C-.>", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Right" },
     },
     opts = {
       options = {
