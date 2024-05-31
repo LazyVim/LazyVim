@@ -49,6 +49,14 @@ return {
     },
   },
 
+  {
+    "folke/trouble.nvim",
+    optional = true,
+    keys = {
+      { "<leader>cs", false },
+    },
+  },
+
   -- Telescope integration
   {
     "nvim-telescope/telescope.nvim",
