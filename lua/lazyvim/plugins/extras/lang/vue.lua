@@ -27,20 +27,6 @@ return {
         -- Volar 2.0 has discontinued their "take over mode" which in previous version provided support for typescript in vue files.
         -- The new approach to get typescript support involves using the typescript language server along side volar.
         vtsls = {
-          settings = {
-            vtsls = {
-              tsserver = {
-                globalPlugins = {
-                  -- Use typescript language server along with vue typescript plugin
-                  vue = {
-                    name = "@vue/typescript-plugin",
-                    location = vue_typescript_plugin,
-                    languages = { "vue" },
-                  },
-                },
-              },
-            },
-          },
           filetypes = {
             "javascript",
             "javascriptreact",
@@ -51,6 +37,12 @@ return {
             "vue",
           },
         },
+      })
+
+      LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+        name = "@vue/typescript-plugin",
+        location = vue_typescript_plugin,
+        languages = { "vue" },
       })
     end,
   },
