@@ -209,7 +209,7 @@ return {
       }
 
       -- do not add trouble symbols if aerial is enabled
-      if not LazyVim.has("aerial.nvim") then
+      if vim.g.trouble_lualine then
         local trouble = require("trouble")
         local symbols = trouble.statusline
           and trouble.statusline({
