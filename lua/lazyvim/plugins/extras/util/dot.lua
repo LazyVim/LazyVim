@@ -7,6 +7,8 @@ local function have(path)
 end
 
 return {
+  recommended = true,
+  desc = "Language support for dotfiles",
   {
     "neovim/nvim-lspconfig",
     opts = {
