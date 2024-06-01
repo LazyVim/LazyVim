@@ -33,7 +33,7 @@ return {
       end
 
       vim.filetype.add({
-        extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi" },
+        extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi", tsbuildinfo = "json" },
         filename = {
           ["vifmrc"] = "vim",
         },
