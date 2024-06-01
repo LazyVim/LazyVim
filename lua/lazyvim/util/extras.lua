@@ -17,6 +17,7 @@ local Text = require("lazy.view.text")
 ---@field enabled boolean
 ---@field managed boolean
 ---@field recommended? boolean
+---@field imports string[]
 ---@field row? number
 ---@field section? string
 ---@field plugins string[]
@@ -82,7 +83,16 @@ end
 ---@param source LazyExtraSource
 function M.get_extra(source, modname)
   local enabled = vim.tbl_contains(M.state, modname)
-  local spec = Plugin.Spec.new({ import = modname }, { optional = true })
+  local spec = Plugin.Spec.new(nil, { optional = true })
+  spec:parse({ import = modname })
+  local imports = vim.tbl_filter(function(x)
+    return x ~= modname
+  end, spec.modules)
+  if #imports > 0 then
+    spec = Plugin.Spec.new(nil, { optional = true })
+    spec.modules = vim.deepcopy(imports)
+    spec:parse({ import = modname })
+  end
   local plugins = {} ---@type string[]
   local optional = {} ---@type string[]
   for _, p in pairs(spec.plugins) do
@@ -107,6 +117,7 @@ function M.get_extra(source, modname)
     name = modname:sub(#source.module + 2),
     module = modname,
     enabled = enabled,
+    imports = imports,
     desc = require(modname).desc,
     recommended = recommended,
     managed = vim.tbl_contains(Config.json.data.extras, modname) or not enabled,
@@ -253,6 +264,10 @@ function X:extra(extra)
   end
   if extra.source.name ~= "LazyVim" then
     self.text:append(" "):append(LazyConfig.options.ui.icons.event .. " " .. extra.source.name, "LazyReasonEvent")
+  end
+  for _, import in ipairs(extra.imports) do
+    import = import:gsub("^lazyvim.plugins.extras.", "")
+    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. import, "LazyReasonStart")
   end
   for _, plugin in ipairs(extra.plugins) do
     self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonPlugin")
