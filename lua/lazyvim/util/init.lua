@@ -226,11 +226,12 @@ end
 ---@param path? string
 ---@param opts? { warn?: boolean }
 function M.get_pkg_path(pkg, path, opts)
-  require("mason") -- make sure Mason is loaded
+  pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
+  local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
   opts = opts or {}
   opts.warn = opts.warn == nil and true or opts.warn
   path = path or ""
-  local ret = vim.env.MASON .. "/packages/" .. pkg .. "/" .. path
+  local ret = root .. "/packages/" .. pkg .. "/" .. path
   if opts.warn and not vim.loop.fs_stat(ret) then
     M.warn(("Mason package path not found for **%s**:\n- `%s`"):format(pkg, path))
   end
