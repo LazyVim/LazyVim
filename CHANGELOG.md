@@ -1,5 +1,30 @@
 # Changelog
 
+## [12.2.0](https://github.com/LazyVim/LazyVim/compare/v12.1.0...v12.2.0) (2024-06-01)
+
+
+### Features
+
+* **astro:** added support for ts-plugin, but won't work till mason-registry PR is merged. See [#3364](https://github.com/LazyVim/LazyVim/issues/3364) ([683aaeb](https://github.com/LazyVim/LazyVim/commit/683aaeb75b46f182f2a2dca3b8416151de296626))
+* **extras:** added extra for svelte. Full support will be enabled once my mason PR gets merged ([7598a75](https://github.com/LazyVim/LazyVim/commit/7598a7503df0fd7912e81fdc9a0eb7635795605b))
+* **typescript:** add keymap for remove unused imports ([#3376](https://github.com/LazyVim/LazyVim/issues/3376)) ([0a93737](https://github.com/LazyVim/LazyVim/commit/0a9373733f79be5edb4ccb8d9268a700c1e3faad))
+
+
+### Bug Fixes
+
+* **aerial:** disable trouble leader-cs keymap when aerial extra is enabled ([1351503](https://github.com/LazyVim/LazyVim/commit/135150307b53a5b51f2f0c149ca7f426a67eb8f1))
+* **copilot-chat:** no need to schedule which-key keys. just use default ([6678af3](https://github.com/LazyVim/LazyVim/commit/6678af37ee3100882b4c08451fa8aaa37e37fd69))
+* **extras:** `underline = false` for setting diagnostics ([#3379](https://github.com/LazyVim/LazyVim/issues/3379)) ([060f56d](https://github.com/LazyVim/LazyVim/commit/060f56d6d429c5ee3fd35f4fa0c152f4a42781ca))
+* **health:** remove old deprecated module checks ([4e62df4](https://github.com/LazyVim/LazyVim/commit/4e62df4269a9300c17f6bf23acfcb9dd0729b6c3))
+* **lsp:** better way of extending deeply nested lists. Fixes [#3398](https://github.com/LazyVim/LazyVim/issues/3398) ([9f2cc30](https://github.com/LazyVim/LazyVim/commit/9f2cc302463e3be0ca3a42845c0fc34e49e75bca))
+* rename `+a` which-key group to `ai`. Fixes [#3392](https://github.com/LazyVim/LazyVim/issues/3392) ([a474aea](https://github.com/LazyVim/LazyVim/commit/a474aea1f9fcf0c7601914b1e53260067f621799))
+* **rust:** let rustaceans.nvim setup rust_analyzer ([#3389](https://github.com/LazyVim/LazyVim/issues/3389)) ([3fadf6a](https://github.com/LazyVim/LazyVim/commit/3fadf6af8f4adc1788fb8adec1fd9850d12feaf8))
+* **trouble:** don't enable symbols keymap when `outline.nvim` enabled ([#3408](https://github.com/LazyVim/LazyVim/issues/3408)) ([146c87c](https://github.com/LazyVim/LazyVim/commit/146c87cd786854b9225ad49ad39acbcb4b7fff0b))
+* **ui:** allow to disable the trouble lualine component with `vim.g.trouble_lualine = false` ([#3391](https://github.com/LazyVim/LazyVim/issues/3391)) ([d02b73d](https://github.com/LazyVim/LazyVim/commit/d02b73d72a85d72a57c3bcf0cfaef0cd50c81c37))
+* **ui:** remove old alpha.nvim warning ([abc6554](https://github.com/LazyVim/LazyVim/commit/abc6554e24ff97bfc630fe1d91827e02f826b1fa))
+* **util:** make sure mason is loaded when getting package paths ([a6df15a](https://github.com/LazyVim/LazyVim/commit/a6df15a63fdeaf25895fb2d97910e3e099a95d0c))
+* **vue:** correctly add plugins. See [#3401](https://github.com/LazyVim/LazyVim/issues/3401) ([e7430b0](https://github.com/LazyVim/LazyVim/commit/e7430b0776c13e9ab3f42a1b9aee84561bd07c0a))
+
 ## [12.1.0](https://github.com/LazyVim/LazyVim/compare/v12.0.0...v12.1.0) (2024-05-30)
 
 
