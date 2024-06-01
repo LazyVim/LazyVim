@@ -226,6 +226,7 @@ end
 ---@param path? string
 ---@param opts? { warn?: boolean }
 function M.get_pkg_path(pkg, path, opts)
+  require("mason") -- make sure Mason is loaded
   opts = opts or {}
   opts.warn = opts.warn == nil and true or opts.warn
   path = path or ""
