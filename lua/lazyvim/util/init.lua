@@ -221,10 +221,13 @@ end
 --- available yet and trigger errors.
 ---@param pkg string
 ---@param path? string
-function M.get_pkg_path(pkg, path)
+---@param opts? { warn?: boolean }
+function M.get_pkg_path(pkg, path, opts)
+  opts = opts or {}
+  opts.warn = opts.warn == nil and true or opts.warn
   path = path or ""
   local ret = vim.env.MASON .. "/packages/" .. pkg .. "/" .. path
-  if not vim.loop.fs_stat(ret) then
+  if opts.warn and not vim.loop.fs_stat(ret) then
     M.warn(("Mason package path not found for **%s**:\n- `%s`"):format(pkg, path))
   end
   return ret
