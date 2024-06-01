@@ -72,6 +72,9 @@ function M.on_very_lazy(fn)
   })
 end
 
+--- This extends a deeply nested list with a key in a table
+--- that is a dot-separated string.
+--- The nested list will be created if it does not exist.
 ---@generic T
 ---@param t T[]
 ---@param key string
