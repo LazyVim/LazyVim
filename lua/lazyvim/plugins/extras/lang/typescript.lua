@@ -32,10 +32,21 @@ return {
           enabled = false,
         },
         vtsls = {
+          -- explicitly add default filetypes, so that we can extend
+          -- them in related extras
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+          },
           settings = {
             complete_function_calls = true,
             vtsls = {
               enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
               experimental = {
                 completion = {
                   enableServerSideFuzzyMatch = true,
@@ -147,8 +158,7 @@ return {
             command = "node",
             -- 💀 Make sure to update this path to point to your installation
             args = {
-              require("mason-registry").get_package("js-debug-adapter"):get_install_path()
-                .. "/js-debug/src/dapDebugServer.js",
+              LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
               "${port}",
             },
           },

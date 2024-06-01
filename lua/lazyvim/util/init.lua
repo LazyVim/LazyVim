@@ -72,7 +72,12 @@ function M.on_very_lazy(fn)
   })
 end
 
-function M.extend(t, key, value)
+---@generic T
+---@param t T[]
+---@param key string
+---@param values T[]
+---@return T[]?
+function M.extend(t, key, values)
   local keys = vim.split(key, ".", { plain = true })
   for i = 1, #keys do
     local k = keys[i]
@@ -82,7 +87,7 @@ function M.extend(t, key, value)
     end
     t = t[k]
   end
-  t[#t + 1] = value
+  return vim.list_extend(t, values)
 end
 
 ---@param name string
@@ -208,6 +213,29 @@ M.CREATE_UNDO = vim.api.nvim_replace_termcodes("<c-G>u", true, true, true)
 function M.create_undo()
   if vim.api.nvim_get_mode().mode == "i" then
     vim.api.nvim_feedkeys(M.CREATE_UNDO, "n", false)
+  end
+end
+
+--- Gets a path to a package in the Mason registry.
+--- Prefer this to `get_package`, since the package might not always be
+--- available yet and trigger errors.
+---@param pkg string
+---@param path? string
+function M.get_pkg_path(pkg, path)
+  path = path or ""
+  local ret = vim.env.MASON .. "/packages/" .. pkg .. "/" .. path
+  if not vim.loop.fs_stat(ret) then
+    M.warn(("Mason package path not found for **%s**:\n- `%s`"):format(pkg, path))
+  end
+  return ret
+end
+
+--- Override the default title for notifications.
+for _, level in ipairs({ "info", "warn", "error" }) do
+  M[level] = function(msg, opts)
+    opts = opts or {}
+    opts.title = opts.title or "LazyVim"
+    return LazyUtil[level](msg, opts)
   end
 end
 
