@@ -17,11 +17,7 @@ M.deprecated_extras = {
   ["lazyvim.plugins.extras.editor.trouble-v3"] = "Trouble v3 has been merged in main",
 }
 
-M.deprecated_modules = {
-  ["null-ls"] = "lsp.none-ls",
-  ["nvim-navic.lib"] = "editor.navic",
-  ["nvim-navic"] = "editor.navic",
-}
+M.deprecated_modules = {}
 
 ---@type table<string, string>
 M.renames = {
