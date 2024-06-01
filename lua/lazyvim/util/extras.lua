@@ -225,7 +225,8 @@ function X:render()
     title = "Recommended Languages",
     empty = false,
   })
-  self:section({ enabled = true, title = "Enabled" })
+  self:section({ enabled = true, exclude = "^lang%.", title = "Enabled Plugins" })
+  self:section({ enabled = true, title = "Enabled Languages" })
   self:section({ recommended = true, title = "Recommended Plugins", empty = false })
   self:section({ title = "Plugins", exclude = "^lang%." })
   self:section({ title = "Languages" })
