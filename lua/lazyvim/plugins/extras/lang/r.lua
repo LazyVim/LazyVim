@@ -43,6 +43,7 @@ return {
       pdfviewer = ""
     },
     config = function(_, opts)
+      vim.g.rout_follow_colorscheme = true
       require("r").setup(opts)
       require("r.pdf.generic").open = vim.ui.open
     end,
