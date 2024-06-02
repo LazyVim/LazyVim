@@ -128,18 +128,7 @@ return {
 
       vim.o.laststatus = vim.g.lualine_laststatus
 
-      local trouble = require("trouble")
-      local symbols = trouble.statusline
-        and trouble.statusline({
-          mode = "symbols",
-          groups = {},
-          title = false,
-          filter = { range = true },
-          format = "{kind_icon}{symbol.name:Normal}",
-          hl_group = "lualine_c_normal",
-        })
-
-      return {
+      local opts = {
         options = {
           theme = "auto",
           globalstatus = true,
@@ -162,10 +151,6 @@ return {
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { LazyVim.lualine.pretty_path() },
-            {
-              symbols and symbols.get,
-              cond = symbols and symbols.has,
-            },
           },
           lualine_x = {
             -- stylua: ignore
@@ -222,6 +207,26 @@ return {
         },
         extensions = { "neo-tree", "lazy" },
       }
+
+      -- do not add trouble symbols if aerial is enabled
+      if vim.g.trouble_lualine then
+        local trouble = require("trouble")
+        local symbols = trouble.statusline
+          and trouble.statusline({
+            mode = "symbols",
+            groups = {},
+            title = false,
+            filter = { range = true },
+            format = "{kind_icon}{symbol.name:Normal}",
+            hl_group = "lualine_c_normal",
+          })
+        table.insert(opts.sections.lualine_c, {
+          symbols and symbols.get,
+          cond = symbols and symbols.has,
+        })
+      end
+
+      return opts
     end,
   },
 
@@ -314,20 +319,6 @@ return {
 
   -- ui components
   { "MunifTanjim/nui.nvim", lazy = true },
-
-  {
-    "goolord/alpha-nvim",
-    optional = true,
-    enabled = function()
-      LazyVim.warn({
-        "`dashboard.nvim` is now the default LazyVim starter plugin.",
-        "",
-        "To keep using `alpha.nvim`, please enable the `lazyvim.plugins.extras.ui.alpha` extra.",
-        "Or to hide this message, remove the alpha spec from your config.",
-      })
-      return false
-    end,
-  },
 
   {
     "nvimdev/dashboard-nvim",

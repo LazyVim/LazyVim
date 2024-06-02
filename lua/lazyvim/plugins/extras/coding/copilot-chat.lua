@@ -50,13 +50,6 @@ return {
         mode = { "n", "v" },
       },
     },
-    init = function()
-      LazyVim.on_load("which-key.nvim", function()
-        vim.schedule(function()
-          require("which-key").register({ a = { name = "+CopilotChat (AI)" } }, { prefix = "<leader>" })
-        end)
-      end)
-    end,
     config = function(_, opts)
       local chat = require("CopilotChat")
       require("CopilotChat.integrations.cmp").setup()
@@ -71,6 +64,16 @@ return {
 
       chat.setup(opts)
     end,
+  },
+
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>a"] = { name = "+ai" },
+      },
+    },
   },
 
   -- Telescope integration

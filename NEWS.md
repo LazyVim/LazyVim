@@ -2,6 +2,12 @@
 
 ## 11.x
 
+- **Neovim >= 0.10** now uses the much faster [lazydev.nvim](https://github.com/folke/lazydev.nvim)
+  instead of `neodev.nvim`
+
+- moved `neoconf.nvim` to extras. Project specific LSP settings
+  can be done with a `.lazy.lua` file instead.
+
 - `mini.ai` is back as a default plugin! Removing it was a mistake.
   It's a great plugin that enhances the native text objects.
 

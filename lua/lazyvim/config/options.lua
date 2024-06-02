@@ -28,6 +28,9 @@ vim.g.lazygit_config = true
 -- Hide deprecation warnings
 vim.g.deprecation_warnings = false
 
+-- Show the current document symbols location from Trouble in lualine
+vim.g.trouble_lualine = true
+
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write

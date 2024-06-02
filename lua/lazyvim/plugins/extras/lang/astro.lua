@@ -10,6 +10,9 @@ return {
     })
   end,
 
+  -- depends on the typescript extra
+  { import = "lazyvim.plugins.extras.lang.typescript" },
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -19,6 +22,7 @@ return {
     end,
   },
 
+  -- LSP Servers
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -26,5 +30,23 @@ return {
         astro = {},
       },
     },
+  },
+
+  -- Configure tsserver plugin
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+        {
+          name = "@astrojs/ts-plugin",
+          location = LazyVim.get_pkg_path(
+            "astro-language-server",
+            "/node_modules/@astrojs/ts-plugin",
+            { warn = false }
+          ),
+          enableForWorkspaceTypeScriptVersions = true,
+        },
+      })
+    end,
   },
 }
