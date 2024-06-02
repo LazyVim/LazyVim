@@ -207,8 +207,8 @@ return {
     opts = function()
       return {
         library = {
-          uv = LazyVim.get_plugin_path("luvit-meta", "library"),
-          lazyvim = LazyVim.get_plugin_path("LazyVim"),
+          uv = "luvit-meta/library",
+          lazyvim = "LazyVim",
         },
       }
     end,
