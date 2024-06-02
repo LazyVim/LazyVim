@@ -4,7 +4,6 @@ return {
     "neovim/nvim-lspconfig",
     event = "LazyFile",
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -119,10 +118,6 @@ return {
     end,
     ---@param opts PluginLspOpts
     config = function(_, opts)
-      if LazyVim.has("neoconf.nvim") then
-        require("neoconf").setup(LazyVim.opts("neoconf.nvim"))
-      end
-
       -- setup autoformat
       LazyVim.format.register(LazyVim.lsp.formatter())
 
