@@ -2,6 +2,7 @@ return {
   {
     "folke/edgy.nvim",
     event = "VeryLazy",
+    optional = true,
     init = function()
       vim.opt.laststatus = 3
       vim.opt.splitkeep = "screen"
@@ -19,7 +20,6 @@ return {
         title = "DB Query Result",
         ft = "dbout",
       })
-      opts.optional = true
     end,
   },
 
