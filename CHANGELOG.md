@@ -1,5 +1,23 @@
 # Changelog
 
+## [12.3.0](https://github.com/LazyVim/LazyVim/compare/v12.2.0...v12.3.0) (2024-06-02)
+
+
+### Features
+
+* **coding:** use `lazydev.nvim` instead of `neodev.nvim` ([5e76948](https://github.com/LazyVim/LazyVim/commit/5e76948d58d3ccae57b1cc09474a1f8b36d100ce))
+* **extras:** show extras imported in other extras ([b2858a2](https://github.com/LazyVim/LazyVim/commit/b2858a297a465546e9f34d5c3e9d42b9716048eb))
+* **extras:** split enabled in enabled plugins/languages ([45b92aa](https://github.com/LazyVim/LazyVim/commit/45b92aa381243417462fb4aac92478ce50b4e126))
+* moved neoconf.nvim to extras ([c14d21c](https://github.com/LazyVim/LazyVim/commit/c14d21ce7534ff302c1ccf0b22f46160ea98ccf1))
+* **util:** utility methods for lazy plugins ([596c439](https://github.com/LazyVim/LazyVim/commit/596c439db572c8b37c442a1f425b3f452607fd36))
+
+
+### Bug Fixes
+
+* **dot:** added dot to recommended ([c69553e](https://github.com/LazyVim/LazyVim/commit/c69553e1942a646917c92f3643a2ca78eeb19adf))
+* **json:** added *.json to recommended ([c98fbef](https://github.com/LazyVim/LazyVim/commit/c98fbef3b56fe6ba709254cdc90c8c46c078d555))
+* **util:** make sure doc gen works ([c33d657](https://github.com/LazyVim/LazyVim/commit/c33d6578a8b2ce03cab58d5952d717064125ef5d))
+
 ## [12.2.0](https://github.com/LazyVim/LazyVim/compare/v12.1.0...v12.2.0) (2024-06-01)
 
 
