@@ -5,15 +5,21 @@ return {
     init = function()
       vim.opt.laststatus = 3
       vim.opt.splitkeep = "screen"
+      vim.g.db_ui_auto_execute_table_helpers = 1
     end,
     opts = function(_, opts)
       table.insert(opts.right, {
         title = "Database",
         ft = "dbui",
-        pinned = true,
+        pinned = false,
         open = "DBUI",
         size = { width = 0.25 },
       })
+      table.insert(opts.bottom, {
+        title = "DB Query Result",
+        ft = "dbout",
+      })
+      opts.optional = true
     end,
   },
 
