@@ -200,4 +200,26 @@ return {
       }
     end,
   },
+
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = function()
+      return {
+        library = {
+          uv = LazyVim.get_plugin_path("luvit-meta", "library"),
+          lazyvim = LazyVim.get_plugin_path("LazyVim"),
+        },
+      }
+    end,
+  },
+  -- Manage libuv types with lazy. Plugin will never be loaded
+  { "Bilal2453/luvit-meta", lazy = true },
+  -- Add lazydev source to cmp
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      table.insert(opts.sources, { name = "lazydev", group_index = 0 })
+    end,
+  },
 }
