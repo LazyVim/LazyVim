@@ -6,18 +6,15 @@ return {
       vim.opt.laststatus = 3
       vim.opt.splitkeep = "screen"
     end,
-    opts = {
-      right = {
-        {
-          ft = "dbui",
-          pinned = true,
-          open = "DBUI",
-        },
-      },
-      options = {
-        right = { size = 40 },
-      },
-    },
+    opts = function(_, opts)
+      table.insert(opts.right, {
+        title = "Database",
+        ft = "dbui",
+        pinned = true,
+        open = "DBUI",
+        size = { width = 0.25 },
+      })
+    end,
   },
 
   {
@@ -27,21 +24,23 @@ return {
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
     },
     cmd = {
-      "DBUI",
       "DBUIToggle",
       "DBUIAddConnection",
-      "DBUIFindBuffer",
     },
     init = function()
       local wk = require("which-key")
-      local wkopts = function(keymaps, description)
-        return { keymaps, description, noremap = true, silent = true }
+      local dbtoggle = function()
+        if _G.LazyVim.is_loaded("vim-dadbod-ui") then
+          return { "<cmd>DBUIToggle<CR>", "Database Explorer", silent = true }
+        else
+          return { "<cmd>Lazy load vim-dadbod-ui | DBUIToggle<CR>", "Database Explorer", silent = true }
+        end
       end
       wk.register({
         uD = {
           name = "Database UI",
-          e = wkopts("<cmd>DBUI<CR>", "Database Explorer"),
-          a = wkopts("<cmd>DBUIAddConnection<CR>", "Add Database Connection"),
+          e = dbtoggle(),
+          a = { "<cmd>DBUIAddConnection<CR>", "Add Database Connection", silent = true },
         },
       }, { prefix = "<leader>" })
       vim.g.db_ui_use_nerd_fonts = 1
