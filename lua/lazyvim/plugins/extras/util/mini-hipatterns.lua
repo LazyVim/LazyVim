@@ -14,7 +14,18 @@ M.plugin = {
       -- custom LazyVim option to enable the tailwind integration
       tailwind = {
         enabled = true,
-        ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" },
+        ft = {          
+          "typescriptreact",
+          "javascriptreact",
+          "css",
+          "javascript",
+          "typescript",
+          "html",
+          "svelte",
+          "rust",
+          "html-eex",
+          "heex", 
+        },
         -- full: the whole css class will be highlighted
         -- compact: only the color will be highlighted
         style = "full",
@@ -41,7 +52,18 @@ M.plugin = {
     if opts.tailwind == true then
       opts.tailwind = {
         enabled = true,
-        ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" },
+        ft = {          
+          "typescriptreact",
+          "javascriptreact",
+          "css",
+          "javascript",
+          "typescript",
+          "html",
+          "svelte",
+          "rust",
+          "html-eex",
+          "heex", 
+        },
         style = "full",
       }
     end
