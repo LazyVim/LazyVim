@@ -1,14 +1,19 @@
 return {
+
+  -- Rename with cmdpreview
+  recommended = true,
+  desc = "Incremental LSP renaming based on Neovim's command-preview feature",
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
-    config = true,
+    opts = {},
   },
+
+  -- LSP Keymaps
   {
     "neovim/nvim-lspconfig",
-    init = function()
+    opts = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
       keys[#keys + 1] = {
         "<leader>cr",
         function()
@@ -16,9 +21,18 @@ return {
           return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
         end,
         expr = true,
-        desc = "Rename",
+        desc = "Rename (inc-rename.nvim)",
         has = "rename",
       }
     end,
+  },
+
+  --- Noice integration
+  {
+    "folke/noice.nvim",
+    optional = true,
+    opts = {
+      presets = { inc_rename = true },
+    },
   },
 }
