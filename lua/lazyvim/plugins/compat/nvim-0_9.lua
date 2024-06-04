@@ -8,12 +8,22 @@ return {
   { "folke/ts-comments.nvim", enabled = false },
   { import = "lazyvim.plugins.extras.coding.mini-comment" },
 
-  -- Use neodev instead of lazydev
-  { "folke/lazydev.nvim", enabled = false },
+  -- Use neodev-types with lazydev
+  { "folke/neodev.nvim", config = function() end },
+  {
+    "folke/lazydev.nvim",
+    opts = function(_, opts)
+      opts.library = opts.library or {}
+      table.insert(opts.library, { "neodev.nvim/types/stable" })
+    end,
+    config = function(_, opts)
+      -- force lazydev to load on Neovim 0.9
+      require("lazydev.config").have_0_10 = true
+      require("lazydev").setup(opts)
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      { "folke/neodev.nvim", opts = {} },
-    },
+    dependencies = {},
   },
 }
