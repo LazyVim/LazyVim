@@ -73,7 +73,7 @@ function M.inlay_hints(buf, value)
   end
 end
 
----@type {width:number, height:number}?
+---@type {k:string, v:any}[]
 M._maximized = nil
 ---@param state boolean?
 function M.maximize(state)
@@ -81,17 +81,22 @@ function M.maximize(state)
     return
   end
   if M._maximized then
-    vim.o.winwidth = M._maximized.width
-    vim.o.winheight = M._maximized.height
+    for _, opt in ipairs(M._maximized) do
+      vim.o[opt.k] = opt.v
+    end
     M._maximized = nil
     vim.cmd("wincmd =")
   else
-    M._maximized = {
-      width = vim.o.winwidth,
-      height = vim.o.winheight,
-    }
-    vim.o.winwidth = 999
-    vim.o.winheight = 999
+    M._maximized = {}
+    local function set(k, v)
+      table.insert(M._maximized, 1, { k = k, v = vim.o[k] })
+      vim.o[k] = v
+    end
+    set("winwidth", 999)
+    set("winheight", 999)
+    set("winminwidth", 10)
+    set("winminheight", 4)
+    vim.cmd("wincmd =")
   end
   -- `QuitPre` seems to be executed even if we quit a normal window, so we don't want that
   -- `VimLeavePre` might be another consideration? Not sure about differences between the 2
