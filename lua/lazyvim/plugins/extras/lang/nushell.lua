@@ -1,4 +1,7 @@
 return {
+  recommended = {
+    ft = "nu",
+  },
   {
     "neovim/nvim-lspconfig",
     opts = {
