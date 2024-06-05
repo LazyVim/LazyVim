@@ -85,30 +85,22 @@ return {
             },
             {
               "<leader>co",
-              function()
-                require("vtsls").commands.organize_imports(0)
-              end,
+              LazyVim.lsp.action["source.organizeImports"],
               desc = "Organize Imports",
             },
             {
               "<leader>cM",
-              function()
-                require("vtsls").commands.add_missing_imports(0)
-              end,
+              LazyVim.lsp.action["source.addMissingImports.ts"],
               desc = "Add missing imports",
             },
             {
               "<leader>cu",
-              function()
-                require("vtsls").commands.remove_unused_imports(0)
-              end,
+              LazyVim.lsp.action["source.removeUnused.ts"],
               desc = "Remove unused imports",
             },
             {
               "<leader>cD",
-              function()
-                require("vtsls").commands.fix_all(0)
-              end,
+              LazyVim.lsp.action["source.fixAll.ts"],
               desc = "Fix all diagnostics",
             },
             {
