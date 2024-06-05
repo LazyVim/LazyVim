@@ -4,6 +4,16 @@ on:
   pull_request:
 
 jobs:
+  stylua:
+    name: Stylua Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
   tests:
     strategy:
       matrix:
@@ -25,7 +35,7 @@ jobs:
         run: |
           nvim --version
           [ ! -d tests ] && exit 0
-          nvim --headless -u tests/init.lua -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/init.lua', sequential = true}"
+          ./tests/run
   docs:
     runs-on: ubuntu-latest
     needs: tests
@@ -54,13 +64,10 @@ jobs:
       - tests
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: simple
-          package-name: LazyVim
-          extra-files: |
-            lua/lazyvim/config/init.lua
       - uses: actions/checkout@v4
       - name: tag stable versions
         if: ${{ steps.release.outputs.release_created }}

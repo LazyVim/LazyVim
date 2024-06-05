@@ -9,6 +9,13 @@ LazyVim.lsp.on_attach(function(client, buffer)
 end)
 
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "helm",
+      root = "Chart.yaml",
+    })
+  end,
+
   { "towolf/vim-helm", ft = "helm" },
   {
     "neovim/nvim-lspconfig",
@@ -18,13 +25,5 @@ return {
         helm_ls = {},
       },
     },
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "helm-ls",
-      })
-    end,
   },
 }
