@@ -1,5 +1,35 @@
 # Changelog
 
+## [12.5.0](https://github.com/LazyVim/LazyVim/compare/v12.4.0...v12.5.0) (2024-06-05)
+
+
+### Features
+
+* **bufferline:** add keymaps for BufferLineMovePrev / BufferLineMoveNext ([#1935](https://github.com/LazyVim/LazyVim/issues/1935)) ([1806ea7](https://github.com/LazyVim/LazyVim/commit/1806ea710fe391d5b00c1916ed9331bf58cfdb49))
+* **editor:** added extra for inc-rename.nvim ([#3432](https://github.com/LazyVim/LazyVim/issues/3432)) ([c50018b](https://github.com/LazyVim/LazyVim/commit/c50018b791a6295fb0f3219fe637209a381db4c4))
+* enabled `ts-plugin` support for `astro` and `svelte` ([d64d761](https://github.com/LazyVim/LazyVim/commit/d64d7615392d70c2ca1957f66725856d0a306b87))
+* **extras:** Add extra for angular lspconfig ([#2806](https://github.com/LazyVim/LazyVim/issues/2806)) ([987bd22](https://github.com/LazyVim/LazyVim/commit/987bd2207f7f2f7f72f65b0e7e811ec04c03aa32))
+* **keymaps:** add keymap to close all tab pages except the current one ([#2975](https://github.com/LazyVim/LazyVim/issues/2975)) ([de9e337](https://github.com/LazyVim/LazyVim/commit/de9e337f0dcd27a7621f6ab741ad3a5d769dbd7c))
+* **lazydev:** use lazydev with neodev types (not the plugin) on Neovim 0.9.x ([1677b3b](https://github.com/LazyVim/LazyVim/commit/1677b3b84f53d410d50c5a2aca32ca7c5e900917))
+* **python:** switch to regexp branch for a rewrite the venv selector plugin ([#3301](https://github.com/LazyVim/LazyVim/issues/3301)) ([1cdb5bd](https://github.com/LazyVim/LazyVim/commit/1cdb5bdf412933bb1be44a3ae5905202124718d9))
+* **statuscol:** statuscolumn options for open fold indicator and fold hl ([#2923](https://github.com/LazyVim/LazyVim/issues/2923)) ([fa706b3](https://github.com/LazyVim/LazyVim/commit/fa706b320b4c94da28136bdbab2ee1841974707c))
+
+
+### Bug Fixes
+
+* cleanup unnecessary treesitter langs and mason lsp servers ([f8268fa](https://github.com/LazyVim/LazyVim/commit/f8268faa7c705cca7047fbaef5984905b47a7324))
+* **extra.lang.scala:** Fix the always initializing regardless of file… ([#3455](https://github.com/LazyVim/LazyVim/issues/3455)) ([c1f5fcf](https://github.com/LazyVim/LazyVim/commit/c1f5fcf9c7ed2659c9d5ac41b3bb8a93e0a3c6a0))
+* **extras:** added recommended for helm/haskell ([ca0b9ee](https://github.com/LazyVim/LazyVim/commit/ca0b9ee915c7e5ddc4ca828688c2cb87f4f0c438))
+* **keymaps:** use root dir for git log ([662e2ff](https://github.com/LazyVim/LazyVim/commit/662e2ffe0ff8f43e15cf97029a5e1ec84bb1e376))
+* **lazydev:** add cmd ([ae0d94e](https://github.com/LazyVim/LazyVim/commit/ae0d94e048423903743b657be3a827d9685761c3))
+* **lsp:** Enable using `deno.enablePaths` in denols settings ([#3446](https://github.com/LazyVim/LazyVim/issues/3446)) ([9a635ef](https://github.com/LazyVim/LazyVim/commit/9a635ef8d690a3cfcf6d3bf54e8ad61156b9d150))
+* **python:** removed the `python-semshi` extra ([e32d191](https://github.com/LazyVim/LazyVim/commit/e32d1918ae676dbab3f5f121a9fa623cb4ee20bd))
+* **tex:** remove latex treesitter support since it's not needed with vimtex and it needs treesitter-cli ([3df8af3](https://github.com/LazyVim/LazyVim/commit/3df8af369c49e13763a7c8962a005aef7604d018))
+* **toggle:** Restore width/height values when closing while maximized is toggled on ([#3453](https://github.com/LazyVim/LazyVim/issues/3453)) ([8971ea2](https://github.com/LazyVim/LazyVim/commit/8971ea25f953f778c8db999da4de240a07713aaa))
+* **toggle:** slightly better maximize ([452b70a](https://github.com/LazyVim/LazyVim/commit/452b70ad15714593a91bed90448313228dd5135a))
+* **toggle:** un-maximize when quiting Neovim ([1c58365](https://github.com/LazyVim/LazyVim/commit/1c583650e66b6f468e8ece4292bfe8bd3f7e1c94))
+* **util:** don't print warning message in headless ([73c767c](https://github.com/LazyVim/LazyVim/commit/73c767c2f3e43cf7edd2964f951b7e574ee5b283))
+
 ## [12.4.0](https://github.com/LazyVim/LazyVim/compare/v12.3.0...v12.4.0) (2024-06-04)
 
 
