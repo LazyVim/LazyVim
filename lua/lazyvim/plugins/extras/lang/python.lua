@@ -122,7 +122,7 @@ return {
       },
     },
     --  Call config for python files and load the cached venv automatically
-    ft = "python", 
+    ft = "python",
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" } },
   },
   {
