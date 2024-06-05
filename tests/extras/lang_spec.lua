@@ -19,7 +19,8 @@ describe("Extra", function()
       return name:match("%.lua$")
     end, { limit = math.huge, type = "file", path = "lua/lazyvim/plugins/extras" })
   )
-  local servers = require("mason-lspconfig.mappings.server").package_to_lspconfig
+  local lsp_to_pkg = require("mason-lspconfig.mappings.server").lspconfig_to_package
+  local pkg_to_lsp = require("mason-lspconfig.mappings.server").package_to_lspconfig
 
   local tsspec = Plugin.Spec.new({
     import = "lazyvim.plugins.treesitter",
@@ -43,16 +44,27 @@ describe("Extra", function()
 
       if extra.modname:find("%.lang%.") then
         assert(mod.recommended, "`recommended` not set for " .. extra.modname)
-        local mason = spec.plugins["mason.nvim"]
-        local opts = Plugin.values(mason, "opts", false)
-        for _, v in ipairs(opts.ensure_installed) do
-          assert(
-            not servers[v],
-            "LSP server " .. v .. " is installed automatically. Please remove from the mason.nvim spec"
-          )
+        local lspconfig = spec.plugins["nvim-lspconfig"]
+
+        if lspconfig then
+          local lspconfig_opts = Plugin.values(lspconfig, "opts", false)
+          local mason = spec.plugins["mason.nvim"]
+          local mason_opts = Plugin.values(mason, "opts", false)
+
+          for lsp in pairs(lspconfig_opts.servers or {}) do
+            local lsp_pkg = pkg_to_lsp[lsp]
+            assert(
+              not (lsp_pkg and vim.tbl_contains(mason_opts.ensure_installed, lsp_pkg)),
+              "LSP server "
+                .. lsp
+                .. " with pkg "
+                .. (lsp_pkg or "foo")
+                .. " is installed automatically. Please remove from the mason.nvim spec"
+            )
+          end
         end
         local ts = spec.plugins["nvim-treesitter"]
-        opts = Plugin.values(mason, "opts", false)
+        local opts = Plugin.values(ts, "opts", false)
         for _, v in ipairs(opts.ensure_installed) do
           assert(
             not vim.tbl_contains(tsensure, v),
