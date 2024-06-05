@@ -49,7 +49,7 @@ return {
         },
       },
       setup = {
-        clangd = function(_, opts)
+        metals = function(_, opts)
           local metals = require("metals")
           local metals_config = vim.tbl_deep_extend("force", metals.bare_config(), opts)
           metals_config.on_attach = LazyVim.has("nvim-dap") and metals.setup_dap or nil
