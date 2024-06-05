@@ -54,13 +54,10 @@ jobs:
       - tests
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: simple
-          package-name: LazyVim
-          extra-files: |
-            lua/lazyvim/config/init.lua
       - uses: actions/checkout@v4
       - name: tag stable versions
         if: ${{ steps.release.outputs.release_created }}
