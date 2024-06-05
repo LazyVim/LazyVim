@@ -1,5 +1,25 @@
 # Changelog
 
+## [12.4.0](https://github.com/LazyVim/LazyVim/compare/v12.3.0...v12.4.0) (2024-06-04)
+
+
+### Features
+
+* **hipatterns:** added vue/astro ([d6c59d9](https://github.com/LazyVim/LazyVim/commit/d6c59d9a411a96fab22df03368b16740ea19da04))
+* **lazydev:** new lazydev config based on trigger words ([39da851](https://github.com/LazyVim/LazyVim/commit/39da8514d32c9eba40efa045c2d12d2170e206cf))
+
+
+### Bug Fixes
+
+* fixup for nvim-snippets compat on 0.9. Fixes [#3426](https://github.com/LazyVim/LazyVim/issues/3426) ([83c0c94](https://github.com/LazyVim/LazyVim/commit/83c0c9405acf4682d473188dd2ce3126c1261ea9))
+* hack for dashboard.nvim so that it shows errors when exiting ([6c3fd9f](https://github.com/LazyVim/LazyVim/commit/6c3fd9fedfa83bac9e63c04d24ff2760569b845e))
+* **hipatterns:** update mini-hipatterns.lua config to add support for heex, rust and svelte files ([#3430](https://github.com/LazyVim/LazyVim/issues/3430)) ([1731e45](https://github.com/LazyVim/LazyVim/commit/1731e455d41a9baa6c80bbc9e89e23c104479431))
+* **lazydev:** easier way of defining library plugin paths ([bb66618](https://github.com/LazyVim/LazyVim/commit/bb66618f1fc265c7a702f3d13d704ffbb1066178))
+* **luasnip:** move mappings to cmp spec so that they dont conflict with native snippets ([da7b773](https://github.com/LazyVim/LazyVim/commit/da7b7738eb84b00c949f48afabebd39266e61d75))
+* **todo-comments:** use toggle for Trouble todo commands ([#3424](https://github.com/LazyVim/LazyVim/issues/3424)) ([028d5bc](https://github.com/LazyVim/LazyVim/commit/028d5bcac5b2a9b6ceb23e2df9c92bdc7d711674))
+* **todo-comments:** use trouble filters for showing only todo/fix/fixmes ([6da95ee](https://github.com/LazyVim/LazyVim/commit/6da95ee7d35f7eab4297c2229d8d79d43f5d12bc))
+* **ui:** fix incorrect colors on change colorscheme (lualine) ([#3431](https://github.com/LazyVim/LazyVim/issues/3431)) ([4d706f1](https://github.com/LazyVim/LazyVim/commit/4d706f1bdc687f1d4d4cd962ec166c65c453633e))
+
 ## [12.3.0](https://github.com/LazyVim/LazyVim/compare/v12.2.0...v12.3.0) (2024-06-02)
 
 

@@ -14,7 +14,20 @@ M.plugin = {
       -- custom LazyVim option to enable the tailwind integration
       tailwind = {
         enabled = true,
-        ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" },
+        ft = {
+          "astro",
+          "css",
+          "heex",
+          "html",
+          "html-eex",
+          "javascript",
+          "javascriptreact",
+          "rust",
+          "svelte",
+          "typescript",
+          "typescriptreact",
+          "vue",
+        },
         -- full: the whole css class will be highlighted
         -- compact: only the color will be highlighted
         style = "full",
@@ -37,14 +50,6 @@ M.plugin = {
     }
   end,
   config = function(_, opts)
-    -- backward compatibility
-    if opts.tailwind == true then
-      opts.tailwind = {
-        enabled = true,
-        ft = { "typescriptreact", "javascriptreact", "css", "javascript", "typescript", "html" },
-        style = "full",
-      }
-    end
     if type(opts.tailwind) == "table" and opts.tailwind.enabled then
       -- reset hl groups when colorscheme changes
       vim.api.nvim_create_autocmd("ColorScheme", {

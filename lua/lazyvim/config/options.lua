@@ -19,6 +19,12 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 -- Set to false to disable.
 vim.g.lazygit_config = true
 
+-- Options for the LazyVim statuscolumn
+vim.g.lazyvim_statuscolumn = {
+  folds_open = false, -- show fold sign when fold is open
+  folds_githl = false, -- highlight fold sign with git sign color
+}
+
 -- Optionally setup the terminal to use
 -- This sets `vim.o.shell` and does some additional configuration for:
 -- * pwsh
