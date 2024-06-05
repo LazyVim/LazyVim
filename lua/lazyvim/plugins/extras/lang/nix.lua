@@ -1,4 +1,8 @@
 return {
+  recommended = {
+    ft = "nix",
+    root = "flake.nix",
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
