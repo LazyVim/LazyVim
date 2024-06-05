@@ -1,6 +1,94 @@
 # What's new?
 
+## 11.x
+
+- **Neovim >= 0.10** now uses the much faster [lazydev.nvim](https://github.com/folke/lazydev.nvim)
+  instead of `neodev.nvim`
+
+- moved `neoconf.nvim` to extras. Project specific LSP settings
+  can be done with a `.lazy.lua` file instead.
+
+- `mini.ai` is back as a default plugin! Removing it was a mistake.
+  It's a great plugin that enhances the native text objects.
+
+- `:LazyExtras` now has multiple new sections:
+
+  - **Enabled**: extras that are currently enabled
+  - **Recommended Languages**: language extras recommended for the current buffer / directory
+  - **Recommended Plugins**: extras that are recommended for most users
+  - **Plugins**: other plugin extras
+  - **Languages**: other language extras
+
+- new option `vim.g.deprecation_warnings` to disable deprecation warnings
+  Defaults to `false`. To enable deprecation warnings, set it to `true` in your `options.lua`
+
+- `vim-illuminate` move to extras
+  Document highlights now use native lsp functionality by default
+
+Since Neovim 0.10 has been released, I've been working on a new version of **LazyVim**
+that is fully compatible with all the latest Neovim features.
+
+Additionally, some core plugins have been moved to extras.
+
+- `native snippets` are now the default on Neovim 0.10
+  Older versions of Neovim will use the new `luasnip` extra.
+
+- `native comments` are now the default on Neovim 0.10
+  Older versions of Neovim will use the new `mini-comment` extra.
+  `nvim-ts-context-commentstring` has been integrated in the native comments.
+
+- `inlay hints` have been in **LazyVim** for a while, but are now
+  enabled by default. To disable them:
+
+  ```lua
+  {
+    "nvim-lspconfig",
+    opts = {
+      inlay_hints = { enabled = false },
+    }
+  }
+  ```
+
+- plugins moved to extras:
+
+  - `mini.surround`
+  - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
+  - `nvim-treesitter-context`
+
 ## 10.x
+
+- added new extra for [mini.diff](https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-diff.md)
+  This is a plugin similar to gitsigns but with a neat diff overlay
+  that can be toggled with `<leader>go`.
+
+- **trouble.nvim** has been rewritten from scratch and is now in beta.
+  I've added a new extra for it (`trouble-v3`) for those of you who want to try it out.
+  You can find the updated docs [here](https://github.com/folke/trouble.nvim/tree/dev)
+
+- The **lazygit** integration now configures:
+
+  - the theme based on the colorscheme
+  - nerd font icons (v3)
+  - editor preset is set to `nvim-remote` for better interop with Neovim
+
+- The option `vim.g.lazygit_theme` was renamed to `vim.g.lazygit_config`
+
+- **lazygit** now automatically uses the colors of your current colorscheme.
+  This is enabled by default. To disable, add the below to your `options.lua`:
+
+  ```lua
+  vim.g.lazygit_config = false
+  ```
+
+- Added support for `basedpyright` to the **python** extra.
+  Enable in your `options.lua` with:
+
+  ```lua
+  vim.g.lazyvim_python_lsp = "basedpyright"
+  ```
+
+  Be aware that `basedpyright` is still in development and
+  may not work exactly the same as `pyright`.
 
 - User extras under `lua/plugins/extras` can now also be managed
   with **LazyExtras**

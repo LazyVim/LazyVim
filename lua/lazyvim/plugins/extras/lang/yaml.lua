@@ -1,4 +1,9 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "yaml",
+    })
+  end,
 
   -- add yaml specific modules to treesitter
   {
@@ -64,7 +69,7 @@ return {
         yamlls = function()
           -- Neovim < 0.10 does not have dynamic registration for formatting
           if vim.fn.has("nvim-0.10") == 0 then
-            require("lazyvim.util").lsp.on_attach(function(client, _)
+            LazyVim.lsp.on_attach(function(client, _)
               if client.name == "yamlls" then
                 client.server_capabilities.documentFormattingProvider = true
               end

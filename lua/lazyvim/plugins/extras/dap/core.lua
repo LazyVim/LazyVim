@@ -12,12 +12,15 @@ end
 
 return {
   "mfussenegger/nvim-dap",
+  recommended = true,
+  desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
 
   dependencies = {
 
     -- fancy UI for the debugger
     {
       "rcarriga/nvim-dap-ui",
+      dependencies = { "nvim-neotest/nvim-nio" },
       -- stylua: ignore
       keys = {
         { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
@@ -25,8 +28,6 @@ return {
       },
       opts = {},
       config = function(_, opts)
-        -- setup dap config by VsCode launch.json file
-        -- require("dap.ext.vscode").load_launchjs()
         local dap = require("dap")
         local dapui = require("dapui")
         dapui.setup(opts)
@@ -89,7 +90,7 @@ return {
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
     { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
     { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
     { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
     { "<leader>dj", function() require("dap").down() end, desc = "Down" },
     { "<leader>dk", function() require("dap").up() end, desc = "Up" },
@@ -114,5 +115,18 @@ return {
         { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
       )
     end
+
+    -- setup dap config by VsCode launch.json file
+    local vscode = require("dap.ext.vscode")
+    local _filetypes = require("mason-nvim-dap.mappings.filetypes")
+    local filetypes = vim.tbl_deep_extend("force", _filetypes, {
+      ["node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
+      ["pwa-node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
+    })
+    local json = require("plenary.json")
+    vscode.json_decode = function(str)
+      return vim.json.decode(json.json_strip_comments(str))
+    end
+    vscode.load_launchjs(nil, filetypes)
   end,
 }

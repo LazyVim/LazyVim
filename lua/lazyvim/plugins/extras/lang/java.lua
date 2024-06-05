@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 -- This is the same as in lspconfig.server_configurations.jdtls, but avoids
 -- needing to require that when this module loads.
 local java_filetypes = { "java" }
@@ -18,6 +16,20 @@ local function extend_or_override(config, custom, ...)
 end
 
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "java",
+      root = {
+        "build.gradle",
+        "build.gradle.kts",
+        "build.xml", -- Ant
+        "pom.xml", -- Maven
+        "settings.gradle", -- Gradle
+        "settings.gradle.kts", -- Gradle
+      },
+    })
+  end,
+
   -- Add java to treesitter.
   {
     "nvim-treesitter/nvim-treesitter",
@@ -104,17 +116,25 @@ return {
 
         -- These depend on nvim-dap, but can additionally be disabled by setting false here.
         dap = { hotcodereplace = "auto", config_overrides = {} },
+        dap_main = {},
         test = true,
+        settings = {
+          java = {
+            inlayHints = {
+              parameterNames = {
+                enabled = "all",
+              },
+            },
+          },
+        },
       }
     end,
-    config = function()
-      local opts = Util.opts("nvim-jdtls") or {}
-
+    config = function(_, opts)
       -- Find the extra bundles that should be passed on the jdtls command-line
       -- if nvim-dap is enabled with java debug/test.
       local mason_registry = require("mason-registry")
       local bundles = {} ---@type string[]
-      if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+      if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
         local java_dbg_pkg = mason_registry.get_package("java-debug-adapter")
         local java_dbg_path = java_dbg_pkg:get_install_path()
         local jar_patterns = {
@@ -145,8 +165,9 @@ return {
           init_options = {
             bundles = bundles,
           },
+          settings = opts.settings,
           -- enable CMP capabilities
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          capabilities = LazyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
 
         -- Existing server will be reused if the root_dir matches.
@@ -195,10 +216,10 @@ return {
               },
             }, { mode = "v", buffer = args.buf })
 
-            if opts.dap and Util.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+            if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
               -- custom init for Java debugger
               require("jdtls").setup_dap(opts.dap)
-              require("jdtls.dap").setup_dap_main_class_configs()
+              require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
 
               -- Java Test require Java debugger to work
               if opts.test and mason_registry.is_installed("java-test") then

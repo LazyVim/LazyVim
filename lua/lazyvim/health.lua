@@ -10,6 +10,9 @@ function M.check()
 
   if vim.fn.has("nvim-0.9.0") == 1 then
     ok("Using Neovim >= 0.9.0")
+    if vim.fn.has("nvim-0.10.0") == 0 then
+      warn("Use Neovim >= 0.10.0 for the best experience")
+    end
   else
     error("Neovim >= 0.9.0 is required")
   end

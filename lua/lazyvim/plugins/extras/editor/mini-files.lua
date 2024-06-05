@@ -18,12 +18,12 @@ return {
       function()
         require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
       end,
-      desc = "Open mini.files (directory of current file)",
+      desc = "Open mini.files (Directory of Current File)",
     },
     {
       "<leader>fM",
       function()
-        require("mini.files").open(vim.loop.cwd(), true)
+        require("mini.files").open(vim.uv.cwd(), true)
       end,
       desc = "Open mini.files (cwd)",
     },
@@ -50,14 +50,14 @@ return {
       callback = function(args)
         local buf_id = args.data.buf_id
         -- Tweak left-hand side of mapping to your liking
-        vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
+        vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id, desc = "Toggle Hidden Files" })
       end,
     })
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesActionRename",
       callback = function(event)
-        require("lazyvim.util").lsp.on_rename(event.data.from, event.data.to)
+        LazyVim.lsp.on_rename(event.data.from, event.data.to)
       end,
     })
   end,
