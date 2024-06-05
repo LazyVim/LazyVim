@@ -13,15 +13,6 @@ return {
     })
   end,
 
-  {
-    "yioneko/nvim-vtsls",
-    lazy = true,
-    opts = {},
-    config = function(_, opts)
-      require("vtsls").config(opts)
-    end,
-  },
-
   -- correctly setup lspconfig
   {
     "neovim/nvim-lspconfig",
