@@ -4,12 +4,6 @@ on:
   pull_request:
 
 jobs:
-  commit_msg:
-    name: Conventional Commit Messages
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: webiny/action-conventional-commits@v1.3.0
   stylua:
     name: Stylua Formatting
     runs-on: ubuntu-latest
