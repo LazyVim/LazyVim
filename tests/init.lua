@@ -21,6 +21,7 @@ local plugins = {
   { "folke/lazy.nvim" },
   "williamboman/mason-lspconfig.nvim",
   "williamboman/mason.nvim",
+  "nvim-treesitter/nvim-treesitter",
 }
 
 local function main()
