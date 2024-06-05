@@ -1,3 +1,16 @@
+if lazyvim_docs then
+  -- By default, prettier will only be used for formatting
+  -- if a prettier configuration file is found in the project.
+  -- Set to `false` to always use prettier for supported filetypes.
+  vim.g.lazyvim_prettier_needs_config = true
+end
+
+local needs_config = vim.g.lazyvim_prettier_needs_config ~= false
+
+-- local check = vim.g.lazyvim_prettier
+
+local enabled = {} ---@type table<string, boolean>
+
 return {
   {
     "williamboman/mason.nvim",
@@ -35,6 +48,22 @@ return {
         ["markdown.mdx"] = { "prettier" },
         ["graphql"] = { "prettier" },
         ["handlebars"] = { "prettier" },
+        ["svelte"] = { "prettier" },
+      },
+      formatters = {
+        prettier = {
+          condition = function(_, ctx)
+            if not needs_config then
+              return true
+            end
+            if enabled[ctx.filename] == nil then
+              enabled[ctx.filename] = vim.fs.find(function(name, path)
+                return name:match("^%.prettierrc%.") or name:match("^prettier%.config%.")
+              end, { path = ctx.filename, upward = true })[1] ~= nil
+            end
+            return enabled[ctx.filename]
+          end,
+        },
       },
     },
   },
