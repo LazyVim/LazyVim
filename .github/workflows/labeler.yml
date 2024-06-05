@@ -1,5 +1,6 @@
 name: "Pull Request Labeler"
 on:
+  - workflow_dispatch
   - pull_request_target
 
 jobs:
@@ -10,3 +11,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/labeler@v5
+        with:
+          pr-number: |
+            2802
+            2797
+            2795
+            2695
+            2519
+            2495
+            2450
+            2449
+            2421
+            2416
+            2285
+            2282
+            2242
+            2232
+            2179
+            1958
+            1956
+            1949
+            1935
+            1884
+            1849
+            1815
+            1750
+            1740
+            1484
+            1450
