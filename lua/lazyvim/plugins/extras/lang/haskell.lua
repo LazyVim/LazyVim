@@ -1,4 +1,10 @@
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "haskell", "lhaskell" },
+      root = { "hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml" },
+    })
+  end,
 
   -- Add Haskell to treesitter
   {

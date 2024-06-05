@@ -9,6 +9,13 @@ LazyVim.lsp.on_attach(function(client, buffer)
 end)
 
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "helm",
+      root = "Chart.yaml",
+    })
+  end,
+
   { "towolf/vim-helm", ft = "helm" },
   {
     "neovim/nvim-lspconfig",
