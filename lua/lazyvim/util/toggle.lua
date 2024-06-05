@@ -88,6 +88,17 @@ function M.maximize()
     vim.o.winwidth = 999
     vim.o.winheight = 999
   end
+  -- `QuitPre` seems to be executed even if we quit a normal window, so we don't want that
+  -- `VimLeavePre` might be another consideration? Not sure about differences between the 2
+  vim.api.nvim_create_autocmd("ExitPre", {
+    once = true,
+    group = vim.api.nvim_create_augroup("lazyvim_restore_max_exit_pre", { clear = true }),
+    desc = "Restore width/height when close Neovim while maximized",
+    callback = function()
+      vim.o.winwidth = M._maximized.width
+      vim.o.winheight = M._maximized.height
+    end,
+  })
 end
 
 setmetatable(M, {
