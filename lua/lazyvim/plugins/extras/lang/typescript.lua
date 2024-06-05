@@ -72,14 +72,23 @@ return {
             {
               "gD",
               function()
-                require("vtsls").commands.goto_source_definition(0)
+                local params = vim.lsp.util.make_position_params()
+                LazyVim.lsp.execute({
+                  command = "typescript.goToSourceDefinition",
+                  arguments = { params.textDocument.uri, params.position },
+                  open = true,
+                })
               end,
               desc = "Goto Source Definition",
             },
             {
               "gR",
               function()
-                require("vtsls").commands.file_references(0)
+                LazyVim.lsp.execute({
+                  command = "typescript.findAllFileReferences",
+                  arguments = { vim.uri_from_bufnr(0) },
+                  open = true,
+                })
               end,
               desc = "File References",
             },
@@ -106,7 +115,7 @@ return {
             {
               "<leader>cV",
               function()
-                require("vtsls").commands.select_ts_version(0)
+                LazyVim.lsp.execute({ command = "typescript.selectTypeScriptVersion" })
               end,
               desc = "Select TS workspace version",
             },
