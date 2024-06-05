@@ -1,0 +1,21 @@
+name: Close stale issues and PRs
+
+on:
+  workflow_call:
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          # default stale time
+          days-before-stale: 30
+          days-before-close: 7
+          # never stale pull requests
+          # days-before-pr-stale: -1
+          days-before-pr-close: -1
+          # exclude issues with certain labels
+          exempt-issue-labels: pinned,wip,security,notice
+          # never stale issues attached to a milestone
+          exempt-all-milestones: true
