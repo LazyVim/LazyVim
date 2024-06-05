@@ -49,6 +49,17 @@ return {
     "kevinhwang91/nvim-ufo",
     event = { "BufRead", "BufNewFile" },
     dependencies = { "kevinhwang91/promise-async" },
+    keys = {
+      {
+        "K",
+        function()
+          if not require("ufo").peekFoldedLinesUnderCursor() then
+            vim.lsp.buf.hover()
+          end
+        end,
+        desc = "Peek fold or hover",
+      },
+    },
     init = function()
       vim.o.foldcolumn = "1"
       vim.o.foldlevel = 99
@@ -101,16 +112,6 @@ return {
           },
         },
       }
-    end,
-    config = function(_, opts)
-      require("ufo").setup(opts)
-
-      local map = require("lazyvim.util").safe_keymap_set
-      map("n", "K", function()
-        if not require("ufo").peekFoldedLinesUnderCursor() then
-          vim.lsp.buf.hover()
-        end
-      end, { desc = "Peek folded lines under cursor or hover" })
     end,
   },
 }
