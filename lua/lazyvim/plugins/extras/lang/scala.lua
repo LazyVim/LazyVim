@@ -1,7 +1,3 @@
--- NOTE: This setup does not define any lsp or dap specific key bindings
--- It is recommended that the LazyVim extras dap-core is imported "lazyvim.plugins.extras.dap.core"
--- If you like you can setup your own key bindings.
--- For minimalistic setup have a look at https://github.com/scalameta/nvim-metals/discussions/39
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -10,44 +6,72 @@ return {
     })
   end,
   {
-    "hrsh7th/nvim-cmp",
-    requires = {
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-vsnip" },
-      { "hrsh7th/vim-vsnip" },
-    },
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "scala" })
+      end
+    end,
   },
   {
     "scalameta/nvim-metals",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "mfussenegger/nvim-dap",
-    },
-    ft = { "scala", "sbt", "java" },
-    init = function()
-      local metals_config = require("metals").bare_config()
-      metals_config.init_options.statusBarProvider = "off"
-      metals_config.settings = {
-        showImplicitArguments = true,
-        excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-      }
-      metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-      metals_config.on_attach = function(client, bufnr)
-        require("metals").setup_dap()
-      end
+    ft = { "scala", "sbt" },
+    config = function() end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        metals = {
+          keys = {
+            {
+              "<leader>me",
+              function()
+                require("telescope").extensions.metals.commands()
+              end,
+              desc = "Metals commands",
+            },
+            {
+              "<leader>mc",
+              function()
+                require("metals").compile_cascade()
+              end,
+              desc = "Metals compile cascade",
+            },
+          },
+          init_options = {
+            statusBarProvider = "off",
+          },
+          settings = {
+            showImplicitArguments = true,
+            excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+          },
+        },
+      },
+      setup = {
+        metals = function(_, opts)
+          local metals = require("metals")
+          local metals_config = vim.tbl_deep_extend("force", metals.bare_config(), opts)
+          metals_config.on_attach = LazyVim.has("nvim-dap") and metals.setup_dap or nil
 
-      local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
-        -- NOTE: You may or may not want java included here. You will need it if you
-        -- want basic Java support but it may also conflict if you are using
-        -- something like nvim-jdtls which also works on a java filetype autocmd.
-        pattern = { "scala", "sbt", "java" },
-        callback = function()
-          require("metals").initialize_or_attach(metals_config)
+          local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "scala", "sbt" },
+            callback = function()
+              metals.initialize_or_attach(metals_config)
+            end,
+            group = nvim_metals_group,
+          })
+          return true
         end,
-        group = nvim_metals_group,
-      })
+      },
+    },
+  },
 
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    opts = function()
       -- Debug settings
       local dap = require("dap")
       dap.configurations.scala = {
@@ -69,30 +93,6 @@ return {
           },
         },
       }
-    end,
-    keys = {
-      {
-        "<leader>me",
-        function()
-          require("telescope").extensions.metals.commands()
-        end,
-        desc = "Metals commands",
-        ft = { "scala", "sbt", "java" },
-      },
-      {
-        "<leader>mc",
-        function()
-          require("metals").compile_cascade()
-        end,
-        desc = "Metals compile cascade",
-        ft = { "scala", "sbt", "java" },
-      },
-    },
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "scala" })
     end,
   },
 }
