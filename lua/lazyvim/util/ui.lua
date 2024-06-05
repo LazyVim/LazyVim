@@ -99,13 +99,18 @@ function M.statuscolumn()
 
   local components = { "", "", "" } -- left, middle, right
 
+  local show_open_folds = vim.g.lazyvim_statuscolumn and vim.g.lazyvim_statuscolumn.folds_open
+  local use_githl = vim.g.lazyvim_statuscolumn and vim.g.lazyvim_statuscolumn.folds_githl
+
   if show_signs then
     ---@type Sign?,Sign?,Sign?
     local left, right, fold, githl
     for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
       if s.name and (s.name:find("GitSign") or s.name:find("MiniDiffSign")) then
         right = s
-        githl = s["texthl"]
+        if use_githl then
+          githl = s["texthl"]
+        end
       else
         left = s
       end
@@ -113,10 +118,15 @@ function M.statuscolumn()
     if vim.v.virtnum ~= 0 then
       left = nil
     end
+
     vim.api.nvim_win_call(win, function()
       if vim.fn.foldclosed(vim.v.lnum) >= 0 then
         fold = { text = vim.opt.fillchars:get().foldclose or "", texthl = githl or "Folded" }
-      elseif not LazyVim.ui.skip_foldexpr[buf] and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">" then -- fold start
+      elseif
+        show_open_folds
+        and not LazyVim.ui.skip_foldexpr[buf]
+        and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">"
+      then -- fold start
         fold = { text = vim.opt.fillchars:get().foldopen or "", texthl = githl }
       end
     end)
