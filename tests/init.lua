@@ -19,6 +19,8 @@ local plugins = {
   "LazyVim/starter",
   { "nvim-lua/plenary.nvim" },
   { "folke/lazy.nvim" },
+  "williamboman/mason-lspconfig.nvim",
+  "williamboman/mason.nvim",
 }
 
 local function main()
