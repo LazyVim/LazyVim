@@ -14,6 +14,18 @@ return {
       if type(opts.ensure_installed) == "table" then
         vim.list_extend(opts.ensure_installed, { "angular", "scss" })
       end
+      vim.filetype.add({
+        pattern = {
+          [".*%.component%.html"] = "angular.html",
+          [".*%.container%.html"] = "angular.html",
+        },
+      })
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "angular.html",
+        callback = function()
+          vim.treesitter.language.register("angular", "angular.html")
+        end,
+      })
     end,
   },
 
