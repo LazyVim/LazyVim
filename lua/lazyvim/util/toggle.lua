@@ -73,8 +73,13 @@ function M.inlay_hints(buf, value)
   end
 end
 
+---@type {width:number, height:number}?
 M._maximized = nil
-function M.maximize()
+---@param state boolean?
+function M.maximize(state)
+  if state == (M._maximized ~= nil) then
+    return
+  end
   if M._maximized then
     vim.o.winwidth = M._maximized.width
     vim.o.winheight = M._maximized.height
@@ -95,8 +100,7 @@ function M.maximize()
     group = vim.api.nvim_create_augroup("lazyvim_restore_max_exit_pre", { clear = true }),
     desc = "Restore width/height when close Neovim while maximized",
     callback = function()
-      vim.o.winwidth = M._maximized.width
-      vim.o.winheight = M._maximized.height
+      M.maximize(false)
     end,
   })
 end
