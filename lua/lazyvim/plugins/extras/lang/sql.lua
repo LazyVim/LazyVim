@@ -63,6 +63,7 @@ return {
     end,
   },
 
+  -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     optional = true,
@@ -72,6 +73,8 @@ return {
       end
     end,
   },
+
+  -- Edgy integration
   {
     "folke/edgy.nvim",
     optional = true,
@@ -93,8 +96,35 @@ return {
     end,
   },
 
+  -- Linters & formatters
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "sqlfluff" })
+    end,
   },
   {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = function(_, opts)
+      for _, ft in ipairs(sql_ft) do
+        opts.linters_by_ft[ft] = opts.linters_by_ft[ft] or {}
+        table.insert(opts.linters_by_ft[ft], "sqlfluff")
+      end
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = function(_, opts)
+      opts.formatters.sqlfluff = {
+        args = { "format", "--dialect=ansi", "-" },
+      }
+      for _, ft in ipairs(sql_ft) do
+        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
+        table.insert(opts.formatters_by_ft[ft], "sqlfluff")
+      end
     end,
   },
 }
