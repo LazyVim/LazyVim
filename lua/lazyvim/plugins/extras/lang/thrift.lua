@@ -1,4 +1,8 @@
 return {
+  recommended = {
+    ft = "thrift",
+    root = ".thrift",
+  },
   {
     "nvim-treesitter",
     optional = true,
