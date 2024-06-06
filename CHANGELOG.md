@@ -1,5 +1,39 @@
 # Changelog
 
+## [12.6.0](https://github.com/LazyVim/LazyVim/compare/v12.5.0...v12.6.0) (2024-06-06)
+
+
+### Features
+
+* **bufferline:** allow custom icons for filetypes ([bac4bba](https://github.com/LazyVim/LazyVim/commit/bac4bba01620ec1c3f14cab682974673767eea02))
+* **extras:** added extra for octo.nvim. Make sure to update lazy.nvim, which-key.nvim and also update tokyonight if you use that theme. ([100c579](https://github.com/LazyVim/LazyVim/commit/100c5793c854b2b5b97340917071a1153eaad36e))
+* **extras:** added new `git` extra with treesitter and issue/pr support ([91a5fc1](https://github.com/LazyVim/LazyVim/commit/91a5fc10e69cd601a800c5cf0b07b5213952b8fc))
+* **extras:** allow recommended to be the args for LazyVim.extras.wants ([502602e](https://github.com/LazyVim/LazyVim/commit/502602e4a2871f14cdd250863020bc3e45a6e16f))
+* **git:** added leader-gB to browse remotes of the current repo ([c4ccd7c](https://github.com/LazyVim/LazyVim/commit/c4ccd7cbcebc23c632cc8d324ab6631576c2cda0))
+* **keymaps:** add neotest toggle watch keymap ([#3073](https://github.com/LazyVim/LazyVim/issues/3073)) ([4d16296](https://github.com/LazyVim/LazyVim/commit/4d1629605b3ab37a63622460823749ba4d7d5ec8))
+* **lang:** add nix language support ([#2956](https://github.com/LazyVim/LazyVim/issues/2956)) ([9eae3e0](https://github.com/LazyVim/LazyVim/commit/9eae3e015aa5a90daa6880c2a7701900d21032a7))
+* **lint:** added support for prepend_args to nvim-lint. Fixes [#1887](https://github.com/LazyVim/LazyVim/issues/1887) ([4ab123f](https://github.com/LazyVim/LazyVim/commit/4ab123fb31344bde8512b2eb98f9ea09d8eb729b))
+* **lsp:** simpler API to deal with code actions ([1bd4d2f](https://github.com/LazyVim/LazyVim/commit/1bd4d2fc723e18912b6ffa91390ec09aa4e242a3))
+* **mini.files:** add cwd and vertical/horizontal keybindings to mini.files ([#2695](https://github.com/LazyVim/LazyVim/issues/2695)) ([393aa44](https://github.com/LazyVim/LazyVim/commit/393aa44e66f8496489221fd166ab32c3d834d9c6)), closes [#2692](https://github.com/LazyVim/LazyVim/issues/2692)
+* **nushell:** add minimal support ([#2416](https://github.com/LazyVim/LazyVim/issues/2416)) ([4ef42b4](https://github.com/LazyVim/LazyVim/commit/4ef42b45785c53a17e55a69739fcd2aa75a8b091))
+* **prettier:** the prettier extra now needs a prettier config file by default. See docs to change this. ([8ceccd7](https://github.com/LazyVim/LazyVim/commit/8ceccd71e2fe211f68ec664063381dfd2706b96c))
+* **treesitter:** add printf ([#2450](https://github.com/LazyVim/LazyVim/issues/2450)) ([0a2f40c](https://github.com/LazyVim/LazyVim/commit/0a2f40c2fb844f9f191fd32736d3599d0dc3308d))
+* **typescript:** open locations from lsp execute command with trouble for vtsls ([a636bf2](https://github.com/LazyVim/LazyVim/commit/a636bf2022198ef9185d33067bb49cc5510237e7))
+
+
+### Bug Fixes
+
+* **angular:** re-fix angular html treesitter ([#3488](https://github.com/LazyVim/LazyVim/issues/3488)) ([fd4c38b](https://github.com/LazyVim/LazyVim/commit/fd4c38bc2b2fcf81e6f871e60087022e6d7a23c7))
+* **angular:** treesitter not enabled for angular templates ([#3469](https://github.com/LazyVim/LazyVim/issues/3469)) ([24af74e](https://github.com/LazyVim/LazyVim/commit/24af74eed60bf2f02d963fd730b07e537cdf34dc))
+* **git:** added recommended ([88db9c5](https://github.com/LazyVim/LazyVim/commit/88db9c5192b8bc8c55ff2d8d4452c533f0bc7280))
+* **kotlin:** kotlin plugin messages and code maintain consistency ([#3291](https://github.com/LazyVim/LazyVim/issues/3291)) ([2244af1](https://github.com/LazyVim/LazyVim/commit/2244af1a86e58f4e91d0b3a715736be789d2590d))
+* **lualine:** don't override user's laststatus setting. See [#3486](https://github.com/LazyVim/LazyVim/issues/3486) ([4d8d597](https://github.com/LazyVim/LazyVim/commit/4d8d597a3fa10c8138641ade4981a1ce81c45910))
+* **svelte:** added organize imports and prettier ([#3466](https://github.com/LazyVim/LazyVim/issues/3466)) ([e0a0123](https://github.com/LazyVim/LazyVim/commit/e0a0123b1869cbb910f28582d345ca0e6287eb55))
+* **svelte:** disable prettier integration for svelte for now. See [#3466](https://github.com/LazyVim/LazyVim/issues/3466) ([9a11623](https://github.com/LazyVim/LazyVim/commit/9a1162314f40ea20e9e8716631b8f99e010c04d2))
+* **typecript:** remove dependency on `nvim-vtsls`. Not needed anymore ([cae2c22](https://github.com/LazyVim/LazyVim/commit/cae2c226b57dd3b17817bcd3a494c60b5ac50e9a))
+* **ui:** remove extra space in extras ui ([#3481](https://github.com/LazyVim/LazyVim/issues/3481)) ([2c2b6f2](https://github.com/LazyVim/LazyVim/commit/2c2b6f200cb98c026cac4e7e97330a850f39cae4))
+* **which-key:** use new which-key support for native group keymaps (nop) ([8010f50](https://github.com/LazyVim/LazyVim/commit/8010f50aa50333407fe6103de365c7d8942c219f))
+
 ## [12.5.0](https://github.com/LazyVim/LazyVim/compare/v12.4.0...v12.5.0) (2024-06-05)
 
 
