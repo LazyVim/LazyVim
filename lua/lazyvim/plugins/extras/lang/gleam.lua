@@ -1,4 +1,9 @@
 return {
+  recommended = {
+    ft = "gleam",
+    root = "gleam.toml",
+  },
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
