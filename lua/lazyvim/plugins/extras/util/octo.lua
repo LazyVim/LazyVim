@@ -7,6 +7,7 @@ return {
   {
     "pwntester/octo.nvim",
     cmd = "Octo",
+    event = { { event = "BufReadCmd", pattern = "octo://*" } },
     init = function()
       vim.treesitter.language.register("markdown", "octo")
     end,
@@ -23,6 +24,7 @@ return {
       { "<leader>gP", "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
       { "<leader>gr", "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
       { "<leader>gS", "<cmd>Octo search<CR>", desc = "Search (Octo)" },
+
       { "<leader>a", "", desc = "+assignee (Otco)", ft = "octo" },
       { "<leader>c", "", desc = "+comment/code (Otco)", ft = "octo" },
       { "<leader>l", "", desc = "+label (Otco)", ft = "octo" },
