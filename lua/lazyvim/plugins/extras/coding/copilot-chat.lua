@@ -22,6 +22,7 @@ return {
       }
     end,
     keys = {
+      { "<leader>a", "", desc = "+ai" },
       {
         "<leader>aa",
         function()
@@ -64,16 +65,6 @@ return {
 
       chat.setup(opts)
     end,
-  },
-
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<leader>a"] = { name = "+ai" },
-      },
-    },
   },
 
   -- Telescope integration

@@ -50,14 +50,8 @@ return {
         update_n_lines = "gzn", -- Update `n_lines`
       },
     },
-  },
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["gz"] = { name = "+surround" },
-      },
+    keys = {
+      { "gz", "", desc = "+surround" },
     },
   },
 

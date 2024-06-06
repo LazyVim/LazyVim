@@ -5,15 +5,6 @@ return {
       root = { ".latexmkrc", ".texlabroot", "texlabroot", "Tectonic.toml" },
     })
   end,
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<localLeader>l"] = { name = "+vimtex" },
-      },
-    },
-  },
 
   -- Add BibTeX/LaTeX to treesitter
   {
@@ -38,6 +29,9 @@ return {
       vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover
       vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
     end,
+    keys = {
+      { "<localLeader>l", "", desc = "+vimtext" },
+    },
   },
 
   -- Correctly setup lspconfig for LaTeX 🚀
