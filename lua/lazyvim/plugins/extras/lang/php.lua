@@ -1,20 +1,16 @@
 return {
+  recommended = {
+    ft = "php",
+    root = { "composer.json", ".git", ".phpactor.json", ".phpactor.yml" },
+  },
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "php",
-      })
+      vim.list_extend(opts.ensure_installed, { "php" })
     end,
   },
-  {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "phpactor",
-      })
-    end,
-  },
+
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -23,6 +19,7 @@ return {
       },
     },
   },
+
   {
     "mfussenegger/nvim-dap",
     optional = true,
