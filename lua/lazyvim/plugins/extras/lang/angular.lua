@@ -32,7 +32,13 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        angularls = {},
+        angularls = {
+          filetypes = {
+            -- default filetypes
+            "typescript", "html", "typescriptreact", "typescript.tsx",
+            -- file type added in order to enable treesitter
+            "angular.html" },
+        },
       },
       setup = {
         angularls = function()
