@@ -1,6 +1,9 @@
 ---@class lazyvim.util.ui
 local M = {}
 
+---@type (fun(buf:number, lnum:number, vnum:number, win:number):Sign[]?)[]
+M.virtual = {}
+
 ---@alias Sign {name:string, text:string, texthl:string, priority:number}
 
 -- Returns a list of regular and extmark signs sorted by priority (low to high)
@@ -103,9 +106,20 @@ function M.statuscolumn()
   local use_githl = vim.g.lazyvim_statuscolumn and vim.g.lazyvim_statuscolumn.folds_githl
 
   if show_signs then
+    local signs = M.get_signs(buf, vim.v.lnum)
+
+    local has_virtual = false
+    for _, fn in ipairs(M.virtual) do
+      local virtual = fn(buf, vim.v.lnum, vim.v.virtnum, win)
+      if virtual then
+        has_virtual = true
+        vim.list_extend(signs, virtual)
+      end
+    end
+
     ---@type Sign?,Sign?,Sign?
     local left, right, fold, githl
-    for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
+    for _, s in ipairs(signs) do
       if s.name and s.name:lower():find("^octo_clean") then
         s.texthl = "IblScope"
       end
@@ -118,7 +132,7 @@ function M.statuscolumn()
         left = s
       end
     end
-    if vim.v.virtnum ~= 0 and vim.bo[buf].filetype ~= "octo" then
+    if vim.v.virtnum ~= 0 and not has_virtual then
       left = nil
     end
 
