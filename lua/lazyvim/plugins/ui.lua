@@ -92,6 +92,10 @@ return {
             text_align = "left",
           },
         },
+        ---@param opts bufferline.IconFetcherOpts
+        get_element_icon = function(opts)
+          return LazyVim.config.icons.ft[opts.filetype]
+        end,
       },
     },
     config = function(_, opts)
