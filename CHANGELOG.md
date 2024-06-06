@@ -1,5 +1,23 @@
 # Changelog
 
+## [12.8.0](https://github.com/LazyVim/LazyVim/compare/v12.7.0...v12.8.0) (2024-06-06)
+
+
+### Features
+
+* **options:** added linebreak=true to default options ([1f4c196](https://github.com/LazyVim/LazyVim/commit/1f4c1964fd9dda8db511bc47bc9a568a6230dff0))
+
+
+### Bug Fixes
+
+* **markdown:** missing markdown-toc in mason ([#3499](https://github.com/LazyVim/LazyVim/issues/3499)) ([a9aea4b](https://github.com/LazyVim/LazyVim/commit/a9aea4b5a14523641aceb23ba6717c07043faca1))
+* **mason-nvim-dap:** correctly configure to auto-install debug adapters ([#3493](https://github.com/LazyVim/LazyVim/issues/3493)) ([86ba1bc](https://github.com/LazyVim/LazyVim/commit/86ba1bc62d4d39b1c68e267076dfc59315814048))
+* **octo:** fixed octo's rendering of comment signs when lines are wrapped ([81370cf](https://github.com/LazyVim/LazyVim/commit/81370cf7145edbcb1d2ca79bf014e7342a44b106))
+* **octo:** load octo on `octo://*` events, so that those buffers work after session restore ([e6443ad](https://github.com/LazyVim/LazyVim/commit/e6443ad7dcb6e3cca286aa6b94eb418e6fa15d8c))
+* **php:** php gets recommended in every .git repo ([#3496](https://github.com/LazyVim/LazyVim/issues/3496)) ([3654098](https://github.com/LazyVim/LazyVim/commit/365409852080dd9565cdf1afbdf8f4b375b4f052))
+* **prettier:** fix prettier config detection. Closes [#3497](https://github.com/LazyVim/LazyVim/issues/3497) ([e51199c](https://github.com/LazyVim/LazyVim/commit/e51199cffa290e0bf50a632fcc8eb1ee437801f9))
+* **prettier:** use prettier to check if prettier should run on the file ([0255b8f](https://github.com/LazyVim/LazyVim/commit/0255b8fdb16e81a84d3642df96bd8d504fcb4a40))
+
 ## [12.7.0](https://github.com/LazyVim/LazyVim/compare/v12.6.0...v12.7.0) (2024-06-06)
 
 
