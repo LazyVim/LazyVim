@@ -1,7 +1,7 @@
 return {
   recommended = {
     ft = "php",
-    root = { "composer.json", ".git", ".phpactor.json", ".phpactor.yml" },
+    root = { "composer.json", ".phpactor.json", ".phpactor.yml" },
   },
 
   {
