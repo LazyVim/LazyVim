@@ -33,6 +33,9 @@ local defaults = {
     misc = {
       dots = "󰇘",
     },
+    ft = {
+      octo = "",
+    },
     dap = {
       Stopped             = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
       Breakpoint          = " ",

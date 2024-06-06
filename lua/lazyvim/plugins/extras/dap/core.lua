@@ -49,17 +49,6 @@ return {
       opts = {},
     },
 
-    -- which key integration
-    {
-      "folke/which-key.nvim",
-      optional = true,
-      opts = {
-        defaults = {
-          ["<leader>d"] = { name = "+debug" },
-        },
-      },
-    },
-
     -- mason.nvim integration
     {
       "jay-babu/mason-nvim-dap.nvim",
@@ -85,6 +74,7 @@ return {
 
   -- stylua: ignore
   keys = {
+    { "<leader>d", "", desc = "+debug" },
     { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
     { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
     { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },

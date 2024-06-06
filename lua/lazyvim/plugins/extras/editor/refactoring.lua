@@ -7,6 +7,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     keys = {
+      { "<leader>r", "", desc = "+refactor" },
       {
         "<leader>rs",
         function()
@@ -123,16 +124,5 @@ return {
         end)
       end
     end,
-  },
-
-  -- which key integration
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    opts = {
-      defaults = {
-        ["<leader>r"] = { name = "+refactor" },
-      },
-    },
   },
 }
