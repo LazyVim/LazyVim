@@ -37,7 +37,9 @@ M.ns = vim.api.nvim_create_namespace("lazyvim.extras")
 ---@type string[]
 M.state = nil
 
----@param opts {ft?: string|string[], root?: string|string[]}
+---@alias WantsOpts {ft?: string|string[], root?: string|string[]}
+
+---@param opts WantsOpts
 ---@return boolean
 function M.wants(opts)
   if opts.ft then
@@ -105,10 +107,12 @@ function M.get_extra(source, modname)
   table.sort(plugins)
   table.sort(optional)
 
-  ---@type boolean|(fun():boolean?)|nil
+  ---@type boolean|(fun():boolean?)|nil|WantsOpts
   local recommended = require(modname).recommended or false
   if type(recommended) == "function" then
     recommended = recommended() or false
+  elseif type(recommended) == "table" then
+    recommended = M.wants(recommended)
   end
 
   ---@type LazyExtra
