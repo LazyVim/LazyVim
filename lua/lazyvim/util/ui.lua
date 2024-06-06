@@ -34,7 +34,7 @@ function M.get_signs(buf, lnum)
   )
   for _, extmark in pairs(extmarks) do
     signs[#signs + 1] = {
-      name = extmark[4].sign_hl_group or "",
+      name = extmark[4].sign_hl_group or extmark[4].sign_name or "",
       text = extmark[4].sign_text,
       texthl = extmark[4].sign_hl_group,
       priority = extmark[4].priority,
@@ -106,6 +106,9 @@ function M.statuscolumn()
     ---@type Sign?,Sign?,Sign?
     local left, right, fold, githl
     for _, s in ipairs(M.get_signs(buf, vim.v.lnum)) do
+      if s.name and s.name:lower():find("^octo_clean") then
+        s.texthl = "IblScope"
+      end
       if s.name and (s.name:find("GitSign") or s.name:find("MiniDiffSign")) then
         right = s
         if use_githl then
@@ -115,7 +118,7 @@ function M.statuscolumn()
         left = s
       end
     end
-    if vim.v.virtnum ~= 0 then
+    if vim.v.virtnum ~= 0 and vim.bo[buf].filetype ~= "octo" then
       left = nil
     end
 
