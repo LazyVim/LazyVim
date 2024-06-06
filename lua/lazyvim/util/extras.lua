@@ -267,17 +267,17 @@ function X:extra(extra)
     self.text:append(" "):append(LazyConfig.options.ui.icons.favorite or " ", "LazyCommit")
   end
   if extra.source.name ~= "LazyVim" then
-    self.text:append(" "):append(LazyConfig.options.ui.icons.event .. " " .. extra.source.name, "LazyReasonEvent")
+    self.text:append(" "):append(LazyConfig.options.ui.icons.event .. extra.source.name, "LazyReasonEvent")
   end
   for _, import in ipairs(extra.imports) do
     import = import:gsub("^lazyvim.plugins.extras.", "")
-    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. import, "LazyReasonStart")
+    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. import, "LazyReasonStart")
   end
   for _, plugin in ipairs(extra.plugins) do
-    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonPlugin")
+    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. plugin, "LazyReasonPlugin")
   end
   for _, plugin in ipairs(extra.optional) do
-    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonRequire")
+    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. plugin, "LazyReasonRequire")
   end
   if extra.desc then
     self.text:nl():append("    " .. extra.desc, "LazyComment")
