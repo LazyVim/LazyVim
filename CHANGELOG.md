@@ -1,5 +1,16 @@
 # Changelog
 
+## [12.7.0](https://github.com/LazyVim/LazyVim/compare/v12.6.0...v12.7.0) (2024-06-06)
+
+
+### Features
+
+* **extras:** add thrift lang support ([#2804](https://github.com/LazyVim/LazyVim/issues/2804)) ([5a19f6b](https://github.com/LazyVim/LazyVim/commit/5a19f6b5fe6f88804a7a80649b6587ef30dcdc85))
+* **extras:** added extra for neogen. Closes [#2881](https://github.com/LazyVim/LazyVim/issues/2881) ([6fd2c88](https://github.com/LazyVim/LazyVim/commit/6fd2c88024447b7eed20ca5461be784df07a3787))
+* **extras:** added gleam lang support ([#2802](https://github.com/LazyVim/LazyVim/issues/2802)) ([1891b02](https://github.com/LazyVim/LazyVim/commit/1891b02d9d50e935739fdaff6095b04a7760bf99))
+* **lang:** add elm ([#3023](https://github.com/LazyVim/LazyVim/issues/3023)) ([4742390](https://github.com/LazyVim/LazyVim/commit/4742390960d6fa41ba7ea53cd3cd17a8d7f48084))
+* **lang:** added php support ([#1450](https://github.com/LazyVim/LazyVim/issues/1450)) ([32ba8ea](https://github.com/LazyVim/LazyVim/commit/32ba8ea3fedb4ace60bc019fc895f4f07d0a60dc))
+
 ## [12.6.0](https://github.com/LazyVim/LazyVim/compare/v12.5.0...v12.6.0) (2024-06-06)
 
 
