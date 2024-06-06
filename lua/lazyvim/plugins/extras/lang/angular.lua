@@ -35,9 +35,13 @@ return {
         angularls = {
           filetypes = {
             -- default filetypes
-            "typescript", "html", "typescriptreact", "typescript.tsx",
+            "typescript",
+            "html",
+            "typescriptreact",
+            "typescript.tsx",
             -- file type added in order to enable treesitter
-            "angular.html" },
+            "angular.html",
+          },
         },
       },
       setup = {
