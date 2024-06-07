@@ -9,10 +9,7 @@ return {
   -- Add Clojure & related to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "clojure" })
-    end,
+    opts = { ensure_installed = { "clojure" } },
   },
 
   -- Extend auto completion
