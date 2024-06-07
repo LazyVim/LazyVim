@@ -1,23 +1,95 @@
+---@diagnostic disable: inject-field
 if lazyvim_docs then
-  -- By default, prettier will only be used for formatting
-  -- if a prettier configuration file is found in the project.
-  -- Set to `false` to always use prettier for supported filetypes.
-  vim.g.lazyvim_prettier_needs_config = true
+  -- Enable the option to require a Prettier config file
+  -- If no prettier config file is found, the formatter will not be used
+  vim.g.lazyvim_prettier_needs_config = false
 end
 
-local needs_config = vim.g.lazyvim_prettier_needs_config ~= false
+---@alias ConformCtx {buf: number, filename: string, dirname: string}
+local M = {}
 
--- local check = vim.g.lazyvim_prettier
+local supported = {
+  "css",
+  "fish",
+  "graphql",
+  "handlebars",
+  "html",
+  "javascript",
+  "javascriptreact",
+  "json",
+  "jsonc",
+  "less",
+  "lua",
+  "markdown",
+  "markdown.mdx",
+  "mysql",
+  "plsql",
+  "scss",
+  "sh",
+  "sql",
+  "typescript",
+  "typescriptreact",
+  "vue",
+  "yaml",
+}
 
-local enabled = {} ---@type table<string, boolean>
+--- Checks if a Prettier config file exists for the given context
+---@param ctx ConformCtx
+function M.has_config(ctx)
+  vim.fn.system({ "prettier", "--find-config-path", ctx.filename })
+  return vim.v.shell_error == 0
+end
+
+--- Checks if a parser can be inferred for the given context:
+--- * If the filetype is in the supported list, return true
+--- * Otherwise, check if a parser can be inferred
+---@param ctx ConformCtx
+function M.has_parser(ctx)
+  local ft = vim.bo[ctx.buf].filetype --[[@as string]]
+  -- default filetypes are always supported
+  if vim.tbl_contains(supported, ft) then
+    return true
+  end
+  -- otherwise, check if a parser can be inferred
+  local ret = vim.fn.system({ "prettier", "--file-info", ctx.filename })
+  ---@type boolean, string?
+  local ok, parser = pcall(function()
+    return vim.fn.json_decode(ret).inferredParser
+  end)
+  return ok and parser and parser ~= vim.NIL
+end
+
+M.has_config = LazyVim.memoize(M.has_config)
+M.has_parser = LazyVim.memoize(M.has_parser)
 
 return {
   {
     "williamboman/mason.nvim",
+    opts = { ensure_installed = { "prettier" } },
+  },
+
+  -- conform
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    ---@param opts ConformOpts
     opts = function(_, opts)
-      table.insert(opts.ensure_installed, "prettier")
+      opts.formatters_by_ft = opts.formatters_by_ft or {}
+      for _, ft in ipairs(supported) do
+        opts.formatters_by_ft[ft] = { "prettier" }
+      end
+
+      opts.formatters = {
+        prettier = {
+          condition = function(_, ctx)
+            return M.has_parser(ctx) and (vim.g.lazyvim_prettier_needs_config ~= true or M.has_config(ctx))
+          end,
+        },
+      }
     end,
   },
+
+  -- none-ls support
   {
     "nvimtools/none-ls.nvim",
     optional = true,
@@ -26,44 +98,5 @@ return {
       opts.sources = opts.sources or {}
       table.insert(opts.sources, nls.builtins.formatting.prettier)
     end,
-  },
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        ["javascript"] = { "prettier" },
-        ["javascriptreact"] = { "prettier" },
-        ["typescript"] = { "prettier" },
-        ["typescriptreact"] = { "prettier" },
-        ["vue"] = { "prettier" },
-        ["css"] = { "prettier" },
-        ["scss"] = { "prettier" },
-        ["less"] = { "prettier" },
-        ["html"] = { "prettier" },
-        ["json"] = { "prettier" },
-        ["jsonc"] = { "prettier" },
-        ["yaml"] = { "prettier" },
-        ["markdown"] = { "prettier" },
-        ["markdown.mdx"] = { "prettier" },
-        ["graphql"] = { "prettier" },
-        ["handlebars"] = { "prettier" },
-        ["svelte"] = { "prettier" },
-      },
-      formatters = {
-        prettier = {
-          condition = function(_, ctx)
-            if not needs_config then
-              return true
-            end
-            if enabled[ctx.filename] == nil then
-              vim.fn.system({ "prettier", "--find-config-path", ctx.filename })
-              enabled[ctx.filename] = vim.v.shell_error == 0
-            end
-            return enabled[ctx.filename]
-          end,
-        },
-      },
-    },
   },
 }
