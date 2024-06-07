@@ -26,17 +26,17 @@ return {
     end,
   },
 
-  -- Enable rainbow parenthesis
-  { "HiPhish/rainbow-delimiters.nvim" },
-
   -- Add s-exp mappings
-  { "PaterJason/nvim-treesitter-sexp" },
+  { "PaterJason/nvim-treesitter-sexp", opts = {}, event = "LazyFile" },
 
   -- Colorize the output of the log buffer
   {
     "m00qek/baleia.nvim",
-    config = function()
-      vim.g.conjure_baleia = require("baleia").setup({ line_starts_at = 3 })
+    opts = {
+      line_starts_at = 3,
+    },
+    config = function(_, opts)
+      vim.g.conjure_baleia = require("baleia").setup(opts)
 
       vim.api.nvim_create_user_command("BaleiaColorize", function()
         vim.g.conjure_baleia.once(vim.api.nvim_get_current_buf())
@@ -49,6 +49,7 @@ return {
   -- Use Clojure REPL
   {
     "Olical/conjure",
+    event = "LazyFile",
     config = function(_, _)
       require("conjure.main").main()
       require("conjure.mapping")["on-filetype"]()
