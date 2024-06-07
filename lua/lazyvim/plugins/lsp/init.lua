@@ -261,11 +261,11 @@ return {
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
+    opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
         "stylua",
         "shfmt",
-        -- "flake8",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

@@ -7,13 +7,7 @@ return {
   end,
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "elixir",
-        "heex",
-        "eex",
-      })
-    end,
+    opts = { ensure_installed = { "elixir", "heex", "eex" } },
   },
   {
     "nvim-neotest/neotest",

@@ -16,7 +16,11 @@ return {
     })
   end,
 
-  { "towolf/vim-helm", ft = "helm" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "helm" } },
+  },
+
   {
     "neovim/nvim-lspconfig",
     opts = {
