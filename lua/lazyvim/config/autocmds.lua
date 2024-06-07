@@ -22,6 +22,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- remember folds when leaving a buffer
+vim.api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, {
+  group = augroup("folds"),
+  pattern = "*",
+  callback = function()
+    vim.cmd("silent! mkview")
+  end,
+})
+
+-- restore folds when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("folds"),
+  pattern = "*",
+  callback = function()
+    vim.cmd("silent! loadview")
+  end,
+})
+
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
