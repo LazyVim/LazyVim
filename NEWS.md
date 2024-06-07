@@ -2,6 +2,8 @@
 
 ## 11.x
 
+- This **news** is now also available on the website at [https://www.lazyvim.org/news](https://www.lazyvim.org/news)
+
 - **prettier** extra now works for all prettier supported filetypes
   and will be enabled for astro/svelte extra if you have a proper
   config file with the correct prettier plugin
