@@ -111,7 +111,9 @@ return {
           return LazyVim.cmp.expand(item.body)
         end,
       }
-      table.insert(opts.sources, { name = "snippets" })
+      if LazyVim.has("nvim-snippets") then
+        table.insert(opts.sources, { name = "snippets" })
+      end
     end,
     keys = {
       {

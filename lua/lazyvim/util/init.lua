@@ -75,6 +75,12 @@ function M.has(plugin)
   return M.get_plugin(plugin) ~= nil
 end
 
+---@param extra string
+function M.has_extra(extra)
+  local modname = "lazyvim.plugins.extras." .. extra
+  return vim.tbl_contains(require("lazy.core.config").spec.modules, modname)
+end
+
 ---@param fn fun()
 function M.on_very_lazy(fn)
   vim.api.nvim_create_autocmd("User", {
@@ -262,4 +268,17 @@ for _, level in ipairs({ "info", "warn", "error" }) do
   end
 end
 
+local cache = {} ---@type table<string, any>
+---@generic T: fun()
+---@param fn T
+---@return T
+function M.memoize(fn)
+  return function(...)
+    local key = vim.inspect({ ... })
+    if cache[key] == nil then
+      cache[key] = fn(...)
+    end
+    return cache[key]
+  end
+end
 return M
