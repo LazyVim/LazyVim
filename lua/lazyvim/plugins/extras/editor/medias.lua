@@ -28,13 +28,13 @@ return {
             },
           }
 
-          local errors = {}
           local filetypes = {}
 
           -- Ensure all required prerequisites are installed
           for _, tool in ipairs(prerequisites.required) do
             if vim.fn.executable(tool.cmd) == 0 then
-              table.insert(errors, "Required prerequisite not installed: " .. tool.name)
+              LazyVim.error("Required prerequisite not installed: " .. tool.name)
+              return
             else
               filetypes = vim.tbl_extend("force", filetypes, tool.filetypes)
             end
@@ -50,7 +50,13 @@ return {
           end
 
           if not findCmd then
-            table.insert(errors, "None of the required 'find cmd' prerequisites are installed")
+            LazyVim.error(
+              "None of the required 'find cmd' prerequisites is installed.\n"
+                .. "Please install at least one of the following: `rd`, `rg`, or `find`.\n"
+                .. "More information can be found at: "
+                .. "https://github.com/nvim-telescope/telescope-media-files.nvim?tab=readme-ov-file#prerequisites"
+            )
+            return
           end
 
           -- Check optional prerequisites and include their filetypes if installed
@@ -58,12 +64,6 @@ return {
             if vim.fn.executable(tool.cmd) == 1 then
               filetypes = vim.tbl_extend("force", filetypes, tool.filetypes)
             end
-          end
-
-          -- If one of required prerequisites not installed print them and return
-          if #errors > 0 then
-            LazyVim.error(table.concat(errors, "\n"))
-            return
           end
 
           -- Setup media_files extension for telescope
