@@ -35,7 +35,7 @@ return {
             )
           end
 
-          local filetypes = {}
+          local supportedFiletypes = {}
 
           -- Ensure all required prerequisites are installed
           for _, tool in ipairs(prerequisites.required) do
@@ -43,7 +43,7 @@ return {
               sendPrerequisitesError("Required prerequisite not installed: " .. tool.name)
               return
             else
-              filetypes = vim.tbl_extend("force", filetypes, tool.filetypes)
+              supportedFiletypes = vim.tbl_extend("force", supportedFiletypes, tool.filetypes)
             end
           end
 
@@ -67,7 +67,7 @@ return {
           -- Check optional prerequisites and include their filetypes if installed
           for _, tool in ipairs(prerequisites.optional) do
             if vim.fn.executable(tool.cmd) == 1 then
-              filetypes = vim.tbl_extend("force", filetypes, tool.filetypes)
+              supportedFiletypes = vim.tbl_extend("force", supportedFiletypes, tool.filetypes)
             end
           end
 
@@ -76,7 +76,7 @@ return {
             local ok, err = pcall(require("telescope").load_extension, "media_files")
             if ok then
               opts.extensions = vim.tbl_extend("force", opts.extensions or {}, {
-                media_files = { filetypes = filetypes, find_cmd = findCmd },
+                media_files = { filetypes = supportedFiletypes, find_cmd = findCmd },
               })
             else
               LazyVim.error("Failed to load the telescope extension for `telescope-media-files.nvim`:\n" .. err)
