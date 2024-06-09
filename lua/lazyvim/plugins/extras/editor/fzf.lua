@@ -27,33 +27,32 @@ return {
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
-    opts = {
-      [1] = "default-title",
-      fzf_colors = {
-        ["fg"] = { "fg", "FzfLuaNormal" },
-        ["bg"] = { "bg", "FzfLuaNormal" },
-        ["hl"] = { "fg", "Special" },
-        ["fg+"] = { "fg", "Visual" },
-        ["bg+"] = { "bg", "Visual" },
-        ["hl+"] = { "fg", "Special" },
-        ["info"] = { "fg", "NonText" },
-        ["border"] = { "fg", "FzfLuaBorder" },
-        ["gutter"] = { "bg", "FzfLuaNormal" },
-        ["query"] = { "fg", "FzfLuaNormal" },
-        ["prompt"] = { "fg", "FzfLuaNormal" },
-        ["pointer"] = { "fg", "FzfLuaMarker" },
-        ["marker"] = { "fg", "FzfLuaMarker" },
-        ["header"] = { "fg", "FzfLuaNormal" },
-      },
-    },
-    config = function(_, opts)
+    opts = function()
       local config = require("fzf-lua.config")
       local actions = require("trouble.sources.fzf").actions
       config.defaults.actions.files["ctrl-t"] = actions.open_all
       config.defaults.actions.files["alt-t"] = actions.open
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
-      -- vim.env.FZF_DEFAULT_OPTS = ""
-      require("fzf-lua").setup(opts)
+
+      return {
+        [1] = "default-title",
+        fzf_colors = {
+          ["fg"] = { "fg", "FzfLuaNormal" },
+          ["bg"] = { "bg", "FzfLuaNormal" },
+          ["hl"] = { "fg", "Special" },
+          ["fg+"] = { "fg", "Visual" },
+          ["bg+"] = { "bg", "Visual" },
+          ["hl+"] = { "fg", "Special" },
+          ["info"] = { "fg", "NonText" },
+          ["border"] = { "fg", "FzfLuaBorder" },
+          ["gutter"] = { "bg", "FzfLuaNormal" },
+          ["query"] = { "fg", "FzfLuaNormal" },
+          ["prompt"] = { "fg", "FzfLuaNormal" },
+          ["pointer"] = { "fg", "FzfLuaMarker" },
+          ["marker"] = { "fg", "FzfLuaMarker" },
+          ["header"] = { "fg", "FzfLuaNormal" },
+        },
+      }
     end,
     keys = {
       { "<esc>", "<cmd>close<cr>", ft = "fzf", mode = "t", nowait = true },
