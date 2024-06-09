@@ -41,7 +41,7 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
-      table.insert(opts.sources, nls.builtins.formatting.pretty_php)
+      table.insert(opts.sources, nls.builtins.formatting.phpcsfixer)
     end,
   },
   {
@@ -49,11 +49,11 @@ return {
     optional = true,
     dependencies = {
       "williamboman/mason.nvim",
-      opts = { ensure_installed = { "pretty-php" } },
+      opts = { ensure_installed = { "php-cs-fixer" } },
     },
     opts = {
       formatters_by_ft = {
-        php = { "pretty-php" },
+        php = { "php-cs-fixer" },
       },
     },
   },
