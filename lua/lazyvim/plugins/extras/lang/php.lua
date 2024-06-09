@@ -19,11 +19,22 @@ return {
   },
 
   {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "phpcs",
+        "php-cs-fixer",
+      },
+    },
+  },
+  {
     "mfussenegger/nvim-dap",
     optional = true,
     dependencies = {
       "williamboman/mason.nvim",
-      opts = { ensure_installed = { "php-debug-adapter" } },
+      opts = { ensure_installed = {
+        "php-debug-adapter",
+      } },
     },
     opts = function()
       local dap = require("dap")
@@ -48,12 +59,6 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    dependencies = {
-      "williamboman/mason.nvim",
-      opts = { ensure_installed = {
-        "phpcs",
-      } },
-    },
     opts = {
       linters_by_ft = {
         php = { "phpcs" },
@@ -62,12 +67,6 @@ return {
     {
       "stevearc/conform.nvim",
       optional = true,
-      dependencies = {
-        "williamboman/mason.nvim",
-        opts = { ensure_installed = {
-          "php-cs-fixer",
-        } },
-      },
       opts = {
         formatters_by_ft = {
           php = { "php-cs-fixer" },
