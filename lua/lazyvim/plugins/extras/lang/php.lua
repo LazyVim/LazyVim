@@ -42,18 +42,31 @@ return {
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
       table.insert(opts.sources, nls.builtins.formatting.phpcsfixer)
+      table.insert(opts.sources, nls.builtins.diagnostics.phpcs)
     end,
   },
   {
-    "stevearc/conform.nvim",
+    "mfussenegger/nvim-lint",
     optional = true,
-    dependencies = {
-      "williamboman/mason.nvim",
-      opts = { ensure_installed = { "php-cs-fixer" } },
-    },
     opts = {
-      formatters_by_ft = {
-        php = { "php-cs-fixer" },
+      linters_by_ft = {
+        php = { "phpcs" },
+      },
+    },
+    {
+      "stevearc/conform.nvim",
+      optional = true,
+      dependencies = {
+        "williamboman/mason.nvim",
+        opts = { ensure_installed = {
+          "phpcs",
+          "php-cs-fixer",
+        } },
+      },
+      opts = {
+        formatters_by_ft = {
+          php = { "php-cs-fixer" },
+        },
       },
     },
   },
