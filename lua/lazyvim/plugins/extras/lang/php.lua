@@ -48,6 +48,12 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
+    dependencies = {
+      "williamboman/mason.nvim",
+      opts = { ensure_installed = {
+        "phpcs",
+      } },
+    },
     opts = {
       linters_by_ft = {
         php = { "phpcs" },
@@ -59,7 +65,6 @@ return {
       dependencies = {
         "williamboman/mason.nvim",
         opts = { ensure_installed = {
-          "phpcs",
           "php-cs-fixer",
         } },
       },
