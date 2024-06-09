@@ -46,4 +46,8 @@ return {
       { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
   },
+  {
+    "garymjr/nvim-snippets",
+    enabled = false,
+  },
 }
