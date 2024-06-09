@@ -12,7 +12,7 @@ return {
           -- https://github.com/nvim-telescope/telescope-media-files.nvim?tab=readme-ov-file#prerequisites
           local prerequisites = {
             required = {
-              { cmd = "chafa", name = "Chafa", filetypes = { "png", "jpg", "jpeg", "webp", "svg" } },
+              { cmd = "chafa", name = "Chafa", filetypes = { "png", "jpg", "jpeg", "webp" } },
             },
             findCmd = {
               { cmd = "fd", name = "fd" },
@@ -20,7 +20,7 @@ return {
               { cmd = "find", name = "find" },
             },
             optional = {
-              { cmd = "convert", name = "ImageMagick", filetypes = {} },
+              { cmd = "convert", name = "ImageMagick", filetypes = { "svg" } },
               { cmd = "ffmpegthumbnailer", name = "ffmpegthumbnailer", filetypes = { "mp4", "webm" } },
               { cmd = "pdftoppm", name = "pdftoppm", filetypes = { "pdf" } },
               { cmd = "epub-thumbnailer", name = "epub-thumbnailer", filetypes = { "epub" } },
