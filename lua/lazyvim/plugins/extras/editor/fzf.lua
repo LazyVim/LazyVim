@@ -39,11 +39,6 @@ return {
     event = "VeryLazy",
     opts = {
       [1] = "default-title",
-      keymap = {
-        fzf = {
-          ["ctrl-q"] = "select-all+accept",
-        },
-      },
       fzf_colors = {
         ["fg"] = { "fg", "FzfLuaNormal" },
         ["bg"] = { "bg", "FzfLuaNormal" },
@@ -62,11 +57,11 @@ return {
       },
     },
     config = function(_, opts)
-      if opts.profile then
-        opts[1] = opts.profile
-        -- require("fzf-lua").setup({ opts.profile })
-        -- opts.profile = nil
-      end
+      local config = require("fzf-lua.config")
+      local actions = require("trouble.sources.fzf").actions
+      config.defaults.actions.files["ctrl-t"] = actions.open_all
+      config.defaults.actions.files["alt-t"] = actions.open
+      config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
       -- vim.env.FZF_DEFAULT_OPTS = ""
       require("fzf-lua").setup(opts)
     end,
