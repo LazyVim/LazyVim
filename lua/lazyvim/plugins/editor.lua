@@ -1,5 +1,6 @@
 local have_make = vim.fn.executable("make") == 1
 local have_cmake = vim.fn.executable("cmake") == 1
+local open_with_trouble = require("trouble.sources.telescope").open
 
 return {
 
@@ -69,6 +70,12 @@ return {
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
+      },
+      defaults = {
+        mappings = {
+          i = { ["<c-t>"] = open_with_trouble },
+          n = { ["<c-t>"] = open_with_trouble },
+        },
       },
       window = {
         mappings = {
