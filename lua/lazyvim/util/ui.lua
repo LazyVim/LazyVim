@@ -1,9 +1,6 @@
 ---@class lazyvim.util.ui
 local M = {}
 
----@type (fun(buf:number, lnum:number, vnum:number, win:number):Sign[]?)[]
-M.virtual = {}
-
 ---@alias Sign {name:string, text:string, texthl:string, priority:number}
 
 -- Returns a list of regular and extmark signs sorted by priority (low to high)
@@ -108,21 +105,9 @@ function M.statuscolumn()
   if show_signs then
     local signs = M.get_signs(buf, vim.v.lnum)
 
-    local has_virtual = false
-    for _, fn in ipairs(M.virtual) do
-      local virtual = fn(buf, vim.v.lnum, vim.v.virtnum, win)
-      if virtual then
-        has_virtual = true
-        vim.list_extend(signs, virtual)
-      end
-    end
-
     ---@type Sign?,Sign?,Sign?
     local left, right, fold, githl
     for _, s in ipairs(signs) do
-      if s.name and s.name:lower():find("^octo_clean") then
-        s.texthl = "IblScope"
-      end
       if s.name and (s.name:find("GitSign") or s.name:find("MiniDiffSign")) then
         right = s
         if use_githl then
@@ -131,9 +116,6 @@ function M.statuscolumn()
       else
         left = s
       end
-    end
-    if vim.v.virtnum ~= 0 and not has_virtual then
-      left = nil
     end
 
     vim.api.nvim_win_call(win, function()

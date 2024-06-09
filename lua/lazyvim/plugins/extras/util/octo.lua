@@ -48,53 +48,20 @@ return {
       else
         LazyVim.error("`octo.nvim` requires `telescope.nvim` or `fzf-lua`")
       end
-      local Signs = require("octo.ui.signs")
 
-      ---@type {buf: number, from: number, to: number, dirty: boolean}[]
-      local signs = {}
-
-      local unplace = Signs.unplace
-      function Signs.unplace(bufnr)
-        signs = vim.tbl_filter(function(s)
-          return s.buf ~= bufnr
-        end, signs)
-        return unplace(bufnr)
-      end
-
-      function Signs.place_signs(bufnr, start_line, end_line, is_dirty)
-        signs[#signs + 1] = { buf = bufnr, from = start_line, to = end_line, dirty = is_dirty }
-      end
-      -- stylua: ignore
-      local corners = {
-        top    = "┌╴",
-        middle = "│ ",
-        last   = "└╴",
-        single = "[ ",
-      }
-
-      --- Fixes octo's comment rendering to take wrapping into account
-      ---@param buf number
-      ---@param lnum number
-      ---@param vnum number
-      ---@param win number
-      table.insert(LazyVim.ui.virtual, function(buf, lnum, vnum, win)
-        lnum = lnum - 1
-        for _, s in ipairs(signs) do
-          if buf == s.buf and lnum >= s.from and lnum <= s.to then
-            local height = vim.api.nvim_win_text_height(win, { start_row = s.from, end_row = s.to }).all
-            local height_end = vim.api.nvim_win_text_height(win, { start_row = s.to, end_row = s.to }).all
-            local corner = corners.middle
-            if height == 1 then
-              corner = corners.single
-            elseif lnum == s.from and vnum == 0 then
-              corner = corners.top
-            elseif lnum == s.to and vnum == height_end - 1 then
-              corner = corners.last
+      -- Keep some empty windows in sessions
+      vim.api.nvim_create_autocmd("ExitPre", {
+        group = vim.api.nvim_create_augroup("octo_exit_pre", { clear = true }),
+        callback = function(ev)
+          local keep = { "octo" }
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if vim.tbl_contains(keep, vim.bo[buf].filetype) then
+              vim.bo[buf].buftype = "" -- set buftype to empty to keep the window
             end
-            return { { text = corner, texthl = s.dirty and "OctoDirty" or "IblScope" } }
           end
-        end
-      end)
+        end,
+      })
     end,
   },
 }
