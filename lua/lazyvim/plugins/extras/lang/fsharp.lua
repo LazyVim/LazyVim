@@ -23,7 +23,7 @@ return {
   },
   {
     "ionide/Ionide-vim",
-    event = "VeryLazy",
+    ft = { "fs", "fsi", "fsx" },
   },
   {
     "mason.nvim",
