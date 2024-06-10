@@ -19,11 +19,22 @@ return {
   },
 
   {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "phpcs",
+        "php-cs-fixer",
+      },
+    },
+  },
+  {
     "mfussenegger/nvim-dap",
     optional = true,
     dependencies = {
       "williamboman/mason.nvim",
-      opts = { ensure_installed = { "php-debug-adapter" } },
+      opts = { ensure_installed = {
+        "php-debug-adapter",
+      } },
     },
     opts = function()
       local dap = require("dap")
@@ -34,5 +45,33 @@ return {
         args = { path .. "/extension/out/phpDebug.js" },
       }
     end,
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, nls.builtins.formatting.phpcsfixer)
+      table.insert(opts.sources, nls.builtins.diagnostics.phpcs)
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        php = { "phpcs" },
+      },
+    },
+    {
+      "stevearc/conform.nvim",
+      optional = true,
+      opts = {
+        formatters_by_ft = {
+          php = { "php-cs-fixer" },
+        },
+      },
+    },
   },
 }
