@@ -9,7 +9,6 @@ LazyVim.pick.commands = {
 ---@param opts? FzfLuaOpts
 LazyVim.pick._open = function(command, opts)
   opts = opts or {}
-
   if opts.cmd == nil and command == "git_files" and opts.show_untracked then
     opts.cmd = "git ls-files --exclude-standard --cached --others"
   end
@@ -35,22 +34,7 @@ return {
 
       return {
         [1] = "default-title",
-        fzf_colors = {
-          ["fg"] = { "fg", "FzfLuaNormal" },
-          ["bg"] = { "bg", "FzfLuaNormal" },
-          ["hl"] = { "fg", "Special" },
-          ["fg+"] = { "fg", "Visual" },
-          ["bg+"] = { "bg", "Visual" },
-          ["hl+"] = { "fg", "Special" },
-          ["info"] = { "fg", "NonText" },
-          ["border"] = { "fg", "FzfLuaBorder" },
-          ["gutter"] = { "bg", "FzfLuaNormal" },
-          ["query"] = { "fg", "FzfLuaNormal" },
-          ["prompt"] = { "fg", "FzfLuaNormal" },
-          ["pointer"] = { "fg", "FzfLuaMarker" },
-          ["marker"] = { "fg", "FzfLuaMarker" },
-          ["header"] = { "fg", "FzfLuaNormal" },
-        },
+        fzf_colors = true,
       }
     end,
     keys = {
@@ -119,6 +103,63 @@ return {
         desc = "Goto Symbol (Workspace)",
       },
     },
+  },
+
+  -- remove when https://github.com/ibhagwan/fzf-lua/pull/1244 gets merged
+  {
+    "ibhagwan/fzf-lua",
+    opts = function(_, opts)
+      local config = require("fzf-lua.config")
+      if opts.fzf_colors ~= true then
+        return
+      end
+
+      -- My PR that supports native colors
+      if config.defaults.fzf_colorscheme ~= nil then
+        return
+      end
+
+      -- Fallback to setting colors manually
+      local links = {
+        Normal = "FzfLuaNormal",
+        CursorLine = "FzfLuaCursorLine",
+        Match = "Special",
+        Info = "NonText",
+        Border = "FzfLuaBorder",
+        Gutter = "FzfLuaNormal",
+        Query = "FzfLuaNormal",
+        Prompt = "Special",
+        Pointer = "Special",
+        Marker = "FzfColorsPointer",
+        Spinner = "FzfColorsPointer",
+        Header = "FzfLuaTitle",
+        Scrollbar = "FzfColorsBorder",
+        Separator = "FzfColorsBorder",
+      }
+      for name, link in pairs(links) do
+        name = "FzfColors" .. name
+        vim.api.nvim_set_hl(0, name, { link = link, default = true })
+      end
+      opts.fzf_colors = {
+        ["fg"] = { "fg", "FzfColorsNormal" },
+        ["bg"] = { "bg", "FzfColorsNormal" },
+        ["hl"] = { "fg", "FzfColorsMatch" },
+        ["fg+"] = { "fg", "FzfColorsCursorLine" },
+        ["bg+"] = { "bg", "FzfColorsCursorLine" },
+        ["hl+"] = { "fg", "FzfColorsMatch" },
+        ["info"] = { "fg", "FzfColorsInfo" },
+        ["border"] = { "fg", "FzfColorsBorder" },
+        ["separator"] = { "fg", "FzfColorsSeparator" },
+        ["scrollbar"] = { "fg", "FzfColorsScrollbar" },
+        ["gutter"] = { "bg", "FzfColorsGutter" },
+        ["query"] = { "fg", "FzfColorsQuery", "regular" },
+        ["prompt"] = { "fg", "FzfColorsPrompt" },
+        ["pointer"] = { "fg", "FzfColorsPointer" },
+        ["marker"] = { "fg", "FzfColorsMarker" },
+        ["spinner"] = { "fg", "FzfColorsSpinner" },
+        ["header"] = { "fg", "FzfColorsHeader" },
+      }
+    end,
   },
   {
     "neovim/nvim-lspconfig",
