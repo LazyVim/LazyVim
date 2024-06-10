@@ -1,4 +1,4 @@
-# What is this PR for?
+## What is this PR for?
 
 <!-- Describe the big picture of your changes to communicate to the maintainers
   why we should accept this pull request. -->
@@ -12,4 +12,4 @@
 
 ## Checklist
 
-- [ ] I've read the [CONTRIBUTING](/CONTRIBUTING.md) guidelines.
+- [ ] I've read the [CONTRIBUTING](https://github.com/LazyVim/LazyVim/blob/main/CONTRIBUTING.md) guidelines.
