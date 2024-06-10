@@ -89,6 +89,7 @@ return {
             end,
             desc = "Open with System Application",
           },
+          ["P"] = { "toggle_preview", config = { use_float = false } },
         },
       },
       default_component_configs = {
