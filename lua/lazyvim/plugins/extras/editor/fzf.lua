@@ -23,10 +23,7 @@ end
 return {
   {
     "nvim-telescope/telescope.nvim",
-    enabled = true,
-    keys = function()
-      return {}
-    end,
+    enabled = false,
   },
   {
     "ibhagwan/fzf-lua",
