@@ -48,6 +48,18 @@ return {
       return {
         [1] = "default-title",
         fzf_colors = true,
+        files = {
+          actions = {
+            ["alt-i"] = { actions.toggle_ignore },
+            ["alt-h"] = { actions.toggle_hidden },
+          },
+        },
+        grep = {
+          actions = {
+            ["alt-i"] = { actions.toggle_ignore },
+            ["alt-h"] = { actions.toggle_hidden },
+          },
+        },
       }
     end,
     keys = {
