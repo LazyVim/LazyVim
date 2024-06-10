@@ -28,13 +28,14 @@ return {
         return false
       end
 
-      local function sendPrerequisitesError(msg)
+      local function disableWithWarnMessage(msg)
         LazyVim.warn(
           "You have enabled extras.editor.medias, see (:`LazyExtras`). \n\n"
             .. msg
             .. "\n\nMore information can be found at: "
             .. "[nvim-telescope/telescope-media-files.nvim](https://github.com/nvim-telescope/telescope-media-files.nvim?tab=readme-ov-file#prerequisites)."
         )
+        return false
       end
       local prerequisites = {
         required = {
@@ -57,8 +58,7 @@ return {
       -- Ensure all required prerequisites are installed
       for _, tool in ipairs(prerequisites.required) do
         if vim.fn.executable(tool.cmd) == 0 then
-          sendPrerequisitesError(string.format("The required prerequisite not installed: `%s`", tool.name))
-          return false
+          return disableWithWarnMessage(string.format("The required prerequisite not installed: `%s`", tool.name))
         else
           supportedFiletypeSet:add(tool.filetypes)
         end
@@ -73,11 +73,10 @@ return {
       end
 
       if not findCmd then
-        sendPrerequisitesError(
+        return disableWithWarnMessage(
           "None of the required 'find cmd' prerequisites is installed.\n"
             .. "Please install at least one of the following: `rd`, `rg`, or `find`."
         )
-        return false
       end
 
       -- Check optional prerequisites and include their filetypes if installed
