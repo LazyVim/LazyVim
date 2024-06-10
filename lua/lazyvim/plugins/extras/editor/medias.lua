@@ -4,9 +4,7 @@ local findCmd = ""
 local supportedFiletypeSet = { _data = {} }
 
 function supportedFiletypeSet:add(values)
-  if type(values) == "string" then
-    values = { values }
-  end
+  values = type(values) == "string" and { values } or values
 
   for _, value in ipairs(values) do
     if not self._data[value] then
@@ -22,9 +20,18 @@ end
 return {
   {
     "nvim-telescope/telescope-media-files.nvim",
-    event = "VeryLazy",
-    dependencies = "nvim-telescope/telescope.nvim",
-    enabled = function()
+    dependencies = {
+      {
+        "nvim-telescope/telescope.nvim",
+        opts = function(_, opts)
+          opts.extensions = vim.tbl_extend("force", opts.extensions or {}, {
+            media_files = { filetypes = supportedFiletypeSet:toList(), find_cmd = findCmd },
+          })
+          return opts
+        end,
+      },
+    },
+    cond = function(plugin)
       if not LazyVim.has("telescope.nvim") then
         return false
       end
@@ -87,20 +94,11 @@ return {
         end
       end
 
+      plugin.ft = supportedFiletypeSet:toList()
       return true
     end,
-    config = function(_, opts)
-      local ok, err = pcall(require("telescope").load_extension, "media_files")
-      if ok then
-        opts.extensions = vim.tbl_extend("force", opts.extensions or {}, {
-          media_files = { filetypes = supportedFiletypeSet:toList(), find_cmd = findCmd },
-        })
-      else
-        LazyVim.error("Failed to load the telescope extension for `telescope-media-files.nvim`:\n" .. err)
-      end
-    end,
     keys = {
-      { "<leader>fm", "<cmd>Telescope media_files<cr>", desc = "Find Media Files" },
+      { "<leader>fP", "<cmd>Telescope media_files<cr>", desc = "Find Media Files" },
     },
   },
 }
