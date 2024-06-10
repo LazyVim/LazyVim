@@ -72,7 +72,7 @@ function M.format(component, text, hl_group)
   return component:format_hl(lualine_hl_group) .. text .. component:get_default_hl()
 end
 
----@param opts? {relative: "cwd"|"root", modified_hl: string?, directory_hl: string?, filename_hl: string?}
+---@param opts? {relative: "cwd"|"root", modified_hl: string?, directory_hl: string?, filename_hl: string?, modified_sign: string?, readonly_icon: string?, length: number?}
 function M.pretty_path(opts)
   opts = vim.tbl_extend("force", {
     relative = "cwd",
@@ -80,6 +80,7 @@ function M.pretty_path(opts)
     directory_hl = "",
     filename_hl = "Bold",
     modified_sign = "",
+    readonly_icon = " 󰌾 ",
     length = 3,
   }, opts or {})
 
@@ -120,7 +121,12 @@ function M.pretty_path(opts)
       dir = table.concat({ unpack(parts, 1, #parts - 1) }, sep)
       dir = M.format(self, dir .. sep, opts.directory_hl)
     end
-    return dir .. parts[#parts]
+
+    local readonly = ""
+    if vim.bo.readonly then
+      readonly = M.format(self, opts.readonly_icon, opts.modified_hl)
+    end
+    return dir .. parts[#parts] .. readonly
   end
 end
 
