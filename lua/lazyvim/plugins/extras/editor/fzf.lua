@@ -31,7 +31,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
-    opts = function()
+    opts = function(_, opts)
       local config = require("fzf-lua.config")
       local actions = require("fzf-lua.actions")
 
@@ -51,10 +51,22 @@ return {
       end
       config.defaults.actions.files["alt-c"] = config.defaults.actions.files["ctrl-r"]
 
-      return {
-        [1] = "default-title",
+      -- use the same prompt for all
+      local defaults = require("fzf-lua.profiles.default-title")
+      local function fix(t)
+        t.prompt = t.prompt ~= nil and " " or nil
+        for _, v in pairs(t) do
+          if type(v) == "table" then
+            fix(v)
+          end
+        end
+      end
+      fix(defaults)
+
+      return vim.tbl_deep_extend("force", opts, defaults, {
         fzf_colors = true,
         files = {
+          cwd_prompt = false,
           actions = {
             ["alt-i"] = { actions.toggle_ignore },
             ["alt-h"] = { actions.toggle_hidden },
@@ -66,7 +78,7 @@ return {
             ["alt-h"] = { actions.toggle_hidden },
           },
         },
-      }
+      })
     end,
     keys = {
       { "<esc>", "<cmd>close<cr>", ft = "fzf", mode = "t", nowait = true },
