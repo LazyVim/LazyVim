@@ -1,5 +1,6 @@
 local findCmd = ""
--- Use the simple Set that implemented by a table to avoid duplicates; it only contains the methods add and toList
+--- @class Set A simple Set implementation using a table to avoid duplicates; it only contains the methods add and toList
+--- @field _data table<string, 1>  Table to hold the set data.
 local supportedFiletypeSet = { _data = {} }
 
 function supportedFiletypeSet:add(values)
