@@ -145,62 +145,6 @@ return {
     },
   },
 
-  -- remove when https://github.com/ibhagwan/fzf-lua/pull/1244 gets merged
-  {
-    "ibhagwan/fzf-lua",
-    opts = function(_, opts)
-      local config = require("fzf-lua.config")
-      if opts.fzf_colors ~= true then
-        return
-      end
-
-      -- My PR that supports native colors
-      if config.defaults.fzf_colorscheme ~= nil then
-        return
-      end
-
-      -- Fallback to setting colors manually
-      local links = {
-        Normal = "FzfLuaNormal",
-        CursorLine = "FzfLuaCursorLine",
-        Match = "Special",
-        Info = "NonText",
-        Border = "FzfLuaBorder",
-        Gutter = "FzfLuaNormal",
-        Query = "FzfLuaNormal",
-        Prompt = "Special",
-        Pointer = "Special",
-        Marker = "FzfColorsPointer",
-        Spinner = "FzfColorsPointer",
-        Header = "FzfLuaTitle",
-        Scrollbar = "FzfColorsBorder",
-        Separator = "FzfColorsBorder",
-      }
-      for name, link in pairs(links) do
-        name = "FzfLuaColors" .. name
-        vim.api.nvim_set_hl(0, name, { link = link, default = true })
-      end
-      opts.fzf_colors = {
-        ["fg"] = { "fg", "FzfLuaColorsNormal" },
-        ["bg"] = { "bg", "FzfLuaColorsNormal" },
-        ["hl"] = { "fg", "FzfLuaColorsMatch" },
-        ["fg+"] = { "fg", "FzfLuaColorsCursorLine" },
-        ["bg+"] = { "bg", "FzfLuaColorsCursorLine" },
-        ["hl+"] = { "fg", "FzfLuaColorsMatch" },
-        ["info"] = { "fg", "FzfLuaColorsInfo" },
-        ["border"] = { "fg", "FzfLuaColorsBorder" },
-        ["separator"] = { "fg", "FzfLuaColorsSeparator" },
-        ["scrollbar"] = { "fg", "FzfLuaColorsScrollbar" },
-        ["gutter"] = { "bg", "FzfLuaColorsGutter" },
-        ["query"] = { "fg", "FzfLuaColorsQuery", "regular" },
-        ["prompt"] = { "fg", "FzfLuaColorsPrompt" },
-        ["pointer"] = { "fg", "FzfLuaColorsPointer" },
-        ["marker"] = { "fg", "FzfLuaColorsMarker" },
-        ["spinner"] = { "fg", "FzfLuaColorsSpinner" },
-        ["header"] = { "fg", "FzfLuaColorsHeader" },
-      }
-    end,
-  },
   {
     "neovim/nvim-lspconfig",
     opts = function()
