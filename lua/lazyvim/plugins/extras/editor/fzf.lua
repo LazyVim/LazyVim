@@ -42,13 +42,14 @@ return {
       config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
 
       -- Toggle root dir / cwd
-      config.defaults.actions.files["alt-c"] = function(_, ctx)
+      config.defaults.actions.files["ctrl-r"] = function(_, ctx)
         local o = vim.deepcopy(ctx.__call_opts)
         o.root = o.root == false
         o.cwd = nil
         o.buf = ctx.__CTX.bufnr
         LazyVim.pick.open(ctx.__INFO.cmd, o)
       end
+      config.defaults.actions.files["alt-c"] = config.defaults.actions.files["ctrl-r"]
 
       return {
         [1] = "default-title",
