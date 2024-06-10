@@ -37,6 +37,8 @@ return {
 
       -- Quickfix
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
+      config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
+      config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
 
       -- Trouble
       config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
