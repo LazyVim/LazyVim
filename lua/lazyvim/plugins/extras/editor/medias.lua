@@ -4,6 +4,7 @@ return {
     dependencies = {
       {
         "nvim-telescope/telescope-media-files.nvim",
+        event = "VeryLazy",
         config = function(_, opts)
           if not LazyVim.has("telescope.nvim") then
             return
