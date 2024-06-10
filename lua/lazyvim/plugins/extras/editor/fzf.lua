@@ -28,9 +28,13 @@ return {
     event = "VeryLazy",
     opts = function()
       local config = require("fzf-lua.config")
-      local actions = require("trouble.sources.fzf").actions
-      config.defaults.actions.files["ctrl-t"] = actions.open
+      local actions = require("fzf-lua.actions")
+
+      -- Quickfix
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
+
+      -- Trouble
+      config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
 
       return {
         [1] = "default-title",
