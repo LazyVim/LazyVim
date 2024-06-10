@@ -9,6 +9,7 @@ local M = setmetatable({}, {
 ---@class lazyvim.util.pick.Opts: table<string, any>
 ---@field root? boolean
 ---@field cwd? string
+---@field buf? number
 ---@field show_untracked? boolean
 
 ---@type table<string, string>
@@ -30,7 +31,7 @@ function M.open(command, opts)
   end
 
   if not opts.cwd and opts.root ~= false then
-    opts.cwd = LazyVim.root()
+    opts.cwd = LazyVim.root({ buf = opts.buf })
   end
 
   local cwd = opts.cwd or vim.uv.cwd()

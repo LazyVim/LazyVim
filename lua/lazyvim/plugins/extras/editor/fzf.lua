@@ -162,27 +162,27 @@ return {
         Separator = "FzfColorsBorder",
       }
       for name, link in pairs(links) do
-        name = "FzfColors" .. name
+        name = "FzfLuaColors" .. name
         vim.api.nvim_set_hl(0, name, { link = link, default = true })
       end
       opts.fzf_colors = {
-        ["fg"] = { "fg", "FzfColorsNormal" },
-        ["bg"] = { "bg", "FzfColorsNormal" },
-        ["hl"] = { "fg", "FzfColorsMatch" },
-        ["fg+"] = { "fg", "FzfColorsCursorLine" },
-        ["bg+"] = { "bg", "FzfColorsCursorLine" },
-        ["hl+"] = { "fg", "FzfColorsMatch" },
-        ["info"] = { "fg", "FzfColorsInfo" },
-        ["border"] = { "fg", "FzfColorsBorder" },
-        ["separator"] = { "fg", "FzfColorsSeparator" },
-        ["scrollbar"] = { "fg", "FzfColorsScrollbar" },
-        ["gutter"] = { "bg", "FzfColorsGutter" },
-        ["query"] = { "fg", "FzfColorsQuery", "regular" },
-        ["prompt"] = { "fg", "FzfColorsPrompt" },
-        ["pointer"] = { "fg", "FzfColorsPointer" },
-        ["marker"] = { "fg", "FzfColorsMarker" },
-        ["spinner"] = { "fg", "FzfColorsSpinner" },
-        ["header"] = { "fg", "FzfColorsHeader" },
+        ["fg"] = { "fg", "FzfLuaColorsNormal" },
+        ["bg"] = { "bg", "FzfLuaColorsNormal" },
+        ["hl"] = { "fg", "FzfLuaColorsMatch" },
+        ["fg+"] = { "fg", "FzfLuaColorsCursorLine" },
+        ["bg+"] = { "bg", "FzfLuaColorsCursorLine" },
+        ["hl+"] = { "fg", "FzfLuaColorsMatch" },
+        ["info"] = { "fg", "FzfLuaColorsInfo" },
+        ["border"] = { "fg", "FzfLuaColorsBorder" },
+        ["separator"] = { "fg", "FzfLuaColorsSeparator" },
+        ["scrollbar"] = { "fg", "FzfLuaColorsScrollbar" },
+        ["gutter"] = { "bg", "FzfLuaColorsGutter" },
+        ["query"] = { "fg", "FzfLuaColorsQuery", "regular" },
+        ["prompt"] = { "fg", "FzfLuaColorsPrompt" },
+        ["pointer"] = { "fg", "FzfLuaColorsPointer" },
+        ["marker"] = { "fg", "FzfLuaColorsMarker" },
+        ["spinner"] = { "fg", "FzfLuaColorsSpinner" },
+        ["header"] = { "fg", "FzfLuaColorsHeader" },
       }
     end,
   },
