@@ -15,6 +15,11 @@ LazyVim.pick._open = function(command, opts)
   return require("fzf-lua")[command](opts)
 end
 
+local function symbols_filter(entry, ctx)
+  ctx.symbols_filter = ctx.symbols_filter or require("lazyvim.config").get_kind_filter(ctx.bufnr)
+  return vim.tbl_contains(ctx.symbols_filter, entry.kind)
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -113,7 +118,7 @@ return {
         "<leader>ss",
         function()
           require("fzf-lua").lsp_document_symbols({
-            symbols = require("lazyvim.config").get_kind_filter(),
+            regex_filter = symbols_filter,
           })
         end,
         desc = "Goto Symbol",
@@ -122,7 +127,7 @@ return {
         "<leader>sS",
         function()
           require("fzf-lua").lsp_dynamic_workspace_symbols({
-            symbols = require("lazyvim.config").get_kind_filter(),
+            regex_filter = symbols_filter,
           })
         end,
         desc = "Goto Symbol (Workspace)",
