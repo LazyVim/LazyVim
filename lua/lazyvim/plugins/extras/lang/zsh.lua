@@ -7,10 +7,6 @@ return {
     })
   end,
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "bash" } },
-  },
-  {
     "mason.nvim",
     opts = { ensure_installed = { "beautysh" } },
   },
