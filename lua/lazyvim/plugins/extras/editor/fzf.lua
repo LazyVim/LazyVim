@@ -63,6 +63,8 @@ return {
       end
       fix(defaults)
 
+      vim.api.nvim_set_hl(0, "FzfLuaPath", { link = "Directory", default = true })
+
       return vim.tbl_deep_extend("force", opts, defaults, {
         fzf_colors = true,
         files = {
@@ -73,9 +75,25 @@ return {
           },
         },
         grep = {
+          formatter = "path.hl",
           actions = {
             ["alt-i"] = { actions.toggle_ignore },
             ["alt-h"] = { actions.toggle_hidden },
+          },
+        },
+        formatters = {
+          path = {
+            hl = {
+              _to = function()
+                local _, escseq = require("fzf-lua.utils").ansi_from_hl("FzfLuaPath", "foo")
+                return [[
+                    return function(s, _, m)
+                      return "]] .. (escseq or "") .. [["
+                        .. s .. m.utils.ansi_escseq.clear
+                    end
+                  ]]
+              end,
+            },
           },
         },
       })
