@@ -83,7 +83,7 @@ describe("Extra", function()
       local opts = Plugin.values(ts, "opts", false)
 
       if not vim.tbl_isempty(opts.ensure_installed) then
-        it("does not install defaut Treesitter langs", function()
+        it("does not install default Treesitter langs", function()
           local invalid = vim.tbl_filter(function(v)
             return vim.tbl_contains(tsensure, v)
           end, opts.ensure_installed or {})

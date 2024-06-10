@@ -3,6 +3,7 @@ return {
   -- Ensure GitUI tool is installed
   {
     "williamboman/mason.nvim",
+    opts = { ensure_installed = { "gitui" } },
     keys = {
       {
         "<leader>gG",
@@ -29,10 +30,6 @@ return {
           pcall(vim.keymap.del, "n", "<leader>gl")
         end,
       })
-    end,
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "gitui" })
     end,
   },
 }

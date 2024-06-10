@@ -15,16 +15,12 @@ return {
   -- Add packages(linting, debug adapter)
   {
     "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, { "ktlint" })
-    end,
+    opts = { ensure_installed = { "ktlint" } },
   },
   -- Add syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, { "kotlin" })
-    end,
+    opts = { ensure_installed = { "kotlin" } },
   },
   -- Add language server
   {

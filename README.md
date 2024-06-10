@@ -115,6 +115,10 @@ There's a great video created by [@elijahmanor](https://github.com/elijahmanor) 
 
 [![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
 
+[@dusty-phillips](https://github.com/dusty-phillips) is working on a book called
+[LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes)
+available for free online.
+
 ## 📂 File Structure
 
 The files under config will be automatically loaded at the appropriate time,

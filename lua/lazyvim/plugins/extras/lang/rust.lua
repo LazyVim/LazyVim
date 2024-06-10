@@ -30,20 +30,14 @@ return {
   -- Add Rust & related to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "ron", "rust" })
-    end,
+    opts = { ensure_installed = { "rust", "ron" } },
   },
 
   -- Ensure Rust debugger is installed
   {
     "williamboman/mason.nvim",
     optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "codelldb" })
-    end,
+    opts = { ensure_installed = { "codelldb" } },
   },
 
   {
@@ -126,11 +120,10 @@ return {
   {
     "nvim-neotest/neotest",
     optional = true,
-    opts = function(_, opts)
-      opts.adapters = opts.adapters or {}
-      vim.list_extend(opts.adapters, {
-        require("rustaceanvim.neotest"),
-      })
-    end,
+    opts = {
+      adapters = {
+        ["rustaceanvim.neotest"] = {},
+      },
+    },
   },
 }

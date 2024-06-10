@@ -24,11 +24,7 @@ return {
   end,
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "ninja", "rst" })
-      end
-    end,
+    opts = { ensure_installed = { "ninja", "rst" } },
   },
   {
     "neovim/nvim-lspconfig",
@@ -62,11 +58,9 @@ return {
       setup = {
         [ruff] = function()
           LazyVim.lsp.on_attach(function(client, _)
-            if client.name == ruff then
-              -- Disable hover in favor of Pyright
-              client.server_capabilities.hoverProvider = false
-            end
-          end)
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end, ruff)
         end,
       },
     },

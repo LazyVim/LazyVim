@@ -14,7 +14,7 @@ return {
       if type(opts.ensure_installed) == "table" then
         vim.list_extend(opts.ensure_installed, { "angular", "scss" })
       end
-      vim.api.nvim_create_autocmd("BufRead", {
+      vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
         pattern = { "*.component.html", "*.container.html" },
         callback = function()
           vim.treesitter.start(nil, "angular")
@@ -36,11 +36,9 @@ return {
       setup = {
         angularls = function()
           LazyVim.lsp.on_attach(function(client)
-            if client.name == "angularls" then
-              --HACK: disable angular renaming capability due to duplicate rename popping up
-              client.server_capabilities.renameProvider = false
-            end
-          end)
+            --HACK: disable angular renaming capability due to duplicate rename popping up
+            client.server_capabilities.renameProvider = false
+          end, "angularls")
         end,
       },
     },

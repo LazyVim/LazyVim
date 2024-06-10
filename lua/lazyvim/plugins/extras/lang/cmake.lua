@@ -7,11 +7,7 @@ return {
   end,
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "cmake" })
-      end
-    end,
+    opts = { ensure_installed = { "cmake" } },
   },
   {
     "nvimtools/none-ls.nvim",
@@ -34,10 +30,7 @@ return {
   },
   {
     "mason.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "cmakelang", "cmakelint" })
-    end,
+    opts = { ensure_installed = { "cmakelang", "cmakelint" } },
   },
   {
     "neovim/nvim-lspconfig",

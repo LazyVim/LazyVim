@@ -53,7 +53,7 @@ return {
 
     -- stylua: ignore
     keys = {
-      { "<leader>d", "", desc = "+debug" },
+      { "<leader>d", "", desc = "+debug", mode = {"n", "v"} },
       { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
       { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
       { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
@@ -87,16 +87,10 @@ return {
 
       -- setup dap config by VsCode launch.json file
       local vscode = require("dap.ext.vscode")
-      local _filetypes = require("mason-nvim-dap.mappings.filetypes")
-      local filetypes = vim.tbl_deep_extend("force", _filetypes, {
-        ["node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
-        ["pwa-node"] = { "javascriptreact", "typescriptreact", "typescript", "javascript" },
-      })
       local json = require("plenary.json")
       vscode.json_decode = function(str)
         return vim.json.decode(json.json_strip_comments(str))
       end
-      vscode.load_launchjs(nil, filetypes)
     end,
   },
 

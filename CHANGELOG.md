@@ -1,5 +1,64 @@
 # Changelog
 
+## [12.11.0](https://github.com/LazyVim/LazyVim/compare/v12.10.0...v12.11.0) (2024-06-09)
+
+
+### Features
+
+* **octo:** re-open octo windows when restoring session + cleanup ([7793942](https://github.com/LazyVim/LazyVim/commit/7793942ebafd32ef90f79e28979898f8013976ff))
+
+
+### Bug Fixes
+
+* **extra-lang-angular:** add BufNew event to attach angular treesitter ([#3522](https://github.com/LazyVim/LazyVim/issues/3522)) ([fbb1276](https://github.com/LazyVim/LazyVim/commit/fbb1276ffd45683d4d64a2d99907bdbd3421c16f))
+* **extras:** +prefix in which-key panel for visual mode ([#3537](https://github.com/LazyVim/LazyVim/issues/3537)) ([5185404](https://github.com/LazyVim/LazyVim/commit/51854046dbb0bacf690ddc217cc76bf98c8ec1aa))
+* **helm:** missing dependency ([#3546](https://github.com/LazyVim/LazyVim/issues/3546)) ([02dd65c](https://github.com/LazyVim/LazyVim/commit/02dd65cdea1ae34cdf4ca00b20760dbb3cfcd72b))
+* **lang:** neotest not loading rust tests ([#3544](https://github.com/LazyVim/LazyVim/issues/3544)) ([0567b37](https://github.com/LazyVim/LazyVim/commit/0567b37f61d5ad997793b950c38a6c8f73de3b9b))
+* **luasnip:** disable nvim-snippets when luasnip is enabled. Fixes [#3547](https://github.com/LazyVim/LazyVim/issues/3547) ([aa059e0](https://github.com/LazyVim/LazyVim/commit/aa059e0d496e570f898644d3f18bc344ca179d38))
+* **rust:** make neotest optional ([547dc76](https://github.com/LazyVim/LazyVim/commit/547dc76a12309d4dafc970ae08832140eae51cba))
+* **typescript:** clean up configuration of the vscode dap extension ([#3556](https://github.com/LazyVim/LazyVim/issues/3556)) ([1c46f54](https://github.com/LazyVim/LazyVim/commit/1c46f544328b084753327a81b92e2b57ab568321))
+* **typescript:** implemented move to new file. Fixes [#3534](https://github.com/LazyVim/LazyVim/issues/3534) ([d90930b](https://github.com/LazyVim/LazyVim/commit/d90930b13e4515a5f4e4f3892ac9f7c392c4f20c))
+
+## [12.10.0](https://github.com/LazyVim/LazyVim/compare/v12.9.0...v12.10.0) (2024-06-07)
+
+
+### Features
+
+* **prettier:** prettier is now enabled for all supported filetypes and no longer requires a config file by default ([7d50bf0](https://github.com/LazyVim/LazyVim/commit/7d50bf0626f768b4d036b500ff204835fa405b74))
+* **prettier:** with the prettier & astro extra, prettier will be enabled if the prettier-astro-plugin is available ([214f5fc](https://github.com/LazyVim/LazyVim/commit/214f5fccdf468030b05851ebfbef8394485322fb))
+* **svelte:** with prettier & svelte extra, prettier will be enabled when prettier-plugin-svelte is available ([945143a](https://github.com/LazyVim/LazyVim/commit/945143a34e298541989a9f050a3fb2ced6646e9e))
+* **util:** added LazyVim.has_extra ([b714f28](https://github.com/LazyVim/LazyVim/commit/b714f286623cca6e3da31df43c4cf4354a46c36d))
+* **util:** added LazyVim.memoize ([5a11d74](https://github.com/LazyVim/LazyVim/commit/5a11d740e119d392858b97b69470201e66e66212))
+
+
+### Bug Fixes
+
+* **clojure:** removed rainbow delimiters and fixed some plugin setups. Closes [#3530](https://github.com/LazyVim/LazyVim/issues/3530) ([cfa8c9f](https://github.com/LazyVim/LazyVim/commit/cfa8c9fbd45a36784f76d4842bc385828214ee1c))
+* **cmp:** don't enable `snippets` source without `nvim-snippets` ([#3527](https://github.com/LazyVim/LazyVim/issues/3527)) ([af80811](https://github.com/LazyVim/LazyVim/commit/af80811be01f5349544a1b21e9dd03f0e25fefca))
+* **extras:** load prettier extra before svelte/astro ([4980574](https://github.com/LazyVim/LazyVim/commit/49805748d4cefc077cc0c81e864f1757198fc3f4))
+* **formatting:** remove deprecation check on some options ([c16fb5d](https://github.com/LazyVim/LazyVim/commit/c16fb5d49bfe10041fb36f6ac80a755767b9e6bf))
+* **prettier:** fixup ([ac9217b](https://github.com/LazyVim/LazyVim/commit/ac9217b1994ad00b488ba73021d89afac03873ee))
+
+## [12.9.0](https://github.com/LazyVim/LazyVim/compare/v12.8.0...v12.9.0) (2024-06-07)
+
+
+### Features
+
+* **autocmd:** enable spell for typst and text file ([#3505](https://github.com/LazyVim/LazyVim/issues/3505)) ([8ca7245](https://github.com/LazyVim/LazyVim/commit/8ca72451298f60e6440ac48293052c5e82bd8ec6))
+* **docs:** add link to LazyVim For Ambitious Developers to README ([#3504](https://github.com/LazyVim/LazyVim/issues/3504)) ([2a5ab31](https://github.com/LazyVim/LazyVim/commit/2a5ab3109a7e5f3ef98c2a93f24738797c6d9cc6))
+* **lang:** add clojure support ([#2179](https://github.com/LazyVim/LazyVim/issues/2179)) ([913902b](https://github.com/LazyVim/LazyVim/commit/913902ba362603a4620f8981fdedac7f53816b3a))
+* **neo-tree:** added l:open and h:close_node to neo-tree. Closes [#3293](https://github.com/LazyVim/LazyVim/issues/3293) ([dbec83d](https://github.com/LazyVim/LazyVim/commit/dbec83d57a1d5936ac860c37e0393a89b7cae7e9))
+* **options:** when available use treesitter spell regions for spell checking ([276b803](https://github.com/LazyVim/LazyVim/commit/276b8032bedb6e1601ae85ecdfaee63217843b4f))
+* **sql:** add SQL extra ([#1740](https://github.com/LazyVim/LazyVim/issues/1740)) ([59495c1](https://github.com/LazyVim/LazyVim/commit/59495c18714d8ae4c0b5f7a41dad96e39f9eb189))
+
+
+### Bug Fixes
+
+* **editor:** telescope init error when trouble.nvim is disabled ([#3518](https://github.com/LazyVim/LazyVim/issues/3518)) ([c452fd7](https://github.com/LazyVim/LazyVim/commit/c452fd730c94bfcbb5f9f4af1cae3c851f9456a3))
+* **lualine:** only show one Lualine component for symbols ([#3514](https://github.com/LazyVim/LazyVim/issues/3514)) ([827aa53](https://github.com/LazyVim/LazyVim/commit/827aa5380a883e6a2a9904c253627489d43d3050)), closes [#3511](https://github.com/LazyVim/LazyVim/issues/3511)
+* **mini.files:** fix error about `opts.mappings` ([#3507](https://github.com/LazyVim/LazyVim/issues/3507)) ([9210648](https://github.com/LazyVim/LazyVim/commit/92106484ed89efb364568fa27a689bd8be83d066))
+* removed leader-m, since it is leading to too many issues. Still available at leader-wm ([119dcb9](https://github.com/LazyVim/LazyVim/commit/119dcb949a84d9b10a620c9ad8400c220c5e5adb))
+
 ## [12.8.0](https://github.com/LazyVim/LazyVim/compare/v12.7.0...v12.8.0) (2024-06-06)
 
 

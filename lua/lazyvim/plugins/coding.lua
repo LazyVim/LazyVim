@@ -19,7 +19,6 @@ return {
     --   auto_brackets = { "python" }
     -- }
     -- ```
-
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
@@ -112,7 +111,9 @@ return {
           return LazyVim.cmp.expand(item.body)
         end,
       }
-      table.insert(opts.sources, { name = "snippets" })
+      if LazyVim.has("nvim-snippets") then
+        table.insert(opts.sources, { name = "snippets" })
+      end
     end,
     keys = {
       {

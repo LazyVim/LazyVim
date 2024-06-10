@@ -6,9 +6,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "php" })
-    end,
+    opts = { ensure_installed = { "php" } },
   },
 
   {
@@ -25,11 +23,7 @@ return {
     optional = true,
     dependencies = {
       "williamboman/mason.nvim",
-      opts = function(_, opts)
-        if type(opts.ensure_installed) == "table" then
-          table.insert(opts.ensure_installed, "php-debug-adapter")
-        end
-      end,
+      opts = { ensure_installed = { "php-debug-adapter" } },
     },
     opts = function()
       local dap = require("dap")
