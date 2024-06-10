@@ -30,8 +30,7 @@ return {
     opts = function()
       local config = require("fzf-lua.config")
       local actions = require("trouble.sources.fzf").actions
-      config.defaults.actions.files["ctrl-t"] = actions.open_all
-      config.defaults.actions.files["alt-t"] = actions.open
+      config.defaults.actions.files["ctrl-t"] = actions.open
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
 
       return {
