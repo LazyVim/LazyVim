@@ -75,6 +75,7 @@ return {
     "folke/edgy.nvim",
     optional = true,
     opts = function(_, opts)
+      opts.right = opts.right or {}
       table.insert(opts.right, {
         title = "Database",
         ft = "dbui",
@@ -85,6 +86,7 @@ return {
         end,
       })
 
+      opts.bottom = opts.bottom or {}
       table.insert(opts.bottom, {
         title = "DB Query Result",
         ft = "dbout",
