@@ -100,6 +100,35 @@ return {
     },
   },
 
+  {
+    "ibhagwan/fzf-lua",
+    optional = true,
+    keys = {
+      -- Show help actions with fzf-lua (if installed in extras)
+      {
+        "<leader>ad",
+        function()
+          local actions = require("CopilotChat.actions")
+          local help = actions.help_actions()
+          if not help then
+            LazyVim.warn("No diagnostics found on the current line")
+            return
+          end
+          require("CopilotChat.integrations.fzflua").pick(help)
+        end,
+        desc = "Diagnostic Help (CopilotChat)",
+      },
+      -- Show prompts actions with fzf-lua (if installed in extras)
+      {
+        "<leader>ap",
+        function()
+          local actions = require("CopilotChat.actions")
+          require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
+        end,
+        desc = "Prompt Actions (CopilotChat)",
+      },
+    },
+  },
   -- Edgy integration
   {
     "folke/edgy.nvim",
