@@ -144,6 +144,7 @@ return {
       { "<leader>ff", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
       { "<leader>fF", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
+      { "<leader>fP", LazyVim.pick.plugin_files(), desc = "Find Plugin File" },
       { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
