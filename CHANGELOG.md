@@ -1,5 +1,31 @@
 # Changelog
 
+## [12.13.0](https://github.com/LazyVim/LazyVim/compare/v12.12.0...v12.13.0) (2024-06-11)
+
+
+### Features
+
+* **copilot-chat:** use fzf-lua if enabled in extras ([#3590](https://github.com/LazyVim/LazyVim/issues/3590)) ([7252474](https://github.com/LazyVim/LazyVim/commit/7252474624cda30cac399b7f419ad25665e62a8f))
+* **fzf:** added ctrl-u and ctrl+d to scroll in the results list ([9f2a369](https://github.com/LazyVim/LazyVim/commit/9f2a3699a8f47467359f2c3defb3a711b32e0efb))
+* **fzf:** added ctrl-x to jump with easymotion to a line, similar to flash telescope ([1c740ce](https://github.com/LazyVim/LazyVim/commit/1c740ce3fdb5e361ec20e5e8cca5a6a79b24ed44))
+* **fzf:** use delta previewer for code actions when available ([1697100](https://github.com/LazyVim/LazyVim/commit/16971006c250f11d5ee3cfc974da0c34ab159286))
+
+
+### Bug Fixes
+
+* **fzf:** action desc ([c6ddb23](https://github.com/LazyVim/LazyVim/commit/c6ddb2328d596771ee562f49462ae10dfc49321f))
+* **fzf:** added action descriptions. (still doesnt work for trouble) ([19a6e2d](https://github.com/LazyVim/LazyVim/commit/19a6e2de158e63264aaa761228a1e3f9d615bd57))
+* **fzf:** cleanup ([79b7c48](https://github.com/LazyVim/LazyVim/commit/79b7c489fdacd0a04e7025e72e9020c4ff595eb3))
+* **fzf:** disable mini.indentscope in fzf-lua buffer ([#3592](https://github.com/LazyVim/LazyVim/issues/3592)) ([0ba67c8](https://github.com/LazyVim/LazyVim/commit/0ba67c87e9054e09d562164de7ed1876587a0539))
+* **fzf:** live document symbols. Fixes [#3587](https://github.com/LazyVim/LazyVim/issues/3587) ([056042b](https://github.com/LazyVim/LazyVim/commit/056042b221c93a14c6069d4a82b7435fc9a228fd))
+* **fzf:** symbols filter ([7e0ac68](https://github.com/LazyVim/LazyVim/commit/7e0ac6850b613ba8cbc179fa2f71199184504a54))
+* **vue:** disable inlay hints for vue, since they seem broken ([3233385](https://github.com/LazyVim/LazyVim/commit/3233385ddb61d01f87de374c061696a374596a10))
+
+
+### Reverts
+
+* "fix(dap): set host to 127.0.0.1 instead of localhost to prevent issues with ipv6. Fixes [#3577](https://github.com/LazyVim/LazyVim/issues/3577)" ([a3547e4](https://github.com/LazyVim/LazyVim/commit/a3547e4b3b03e019dbe7e543104ffd1ea82fa765))
+
 ## [12.12.0](https://github.com/LazyVim/LazyVim/compare/v12.11.0...v12.12.0) (2024-06-11)
 
 
