@@ -37,9 +37,10 @@ return {
       config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
       config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
 
+      actions.open_with_trouble = require("trouble.sources.fzf").actions.open
       -- Trouble
       config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
-      config.set_action_helpstr(config.defaults.actions.files["ctrl-t"].fn, "Open with Trouble")
+      config.set_action_helpstr(config.defaults.actions.files["ctrl-t"].fn, "open-with-trouble")
 
       -- Toggle root dir / cwd
       config.defaults.actions.files["ctrl-r"] = function(_, ctx)
@@ -50,7 +51,7 @@ return {
         LazyVim.pick.open(ctx.__INFO.cmd, o)
       end
       config.defaults.actions.files["alt-c"] = config.defaults.actions.files["ctrl-r"]
-      config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "Toggle Root/CWD")
+      config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "toggle-root-dir")
 
       -- use the same prompt for all
       local defaults = require("fzf-lua.profiles.default-title")
