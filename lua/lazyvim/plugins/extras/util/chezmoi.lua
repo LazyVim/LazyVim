@@ -3,15 +3,10 @@ return {
   {
     -- highlighting for chezmoi files template files
     "alker0/chezmoi.vim",
-    opts = {
-      use_tmp_buffer = true,
-      source_dir_path = os.getenv("HOME") .. "/.local/share/chezmoi",
-    },
-    config = function(_, opts)
-      for key, value in pairs(opts) do
-        vim.g["chezmoi#" .. key] = value
-      end
-    end,
+	init = function()
+		vim.g.chezmoi#use_tmp_buffer = 1
+		vim.g.chezmoi#source_dir_path = os.getenv("HOME") .. "/.local/share/chezmoi",
+	end,
   },
   {
     "xvzc/chezmoi.nvim",
