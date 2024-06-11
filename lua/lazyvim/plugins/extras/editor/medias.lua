@@ -31,8 +31,12 @@ return {
         end,
       },
     },
-    cond = function(plugin)
+    cond = function()
       if not LazyVim.has("telescope.nvim") then
+        return false
+      end
+
+      if not vim.tbl_contains(LazyVim.config.json.data.extras, "lazyvim.plugins.extras.editor.medias") then
         return false
       end
 
@@ -94,7 +98,6 @@ return {
         end
       end
 
-      plugin.ft = supportedFiletypeSet:toList()
       return true
     end,
     keys = {
