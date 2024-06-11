@@ -34,13 +34,13 @@ function M.open(command, opts)
     opts.cwd = LazyVim.root({ buf = opts.buf })
   end
 
-  local cwd = opts.cwd or vim.uv.cwd()
+  opts.cwd = opts.cwd or vim.uv.cwd()
   if command == "auto" then
     command = "files"
     if
-      vim.uv.fs_stat(cwd .. "/.git")
-      and not vim.uv.fs_stat(cwd .. "/.ignore")
-      and not vim.uv.fs_stat(cwd .. "/.rgignore")
+      vim.uv.fs_stat(opts.cwd .. "/.git")
+      and not vim.uv.fs_stat(opts.cwd .. "/.ignore")
+      and not vim.uv.fs_stat(opts.cwd .. "/.rgignore")
     then
       command = "git_files"
       opts.show_untracked = opts.show_untracked ~= false
