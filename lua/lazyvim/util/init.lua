@@ -269,19 +269,18 @@ for _, level in ipairs({ "info", "warn", "error" }) do
   end
 end
 
-local cache = {} ---@type table<string, any>
+local cache = {} ---@type table<(fun()), table<string, any>>
 ---@generic T: fun()
 ---@param fn T
 ---@return T
 function M.memoize(fn)
-  local info = debug.getinfo(fn, "S")
-  local keyprefix = info.source .. ":" .. info.linedefined .. ":"
   return function(...)
-    local key = keyprefix .. vim.inspect({ ... })
-    if cache[key] == nil then
-      cache[key] = fn(...)
+    local key = vim.inspect({ ... })
+    cache[fn] = cache[fn] or {}
+    if cache[fn][key] == nil then
+      cache[fn][key] = fn(...)
     end
-    return cache[key]
+    return cache[fn][key]
   end
 end
 
