@@ -48,9 +48,6 @@ return {
         end,
       })
     end,
-    config = function(_, opts)
-      require("chezmoi").setup(opts)
-    end,
   },
   {
     "nvimdev/dashboard-nvim",
