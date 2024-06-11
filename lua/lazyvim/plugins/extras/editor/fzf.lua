@@ -40,7 +40,6 @@ return {
       actions.open_with_trouble = require("trouble.sources.fzf").actions.open
       -- Trouble
       config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
-      config.set_action_helpstr(config.defaults.actions.files["ctrl-t"].fn, "open-with-trouble")
 
       -- Toggle root dir / cwd
       config.defaults.actions.files["ctrl-r"] = function(_, ctx)
