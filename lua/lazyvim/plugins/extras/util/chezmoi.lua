@@ -1,3 +1,4 @@
+vim.notify("Hello")
 return {
   {
     -- highlighting for chezmoi files template files
@@ -38,7 +39,7 @@ return {
         select = { "<CR>" },
       },
     },
-    config = function(_, opts)
+    init = function()
       -- run chezmoi edit on file enter
       vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         pattern = { os.getenv("HOME") .. "/.local/share/chezmoi/*" },
@@ -46,7 +47,8 @@ return {
           vim.schedule(require("chezmoi.commands.__edit").watch)
         end,
       })
-
+    end,
+    config = function(_, opts)
       require("chezmoi").setup(opts)
     end,
   },
