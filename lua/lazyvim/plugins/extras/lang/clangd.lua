@@ -123,7 +123,7 @@ return {
       if not dap.adapters["codelldb"] then
         require("dap").adapters["codelldb"] = {
           type = "server",
-          host = "127.0.0.1",
+          host = "localhost",
           port = "${port}",
           executable = {
             command = "codelldb",

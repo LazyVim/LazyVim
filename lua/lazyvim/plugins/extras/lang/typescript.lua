@@ -194,7 +194,7 @@ return {
       if not dap.adapters["pwa-node"] then
         require("dap").adapters["pwa-node"] = {
           type = "server",
-          host = "127.0.0.1",
+          host = "localhost",
           port = "${port}",
           executable = {
             command = "node",

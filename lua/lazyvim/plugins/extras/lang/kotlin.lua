@@ -104,7 +104,7 @@ return {
           port = 5005,
           args = {},
           projectRoot = vim.fn.getcwd,
-          hostName = "127.0.0.1",
+          hostName = "localhost",
           timeout = 2000,
         },
       }
