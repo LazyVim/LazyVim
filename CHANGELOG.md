@@ -1,5 +1,28 @@
 # Changelog
 
+## [12.12.0](https://github.com/LazyVim/LazyVim/compare/v12.11.0...v12.12.0) (2024-06-11)
+
+
+### Features
+
+* **extras:** added fzf-lua ([#3555](https://github.com/LazyVim/LazyVim/issues/3555)) ([6ab4041](https://github.com/LazyVim/LazyVim/commit/6ab404134db6004aab13dcf956e200ff063b2d42))
+* **fzf:** better scrollbars ([8bb6538](https://github.com/LazyVim/LazyVim/commit/8bb653876c38518e4befb496b78659e76ed7afee))
+* **fzf:** ignore current line for some lsp pickers ([c481861](https://github.com/LazyVim/LazyVim/commit/c4818616d541e4456850d1982be39b8151bd0f2a))
+* **fzf:** prettier document symbols ([ba3aec7](https://github.com/LazyVim/LazyVim/commit/ba3aec7b4876e36a9f9fd3cce1d204c23c0fe24f))
+* **lualine:** show readonly icon ([#3567](https://github.com/LazyVim/LazyVim/issues/3567)) ([21617a9](https://github.com/LazyVim/LazyVim/commit/21617a9d602f2400c8e9813490958e106cb88ca8))
+
+
+### Bug Fixes
+
+* **dap:** set host to 127.0.0.1 instead of localhost to prevent issues with ipv6. Fixes [#3577](https://github.com/LazyVim/LazyVim/issues/3577) ([9b8a393](https://github.com/LazyVim/LazyVim/commit/9b8a393edc8b9a12a39f712163f6476c084a7f71))
+* **extras.copilot-chat:** small ui fix for which-key in visual mode ([#3573](https://github.com/LazyVim/LazyVim/issues/3573)) ([43afed1](https://github.com/LazyVim/LazyVim/commit/43afed121195df6591d0e941b913b98f849c8af3))
+* **fzf:** lowercase symbols ([d1d24fa](https://github.com/LazyVim/LazyVim/commit/d1d24fa077add680bc532e08fd68aaa0841a14dc))
+* **neo-tree:** use last window for preview ([#3560](https://github.com/LazyVim/LazyVim/issues/3560)) ([caaa6c4](https://github.com/LazyVim/LazyVim/commit/caaa6c440d5c3b80c03cad1dfd93989b852bb875))
+* **php:** formatting and linting ([#3540](https://github.com/LazyVim/LazyVim/issues/3540)) ([f5dc867](https://github.com/LazyVim/LazyVim/commit/f5dc867ac29e31f833442006ebe3daf7540d1f69))
+* **pick:** recent files in cwd. Fixes [#3580](https://github.com/LazyVim/LazyVim/issues/3580) ([d541069](https://github.com/LazyVim/LazyVim/commit/d541069fdffcf5ffaf2a7f161fd87bb68094c8cf))
+* **sql:** make sure edgebars exist. Fixes [#3578](https://github.com/LazyVim/LazyVim/issues/3578) ([bd29f45](https://github.com/LazyVim/LazyVim/commit/bd29f4515307f59437995d5cc0ba601eb02b5baa))
+* **util:** ensure unique cache keys in LazyVim.memoize ([#3576](https://github.com/LazyVim/LazyVim/issues/3576)) ([3354872](https://github.com/LazyVim/LazyVim/commit/335487282a128d6df7ea021a75b31f07a2b9ccfd))
+
 ## [12.11.0](https://github.com/LazyVim/LazyVim/compare/v12.10.0...v12.11.0) (2024-06-09)
 
 
