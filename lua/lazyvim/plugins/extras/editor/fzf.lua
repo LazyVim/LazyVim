@@ -80,6 +80,17 @@ return {
             ["alt-h"] = { actions.toggle_hidden },
           },
         },
+        lsp = {
+          symbols = {
+            symbol_hl = function(s)
+              return "TroubleIcon" .. s
+            end,
+            symbol_fmt = function(s)
+              return s .. "\t"
+            end,
+            child_prefix = false,
+          },
+        },
         formatters = {
           path = {
             hl = {
