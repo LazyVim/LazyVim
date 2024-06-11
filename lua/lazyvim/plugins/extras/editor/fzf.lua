@@ -66,6 +66,14 @@ return {
 
       return vim.tbl_deep_extend("force", opts, defaults, {
         fzf_colors = true,
+        fzf_opts = {
+          ["--no-scrollbar"] = true,
+        },
+        winopts = {
+          preview = {
+            scrollchars = { "┃", "" },
+          },
+        },
         files = {
           cwd_prompt = false,
           actions = {
