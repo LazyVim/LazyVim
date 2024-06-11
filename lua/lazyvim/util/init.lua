@@ -274,8 +274,10 @@ local cache = {} ---@type table<string, any>
 ---@param fn T
 ---@return T
 function M.memoize(fn)
+  local info = debug.getinfo(fn, "S")
+  local keyprefix = info.source .. ":" .. info.linedefined .. ":"
   return function(...)
-    local key = vim.inspect({ ... })
+    local key = keyprefix .. vim.inspect({ ... })
     if cache[key] == nil then
       cache[key] = fn(...)
     end
