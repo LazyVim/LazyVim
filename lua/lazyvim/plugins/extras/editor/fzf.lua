@@ -177,7 +177,7 @@ return {
       {
         "<leader>sS",
         function()
-          require("fzf-lua").lsp_dynamic_workspace_symbols({
+          require("fzf-lua").lsp_live_workspace_symbols({
             regex_filter = symbols_filter,
           })
         end,
