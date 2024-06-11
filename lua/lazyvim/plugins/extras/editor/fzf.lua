@@ -86,7 +86,7 @@ return {
               return "TroubleIcon" .. s
             end,
             symbol_fmt = function(s)
-              return s .. "\t"
+              return s:lower() .. "\t"
             end,
             child_prefix = false,
           },
