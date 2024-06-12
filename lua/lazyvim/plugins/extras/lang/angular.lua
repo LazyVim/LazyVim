@@ -37,12 +37,20 @@ return {
           root_dir = function(root_dir)
             return require("lspconfig.util").root_pattern(unpack(angular_root_pattern))(root_dir)
           end,
-        angularls = function()
-          LazyVim.lsp.on_attach(function(client)
-            --HACK: disable angular renaming capability due to duplicate rename popping up
-            client.server_capabilities.renameProvider = false
-          end, "angularls")
-        end,
+          keys = {
+            {
+              "<leader>cr",
+              function()
+                vim.lsp.buf.rename(nil, {
+                  filter = function(client)
+                    return client.name == "angularls"
+                  end,
+                })
+              end,
+              desc = "Rename",
+            },
+          },
+        },
       },
     },
   },
