@@ -62,9 +62,30 @@ return {
             {
               "gd",
               function()
-                require("omnisharp_extended").telescope_lsp_definitions()
+                require("omnisharp_extended").telescope_lsp_definitions({ reuse_win = true })
               end,
               desc = "Goto Definition",
+            },
+            {
+              "gr",
+              function()
+                require("omnisharp_extended").telescope_lsp_references()
+              end,
+              desc = "References",
+            },
+            {
+              "gI",
+              function()
+                require("omnisharp_extended").telescope_lsp_implementation({ reuse_win = true })
+              end,
+              desc = "Goto Implementation",
+            },
+            {
+              "gy",
+              function()
+                require("omnisharp_extended").telescope_lsp_type_definition({ reuse_win = true })
+              end,
+              desc = "Goto T[y]pe Definition",
             },
           },
           enable_roslyn_analyzers = true,
