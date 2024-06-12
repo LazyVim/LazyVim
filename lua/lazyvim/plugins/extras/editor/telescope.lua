@@ -195,9 +195,12 @@ return {
 
   -- Flash Telescope config
   {
-    "folke/flash.nvim",
+    "nvim-telescope/telescope.nvim",
     optional = true,
     opts = function(_, opts)
+      if not LazyVim.has("flash.nvim") then
+        return
+      end
       local function flash(prompt_bufnr)
         require("flash").jump({
           pattern = "^",
