@@ -102,38 +102,6 @@ return {
             },
           })
         end,
-        formatters = {
-          path = {
-            hl = {
-              _to = function()
-                local utils = require("fzf-lua.utils")
-                local _, hl_file = utils.ansi_from_hl("FzfLuaFilePart", "foo")
-                local _, hl_dir = utils.ansi_from_hl("FzfLuaDirPart", "foo")
-                return ([[
-                  return function(s, _, m)
-                    local _path, _utils = m.path, m.utils
-                    local _hl_dir = "%s"
-                    local _hl_file = "%s"
-                    local parent = _path.parent(s)
-                    local tail = _path.tail(s)
-                    if #_hl_file > 0 then
-                      tail = _hl_file .. tail .. _utils.ansi_escseq.clear
-                    end
-                    if parent then
-                      parent = _path.add_trailing(parent)
-                      if #_hl_dir > 0 then
-                        parent = _hl_dir .. parent .. _utils.ansi_escseq.clear
-                      end
-                    else
-                      parent = ""
-                    end
-                    return parent .. tail
-                  end
-                ]]):format(hl_dir, hl_file)
-              end,
-            },
-          },
-        },
         winopts = {
           width = 0.8,
           height = 0.8,
