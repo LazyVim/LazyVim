@@ -42,6 +42,15 @@ return {
 
           -- Add additional filetypes
           vim.list_extend(opts.filetypes, opts.filetypes_include or {})
+
+          -- Add init_options
+          opts.init_options = opts.init_options or {}
+          opts.init_options.userLanguages = vim.tbl_deep_extend(
+            "force",
+            {},
+            opts.init_options.userLanguages or {},
+            tw.default_config.init_options.userLanguages
+          )
         end,
       },
     },
