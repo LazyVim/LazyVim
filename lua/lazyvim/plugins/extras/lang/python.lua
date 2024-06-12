@@ -99,6 +99,12 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     branch = "regexp", -- Use this branch for the new version
+    dependencies = {
+      { "nvim-telescope/telescope.nvim",
+                dependencies = {
+          "nvim-lua/plenary.nvim",
+        },
+    },
     cmd = "VenvSelect",
     opts = {
       settings = {
