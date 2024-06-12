@@ -26,6 +26,7 @@ local function symbols_filter(entry, ctx)
 end
 
 return {
+  { "stevearc/dressing.nvim", enabled = false },
   {
     "nvim-telescope/telescope.nvim",
     enabled = false,
@@ -79,6 +80,23 @@ return {
         defaults = {
           formatter = "path.filename_first",
         },
+        -- Custom LazyVim option to configure vim.ui.select
+        ui_select = function(fzf_opts, items)
+          local title = vim.trim((fzf_opts.prompt or "Select"):gsub("%s*:%s*$", ""))
+          local width, height ---@type number?, number?
+          if fzf_opts.kind ~= "codeaction" then
+            width, height = 0.5, math.floor(math.min(vim.o.lines * 0.8, #items + 2) + 0.5)
+          end
+          return vim.tbl_deep_extend("force", fzf_opts, {
+            prompt = " ",
+            winopts = {
+              title = " " .. title .. " ",
+              title_pos = "center",
+              width = width,
+              height = height,
+            },
+          })
+        end,
         winopts = {
           width = 0.8,
           height = 0.8,
@@ -116,6 +134,10 @@ return {
           },
         },
       })
+    end,
+    config = function(_, opts)
+      require("fzf-lua").setup(opts)
+      require("fzf-lua").register_ui_select(opts.ui_select or nil)
     end,
     keys = {
       { "<esc>", "<cmd>close<cr>", ft = "fzf", mode = "t", nowait = true },
