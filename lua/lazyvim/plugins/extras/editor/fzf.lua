@@ -120,7 +120,7 @@ return {
                       tail = _hl_file .. tail .. _utils.ansi_escseq.clear
                     end
                     if parent then
-                      parent = _path.remove_trailing(parent) .. "/"
+                      parent = _path.add_trailing(parent)
                       if #_hl_dir > 0 then
                         parent = _hl_dir .. parent .. _utils.ansi_escseq.clear
                       end
