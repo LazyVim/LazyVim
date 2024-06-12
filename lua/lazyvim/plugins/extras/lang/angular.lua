@@ -1,9 +1,11 @@
+local angular_root_pattern = { "angular.json", "project.json" }
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
       root = {
         "angular.json",
-        "nx.json", --support for nx workspace
+        "project.json", --support for angular monorepo workspace
       },
     })
   end,
@@ -31,9 +33,10 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        angularls = {},
-      },
-      setup = {
+        angularls = {
+          root_dir = function(root_dir)
+            return require("lspconfig.util").root_pattern(unpack(angular_root_pattern))(root_dir)
+          end,
         angularls = function()
           LazyVim.lsp.on_attach(function(client)
             --HACK: disable angular renaming capability due to duplicate rename popping up
