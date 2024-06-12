@@ -83,7 +83,7 @@ return {
         },
         defaults = {
           -- formatter = "path.filename_first",
-          formatter = "path.hl",
+          formatter = "path.dirname_first",
         },
         -- Custom LazyVim option to configure vim.ui.select
         ui_select = function(fzf_opts, items)
