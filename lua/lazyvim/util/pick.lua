@@ -32,7 +32,7 @@ function M.register(picker)
   if vim.v.vim_did_enter == 1 then
     return true
   end
-  if M.picker then
+  if M.picker and M.picker.name ~= picker.name then
     LazyVim.warn(
       "`LazyVim.pick`: picker already set to `" .. M.picker.name .. "`,\nignoring new picker `" .. picker.name .. "`"
     )
