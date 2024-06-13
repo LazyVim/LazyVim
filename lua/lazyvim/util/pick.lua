@@ -84,14 +84,8 @@ end
 function M.wrap(command, opts)
   opts = opts or {}
   return function()
-    M.open(command, vim.deepcopy(opts))
+    LazyVim.pick.open(command, vim.deepcopy(opts))
   end
-end
-
----@param command string
----@param opts? lazyvim.util.pick.Opts
-function M._open(command, opts)
-  return LazyVim.telescope.open(command, opts)
 end
 
 function M.config_files()

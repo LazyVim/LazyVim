@@ -5,7 +5,6 @@ local LazyUtil = require("lazy.core.util")
 ---@field ui lazyvim.util.ui
 ---@field lsp lazyvim.util.lsp
 ---@field root lazyvim.util.root
----@field telescope lazyvim.util.telescope
 ---@field terminal lazyvim.util.terminal
 ---@field lazygit lazyvim.util.lazygit
 ---@field toggle lazyvim.util.toggle
