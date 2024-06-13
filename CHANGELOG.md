@@ -1,5 +1,31 @@
 # Changelog
 
+## [12.14.0](https://github.com/LazyVim/LazyVim/compare/v12.13.0...v12.14.0) (2024-06-13)
+
+
+### Features
+
+* **fzf:** better default window size/position ([74cf6e4](https://github.com/LazyVim/LazyVim/commit/74cf6e446247661ccb074838f92537c96a378ff4))
+* **fzf:** better layout for code actions ([e948435](https://github.com/LazyVim/LazyVim/commit/e948435f17afbbccfe1e7f2b355977efce9f1ff8))
+* **fzf:** disable dressing in favor of noice (vim.ui.input) and fzf-lua (vim.ui.select) ([5c876b7](https://github.com/LazyVim/LazyVim/commit/5c876b754999eb5fe8b79c5b6f5249b5bbddb454))
+* **fzf:** use vscode style path names formatter ([14d1ca9](https://github.com/LazyVim/LazyVim/commit/14d1ca93d0e927b60fdf43424158f2336437f3a6))
+* **noice:** added support for fzf-lua. Closes [#3596](https://github.com/LazyVim/LazyVim/issues/3596) ([ec3dba2](https://github.com/LazyVim/LazyVim/commit/ec3dba20af86187a44c953eb326725f76559cc12))
+* **pick:** move pickers to extras (telescope still the default) ([#3606](https://github.com/LazyVim/LazyVim/issues/3606)) ([39a908c](https://github.com/LazyVim/LazyVim/commit/39a908c9faca2387c5444de89191275b7bd02576))
+* **yanky:** added fzf-lua support ([82f680e](https://github.com/LazyVim/LazyVim/commit/82f680ee6b681f9f39fbfb8431a4f362af134d1c))
+
+
+### Bug Fixes
+
+* **dashboard:** proper fix for dashboard's weird action loading ([1d50c75](https://github.com/LazyVim/LazyVim/commit/1d50c75a4b149f1cf00f4d4163f1469bc2fa77fc))
+* **lsp:** add file completion to rename file ([52b5728](https://github.com/LazyVim/LazyVim/commit/52b572881b6fcbc805e5e584c4970c920d314f86))
+* **pick:** ignore registering the same picker ([48a70aa](https://github.com/LazyVim/LazyVim/commit/48a70aa8f5e201dc6c0a4997f4084193dd9b29a5))
+* **pick:** move some leftovers from `editor.lua` to `editor.telescope` ([#3620](https://github.com/LazyVim/LazyVim/issues/3620)) ([b9f7264](https://github.com/LazyVim/LazyVim/commit/b9f726404fce2f5db8bfec713ed3e053537586ad))
+* **pick:** use LazyVim.pick instead of M since dashboard dumps/loadstrings functions. Why though... Fixes [#3617](https://github.com/LazyVim/LazyVim/issues/3617) ([425e6e0](https://github.com/LazyVim/LazyVim/commit/425e6e0ea3006c87645240d003a3b289cbfc446a))
+* **project:** add fzf-lua integration. Fixes [#3609](https://github.com/LazyVim/LazyVim/issues/3609) ([4b9e4ed](https://github.com/LazyVim/LazyVim/commit/4b9e4edbb115f1f13906b2cdb68986e336b05729))
+* **project:** telescope name ([d82c11f](https://github.com/LazyVim/LazyVim/commit/d82c11f889b03effa5248170ac1b4b4681391f08))
+* **python:** only enable venv-selector when telescope is availble. See [#3612](https://github.com/LazyVim/LazyVim/issues/3612) ([74c1766](https://github.com/LazyVim/LazyVim/commit/74c1766479411357054819b5d8c8376ca12c2504))
+* **ui:** use `LazyVim.pick` for alpha.nvim and mini.starter extras ([#3611](https://github.com/LazyVim/LazyVim/issues/3611)) ([339979d](https://github.com/LazyVim/LazyVim/commit/339979d3143d46a37c304d45a00c7a4f448e707d))
+
 ## [12.13.0](https://github.com/LazyVim/LazyVim/compare/v12.12.0...v12.13.0) (2024-06-11)
 
 
