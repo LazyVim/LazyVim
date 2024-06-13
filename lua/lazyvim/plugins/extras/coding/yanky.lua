@@ -11,9 +11,8 @@ return {
     {
       "<leader>p",
       function()
-        local ok, telescope = pcall(require, "telescope")
-        if ok then
-          telescope.extensions.yank_history.yank_history({})
+        if LazyVim.pick.picker.name == "telescope" then
+          require("telescope").extensions.yank_history.yank_history({})
         else
           vim.cmd([[YankyRingHistory]])
         end

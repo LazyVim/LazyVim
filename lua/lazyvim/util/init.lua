@@ -32,6 +32,7 @@ local deprecated = {
   toggle_diagnostics = { "toggle", "diagnostics" },
   toggle_number = { "toggle", "number" },
   fg = "ui",
+  telescope = "pick",
 }
 
 setmetatable(M, {
@@ -78,8 +79,10 @@ end
 
 ---@param extra string
 function M.has_extra(extra)
+  local Config = require("lazyvim.config")
   local modname = "lazyvim.plugins.extras." .. extra
   return vim.tbl_contains(require("lazy.core.config").spec.modules, modname)
+    or vim.tbl_contains(Config.json.data.extras, modname)
 end
 
 ---@param fn fun()

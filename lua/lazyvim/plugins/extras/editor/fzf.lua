@@ -1,18 +1,25 @@
 ---@class FzfLuaOpts: lazyvim.util.pick.Opts
 ---@field cmd string?
 
-LazyVim.pick.commands = {
-  files = "files",
-}
+---@type LazyPicker
+local picker = {
+  name = "fzf",
+  commands = {
+    files = "files",
+  },
 
----@param command string
----@param opts? FzfLuaOpts
-LazyVim.pick._open = function(command, opts)
-  opts = opts or {}
-  if opts.cmd == nil and command == "git_files" and opts.show_untracked then
-    opts.cmd = "git ls-files --exclude-standard --cached --others"
-  end
-  return require("fzf-lua")[command](opts)
+  ---@param command string
+  ---@param opts? FzfLuaOpts
+  open = function(command, opts)
+    opts = opts or {}
+    if opts.cmd == nil and command == "git_files" and opts.show_untracked then
+      opts.cmd = "git ls-files --exclude-standard --cached --others"
+    end
+    return require("fzf-lua")[command](opts)
+  end,
+}
+if not LazyVim.pick.register(picker) then
+  return {}
 end
 
 local function symbols_filter(entry, ctx)
@@ -26,11 +33,8 @@ local function symbols_filter(entry, ctx)
 end
 
 return {
-  { "stevearc/dressing.nvim", enabled = false },
-  {
-    "nvim-telescope/telescope.nvim",
-    enabled = false,
-  },
+  desc = "Awesome picker for FZF (alternative to Telescope)",
+  recommended = true,
   {
     "ibhagwan/fzf-lua",
     event = "VeryLazy",
@@ -78,7 +82,8 @@ return {
           ["--no-scrollbar"] = true,
         },
         defaults = {
-          formatter = "path.filename_first",
+          -- formatter = "path.filename_first",
+          formatter = "path.dirname_first",
         },
         -- Custom LazyVim option to configure vim.ui.select
         ui_select = function(fzf_opts, items)

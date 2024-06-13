@@ -1,20 +1,20 @@
 local pick = function()
-  if pcall(require, "telescope") then
+  if LazyVim.pick.picker.name == "telescope" then
     return vim.cmd("Telescope projects")
-  end
-
-  local fzf_lua = require("fzf-lua")
-  local history = require("project_nvim.utils.history")
-  local results = history.get_recent_projects()
-  fzf_lua.fzf_exec(results, {
-    actions = {
-      ["default"] = {
-        function(selected)
-          fzf_lua.files({ cwd = selected[1] })
-        end,
+  elseif LazyVim.pick.picker.name == "fzf" then
+    local fzf_lua = require("fzf-lua")
+    local history = require("project_nvim.utils.history")
+    local results = history.get_recent_projects()
+    fzf_lua.fzf_exec(results, {
+      actions = {
+        ["default"] = {
+          function(selected)
+            fzf_lua.files({ cwd = selected[1] })
+          end,
+        },
       },
-    },
-  })
+    })
+  end
 end
 
 return {
