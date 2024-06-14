@@ -155,9 +155,8 @@ return {
       require("fzf-lua").register_ui_select(opts.ui_select or nil)
     end,
     keys = {
-      { "<esc>", "<c-c>", ft = "fzf", mode = "t", nowait = true },
-      { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
-      { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
+      { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
+      { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
       {
         "<leader>,",
         "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
