@@ -76,7 +76,7 @@ return {
       end
       fix(defaults)
 
-      return vim.tbl_deep_extend("force", opts, defaults, {
+      return vim.tbl_deep_extend("force", defaults, {
         fzf_colors = true,
         fzf_opts = {
           ["--no-scrollbar"] = true,
@@ -155,7 +155,7 @@ return {
       require("fzf-lua").register_ui_select(opts.ui_select or nil)
     end,
     keys = {
-      { "<esc>", "<esc>", ft = "fzf", mode = "t", nowait = true },
+      { "<esc>", "<c-c>", ft = "fzf", mode = "t", nowait = true },
       { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
       { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
       {
