@@ -301,13 +301,13 @@ return {
   {
     import = "lazyvim.plugins.extras.editor.fzf",
     enabled = function()
-      return LazyVim.has_extra("editor.fzf")
+      return LazyVim.pick.want() == "fzf"
     end,
   },
   {
     import = "lazyvim.plugins.extras.editor.telescope",
     enabled = function()
-      return not LazyVim.has_extra("editor.fzf")
+      return LazyVim.pick.want() == "telescope"
     end,
   },
 }
