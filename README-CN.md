@@ -113,6 +113,10 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 [![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
 
+[@dusty-phillips](https://github.com/dusty-phillips) 正在编写一本名为
+[LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes)
+的书，该书可在线免费获得。
+
 ## 📂 文件结构
 
 config 下的文件会在适当的时候自动加载，所以你不需要手动引入这些文件。
