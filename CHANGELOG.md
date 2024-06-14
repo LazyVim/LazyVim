@@ -1,5 +1,18 @@
 # Changelog
 
+## [12.14.1](https://github.com/LazyVim/LazyVim/compare/v12.14.0...v12.14.1) (2024-06-14)
+
+
+### Bug Fixes
+
+* **edgy:** only track other neo-tree windows with a source ([6efbdab](https://github.com/LazyVim/LazyVim/commit/6efbdabd1b2272401566354686ce85e1372fe925))
+* **extras:** better reasons as to why some extras are included in your config. ([eeccbbc](https://github.com/LazyVim/LazyVim/commit/eeccbbc40721bb825182251acf201750741c77b2))
+* **fzf:** esc and c-j, c-k keymaps with nowait. update fzf-lua as well ([c9380a3](https://github.com/LazyVim/LazyVim/commit/c9380a309dbdc9fe45ec1bc9f8f27700540c2eea))
+* **fzf:** esc and nowait ([7c7703d](https://github.com/LazyVim/LazyVim/commit/7c7703d79226cda99b1ec3d25fbfff54af04ba5b))
+* **fzf:** floating previewer closed fail ([#3638](https://github.com/LazyVim/LazyVim/issues/3638)) ([427e57d](https://github.com/LazyVim/LazyVim/commit/427e57ddf7030f7081d858d923fb9337f94bf0a7))
+* **issue template:** repro.lua didn't work ([#3628](https://github.com/LazyVim/LazyVim/issues/3628)) ([25cccb5](https://github.com/LazyVim/LazyVim/commit/25cccb5db858ad0640fd6a9eb5da4c5f465749d9))
+* **pick:** allow configuring pickers without LazyExtras. Fixes [#3626](https://github.com/LazyVim/LazyVim/issues/3626) ([304e743](https://github.com/LazyVim/LazyVim/commit/304e7439aa8ae646adafb737b292707bf77a31d9))
+
 ## [12.14.0](https://github.com/LazyVim/LazyVim/compare/v12.13.0...v12.14.0) (2024-06-13)
 
 
