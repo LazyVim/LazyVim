@@ -1,3 +1,9 @@
+if lazyvim_docs then
+  -- In case you don't want to use `:LazyExtras`,
+  -- then you need to set the option below.
+  vim.g.lazyvim_picker = "fzf"
+end
+
 ---@class FzfLuaOpts: lazyvim.util.pick.Opts
 ---@field cmd string?
 
@@ -155,9 +161,8 @@ return {
       require("fzf-lua").register_ui_select(opts.ui_select or nil)
     end,
     keys = {
-      { "<esc>", "<c-c>", ft = "fzf", mode = "t", nowait = true },
-      { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
-      { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
+      { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
+      { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
       {
         "<leader>,",
         "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",

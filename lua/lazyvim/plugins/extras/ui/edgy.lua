@@ -84,7 +84,14 @@ return {
             pinned = true,
             open = "Neotree position=top buffers",
           },
-          "neo-tree",
+          {
+            title = "Neo-Tree Other",
+            ft = "neo-tree",
+            filter = function(buf)
+              return vim.b[buf].neo_tree_source ~= nil
+            end,
+          },
+          -- "neo-tree",
         },
         keys = {
           -- increase width

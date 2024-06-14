@@ -20,8 +20,9 @@ local v = version.major .. "_" .. version.minor
 
 local compat = { "0_9" }
 
+LazyVim.plugin.save_core()
 if vim.tbl_contains(compat, v) then
-  extras[#extras + 1] = "lazyvim.plugins.compat.nvim-" .. v
+  table.insert(extras, 1, "lazyvim.plugins.compat.nvim-" .. v)
 end
 
 table.sort(extras, function(a, b)

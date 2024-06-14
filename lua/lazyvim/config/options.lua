@@ -5,6 +5,12 @@ vim.g.maplocalleader = "\\"
 -- LazyVim auto format
 vim.g.autoformat = true
 
+-- LazyVim picker to use.
+-- Can be one of: telescope, fzf
+-- Leave it to "auto" to automatically use the picker
+-- enabled with `:LazyExtras`
+vim.g.lazyvim_picker = "auto"
+
 -- LazyVim root dir detection
 -- Each entry can be:
 -- * the name of a detector function like `lsp` or `cwd`
