@@ -250,10 +250,30 @@ end
 ---@param extra LazyExtra
 function X:extra(extra)
   if not extra.managed then
-    self:diagnostic({
-      message = "Not managed by LazyExtras (config)",
-      severity = vim.diagnostic.severity.WARN,
-    })
+    ---@type LazyExtra[]
+    local parents = {}
+    for _, x in ipairs(self.extras) do
+      if x.enabled and vim.tbl_contains(x.imports, extra.module) then
+        parents[#parents + 1] = x
+      end
+    end
+    if #parents > 0 then
+      local pp = vim.tbl_map(function(x)
+        return x.name
+      end, parents)
+      self:diagnostic({
+        message = "Required by " .. table.concat(pp, ", "),
+      })
+    elseif vim.tbl_contains(LazyVim.plugin.core_imports, extra.module) then
+      self:diagnostic({
+        message = "This extra is included by default",
+      })
+    else
+      self:diagnostic({
+        message = "Not managed by LazyExtras (config)",
+        severity = vim.diagnostic.severity.WARN,
+      })
+    end
   end
   extra.row = self.text:row()
   local hl = extra.managed and "LazySpecial" or "LazyLocal"

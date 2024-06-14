@@ -3,6 +3,9 @@ local Plugin = require("lazy.core.plugin")
 ---@class lazyvim.util.plugin
 local M = {}
 
+---@type string[]
+M.core_imports = {}
+
 M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
 ---@type table<string, string>
@@ -31,6 +34,13 @@ M.renames = {
   ["romgrk/nvim-treesitter-context"] = "nvim-treesitter/nvim-treesitter-context",
   ["glepnir/dashboard-nvim"] = "nvimdev/dashboard-nvim",
 }
+
+function M.save_core()
+  if vim.v.vim_did_enter == 1 then
+    return
+  end
+  M.core_imports = vim.deepcopy(require("lazy.core.config").spec.modules)
+end
 
 function M.setup()
   M.fix_imports()
