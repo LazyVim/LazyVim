@@ -307,7 +307,7 @@ return {
   {
     import = "lazyvim.plugins.extras.editor.telescope",
     enabled = function()
-      return not LazyVim.has_extra("editor.fzf")
+      return not LazyVim.has_extra("editor.telescope")
     end,
   },
 }
