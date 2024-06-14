@@ -155,7 +155,7 @@ return {
       require("fzf-lua").register_ui_select(opts.ui_select or nil)
     end,
     keys = {
-      { "<esc>", "<cmd>close<cr>", ft = "fzf", mode = "t", nowait = true },
+      { "<esc>", "<esc>", ft = "fzf", mode = "t", nowait = true },
       { "<c-j>", "<Down>", ft = "fzf", mode = "t", nowait = true },
       { "<c-k>", "<Up>", ft = "fzf", mode = "t", nowait = true },
       {
