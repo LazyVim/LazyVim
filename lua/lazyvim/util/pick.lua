@@ -20,11 +20,6 @@ local M = setmetatable({}, {
 ---@type LazyPicker?
 M.picker = nil
 
----@type table<string, string>
-M.commands = {
-  files = "find_files",
-}
-
 ---@param picker LazyPicker
 function M.register(picker)
   -- this only happens when using :LazyExtras
