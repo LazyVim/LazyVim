@@ -143,7 +143,13 @@ return {
     event = "VeryLazy",
     opts = {
       -- skip autopair when next character is one of these
-      skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+      -- [ ( { ` ' "
+      left_pair = "[%[%(%{`'\"]",
+      -- ] ) } ` ' "
+      right_pair = "[%]%)%}`'\"]",
+      -- %w [ ] { } ( ) ` ' "
+      skip_before = "[%w%[%]%{%}%(%)`'\"]$",
+      skip_next = "^[%w%[%]%{%}%(%)`'\"]",
       -- skip autopair when next character is closing pair
       -- and there are more closing pairs than opening pairs
       skip_unbalanced = true,
@@ -177,7 +183,16 @@ return {
         if opts.markdown and o == "`" and vim.bo.filetype == "markdown" and before:match("^%s*``") then
           return "`\n```" .. vim.api.nvim_replace_termcodes("<up>", true, true, true)
         end
-        if opts.skip_next and next ~= "" and next:match(opts.skip_next) then
+        -- If the left and right characters are pairs of characters
+        if before:match(opts.left_pair .. "$") and next:match("^" .. opts.right_pair) then
+          return open(pair, neigh_pattern)
+        end
+        -- If the end of the string to the left of the cursor is a letter or a punctuation pair
+        if before ~= "" and before:match(opts.skip_before) then
+          return o
+        end
+        -- If the end of the string to the right of the cursor is a letter or a punctuation pair
+        if next ~= "" and next:match(opts.skip_next) then
           return o
         end
         if opts.skip_unbalanced and next == c and c ~= o then
