@@ -48,8 +48,8 @@ return {
     },
 
     config = function()
-      -- trigger loading mason-nvim-dap
-      require("mason-nvim-dap")
+      -- load mason-nvim-dap here, after all adapters have been setup
+      require("mason-nvim-dap").setup(LazyVim.opts("mason-nvim-dap.nvim"))
 
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
@@ -116,5 +116,7 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
       },
     },
+    -- mason-nvim-dap is loaded when nvim-dap loads
+    config = function() end,
   },
 }
