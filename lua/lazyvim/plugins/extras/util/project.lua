@@ -5,6 +5,7 @@ local pick = function()
     local fzf_lua = require("fzf-lua")
     local history = require("project_nvim.utils.history")
     local results = history.get_recent_projects()
+    local actions = require("fzf-lua.actions")
     fzf_lua.fzf_exec(results, {
       actions = {
         ["default"] = {
@@ -12,6 +13,7 @@ local pick = function()
             fzf_lua.files({ cwd = selected[1] })
           end,
         },
+        ["ctrl-t"] = actions.file_tabedit,
       },
     })
   end
