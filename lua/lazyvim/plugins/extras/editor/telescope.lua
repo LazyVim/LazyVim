@@ -249,23 +249,7 @@ return {
         end,
         config = function()
           local findCmd = ""
-          --- @class Set A simple Set implementation using a table to avoid duplicates; it only contains the methods add and toList
-          --- @field _data table<string, 1>  Table to hold the set data.
-          local supportedFiletypeSet = { _data = {} }
-
-          function supportedFiletypeSet:add(values)
-            values = type(values) == "string" and { values } or values
-
-            for _, value in ipairs(values) do
-              if not self._data[value] then
-                self._data[value] = 1
-              end
-            end
-          end
-
-          function supportedFiletypeSet:toList()
-            return vim.tbl_keys(self._data)
-          end
+          local supportedFiletypes = {}
 
           -- Find the installed 'find' command
           for _, cmd in ipairs({ "find", "fd", "rg" }) do
@@ -296,14 +280,14 @@ return {
           }
           for _, tool in ipairs(tools) do
             if vim.fn.executable(tool.cmd) == 1 then
-              supportedFiletypeSet:add(tool.filetypes)
+              vim.list_extend(supportedFiletypes, tool.filetypes)
             end
           end
 
           -- We checked that all required prerequisites were installed in the enabled function, but still ensure this again before setup.
           -- Set up the extension for media files when the telescope is loaded.
           local mediaFilesExtension = {
-            filetypes = supportedFiletypeSet:toList(),
+            filetypes = LazyVim.dedup(supportedFiletypes),
             find_cmd = findCmd,
           }
           if mediaFilesExtension.find_cmd and #mediaFilesExtension.filetypes > 0 then
