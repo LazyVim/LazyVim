@@ -1,5 +1,23 @@
 # Changelog
 
+## [12.15.0](https://github.com/LazyVim/LazyVim/compare/v12.14.1...v12.15.0) (2024-06-15)
+
+
+### Features
+
+* **mini.pairs:** added some custom options to make mini.pairs behave better ([bf809ad](https://github.com/LazyVim/LazyVim/commit/bf809ad2a1f6cd8f74451feacdd79af68d201d6e))
+* **project:** ctrl-t opens project in tab ([f28937b](https://github.com/LazyVim/LazyVim/commit/f28937b0c53195a90fb450d0f07bacd3321a0cfd))
+
+
+### Bug Fixes
+
+* **dap:** make sure mason-dap is loaded after initializing dap. See [#3663](https://github.com/LazyVim/LazyVim/issues/3663) ([e0e1ab0](https://github.com/LazyVim/LazyVim/commit/e0e1ab01af01f393d4c96f943faddcc62f6eda16))
+* **dap:** make sure mason-nvim-dap loads after nvim-dap ([2b703ac](https://github.com/LazyVim/LazyVim/commit/2b703ac125a21b48bb207d86cddbb461189d025b))
+* **elixir:** add missing lspconfig ([#3661](https://github.com/LazyVim/LazyVim/issues/3661)) ([06f5ef9](https://github.com/LazyVim/LazyVim/commit/06f5ef928f61dbb64ee0555cddf556bc01cc62f4))
+* **fzf:** only add trouble integration when trouble is available ([e1f587a](https://github.com/LazyVim/LazyVim/commit/e1f587a43dce83c652db5c6742cf516d983152a3))
+* **rust:** incorporate latest changes from `rustaceanvim` ([#3655](https://github.com/LazyVim/LazyVim/issues/3655)) ([2d68976](https://github.com/LazyVim/LazyVim/commit/2d689763e43f9c744f4893a6d68fcb8308502053))
+* **vue:** disable volar hybrid mode since it interferes with tsserver ([#3654](https://github.com/LazyVim/LazyVim/issues/3654)) ([5070694](https://github.com/LazyVim/LazyVim/commit/5070694861f91ac258fbf851ed771294cafafb8f))
+
 ## [12.14.1](https://github.com/LazyVim/LazyVim/compare/v12.14.0...v12.14.1) (2024-06-14)
 
 
