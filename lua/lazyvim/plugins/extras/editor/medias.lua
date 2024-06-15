@@ -84,16 +84,16 @@ return {
 
           -- We checked that all required prerequisites were installed in the enabled function, but still ensure this again before setup.
           -- Set up the extension for media files when the telescope is loaded.
-          local medifaExtension = {
+          local mediaFilesExtension = {
             filetypes = supportedFiletypeSet:toList(),
             find_cmd = findCmd,
           }
-          if medifaExtension.find_cmd and #medifaExtension.filetypes > 0 then
+          if mediaFilesExtension.find_cmd and #mediaFilesExtension.filetypes > 0 then
             LazyVim.on_load("telescope.nvim", function()
               local ok, telescope = pcall(require, "telescope")
               if ok then
                 telescope.extensions["media_files"] =
-                  vim.tbl_extend("force", telescope.extensions["media_files"] or {}, medifaExtension)
+                  vim.tbl_extend("force", telescope.extensions["media_files"] or {}, mediaFilesExtension)
               else
                 LazyVim.error("Failed to load telescope.nvim")
               end
