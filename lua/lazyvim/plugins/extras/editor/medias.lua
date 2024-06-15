@@ -20,10 +20,12 @@ return {
             return false
           end
 
+          -- Check that the required prerequisites are installed.
           if vim.fn.executable("chafa") == 0 then
             return disableWithWarnMessage("The required prerequisite not installed: `Chafa`")
           end
 
+          -- Check that at least one prerequisite is installed.
           local hasFindCmd = vim.tbl_contains({ "find", "fd", "rg" }, function(cmd)
             return vim.fn.executable(cmd) == 1
           end, { predicate = true })
@@ -80,18 +82,23 @@ return {
             end
           end
 
-          -- Setup extension for media files when telescope is loaded
-          LazyVim.on_load("telescope.nvim", function()
-            local ok, telescope = pcall(require, "telescope")
-            if ok then
-              telescope.extensions["media_files"] = vim.tbl_extend("force", telescope.extensions["media_files"] or {}, {
-                filetypes = supportedFiletypeSet:toList(),
-                find_cmd = findCmd,
-              })
-            else
-              LazyVim.error("Failed to load telescope.nvim")
-            end
-          end)
+          -- We checked that all required prerequisites were installed in the enabled function, but still ensure this again before setup.
+          -- Set up the extension for media files when the telescope is loaded.
+          local medifaExtension = {
+            filetypes = supportedFiletypeSet:toList(),
+            find_cmd = findCmd,
+          }
+          if medifaExtension.find_cmd and #medifaExtension.filetypes > 0 then
+            LazyVim.on_load("telescope.nvim", function()
+              local ok, telescope = pcall(require, "telescope")
+              if ok then
+                telescope.extensions["media_files"] =
+                  vim.tbl_extend("force", telescope.extensions["media_files"] or {}, medifaExtension)
+              else
+                LazyVim.error("Failed to load telescope.nvim")
+              end
+            end)
+          end
         end,
         keys = {
           { "<leader>fP", "<cmd>Telescope media_files<cr>", desc = "Find Media Files" },
