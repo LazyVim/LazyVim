@@ -84,6 +84,18 @@ return {
       end
       fix(defaults)
 
+      local img_previewer ---@type string[]?
+      for _, v in ipairs({
+        { cmd = "ueberzug", args = {} },
+        { cmd = "chafa", args = { "{file}", "--format=symbols" } },
+        { cmd = "viu", args = { "-b" } },
+      }) do
+        if vim.fn.executable(v.cmd) == 1 then
+          img_previewer = vim.list_extend({ v.cmd }, v.args)
+          break
+        end
+      end
+
       return vim.tbl_deep_extend("force", defaults, {
         fzf_colors = true,
         fzf_opts = {
@@ -92,6 +104,18 @@ return {
         defaults = {
           -- formatter = "path.filename_first",
           formatter = "path.dirname_first",
+        },
+        previewers = {
+          builtin = {
+            extensions = {
+              ["png"] = img_previewer,
+              ["jpg"] = img_previewer,
+              ["jpeg"] = img_previewer,
+              ["gif"] = img_previewer,
+              ["webp"] = img_previewer,
+            },
+            ueberzug_scaler = "fit_contain",
+          },
         },
         -- Custom LazyVim option to configure vim.ui.select
         ui_select = function(fzf_opts, items)
