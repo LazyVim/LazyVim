@@ -115,6 +115,9 @@ function M.pairs(opts)
   pairs.setup(opts)
   local open = pairs.open
   pairs.open = function(pair, neigh_pattern)
+    if vim.fn.getcmdline() ~= "" then
+      return open(pair, neigh_pattern)
+    end
     local o, c = pair:sub(1, 1), pair:sub(2, 2)
     local line = vim.api.nvim_get_current_line()
     local cursor = vim.api.nvim_win_get_cursor(0)
