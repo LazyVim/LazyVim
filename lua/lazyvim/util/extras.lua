@@ -1,4 +1,3 @@
-local Config = require("lazyvim.config")
 local Float = require("lazy.view.float")
 local LazyConfig = require("lazy.core.config")
 local Plugin = require("lazy.core.plugin")
@@ -124,7 +123,7 @@ function M.get_extra(source, modname)
     imports = imports,
     desc = require(modname).desc,
     recommended = recommended,
-    managed = vim.tbl_contains(Config.json.data.extras, modname) or not enabled,
+    managed = vim.tbl_contains(LazyVim.config.json.data.extras, modname) or not enabled,
     plugins = plugins,
     optional = optional,
   }
@@ -169,17 +168,17 @@ function X:toggle()
         return
       end
       extra.enabled = not extra.enabled
-      Config.json.data.extras = vim.tbl_filter(function(name)
+      LazyVim.config.json.data.extras = vim.tbl_filter(function(name)
         return name ~= extra.module
-      end, Config.json.data.extras)
+      end, LazyVim.config.json.data.extras)
       M.state = vim.tbl_filter(function(name)
         return name ~= extra.module
       end, M.state)
       if extra.enabled then
-        table.insert(Config.json.data.extras, extra.module)
+        table.insert(LazyVim.config.json.data.extras, extra.module)
         M.state[#M.state + 1] = extra.module
       end
-      table.sort(Config.json.data.extras)
+      table.sort(LazyVim.config.json.data.extras)
       LazyVim.json.save()
       LazyVim.info(
         "`"

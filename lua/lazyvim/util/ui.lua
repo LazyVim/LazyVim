@@ -78,7 +78,7 @@ function M.foldtext()
   if not ret or type(ret) == "string" then
     ret = { { vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1], {} } }
   end
-  table.insert(ret, { " " .. require("lazyvim.config").icons.misc.dots })
+  table.insert(ret, { " " .. LazyVim.config.icons.misc.dots })
 
   if not vim.treesitter.foldtext then
     return table.concat(
