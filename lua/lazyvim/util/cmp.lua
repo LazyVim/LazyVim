@@ -70,6 +70,11 @@ function M.add_missing_snippet_docs(window)
   end
 end
 
+function M.visible()
+  local ok, cmp = pcall(require, "cmp")
+  return ok and cmp.core.view:visible()
+end
+
 -- This is a better implementation of `cmp.confirm`:
 --  * check if the completion menu is visible without waiting for running sources
 --  * create an undo point before confirming
