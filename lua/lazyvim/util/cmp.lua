@@ -71,8 +71,9 @@ function M.add_missing_snippet_docs(window)
 end
 
 function M.visible()
-  local ok, cmp = pcall(require, "cmp")
-  return ok and cmp.core.view:visible()
+  ---@module 'cmp'
+  local cmp = package.loaded["cmp"]
+  return cmp and cmp.core.view:visible()
 end
 
 -- This is a better implementation of `cmp.confirm`:
