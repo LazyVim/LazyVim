@@ -1,5 +1,25 @@
 # Changelog
 
+## [12.16.0](https://github.com/LazyVim/LazyVim/compare/v12.15.0...v12.16.0) (2024-06-16)
+
+
+### Features
+
+* **fzf:** basic image viewing support ([cda30f2](https://github.com/LazyVim/LazyVim/commit/cda30f2740f0479098e93a546a741aeefad535cc))
+* **mini.pairs:** allow to skip pairs in certain treesitter nodes ([d6bea06](https://github.com/LazyVim/LazyVim/commit/d6bea06a82912e324ec86438708e619aaa3adce0))
+* **mini.pairs:** and now the actual code :) ([540261d](https://github.com/LazyVim/LazyVim/commit/540261d74d2a743f3bff7eb9749cddeea1d29b19))
+* **mini.pairs:** enable mini.pairs in the cmdline ([2daca4b](https://github.com/LazyVim/LazyVim/commit/2daca4b51014a1a14ce8a5ccdd9fdf08a51db3db))
+* **outline:** free ctrl-k /ctrl+j ([#3686](https://github.com/LazyVim/LazyVim/issues/3686)) ([31c2ad7](https://github.com/LazyVim/LazyVim/commit/31c2ad7dac2e711018b3e1393c5b995515b2ef5e))
+* **project:** add some fzf-lua keymap ([#3666](https://github.com/LazyVim/LazyVim/issues/3666)) ([f24999f](https://github.com/LazyVim/LazyVim/commit/f24999fd3645756a338137278ccc4fa3e1240a90))
+
+
+### Bug Fixes
+
+* **edgy:** neo-tree. See [#3667](https://github.com/LazyVim/LazyVim/issues/3667) ([f22a602](https://github.com/LazyVim/LazyVim/commit/f22a6022c4e97bc8dc6060479fe4188e1a953c1e))
+* **egdy:** do not add panes for not enabled neo-tree sources ([#3667](https://github.com/LazyVim/LazyVim/issues/3667)) ([67616b9](https://github.com/LazyVim/LazyVim/commit/67616b9520a5309d2e3565ff880b37ceef662179))
+* **pick:** remove the unused commands attribute ([#3673](https://github.com/LazyVim/LazyVim/issues/3673)) ([eca8692](https://github.com/LazyVim/LazyVim/commit/eca86924510676667a3868efc512588749f6594e))
+* **telescope:** default to follow=true ([b87d18c](https://github.com/LazyVim/LazyVim/commit/b87d18cc17300c49bf8bec4b81a3416024a39a21))
+
 ## [12.15.0](https://github.com/LazyVim/LazyVim/compare/v12.14.1...v12.15.0) (2024-06-15)
 
 
