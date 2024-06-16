@@ -1,3 +1,11 @@
+if lazyvim_docs then
+  -- LSP Server to use for PHP.
+  -- Set to "intelephense" to use intelephense instead of phpactor.
+  vim.g.lazyvim_php_lsp = "intelephense"
+end
+
+local lsp = vim.g.lazyvim_php_lsp or "phpactor"
+
 return {
   recommended = {
     ft = "php",
@@ -13,7 +21,15 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        phpactor = {},
+        phpactor = {
+          enabled = lsp == "phpactor",
+        },
+        intelephense = {
+          enabled = lsp == "intelephense",
+        },
+        [lsp] = {
+          enabled = true,
+        },
       },
     },
   },
