@@ -160,13 +160,17 @@ function M.blame_line(opts)
 end
 
 function M.browse()
-  local config = require("lazy.manage.git").get_config(LazyVim.root.detectors.pattern(0, { ".git" })[1])
+  local lines = require("lazy.manage.process").exec({ "git", "remote", "-v" })
   local remotes = {} ---@type {name:string, url:string}[]
-  for name, url in pairs(config) do
-    name = name:match("^remote%.(.-)%.url$")
-    if name then
-      url = url:gsub("git@github.com:", "https://github.com/"):gsub("%.git$", "") --[[@as string]]
+
+  for _, line in ipairs(lines) do
+    local name, url = line:match("(%S+)%s+(%S+)%s+%(fetch%)")
+    if name and url then
+      if url:find("git@github.com") or url:find("git@bitbucket.org") or url:find("git@gitlab.com") then
+        url = url:gsub("git@(%S+):", "https://%1/"):gsub(".git$", "")
+      end
       table.insert(remotes, { name = name, url = url })
+      LazyVim.info(("Found remote %s %s)"):format(name, url))
     end
   end
 
