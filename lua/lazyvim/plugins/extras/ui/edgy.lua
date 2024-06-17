@@ -100,7 +100,7 @@ return {
       local neotree_sources = { buffers = "top", git_status = "right" }
 
       for source, pos in pairs(neotree_sources) do
-        if vim.list_contains(neotree_opts.sources, source) then
+        if neotree_opts.sources ~= nil and vim.list_contains(neotree_opts.sources, source) then
           table.insert(opts.left, 3, {
             title = "Neo-Tree " .. source:gsub("_", " "),
             ft = "neo-tree",
