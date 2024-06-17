@@ -170,7 +170,6 @@ function M.browse()
         url = url:gsub("git@(%S+):", "https://%1/"):gsub(".git$", "")
       end
       table.insert(remotes, { name = name, url = url })
-      LazyVim.info(("Found remote %s %s)"):format(name, url))
     end
   end
 
