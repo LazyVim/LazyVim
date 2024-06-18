@@ -113,3 +113,15 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
+
+-- Switch to terminal mode when entering a terminal buffer (term://)
+-- NOTE: "BufEnter" is emitted when a user focuses to an _existing_ terminal buffer
+--  "TermOpen" when a new terminal buffer is created eg. with `:term`.
+--  Odd that "BufEnter" is not emitted for a "term://" buffer after `:term`
+vim.api.nvim_create_autocmd({ "BufEnter", "TermOpen" }, {
+  callback = function()
+    vim.cmd("startinsert")
+  end,
+  pattern = { "term://*" },
+  group = augroup("enter_term_mode_on_focus"),
+})
