@@ -1,7 +1,9 @@
 return {
-  recommended = {
-    ft = "prisma",
-  },
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "prisma",
+    })
+  end,
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
