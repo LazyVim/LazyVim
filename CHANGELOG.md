@@ -1,5 +1,25 @@
 # Changelog
 
+## [12.17.0](https://github.com/LazyVim/LazyVim/compare/v12.16.0...v12.17.0) (2024-06-18)
+
+
+### Features
+
+* **copilot-chat:** ctrl-s now works in both normal and insert mode ([0fcadce](https://github.com/LazyVim/LazyVim/commit/0fcadced89f96f59a9f9cb0c85ee73990df1219f))
+* **php:** allow using intelephense instead of phpactor in php extras ([#3691](https://github.com/LazyVim/LazyVim/issues/3691)) ([ea3b5cc](https://github.com/LazyVim/LazyVim/commit/ea3b5cc2ab4ff7d70163ab66ea7fa0acc0e88566))
+* **treesitter-textobjects:** added ]a and [a to move between parameters ([18c7731](https://github.com/LazyVim/LazyVim/commit/18c7731281f7a9886ae98d9c034661fa85340fb2))
+
+
+### Bug Fixes
+
+* **cmp:** visible ([57ef349](https://github.com/LazyVim/LazyVim/commit/57ef349910ec40c7024f3b50a549aabefa1ebbf0))
+* **conform:** `lsp_format` breaking changes ([#3707](https://github.com/LazyVim/LazyVim/issues/3707)) ([a69e626](https://github.com/LazyVim/LazyVim/commit/a69e626d7a3a027df124bae7b2672658a4fb5b0f))
+* **edgy:** only enable edgy neo-tree when needed. Fixes [#3697](https://github.com/LazyVim/LazyVim/issues/3697). Closes [#3703](https://github.com/LazyVim/LazyVim/issues/3703) ([bdca1e9](https://github.com/LazyVim/LazyVim/commit/bdca1e95ff97348501a715bd6aa5977422a27969))
+* **git:** removed debug info ([d9caee6](https://github.com/LazyVim/LazyVim/commit/d9caee610038548a4b79f2b6eb126180ec8ba6b6))
+* **lazygit:** support monorepo structure and other git providers ([#3701](https://github.com/LazyVim/LazyVim/issues/3701)) ([1f034e1](https://github.com/LazyVim/LazyVim/commit/1f034e16000692d1d0ec8e02110d37cf2089bd4c))
+* **lsp:** dont highlight document words when cmp is visible ([0d57115](https://github.com/LazyVim/LazyVim/commit/0d57115f01b4094f68e426942e14892f204ec664))
+* **snippets:** nvim-snippets `&lt;S-Tab&gt;` prev key ([#3712](https://github.com/LazyVim/LazyVim/issues/3712)) ([492fa86](https://github.com/LazyVim/LazyVim/commit/492fa86faa29f2987f662ad0cdb796b5c1c49ef3))
+
 ## [12.16.0](https://github.com/LazyVim/LazyVim/compare/v12.15.0...v12.16.0) (2024-06-16)
 
 
