@@ -13,6 +13,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    optional = true,
     opts = function(_, opts)
       table.insert(opts.sources, { name = "supermaven", priority = 100 })
     end,
