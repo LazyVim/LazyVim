@@ -1,5 +1,21 @@
 # Changelog
 
+## [12.18.0](https://github.com/LazyVim/LazyVim/compare/v12.17.0...v12.18.0) (2024-06-19)
+
+
+### Features
+
+* **extra:** add prisma support and config ([#3684](https://github.com/LazyVim/LazyVim/issues/3684)) ([1101c3e](https://github.com/LazyVim/LazyVim/commit/1101c3ed24709feec85371a951ea0feed6bd50fa))
+* **project:** add fzf-lua keymap descriptions ([#3690](https://github.com/LazyVim/LazyVim/issues/3690)) ([07ab681](https://github.com/LazyVim/LazyVim/commit/07ab681b1d6f0223e6b265f3eb6aaafbd12e5c0e))
+
+
+### Bug Fixes
+
+* **dap:** get the correct debugpy pkg path on windows ([#3716](https://github.com/LazyVim/LazyVim/issues/3716)) ([06f13da](https://github.com/LazyVim/LazyVim/commit/06f13daf7261377ecfa6b4ac845d742f446df719))
+* **extras.python:** avoid launching extra console with dap on Windows ([#3723](https://github.com/LazyVim/LazyVim/issues/3723)) ([67eece6](https://github.com/LazyVim/LazyVim/commit/67eece6d74f071035ca7b934a753d71d1677dd9b))
+* **root:** also check root_dir. Fixes [#3732](https://github.com/LazyVim/LazyVim/issues/3732) ([d4991d5](https://github.com/LazyVim/LazyVim/commit/d4991d5aac3c4ab5865e65d73fb8957b3d61bdc3))
+* **statuscolumn:** `%r` deprecated in nightly and `%l` handles everything ([#3719](https://github.com/LazyVim/LazyVim/issues/3719)) ([1a295c5](https://github.com/LazyVim/LazyVim/commit/1a295c5ef8cab02c6054067c35ca805a3e4ccf72))
+
 ## [12.17.0](https://github.com/LazyVim/LazyVim/compare/v12.16.0...v12.17.0) (2024-06-18)
 
 
