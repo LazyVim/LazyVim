@@ -114,6 +114,21 @@ return {
   },
 
   {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters = {
+        rustfmt = {
+          command = "rustfmt",
+        },
+      },
+      formatters_by_ft = {
+        ["rust"] = { "rustfmt" },
+      },
+    },
+  },
+
+  {
     "nvim-neotest/neotest",
     optional = true,
     opts = {
