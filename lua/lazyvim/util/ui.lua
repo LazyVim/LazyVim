@@ -124,7 +124,7 @@ function M.statuscolumn()
       elseif
         show_open_folds
         and not LazyVim.ui.skip_foldexpr[buf]
-        and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">"
+        and tostring(vim.treesitter.foldexpr(vim.v.lnum)):sub(1, 1) == ">"
       then -- fold start
         fold = { text = vim.opt.fillchars:get().foldopen or "", texthl = githl }
       end
