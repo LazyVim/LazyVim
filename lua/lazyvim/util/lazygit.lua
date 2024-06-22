@@ -211,7 +211,7 @@ function M.browse()
         local key, value = line:match("^(%S+)%s+(.+)$")
 
         if key:lower() == "host" then
-          -- process url before parse next group of host if match we could close file and early return
+          -- Process the URL before parsing the next group of hosts. If there is a match, we can replace the string and break early.
           if currentHost ~= "" and currentHost ~= value and url:match(currentHost .. ":") then
             -- If the username is specified, we do not need to replace it; otherwise, replace the username with "git".
             local searchString = hostGroup[currentHost].User and currentHost .. ":" or "git@" .. currentHost .. ":"
