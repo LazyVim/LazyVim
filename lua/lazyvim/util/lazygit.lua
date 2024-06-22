@@ -213,11 +213,11 @@ function M.browse()
         if key:lower() == "host" then
           -- process url before parse next group of host if match we could close file and early return
           if currentHost ~= "" and currentHost ~= value and url:match(currentHost .. ":") then
-            file:close()
             -- If the username is specified, we do not need to replace it; otherwise, replace the username with "git".
             local searchString = hostGroup[currentHost].User and currentHost .. ":" or "git@" .. currentHost .. ":"
             local destinationURL = string.format("https://%s/", hostGroup[currentHost].HostName)
-            return url:gsub(searchString, destinationURL):gsub("%.git$", "")
+            url = url:gsub(searchString, destinationURL):gsub("%.git$", "")
+            break
           end
           -- Setup group of host
           currentHost = value
@@ -227,7 +227,9 @@ function M.browse()
         end
       end
     end
+
     file:close()
+    return url
   end
 
   for _, line in ipairs(lines) do
