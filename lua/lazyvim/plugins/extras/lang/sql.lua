@@ -17,6 +17,8 @@ if lazyvim_docs then
   local ok, dbs = pcall(require, "secrests/db-env")
   if ok then
     vim.g.dbs = dbs
+  else
+    vim.g.dbs = {}
   end
 
   -- Alternatively, you can also use other ways to inject your environment variables.
