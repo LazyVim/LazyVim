@@ -10,9 +10,12 @@ if lazyvim_docs then
     { name = "staging", url = "Replace with your database connection URL." },
   }
 
-  -- NOTICE: Replace yourself path for module
+  -- NOTICE: Replace `secrets/db-env` with your own module path.
   -- You can set your secrets directly through a Lua table, for example:
-  vim.g.dbs = require("secrests/db-env")
+  local ok, dbs = pcall(require, "secrests/db-env")
+  if ok then
+    vim.g.dbs = dbs
+  end
 
   -- Alternatively, you can also use other ways to inject your environment variables.
 
