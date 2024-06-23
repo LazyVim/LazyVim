@@ -1,29 +1,32 @@
 if lazyvim_docs then
   -- Automatically configure connections without needing to manually input them each time.
-  vim.g.dbs = {
-    dev = "Replace with your database connection URL.",
-    staging = "Replace with your database connection URL.",
-  }
+  --    vim.g.dbs = {
+  --      dev = "Replace with your database connection URL.",
+  --      staging = "Replace with your database connection URL.",
+  --    }
   -- or
-  vim.g.dbs = {
-    { name = "dev", url = "Replace with your database connection URL." },
-    { name = "staging", url = "Replace with your database connection URL." },
-  }
+  --    vim.g.dbs = {
+  --      { name = "dev", url = "Replace with your database connection URL." },
+  --      { name = "staging", url = "Replace with your database connection URL." },
+  --    }
 
-  -- You can set your secrets directly through a Lua table. For example:
-  -- Create a secrets/db-env.lua file and return the connection table.
-  -- Or
-  -- Replace `secrets/db-env` with your own module path.
-  local ok, dbs = pcall(require, "secrests/db-env")
-  if ok then
-    vim.g.dbs = dbs
-  else
+  -- You can set your those configuration through a Lua table. For example:
+  -- Create a `.lazy.lua` file in your project and set your connections in it like this:
+  -- ```lua
+  --    vim.g.dbs = {...}
+  --
+  --    return {}
+  -- ```
+
+  local ok = pcall(dofile, vim.fn.getcwd() .. "/.lazy.lua")
+
+  if not ok then
     vim.g.dbs = {}
   end
 
   -- Alternatively, you can also use other ways to inject your environment variables.
 
-  -- After all, please make sure to protect your secrets and add them to your `.gitignore` file.
+  -- After all, please make sure to add `.lazy` to your global `.gitignore` file.
 end
 
 local sql_ft = { "sql", "mysql", "plsql" }
