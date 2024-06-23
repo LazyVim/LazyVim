@@ -312,9 +312,8 @@ return {
            ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           
       ]]
 
-      logo = string.rep("\n", 8) .. logo .. "\n\n"
-
       local opts = {
+        logo = logo,
         theme = "doom",
         hide = {
           -- this is taken care of by lualine
@@ -322,7 +321,6 @@ return {
           statusline = false,
         },
         config = {
-          header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
             { action = 'lua LazyVim.pick()()',                           desc = " Find File",       icon = " ", key = "f" },
@@ -360,6 +358,17 @@ return {
       end
 
       return opts
+    end,
+    config = function(_, opts)
+      local win_height = vim.api.nvim_win_get_height(0) + 2 -- plus 2 for status bar
+      local _, logo_count = string.gsub(opts.logo, "\n", "") -- count newlines in logo
+      local logo_height = logo_count + 3 -- logo size + newlines
+      local actions_height = #opts.config.center * 2 - 1 -- minus 1 for last item
+      local total_height = logo_height + actions_height + 2 -- plus for 2 for footer
+      local margin = math.floor((win_height - total_height) / 2)
+      local logo = string.rep("\n", margin) .. opts.logo .. "\n\n"
+      opts.config.header = vim.split(logo, "\n")
+      require("dashboard").setup(opts)
     end,
   },
 }
