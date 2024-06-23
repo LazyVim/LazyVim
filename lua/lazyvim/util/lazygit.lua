@@ -176,6 +176,10 @@ function M.browse()
   local function open(remote)
     if remote then
       LazyVim.info(("Opening [%s](%s)"):format(remote.name, remote.url))
+      if vim.fn.has("nvim-0.10") == 0 then
+        require("lazy.util").open(remote.url, { system = true })
+        return
+      end
       vim.ui.open(remote.url)
     end
   end
