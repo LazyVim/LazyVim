@@ -1,5 +1,21 @@
 # Changelog
 
+## [12.19.0](https://github.com/LazyVim/LazyVim/compare/v12.18.0...v12.19.0) (2024-06-23)
+
+
+### Features
+
+* **gitsigns:** navigate diff changes as well as git hunks with [h/]h ([#3736](https://github.com/LazyVim/LazyVim/issues/3736)) ([1f42393](https://github.com/LazyVim/LazyVim/commit/1f423930e03078eb1a2786356a46287c8a466c91))
+* **gitsigns:** new keymap for `Gitsigns blame` ([#3758](https://github.com/LazyVim/LazyVim/issues/3758)) ([b22831b](https://github.com/LazyVim/LazyVim/commit/b22831b7e25a4681df171da30204d4d4f7e9abfa))
+* **go:** switch to neotest-golang ([#3749](https://github.com/LazyVim/LazyVim/issues/3749)) ([55464b7](https://github.com/LazyVim/LazyVim/commit/55464b77c6ae8f14306ce743bcb3c5c465af3d4f))
+
+
+### Bug Fixes
+
+* **neo-tree:** don't enable document symbols by default ([52d4616](https://github.com/LazyVim/LazyVim/commit/52d46166b14a9e99509c509482d9a0979fa00809))
+* **refactoring:** use `pick` for both Telescope and fzf-lua ([#3769](https://github.com/LazyVim/LazyVim/issues/3769)) ([b45d4ed](https://github.com/LazyVim/LazyVim/commit/b45d4ed62c613a4c47dd9183cf51985f2b153b21))
+* **statuscolumn:** fix `folds_open = true` ([#3756](https://github.com/LazyVim/LazyVim/issues/3756)) ([b47c65f](https://github.com/LazyVim/LazyVim/commit/b47c65f4087c4d82720ab7439f395aba5d6b5f40))
+
 ## [12.18.0](https://github.com/LazyVim/LazyVim/compare/v12.17.0...v12.18.0) (2024-06-19)
 
 
