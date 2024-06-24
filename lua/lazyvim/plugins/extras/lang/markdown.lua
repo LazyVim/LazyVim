@@ -1,6 +1,8 @@
-vim.filetype.add({
-  extension = { mdx = "markdown.mdx" },
-})
+LazyVim.on_very_lazy(function()
+  vim.filetype.add({
+    extension = { mdx = "markdown.mdx" },
+  })
+end)
 return {
   recommended = function()
     return LazyVim.extras.wants({
