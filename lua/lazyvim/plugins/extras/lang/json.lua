@@ -61,7 +61,6 @@ return {
       { "<localleader>M", "<cmd>JsonMinifySelection<cr>", ft = "json", desc = "Minify JSON in selected text" },
       { "<localleader>u", "<cmd>JsonUnescapeFile<cr>", ft = "json", desc = "Unescape JSON in entire file" },
       { "<localleader>U", "<cmd>JsonUnescapeSelection<cr>", ft = "json", desc = "Unescape JSON in selected text" },
-      
     },
   },
 
