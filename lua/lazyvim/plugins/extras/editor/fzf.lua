@@ -131,7 +131,11 @@ return {
               -- height is number of items minus 15 lines for the preview, with a max of 80% screen height
               height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 2) + 0.5) + 16,
               width = 0.5,
-              preview = {
+              preview = not vim.tbl_isempty(LazyVim.lsp.get_clients({ bufnr = 0, name = "vtsls" })) and {
+                layout = "vertical",
+                vertical = "down:15,border-top",
+                hidden = "hidden",
+              } or {
                 layout = "vertical",
                 vertical = "down:15,border-top",
               },
