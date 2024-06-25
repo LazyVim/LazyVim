@@ -51,7 +51,7 @@ return {
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, { "codelldb" })
       if diagnostics == "bacon-ls" then
-        vim.list_extend(opts.ensure_installed, { "bacon", "bacon-ls" })
+        vim.list_extend(opts.ensure_installed, { "bacon" })
       end
     end,
   },
