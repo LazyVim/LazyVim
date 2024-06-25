@@ -53,7 +53,7 @@ return {
       if diagnostics == "bacon-ls" then
         vim.list_extend(opts.ensure_installed, { "bacon", "bacon-ls" })
       end
-    end
+    end,
   },
 
   {
