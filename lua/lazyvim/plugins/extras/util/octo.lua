@@ -8,9 +8,6 @@ return {
     "pwntester/octo.nvim",
     cmd = "Octo",
     event = { { event = "BufReadCmd", pattern = "octo://*" } },
-    init = function()
-      vim.treesitter.language.register("markdown", "octo")
-    end,
     opts = {
       enable_builtin = true,
       default_to_projects_v2 = true,
@@ -41,6 +38,7 @@ return {
   {
     "pwntester/octo.nvim",
     opts = function(_, opts)
+      vim.treesitter.language.register("markdown", "octo")
       if LazyVim.has("telescope.nvim") then
         opts.picker = "telescope"
       elseif LazyVim.has("fzf-lua") then

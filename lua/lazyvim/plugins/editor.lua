@@ -60,7 +60,7 @@ return {
       })
     end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      sources = { "filesystem", "buffers", "git_status" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = {
         bind_to_cwd = false,
@@ -177,7 +177,7 @@ return {
         ["<leader>c"] = { name = "+code" },
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunks" },
+        ["<leader>gh"] = { name = "+hunks", ["_"] = "which_key_ignore" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
         ["<leader>u"] = { name = "+ui" },
@@ -215,8 +215,20 @@ return {
         end
 
         -- stylua: ignore start
-        map("n", "]h", function() gs.nav_hunk("next") end, "Next Hunk")
-        map("n", "[h", function() gs.nav_hunk("prev") end, "Prev Hunk")
+        map("n", "]h", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "]c", bang = true })
+          else
+            gs.nav_hunk("next")
+          end
+        end, "Next Hunk")
+        map("n", "[h", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "[c", bang = true })
+          else
+            gs.nav_hunk("prev")
+          end
+        end, "Prev Hunk")
         map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
         map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
         map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
@@ -226,6 +238,7 @@ return {
         map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
         map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
         map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")

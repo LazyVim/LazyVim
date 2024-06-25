@@ -77,42 +77,27 @@ return {
       }
 
       if LazyVim.has("neo-tree.nvim") then
-        table.insert(opts.left, 1, {
-          title = "Neo-Tree",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "filesystem"
-          end,
-          pinned = true,
-          open = function()
-            require("neo-tree.command").execute({ dir = LazyVim.root() })
-          end,
-          size = { height = 0.5 },
-        })
-        -- only add neo-tree sources if they are enabled in config
-        local neotree_opts = LazyVim.opts("neo-tree.nvim")
-        local neotree_sources = { buffers = "top", git_status = "right" }
-
-        for source, pos in pairs(neotree_sources) do
-          if vim.list_contains(neotree_opts.sources or {}, source) then
-            table.insert(opts.left, {
-              title = "Neo-Tree " .. source:gsub("_", " "),
-              ft = "neo-tree",
-              filter = function(buf)
-                return vim.b[buf].neo_tree_source == source
-              end,
-              pinned = true,
-              open = "Neotree position=" .. pos .. " " .. source,
-            })
-          end
+        local pos = {
+          filesystem = "left",
+          buffers = "top",
+          git_status = "right",
+          document_symbols = "bottom",
+          diagnostics = "bottom",
+        }
+        local sources = LazyVim.opts("neo-tree.nvim").sources or {}
+        for i, v in ipairs(sources) do
+          table.insert(opts.left, i, {
+            title = "Neo-Tree " .. v:gsub("_", " "):gsub("^%l", string.upper),
+            ft = "neo-tree",
+            filter = function(buf)
+              return vim.b[buf].neo_tree_source == v
+            end,
+            pinned = true,
+            open = function()
+              vim.cmd(("Neotree show position=%s %s dir=%s"):format(pos[v] or "bottom", v, LazyVim.root()))
+            end,
+          })
         end
-        table.insert(opts.left, {
-          title = "Neo-Tree Other",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source ~= nil
-          end,
-        })
       end
 
       for _, pos in ipairs({ "top", "bottom", "left", "right" }) do

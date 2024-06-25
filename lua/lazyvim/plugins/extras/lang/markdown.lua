@@ -1,7 +1,12 @@
+LazyVim.on_very_lazy(function()
+  vim.filetype.add({
+    extension = { mdx = "markdown.mdx" },
+  })
+end)
 return {
   recommended = function()
     return LazyVim.extras.wants({
-      ft = "markdown",
+      ft = { "markdown", "markdown.mdx" },
       root = "README.md",
     })
   end,
