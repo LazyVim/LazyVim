@@ -28,6 +28,7 @@ local function main()
   print("Installing plugins")
   require("lazy").setup(plugins, {
     root = root .. "/plugins",
+    pkg = { enabled = false },
     performance = {
       rtp = {
         reset = false,
