@@ -1,5 +1,26 @@
 # Changelog
 
+## [12.20.0](https://github.com/LazyVim/LazyVim/compare/v12.19.1...v12.20.0) (2024-06-25)
+
+
+### Features
+
+* **autocmds:** added proper bigfile support ([938a671](https://github.com/LazyVim/LazyVim/commit/938a6718c6f0d5c6716a34bd3383758907820c52))
+
+
+### Bug Fixes
+
+* **dashboard:** load dashboard when closing lazy if needed ([fa2fc64](https://github.com/LazyVim/LazyVim/commit/fa2fc6403185faabc47741b3aa2809192870b92e))
+* **elixir:** fix credo detection for elixir linters. ([#3809](https://github.com/LazyVim/LazyVim/issues/3809)) ([c132158](https://github.com/LazyVim/LazyVim/commit/c13215814cd5dc3821625e9f3b55860ba880ebdb))
+* **fzf:** disable `preview` for `vtsls` ([#3798](https://github.com/LazyVim/LazyVim/issues/3798)) ([b5945c2](https://github.com/LazyVim/LazyVim/commit/b5945c2fc8cbb531983c7ec27d283ad8abf1acec))
+* **noice:** dont show old messages when installing plugins ([faee8ce](https://github.com/LazyVim/LazyVim/commit/faee8ce5819c40852f574aafad55701e2492ffae))
+* **util.terminal:** fix the shellredir and shellpipe options for powershell    ([#3803](https://github.com/LazyVim/LazyVim/issues/3803)) ([a33eabd](https://github.com/LazyVim/LazyVim/commit/a33eabddd9f3786421652d07894516d946c88647))
+
+
+### Performance Improvements
+
+* **markdown:** add filetype in VeryLazy ([3513362](https://github.com/LazyVim/LazyVim/commit/351336244c0a68d4ebed7f687e27e6eab8e5da09))
+
 ## [12.19.1](https://github.com/LazyVim/LazyVim/compare/v12.19.0...v12.19.1) (2024-06-23)
 
 
