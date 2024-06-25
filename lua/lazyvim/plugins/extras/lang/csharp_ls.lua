@@ -44,7 +44,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        sharp_ls = {
+        csharp_ls = {
           handlers = {
             ["textDocument/definition"] = function(...)
               return require("csharpls_extended").handler(...)
