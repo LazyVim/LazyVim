@@ -1,4 +1,3 @@
-vim.notify("Hello")
 return {
   {
     -- highlighting for chezmoi files template files
