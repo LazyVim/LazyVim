@@ -38,13 +38,10 @@ describe("Extra", function()
   for _, extra in ipairs(extras) do
     local name = extra.modname:sub(#"lazyvim.plugins.extras" + 2)
     describe(name, function()
-      ---@type any, LazySpecLoader
-      local mod, spec
-
       it("spec is valid", function()
-        mod = require(extra.modname)
+        local mod = require(extra.modname)
         assert.is_not_nil(mod)
-        spec = Plugin.Spec.new({
+        local spec = Plugin.Spec.new({
           { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
           mod,
@@ -54,10 +51,17 @@ describe("Extra", function()
 
       if extra.modname:find("%.lang%.") then
         it("has recommended set", function()
+          local mod = require(extra.modname)
           assert(mod.recommended, "`recommended` not set for " .. extra.modname)
         end)
       end
 
+      local mod = require(extra.modname)
+      local spec = Plugin.Spec.new({
+        { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
+        { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
+        mod,
+      }, { optional = true })
       local lspconfig = spec.plugins["nvim-lspconfig"]
       if lspconfig then
         it("does not install LSP servers with mason.nvim", function()
