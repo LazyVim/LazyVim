@@ -16,4 +16,21 @@ return {
       table.insert(opts.sources, { name = "supermaven", priority = 100 })
     end,
   },
+  {
+    "folke/noice.nvim",
+    opts = function(_, opts)
+      vim.list_extend(opts.routes, {
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "Starting Supermaven" },
+              { find = "Supermaven Free Tier" },
+            },
+          },
+          skip = true,
+        },
+      })
+    end,
+  },
 }
