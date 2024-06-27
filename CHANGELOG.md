@@ -1,5 +1,12 @@
 # Changelog
 
+## [12.20.1](https://github.com/LazyVim/LazyVim/compare/v12.20.0...v12.20.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* **autocmds:** check that buf exists ([135ce0d](https://github.com/LazyVim/LazyVim/commit/135ce0d7edb64958b2c8f636a9ba624ec0721eb3))
+
 ## [12.20.0](https://github.com/LazyVim/LazyVim/compare/v12.19.1...v12.20.0) (2024-06-25)
 
 
