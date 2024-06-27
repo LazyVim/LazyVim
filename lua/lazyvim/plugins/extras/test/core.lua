@@ -86,6 +86,9 @@ return {
               local meta = getmetatable(adapter)
               if adapter.setup then
                 adapter.setup(config)
+              elseif adapter.adapter then
+                adapter.adapter(config)
+                adapter = adapter.adapter
               elseif meta and meta.__call then
                 adapter(config)
               else
