@@ -8,71 +8,76 @@ pick = function()
     local project = require("project_nvim.project")
     local history = require("project_nvim.utils.history")
     local results = history.get_recent_projects()
-    local actions = require("fzf-lua.actions")
-    local core = require("fzf-lua.core")
-    -- local path = require("fzf-lua.path")
     local utils = require("fzf-lua.utils")
 
     local function hl_validate(hl)
       return not utils.is_hl_cleared(hl) and hl or nil
     end
 
-    function actions.project_files(selected)
-      fzf_lua.files({ cwd = selected[1] })
+    local function ansi_from_hl(hl, s)
+      return utils.ansi_from_hl(hl_validate(hl), s)
     end
-
-    function actions.project_live_grep(selected)
-      fzf_lua.live_grep({ cwd = selected[1] })
-    end
-
-    function actions.project_oldfiles(selected)
-      fzf_lua.oldfiles({ cwd = selected[1] })
-    end
-
-    function actions.project_cd_cwd(selected)
-      local path = selected[1]
-      local ok = project.set_pwd(path)
-      if ok then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-        LazyVim.info("Change project dir to " .. path)
-      end
-    end
-
-    function actions.project_delete(selected)
-      local path = selected[1]
-      local choice = vim.fn.confirm("Delete '" .. path .. "' project? ", "&Yes\n&No")
-      if choice == 1 then
-        history.delete_project({ value = path })
-      end
-      pick()
-    end
-
-    -- core.ACTION_DEFINITIONS[actions.project_files] = { "find project files" }
-    core.ACTION_DEFINITIONS[actions.file_tabedit] = { "tabedit" }
-    core.ACTION_DEFINITIONS[actions.project_live_grep] = { "live_grep" }
-    core.ACTION_DEFINITIONS[actions.project_oldfiles] = { "oldfiles" }
-    core.ACTION_DEFINITIONS[actions.project_cd_cwd] = { "change dir" }
-    core.ACTION_DEFINITIONS[actions.project_delete] = { "delete" }
 
     local opts = {
-      fzf_opts = {},
-      hls = {
-        header_bind = hl_validate("FzfLuaHeaderBind"),
-        header_text = hl_validate("FzfLuaHeaderText"),
+      fzf_opts = {
+        ["--header"] = string.format(
+          ":: <%s> to %s | <%s> to %s | <%s> to %s | <%s> to %s | <%s> to %s",
+          ansi_from_hl("FzfLuaHeaderBind", "ctrl-t"),
+          ansi_from_hl("FzfLuaHeaderText", "tabedit"),
+          ansi_from_hl("FzfLuaHeaderBind", "ctrl-s"),
+          ansi_from_hl("FzfLuaHeaderText", "live_grep"),
+          ansi_from_hl("FzfLuaHeaderBind", "ctrl-r"),
+          ansi_from_hl("FzfLuaHeaderText", "oldfiles"),
+          ansi_from_hl("FzfLuaHeaderBind", "ctrl-w"),
+          ansi_from_hl("FzfLuaHeaderText", "change_dir"),
+          ansi_from_hl("FzfLuaHeaderBind", "ctrl-d"),
+          ansi_from_hl("FzfLuaHeaderText", "delete")
+        ),
       },
       fzf_colors = true,
-      header_separator = " | ",
       actions = {
-        ["default"] = actions.project_files,
-        ["ctrl-t"] = actions.file_tabedit,
-        ["ctrl-s"] = actions.project_live_grep,
-        ["ctrl-r"] = actions.project_oldfiles,
-        ["ctrl-w"] = actions.project_cd_cwd,
-        ["ctrl-d"] = actions.project_delete,
+        ["default"] = {
+          function(selected)
+            fzf_lua.files({ cwd = selected[1] })
+          end,
+        },
+        ["ctrl-t"] = {
+          function(selected)
+            vim.cmd("tabedit")
+            fzf_lua.files({ cwd = selected[1] })
+          end,
+        },
+        ["ctrl-s"] = {
+          function(selected)
+            fzf_lua.live_grep({ cwd = selected[1] })
+          end,
+        },
+        ["ctrl-r"] = {
+          function(selected)
+            fzf_lua.oldfiles({ cwd = selected[1] })
+          end,
+        },
+        ["ctrl-w"] = {
+          function(selected)
+            local path = selected[1]
+            local ok = project.set_pwd(path)
+            if ok then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+              LazyVim.info("Change project dir to " .. path)
+            end
+          end,
+        },
+        ["ctrl-d"] = function(selected)
+          local path = selected[1]
+          local choice = vim.fn.confirm("Delete '" .. path .. "' project? ", "&Yes\n&No")
+          if choice == 1 then
+            history.delete_project({ value = path })
+          end
+          pick()
+        end,
       },
     }
 
-    opts = core.set_header(opts, { "actions" })
     fzf_lua.fzf_exec(results, opts)
   end
 end
