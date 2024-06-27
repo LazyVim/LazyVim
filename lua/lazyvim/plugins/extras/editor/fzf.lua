@@ -231,6 +231,7 @@ return {
       { "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
       { "<leader>sR", "<cmd>FzfLua resume<cr>", desc = "Resume" },
       { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
+      { "<leader>xh", "<cmd>FzfLua quickfix_stack<cr>", desc = "Quickfix Stack" },
       { "<leader>sw", LazyVim.pick("grep_cword"), desc = "Word (Root Dir)" },
       { "<leader>sW", LazyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
       { "<leader>sw", LazyVim.pick("grep_visual"), mode = "v", desc = "Selection (Root Dir)" },
