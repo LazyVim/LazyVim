@@ -15,14 +15,14 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        ["markdown"] = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
-        ["markdown.mdx"] = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
+        ["markdown"] = { { "prettierd", "prettier" }, "markdownlint-cli2", "markdown-toc" },
+        ["markdown.mdx"] = { { "prettierd", "prettier" }, "markdownlint-cli2", "markdown-toc" },
       },
     },
   },
   {
     "williamboman/mason.nvim",
-    opts = { ensure_installed = { "markdownlint", "markdown-toc" } },
+    opts = { ensure_installed = { "markdownlint-cli2", "markdown-toc" } },
   },
   {
     "nvimtools/none-ls.nvim",
@@ -30,7 +30,7 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.diagnostics.markdownlint,
+        nls.builtins.diagnostics.markdownlint_cli2,
       })
     end,
   },
@@ -39,7 +39,7 @@ return {
     optional = true,
     opts = {
       linters_by_ft = {
-        markdown = { "markdownlint" },
+        markdown = { "markdownlint-cli2" },
       },
     },
   },
