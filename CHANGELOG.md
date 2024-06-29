@@ -1,5 +1,27 @@
 # Changelog
 
+## [12.21.0](https://github.com/LazyVim/LazyVim/compare/v12.20.1...v12.21.0) (2024-06-29)
+
+
+### Features
+
+* **extras:** add `overseer.nvim` plugin extra ([#2421](https://github.com/LazyVim/LazyVim/issues/2421)) ([683bf52](https://github.com/LazyVim/LazyVim/commit/683bf52c024306f9c0fccc2b02348692c3f09bfa))
+* **extras:** add chezmoi extra ([#2859](https://github.com/LazyVim/LazyVim/issues/2859)) ([88f2541](https://github.com/LazyVim/LazyVim/commit/88f25410e020fe64fe42a94d71f0be3db1b918b4))
+* **extras:** switch to markdownlint-cli2 ([#3843](https://github.com/LazyVim/LazyVim/issues/3843)) ([f47d105](https://github.com/LazyVim/LazyVim/commit/f47d105b80dce615a572a13351a137653444d548))
+* **java:** enable Lombok support in jdtls ([#3852](https://github.com/LazyVim/LazyVim/issues/3852)) ([0fede40](https://github.com/LazyVim/LazyVim/commit/0fede4040b15da7e74c6a741132ff3d48634c1ad))
+
+
+### Bug Fixes
+
+* **bufremove:** fix `Cancel` ([#3834](https://github.com/LazyVim/LazyVim/issues/3834)) ([87fe403](https://github.com/LazyVim/LazyVim/commit/87fe403df62fd8b89b886920c4f562da8e162cbe))
+* **edgy:** improve edgy.lua bufferline offset logic ([#3794](https://github.com/LazyVim/LazyVim/issues/3794)) ([566753b](https://github.com/LazyVim/LazyVim/commit/566753b8889a6132f2e667606a6a002fdd8847b1))
+* **extras:** don't load pkgs when parsing specs for LazyExtras ([3764735](https://github.com/LazyVim/LazyVim/commit/3764735fb20596dfc9cd0707d2830a40004c7f0e))
+* **gitsigns:** fix inconsistent signs ([#3830](https://github.com/LazyVim/LazyVim/issues/3830)) ([44ed11c](https://github.com/LazyVim/LazyVim/commit/44ed11c4f8867cdc887fdcba6a22938125a403ee))
+* **lazygit:** fix browsing private git hostings ([#3833](https://github.com/LazyVim/LazyVim/issues/3833)) ([b292a72](https://github.com/LazyVim/LazyVim/commit/b292a721bfce1b079428a3a42aa9ea3454c5692d))
+* **lint:** make prepend_args opt work when default args is empty ([#3828](https://github.com/LazyVim/LazyVim/issues/3828)) ([ff1b44e](https://github.com/LazyVim/LazyVim/commit/ff1b44e67606080b8b40d066943c55c92856e3c6))
+* **neotest:** support adapter key on adapter for playwright ([#3824](https://github.com/LazyVim/LazyVim/issues/3824)) ([e5e8d7a](https://github.com/LazyVim/LazyVim/commit/e5e8d7a8056a8c80456751385e73a4b184bcd436))
+* **pick:** set recurse_submodules to false when using `auto` picker. Fixes [#3831](https://github.com/LazyVim/LazyVim/issues/3831), Closes [#3835](https://github.com/LazyVim/LazyVim/issues/3835) ([d6429a5](https://github.com/LazyVim/LazyVim/commit/d6429a5c8ad317057cb852d3cd67ce52e9c30727))
+
 ## [12.20.1](https://github.com/LazyVim/LazyVim/compare/v12.20.0...v12.20.1) (2024-06-26)
 
 
