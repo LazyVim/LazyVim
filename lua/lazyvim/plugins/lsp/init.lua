@@ -5,7 +5,7 @@ return {
     event = "LazyFile",
     dependencies = {
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "williamboman/mason-lspconfig.nvim", config = function() end },
     },
     ---@class PluginLspOpts
     opts = function()
