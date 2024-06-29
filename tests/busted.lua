@@ -7,8 +7,6 @@ load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/ma
 require("lazy.minit").busted({
   spec = {
     "LazyVim/starter",
-    { "nvim-lua/plenary.nvim" },
-    { "folke/lazy.nvim" },
     "williamboman/mason-lspconfig.nvim",
     "williamboman/mason.nvim",
     "nvim-treesitter/nvim-treesitter",
