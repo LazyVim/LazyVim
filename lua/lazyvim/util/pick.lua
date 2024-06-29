@@ -80,7 +80,10 @@ function M.open(command, opts)
       and not vim.uv.fs_stat(cwd .. "/.rgignore")
     then
       command = "git_files"
-      opts.show_untracked = opts.show_untracked ~= false
+      if opts.show_untracked == nil then
+        opts.show_untracked = true
+        opts.recurse_submodules = false
+      end
     end
   end
   command = M.picker.commands[command] or command
