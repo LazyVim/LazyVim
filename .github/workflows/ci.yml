@@ -39,7 +39,7 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     needs: tests
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'LazyVim' }}
     steps:
       - uses: actions/checkout@v4
       - name: panvimdoc
@@ -58,7 +58,7 @@ jobs:
           commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
   release:
     name: release
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.repository_owner == 'LazyVim' }}
     needs:
       - docs
       - tests
