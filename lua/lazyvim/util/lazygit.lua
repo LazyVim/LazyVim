@@ -166,7 +166,7 @@ function M.browse()
   for _, line in ipairs(lines) do
     local name, url = line:match("(%S+)%s+(%S+)%s+%(fetch%)")
     if name and url then
-      if url:find("git@github.com") or url:find("git@bitbucket.org") or url:find("git@gitlab.com") then
+      if url:find("git@") == 1 then
         url = url:gsub("git@(%S+):", "https://%1/"):gsub(".git$", "")
       end
       table.insert(remotes, { name = name, url = url })
