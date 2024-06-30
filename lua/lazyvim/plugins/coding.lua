@@ -55,30 +55,14 @@ return {
               item.kind = icons[item.kind] .. item.kind
             end
 
-            -- Set 'fixed_width' to false if not provided.
-            local fixed_width = vim.g.cmp_fixed_width or false
+            local abbr_width = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 30
+            local menu_width = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30
 
-            -- Set the fixed completion window width.
-            if fixed_width then
-              vim.o.pumwidth = fixed_width
-            end
-
-            -- Get the width of the current window.
-            local win_width = vim.api.nvim_win_get_width(0)
-
-            -- Set the max content width based on either: 'fixed_width'
-            -- or a percentage of the window width, in this case 20%.
-            -- We subtract 10 from 'fixed_width' to leave room for 'kind' fields.
-            local max_content_width = fixed_width and fixed_width - 10 or math.floor(win_width * 0.25)
-
-            -- Truncate the completion entry text if it's longer than the
-            -- max content width. We subtract 3 from the max content width
-            -- to account for the "..." that will be appended to it.
-            if item.menu and #item.abbr > (max_content_width * 0.7) then
-              item.abbr = vim.fn.strcharpart(item.abbr, 0, math.floor(max_content_width * 0.7) - 3) .. "…"
-            end
-            if item.menu and #item.menu > (max_content_width * 0.7) then
-              item.menu = vim.fn.strcharpart(item.menu, 0, math.floor(max_content_width * 0.7) - 3) .. "…"
+            if item.menu then
+              if vim.fn.strdisplaywidth(item.abbr) > abbr_width then
+                item.abbr = vim.fn.strcharpart(item.abbr, 0, abbr_width - 1) .. "…"
+              end
+              item.menu = vim.fn.strcharpart(item.menu, 0, menu_width - 1) .. "…"
             end
 
             return item
