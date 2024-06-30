@@ -1,5 +1,17 @@
 # Changelog
 
+## [12.22.1](https://github.com/LazyVim/LazyVim/compare/v12.22.0...v12.22.1) (2024-06-30)
+
+
+### Performance Improvements
+
+* **markdown:** only run markdownlint-cli2 formatter when there are markdownlint diagnostics for the buffer ([8a6875a](https://github.com/LazyVim/LazyVim/commit/8a6875ab3bc79d5890cf0a65e3ef602c1567fa90))
+
+
+### Reverts
+
+* feat(neo-tree): more sane defaults for gitignore and hidden files ([2bfcd05](https://github.com/LazyVim/LazyVim/commit/2bfcd05c621f74b4d735b14b43804a901f17d416))
+
 ## [12.22.0](https://github.com/LazyVim/LazyVim/compare/v12.21.1...v12.22.0) (2024-06-30)
 
 
