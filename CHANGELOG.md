@@ -1,5 +1,19 @@
 # Changelog
 
+## [12.22.0](https://github.com/LazyVim/LazyVim/compare/v12.21.1...v12.22.0) (2024-06-30)
+
+
+### Features
+
+* allow a custom path for `lazyvim.json`. Fixes [#3856](https://github.com/LazyVim/LazyVim/issues/3856) ([131187c](https://github.com/LazyVim/LazyVim/commit/131187c092cc42768e0a48a3668e91d009a213a0))
+* **cmp:** disable `item.menu` for Rust filetypes ([#3858](https://github.com/LazyVim/LazyVim/issues/3858)) ([ee44b21](https://github.com/LazyVim/LazyVim/commit/ee44b2189827e6a34530ad8b55f214a0a809c045))
+* **neo-tree:** more sane defaults for gitignore and hidden files ([85405d6](https://github.com/LazyVim/LazyVim/commit/85405d65348cac72343d081a81addfb5c8d43743))
+
+
+### Bug Fixes
+
+* **lsp:** prevent setting up mason-lspconfig more than once when setting mslp opts ([8c900f9](https://github.com/LazyVim/LazyVim/commit/8c900f92e735e9c7e9af24b97de740390383a137))
+
 ## [12.21.1](https://github.com/LazyVim/LazyVim/compare/v12.21.0...v12.21.1) (2024-06-29)
 
 
