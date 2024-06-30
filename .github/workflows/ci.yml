@@ -1,7 +1,6 @@
 name: CI
 on:
   push:
-  pull_request:
 
 jobs:
   stylua:
@@ -15,11 +14,7 @@ jobs:
           version: latest
           args: --check .
   tests:
-    strategy:
-      matrix:
-        # os: [ubuntu-latest, windows-latest]
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Neovim
