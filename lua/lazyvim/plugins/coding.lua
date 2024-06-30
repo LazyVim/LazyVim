@@ -75,10 +75,10 @@ return {
             -- max content width. We subtract 3 from the max content width
             -- to account for the "..." that will be appended to it.
             if item.menu and #item.abbr > (max_content_width * 0.7) then
-              item.abbr = vim.fn.strcharpart(item.abbr, 0, math.floor(max_content_width * 0.7) - 3) .. "..."
+              item.abbr = vim.fn.strcharpart(item.abbr, 0, math.floor(max_content_width * 0.7) - 3) .. "…"
             end
             if item.menu and #item.menu > (max_content_width * 0.7) then
-              item.menu = vim.fn.strcharpart(item.menu, 0, math.floor(max_content_width * 0.7) - 3) .. "..."
+              item.menu = vim.fn.strcharpart(item.menu, 0, math.floor(max_content_width * 0.7) - 3) .. "…"
             end
 
             return item
