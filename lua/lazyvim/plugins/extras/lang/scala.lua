@@ -34,6 +34,13 @@ return {
               end,
               desc = "Metals compile cascade",
             },
+            {
+              "<leader>mh",
+              function()
+                require("metals").hover_worksheet()
+              end,
+              desc = "Metals hover worksheet",
+            },
           },
           init_options = {
             statusBarProvider = "off",
