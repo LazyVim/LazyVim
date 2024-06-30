@@ -55,14 +55,15 @@ return {
               item.kind = icons[item.kind] .. item.kind
             end
 
-            local abbr_width = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 30
-            local menu_width = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30
+            local widths = {
+              abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+              menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+            }
 
-            if item.menu then
-              if vim.fn.strdisplaywidth(item.abbr) > abbr_width then
-                item.abbr = vim.fn.strcharpart(item.abbr, 0, abbr_width - 1) .. "…"
+            for key, width in pairs(widths) do
+              if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+                item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
               end
-              item.menu = vim.fn.strcharpart(item.menu, 0, menu_width - 1) .. "…"
             end
 
             return item
