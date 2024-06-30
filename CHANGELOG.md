@@ -1,5 +1,43 @@
 # Changelog
 
+## [12.22.1](https://github.com/LazyVim/LazyVim/compare/v12.22.0...v12.22.1) (2024-06-30)
+
+
+### Performance Improvements
+
+* **markdown:** only run markdownlint-cli2 formatter when there are markdownlint diagnostics for the buffer ([8a6875a](https://github.com/LazyVim/LazyVim/commit/8a6875ab3bc79d5890cf0a65e3ef602c1567fa90))
+
+
+### Reverts
+
+* feat(neo-tree): more sane defaults for gitignore and hidden files ([2bfcd05](https://github.com/LazyVim/LazyVim/commit/2bfcd05c621f74b4d735b14b43804a901f17d416))
+
+## [12.22.0](https://github.com/LazyVim/LazyVim/compare/v12.21.1...v12.22.0) (2024-06-30)
+
+
+### Features
+
+* allow a custom path for `lazyvim.json`. Fixes [#3856](https://github.com/LazyVim/LazyVim/issues/3856) ([131187c](https://github.com/LazyVim/LazyVim/commit/131187c092cc42768e0a48a3668e91d009a213a0))
+* **cmp:** disable `item.menu` for Rust filetypes ([#3858](https://github.com/LazyVim/LazyVim/issues/3858)) ([ee44b21](https://github.com/LazyVim/LazyVim/commit/ee44b2189827e6a34530ad8b55f214a0a809c045))
+* **neo-tree:** more sane defaults for gitignore and hidden files ([85405d6](https://github.com/LazyVim/LazyVim/commit/85405d65348cac72343d081a81addfb5c8d43743))
+
+
+### Bug Fixes
+
+* **lsp:** prevent setting up mason-lspconfig more than once when setting mslp opts ([8c900f9](https://github.com/LazyVim/LazyVim/commit/8c900f92e735e9c7e9af24b97de740390383a137))
+
+## [12.21.1](https://github.com/LazyVim/LazyVim/compare/v12.21.0...v12.21.1) (2024-06-29)
+
+
+### Bug Fixes
+
+* **git:** use current dir when git not found to get a meaningful error message ([b43ace1](https://github.com/LazyVim/LazyVim/commit/b43ace1ecfbeb87626fbde8973a2717247471b2e))
+
+
+### Performance Improvements
+
+* **markdown:** don't format with markdown-toc when no toc in the doc ([73e72ee](https://github.com/LazyVim/LazyVim/commit/73e72ee21d7673e4040bb99f4de834410219d6cb))
+
 ## [12.21.0](https://github.com/LazyVim/LazyVim/compare/v12.20.1...v12.21.0) (2024-06-29)
 
 

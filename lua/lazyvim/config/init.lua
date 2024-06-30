@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "12.21.0" -- x-release-please-version
+M.version = "12.22.1" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -136,6 +136,7 @@ local defaults = {
 
 M.json = {
   version = 6,
+  path = vim.g.lazyvim_json or vim.fn.stdpath("config") .. "/lazyvim.json",
   data = {
     version = nil, ---@type string?
     news = {}, ---@type table<string, string>
@@ -144,8 +145,7 @@ M.json = {
 }
 
 function M.json.load()
-  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
-  local f = io.open(path, "r")
+  local f = io.open(M.json.path, "r")
   if f then
     local data = f:read("*a")
     f:close()
