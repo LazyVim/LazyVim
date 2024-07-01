@@ -202,6 +202,93 @@ return {
     end,
   },
 
+  -- Media files for Telescope
+  -- Ensure the required prerequisites are installed.
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    dependencies = {
+      {
+        "nvim-telescope/telescope-media-files.nvim",
+        enabled = function()
+          -- Check that the required prerequisites are installed.
+          if vim.fn.executable("chafa") == 0 then
+            return false
+          end
+
+          -- Check that at least one prerequisite is installed.
+          local hasFindCmd = vim.tbl_contains({ "find", "fd", "rg" }, function(cmd)
+            return vim.fn.executable(cmd) == 1
+          end, { predicate = true })
+
+          if not hasFindCmd then
+            return false
+          end
+
+          return true
+        end,
+        config = function()
+          local findCmd = ""
+          local supportedFiletypes = {}
+
+          -- Find the installed 'find' command
+          for _, cmd in ipairs({ "find", "fd", "rg" }) do
+            if vim.fn.executable(cmd) == 1 then
+              findCmd = cmd
+              break
+            end
+          end
+
+          -- Add the supported file types if the tool is installed
+          local tools = {
+            -- required
+            { cmd = "chafa", name = "Chafa", filetypes = { "png", "jpg", "jpeg", "webp", "gif", "bmp", "tiff" } },
+            -- optional
+            {
+              cmd = "convert",
+              name = "ImageMagick",
+              filetypes = { "svg", "png", "jpg", "jpeg", "gif", "tiff", "bmp", "webp", "pdf", "ico", "eps" },
+            },
+            {
+              cmd = "ffmpegthumbnailer",
+              name = "ffmpegthumbnailer",
+              filetypes = { "mp4", "webm", "mkv", "avi", "mov", "flv", "mpeg", "mpg" },
+            },
+            { cmd = "pdftoppm", name = "pdftoppm", filetypes = { "pdf" } },
+            { cmd = "epub-thumbnailer", name = "epub-thumbnailer", filetypes = { "epub" } },
+            { cmd = "fontpreview", name = "fontpreview", filetypes = { "ttf", "otf", "woff", "woff2" } },
+          }
+          for _, tool in ipairs(tools) do
+            if vim.fn.executable(tool.cmd) == 1 then
+              vim.list_extend(supportedFiletypes, tool.filetypes)
+            end
+          end
+
+          -- We checked that all required prerequisites were installed in the enabled function, but still ensure this again before setup.
+          -- Set up the extension for media files when the telescope is loaded.
+          local mediaFilesExtension = {
+            filetypes = LazyVim.dedup(supportedFiletypes),
+            find_cmd = findCmd,
+          }
+          if mediaFilesExtension.find_cmd and #mediaFilesExtension.filetypes > 0 then
+            LazyVim.on_load("telescope.nvim", function()
+              local ok, telescope = pcall(require, "telescope")
+              if ok then
+                telescope.extensions["media_files"] =
+                  vim.tbl_extend("force", telescope.extensions["media_files"] or {}, mediaFilesExtension)
+              else
+                LazyVim.error("Failed to load telescope.nvim")
+              end
+            end)
+          end
+        end,
+        keys = {
+          { "<leader>fP", "<cmd>Telescope media_files<cr>", desc = "Find Media Files" },
+        },
+      },
+    },
+  },
+
   -- Flash Telescope config
   {
     "nvim-telescope/telescope.nvim",
