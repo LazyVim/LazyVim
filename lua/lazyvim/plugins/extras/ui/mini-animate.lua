@@ -18,6 +18,13 @@ return {
     return {
       resize = {
         timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
+        -- diable animate when resize acitve
+        -- best effort to avoid lagging when doing a lot of relative resizing
+        subresize = animate.gen_subresize.equal({
+          predicate = function()
+            return not animate.is_active("resize")
+          end,
+        }),
       },
       scroll = {
         timing = animate.gen_timing.linear({ duration = 150, unit = "total" }),
@@ -33,4 +40,36 @@ return {
       },
     }
   end,
+  -- because of "VeryLazy" event, "MiniAnimate" module has already been exported
+  -- make LazyVim key maps smoother
+  keys = {
+    {
+      "<C-Up>",
+      function()
+        MiniAnimate.execute_after("resize", "resize +2")
+      end,
+      desc = "Increase Window Height",
+    },
+    {
+      "<C-Down>",
+      function()
+        MiniAnimate.execute_after("resize", "resize -2")
+      end,
+      desc = "Decrease Window Height",
+    },
+    {
+      "<C-Left>",
+      function()
+        MiniAnimate.execute_after("resize", "vertical resize -2")
+      end,
+      desc = "Decrease Window Width",
+    },
+    {
+      "<C-Right>",
+      function()
+        MiniAnimate.execute_after("resize", "vertical resize +2")
+      end,
+      desc = "Increase Window Width",
+    },
+  },
 }
