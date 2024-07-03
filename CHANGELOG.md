@@ -1,5 +1,18 @@
 # Changelog
 
+## [12.23.0](https://github.com/LazyVim/LazyVim/compare/v12.22.1...v12.23.0) (2024-07-03)
+
+
+### Features
+
+* **cmp:** attempt for dynamic width and trimming between fields ([#3873](https://github.com/LazyVim/LazyVim/issues/3873)) ([78cf6ee](https://github.com/LazyVim/LazyVim/commit/78cf6ee024cbf6a17dc8406555eb131994cd8b63))
+
+
+### Bug Fixes
+
+* **chezmoi:** missing support for fzf file picker ([#3888](https://github.com/LazyVim/LazyVim/issues/3888)) ([2114a66](https://github.com/LazyVim/LazyVim/commit/2114a6610f6fc6dea2e4937171429252641bd27d))
+* **neo-tree:** remove `branch`, since it obstructs updating to latest version ([#3871](https://github.com/LazyVim/LazyVim/issues/3871)) ([d23731c](https://github.com/LazyVim/LazyVim/commit/d23731c50d149769799d90ae8ec4969a79db3628))
+
 ## [12.22.1](https://github.com/LazyVim/LazyVim/compare/v12.22.0...v12.22.1) (2024-06-30)
 
 
