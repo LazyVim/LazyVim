@@ -1,5 +1,22 @@
 # Changelog
 
+## [12.24.0](https://github.com/LazyVim/LazyVim/compare/v12.23.0...v12.24.0) (2024-07-03)
+
+
+### Features
+
+* **options:** jumpoptions=view ([fe3d0da](https://github.com/LazyVim/LazyVim/commit/fe3d0da5087ecadfee8922fa363d3e84c0ba3461))
+
+
+### Bug Fixes
+
+* **dials:** dials.nvim stopped working after making changes to plugin files ([455557c](https://github.com/LazyVim/LazyVim/commit/455557c1f693c6ced946de2322beceb555161417))
+
+
+### Performance Improvements
+
+* **fzf:** lazy-load fzf-lua ([b9a8a4a](https://github.com/LazyVim/LazyVim/commit/b9a8a4ad7f39c8ed3f4febb25dabc9ae24110f98))
+
 ## [12.23.0](https://github.com/LazyVim/LazyVim/compare/v12.22.1...v12.23.0) (2024-07-03)
 
 
