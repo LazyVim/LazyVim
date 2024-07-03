@@ -225,8 +225,18 @@ return {
                 -- custom keymaps for Java test runner (not yet compatible with neotest)
                 wk.register({
                   ["<leader>t"] = { name = "+test" },
-                  ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
-                  ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
+                  ["<leader>tt"] = {
+                    function()
+                      require("jdtls.dap").test_class({ config_overrides = opts.test.config_overrides })
+                    end,
+                    "Run All Test",
+                  },
+                  ["<leader>tr"] = {
+                    function()
+                      require("jdtls.dap").test_nearest_method({ config_overrides = opts.test.config_overrides })
+                    end,
+                    "Run Nearest Test",
+                  },
                   ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
                 }, { mode = "n", buffer = args.buf })
               end
