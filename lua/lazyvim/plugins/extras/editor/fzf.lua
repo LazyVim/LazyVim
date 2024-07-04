@@ -192,6 +192,14 @@ return {
       require("fzf-lua").setup(opts)
       require("fzf-lua").register_ui_select(opts.ui_select or nil)
     end,
+    init = function()
+      LazyVim.on_very_lazy(function()
+        vim.ui.select = function(...)
+          require("fzf-lua")
+          return vim.ui.select(...)
+        end
+      end)
+    end,
     keys = {
       { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
       { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
