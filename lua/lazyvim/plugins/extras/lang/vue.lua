@@ -1,3 +1,5 @@
+local enableHybridMode = vim.g.vue_hybrid_mode
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -22,7 +24,7 @@ return {
         volar = {
           init_options = {
             vue = {
-              hybridMode = false,
+              hybridMode = enableHybridMode,
             },
           },
         },
@@ -35,16 +37,18 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      table.insert(opts.servers.vtsls.filetypes, "vue")
-      LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
-        {
-          name = "@vue/typescript-plugin",
-          location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
-          languages = { "vue" },
-          configNamespace = "typescript",
-          enableForWorkspaceTypeScriptVersions = true,
-        },
-      })
+      if enableHybridMode then
+        table.insert(opts.servers.vtsls.filetypes, "vue")
+        LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+          {
+            name = "@vue/typescript-plugin",
+            location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+            languages = { "vue" },
+            configNamespace = "typescript",
+            enableForWorkspaceTypeScriptVersions = true,
+          },
+        })
+      end
     end,
   },
 }
