@@ -13,9 +13,6 @@ return {
       { "<leader>rp", "<cmd>lua require('kulala').jump_prev()<cr>", desc = "Jump to previous request" },
       { "<leader>rn", "<cmd>lua require('kulala').jump_next()<cr>", desc = "Jump to next request" },
     },
-    config = function()
-      require("kulala").setup({})
-    end,
     opts = {},
   },
   {
