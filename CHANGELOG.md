@@ -1,5 +1,19 @@
 # Changelog
 
+## [12.25.0](https://github.com/LazyVim/LazyVim/compare/v12.24.0...v12.25.0) (2024-07-04)
+
+
+### Features
+
+* **erlang:** add Erlang language ([#3911](https://github.com/LazyVim/LazyVim/issues/3911)) ([9c7d3dc](https://github.com/LazyVim/LazyVim/commit/9c7d3dc75e4ecafe8a6dd6ee8fef0bd7711550ac))
+* **fzf-lua:** preview keymaps for git ([#3904](https://github.com/LazyVim/LazyVim/issues/3904)) ([d5f3d39](https://github.com/LazyVim/LazyVim/commit/d5f3d395f490a252125044d0918267eb18298532))
+* **ui:** use `mini.icons` instead of `nvim-wev-devicons` ([#3899](https://github.com/LazyVim/LazyVim/issues/3899)) ([045faec](https://github.com/LazyVim/LazyVim/commit/045faec0351ff9a38fda1af9b06bd7f948e84d28))
+
+
+### Bug Fixes
+
+* **fzf:** make sure `vim.ui.select` works when fzf is not loaded yet ([9acadc7](https://github.com/LazyVim/LazyVim/commit/9acadc7ec289966cf8f4f6c37c348f286ed73ffe))
+
 ## [12.24.0](https://github.com/LazyVim/LazyVim/compare/v12.23.0...v12.24.0) (2024-07-03)
 
 
