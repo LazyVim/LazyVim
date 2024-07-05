@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Before** reporting an issue, make sure to read the [documentation](https://github.com/folke/LazyVim) and search [existing issues](https://github.com/folke/LazyVim/issues). Usage questions such as ***"How do I...?"*** belong in [Discussions](https://github.com/folke/LazyVim/discussions) and will be closed.
+        **Before** reporting an issue, make sure to read the [documentation](https://github.com/LazyVim/LazyVim) and search [existing issues](https://github.com/LazyVim/LazyVim/issues). Usage questions such as ***"How do I...?"*** belong in [Discussions](https://github.com/LazyVim/LazyVim/discussions) and will be closed.
   - type: checkboxes
     attributes:
       label: Did you check docs and existing issues?
