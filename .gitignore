@@ -1,8 +1,7 @@
 tt.*
+foo.*
 .tests
 doc/tags
 debug
 .repro
-foo.*
 *.log
-data
