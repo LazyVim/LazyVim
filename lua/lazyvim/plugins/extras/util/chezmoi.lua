@@ -88,4 +88,24 @@ return {
       table.insert(opts.config.center, 5, projects)
     end,
   },
+
+  -- Filetype icons
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      file = {
+        [".chezmoiignore"] = { glyph = "", hl = "MiniIconsGray" },
+        [".chezmoiremove"] = { glyph = "", hl = "MiniIconsGray" },
+        [".chezmoiroot"] = { glyph = "", hl = "MiniIconsGray" },
+        [".chezmoiversion"] = { glyph = "", hl = "MiniIconsGray" },
+        ["bash.tmpl"] = { glyph = "", hl = "MiniIconsGray" },
+        ["json.tmpl"] = { glyph = "", hl = "MiniIconsGray" },
+        ["ps1.tmpl"] = { glyph = "󰨊", hl = "MiniIconsGray" },
+        ["sh.tmpl"] = { glyph = "", hl = "MiniIconsGray" },
+        ["toml.tmpl"] = { glyph = "", hl = "MiniIconsGray" },
+        ["yaml.tmpl"] = { glyph = "", hl = "MiniIconsGray" },
+        ["zsh.tmpl"] = { glyph = "", hl = "MiniIconsGray" },
+      },
+    },
+  },
 }

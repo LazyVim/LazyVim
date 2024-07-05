@@ -137,4 +137,19 @@ return {
       },
     },
   },
+
+  -- Filetype icons
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      file = {
+        [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
+      },
+      filetype = {
+        gomod = { glyph = "", hl = "MiniIconsAzure" },
+        gosum = { glyph = "", hl = "MiniIconsCyan" },
+        gotmpl = { glyph = "󰟓", hl = "MiniIconsGray" },
+      },
+    },
+  },
 }

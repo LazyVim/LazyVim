@@ -31,4 +31,14 @@ return {
       },
     },
   },
+
+  -- Filetype icons
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      filetype = {
+        helm = { glyph = "󰠳", hl = "MiniIconsBlue" },
+      },
+    },
+  },
 }

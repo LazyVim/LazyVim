@@ -22,4 +22,14 @@ return {
       ensure_installed = { "http", "graphql" },
     },
   },
+
+  -- Filetype icons
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      filetype = {
+        http = { glyph = "", hl = "MiniIconsRed" },
+      },
+    },
+  },
 }

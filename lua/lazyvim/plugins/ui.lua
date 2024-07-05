@@ -306,7 +306,15 @@ return {
   {
     "echasnovski/mini.icons",
     lazy = true,
-    opts = {},
+    opts_extend = { "directory", "extension", "file", "filetype", "lsp", "os" },
+    opts = {
+      file = {
+        [".gitkeep"] = { glyph = "󰊢", hl = "MiniIconsGray" },
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGray" },
+        ["CODEOWNERS"] = { glyph = "", hl = "MiniIconsGreen" },
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+    },
     init = function()
       package.preload["nvim-web-devicons"] = function()
         require("mini.icons").mock_nvim_web_devicons()

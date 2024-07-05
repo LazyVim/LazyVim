@@ -19,4 +19,15 @@ return {
       table.insert(opts.sources, { name = "git" })
     end,
   },
+
+  -- Filetype icons
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      file = {
+        [".gitkeep"] = { glyph = "󰊢", hl = "MiniIconsGray" },
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGray" },
+      },
+    },
+  },
 }
