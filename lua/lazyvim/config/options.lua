@@ -49,11 +49,6 @@ vim.g.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
 -- Show the current document symbols location from Trouble in lualine
 vim.g.trouble_lualine = true
 
--- Enable hybrid mode for Vue files
--- If the hybrid mode is enabled, a sperate vtsls will run for Vue files
--- If the hybrid mode is disabled, volar will run a tsserver under the hood
-vim.g.vue_hybrid_mode = true
-
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
