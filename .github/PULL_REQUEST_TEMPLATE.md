@@ -7,7 +7,7 @@
 
 <!--
   If this PR fixes any issues, please link to the issue here.
-  Fixes #<issue_number>
+  - Fixes #<issue_number>
 -->
 
 ## Checklist
