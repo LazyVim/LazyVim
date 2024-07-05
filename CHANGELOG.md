@@ -1,5 +1,21 @@
 # Changelog
 
+## [12.26.0](https://github.com/LazyVim/LazyVim/compare/v12.25.0...v12.26.0) (2024-07-05)
+
+
+### Features
+
+* **dial:** yaml support ([f64bbd2](https://github.com/LazyVim/LazyVim/commit/f64bbd29fb279ba672ce1fc9a79b06ecc4237c87))
+* **util:** rest-client ([#3915](https://github.com/LazyVim/LazyVim/issues/3915)) ([76b41cd](https://github.com/LazyVim/LazyVim/commit/76b41cdec421668dd8078e43184674c783554044))
+* **vue:** enabled hybrid mode to avoid 2 typescript lsp running at same time ([#3908](https://github.com/LazyVim/LazyVim/issues/3908)) ([4b0f720](https://github.com/LazyVim/LazyVim/commit/4b0f720457fbbf624406a540b42e9ad7f2e50a77))
+
+
+### Bug Fixes
+
+* **dial:** move date related augends to default group ([#3927](https://github.com/LazyVim/LazyVim/issues/3927)) ([4192d95](https://github.com/LazyVim/LazyVim/commit/4192d9578d1946deba76efd1a0ec36e4ba0e1bbf))
+* **outline:** use the correct symbols and filter config format ([#3924](https://github.com/LazyVim/LazyVim/issues/3924)) ([502dac1](https://github.com/LazyVim/LazyVim/commit/502dac1d9aed71aaa9be8c08a4312622742d47f3))
+* **project:** properly close window after changing directory ([#3919](https://github.com/LazyVim/LazyVim/issues/3919)) ([51e99df](https://github.com/LazyVim/LazyVim/commit/51e99dfba104af54947dcb960f277d739db4280c))
+
 ## [12.25.0](https://github.com/LazyVim/LazyVim/compare/v12.24.0...v12.25.0) (2024-07-04)
 
 
