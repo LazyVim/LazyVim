@@ -5,4 +5,5 @@ build
 debug
 doc/tags
 foo.*
+node_modules
 tt.*
