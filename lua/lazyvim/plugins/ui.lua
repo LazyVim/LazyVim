@@ -309,7 +309,6 @@ return {
     opts = {
       file = {
         [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
-        ["CODEOWNERS"] = { glyph = "", hl = "MiniIconsGreen" },
         ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
       },
       filetype = {
