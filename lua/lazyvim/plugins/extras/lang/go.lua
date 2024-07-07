@@ -146,8 +146,6 @@ return {
         [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
       },
       filetype = {
-        gomod = { glyph = "", hl = "MiniIconsAzure" },
-        gosum = { glyph = "", hl = "MiniIconsCyan" },
         gotmpl = { glyph = "󰟓", hl = "MiniIconsGray" },
       },
     },

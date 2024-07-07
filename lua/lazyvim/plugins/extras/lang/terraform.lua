@@ -77,14 +77,4 @@ return {
       },
     },
   },
-
-  -- Filetype icons
-  {
-    "echasnovski/mini.icons",
-    opts = {
-      filetype = {
-        tf = { glyph = "󱁢", hl = "MiniIconsBlue" },
-      },
-    },
-  },
 }
