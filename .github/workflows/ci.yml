@@ -12,4 +12,3 @@ jobs:
     with:
       plugin: LazyVim
       repo: LazyVim/LazyVim
-      tests: true

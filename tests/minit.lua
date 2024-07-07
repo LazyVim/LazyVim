@@ -11,5 +11,6 @@ require("lazy.minit").setup({
     "williamboman/mason-lspconfig.nvim",
     "williamboman/mason.nvim",
     "nvim-treesitter/nvim-treesitter",
+    { "echasnovski/mini.icons", opts = {} },
   },
 })

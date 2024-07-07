@@ -1,5 +1,12 @@
 # Changelog
 
+## [12.26.2](https://github.com/LazyVim/LazyVim/compare/v12.26.1...v12.26.2) (2024-07-07)
+
+
+### Bug Fixes
+
+* **lualine:** check that trouble is installed ([d108169](https://github.com/LazyVim/LazyVim/commit/d108169e951fff8c65ed8dea89b058717cc48da5))
+
 ## [12.26.1](https://github.com/LazyVim/LazyVim/compare/v12.26.0...v12.26.1) (2024-07-06)
 
 
