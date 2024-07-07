@@ -25,7 +25,7 @@ return {
     "echasnovski/mini.icons",
     opts = {
       file = {
-        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGray" },
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
       },
     },
   },

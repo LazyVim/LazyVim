@@ -146,7 +146,7 @@ return {
         [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
       },
       filetype = {
-        gotmpl = { glyph = "󰟓", hl = "MiniIconsGray" },
+        gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
       },
     },
   },

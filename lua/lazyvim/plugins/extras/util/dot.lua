@@ -66,8 +66,8 @@ return {
     "echasnovski/mini.icons",
     opts = {
       extension = {
-        bash = { glyph = "", hl = "MiniIconsGray" },
-        zsh = { glyph = "", hl = "MiniIconsGray" },
+        bash = { glyph = "", hl = "MiniIconsGrey" },
+        zsh = { glyph = "", hl = "MiniIconsGrey" },
       },
       filetype = {
         dotenv = { glyph = "", hl = "MiniIconsYellow" },

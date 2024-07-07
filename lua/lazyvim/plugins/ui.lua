@@ -306,11 +306,10 @@ return {
   {
     "echasnovski/mini.icons",
     lazy = true,
-    opts_extend = { "directory", "extension", "file", "filetype", "lsp", "os" },
     opts = {
       file = {
-        [".gitkeep"] = { glyph = "󰊢", hl = "MiniIconsGray" },
-        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGray" },
+        [".gitkeep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
         ["CODEOWNERS"] = { glyph = "", hl = "MiniIconsGreen" },
         ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
       },
