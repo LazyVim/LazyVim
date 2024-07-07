@@ -60,18 +60,4 @@ return {
       end
     end,
   },
-
-  -- Filetype icons
-  {
-    "echasnovski/mini.icons",
-    opts = {
-      extension = {
-        bash = { glyph = "", hl = "MiniIconsGrey" },
-        zsh = { glyph = "", hl = "MiniIconsGrey" },
-      },
-      filetype = {
-        dotenv = { glyph = "", hl = "MiniIconsYellow" },
-      },
-    },
-  },
 }

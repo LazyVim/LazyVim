@@ -308,10 +308,12 @@ return {
     lazy = true,
     opts = {
       file = {
-        [".gitkeep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
         [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
         ["CODEOWNERS"] = { glyph = "", hl = "MiniIconsGreen" },
         ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
       },
     },
     init = function()
