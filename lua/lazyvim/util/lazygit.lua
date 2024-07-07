@@ -159,63 +159,40 @@ function M.blame_line(opts)
   return require("lazy.util").float_cmd(cmd, opts)
 end
 
----@class GitRemote
----@field host string
----@field owner string
----@field repo string
----@field scheme string
+M.remote_patterns = {
+  { "^(https?://.*)%.git$", "%1" },
+  { "^git@(.+):(.+)%.git$", "https://%1/%2" },
+  { "^git@(.+):(.+)$", "https://%1/%2" },
+  { "^git@(.+)/(.+)$", "https://%1/%2" },
+  { "^ssh://git@(.*)$", "https://%1" },
+  { "ssh%.dev%.azure%.com/v3/(.*)/(.*)$", "dev.azure.com/%1/_git/%2" },
+  { "^https://%w*@(.*)", "https://%1" },
+  { "^git@(.*)", "https://%1" },
+  { ":%d+", "" },
+  { "%.git$", "" },
+}
 
----@param url string
----@return GitRemote
-function M.parse_remote_url(url)
-  local scheme, host, owner, repo
-  scheme = "ssh"
-  -- handle ssh format: user@host:path/repo.git
-  _, host, owner, repo = url:match("^([^@]+)@([^:]+):(.+)/([^/]+)$")
-  -- handle http(s) format: scheme://host[:port]/path/repo.git
-  if not host then
-    scheme, host, _, owner, repo = url:match("^(%w+)://([^:/]+):?(%d*)(.*)/([^/]+)$")
+---@param remote string
+function M.get_url(remote)
+  local ret = remote
+  for _, pattern in ipairs(M.remote_patterns) do
+    ret = ret:gsub(pattern[1], pattern[2])
   end
-
-  -- handle azure.com v3/ prefix
-  if host and host:sub(-#"azure.com") == "azure.com" then
-    owner = owner:gsub("^v3/", "")
-  end
-
-  return {
-    host = host,
-    owner = owner,
-    repo = repo,
-    scheme = scheme,
-  }
+  return ret:find("https://") == 1 and ret or ("https://%s"):format(ret)
 end
 
 function M.browse()
   local lines = require("lazy.manage.process").exec({ "git", "remote", "-v" })
   local remotes = {} ---@type {name:string, url:string}[]
-  local git_browse_urls = vim.g.lazygit_git_browse or {}
-
-  local function get_remote_template(remote_host)
-    for host, browse_url in pairs(git_browse_urls) do
-      if remote_host:sub(-#host) == host then
-        return browse_url
-      end
-    end
-  end
 
   for _, line in ipairs(lines) do
-    local name, url = line:match("(%S+)%s+(%S+)%s+%(fetch%)")
-    if name and url then
-      local remote = M.parse_remote_url(url)
-      local git_browse_url = get_remote_template(remote.host)
-      if git_browse_url then
-        local browse_url = git_browse_url:gsub("($%b{})", function(m)
-          return remote[m:sub(3, -2)] or m
-        end)
-
+    local name, remote = line:match("(%S+)%s+(%S+)%s+%(fetch%)")
+    if name and remote then
+      local url = M.get_url(remote)
+      if url then
         table.insert(remotes, {
           name = name,
-          url = browse_url,
+          url = url,
         })
       end
     end

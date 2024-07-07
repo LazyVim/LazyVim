@@ -31,16 +31,6 @@ vim.g.lazyvim_statuscolumn = {
   folds_githl = false, -- highlight fold sign with git sign color
 }
 
--- URL Templates for git browse by host, with given placeholders
---  * owner: git repo owner
---  * repo: git repo name
-vim.g.lazygit_git_browse = {
-  ["azure.com"] = "https://dev.azure.com/${owner}/_git/${repo}",
-  ["bitbucket.org"] = "https://bitbucket.org/${owner}/${repo}",
-  ["github.com"] = "https://github.com/${owner}/${repo}",
-  ["gitlab.com"] = "https://gitlab.com/${owner}/${repo}",
-}
-
 -- Optionally setup the terminal to use
 -- This sets `vim.o.shell` and does some additional configuration for:
 -- * pwsh
