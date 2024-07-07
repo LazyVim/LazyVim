@@ -1,5 +1,7 @@
 ---@module 'luassert'
 
+local Icons = require("mini.icons")
+
 local Plugin = require("lazy.core.plugin")
 _G.LazyVim = require("lazyvim.util")
 
@@ -97,6 +99,28 @@ describe("Extra", function()
             "These Treesitter langs are installed by default. Please remove them from the extra."
           )
         end)
+      end
+
+      -- Icons
+      local icons = spec.plugins["mini.icons"]
+      if icons then
+        local icon_opts = Plugin.values(icons, "opts", false) or {}
+        local cats = { "directory", "file", "extension", "filetype", "lsp", "os" }
+        for _, cat in ipairs(cats) do
+          local cat_names = Icons.list(cat)
+          if icon_opts[cat] then
+            describe("does not set existing icons for " .. cat, function()
+              for icon_name in pairs(icon_opts[cat]) do
+                it(icon_name, function()
+                  assert.is_false(
+                    vim.tbl_contains(cat_names, icon_name),
+                    "Icon " .. icon_name .. " already exists:\n" .. vim.inspect({ Icons.get(cat, icon_name) })
+                  )
+                end)
+              end
+            end)
+          end
+        end
       end
     end)
   end
