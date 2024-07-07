@@ -1,5 +1,19 @@
 # Changelog
 
+## [12.27.0](https://github.com/LazyVim/LazyVim/compare/v12.26.2...v12.27.0) (2024-07-07)
+
+
+### Features
+
+* **icons:** provide language specific icons in extras ([#3931](https://github.com/LazyVim/LazyVim/issues/3931)) ([aa418a2](https://github.com/LazyVim/LazyVim/commit/aa418a2147f52fbe3225aced3a0e7638cf15ea78))
+* **java:** allow overriding test config ([#3891](https://github.com/LazyVim/LazyVim/issues/3891)) ([8b2eacb](https://github.com/LazyVim/LazyVim/commit/8b2eacb6ac2a8df3c9eaba69fbce34abc3666ec1))
+
+
+### Bug Fixes
+
+* **fzf-lua:** move register_select to lazy init ([33e1da5](https://github.com/LazyVim/LazyVim/commit/33e1da585d8709bcf6c076e80a73b55ef70a9443))
+* **lazygit:** improve git browse ([#3941](https://github.com/LazyVim/LazyVim/issues/3941)) ([28805d1](https://github.com/LazyVim/LazyVim/commit/28805d1a4c09b8dccbac8db4f7c6576a29abbd40))
+
 ## [12.26.2](https://github.com/LazyVim/LazyVim/compare/v12.26.1...v12.26.2) (2024-07-07)
 
 
