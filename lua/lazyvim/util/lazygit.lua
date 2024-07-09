@@ -186,15 +186,58 @@ function M.browse()
   local lines = require("lazy.manage.process").exec({ "git", "remote", "-v" })
   local remotes = {} ---@type {name:string, url:string}[]
 
+  --- @param url string
+  local function getRemoteURLFromSSH(url)
+    local SSHConfigPath = vim.env.HOME .. "/.ssh/config"
+
+    -- Return the original URL if SSH config is not found or not readable
+    if not vim.uv.fs_access(SSHConfigPath, "R") then
+      return url
+    end
+
+    -- Handle SSH config remotes
+    local file = io.open(SSHConfigPath, "r")
+
+    -- Return the original URL if unable to read SSH config file
+    if not file then
+      return url
+    end
+
+    local currentHost, hostGroup = "", {}
+    for line in file:lines() do
+      line = line:match("^%s*(.-)%s*$")
+
+      if line ~= "" and not line:match("^#") then
+        local key, value = line:match("^(%S+)%s+(.+)$")
+
+        if key:lower() == "host" then
+          -- process url before parse next group of host if match we could close file and early return
+          if currentHost ~= "" and currentHost ~= value and url:match(currentHost .. ":") then
+            file:close()
+            -- If the username is specified, we do not need to replace it; otherwise, replace the username with "git".
+            local searchString = hostGroup[currentHost].User and currentHost .. ":" or "git@" .. currentHost .. ":"
+            local destinationURL = string.format("https://%s/", hostGroup[currentHost].HostName)
+            return url:gsub(searchString, destinationURL):gsub("%.git$", "")
+          end
+          -- Setup group of host
+          currentHost = value
+          hostGroup[currentHost] = {}
+        elseif currentHost then
+          hostGroup[currentHost][key] = value
+        end
+      end
+    end
+    file:close()
+  end
+
   for _, line in ipairs(lines) do
     local name, remote = line:match("(%S+)%s+(%S+)%s+%(fetch%)")
     if name and remote then
       local url = M.get_url(remote)
       if url then
-        table.insert(remotes, {
-          name = name,
-          url = url,
-        })
+        table.insert(remotes, { name = name, url = url })
+      else
+        table.insert(remotes, { name = name, url = getRemoteURLFromSSH(remote) })
       end
     end
   end
