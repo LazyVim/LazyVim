@@ -1,5 +1,94 @@
 # Changelog
 
+## [12.27.0](https://github.com/LazyVim/LazyVim/compare/v12.26.2...v12.27.0) (2024-07-07)
+
+
+### Features
+
+* **icons:** provide language specific icons in extras ([#3931](https://github.com/LazyVim/LazyVim/issues/3931)) ([aa418a2](https://github.com/LazyVim/LazyVim/commit/aa418a2147f52fbe3225aced3a0e7638cf15ea78))
+* **java:** allow overriding test config ([#3891](https://github.com/LazyVim/LazyVim/issues/3891)) ([8b2eacb](https://github.com/LazyVim/LazyVim/commit/8b2eacb6ac2a8df3c9eaba69fbce34abc3666ec1))
+
+
+### Bug Fixes
+
+* **fzf-lua:** move register_select to lazy init ([33e1da5](https://github.com/LazyVim/LazyVim/commit/33e1da585d8709bcf6c076e80a73b55ef70a9443))
+* **lazygit:** improve git browse ([#3941](https://github.com/LazyVim/LazyVim/issues/3941)) ([28805d1](https://github.com/LazyVim/LazyVim/commit/28805d1a4c09b8dccbac8db4f7c6576a29abbd40))
+
+## [12.26.2](https://github.com/LazyVim/LazyVim/compare/v12.26.1...v12.26.2) (2024-07-07)
+
+
+### Bug Fixes
+
+* **lualine:** check that trouble is installed ([d108169](https://github.com/LazyVim/LazyVim/commit/d108169e951fff8c65ed8dea89b058717cc48da5))
+
+## [12.26.1](https://github.com/LazyVim/LazyVim/compare/v12.26.0...v12.26.1) (2024-07-06)
+
+
+### Bug Fixes
+
+* **lualine:** use the new ministarter file type to disable in mini.starter ([#3929](https://github.com/LazyVim/LazyVim/issues/3929)) ([330d2e4](https://github.com/LazyVim/LazyVim/commit/330d2e470b79eb31f884685b331d5d255776de90))
+* **mini.starter:** lazyvim startuptime in mini.starter ([#3935](https://github.com/LazyVim/LazyVim/issues/3935)) ([5f952bb](https://github.com/LazyVim/LazyVim/commit/5f952bb9d6927bdc6a4411dc6b1002fa47b3371d))
+
+## [12.26.0](https://github.com/LazyVim/LazyVim/compare/v12.25.0...v12.26.0) (2024-07-05)
+
+
+### Features
+
+* **dial:** yaml support ([f64bbd2](https://github.com/LazyVim/LazyVim/commit/f64bbd29fb279ba672ce1fc9a79b06ecc4237c87))
+* **util:** rest-client ([#3915](https://github.com/LazyVim/LazyVim/issues/3915)) ([76b41cd](https://github.com/LazyVim/LazyVim/commit/76b41cdec421668dd8078e43184674c783554044))
+* **vue:** enabled hybrid mode to avoid 2 typescript lsp running at same time ([#3908](https://github.com/LazyVim/LazyVim/issues/3908)) ([4b0f720](https://github.com/LazyVim/LazyVim/commit/4b0f720457fbbf624406a540b42e9ad7f2e50a77))
+
+
+### Bug Fixes
+
+* **dial:** move date related augends to default group ([#3927](https://github.com/LazyVim/LazyVim/issues/3927)) ([4192d95](https://github.com/LazyVim/LazyVim/commit/4192d9578d1946deba76efd1a0ec36e4ba0e1bbf))
+* **outline:** use the correct symbols and filter config format ([#3924](https://github.com/LazyVim/LazyVim/issues/3924)) ([502dac1](https://github.com/LazyVim/LazyVim/commit/502dac1d9aed71aaa9be8c08a4312622742d47f3))
+* **project:** properly close window after changing directory ([#3919](https://github.com/LazyVim/LazyVim/issues/3919)) ([51e99df](https://github.com/LazyVim/LazyVim/commit/51e99dfba104af54947dcb960f277d739db4280c))
+
+## [12.25.0](https://github.com/LazyVim/LazyVim/compare/v12.24.0...v12.25.0) (2024-07-04)
+
+
+### Features
+
+* **erlang:** add Erlang language ([#3911](https://github.com/LazyVim/LazyVim/issues/3911)) ([9c7d3dc](https://github.com/LazyVim/LazyVim/commit/9c7d3dc75e4ecafe8a6dd6ee8fef0bd7711550ac))
+* **fzf-lua:** preview keymaps for git ([#3904](https://github.com/LazyVim/LazyVim/issues/3904)) ([d5f3d39](https://github.com/LazyVim/LazyVim/commit/d5f3d395f490a252125044d0918267eb18298532))
+* **ui:** use `mini.icons` instead of `nvim-wev-devicons` ([#3899](https://github.com/LazyVim/LazyVim/issues/3899)) ([045faec](https://github.com/LazyVim/LazyVim/commit/045faec0351ff9a38fda1af9b06bd7f948e84d28))
+
+
+### Bug Fixes
+
+* **fzf:** make sure `vim.ui.select` works when fzf is not loaded yet ([9acadc7](https://github.com/LazyVim/LazyVim/commit/9acadc7ec289966cf8f4f6c37c348f286ed73ffe))
+
+## [12.24.0](https://github.com/LazyVim/LazyVim/compare/v12.23.0...v12.24.0) (2024-07-03)
+
+
+### Features
+
+* **options:** jumpoptions=view ([fe3d0da](https://github.com/LazyVim/LazyVim/commit/fe3d0da5087ecadfee8922fa363d3e84c0ba3461))
+
+
+### Bug Fixes
+
+* **dials:** dials.nvim stopped working after making changes to plugin files ([455557c](https://github.com/LazyVim/LazyVim/commit/455557c1f693c6ced946de2322beceb555161417))
+
+
+### Performance Improvements
+
+* **fzf:** lazy-load fzf-lua ([b9a8a4a](https://github.com/LazyVim/LazyVim/commit/b9a8a4ad7f39c8ed3f4febb25dabc9ae24110f98))
+
+## [12.23.0](https://github.com/LazyVim/LazyVim/compare/v12.22.1...v12.23.0) (2024-07-03)
+
+
+### Features
+
+* **cmp:** attempt for dynamic width and trimming between fields ([#3873](https://github.com/LazyVim/LazyVim/issues/3873)) ([78cf6ee](https://github.com/LazyVim/LazyVim/commit/78cf6ee024cbf6a17dc8406555eb131994cd8b63))
+
+
+### Bug Fixes
+
+* **chezmoi:** missing support for fzf file picker ([#3888](https://github.com/LazyVim/LazyVim/issues/3888)) ([2114a66](https://github.com/LazyVim/LazyVim/commit/2114a6610f6fc6dea2e4937171429252641bd27d))
+* **neo-tree:** remove `branch`, since it obstructs updating to latest version ([#3871](https://github.com/LazyVim/LazyVim/issues/3871)) ([d23731c](https://github.com/LazyVim/LazyVim/commit/d23731c50d149769799d90ae8ec4969a79db3628))
+
 ## [12.22.1](https://github.com/LazyVim/LazyVim/compare/v12.22.0...v12.22.1) (2024-06-30)
 
 

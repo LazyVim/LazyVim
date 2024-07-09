@@ -1,0 +1,12 @@
+name: Update Repo
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every hour
+    - cron: "0 * * * *"
+
+jobs:
+  ci:
+    uses: folke/github/.github/workflows/update.yml@main
+    secrets: inherit

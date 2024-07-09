@@ -120,7 +120,7 @@ return {
         options = {
           theme = "auto",
           globalstatus = vim.o.laststatus == 3,
-          disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
+          disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter" } },
         },
         sections = {
           lualine_a = { "mode" },
@@ -198,7 +198,7 @@ return {
       }
 
       -- do not add trouble symbols if aerial is enabled
-      if vim.g.trouble_lualine then
+      if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
         local trouble = require("trouble")
         local symbols = trouble.statusline
           and trouble.statusline({
@@ -303,7 +303,25 @@ return {
   },
 
   -- icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "echasnovski/mini.icons",
+    lazy = true,
+    opts = {
+      file = {
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      },
+    },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
 
   -- ui components
   { "MunifTanjim/nui.nvim", lazy = true },

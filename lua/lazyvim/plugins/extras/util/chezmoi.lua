@@ -1,3 +1,27 @@
+local pick_chezmoi = function()
+  if LazyVim.pick.picker.name == "telescope" then
+    require("telescope").extensions.chezmoi.find_files()
+  elseif LazyVim.pick.picker.name == "fzf" then
+    local fzf_lua = require("fzf-lua")
+    local results = require("chezmoi.commands").list()
+    local chezmoi = require("chezmoi.commands")
+
+    local opts = {
+      fzf_opts = {},
+      fzf_colors = true,
+      actions = {
+        ["default"] = function(selected)
+          chezmoi.edit({
+            targets = { "~/" .. selected[1] },
+            args = { "--watch" },
+          })
+        end,
+      },
+    }
+    fzf_lua.fzf_exec(results, opts)
+  end
+end
+
 return {
   {
     -- highlighting for chezmoi files template files
@@ -12,9 +36,7 @@ return {
     keys = {
       {
         "<leader>sz",
-        function()
-          require("telescope").extensions.chezmoi.find_files()
-        end,
+        pick_chezmoi,
         desc = "Chezmoi",
       },
     },
@@ -47,7 +69,7 @@ return {
     optional = true,
     opts = function(_, opts)
       local projects = {
-        action = "Telescope chezmoi find_files",
+        action = pick_chezmoi,
         desc = "  Config",
         icon = "",
         key = "c",
@@ -65,5 +87,25 @@ return {
 
       table.insert(opts.config.center, 5, projects)
     end,
+  },
+
+  -- Filetype icons
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      file = {
+        [".chezmoiignore"] = { glyph = "", hl = "MiniIconsGrey" },
+        [".chezmoiremove"] = { glyph = "", hl = "MiniIconsGrey" },
+        [".chezmoiroot"] = { glyph = "", hl = "MiniIconsGrey" },
+        [".chezmoiversion"] = { glyph = "", hl = "MiniIconsGrey" },
+        ["bash.tmpl"] = { glyph = "", hl = "MiniIconsGrey" },
+        ["json.tmpl"] = { glyph = "", hl = "MiniIconsGrey" },
+        ["ps1.tmpl"] = { glyph = "󰨊", hl = "MiniIconsGrey" },
+        ["sh.tmpl"] = { glyph = "", hl = "MiniIconsGrey" },
+        ["toml.tmpl"] = { glyph = "", hl = "MiniIconsGrey" },
+        ["yaml.tmpl"] = { glyph = "", hl = "MiniIconsGrey" },
+        ["zsh.tmpl"] = { glyph = "", hl = "MiniIconsGrey" },
+      },
+    },
   },
 }

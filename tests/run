@@ -1,3 +1,0 @@
-#!/bin/sh
-
-nvim -l tests/busted.lua tests -o utfTerminal
