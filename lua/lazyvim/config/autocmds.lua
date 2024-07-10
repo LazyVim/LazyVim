@@ -119,7 +119,7 @@ vim.filetype.add({
   pattern = {
     [".*"] = {
       function(path, buf)
-	local bfs = vim.g.bigfile_size
+        local bfs = vim.g.bigfile_size
         return vim.bo[buf]
             and vim.bo[buf].filetype ~= "bigfile"
             and path
