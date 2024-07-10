@@ -359,6 +359,7 @@ return {
             { action = 'lua LazyVim.pick.config_files()()',              desc = " Config",          icon = " ", key = "c" },
             { action = 'lua require("persistence").load()',              desc = " Restore Session", icon = " ", key = "s" },
             { action = "LazyExtras",                                     desc = " Lazy Extras",     icon = " ", key = "x" },
+            -- TODO: Consult with the maintainer to determine which icon is more appropriate.
             { action = "LazyVimDocument",                                desc = " LazyVim Document",icon = "󰒲 ", key = "d" },
             { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
             { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
