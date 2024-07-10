@@ -179,20 +179,15 @@ function M.get_url(remote)
   for _, pattern in ipairs(M.remote_patterns) do
     ret = ret:gsub(pattern[1], pattern[2])
   end
-  return ret:find("https://") == 1 and ret or ("https://%s"):format(ret)
-end
-
-function M.browse()
-  local lines = require("lazy.manage.process").exec({ "git", "remote", "-v" })
-  local remotes = {} ---@type {name:string, url:string}[]
 
   --- @param url string
   local function getRemoteURLFromSSH(url)
+    local transformedUrl = ""
     local SSHConfigPath = vim.env.HOME .. "/.ssh/config"
 
     -- Return the original URL if SSH config is not found or not readable
     if not vim.uv.fs_access(SSHConfigPath, "R") then
-      return url
+      return
     end
 
     -- Handle SSH config remotes
@@ -200,7 +195,7 @@ function M.browse()
 
     -- Return the original URL if unable to read SSH config file
     if not file then
-      return url
+      return
     end
 
     local currentHost, hostGroup = "", {}
@@ -216,7 +211,7 @@ function M.browse()
             -- If the username is specified, we do not need to replace it; otherwise, replace the username with "git".
             local searchString = hostGroup[currentHost].User and currentHost .. ":" or "git@" .. currentHost .. ":"
             local destinationURL = string.format("https://%s/", hostGroup[currentHost].HostName)
-            url = url:gsub(searchString, destinationURL):gsub("%.git$", "")
+            transformedUrl = url:gsub(searchString, destinationURL):gsub("%.git$", "")
             break
           end
           -- Setup group of host
@@ -229,8 +224,15 @@ function M.browse()
     end
 
     file:close()
-    return url
+    return transformedUrl
   end
+
+  return ret:find("https://") == 1 and ret or getRemoteURLFromSSH(ret) or ("https://%s"):format(ret)
+end
+
+function M.browse()
+  local lines = require("lazy.manage.process").exec({ "git", "remote", "-v" })
+  local remotes = {} ---@type {name:string, url:string}[]
 
   for _, line in ipairs(lines) do
     local name, remote = line:match("(%S+)%s+(%S+)%s+%(fetch%)")
@@ -238,8 +240,6 @@ function M.browse()
       local url = M.get_url(remote)
       if url then
         table.insert(remotes, { name = name, url = url })
-      else
-        table.insert(remotes, { name = name, url = getRemoteURLFromSSH(remote) })
       end
     end
   end
