@@ -180,6 +180,10 @@ function M.get_url(remote)
     ret = ret:gsub(pattern[1], pattern[2])
   end
 
+  if ret:find("https://") == 1 then
+    return ret
+  end
+
   --- @param url string
   local function getRemoteURLFromSSH(url)
     local transformedUrl = ""
@@ -227,7 +231,7 @@ function M.get_url(remote)
     return transformedUrl
   end
 
-  return ret:find("https://") == 1 and ret or getRemoteURLFromSSH(ret) or ("https://%s"):format(ret)
+  return getRemoteURLFromSSH(ret) or ("https://%s"):format(ret)
 end
 
 function M.browse()
