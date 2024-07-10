@@ -1,11 +1,10 @@
 _G.LazyVim = require("lazyvim.util")
 
-local LAZYVIM_DOC = "https://www.lazyvim.org"
-
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
 M.version = "12.27.0" -- x-release-please-version
+M.WEBSITE = "https://www.lazyvim.org"
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -194,7 +193,7 @@ function M.setup(opts)
       -- end, { desc = "Open Lazy Document" })
 
       vim.api.nvim_create_user_command("LazyVimDocument", function()
-        require("lazy.util").open(LAZYVIM_DOC)
+        require("lazy.util").open(M.WEBSITE)
       end, { desc = "Open LazyVim Document" })
 
       vim.api.nvim_create_user_command("LazyExtras", function()

@@ -163,7 +163,7 @@ function X:open()
   local pos = vim.api.nvim_win_get_cursor(self.float.win)
   for _, extra in ipairs(self.extras) do
     if extra.row == pos[1] then
-      require("lazy.util").open(("https://www.lazyvim.org/%s"):format(extra.name:gsub("%.", "/")))
+      require("lazy.util").open(("%s/%s"):format(LazyVim.config.WEBSITE, extra.name:gsub("%.", "/")))
       return
     end
   end
