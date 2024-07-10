@@ -144,6 +144,9 @@ function X.new()
   self.float:on_key("x", function()
     self:toggle()
   end, "Toggle extra")
+  self:on_key("o", function()
+    self:open()
+  end, "Open extra document")
   self.diag = {}
   self:update()
   return self
@@ -154,6 +157,16 @@ function X:diagnostic(diag)
   diag.row = diag.row or self.text:row()
   diag.severity = diag.severity or vim.diagnostic.severity.INFO
   table.insert(self.diag, diag)
+end
+
+function X:open()
+  local pos = vim.api.nvim_win_get_cursor(self.float.win)
+  for _, extra in ipairs(self.extras) do
+    if extra.row == pos[1] then
+      require("lazy.util").open(("https://www.lazyvim.org/%s"):format(extra.name:gsub("%.", "/")))
+      return
+    end
+  end
 end
 
 function X:toggle()
