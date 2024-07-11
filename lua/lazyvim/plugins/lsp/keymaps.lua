@@ -17,7 +17,7 @@ function M.get()
       { "gd", vim.lsp.buf.definition(), desc = "Goto Definition", has = "definition" },
       { "gr", vim.lsp.buf.references(), desc = "References", nowait = true },
       { "gI", vim.lsp.buf.implementation(), desc = "Goto Implementation" },
-      { "gy", vim.lsp.buf.type_definition(), desc = "Goto T[y]pe Definition" },
+      { "gy", vim.lsp.buf.type_definition(), desc = "Goto Type Definition" },
       { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
       { "K", vim.lsp.buf.hover, desc = "Hover" },
       { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
