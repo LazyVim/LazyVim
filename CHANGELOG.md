@@ -1,5 +1,21 @@
 # Changelog
 
+## [12.28.0](https://github.com/LazyVim/LazyVim/compare/v12.27.0...v12.28.0) (2024-07-12)
+
+
+### Features
+
+* new mappings format for which-key v3. Forgot to push :) ([702471e](https://github.com/LazyVim/LazyVim/commit/702471e454ff552189ab03325dc19d0f7a601704))
+
+
+### Bug Fixes
+
+* **autocmds:** fixed pattern for autocommand to autoenable wrap and spell in text files ([#3975](https://github.com/LazyVim/LazyVim/issues/3975)) ([927031a](https://github.com/LazyVim/LazyVim/commit/927031a2de93f694b032a4df5e6d93fff635a496))
+* **java:** fix `config_overrides` for tests ([#3968](https://github.com/LazyVim/LazyVim/issues/3968)) ([b481b64](https://github.com/LazyVim/LazyVim/commit/b481b644ddf9f02470ec50264e63c6dd69d444f8))
+* **outline:** use new object for `symbols.filter` ([#4006](https://github.com/LazyVim/LazyVim/issues/4006)) ([db234ef](https://github.com/LazyVim/LazyVim/commit/db234ef9cbbb1b7b0efa8e3af5c446b965e7c07a))
+* **php:** `php_cs_fixer` is the correct name ([#3991](https://github.com/LazyVim/LazyVim/issues/3991)) ([8bfd9a5](https://github.com/LazyVim/LazyVim/commit/8bfd9a50a71d8b8147f7d742e8d0f05ee6cba888))
+* **vscode:** allow overriding default vscode keymaps. Fixes [#3950](https://github.com/LazyVim/LazyVim/issues/3950) ([6765052](https://github.com/LazyVim/LazyVim/commit/67650528e47a57fb687bce2d7bb61fb4f1af8f63))
+
 ## [12.27.0](https://github.com/LazyVim/LazyVim/compare/v12.26.2...v12.27.0) (2024-07-07)
 
 
