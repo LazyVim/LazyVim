@@ -200,7 +200,7 @@ return {
                 { "gs", require("jdtls").super_implementation, desc = "Goto Super" },
                 { "gS", require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
                 { "<leader>co", require("jdtls").organize_imports, desc = "Organize Imports" },
-              }
+              },
             })
             wk.add({
               {
@@ -222,7 +222,7 @@ return {
                   [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
                   desc = "Extract Constant",
                 },
-              }
+              },
             })
 
             if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
@@ -257,7 +257,7 @@ return {
                       desc = "Run Nearest Test",
                     },
                     { "<leader>tT", require("jdtls.dap").pick_test, desc = "Run Test" },
-                  }
+                  },
                 })
               end
             end
