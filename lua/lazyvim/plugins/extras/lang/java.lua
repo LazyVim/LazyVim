@@ -194,7 +194,7 @@ return {
               {
                 mode = "n",
                 buffer = args.buf,
-                { "<leader>cx", name = "+extract" },
+                { "<leader>cx", group = "extract" },
                 { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
                 { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
                 { "gs", require("jdtls").super_implementation, desc = "Goto Super" },
@@ -206,7 +206,7 @@ return {
               {
                 mode = "v",
                 buffer = args.buf,
-                { "<leader>cx", name = "+extract" },
+                { "<leader>cx", group = "extract" },
                 {
                   "<leader>cxm",
                   [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
