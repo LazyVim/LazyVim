@@ -69,6 +69,6 @@ body:
             -- add any other plugins here
           },
         })
-      render: Lua
+      render: lua
     validations:
       required: false
