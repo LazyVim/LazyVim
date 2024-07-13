@@ -237,7 +237,7 @@ return {
                   {
                     mode = "n",
                     buffer = args.buf,
-                    { "<leader>t", name = "+test" },
+                    { "<leader>t", group = "test" },
                     {
                       "<leader>tt",
                       function()
