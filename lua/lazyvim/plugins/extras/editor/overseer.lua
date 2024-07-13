@@ -64,7 +64,9 @@ return {
     "folke/which-key.nvim",
     optional = true,
     opts = {
-      defaults = { ["<leader>o"] = { name = "+overseer" } },
+      spec = {
+        { "<leader>o", group = "overseer" },
+      },
     },
   },
   {
