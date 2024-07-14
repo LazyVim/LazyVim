@@ -186,10 +186,9 @@ function M.get_url(remote)
 
   --- @param url string
   local function getRemoteURLFromSSH(url)
-    local transformedUrl = ""
     local SSHConfigPath = vim.env.HOME .. "/.ssh/config"
 
-    -- Return the original URL if SSH config is not found or not readable
+    -- Returns if SSH config is not found or not readable
     if not vim.uv.fs_access(SSHConfigPath, "R") then
       return
     end
@@ -197,11 +196,12 @@ function M.get_url(remote)
     -- Handle SSH config remotes
     local file = io.open(SSHConfigPath, "r")
 
-    -- Return the original URL if unable to read SSH config file
+    -- Returns if unable to read SSH config file
     if not file then
       return
     end
 
+    local transformedUrl = ""
     local currentHost, hostGroup = "", {}
     for line in file:lines() do
       line = line:match("^%s*(.-)%s*$")
@@ -218,6 +218,7 @@ function M.get_url(remote)
             transformedUrl = url:gsub(searchString, destinationURL):gsub("%.git$", "")
             break
           end
+
           -- Setup group of host
           currentHost = value
           hostGroup[currentHost] = {}
