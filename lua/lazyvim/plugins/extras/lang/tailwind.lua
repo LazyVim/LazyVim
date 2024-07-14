@@ -40,6 +40,17 @@ return {
             return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
           end, opts.filetypes)
 
+          -- Additional settings for Phoenix projects
+          opts.settings = {
+            tailwindCSS = {
+              includeLanguages = {
+                elixir = "html-eex",
+                eelixir = "html-eex",
+                heex = "html-eex",
+              },
+            },
+          }
+
           -- Add additional filetypes
           vim.list_extend(opts.filetypes, opts.filetypes_include or {})
         end,
