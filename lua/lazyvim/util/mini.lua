@@ -63,32 +63,32 @@ end
 function M.ai_whichkey()
   local objects = {
     { " ", desc = "whitespace" },
-    { '"', desc = 'balanced "' },
-    { "'", desc = "balanced '" },
-    { "(", desc = "balanced (" },
-    { ")", desc = "balanced ) including white-space" },
-    { "<", desc = "balanced <" },
-    { ">", desc = "balanced > including white-space" },
+    { '"', desc = '" string' },
+    { "'", desc = "' string" },
+    { "(", desc = "() block" },
+    { ")", desc = "() block with ws" },
+    { "<", desc = "<> block" },
+    { ">", desc = "<> block with ws" },
     { "?", desc = "user prompt" },
-    { "U", desc = "use/call without dot in name" },
-    { "[", desc = "balanced [" },
-    { "]", desc = "balanced ] including white-space" },
+    { "U", desc = "use/call without dot" },
+    { "[", desc = "[] block" },
+    { "]", desc = "[] block with ws" },
     { "_", desc = "underscore" },
-    { "`", desc = "balanced `" },
+    { "`", desc = "` string" },
     { "a", desc = "argument" },
-    { "b", desc = "balanced )]}" },
+    { "b", desc = ")]} block" },
     { "c", desc = "class" },
     { "d", desc = "digit(s)" },
-    { "e", desc = "word in CamelCase & snake_case" },
+    { "e", desc = "CamelCase / snake_case" },
     { "f", desc = "function" },
     { "g", desc = "entire file" },
     { "i", desc = "indent" },
     { "o", desc = "block, conditional, loop" },
     { "q", desc = "quote `\"'" },
     { "t", desc = "tag" },
-    { "u", desc = "use/call function & method" },
-    { "{", desc = "balanced {" },
-    { "}", desc = "balanced } including white-space" },
+    { "u", desc = "use/call" },
+    { "{", desc = "{} block" },
+    { "}", desc = "{} with ws" },
   }
 
   local ret = { mode = { "o", "x" } }
@@ -102,6 +102,10 @@ function M.ai_whichkey()
   }) do
     ret[#ret + 1] = { prefix, group = name }
     for _, obj in ipairs(objects) do
+      local desc = obj.desc
+      if prefix:sub(1, 1) == "i" then
+        desc = desc:gsub(" with ws", "")
+      end
       ret[#ret + 1] = { prefix .. obj[1], desc = obj.desc }
     end
   end
