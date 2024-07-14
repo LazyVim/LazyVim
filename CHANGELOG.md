@@ -1,5 +1,18 @@
 # Changelog
 
+## [12.29.0](https://github.com/LazyVim/LazyVim/compare/v12.28.0...v12.29.0) (2024-07-14)
+
+
+### Features
+
+* **java:** new java mappings format for which-key v3 ([#4013](https://github.com/LazyVim/LazyVim/issues/4013)) ([28a7f81](https://github.com/LazyVim/LazyVim/commit/28a7f8126c1b46b41ca58845ee081b67ce6981f2))
+* shorter keymap descriptions for mini.ai / yanky ([75ff149](https://github.com/LazyVim/LazyVim/commit/75ff1496bd4209784a4250e59920d24d75a3e3b0))
+
+
+### Bug Fixes
+
+* **flit:** use which-key preset keymap descriptions ([#4000](https://github.com/LazyVim/LazyVim/issues/4000)) ([ca37162](https://github.com/LazyVim/LazyVim/commit/ca37162cb7452dce32cf3f0ad661bcd1245286c0))
+
 ## [12.28.0](https://github.com/LazyVim/LazyVim/compare/v12.27.0...v12.28.0) (2024-07-12)
 
 
