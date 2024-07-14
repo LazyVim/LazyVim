@@ -1,5 +1,14 @@
 # Changelog
 
+## [12.29.1](https://github.com/LazyVim/LazyVim/compare/v12.29.0...v12.29.1) (2024-07-14)
+
+
+### Bug Fixes
+
+* **omnisharp:** don't detach coreclr debug adapter ([#4023](https://github.com/LazyVim/LazyVim/issues/4023)) ([b3e746b](https://github.com/LazyVim/LazyVim/commit/b3e746b637a0d43aa0195cc1ff3d8adf1fedfaf6))
+* **pick:** get rid of "auto" picker and set better defaults for telescope find_files ([#4024](https://github.com/LazyVim/LazyVim/issues/4024)) ([337e9dd](https://github.com/LazyVim/LazyVim/commit/337e9ddc007d32c624433b5c6f0af6e8697dfcc6))
+* **tailwind:** additional tailwind completion settings for phoenix projects ([#3961](https://github.com/LazyVim/LazyVim/issues/3961)) ([9bce054](https://github.com/LazyVim/LazyVim/commit/9bce054fafcd631ec133a82ada1ecbbd23ca5510))
+
 ## [12.29.0](https://github.com/LazyVim/LazyVim/compare/v12.28.0...v12.29.0) (2024-07-14)
 
 
