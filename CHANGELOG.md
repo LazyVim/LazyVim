@@ -1,5 +1,12 @@
 # Changelog
 
+## [12.29.2](https://github.com/LazyVim/LazyVim/compare/v12.29.1...v12.29.2) (2024-07-14)
+
+
+### Bug Fixes
+
+* **telescope:** better find_command. Fixes [#4031](https://github.com/LazyVim/LazyVim/issues/4031) ([d39cdb0](https://github.com/LazyVim/LazyVim/commit/d39cdb059624b1200f2ef762f30c6e3b74066bc5))
+
 ## [12.29.1](https://github.com/LazyVim/LazyVim/compare/v12.29.0...v12.29.1) (2024-07-14)
 
 
