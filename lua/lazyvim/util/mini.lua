@@ -60,7 +60,8 @@ function M.ai_buffer(ai_type)
 end
 
 -- register all text objects with which-key
-function M.ai_whichkey()
+---@param opts table
+function M.ai_whichkey(opts)
   local objects = {
     { " ", desc = "whitespace" },
     { '"', desc = '" string' },
@@ -92,14 +93,20 @@ function M.ai_whichkey()
   }
 
   local ret = { mode = { "o", "x" } }
-  for prefix, name in pairs({
-    i = "inside",
-    a = "around",
-    il = "last",
-    ["in"] = "next",
-    al = "last",
-    an = "next",
-  }) do
+  ---@type table<string, string>
+  local mappings = vim.tbl_extend("force", {}, {
+    around = "a",
+    inside = "i",
+    around_next = "an",
+    inside_next = "in",
+    around_last = "al",
+    inside_last = "il",
+  }, opts.mappings or {})
+  mappings.goto_left = nil
+  mappings.goto_right = nil
+
+  for name, prefix in pairs(mappings) do
+    name = name:gsub("^around_", ""):gsub("^inside_", "")
     ret[#ret + 1] = { prefix, group = name }
     for _, obj in ipairs(objects) do
       local desc = obj.desc
