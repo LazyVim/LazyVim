@@ -92,8 +92,22 @@ function M.ai_whichkey()
   }
 
   local ret = { mode = { "o", "x" } }
-  local mappings = LazyVim.opts("mini.ai").mappings
+  local default_mappings = {
+    around = "a",
+    inside = "i",
+
+    around_next = "an",
+    inside_next = "in",
+    around_last = "al",
+    inside_last = "il",
+  }
+  local user_mappings = LazyVim.opts("mini.ai").mappings
+  local mappings = vim.tbl_extend("force", default_mappings, user_mappings)
+
   for name, prefix in pairs(mappings) do
+    if name:match("next$") or name:match("last$") then
+      name = name:gsub("^around_", ""):gsub("^inside_", "")
+    end
     ret[#ret + 1] = { prefix, group = name }
     for _, obj in ipairs(objects) do
       local desc = obj.desc
