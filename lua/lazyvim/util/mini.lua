@@ -60,7 +60,8 @@ function M.ai_buffer(ai_type)
 end
 
 -- register all text objects with which-key
-function M.ai_whichkey()
+---@param opts table
+function M.ai_whichkey(opts)
   local objects = {
     { " ", desc = "whitespace" },
     { '"', desc = '" string' },
@@ -92,22 +93,22 @@ function M.ai_whichkey()
   }
 
   local ret = { mode = { "o", "x" } }
-  local default_mappings = {
+  ---@type table<string, string>
+  local mappings = vim.tbl_extend("force", {}, {
     around = "a",
     inside = "i",
-
     around_next = "an",
     inside_next = "in",
     around_last = "al",
     inside_last = "il",
-  }
-  local user_mappings = LazyVim.opts("mini.ai").mappings
-  local mappings = vim.tbl_extend("force", default_mappings, user_mappings)
+    goto_left = "g[",
+    goto_right = "g]",
+  }, opts.mappings or {})
+  mappings.goto_left = nil
+  mappings.goto_right = nil
 
   for name, prefix in pairs(mappings) do
-    if name:match("next$") or name:match("last$") then
-      name = name:gsub("^around_", ""):gsub("^inside_", "")
-    end
+    name = name:gsub("^around_", ""):gsub("^inside_", "")
     ret[#ret + 1] = { prefix, group = name }
     for _, obj in ipairs(objects) do
       local desc = obj.desc
