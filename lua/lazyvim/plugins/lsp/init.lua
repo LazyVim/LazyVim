@@ -7,9 +7,9 @@ return {
       "mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = function() end },
     },
-    ---@class PluginLspOpts
     opts = function()
-      return {
+      ---@class PluginLspOpts
+      local ret = {
         -- options for vim.diagnostic.config()
         ---@type vim.diagnostic.Opts
         diagnostics = {
@@ -114,6 +114,7 @@ return {
           -- ["*"] = function(server, opts) end,
         },
       }
+      return ret
     end,
     ---@param opts PluginLspOpts
     config = function(_, opts)
@@ -150,7 +151,7 @@ return {
               and vim.bo[buffer].buftype == ""
               and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
             then
-              LazyVim.toggle.inlay_hints(buffer, true)
+              vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
             end
           end)
         end

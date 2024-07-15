@@ -115,20 +115,19 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- stylua: ignore start
 
 -- toggle options
-map("n", "<leader>uf", function() LazyVim.format.toggle() end, { desc = "Toggle Auto Format (Global)" })
-map("n", "<leader>uF", function() LazyVim.format.toggle(true) end, { desc = "Toggle Auto Format (Buffer)" })
-map("n", "<leader>us", function() LazyVim.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() LazyVim.toggle("wrap") end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>uL", function() LazyVim.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>ul", function() LazyVim.toggle.number() end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ud", function() LazyVim.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
-local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() LazyVim.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
-if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-  map( "n", "<leader>uh", function() LazyVim.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
+LazyVim.toggle.map("<leader>uf", LazyVim.toggle.format())
+LazyVim.toggle.map("<leader>uF", LazyVim.toggle.format(true))
+LazyVim.toggle.map("<leader>us", LazyVim.toggle("spell", { name = "Spelling" }))
+LazyVim.toggle.map("<leader>uw", LazyVim.toggle("wrap", { name = "Wrap" }))
+LazyVim.toggle.map("<leader>uL", LazyVim.toggle("relativenumber", { name = "Relative Number" }))
+LazyVim.toggle.map("<leader>ud", LazyVim.toggle.diagnostics)
+LazyVim.toggle.map("<leader>ul", LazyVim.toggle.number)
+LazyVim.toggle.map( "<leader>uc", LazyVim.toggle("conceallevel", { values = { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 } }))
+LazyVim.toggle.map("<leader>uT", LazyVim.toggle.treesitter)
+LazyVim.toggle.map("<leader>ub", LazyVim.toggle("background", { values = { "light", "dark" }, name = "Background" }))
+if vim.lsp.inlay_hint then
+  LazyVim.toggle.map("<leader>uh", LazyVim.toggle.inlay_hints)
 end
-map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end, { desc = "Toggle Treesitter Highlight" })
-map("n", "<leader>ub", function() LazyVim.toggle("background", false, {"light", "dark"}) end, { desc = "Toggle Background" })
 
 -- lazygit
 map("n", "<leader>gg", function() LazyVim.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
@@ -181,7 +180,7 @@ map("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
-map("n", "<leader>wm", function() LazyVim.toggle.maximize() end, { desc = "Maximize Toggle" })
+LazyVim.toggle.map("<leader>wm", LazyVim.toggle.maximize)
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
