@@ -1,5 +1,7 @@
 ---@module 'luassert'
 
+local Icons = require("mini.icons")
+
 local Plugin = require("lazy.core.plugin")
 _G.LazyVim = require("lazyvim.util")
 
@@ -38,13 +40,10 @@ describe("Extra", function()
   for _, extra in ipairs(extras) do
     local name = extra.modname:sub(#"lazyvim.plugins.extras" + 2)
     describe(name, function()
-      ---@type any, LazySpecLoader
-      local mod, spec
-
       it("spec is valid", function()
-        mod = require(extra.modname)
+        local mod = require(extra.modname)
         assert.is_not_nil(mod)
-        spec = Plugin.Spec.new({
+        local spec = Plugin.Spec.new({
           { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
           mod,
@@ -54,10 +53,17 @@ describe("Extra", function()
 
       if extra.modname:find("%.lang%.") then
         it("has recommended set", function()
+          local mod = require(extra.modname)
           assert(mod.recommended, "`recommended` not set for " .. extra.modname)
         end)
       end
 
+      local mod = require(extra.modname)
+      local spec = Plugin.Spec.new({
+        { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
+        { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
+        mod,
+      }, { optional = true })
       local lspconfig = spec.plugins["nvim-lspconfig"]
       if lspconfig then
         it("does not install LSP servers with mason.nvim", function()
@@ -93,6 +99,28 @@ describe("Extra", function()
             "These Treesitter langs are installed by default. Please remove them from the extra."
           )
         end)
+      end
+
+      -- Icons
+      local icons = spec.plugins["mini.icons"]
+      if icons then
+        local icon_opts = Plugin.values(icons, "opts", false) or {}
+        local cats = { "directory", "file", "extension", "filetype", "lsp", "os" }
+        for _, cat in ipairs(cats) do
+          local cat_names = Icons.list(cat)
+          if icon_opts[cat] then
+            describe("does not set existing icons for " .. cat, function()
+              for icon_name in pairs(icon_opts[cat]) do
+                it(icon_name, function()
+                  assert.is_false(
+                    vim.tbl_contains(cat_names, icon_name),
+                    "Icon " .. icon_name .. " already exists:\n" .. vim.inspect({ Icons.get(cat, icon_name) })
+                  )
+                end)
+              end
+            end)
+          end
+        end
       end
     end)
   end

@@ -1,5 +1,3 @@
-local Config = require("lazyvim.config")
-
 ---@class lazyvim.util.news
 local M = {}
 
@@ -13,13 +11,13 @@ end
 
 function M.setup()
   vim.schedule(function()
-    if Config.news.lazyvim then
-      if not Config.json.data.news["NEWS.md"] then
+    if LazyVim.config.news.lazyvim then
+      if not LazyVim.config.json.data.news["NEWS.md"] then
         M.welcome()
       end
       M.lazyvim(true)
     end
-    if Config.news.neovim then
+    if LazyVim.config.news.neovim then
       M.neovim(true)
     end
   end)
@@ -61,12 +59,12 @@ function M.open(file, opts)
   end
 
   if opts.when_changed then
-    local is_new = not Config.json.data.news[ref]
+    local is_new = not LazyVim.config.json.data.news[ref]
     local hash = M.hash(file)
-    if hash == Config.json.data.news[ref] then
+    if hash == LazyVim.config.json.data.news[ref] then
       return
     end
-    Config.json.data.news[ref] = hash
+    LazyVim.config.json.data.news[ref] = hash
     LazyVim.json.save()
     -- don't open if file has never been opened
     if is_new then

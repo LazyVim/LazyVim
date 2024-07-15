@@ -78,7 +78,7 @@ function M.foldtext()
   if not ret or type(ret) == "string" then
     ret = { { vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1], {} } }
   end
-  table.insert(ret, { " " .. require("lazyvim.config").icons.misc.dots })
+  table.insert(ret, { " " .. LazyVim.config.icons.misc.dots })
 
   if not vim.treesitter.foldtext then
     return table.concat(
@@ -124,7 +124,7 @@ function M.statuscolumn()
       elseif
         show_open_folds
         and not LazyVim.ui.skip_foldexpr[buf]
-        and vim.treesitter.foldexpr(vim.v.lnum):sub(1, 1) == ">"
+        and tostring(vim.treesitter.foldexpr(vim.v.lnum)):sub(1, 1) == ">"
       then -- fold start
         fold = { text = vim.opt.fillchars:get().foldopen or "", texthl = githl }
       end
@@ -140,10 +140,14 @@ function M.statuscolumn()
   local is_num = vim.wo[win].number
   local is_relnum = vim.wo[win].relativenumber
   if (is_num or is_relnum) and vim.v.virtnum == 0 then
-    if vim.v.relnum == 0 then
-      components[2] = is_num and "%l" or "%r" -- the current line
+    if vim.fn.has("nvim-0.11") == 1 then
+      components[2] = "%l" -- 0.11 handles both the current and other lines with %l
     else
-      components[2] = is_relnum and "%r" or "%l" -- other lines
+      if vim.v.relnum == 0 then
+        components[2] = is_num and "%l" or "%r" -- the current line
+      else
+        components[2] = is_relnum and "%r" or "%l" -- other lines
+      end
     end
     components[2] = "%=" .. components[2] .. " " -- right align
   end
@@ -227,7 +231,7 @@ function M.bufremove(buf)
 
   if vim.bo.modified then
     local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
-    if choice == 0 then -- Cancel
+    if choice == 0 or choice == 3 then -- 0 for <Esc>/<C-c> and 3 for Cancel
       return
     end
     if choice == 1 then -- Yes

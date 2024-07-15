@@ -30,7 +30,7 @@ end
 
 local function symbols_filter(entry, ctx)
   if ctx.symbols_filter == nil then
-    ctx.symbols_filter = require("lazyvim.config").get_kind_filter(ctx.bufnr) or false
+    ctx.symbols_filter = LazyVim.config.get_kind_filter(ctx.bufnr) or false
   end
   if ctx.symbols_filter == false then
     return true
@@ -43,7 +43,7 @@ return {
   recommended = true,
   {
     "ibhagwan/fzf-lua",
-    event = "VeryLazy",
+    cmd = "FzfLua",
     opts = function(_, opts)
       local config = require("fzf-lua.config")
       local actions = require("fzf-lua.actions")
@@ -53,6 +53,8 @@ return {
       config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
       config.defaults.keymap.fzf["ctrl-d"] = "half-page-down"
       config.defaults.keymap.fzf["ctrl-x"] = "jump"
+      config.defaults.keymap.fzf["ctrl-f"] = "preview-page-down"
+      config.defaults.keymap.fzf["ctrl-b"] = "preview-page-up"
       config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
       config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
 
@@ -84,6 +86,18 @@ return {
       end
       fix(defaults)
 
+      local img_previewer ---@type string[]?
+      for _, v in ipairs({
+        { cmd = "ueberzug", args = {} },
+        { cmd = "chafa", args = { "{file}", "--format=symbols" } },
+        { cmd = "viu", args = { "-b" } },
+      }) do
+        if vim.fn.executable(v.cmd) == 1 then
+          img_previewer = vim.list_extend({ v.cmd }, v.args)
+          break
+        end
+      end
+
       return vim.tbl_deep_extend("force", defaults, {
         fzf_colors = true,
         fzf_opts = {
@@ -92,6 +106,18 @@ return {
         defaults = {
           -- formatter = "path.filename_first",
           formatter = "path.dirname_first",
+        },
+        previewers = {
+          builtin = {
+            extensions = {
+              ["png"] = img_previewer,
+              ["jpg"] = img_previewer,
+              ["jpeg"] = img_previewer,
+              ["gif"] = img_previewer,
+              ["webp"] = img_previewer,
+            },
+            ueberzug_scaler = "fit_contain",
+          },
         },
         -- Custom LazyVim option to configure vim.ui.select
         ui_select = function(fzf_opts, items)
@@ -107,7 +133,11 @@ return {
               -- height is number of items minus 15 lines for the preview, with a max of 80% screen height
               height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 2) + 0.5) + 16,
               width = 0.5,
-              preview = {
+              preview = not vim.tbl_isempty(LazyVim.lsp.get_clients({ bufnr = 0, name = "vtsls" })) and {
+                layout = "vertical",
+                vertical = "down:15,border-top",
+                hidden = "hidden",
+              } or {
                 layout = "vertical",
                 vertical = "down:15,border-top",
               },
@@ -160,7 +190,16 @@ return {
     end,
     config = function(_, opts)
       require("fzf-lua").setup(opts)
-      require("fzf-lua").register_ui_select(opts.ui_select or nil)
+    end,
+    init = function()
+      LazyVim.on_very_lazy(function()
+        vim.ui.select = function(...)
+          require("lazy").load({ plugins = { "fzf-lua" } })
+          local opts = LazyVim.opts("fzf-lua") or {}
+          require("fzf-lua").register_ui_select(opts.ui_select or nil)
+          return vim.ui.select(...)
+        end
+      end)
     end,
     keys = {
       { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
@@ -172,12 +211,12 @@ return {
       },
       { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
-      { "<leader><space>", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+      { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- find
       { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
-      { "<leader>ff", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
-      { "<leader>fF", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },

@@ -22,7 +22,7 @@ return {
         volar = {
           init_options = {
             vue = {
-              hybridMode = false,
+              hybridMode = true,
             },
           },
         },

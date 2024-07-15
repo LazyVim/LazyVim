@@ -3,7 +3,6 @@ return {
   -- file explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
     cmd = "Neotree",
     keys = {
       {
@@ -60,7 +59,7 @@ return {
       })
     end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      sources = { "filesystem", "buffers", "git_status" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = {
         bind_to_cwd = false,
@@ -163,32 +162,47 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    opts_extend = { "spec" },
     opts = {
-      plugins = { spelling = true },
-      defaults = {
-        mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
-        ["gs"] = { name = "+surround" },
-        ["z"] = { name = "+fold" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader><tab>"] = { name = "+tabs" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>c"] = { name = "+code" },
-        ["<leader>f"] = { name = "+file/find" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>q"] = { name = "+quit/session" },
-        ["<leader>s"] = { name = "+search" },
-        ["<leader>u"] = { name = "+ui" },
-        ["<leader>w"] = { name = "+windows" },
-        ["<leader>x"] = { name = "+diagnostics/quickfix" },
+      defaults = {},
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "<leader><tab>", group = "tabs" },
+          { "<leader>b", group = "buffer" },
+          { "<leader>c", group = "code" },
+          { "<leader>f", group = "file/find" },
+          { "<leader>g", group = "git" },
+          { "<leader>gh", group = "hunks" },
+          { "<leader>q", group = "quit/session" },
+          { "<leader>s", group = "search" },
+          { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
+          { "<leader>w", group = "windows" },
+          { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+          { "[", group = "prev" },
+          { "]", group = "next" },
+          { "g", group = "goto" },
+          { "gs", group = "surround" },
+          { "z", group = "fold" },
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Keymaps (which-key)",
       },
     },
     config = function(_, opts)
       local wk = require("which-key")
       wk.setup(opts)
-      wk.register(opts.defaults)
+      if not vim.tbl_isempty(opts.defaults) then
+        LazyVim.warn("which-key: opts.defaults is deprecated. Please use opts.spec instead.")
+        wk.register(opts.defaults)
+      end
     end,
   },
 
@@ -207,6 +221,13 @@ return {
         changedelete = { text = "▎" },
         untracked = { text = "▎" },
       },
+      signs_staged = {
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+      },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
@@ -215,8 +236,20 @@ return {
         end
 
         -- stylua: ignore start
-        map("n", "]h", function() gs.nav_hunk("next") end, "Next Hunk")
-        map("n", "[h", function() gs.nav_hunk("prev") end, "Prev Hunk")
+        map("n", "]h", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "]c", bang = true })
+          else
+            gs.nav_hunk("next")
+          end
+        end, "Next Hunk")
+        map("n", "[h", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "[c", bang = true })
+          else
+            gs.nav_hunk("prev")
+          end
+        end, "Prev Hunk")
         map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
         map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
         map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
@@ -226,6 +259,7 @@ return {
         map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
         map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
         map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
@@ -237,16 +271,18 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "Trouble" },
-    opts = {},
+    opts = {
+      modes = {
+        lsp = {
+          win = { position = "right" },
+        },
+      },
+    },
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-      {
-        "<leader>cS",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP references/definitions/... (Trouble)",
-      },
+      { "<leader>cs", "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
+      { "<leader>cS", "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions/... (Trouble)" },
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
       {

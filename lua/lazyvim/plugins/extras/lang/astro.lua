@@ -3,9 +3,11 @@ return {
     return LazyVim.extras.wants({
       ft = "astro",
       root = {
+        -- https://docs.astro.build/en/guides/configuring-astro/#supported-config-file-types
         "astro.config.js",
         "astro.config.mjs",
         "astro.config.cjs",
+        "astro.config.ts",
       },
     })
   end,

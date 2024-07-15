@@ -69,7 +69,7 @@ return {
           local pad_footer = string.rep(" ", 8)
           starter.config.footer = pad_footer .. "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
           -- INFO: based on @echasnovski's recommendation (thanks a lot!!!)
-          if vim.bo[ev.buf].filetype == "starter" then
+          if vim.bo[ev.buf].filetype == "ministarter" then
             pcall(starter.refresh)
           end
         end,

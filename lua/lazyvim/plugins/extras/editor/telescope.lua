@@ -20,6 +20,7 @@ local picker = {
   ---@param opts? lazyvim.util.pick.Opts
   open = function(builtin, opts)
     opts = opts or {}
+    opts.follow = opts.follow ~= false
     if opts.cwd and opts.cwd ~= vim.uv.cwd() then
       local function open_cwd_dir()
         local action_state = require("telescope.actions.state")
@@ -91,12 +92,12 @@ return {
       },
       { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+      { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- find
       { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
-      { "<leader>ff", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
-      { "<leader>fF", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
@@ -132,7 +133,7 @@ return {
         "<leader>ss",
         function()
           require("telescope.builtin").lsp_document_symbols({
-            symbols = require("lazyvim.config").get_kind_filter(),
+            symbols = LazyVim.config.get_kind_filter(),
           })
         end,
         desc = "Goto Symbol",
@@ -141,7 +142,7 @@ return {
         "<leader>sS",
         function()
           require("telescope.builtin").lsp_dynamic_workspace_symbols({
-            symbols = require("lazyvim.config").get_kind_filter(),
+            symbols = LazyVim.config.get_kind_filter(),
           })
         end,
         desc = "Goto Symbol (Workspace)",
@@ -162,6 +163,20 @@ return {
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
         LazyVim.pick("find_files", { hidden = true, default_text = line })()
+      end
+
+      local function find_command()
+        if 1 == vim.fn.executable("rg") then
+          return { "rg", "--files", "--color", "never", "-g", "!.git" }
+        elseif 1 == vim.fn.executable("fd") then
+          return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
+        elseif 1 == vim.fn.executable("fdfind") then
+          return { "fdfind", "--type", "f", "--color", "never", "-E", ".git" }
+        elseif 1 == vim.fn.executable("find") and vim.fn.has("win32") == 0 then
+          return { "find", ".", "-type", "f" }
+        elseif 1 == vim.fn.executable("where") then
+          return { "where", "/r", ".", "*" }
+        end
       end
 
       return {
@@ -195,6 +210,12 @@ return {
             n = {
               ["q"] = actions.close,
             },
+          },
+        },
+        pickers = {
+          find_files = {
+            find_command = find_command,
+            hidden = true,
           },
         },
       }

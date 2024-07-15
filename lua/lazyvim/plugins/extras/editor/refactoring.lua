@@ -1,3 +1,24 @@
+local pick = function()
+  if LazyVim.pick.picker.name == "telescope" then
+    return require("telescope").extensions.refactoring.refactors()
+  elseif LazyVim.pick.picker.name == "fzf" then
+    local fzf_lua = require("fzf-lua")
+    local results = require("refactoring").get_refactors()
+    local refactoring = require("refactoring")
+
+    local opts = {
+      fzf_opts = {},
+      fzf_colors = true,
+      actions = {
+        ["default"] = function(selected)
+          refactoring.refactor(selected[1])
+        end,
+      },
+    }
+    fzf_lua.fzf_exec(results, opts)
+  end
+end
+
 return {
   {
     "ThePrimeagen/refactoring.nvim",
@@ -10,9 +31,7 @@ return {
       { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
       {
         "<leader>rs",
-        function()
-          require("telescope").extensions.refactoring.refactors()
-        end,
+        pick,
         mode = "v",
         desc = "Refactor",
       },

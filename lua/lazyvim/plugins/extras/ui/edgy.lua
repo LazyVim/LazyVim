@@ -53,26 +53,7 @@ return {
           { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
         },
         left = {
-          {
-            title = "Neo-Tree",
-            ft = "neo-tree",
-            filter = function(buf)
-              return vim.b[buf].neo_tree_source == "filesystem"
-            end,
-            pinned = true,
-            open = function()
-              require("neo-tree.command").execute({ dir = LazyVim.root() })
-            end,
-            size = { height = 0.5 },
-          },
           { title = "Neotest Summary", ft = "neotest-summary" },
-          {
-            title = "Neo-Tree Other",
-            ft = "neo-tree",
-            filter = function(buf)
-              return vim.b[buf].neo_tree_source ~= nil
-            end,
-          },
           -- "neo-tree",
         },
         keys = {
@@ -95,20 +76,26 @@ return {
         },
       }
 
-      -- only add neo-tree sources if they are enabled in config
-      local neotree_opts = LazyVim.opts("neo-tree.nvim")
-      local neotree_sources = { buffers = "top", git_status = "right" }
-
-      for source, pos in pairs(neotree_sources) do
-        if vim.list_contains(neotree_opts.sources, source) then
-          table.insert(opts.left, 3, {
-            title = "Neo-Tree " .. source:gsub("_", " "),
+      if LazyVim.has("neo-tree.nvim") then
+        local pos = {
+          filesystem = "left",
+          buffers = "top",
+          git_status = "right",
+          document_symbols = "bottom",
+          diagnostics = "bottom",
+        }
+        local sources = LazyVim.opts("neo-tree.nvim").sources or {}
+        for i, v in ipairs(sources) do
+          table.insert(opts.left, i, {
+            title = "Neo-Tree " .. v:gsub("_", " "):gsub("^%l", string.upper),
             ft = "neo-tree",
             filter = function(buf)
-              return vim.b[buf].neo_tree_source == source
+              return vim.b[buf].neo_tree_source == v
             end,
             pinned = true,
-            open = "Neotree position=" .. pos .. " " .. source,
+            open = function()
+              vim.cmd(("Neotree show position=%s %s dir=%s"):format(pos[v] or "bottom", v, LazyVim.root()))
+            end,
           })
         end
       end
@@ -165,14 +152,17 @@ return {
         local get = Offset.get
         Offset.get = function()
           if package.loaded.edgy then
+            local old_offset = get()
             local layout = require("edgy.config").layout
             local ret = { left = "", left_size = 0, right = "", right_size = 0 }
             for _, pos in ipairs({ "left", "right" }) do
               local sb = layout[pos]
+              local title = " Sidebar" .. string.rep(" ", sb.bounds.width - 8)
               if sb and #sb.wins > 0 then
-                local title = " Sidebar" .. string.rep(" ", sb.bounds.width - 8)
-                ret[pos] = "%#EdgyTitle#" .. title .. "%*" .. "%#WinSeparator#│%*"
-                ret[pos .. "_size"] = sb.bounds.width
+                ret[pos] = old_offset[pos .. "_size"] > 0 and old_offset[pos]
+                  or pos == "left" and ("%#Bold#" .. title .. "%*" .. "%#BufferLineOffsetSeparator#│%*")
+                  or pos == "right" and ("%#BufferLineOffsetSeparator#│%*" .. "%#Bold#" .. title .. "%*")
+                ret[pos .. "_size"] = old_offset[pos .. "_size"] > 0 and old_offset[pos .. "_size"] or sb.bounds.width
               end
             end
             ret.total_size = ret.left_size + ret.right_size

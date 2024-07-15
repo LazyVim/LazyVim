@@ -1,5 +1,3 @@
-local Config = require("lazyvim.config")
-
 ---@class lazyvim.util.json
 local M = {}
 
@@ -46,18 +44,17 @@ function M.encode(value)
 end
 
 function M.save()
-  Config.json.data.version = Config.json.version
-  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
-  local f = io.open(path, "w")
+  LazyVim.config.json.data.version = LazyVim.config.json.version
+  local f = io.open(LazyVim.config.json.path, "w")
   if f then
-    f:write(LazyVim.json.encode(Config.json.data))
+    f:write(LazyVim.json.encode(LazyVim.config.json.data))
     f:close()
   end
 end
 
 function M.migrate()
-  LazyVim.info("Migrating `lazyvim.json` to version `" .. Config.json.version .. "`")
-  local json = Config.json
+  LazyVim.info("Migrating `lazyvim.json` to version `" .. LazyVim.config.json.version .. "`")
+  local json = LazyVim.config.json
 
   -- v0
   if not json.data.version then

@@ -33,12 +33,13 @@ return {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)
-      if vim.fn.executable("credo") == 0 then
-        return
-      end
       local nls = require("null-ls")
       opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.diagnostics.credo,
+        nls.builtins.diagnostics.credo.with({
+          condition = function(utils)
+            return utils.root_has_file(".credo.exs")
+          end,
+        }),
       })
     end,
   },
@@ -46,11 +47,16 @@ return {
     "mfussenegger/nvim-lint",
     optional = true,
     opts = function(_, opts)
-      if vim.fn.executable("credo") == 0 then
-        return
-      end
       opts.linters_by_ft = {
         elixir = { "credo" },
+      }
+
+      opts.linters = {
+        credo = {
+          condition = function(ctx)
+            return vim.fs.find({ ".credo.exs" }, { path = ctx.filename, upward = true })[1]
+          end,
+        },
       }
     end,
   },

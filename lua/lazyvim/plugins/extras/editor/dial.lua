@@ -1,6 +1,4 @@
 local M = {}
----@type table<string, table<string, string[]>>
-M.dials_by_ft = {}
 
 ---@param increment boolean
 ---@param g? boolean
@@ -9,7 +7,7 @@ function M.dial(increment, g)
   -- Use visual commands for VISUAL 'v', VISUAL LINE 'V' and VISUAL BLOCK '\22'
   local is_visual = mode == "v" or mode == "V" or mode == "\22"
   local func = (increment and "inc" or "dec") .. (g and "_g" or "_") .. (is_visual and "visual" or "normal")
-  local group = M.dials_by_ft[vim.bo.filetype] or "default"
+  local group = vim.g.dials_by_ft[vim.bo.filetype] or "default"
   return require("dial.map")[func](group)
 end
 
@@ -110,21 +108,26 @@ return {
         scss = "css",
         typescript = "typescript",
         typescriptreact = "typescript",
+        yaml = "yaml",
       },
       groups = {
         default = {
           augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
           augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
           augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
+          ordinal_numbers,
+          weekdays,
+          months,
         },
         typescript = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
           augend.constant.alias.bool, -- boolean value (true <-> false)
           logical_alias,
           augend.constant.new({ elements = { "let", "const" } }),
-          ordinal_numbers,
-          weekdays,
-          months,
+        },
+        yaml = {
+          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.constant.alias.bool, -- boolean value (true <-> false)
         },
         css = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
@@ -137,9 +140,6 @@ return {
         },
         markdown = {
           augend.misc.alias.markdown_header,
-          ordinal_numbers,
-          weekdays,
-          months,
         },
         json = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
@@ -153,23 +153,17 @@ return {
             word = true, -- if false, "sand" is incremented into "sor", "doctor" into "doctand", etc.
             cyclic = true, -- "or" is incremented into "and".
           }),
-          ordinal_numbers,
-          weekdays,
-          months,
         },
         python = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
           capitalized_boolean,
           logical_alias,
-          ordinal_numbers,
-          weekdays,
-          months,
         },
       },
     }
   end,
   config = function(_, opts)
     require("dial.config").augends:register_group(opts.groups)
-    M.dials_by_ft = opts.dials_by_ft
+    vim.g.dials_by_ft = opts.dials_by_ft
   end,
 }

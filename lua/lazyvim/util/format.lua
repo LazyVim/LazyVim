@@ -97,10 +97,19 @@ end
 
 ---@param buf? boolean
 function M.toggle(buf)
+  M.enable(not M.enabled(), buf)
+end
+
+---@param enable? boolean
+---@param buf? boolean
+function M.enable(enable, buf)
+  if enable == nil then
+    enable = true
+  end
   if buf then
-    vim.b.autoformat = not M.enabled()
+    vim.b.autoformat = enable
   else
-    vim.g.autoformat = not M.enabled()
+    vim.g.autoformat = enable
     vim.b.autoformat = nil
   end
   M.info()

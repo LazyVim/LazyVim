@@ -1,8 +1,9 @@
-tt.*
-.tests
-doc/tags
-debug
-.repro
-foo.*
 *.log
-data
+/.repro
+/.tests
+/build
+/debug
+/doc/tags
+foo.*
+node_modules
+tt.*
