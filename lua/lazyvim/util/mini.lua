@@ -92,14 +92,8 @@ function M.ai_whichkey()
   }
 
   local ret = { mode = { "o", "x" } }
-  for prefix, name in pairs({
-    i = "inside",
-    a = "around",
-    il = "last",
-    ["in"] = "next",
-    al = "last",
-    an = "next",
-  }) do
+  local mappings = LazyVim.opts("mini.ai").mappings
+  for name, prefix in pairs(mappings) do
     ret[#ret + 1] = { prefix, group = name }
     for _, obj in ipairs(objects) do
       local desc = obj.desc
