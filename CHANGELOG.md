@@ -1,5 +1,24 @@
 # Changelog
 
+## [12.30.0](https://github.com/LazyVim/LazyVim/compare/v12.29.2...v12.30.0) (2024-07-15)
+
+
+### Features
+
+* **keymaps:** dynamic which-key icons/descriptions for toggles ([#4050](https://github.com/LazyVim/LazyVim/issues/4050)) ([78cf032](https://github.com/LazyVim/LazyVim/commit/78cf0320bfc34050883cde5e7af267184dc60ee9))
+* **util.mini:** follow the user's mappings instead of hardcoded values ([#4043](https://github.com/LazyVim/LazyVim/issues/4043)) ([8506cb5](https://github.com/LazyVim/LazyVim/commit/8506cb5a98a528651a5557d8e447fa13bd8ac0cb))
+
+
+### Bug Fixes
+
+* **lsp:** lsp keymaps. Fixes [#4051](https://github.com/LazyVim/LazyVim/issues/4051) ([706ec4b](https://github.com/LazyVim/LazyVim/commit/706ec4b6b6be4265cbcfd326d3216f2a29952b55))
+* **yanky:** enable yank history in visual mode ([#4048](https://github.com/LazyVim/LazyVim/issues/4048)) ([6911327](https://github.com/LazyVim/LazyVim/commit/6911327a5edca85ce3bc71229236494d9af7fafa))
+
+
+### Performance Improvements
+
+* **luasnip:** luasnip wasn't lazyloaded ([#4032](https://github.com/LazyVim/LazyVim/issues/4032)) ([e80ed32](https://github.com/LazyVim/LazyVim/commit/e80ed322a79a8b9857c6ab0ad76545654917ddcb))
+
 ## [12.29.2](https://github.com/LazyVim/LazyVim/compare/v12.29.1...v12.29.2) (2024-07-14)
 
 
