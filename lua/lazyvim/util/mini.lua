@@ -121,6 +121,15 @@ end
 
 ---@param opts {skip_next: string, skip_ts: string[], skip_unbalanced: boolean, markdown: boolean}
 function M.pairs(opts)
+  LazyVim.toggle.map("<leader>up", {
+    name = "Mini Pairs",
+    get = function()
+      return not vim.g.minipairs_disable
+    end,
+    set = function(state)
+      vim.g.minipairs_disable = not state
+    end,
+  })
   local pairs = require("mini.pairs")
   pairs.setup(opts)
   local open = pairs.open

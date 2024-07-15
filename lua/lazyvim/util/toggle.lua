@@ -21,6 +21,13 @@ function M.map(lhs, toggle)
       LazyVim.warn("Disabled " .. toggle.name, { title = toggle.name })
     end
   end, { desc = "Toggle" .. toggle.name })
+  M.wk(lhs, toggle)
+end
+
+function M.wk(lhs, toggle)
+  if not LazyVim.has("which-key.nvim") then
+    return
+  end
   require("which-key").add({
     {
       lhs,
