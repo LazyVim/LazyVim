@@ -101,8 +101,6 @@ function M.ai_whichkey(opts)
     inside_next = "in",
     around_last = "al",
     inside_last = "il",
-    goto_left = "g[",
-    goto_right = "g]",
   }, opts.mappings or {})
   mappings.goto_left = nil
   mappings.goto_right = nil
