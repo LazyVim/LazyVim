@@ -122,9 +122,9 @@ LazyVim.toggle.map("<leader>uw", LazyVim.toggle("wrap"))
 LazyVim.toggle.map("<leader>uL", LazyVim.toggle("relativenumber"))
 LazyVim.toggle.map("<leader>ud", LazyVim.toggle.diagnostics)
 LazyVim.toggle.map("<leader>ul", LazyVim.toggle.number)
-LazyVim.toggle.map("<leader>uc", LazyVim.toggle("conceallevel", {0, vim.o.conceallevel > 0 and vim.o.conceallevel or 3}))
+LazyVim.toggle.map("<leader>uc", LazyVim.toggle("conceallevel", { 0, vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }))
 LazyVim.toggle.map("<leader>uT", LazyVim.toggle.treesitter)
-LazyVim.toggle.map("<leader>ub", LazyVim.toggle("background", false, {"light", "dark"}))
+LazyVim.toggle.map("<leader>ub", LazyVim.toggle("background", { "light", "dark" }))
 if vim.lsp.inlay_hint then
   LazyVim.toggle.map("<leader>uh", LazyVim.toggle.inlay_hints)
 end

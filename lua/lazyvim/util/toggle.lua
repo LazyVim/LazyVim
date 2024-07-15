@@ -81,9 +81,9 @@ function M.option(option, values)
     set = function(state)
       if values then
         if state then
-          vim.opt_local[option] = values[1]
-        else
           vim.opt_local[option] = values[2]
+        else
+          vim.opt_local[option] = values[1]
         end
       else
         ---@diagnostic disable-next-line: no-unknown
