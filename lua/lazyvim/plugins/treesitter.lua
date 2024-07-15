@@ -1,4 +1,14 @@
 return {
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<BS>", desc = "Decrement Selection", mode = "x" },
+        { "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
+      },
+    },
+  },
+
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
