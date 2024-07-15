@@ -150,7 +150,7 @@ return {
               and vim.bo[buffer].buftype == ""
               and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
             then
-              LazyVim.toggle.inlay_hints(buffer, true)
+              vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
             end
           end)
         end
