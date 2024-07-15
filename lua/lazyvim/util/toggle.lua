@@ -20,7 +20,7 @@ function M.map(lhs, toggle)
     else
       LazyVim.warn("Disabled " .. toggle.name, { title = toggle.name })
     end
-  end, { desc = "Toggle" .. toggle.name })
+  end, { desc = "Toggle " .. toggle.name })
   M.wk(lhs, toggle)
 end
 
