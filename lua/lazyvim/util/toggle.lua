@@ -112,17 +112,11 @@ M.number = {
   end,
 }
 
-local enabled = true
 ---@type lazyvim.Toggle
 M.diagnostics = {
   name = "Diagnostics",
   get = function()
-    if vim.diagnostic.is_enabled then
-      enabled = vim.diagnostic.is_enabled()
-    elseif vim.diagnostic.is_disabled then
-      enabled = not vim.diagnostic.is_disabled()
-    end
-    return enabled
+    return vim.diagnostic.is_enabled and vim.diagnostic.is_enabled()
   end,
   set = vim.diagnostic.enable,
 }

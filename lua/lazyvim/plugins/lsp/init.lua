@@ -7,9 +7,9 @@ return {
       "mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = function() end },
     },
-    ---@class PluginLspOpts
     opts = function()
-      return {
+      ---@class PluginLspOpts
+      local ret = {
         -- options for vim.diagnostic.config()
         ---@type vim.diagnostic.Opts
         diagnostics = {
@@ -114,6 +114,7 @@ return {
           -- ["*"] = function(server, opts) end,
         },
       }
+      return ret
     end,
     ---@param opts PluginLspOpts
     config = function(_, opts)
