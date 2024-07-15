@@ -50,9 +50,16 @@ return {
         }),
         formatting = {
           format = function(entry, item)
-            local icons = LazyVim.config.icons.kinds
-            if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
+            local icon = LazyVim.config.icons.kinds[item.kind]
+            if LazyVim.has("mini.icons") then
+              local mini_icon, _, _ = require("mini.icons").get("lsp", item.kind)
+              if mini_icon then
+                icon = mini_icon .. " "
+              end
+            end
+
+            if icon then
+              item.kind = icon .. item.kind
             end
 
             local widths = {
