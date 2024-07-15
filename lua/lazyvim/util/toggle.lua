@@ -74,28 +74,20 @@ function M.format(buf)
   return ret
 end
 
----@param values? {[1]:any, [2]:any}
-function M.option(option, values)
+---@param opts? {values?: {[1]:any, [2]:any}, name?: string}
+function M.option(option, opts)
+  opts = opts or {}
+  local name = opts.name or option
+  local on = opts.values and opts.values[2] or true
+  local off = opts.values and opts.values[1] or false
   ---@type lazyvim.Toggle
   local ret = {
-    name = option,
+    name = name,
     get = function()
-      if values then
-        return vim.opt_local[option]:get() == values[2]
-      end
-      return vim.opt_local[option]:get()
+      return vim.opt_local[option]:get() == on
     end,
     set = function(state)
-      if values then
-        if state then
-          vim.opt_local[option] = values[2]
-        else
-          vim.opt_local[option] = values[1]
-        end
-      else
-        ---@diagnostic disable-next-line: no-unknown
-        vim.opt_local[option] = state
-      end
+      vim.opt_local[option] = state and on or off
     end,
   }
   return ret
