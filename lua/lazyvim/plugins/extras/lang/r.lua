@@ -21,6 +21,7 @@ return {
 
           local wk = require("which-key")
           wk.add({
+            buffer = true,
             { "<localleader>a", group = "all" },
             { "<localleader>b", group = "between marks" },
             { "<localleader>c", group = "chunks" },
