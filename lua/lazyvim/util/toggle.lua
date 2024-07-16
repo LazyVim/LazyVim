@@ -6,15 +6,17 @@ local M = {}
 ---@field get fun():boolean
 ---@field set fun(state:boolean)
 
+---@class lazyvim.Toggle.wrap: lazyvim.Toggle
+---@operator call:boolean
+
 ---@param toggle lazyvim.Toggle
----@return lazyvim.Toggle|fun():boolean
 function M.wrap(toggle)
   return setmetatable(toggle, {
     __call = function(t)
       t.set(not t.get())
       return t.get()
     end,
-  })
+  }) --[[@as lazyvim.Toggle.wrap]]
 end
 
 ---@param lhs string
