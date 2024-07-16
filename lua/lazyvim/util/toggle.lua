@@ -5,17 +5,24 @@ local M = {}
 ---@field name string
 ---@field get fun():boolean
 ---@field set fun(state:boolean)
----@overload fun()
-local T = {}
-T.__index = T
+
+---@param toggle lazyvim.Toggle
+---@return lazyvim.Toggle|fun():boolean
+function M.wrap(toggle)
+  return setmetatable(toggle, {
+    __call = function(t)
+      t.set(not t.get())
+      return t.get()
+    end,
+  })
+end
 
 ---@param lhs string
 ---@param toggle lazyvim.Toggle
 function M.map(lhs, toggle)
+  local t = M.wrap(toggle)
   LazyVim.safe_keymap_set("n", lhs, function()
-    local state = not toggle.get()
-    toggle.set(state)
-    if state then
+    if t() then
       LazyVim.info("Enabled " .. toggle.name, { title = toggle.name })
     else
       LazyVim.warn("Disabled " .. toggle.name, { title = toggle.name })
@@ -41,8 +48,7 @@ function M.wk(lhs, toggle)
   })
 end
 
----@type lazyvim.Toggle
-M.treesitter = {
+M.treesitter = M.wrap({
   name = "Treesitter Highlight",
   get = function()
     return vim.b.ts_highlight
@@ -54,12 +60,11 @@ M.treesitter = {
       vim.treesitter.stop()
     end
   end,
-}
+})
 
 ---@param buf? boolean
 function M.format(buf)
-  ---@type lazyvim.Toggle
-  local ret = {
+  return M.wrap({
     name = "Auto Format (" .. (buf and "Buffer" or "Global") .. ")",
     get = function()
       if not buf then
@@ -70,8 +75,7 @@ function M.format(buf)
     set = function(state)
       LazyVim.format.enable(state, buf)
     end,
-  }
-  return ret
+  })
 end
 
 ---@param opts? {values?: {[1]:any, [2]:any}, name?: string}
@@ -80,8 +84,7 @@ function M.option(option, opts)
   local name = opts.name or option
   local on = opts.values and opts.values[2] or true
   local off = opts.values and opts.values[1] or false
-  ---@type lazyvim.Toggle
-  local ret = {
+  return M.wrap({
     name = name,
     get = function()
       return vim.opt_local[option]:get() == on
@@ -89,13 +92,11 @@ function M.option(option, opts)
     set = function(state)
       vim.opt_local[option] = state and on or off
     end,
-  }
-  return ret
+  })
 end
 
 local nu = { number = true, relativenumber = true }
----@type lazyvim.Toggle
-M.number = {
+M.number = M.wrap({
   name = "Line Numbers",
   get = function()
     return vim.opt_local.number:get() or vim.opt_local.relativenumber:get()
@@ -110,19 +111,17 @@ M.number = {
       vim.opt_local.relativenumber = false
     end
   end,
-}
+})
 
----@type lazyvim.Toggle
-M.diagnostics = {
+M.diagnostics = M.wrap({
   name = "Diagnostics",
   get = function()
     return vim.diagnostic.is_enabled and vim.diagnostic.is_enabled()
   end,
   set = vim.diagnostic.enable,
-}
+})
 
----@type lazyvim.Toggle
-M.inlay_hints = {
+M.inlay_hints = M.wrap({
   name = "Inlay Hints",
   get = function()
     return vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
@@ -130,12 +129,11 @@ M.inlay_hints = {
   set = function(state)
     vim.lsp.inlay_hint.enable(state, { bufnr = 0 })
   end,
-}
+})
 
 ---@type {k:string, v:any}[]
 M._maximized = nil
----@type lazyvim.Toggle
-M.maximize = {
+M.maximize = M.wrap({
   name = "Maximize",
   get = function()
     return M._maximized ~= nil
@@ -170,7 +168,7 @@ M.maximize = {
       vim.cmd("wincmd =")
     end
   end,
-}
+})
 
 setmetatable(M, {
   __call = function(m, ...)
