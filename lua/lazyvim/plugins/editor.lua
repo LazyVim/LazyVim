@@ -169,7 +169,13 @@ return {
         {
           mode = { "n", "v" },
           { "<leader><tab>", group = "tabs" },
-          { "<leader>b", group = "buffer" },
+          {
+            "<leader>b",
+            group = "buffer",
+            expand = function()
+              return require("which-key.extras").expand.buf()
+            end,
+          },
           { "<leader>c", group = "code" },
           { "<leader>f", group = "file/find" },
           { "<leader>g", group = "git" },
