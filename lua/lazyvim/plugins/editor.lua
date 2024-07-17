@@ -177,7 +177,14 @@ return {
           { "<leader>q", group = "quit/session" },
           { "<leader>s", group = "search" },
           { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
-          { "<leader>w", group = "windows" },
+          {
+            "<leader>w",
+            group = "windows",
+            proxy = "<c-w>",
+            expand = function()
+              return require("which-key.extras").expand.win()
+            end,
+          },
           { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
           { "[", group = "prev" },
           { "]", group = "next" },
