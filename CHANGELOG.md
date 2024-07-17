@@ -1,5 +1,18 @@
 # Changelog
 
+## [12.31.0](https://github.com/LazyVim/LazyVim/compare/v12.30.0...v12.31.0) (2024-07-17)
+
+
+### Features
+
+* **keymaps:** proxy leader-w to ctrl-w ([bab5440](https://github.com/LazyVim/LazyVim/commit/bab54406dc312947e4e03bb728498503c09231ca))
+* **R:** added new which-key group for new install feature ([#4078](https://github.com/LazyVim/LazyVim/issues/4078)) ([5339aca](https://github.com/LazyVim/LazyVim/commit/5339acacec0996968d64fdbaf9fe8187bfea1b47))
+* **toggle:** make toggles callable. Fixes [#4081](https://github.com/LazyVim/LazyVim/issues/4081) ([150523b](https://github.com/LazyVim/LazyVim/commit/150523b77b6e848c4135a97a5fd8f6f79a6f4443))
+* **treesitter-context:** which-key toggle ([#4059](https://github.com/LazyVim/LazyVim/issues/4059)) ([ab01350](https://github.com/LazyVim/LazyVim/commit/ab0135093bc18ccf82325bc8ee14c25230a71786))
+* **which-key:** dynamic buffer mappings under leader-b ([8d9f2ad](https://github.com/LazyVim/LazyVim/commit/8d9f2ad97ee0d495135380975438ab8a8ae62b14))
+* **which-key:** dynamic window mappings under leader-w ([66bba78](https://github.com/LazyVim/LazyVim/commit/66bba787b83afdd85b5ee95aa589fbe9fbb95535))
+* **which-key:** leader-w-space starts hydra mode for window mappings ([865bf15](https://github.com/LazyVim/LazyVim/commit/865bf15f1cf4d4f6a3eda6d7509f94a59752fb36))
+
 ## [12.30.0](https://github.com/LazyVim/LazyVim/compare/v12.29.2...v12.30.0) (2024-07-15)
 
 
