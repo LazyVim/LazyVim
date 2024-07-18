@@ -69,6 +69,11 @@ return {
       vscode.json_decode = function(str)
         return vim.json.decode(json.json_strip_comments(str))
       end
+
+      -- Extends dap.configurations with entries read from .vscode/launch.json
+      if vim.fn.filereadable(".vscode/launch.json") then
+        require("dap.ext.vscode").load_launchjs(nil, {})
+      end
     end,
   },
 
