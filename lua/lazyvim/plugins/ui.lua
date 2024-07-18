@@ -199,9 +199,11 @@ return {
 
       -- do not add trouble symbols if aerial is enabled
       -- And allow it to be overriden for some buffer types (see autocmds)
-      local trouble_lualine_enabled = vim.b.trouble_lualine == nil or vim.b.trouble_lualine
-      trouble_lualine_enabled = trouble_lualine_enabled and vim.g.trouble_lualine
-      if trouble_lualine_enabled and LazyVim.has("trouble.nvim") then
+      if
+        vim.g.trouble_luline_enabed ~= false
+        and vim.b.trouble_lualine_enabled ~= false
+        and LazyVim.has("trouble.nvim")
+      then
         local trouble = require("trouble")
         local symbols = trouble.statusline
           and trouble.statusline({
