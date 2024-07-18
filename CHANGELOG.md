@@ -1,5 +1,21 @@
 # Changelog
 
+## [12.32.0](https://github.com/LazyVim/LazyVim/compare/v12.31.0...v12.32.0) (2024-07-18)
+
+
+### Features
+
+* **edgy:** added support for grug-far.nvim ([b1a4740](https://github.com/LazyVim/LazyVim/commit/b1a47405b9fa5eb9f5222876e81be73206b80792))
+* **terminal:** clear search highlight when opening a terminal ([#4090](https://github.com/LazyVim/LazyVim/issues/4090)) ([b5290fd](https://github.com/LazyVim/LazyVim/commit/b5290fd92935d2e96fa2249cfd09bdd853972869))
+* **toggle:** move toggle notifs to toggle function ([c1b76ee](https://github.com/LazyVim/LazyVim/commit/c1b76ee235a2cccff6370ecfca57bdacd5fe6258))
+
+
+### Bug Fixes
+
+* **autcmds:** desc for close_with_q ([d6561fd](https://github.com/LazyVim/LazyVim/commit/d6561fd27c17806ca972cbfc18573ca81d13e346))
+* **ui:** another typo ([b8bdebe](https://github.com/LazyVim/LazyVim/commit/b8bdebe5be7eba91db23e43575fc1226075f6a56))
+* **ui:** typo ([4ac249b](https://github.com/LazyVim/LazyVim/commit/4ac249beaae3462d606128ca21db79cb85a8c65b))
+
 ## [12.31.0](https://github.com/LazyVim/LazyVim/compare/v12.30.0...v12.31.0) (2024-07-17)
 
 
