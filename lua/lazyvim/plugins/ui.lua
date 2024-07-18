@@ -200,7 +200,7 @@ return {
       -- do not add trouble symbols if aerial is enabled
       -- And allow it to be overriden for some buffer types (see autocmds)
       if
-        vim.g.trouble_lualine_enabed ~= false
+        vim.g.trouble_lualine_enabled ~= false
         and vim.b.trouble_lualine_enabled ~= false
         and LazyVim.has("trouble.nvim")
       then
