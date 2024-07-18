@@ -1,3 +1,13 @@
+if lazyvim_docs then
+  -- LSP Server to use for Ruby.
+  -- Set to "solargraph" to use solargraph instead of ruby_lsp.
+  vim.g.lazyvim_ruby_lsp = "ruby_lsp"
+  vim.g.lazyvim_ruby_formatter = "rubocop"
+end
+
+local lsp = vim.g.lazyvim_ruby_lsp or "ruby_lsp"
+local formatter = vim.g.lazyvim_ruby_formatter or "rubocop"
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -15,12 +25,18 @@ return {
     opts = {
       ---@type lspconfig.options
       servers = {
-        -- disable solargraph from auto running when you open ruby files
-        solargraph = {
-          autostart = false,
+        ruby_lsp = {
+          enabled = lsp == "ruby_lsp",
         },
-        -- ruby_lsp will be automatically installed with mason and loaded with lspconfig
-        ruby_lsp = {},
+        solargraph = {
+          enabled = lsp == "solargraph",
+        },
+        rubocop = {
+          enabled = formatter == "rubocop",
+        },
+        standardrb = {
+          enabled = formatter == "standardrb",
+        },
       },
     },
   },
