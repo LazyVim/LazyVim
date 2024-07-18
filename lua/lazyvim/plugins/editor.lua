@@ -128,13 +128,22 @@ return {
 
   -- search/replace in multiple files
   {
-    "nvim-pack/nvim-spectre",
-    build = false,
-    cmd = "Spectre",
-    opts = { open_cmd = "noswapfile vnew" },
-    -- stylua: ignore
+    "MagicDuck/grug-far.nvim",
+    opts = { headerMaxWidth = 80 },
+    cmd = "GrugFar",
     keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in Files (Spectre)" },
+      {
+        "<leader>sr",
+        function()
+          require("grug-far").grug_far({
+            prefills = {
+              search = vim.fn.expand("<cword>"),
+              filesFilter = "*." .. vim.fn.expand("%:e"),
+            },
+          })
+        end,
+        desc = "Search and Replace",
+      },
     },
   },
 
