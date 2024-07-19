@@ -84,13 +84,13 @@ end
 ---@param source LazyExtraSource
 function M.get_extra(source, modname)
   local enabled = vim.tbl_contains(M.state, modname)
-  local spec = Plugin.Spec.new(nil, { optional = true })
+  local spec = Plugin.Spec.new(nil, { optional = true, pkg = false })
   spec:parse({ import = modname })
   local imports = vim.tbl_filter(function(x)
     return x ~= modname
   end, spec.modules)
   if #imports > 0 then
-    spec = Plugin.Spec.new(nil, { optional = true })
+    spec = Plugin.Spec.new(nil, { optional = true, pkg = false })
     spec.modules = vim.deepcopy(imports)
     spec:parse({ import = modname })
   end

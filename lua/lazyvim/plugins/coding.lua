@@ -49,11 +49,23 @@ return {
           { name = "buffer" },
         }),
         formatting = {
-          format = function(_, item)
+          format = function(entry, item)
             local icons = LazyVim.config.icons.kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
             end
+
+            local widths = {
+              abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+              menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
+            }
+
+            for key, width in pairs(widths) do
+              if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+                item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
+              end
+            end
+
             return item
           end,
         },
@@ -128,20 +140,6 @@ return {
       -- better deal with markdown code blocks
       markdown = true,
     },
-    keys = {
-      {
-        "<leader>up",
-        function()
-          vim.g.minipairs_disable = not vim.g.minipairs_disable
-          if vim.g.minipairs_disable then
-            LazyVim.warn("Disabled auto pairs", { title = "Option" })
-          else
-            LazyVim.info("Enabled auto pairs", { title = "Option" })
-          end
-        end,
-        desc = "Toggle Auto Pairs",
-      },
-    },
     config = function(_, opts)
       LazyVim.mini.pairs(opts)
     end,
@@ -159,9 +157,6 @@ return {
     "echasnovski/mini.ai",
     event = "VeryLazy",
     opts = function()
-      LazyVim.on_load("which-key.nvim", function()
-        vim.schedule(LazyVim.mini.ai_whichkey)
-      end)
       local ai = require("mini.ai")
       return {
         n_lines = 500,
@@ -184,6 +179,14 @@ return {
           U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
         },
       }
+    end,
+    config = function(_, opts)
+      require("mini.ai").setup(opts)
+      LazyVim.on_load("which-key.nvim", function()
+        vim.schedule(function()
+          LazyVim.mini.ai_whichkey(opts)
+        end)
+      end)
     end,
   },
 

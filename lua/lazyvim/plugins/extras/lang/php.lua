@@ -74,13 +74,13 @@ return {
         php = { "phpcs" },
       },
     },
-    {
-      "stevearc/conform.nvim",
-      optional = true,
-      opts = {
-        formatters_by_ft = {
-          php = { "php-cs-fixer" },
-        },
+  },
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        php = { "php_cs_fixer" },
       },
     },
   },

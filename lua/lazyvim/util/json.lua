@@ -45,8 +45,7 @@ end
 
 function M.save()
   LazyVim.config.json.data.version = LazyVim.config.json.version
-  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
-  local f = io.open(path, "w")
+  local f = io.open(LazyVim.config.json.path, "w")
   if f then
     f:write(LazyVim.json.encode(LazyVim.config.json.data))
     f:close()

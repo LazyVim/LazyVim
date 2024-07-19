@@ -43,7 +43,7 @@ return {
   recommended = true,
   {
     "ibhagwan/fzf-lua",
-    event = "VeryLazy",
+    cmd = "FzfLua",
     opts = function(_, opts)
       local config = require("fzf-lua.config")
       local actions = require("fzf-lua.actions")
@@ -53,6 +53,8 @@ return {
       config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
       config.defaults.keymap.fzf["ctrl-d"] = "half-page-down"
       config.defaults.keymap.fzf["ctrl-x"] = "jump"
+      config.defaults.keymap.fzf["ctrl-f"] = "preview-page-down"
+      config.defaults.keymap.fzf["ctrl-b"] = "preview-page-up"
       config.defaults.keymap.builtin["<c-f>"] = "preview-page-down"
       config.defaults.keymap.builtin["<c-b>"] = "preview-page-up"
 
@@ -188,7 +190,16 @@ return {
     end,
     config = function(_, opts)
       require("fzf-lua").setup(opts)
-      require("fzf-lua").register_ui_select(opts.ui_select or nil)
+    end,
+    init = function()
+      LazyVim.on_very_lazy(function()
+        vim.ui.select = function(...)
+          require("lazy").load({ plugins = { "fzf-lua" } })
+          local opts = LazyVim.opts("fzf-lua") or {}
+          require("fzf-lua").register_ui_select(opts.ui_select or nil)
+          return vim.ui.select(...)
+        end
+      end)
     end,
     keys = {
       { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
@@ -200,12 +211,12 @@ return {
       },
       { "<leader>/", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
-      { "<leader><space>", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
+      { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- find
       { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
-      { "<leader>ff", LazyVim.pick("auto"), desc = "Find Files (Root Dir)" },
-      { "<leader>fF", LazyVim.pick("auto", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
