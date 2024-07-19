@@ -8,9 +8,6 @@ return {
   {
     "Julian/lean.nvim",
     event = { "BufReadPre *.lean", "BufNewFile *.lean" },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
 
     -- see details below for full configuration options
     opts = {
@@ -22,7 +19,6 @@ return {
       -- In particular ensure you have followed instructions setting up a callback
       -- for `LspAttach` which sets your key bindings!
       lsp = {
-        on_attach = on_attach,
         init_options = {
           -- See Lean.Lsp.InitializationOptions for details and further options.
 
@@ -124,18 +120,5 @@ return {
         on_lines = nil,
       },
     },
-  },
-  {
-    -- Lean4 has it's own built in lsp
-    -- this is automatically added by lean.nvim
-    "neovim/nvim-lspconfig",
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    optional = true,
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, { { name = "nvim_lsp" }, { name = "path" }, { name = "buffer" } })
-    end,
   },
 }
