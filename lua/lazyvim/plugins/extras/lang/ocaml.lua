@@ -19,7 +19,7 @@ return {
       servers = {
         ocamllsp = {
           get_language_id = function(_, ftype)
-            return ftype
+            return language_id_of[ftype]
           end,
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
@@ -32,7 +32,6 @@ return {
               "*.ml"
             )(fname)
           end,
-          on_attach = on_attach,
         },
       },
     },
