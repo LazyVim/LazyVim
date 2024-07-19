@@ -4,8 +4,8 @@ return {
       return LazyVim.extras.wants({
         ft = { "lean" },
         root = { "lean-toolchain" },
-        })
-      end,
+      })
+    end,
   },
   {
     "Julian/lean.nvim",
