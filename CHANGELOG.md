@@ -1,5 +1,19 @@
 # Changelog
 
+## [12.33.0](https://github.com/LazyVim/LazyVim/compare/v12.32.0...v12.33.0) (2024-07-19)
+
+
+### Features
+
+* **extras:** improve ruby extra by letting user chose ([#3652](https://github.com/LazyVim/LazyVim/issues/3652)) ([7839498](https://github.com/LazyVim/LazyVim/commit/783949810855556dd12ed2685e62fb37a4c9504d))
+* **lang:** add Lean 4 support ([#4080](https://github.com/LazyVim/LazyVim/issues/4080)) ([3e29fdf](https://github.com/LazyVim/LazyVim/commit/3e29fdf478383034c48477dd04fd433a7c9327ee))
+* **lang:** add OCaml ([#4079](https://github.com/LazyVim/LazyVim/issues/4079)) ([a219e10](https://github.com/LazyVim/LazyVim/commit/a219e105b0e86316edfedb57f1fa267a764eab13))
+
+
+### Bug Fixes
+
+* **ui:** trouble lualine component ([f9fdb35](https://github.com/LazyVim/LazyVim/commit/f9fdb356f2362e5ae4ef490944b1957b49dc6680))
+
 ## [12.32.0](https://github.com/LazyVim/LazyVim/compare/v12.31.0...v12.32.0) (2024-07-18)
 
 
