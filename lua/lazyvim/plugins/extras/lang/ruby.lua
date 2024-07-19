@@ -45,6 +45,10 @@ return {
     },
   },
   {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = { "erb-formatter", "erb-lint" } },
+  },
+  {
     "mfussenegger/nvim-dap",
     optional = true,
     dependencies = {
