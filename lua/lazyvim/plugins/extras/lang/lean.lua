@@ -1,13 +1,18 @@
 return {
-  recommended = function()
-    return LazyVim.extras.wants({
-      ft = { "lean" },
-      root = { "lean-toolchain" },
-    })
-  end,
+  {
+    recommended = function()
+      return LazyVim.extras.wants({
+        ft = { "lean" },
+        root = { "lean-toolchain" },
+        })
+      end,
+  },
   {
     "Julian/lean.nvim",
     event = { "BufReadPre *.lean", "BufNewFile *.lean" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
 
     -- see details below for full configuration options
     opts = {
