@@ -225,28 +225,66 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "LazyFile",
-    opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
-      scope = { show_start = false, show_end = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
+    opts = function()
+      local ibl = require("ibl")
+      local conf = require("ibl.config")
+
+      LazyVim.toggle.map("<leader>ug", {
+        name = "Indention Guides",
+        get = function()
+          if conf.get_config(0).enabled then
+            return true
+          end
+          return false
+        end,
+        set = function(state)
+          if state then
+            ibl.setup_buffer(0, { enabled = true })
+          else
+            ibl.setup_buffer(0, { enabled = false })
+          end
+        end,
+      })
+      LazyVim.toggle.map("<leader>uS", {
+        name = "Scope Highlight",
+        get = function()
+          if conf.get_config(0).scope.enabled then
+            return true
+          end
+          return false
+        end,
+        set = function(state)
+          if state then
+            ibl.setup_buffer(0, { scope = { enabled = true } })
+          else
+            ibl.setup_buffer(0, { scope = { enabled = false } })
+          end
+        end,
+      })
+
+      return {
+        indent = {
+          char = "│",
+          tab_char = "│",
         },
-      },
-    },
+        scope = { show_start = false, show_end = false },
+        exclude = {
+          filetypes = {
+            "help",
+            "alpha",
+            "dashboard",
+            "neo-tree",
+            "Trouble",
+            "trouble",
+            "lazy",
+            "mason",
+            "notify",
+            "toggleterm",
+            "lazyterm",
+          },
+        },
+      }
+    end,
     main = "ibl",
   },
 
