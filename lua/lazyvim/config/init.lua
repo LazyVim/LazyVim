@@ -161,6 +161,7 @@ end
 
 ---@type LazyVimOptions
 local options
+local lazy_clipboard
 
 ---@param opts? LazyVimOptions
 function M.setup(opts)
@@ -181,6 +182,9 @@ function M.setup(opts)
         M.load("autocmds")
       end
       M.load("keymaps")
+      if lazy_clipboard ~= nil then
+        vim.opt.clipboard = lazy_clipboard
+      end
 
       LazyVim.format.setup()
       LazyVim.news.setup()
@@ -285,6 +289,9 @@ function M.init()
   -- this is needed to make sure options will be correctly applied
   -- after installing missing plugins
   M.load("options")
+  -- defer built-in clipboard handling: "xsel" and "pbcopy" can be slow
+  lazy_clipboard = vim.opt.clipboard
+  vim.opt.clipboard = ""
 
   if vim.g.deprecation_warnings == false then
     vim.deprecate = function() end
