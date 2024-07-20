@@ -1,5 +1,24 @@
 # Changelog
 
+## [12.34.0](https://github.com/LazyVim/LazyVim/compare/v12.33.0...v12.34.0) (2024-07-20)
+
+
+### Features
+
+* **editor:** replace nvim-spectre with grug-far.nvim ([#4099](https://github.com/LazyVim/LazyVim/issues/4099)) ([0d561a3](https://github.com/LazyVim/LazyVim/commit/0d561a3226b46f6a44c4f2c9be2288f3b52cc351))
+* **indent-blankline:** add which-key toggles ([#4122](https://github.com/LazyVim/LazyVim/issues/4122)) ([a997152](https://github.com/LazyVim/LazyVim/commit/a997152eb2307380888d640440e0732493f82727))
+
+
+### Bug Fixes
+
+* **conform:** changes for new conform.nvim config ([eed91a3](https://github.com/LazyVim/LazyVim/commit/eed91a3e4c1521dd839d1a8bc09bdd98ac2fb874))
+* **toggle:** safe toggle get ([c8ab5d7](https://github.com/LazyVim/LazyVim/commit/c8ab5d7554da9f1eff69f5d6d8a0df38309d9f81))
+
+
+### Performance Improvements
+
+* **core:** defer clipboard because xsel and pbcopy can be slow ([#4120](https://github.com/LazyVim/LazyVim/issues/4120)) ([578f06e](https://github.com/LazyVim/LazyVim/commit/578f06e1401defbbc0a82f9ff1fb505564d038cf))
+
 ## [12.33.0](https://github.com/LazyVim/LazyVim/compare/v12.32.0...v12.33.0) (2024-07-19)
 
 
