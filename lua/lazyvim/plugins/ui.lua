@@ -226,39 +226,13 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     event = "LazyFile",
     opts = function()
-      local ibl = require("ibl")
-      local conf = require("ibl.config")
-
       LazyVim.toggle.map("<leader>ug", {
         name = "Indention Guides",
         get = function()
-          if conf.get_config(0).enabled then
-            return true
-          end
-          return false
+          return require("ibl.config").get_config(0).enabled
         end,
         set = function(state)
-          if state then
-            ibl.setup_buffer(0, { enabled = true })
-          else
-            ibl.setup_buffer(0, { enabled = false })
-          end
-        end,
-      })
-      LazyVim.toggle.map("<leader>uS", {
-        name = "Scope Highlight",
-        get = function()
-          if conf.get_config(0).scope.enabled then
-            return true
-          end
-          return false
-        end,
-        set = function(state)
-          if state then
-            ibl.setup_buffer(0, { scope = { enabled = true } })
-          else
-            ibl.setup_buffer(0, { scope = { enabled = false } })
-          end
+          require("ibl").setup_buffer(0, { enabled = state })
         end,
       })
 
