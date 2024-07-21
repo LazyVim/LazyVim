@@ -141,7 +141,7 @@ return {
           end
           local grug = require("grug-far");
           (is_visual and grug.with_visual_selection or grug.grug_far)({
-            prefills = { filesFilter = "*." .. vim.fn.expand("%:e") },
+            prefills = { filesFilter = "*.*" .. vim.fn.expand("%:e") },
           })
         end,
         mode = { "n", "v" },
