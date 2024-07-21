@@ -196,6 +196,9 @@ return {
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
         }, servers[server] or {})
+        if server_opts.enabled == false then
+          return
+        end
 
         if opts.setup[server] then
           if opts.setup[server](server, server_opts) then
