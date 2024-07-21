@@ -31,28 +31,22 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {
-          enabled = lsp == "pyright",
-        },
-        basedpyright = {
-          enabled = lsp == "basedpyright",
-        },
-        [lsp] = {
-          enabled = true,
-        },
-        ruff_lsp = {
-          enabled = ruff == "ruff_lsp",
-        },
         ruff = {
-          enabled = ruff == "ruff",
           cmd_env = { RUFF_TRACE = "messages" },
           init_options = {
             settings = {
               logLevel = "error",
             },
           },
+          keys = {
+            {
+              "<leader>co",
+              LazyVim.lsp.action["source.organizeImports"],
+              desc = "Organize Imports",
+            },
+          },
         },
-        [ruff] = {
+        ruff_lsp = {
           keys = {
             {
               "<leader>co",
@@ -71,6 +65,16 @@ return {
         end,
       },
     },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      local servers = { "pyright", "basedpyright", "ruff", "ruff_lsp", ruff, lsp }
+      for _, server in ipairs(servers) do
+        opts.servers[server] = opts.servers[server] or {}
+        opts.servers[server].enabled = server == lsp or server == ruff
+      end
+    end,
   },
   {
     "nvim-neotest/neotest",
