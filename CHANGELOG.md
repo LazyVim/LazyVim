@@ -1,5 +1,12 @@
 # Changelog
 
+## [12.35.0](https://github.com/LazyVim/LazyVim/compare/v12.34.0...v12.35.0) (2024-07-21)
+
+
+### Features
+
+* **python:** default to new ruff instead of ruff_lsp ([#4126](https://github.com/LazyVim/LazyVim/issues/4126)) ([61ce1cf](https://github.com/LazyVim/LazyVim/commit/61ce1cfaaf8365e3b5c12b1509064579ab7d80b5))
+
 ## [12.34.0](https://github.com/LazyVim/LazyVim/compare/v12.33.0...v12.34.0) (2024-07-20)
 
 
