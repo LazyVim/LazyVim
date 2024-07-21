@@ -2,11 +2,12 @@ if lazyvim_docs then
   -- LSP Server to use for Python.
   -- Set to "basedpyright" to use basedpyright instead of pyright.
   vim.g.lazyvim_python_lsp = "pyright"
-  vim.g.lazyvim_python_ruff = "ruff_lsp"
+  -- Set to "ruff_lsp" to use the old LSP implementation version.
+  vim.g.lazyvim_python_ruff = "ruff"
 end
 
 local lsp = vim.g.lazyvim_python_lsp or "pyright"
-local ruff = vim.g.lazyvim_python_ruff or "ruff_lsp"
+local ruff = vim.g.lazyvim_python_ruff or "ruff"
 
 return {
   recommended = function()
@@ -44,6 +45,12 @@ return {
         },
         ruff = {
           enabled = ruff == "ruff",
+          cmd_env = { RUFF_TRACE = "messages" },
+          init_options = {
+            settings = {
+              logLevel = "error",
+            },
+          },
         },
         [ruff] = {
           keys = {
