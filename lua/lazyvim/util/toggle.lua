@@ -39,14 +39,21 @@ function M.wk(lhs, toggle)
   if not LazyVim.has("which-key.nvim") then
     return
   end
+  local function safe_get()
+    local ok, enabled = pcall(toggle.get)
+    if not ok then
+      LazyVim.error({ "Failed to get toggle state for **" .. toggle.name .. "**:\n", enabled }, { once = true })
+    end
+    return enabled
+  end
   require("which-key").add({
     {
       lhs,
       icon = function()
-        return toggle.get() and { icon = " ", color = "green" } or { icon = " ", color = "yellow" }
+        return safe_get() and { icon = " ", color = "green" } or { icon = " ", color = "yellow" }
       end,
       desc = function()
-        return (toggle.get() and "Disable " or "Enable ") .. toggle.name
+        return (safe_get() and "Disable " or "Enable ") .. toggle.name
       end,
     },
   })

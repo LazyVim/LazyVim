@@ -2,6 +2,9 @@
 
 ## 12.x
 
+- [nvim-spectre](https://github.com/nvim-pack/nvim-spectre) has been removed in favor of [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim).
+  **grug-far.nvim** has a great UI and feels more intuitive to use.
+
 - This **news** is now also available on the website at [https://www.lazyvim.org/news](https://www.lazyvim.org/news)
 
 - **prettier** extra now works for all prettier supported filetypes
