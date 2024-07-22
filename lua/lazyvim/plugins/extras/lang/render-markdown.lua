@@ -7,7 +7,7 @@ return {
     "MeanderingProgrammer/markdown.nvim",
     name = "render-markdown",
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
-    event = "BufEnter",
+    event = "LazyFile",
     keys = {
       { "<leader>um", "<cmd>RenderMarkdown toggle<CR>", desc = "Toggle Markdown Render" },
     },
