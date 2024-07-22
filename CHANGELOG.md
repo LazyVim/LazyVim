@@ -1,5 +1,12 @@
 # Changelog
 
+## [12.36.0](https://github.com/LazyVim/LazyVim/compare/v12.35.1...v12.36.0) (2024-07-22)
+
+
+### Features
+
+* **grug-far:** no longer needed to call visual replace separately ([72d0cad](https://github.com/LazyVim/LazyVim/commit/72d0cad3530d877401ad9674f5266c79fbec396b))
+
 ## [12.35.1](https://github.com/LazyVim/LazyVim/compare/v12.35.0...v12.35.1) (2024-07-21)
 
 
