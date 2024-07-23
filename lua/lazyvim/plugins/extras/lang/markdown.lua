@@ -96,7 +96,11 @@ return {
     opts = {
       file_types = { "markdown", "norg", "rmd", "org" },
       code = { sign = false },
-      heading = { sign = false },
+      heading = { sign = false, icons = {} },
+      inline_query = [[
+        (shortcut_link) @callout
+        [(inline_link) (image)] @link
+      ]],
     },
     ft = { "markdown", "norg", "rmd", "org" },
     enabled = true,
