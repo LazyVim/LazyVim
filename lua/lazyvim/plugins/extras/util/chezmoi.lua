@@ -68,15 +68,15 @@ return {
     "nvimdev/dashboard-nvim",
     optional = true,
     opts = function(_, opts)
-      local projects = {
+      local chezmoi = {
         action = pick_chezmoi,
         desc = "  Config",
         icon = "",
         key = "c",
       }
 
-      projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
-      projects.key_format = "  %s"
+      chezmoi.desc = chezmoi.desc .. string.rep(" ", 43 - #chezmoi.desc)
+      chezmoi.key_format = "  %s"
 
       -- remove lazyvim config property
       for i = #opts.config.center, 1, -1 do
@@ -85,7 +85,7 @@ return {
         end
       end
 
-      table.insert(opts.config.center, 5, projects)
+      table.insert(opts.config.center, 5, chezmoi)
     end,
   },
 
