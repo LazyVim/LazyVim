@@ -138,4 +138,15 @@ return {
       table.insert(opts.auto_brackets, "python")
     end,
   },
+
+  -- Don't mess up DAP adapters provided by nvim-dap-python
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    optional = true,
+    opts = {
+      handlers = {
+        python = function() end,
+      },
+    },
+  },
 }
