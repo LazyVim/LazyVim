@@ -72,7 +72,7 @@ return {
 
       -- Extends dap.configurations with entries read from .vscode/launch.json
       if vim.fn.filereadable(".vscode/launch.json") then
-        require("dap.ext.vscode").load_launchjs(nil, {})
+        vscode.load_launchjs(nil, {})
       end
     end,
   },
