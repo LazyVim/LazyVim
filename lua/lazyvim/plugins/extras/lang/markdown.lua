@@ -102,8 +102,7 @@ return {
       },
       heading = {
         sign = false,
-        -- FIXME: uncomment when PR is merged
-        -- icons = {},
+        icons = {},
       },
     },
     ft = { "markdown", "norg", "rmd", "org" },
