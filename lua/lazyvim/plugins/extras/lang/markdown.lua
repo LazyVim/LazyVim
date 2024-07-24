@@ -93,6 +93,7 @@ return {
 
   {
     "MeanderingProgrammer/markdown.nvim",
+    name = "render-markdown",
     opts = {
       file_types = { "markdown", "norg", "rmd", "org" },
       code = {
