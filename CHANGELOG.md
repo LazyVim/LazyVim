@@ -1,5 +1,23 @@
 # Changelog
 
+## [12.37.0](https://github.com/LazyVim/LazyVim/compare/v12.36.0...v12.37.0) (2024-07-24)
+
+
+### Features
+
+* **catppuccin:** enable grug-far integration ([#4156](https://github.com/LazyVim/LazyVim/issues/4156)) ([4bf6d85](https://github.com/LazyVim/LazyVim/commit/4bf6d856a805d38c19c8485c7a062d6cbc5cfaa8))
+* **elixir:** add elixirls code actions ([#4148](https://github.com/LazyVim/LazyVim/issues/4148)) ([f94a059](https://github.com/LazyVim/LazyVim/commit/f94a0591b3e5838794b1c3897ec21491aeb080fe))
+
+
+### Bug Fixes
+
+* **dap:** don't mess up DAP adapters provided by nvim-dap-python ([#4141](https://github.com/LazyVim/LazyVim/issues/4141)) ([940d7df](https://github.com/LazyVim/LazyVim/commit/940d7df59aac01f6cc587f035d9b4913139fae60))
+* **dap:** extend dap.configurations from .vscode/launch.json ([#4106](https://github.com/LazyVim/LazyVim/issues/4106)) ([caf227d](https://github.com/LazyVim/LazyVim/commit/caf227dd08e83c826800cb88c34c87c600793fa3))
+* **grug-far:** use new transient option ([1c2be20](https://github.com/LazyVim/LazyVim/commit/1c2be200c185a4567c6a634da2b624d9a638fe73))
+* **keymaps:** leader-wd ([f0d8b8b](https://github.com/LazyVim/LazyVim/commit/f0d8b8b293c1fc798b576a74a87f9bd0b59714f3))
+* **keymaps:** leader-wm ([391f506](https://github.com/LazyVim/LazyVim/commit/391f506295607e12db545b85fcbe0e00b1b8efa9))
+* **news:** deprecated API ([f6cd4a3](https://github.com/LazyVim/LazyVim/commit/f6cd4a38c667e3ef56672d723705ecd8a774a0f4))
+
 ## [12.36.0](https://github.com/LazyVim/LazyVim/compare/v12.35.1...v12.36.0) (2024-07-22)
 
 
