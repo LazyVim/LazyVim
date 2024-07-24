@@ -1,5 +1,13 @@
 # Changelog
 
+## [12.38.0](https://github.com/LazyVim/LazyVim/compare/v12.37.0...v12.38.0) (2024-07-24)
+
+
+### Features
+
+* **markdown:** markdown-render toggle ([c8d0faf](https://github.com/LazyVim/LazyVim/commit/c8d0faf9b152283b2ae74f9594287a834eae002a))
+* **markdown:** replace `headlines.nvim` by `markdown.nvim` ([#4139](https://github.com/LazyVim/LazyVim/issues/4139)) ([264abdf](https://github.com/LazyVim/LazyVim/commit/264abdf9d52fe44c1dcb66f0502dcba5a881ea43))
+
 ## [12.37.0](https://github.com/LazyVim/LazyVim/compare/v12.36.0...v12.37.0) (2024-07-24)
 
 
