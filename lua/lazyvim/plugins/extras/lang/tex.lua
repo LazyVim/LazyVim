@@ -30,7 +30,7 @@ return {
       vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
     end,
     keys = {
-      { "<localLeader>l", "", desc = "+vimtext" },
+      { "<localLeader>l", "", desc = "+vimtex" },
     },
   },
 
