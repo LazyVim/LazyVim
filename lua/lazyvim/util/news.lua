@@ -82,9 +82,9 @@ function M.open(file, opts)
   vim.opt_local.statuscolumn = " "
   vim.opt_local.conceallevel = 3
   if vim.diagnostic.enable then
-    vim.diagnostic.enable(false, { bufnr = float.buf })
+    pcall(vim.diagnostic.enable, false, { bufnr = float.buf })
   else
-    vim.diagnostic.disable(float.buf)
+    pcall(vim.diagnostic.disable, float.buf)
   end
 end
 
