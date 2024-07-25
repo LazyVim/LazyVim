@@ -1,7 +1,7 @@
 return {
   recommended = function()
     return LazyVim.extras.wants({
-      ft = { "elixir", "eelixir", "heex", "surface" },
+      ft = { "elixir", "eelixir", "heex", "surface", "livebook" },
       root = "mix.exs",
     })
   end,
@@ -40,7 +40,10 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "elixir", "heex", "eex" } },
+    opts = function(_, opts)
+      opts.ensure_installed = { "elixir", "heex", "eex" }
+      vim.treesitter.language.register("markdown", "livebook")
+    end,
   },
   {
     "nvim-neotest/neotest",
@@ -83,6 +86,14 @@ return {
           end,
         },
       }
+    end,
+  },
+  {
+    "MeanderingProgrammer/markdown.nvim",
+    optional = true,
+    ft = { "livebook" },
+    opts = function(_, opts)
+      vim.list_extend(opts.file_types or {}, { "livebook" })
     end,
   },
 }
