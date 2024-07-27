@@ -1,10 +1,13 @@
+-- exclude directories and externals
+local chezmoi_list_args = { "--include", "files", "--exclude", "externals" }
+
 ---@param targets? string|string[]
 local function fzf_chezmoi(targets)
   local fzf_lua = require("fzf-lua")
   local chezmoi = require("chezmoi.commands")
   local results = chezmoi.list({
     targets = targets or {},
-    args = { "--include", "files" }, -- exclude directories
+    args = chezmoi_list_args,
   })
   local opts = {
     fzf_opts = {},
@@ -36,7 +39,7 @@ local pick_config = function()
   local config_dir = vim.fn.stdpath("config")
   local managed_config_files = chezmoi.list({
     targets = config_dir,
-    args = { "--path-style", "absolute", "--include", "files" },
+    args = { "--path-style", "absolute", unpack(chezmoi_list_args) },
   })
 
   if vim.tbl_isempty(managed_config_files) then
