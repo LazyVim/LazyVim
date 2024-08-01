@@ -99,6 +99,7 @@ return {
         sign = false,
         width = "block",
         right_pad = 1,
+        position = "right",
       },
       heading = {
         sign = false,
