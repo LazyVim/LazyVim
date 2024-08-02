@@ -130,13 +130,7 @@ if vim.lsp.inlay_hint then
 end
 
 -- lazygit
-local status, gitcheck = pcall(require, "lazyvim.util.gitcheck")
-if not status then
-  print("Failed to load gitcheck.")  
-else
-  local is_lazygit_available = gitcheck.is_lazygit_available
--- Setting keymaps only if the user has it installed:
-if is_lazygit_available() then
+if vim.fn.executable('lazygit') == 1 then
 map("n", "<leader>gg", function() LazyVim.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 map("n", "<leader>gG", function() LazyVim.lazygit() end, { desc = "Lazygit (cwd)" })
 map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
@@ -151,11 +145,7 @@ end, { desc = "Lazygit Log" })
 map("n", "<leader>gL", function()
   LazyVim.lazygit({ args = { "log" } })
 end, { desc = "Lazygit Log (cwd)" })
-else
-  print("Lazygit is not installed.")
 end
-end
-
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
