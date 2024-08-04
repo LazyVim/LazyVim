@@ -286,14 +286,12 @@ return {
         end, 100)
       end)
 
-      mr.refresh(function()
-        for _, tool in ipairs(opts.ensure_installed) do
+      for _, tool in ipairs(opts.ensure_installed) do
+        if not mr.is_installed(tool) then
           local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
+          p:install()
         end
-      end)
+      end
     end,
   },
 }
