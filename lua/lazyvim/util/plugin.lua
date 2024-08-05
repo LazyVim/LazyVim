@@ -33,6 +33,7 @@ M.renames = {
   ["null-ls.nvim"] = "none-ls.nvim",
   ["romgrk/nvim-treesitter-context"] = "nvim-treesitter/nvim-treesitter-context",
   ["glepnir/dashboard-nvim"] = "nvimdev/dashboard-nvim",
+  ["markdown.nvim"] = "render-markdown.nvim",
 }
 
 function M.save_core()
