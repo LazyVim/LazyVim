@@ -62,7 +62,7 @@ pick = function()
             local path = selected[1]
             local ok = project.set_pwd(path)
             if ok then
-              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+              vim.api.nvim_win_close(0, false)
               LazyVim.info("Change project dir to " .. path)
             end
           end,

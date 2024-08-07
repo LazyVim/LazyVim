@@ -108,21 +108,26 @@ return {
         scss = "css",
         typescript = "typescript",
         typescriptreact = "typescript",
+        yaml = "yaml",
       },
       groups = {
         default = {
           augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
           augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
           augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
+          ordinal_numbers,
+          weekdays,
+          months,
         },
         typescript = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
           augend.constant.alias.bool, -- boolean value (true <-> false)
           logical_alias,
           augend.constant.new({ elements = { "let", "const" } }),
-          ordinal_numbers,
-          weekdays,
-          months,
+        },
+        yaml = {
+          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.constant.alias.bool, -- boolean value (true <-> false)
         },
         css = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
@@ -135,9 +140,6 @@ return {
         },
         markdown = {
           augend.misc.alias.markdown_header,
-          ordinal_numbers,
-          weekdays,
-          months,
         },
         json = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
@@ -151,17 +153,11 @@ return {
             word = true, -- if false, "sand" is incremented into "sor", "doctor" into "doctand", etc.
             cyclic = true, -- "or" is incremented into "and".
           }),
-          ordinal_numbers,
-          weekdays,
-          months,
         },
         python = {
           augend.integer.alias.decimal, -- nonnegative and negative decimal number
           capitalized_boolean,
           logical_alias,
-          ordinal_numbers,
-          weekdays,
-          months,
         },
       },
     }

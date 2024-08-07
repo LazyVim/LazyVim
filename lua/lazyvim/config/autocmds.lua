@@ -55,6 +55,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
+    "grug-far",
     "help",
     "lspinfo",
     "notify",
@@ -71,7 +72,11 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", {
+      buffer = event.buf,
+      silent = true,
+      desc = "Quit buffer",
+    })
   end,
 })
 
@@ -87,7 +92,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
-  pattern = { "*.txt", "*.tex", "*.typ", "gitcommit", "markdown" },
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true

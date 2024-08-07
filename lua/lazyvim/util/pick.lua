@@ -57,7 +57,7 @@ function M.open(command, opts)
     return LazyVim.error("LazyVim.pick: picker not set")
   end
 
-  command = command or "auto"
+  command = command ~= "auto" and command or "files"
   opts = opts or {}
 
   opts = vim.deepcopy(opts)
@@ -71,21 +71,6 @@ function M.open(command, opts)
     opts.cwd = LazyVim.root({ buf = opts.buf })
   end
 
-  local cwd = opts.cwd or vim.uv.cwd()
-  if command == "auto" then
-    command = "files"
-    if
-      vim.uv.fs_stat(cwd .. "/.git")
-      and not vim.uv.fs_stat(cwd .. "/.ignore")
-      and not vim.uv.fs_stat(cwd .. "/.rgignore")
-    then
-      command = "git_files"
-      if opts.show_untracked == nil then
-        opts.show_untracked = true
-        opts.recurse_submodules = false
-      end
-    end
-  end
   command = M.picker.commands[command] or command
   M.picker.open(command, opts)
 end

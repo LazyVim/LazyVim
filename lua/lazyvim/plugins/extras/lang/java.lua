@@ -190,30 +190,40 @@ return {
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client and client.name == "jdtls" then
             local wk = require("which-key")
-            wk.register({
-              ["<leader>cx"] = { name = "+extract" },
-              ["<leader>cxv"] = { require("jdtls").extract_variable_all, "Extract Variable" },
-              ["<leader>cxc"] = { require("jdtls").extract_constant, "Extract Constant" },
-              ["gs"] = { require("jdtls").super_implementation, "Goto Super" },
-              ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
-              ["<leader>co"] = { require("jdtls").organize_imports, "Organize Imports" },
-            }, { mode = "n", buffer = args.buf })
-            wk.register({
-              ["<leader>c"] = { name = "+code" },
-              ["<leader>cx"] = { name = "+extract" },
-              ["<leader>cxm"] = {
-                [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-                "Extract Method",
+            wk.add({
+              {
+                mode = "n",
+                buffer = args.buf,
+                { "<leader>cx", group = "extract" },
+                { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
+                { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
+                { "gs", require("jdtls").super_implementation, desc = "Goto Super" },
+                { "gS", require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
+                { "<leader>co", require("jdtls").organize_imports, desc = "Organize Imports" },
               },
-              ["<leader>cxv"] = {
-                [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
-                "Extract Variable",
+            })
+            wk.add({
+              {
+                mode = "v",
+                buffer = args.buf,
+                { "<leader>cx", group = "extract" },
+                {
+                  "<leader>cxm",
+                  [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
+                  desc = "Extract Method",
+                },
+                {
+                  "<leader>cxv",
+                  [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
+                  desc = "Extract Variable",
+                },
+                {
+                  "<leader>cxc",
+                  [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
+                  desc = "Extract Constant",
+                },
               },
-              ["<leader>cxc"] = {
-                [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
-                "Extract Constant",
-              },
-            }, { mode = "v", buffer = args.buf })
+            })
 
             if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
               -- custom init for Java debugger
@@ -223,12 +233,32 @@ return {
               -- Java Test require Java debugger to work
               if opts.test and mason_registry.is_installed("java-test") then
                 -- custom keymaps for Java test runner (not yet compatible with neotest)
-                wk.register({
-                  ["<leader>t"] = { name = "+test" },
-                  ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
-                  ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
-                  ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
-                }, { mode = "n", buffer = args.buf })
+                wk.add({
+                  {
+                    mode = "n",
+                    buffer = args.buf,
+                    { "<leader>t", group = "test" },
+                    {
+                      "<leader>tt",
+                      function()
+                        require("jdtls.dap").test_class({
+                          config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                        })
+                      end,
+                      desc = "Run All Test",
+                    },
+                    {
+                      "<leader>tr",
+                      function()
+                        require("jdtls.dap").test_nearest_method({
+                          config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                        })
+                      end,
+                      desc = "Run Nearest Test",
+                    },
+                    { "<leader>tT", require("jdtls.dap").pick_test, desc = "Run Test" },
+                  },
+                })
               end
             end
 

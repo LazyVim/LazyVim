@@ -120,7 +120,7 @@ return {
         options = {
           theme = "auto",
           globalstatus = vim.o.laststatus == 3,
-          disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
+          disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter" } },
         },
         sections = {
           lualine_a = { "mode" },
@@ -198,20 +198,22 @@ return {
       }
 
       -- do not add trouble symbols if aerial is enabled
-      if vim.g.trouble_lualine then
+      -- And allow it to be overriden for some buffer types (see autocmds)
+      if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
         local trouble = require("trouble")
-        local symbols = trouble.statusline
-          and trouble.statusline({
-            mode = "symbols",
-            groups = {},
-            title = false,
-            filter = { range = true },
-            format = "{kind_icon}{symbol.name:Normal}",
-            hl_group = "lualine_c_normal",
-          })
+        local symbols = trouble.statusline({
+          mode = "symbols",
+          groups = {},
+          title = false,
+          filter = { range = true },
+          format = "{kind_icon}{symbol.name:Normal}",
+          hl_group = "lualine_c_normal",
+        })
         table.insert(opts.sections.lualine_c, {
           symbols and symbols.get,
-          cond = symbols and symbols.has,
+          cond = function()
+            return vim.b.trouble_lualine ~= false and symbols.has()
+          end,
         })
       end
 
@@ -223,28 +225,40 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "LazyFile",
-    opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
-      scope = { show_start = false, show_end = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
+    opts = function()
+      LazyVim.toggle.map("<leader>ug", {
+        name = "Indention Guides",
+        get = function()
+          return require("ibl.config").get_config(0).enabled
+        end,
+        set = function(state)
+          require("ibl").setup_buffer(0, { enabled = state })
+        end,
+      })
+
+      return {
+        indent = {
+          char = "│",
+          tab_char = "│",
         },
-      },
-    },
+        scope = { show_start = false, show_end = false },
+        exclude = {
+          filetypes = {
+            "help",
+            "alpha",
+            "dashboard",
+            "neo-tree",
+            "Trouble",
+            "trouble",
+            "lazy",
+            "mason",
+            "notify",
+            "toggleterm",
+            "lazyterm",
+          },
+        },
+      }
+    end,
     main = "ibl",
   },
 
@@ -306,7 +320,15 @@ return {
   {
     "echasnovski/mini.icons",
     lazy = true,
-    opts = {},
+    opts = {
+      file = {
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      },
+    },
     init = function()
       package.preload["nvim-web-devicons"] = function()
         require("mini.icons").mock_nvim_web_devicons()
