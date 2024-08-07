@@ -179,7 +179,60 @@ function M.get_url(remote)
   for _, pattern in ipairs(M.remote_patterns) do
     ret = ret:gsub(pattern[1], pattern[2])
   end
-  return ret:find("https://") == 1 and ret or ("https://%s"):format(ret)
+
+  if ret:find("https://") == 1 then
+    return ret
+  end
+
+  --- @param url string
+  local function getRemoteURLFromSSH(url)
+    local SSHConfigPath = vim.env.HOME .. "/.ssh/config"
+
+    -- Returns if SSH config is not found or not readable
+    if not vim.uv.fs_access(SSHConfigPath, "R") then
+      return
+    end
+
+    -- Handle SSH config remotes
+    local file = io.open(SSHConfigPath, "r")
+
+    -- Returns if unable to read SSH config file
+    if not file then
+      return
+    end
+
+    local transformedUrl = ""
+    local currentHost, hostGroup = "", {}
+    for line in file:lines() do
+      line = line:match("^%s*(.-)%s*$")
+
+      if line ~= "" and not line:match("^#") then
+        local key, value = line:match("^(%S+)%s+(.+)$")
+
+        if key:lower() == "host" then
+          -- Process the URL before parsing the next group of hosts. If there is a match, we can replace the string and break early.
+          if currentHost ~= "" and currentHost ~= value and url:match(currentHost .. ":") then
+            -- If the username is specified, we do not need to replace it; otherwise, replace the username with "git".
+            local searchString = hostGroup[currentHost].User and currentHost .. ":" or "git@" .. currentHost .. ":"
+            local destinationURL = string.format("https://%s/", hostGroup[currentHost].HostName)
+            transformedUrl = url:gsub(searchString, destinationURL):gsub("%.git$", "")
+            break
+          end
+
+          -- Setup group of host
+          currentHost = value
+          hostGroup[currentHost] = {}
+        elseif currentHost then
+          hostGroup[currentHost][key] = value
+        end
+      end
+    end
+
+    file:close()
+    return transformedUrl
+  end
+
+  return getRemoteURLFromSSH(ret) or ("https://%s"):format(ret)
 end
 
 function M.browse()
@@ -191,10 +244,7 @@ function M.browse()
     if name and remote then
       local url = M.get_url(remote)
       if url then
-        table.insert(remotes, {
-          name = name,
-          url = url,
-        })
+        table.insert(remotes, { name = name, url = url })
       end
     end
   end
