@@ -14,6 +14,13 @@ return {
       end, { expr = true })
     end
 
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "grug-far",
+      callback = function()
+        vim.b.minianimate_disable = true
+      end,
+    })
+
     LazyVim.toggle.map("<leader>ua", {
       name = "Mini Animate",
       get = function()

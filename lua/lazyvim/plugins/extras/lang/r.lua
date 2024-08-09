@@ -19,14 +19,15 @@ return {
           vim.keymap.set("n", "<Enter>", "<Plug>RDSendLine", { buffer = true })
           vim.keymap.set("v", "<Enter>", "<Plug>RSendSelection", { buffer = true })
 
-          -- Increase the width of which-key to handle the longer r-nvim descriptions
           local wk = require("which-key")
           wk.add({
+            buffer = true,
             { "<localleader>a", group = "all" },
             { "<localleader>b", group = "between marks" },
             { "<localleader>c", group = "chunks" },
             { "<localleader>f", group = "functions" },
             { "<localleader>g", group = "goto" },
+            { "<localleader>i", group = "install" },
             { "<localleader>k", group = "knit" },
             { "<localleader>p", group = "paragraph" },
             { "<localleader>q", group = "quarto" },

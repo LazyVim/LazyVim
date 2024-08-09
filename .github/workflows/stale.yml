@@ -5,6 +5,7 @@ on:
     - cron: "30 1 * * *"
 
 jobs:
-  ci:
+  stale:
+    if: contains(fromJSON('["folke", "LazyVim"]'), github.repository_owner)
     uses: folke/github/.github/workflows/stale.yml@main
     secrets: inherit

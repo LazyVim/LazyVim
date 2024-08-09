@@ -2,6 +2,12 @@
 
 ## 12.x
 
+- **Markdown Extra**: [headlines.nvim](https://github.com/lukas-reineke/headlines.nvim) has been removed in favor of [markdown.nvim](https://github.com/MeanderingProgrammer/markdown.nvim)
+  to spice up your markdown files.
+
+- [nvim-spectre](https://github.com/nvim-pack/nvim-spectre) has been removed in favor of [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim).
+  **grug-far.nvim** has a great UI and feels more intuitive to use.
+
 - This **news** is now also available on the website at [https://www.lazyvim.org/news](https://www.lazyvim.org/news)
 
 - **prettier** extra now works for all prettier supported filetypes
