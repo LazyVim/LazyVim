@@ -28,9 +28,21 @@ return {
     config = function()
       vim.g.vimtex_mappings_disable = { ["n"] = { "K" } } -- disable `K` as it conflicts with LSP hover
       vim.g.vimtex_quickfix_method = vim.fn.executable("pplatex") == 1 and "pplatex" or "latexlog"
+
+      -- disable features provided by LaTeX Workshop
+      if vim.g.vscode then
+        vim.g.vimtex_compiler_enabled = 0
+        vim.g.vimtex_complete_enabled = 0
+        vim.g.vimtex_indent_enabled = 0
+        vim.g.vimtex_indent_bib_enabled = 0
+        vim.g.vimtex_quickfix_enabled = 0
+        vim.g.vimtex_syntax_enabled = 0
+        vim.g.vimtex_toc_enabled = 0
+        vim.g.vimtex_view_enabled = 0
+      end
     end,
     keys = {
-      { "<localLeader>l", "", desc = "+vimtext" },
+      { "<localLeader>l", "", desc = "+vimtex" },
     },
   },
 

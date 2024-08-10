@@ -17,6 +17,7 @@ local enabled = {
   "nvim-ts-context-commentstring",
   "ts-comments.nvim",
   "vim-repeat",
+  "vimtex",
   "yanky.nvim",
   "LazyVim",
 }
