@@ -1,3 +1,10 @@
+if lazyvim_docs then
+  -- If you don't use Mason to install the `svelte-language-server` you can use the following to custom path for `svelte-language-server`.
+  vim.g.pkg_path = {
+    ["svelte-language-server"] = "path_to_this_node_package",
+  }
+end
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -48,7 +55,8 @@ return {
       LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
           name = "typescript-svelte-plugin",
-          location = LazyVim.get_pkg_path("svelte-language-server", "/node_modules/typescript-svelte-plugin"),
+          location = vim.g.pkg_path and vim.g.pkg_path["typescript-svelte-plugin"]
+            or LazyVim.get_pkg_path("svelte-language-server", "/node_modules/typescript-svelte-plugin"),
           enableForWorkspaceTypeScriptVersions = true,
         },
       })
