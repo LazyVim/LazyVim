@@ -6,13 +6,18 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Before** reporting an issue, make sure to read the [documentation](https://github.com/folke/LazyVim) and search [existing issues](https://github.com/folke/LazyVim/issues). Usage questions such as ***"How do I...?"*** belong in [Discussions](https://github.com/folke/LazyVim/discussions) and will be closed.
+        **Before** reporting an issue, make sure to read the [documentation](https://github.com/LazyVim/LazyVim)
+        and search [existing issues](https://github.com/LazyVim/LazyVim/issues).
+
+        Usage questions such as ***"How do I...?"*** belong in [Discussions](https://github.com/LazyVim/LazyVim/discussions) and will be closed.
   - type: checkboxes
     attributes:
       label: Did you check docs and existing issues?
       description: Make sure you checked all of the below before submitting an issue
       options:
         - label: I have read all the LazyVim docs
+          required: true
+        - label: I have updated the plugin to the latest version before submitting this issue
           required: true
         - label: I have searched the existing issues of LazyVim
           required: true
@@ -57,33 +62,15 @@ body:
       label: Repro
       description: Minimal `init.lua` to reproduce this issue. Save as `repro.lua` and run with `nvim -u repro.lua`
       value: |
-        -- DO NOT change the paths and don't remove the colorscheme
-        local root = vim.fn.fnamemodify("./.repro", ":p")
+        vim.env.LAZY_STDPATH = ".repro"
+        load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/main/bootstrap.lua"))()
 
-        -- set stdpaths to use .repro
-        for _, name in ipairs({ "config", "data", "state", "cache" }) do
-          vim.env[("XDG_%s_HOME"):format(name:upper())] = root .. "/" .. name
-        end
-
-        -- bootstrap lazy
-        local lazypath = root .. "/plugins/lazy.nvim"
-        if not vim.loop.fs_stat(lazypath) then
-          vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazypath, })
-        end
-        vim.opt.runtimepath:prepend(lazypath)
-
-        -- install plugins
-        local plugins = {
-          "folke/tokyonight.nvim",
-          "folke/LazyVim",
-          -- add any other plugins here
-        }
-        require("lazy").setup(plugins, {
-          root = root .. "/plugins",
+        require("lazy.minit").repro({
+          spec = {
+            { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+            -- add any other plugins here
+          },
         })
-
-        vim.cmd.colorscheme("tokyonight")
-        -- add anything else here
-      render: Lua
+      render: lua
     validations:
       required: false

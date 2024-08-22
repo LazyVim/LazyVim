@@ -129,6 +129,7 @@ function M.rename_file()
   vim.ui.input({
     prompt = "New File Name: ",
     default = extra,
+    completion = "file",
   }, function(new)
     if not new or new == "" or new == extra then
       return
@@ -279,10 +280,11 @@ function M.words.setup(opts)
         if not require("lazyvim.plugins.lsp.keymaps").has(buf, "documentHighlight") then
           return false
         end
+
         if not ({ M.words.get() })[2] then
           if ev.event:find("CursorMoved") then
             vim.lsp.buf.clear_references()
-          else
+          elseif not LazyVim.cmp.visible() then
             vim.lsp.buf.document_highlight()
           end
         end

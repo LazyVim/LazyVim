@@ -1,0 +1,6 @@
+describe("Should not have", function()
+  it("dd()", function()
+    local out = vim.fn.system([[/bin/grep --line-number -r '\\bdd(' lua]])
+    assert(vim.v.shell_error == 1, "Should not have dd()\n" .. out)
+  end)
+end)

@@ -6,6 +6,39 @@ return {
     })
   end,
   {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        elixirls = {
+          keys = {
+            {
+              "<leader>cp",
+              function()
+                local params = vim.lsp.util.make_position_params()
+                LazyVim.lsp.execute({
+                  command = "manipulatePipes:serverid",
+                  arguments = { "toPipe", params.textDocument.uri, params.position.line, params.position.character },
+                })
+              end,
+              desc = "To Pipe",
+            },
+            {
+              "<leader>cP",
+              function()
+                local params = vim.lsp.util.make_position_params()
+                LazyVim.lsp.execute({
+                  command = "manipulatePipes:serverid",
+                  arguments = { "fromPipe", params.textDocument.uri, params.position.line, params.position.character },
+                })
+              end,
+              desc = "From Pipe",
+            },
+          },
+        },
+      },
+    },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "elixir", "heex", "eex" } },
   },
@@ -25,12 +58,13 @@ return {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)
-      if vim.fn.executable("credo") == 0 then
-        return
-      end
       local nls = require("null-ls")
       opts.sources = vim.list_extend(opts.sources or {}, {
-        nls.builtins.diagnostics.credo,
+        nls.builtins.diagnostics.credo.with({
+          condition = function(utils)
+            return utils.root_has_file(".credo.exs")
+          end,
+        }),
       })
     end,
   },
@@ -38,11 +72,16 @@ return {
     "mfussenegger/nvim-lint",
     optional = true,
     opts = function(_, opts)
-      if vim.fn.executable("credo") == 0 then
-        return
-      end
       opts.linters_by_ft = {
         elixir = { "credo" },
+      }
+
+      opts.linters = {
+        credo = {
+          condition = function(ctx)
+            return vim.fs.find({ ".credo.exs" }, { path = ctx.filename, upward = true })[1]
+          end,
+        },
       }
     end,
   },

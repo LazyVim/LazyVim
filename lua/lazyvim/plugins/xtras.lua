@@ -1,5 +1,3 @@
-local Config = require("lazyvim.config")
-
 -- Some extras need to be loaded before others
 local prios = {
   ["lazyvim.plugins.extras.test.core"] = 1,
@@ -13,15 +11,16 @@ local prios = {
 }
 
 ---@type string[]
-local extras = LazyVim.dedup(Config.json.data.extras)
+local extras = LazyVim.dedup(LazyVim.config.json.data.extras)
 
 local version = vim.version()
 local v = version.major .. "_" .. version.minor
 
 local compat = { "0_9" }
 
+LazyVim.plugin.save_core()
 if vim.tbl_contains(compat, v) then
-  extras[#extras + 1] = "lazyvim.plugins.compat.nvim-" .. v
+  table.insert(extras, 1, "lazyvim.plugins.compat.nvim-" .. v)
 end
 
 table.sort(extras, function(a, b)

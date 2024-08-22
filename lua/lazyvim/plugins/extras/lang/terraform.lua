@@ -57,6 +57,7 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
+    optional = true,
     dependencies = {
       {
         "ANGkeith/telescope-terraform-doc.nvim",

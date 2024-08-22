@@ -29,15 +29,15 @@ return {
         evaluate_single = true,
         header = logo,
         items = {
-          new_section("Find file",       "Telescope find_files",                                   "Telescope"),
-          new_section("Recent files",    "Telescope oldfiles",                                     "Telescope"),
-          new_section("Grep text",       "Telescope live_grep",                                    "Telescope"),
-          new_section("Config",          "lua require('lazyvim.util').telescope.config_files()()", "Config"),
-          new_section("Extras",          "LazyExtras",                                             "Config"),
-          new_section("Lazy",            "Lazy",                                                   "Config"),
-          new_section("New file",        "ene | startinsert",                                      "Built-in"),
-          new_section("Quit",            "qa",                                                     "Built-in"),
-          new_section("Session restore", [[lua require("persistence").load()]],                    "Session"),
+          new_section("Find file",       LazyVim.pick(),                        "Telescope"),
+          new_section("New file",        "ene | startinsert",                   "Built-in"),
+          new_section("Recent files",    LazyVim.pick("oldfiles"),              "Telescope"),
+          new_section("Find text",       LazyVim.pick("live_grep"),             "Telescope"),
+          new_section("Config",          LazyVim.pick.config_files(),           "Config"),
+          new_section("Restore session", [[lua require("persistence").load()]], "Session"),
+          new_section("Lazy Extras",     "LazyExtras",                          "Config"),
+          new_section("Lazy",            "Lazy",                                "Config"),
+          new_section("Quit",            "qa",                                  "Built-in"),
         },
         content_hooks = {
           starter.gen_hook.adding_bullet(pad .. "░ ", false),
@@ -69,7 +69,7 @@ return {
           local pad_footer = string.rep(" ", 8)
           starter.config.footer = pad_footer .. "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
           -- INFO: based on @echasnovski's recommendation (thanks a lot!!!)
-          if vim.bo[ev.buf].filetype == "starter" then
+          if vim.bo[ev.buf].filetype == "ministarter" then
             pcall(starter.refresh)
           end
         end,

@@ -1,14 +1,6 @@
 return {
   "echasnovski/mini.files",
   opts = {
-    mappings = {
-      toggle_hidden = "g.",
-      change_cwd = "gc",
-      go_in_horizontal = "<C-w>s",
-      go_in_vertical = "<C-w>v",
-      go_in_horizontal_plus = "<C-w>S",
-      go_in_vertical_plus = "<C-w>V",
-    },
     windows = {
       preview = true,
       width_focus = 30,
@@ -90,17 +82,22 @@ return {
 
         vim.keymap.set(
           "n",
-          opts.mappings.toggle_hidden,
+          opts.mappings and opts.mappings.toggle_hidden or "g.",
           toggle_dotfiles,
           { buffer = buf_id, desc = "Toggle hidden files" }
         )
 
-        vim.keymap.set("n", opts.mappings.change_cwd, files_set_cwd, { buffer = args.data.buf_id, desc = "Set cwd" })
+        vim.keymap.set(
+          "n",
+          opts.mappings and opts.mappings.change_cwd or "gc",
+          files_set_cwd,
+          { buffer = args.data.buf_id, desc = "Set cwd" }
+        )
 
-        map_split(buf_id, opts.mappings.go_in_horizontal, "horizontal", false)
-        map_split(buf_id, opts.mappings.go_in_vertical, "vertical", false)
-        map_split(buf_id, opts.mappings.go_in_horizontal_plus, "horizontal", true)
-        map_split(buf_id, opts.mappings.go_in_vertical_plus, "vertical", true)
+        map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<C-w>s", "horizontal", false)
+        map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<C-w>v", "vertical", false)
+        map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal_plus or "<C-w>S", "horizontal", true)
+        map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical_plus or "<C-w>V", "vertical", true)
       end,
     })
 

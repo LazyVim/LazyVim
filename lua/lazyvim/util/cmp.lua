@@ -70,6 +70,12 @@ function M.add_missing_snippet_docs(window)
   end
 end
 
+function M.visible()
+  ---@module 'cmp'
+  local cmp = package.loaded["cmp"]
+  return cmp and cmp.core.view:visible()
+end
+
 -- This is a better implementation of `cmp.confirm`:
 --  * check if the completion menu is visible without waiting for running sources
 --  * create an undo point before confirming
@@ -121,6 +127,33 @@ function M.expand(snippet)
   if session then
     vim.snippet._session = session
   end
+end
+
+---@param opts cmp.ConfigSchema | {auto_brackets?: string[]}
+function M.setup(opts)
+  for _, source in ipairs(opts.sources) do
+    source.group_index = source.group_index or 1
+  end
+
+  local parse = require("cmp.utils.snippet").parse
+  require("cmp.utils.snippet").parse = function(input)
+    local ok, ret = pcall(parse, input)
+    if ok then
+      return ret
+    end
+    return LazyVim.cmp.snippet_preview(input)
+  end
+
+  local cmp = require("cmp")
+  cmp.setup(opts)
+  cmp.event:on("confirm_done", function(event)
+    if vim.tbl_contains(opts.auto_brackets or {}, vim.bo.filetype) then
+      LazyVim.cmp.auto_brackets(event.entry)
+    end
+  end)
+  cmp.event:on("menu_opened", function(event)
+    LazyVim.cmp.add_missing_snippet_docs(event.window)
+  end)
 end
 
 return M

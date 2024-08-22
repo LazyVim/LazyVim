@@ -26,4 +26,13 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {},
   },
+
+  -- dummy import to save core imports
+  {
+    import = "foobar",
+    enabled = function()
+      LazyVim.plugin.save_core()
+      return false
+    end,
+  },
 }

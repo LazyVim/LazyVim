@@ -1,0 +1,13 @@
+name: Update Repo
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run every hour
+    - cron: "0 * * * *"
+
+jobs:
+  update:
+    if: contains(fromJSON('["folke", "LazyVim"]'), github.repository_owner)
+    uses: folke/github/.github/workflows/update.yml@main
+    secrets: inherit

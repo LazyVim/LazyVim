@@ -14,10 +14,6 @@ return {
     opts = {
       servers = {
         gopls = {
-          keys = {
-            -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
-            { "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug Nearest (Go)" },
-          },
           settings = {
             gopls = {
               gofumpt = true,
@@ -121,7 +117,7 @@ return {
       },
       {
         "leoluz/nvim-dap-go",
-        config = true,
+        opts = {},
       },
     },
   },
@@ -129,15 +125,28 @@ return {
     "nvim-neotest/neotest",
     optional = true,
     dependencies = {
-      "nvim-neotest/neotest-go",
+      "fredrikaverpil/neotest-golang",
     },
     opts = {
       adapters = {
-        ["neotest-go"] = {
-          -- Here we can set options for neotest-go, e.g.
-          -- args = { "-tags=integration" }
-          recursive_run = true,
+        ["neotest-golang"] = {
+          -- Here we can set options for neotest-golang, e.g.
+          -- go_test_args = { "-v", "-race", "-count=1", "-timeout=60s" },
+          dap_go_enabled = true, -- requires leoluz/nvim-dap-go
         },
+      },
+    },
+  },
+
+  -- Filetype icons
+  {
+    "echasnovski/mini.icons",
+    opts = {
+      file = {
+        [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
+      },
+      filetype = {
+        gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
       },
     },
   },

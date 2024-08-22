@@ -5,7 +5,6 @@ local LazyUtil = require("lazy.core.util")
 ---@field ui lazyvim.util.ui
 ---@field lsp lazyvim.util.lsp
 ---@field root lazyvim.util.root
----@field telescope lazyvim.util.telescope
 ---@field terminal lazyvim.util.terminal
 ---@field lazygit lazyvim.util.lazygit
 ---@field toggle lazyvim.util.toggle
@@ -17,6 +16,7 @@ local LazyUtil = require("lazy.core.util")
 ---@field json lazyvim.util.json
 ---@field lualine lazyvim.util.lualine
 ---@field mini lazyvim.util.mini
+---@field pick lazyvim.util.pick
 ---@field cmp lazyvim.util.cmp
 local M = {}
 
@@ -31,6 +31,7 @@ local deprecated = {
   toggle_diagnostics = { "toggle", "diagnostics" },
   toggle_number = { "toggle", "number" },
   fg = "ui",
+  telescope = "pick",
 }
 
 setmetatable(M, {
@@ -77,8 +78,10 @@ end
 
 ---@param extra string
 function M.has_extra(extra)
+  local Config = require("lazyvim.config")
   local modname = "lazyvim.plugins.extras." .. extra
   return vim.tbl_contains(require("lazy.core.config").spec.modules, modname)
+    or vim.tbl_contains(Config.json.data.extras, modname)
 end
 
 ---@param fn fun()
@@ -114,7 +117,7 @@ end
 
 ---@param name string
 function M.opts(name)
-  local plugin = require("lazy.core.config").spec.plugins[name]
+  local plugin = M.get_plugin(name)
   if not plugin then
     return {}
   end
@@ -268,17 +271,19 @@ for _, level in ipairs({ "info", "warn", "error" }) do
   end
 end
 
-local cache = {} ---@type table<string, any>
+local cache = {} ---@type table<(fun()), table<string, any>>
 ---@generic T: fun()
 ---@param fn T
 ---@return T
 function M.memoize(fn)
   return function(...)
     local key = vim.inspect({ ... })
-    if cache[key] == nil then
-      cache[key] = fn(...)
+    cache[fn] = cache[fn] or {}
+    if cache[fn][key] == nil then
+      cache[fn][key] = fn(...)
     end
-    return cache[key]
+    return cache[fn][key]
   end
 end
+
 return M

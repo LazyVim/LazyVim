@@ -17,33 +17,7 @@ return {
     desc = "Debugging support. Requires language specific adapters to be configured. (see lang extras)",
 
     dependencies = {
-
-      -- fancy UI for the debugger
-      {
-        "rcarriga/nvim-dap-ui",
-        dependencies = { "nvim-neotest/nvim-nio" },
-        -- stylua: ignore
-        keys = {
-          { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-          { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-        },
-        opts = {},
-        config = function(_, opts)
-          local dap = require("dap")
-          local dapui = require("dapui")
-          dapui.setup(opts)
-          dap.listeners.after.event_initialized["dapui_config"] = function()
-            dapui.open({})
-          end
-          dap.listeners.before.event_terminated["dapui_config"] = function()
-            dapui.close({})
-          end
-          dap.listeners.before.event_exited["dapui_config"] = function()
-            dapui.close({})
-          end
-        end,
-      },
-
+      "rcarriga/nvim-dap-ui",
       -- virtual text for the debugger
       {
         "theHamsta/nvim-dap-virtual-text",
@@ -74,10 +48,14 @@ return {
     },
 
     config = function()
-      local Config = require("lazyvim.config")
+      -- load mason-nvim-dap here, after all adapters have been setup
+      if LazyVim.has("mason-nvim-dap.nvim") then
+        require("mason-nvim-dap").setup(LazyVim.opts("mason-nvim-dap.nvim"))
+      end
+
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-      for name, sign in pairs(Config.icons.dap) do
+      for name, sign in pairs(LazyVim.config.icons.dap) do
         sign = type(sign) == "table" and sign or { sign }
         vim.fn.sign_define(
           "Dap" .. name,
@@ -90,6 +68,37 @@ return {
       local json = require("plenary.json")
       vscode.json_decode = function(str)
         return vim.json.decode(json.json_strip_comments(str))
+      end
+
+      -- Extends dap.configurations with entries read from .vscode/launch.json
+      if vim.fn.filereadable(".vscode/launch.json") then
+        vscode.load_launchjs()
+      end
+    end,
+  },
+
+  -- fancy UI for the debugger
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "nvim-neotest/nvim-nio" },
+    -- stylua: ignore
+    keys = {
+      { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+      { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+    },
+    opts = {},
+    config = function(_, opts)
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup(opts)
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open({})
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close({})
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close({})
       end
     end,
   },
@@ -114,5 +123,7 @@ return {
         -- Update this to ensure that you have the debuggers for the langs you want
       },
     },
+    -- mason-nvim-dap is loaded when nvim-dap loads
+    config = function() end,
   },
 }

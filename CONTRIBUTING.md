@@ -17,6 +17,9 @@
 
 ## Contributing an Extra Language
 
+- You should be familiar with the language you are adding.
+- You should have experience with the language's ecosystem, including formatters,
+  linters, and LSP servers.
 - The extra should include the setup most widely used by the community.
 - Include Tree-sitter parsers that are not yet the default.
 - Include the most widely used LSP server setup.
