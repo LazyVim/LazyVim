@@ -102,26 +102,17 @@ return {
         table.insert(opts.sources, { name = "snippets" })
       end
     end,
-    keys = {
-      {
-        "<Tab>",
-        function()
+    init = function()
+      -- Neovim enabled snippet navigation mappings by default in v0.11
+      if vim.fn.has("nvim-0.11") == 0 then
+        vim.keymap.set({ "i", "s" }, "<Tab>", function()
           return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-      {
-        "<S-Tab>",
-        function()
+        end, { expr = true, silent = true })
+        vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
           return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-    },
+        end, { expr = true, silent = true })
+      end
+    end,
   },
 
   -- auto pairs
