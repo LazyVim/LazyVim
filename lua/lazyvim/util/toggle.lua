@@ -127,30 +127,23 @@ M.number = M.wrap({
 M.diagnostics = M.wrap({
   name = "Diagnostics",
   get = function()
-    local enabled
+    local enabled = false
     if vim.diagnostic.is_enabled then
       enabled = vim.diagnostic.is_enabled()
-    else
+    elseif vim.diagnostic.is_disabled then
       enabled = not vim.diagnostic.is_disabled()
     end
     return enabled
   end,
-  set = function()
-    local enabled
-    if vim.diagnostic.is_enabled then
-      enabled = vim.diagnostic.is_enabled()
-    else
-      enabled = not vim.diagnostic.is_disabled()
-    end
-    enabled = not enabled
+  set = function(state)
     if vim.fn.has("nvim-0.10") == 0 then
-      if enabled then
+      if state then
         pcall(vim.diagnostic.enable)
       else
-        vim.diagnostic.disable()
+        pcall(vim.diagnostic.disable)
       end
     else
-      vim.diagnostic.enable(enabled)
+      vim.diagnostic.enable(state)
     end
   end,
 })
