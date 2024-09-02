@@ -16,18 +16,18 @@ return {
         n = "q",
         i = "<C-c>",
       }
-      options.strategies.chat.keymaps.stop.modes.n = "<C-c>"
-      options.strategies.chat.keymaps.send.modes.n = "gS"
+      options.strategies.chat.keymaps.stop.modes.n = "<Esc>"
+      options.strategies.chat.keymaps.send.modes.n = "<CR>"
 
       return options
     end,
 
     keys = {
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
-      { "<leader>aA", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "Prompt Actions (CodeCompanion)" },
+      { "<leader>ap", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "Prompt Actions (CodeCompanion)" },
       { "<leader>aa", "<cmd>CodeCompanionToggle<cr>", mode = { "n", "v" }, desc = "Toggle (CodeCompanion)" },
       { "<leader>ac", "<cmd>CodeCompanionAdd<cr>", mode = "v", desc = "Add code to CodeCompanion" },
-      { "<leader>ap", "<cmd>CodeCompanion<cr>", mode = "n", desc = "Inline prompt (CodeCompanion)" },
+      { "<leader>ai", "<cmd>CodeCompanion<cr>", mode = "n", desc = "Inline prompt (CodeCompanion)" },
     },
   },
 
