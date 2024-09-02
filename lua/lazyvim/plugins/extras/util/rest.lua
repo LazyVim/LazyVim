@@ -11,7 +11,7 @@ return {
       { "<leader>R", "", desc = "+Rest" },
       { "<leader>Rb", "<cmd>lua require('kulala').scratchpad()<cr>", desc = "Open scratchpad" },
       { "<leader>Rc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL" },
-      { "<leader>Ri", "<cmd>lua require('kulala').inspect()<cr>", desc = "Inspects current request" }, 
+      { "<leader>Ri", "<cmd>lua require('kulala').inspect()<cr>", desc = "Inspect current request" },
       { "<leader>Rg", "<cmd>lua require('kulala').download_graphql_schema()<cr>", desc = "Download GraphQL schema" },
       { "<leader>Rr", "<cmd>lua require('kulala').replay()<cr>", desc = "Replay the last request" },
       { "<leader>Rs", "<cmd>lua require('kulala').run()<cr>", desc = "Send the request" },
