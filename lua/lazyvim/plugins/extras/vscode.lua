@@ -38,6 +38,10 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+function LazyVim.terminal()
+  require("vscode").action("workbench.action.terminal.toggleTerminal")
+end
+
 return {
   {
     "LazyVim/LazyVim",
