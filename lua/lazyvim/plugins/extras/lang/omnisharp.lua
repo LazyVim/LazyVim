@@ -46,16 +46,46 @@ return {
         omnisharp = {
           handlers = {
             ["textDocument/definition"] = function(...)
-              return require("omnisharp_extended").handler(...)
+              return require("omnisharp_extended").definition_handler(...)
+            end,
+            ["textDocument/typeDefinition"] = function(...)
+              return require("omnisharp_extended").type_definition_handler(...)
+            end,
+            ["textDocument/references"] = function(...)
+              return require("omnisharp_extended").references_handler(...)
+            end,
+            ["textDocument/implementation"] = function(...)
+              return require("omnisharp_extended").implementation_handler(...)
             end,
           },
           keys = {
             {
               "gd",
               function()
-                require("omnisharp_extended").telescope_lsp_definitions()
+                require("omnisharp_extended").telescope_lsp_definitions({ reuse_win = true })
               end,
               desc = "Goto Definition",
+            },
+            {
+              "gr",
+              function()
+                require("omnisharp_extended").telescope_lsp_references()
+              end,
+              desc = "References",
+            },
+            {
+              "gI",
+              function()
+                require("omnisharp_extended").telescope_lsp_implementation({ reuse_win = true })
+              end,
+              desc = "Goto Implementation",
+            },
+            {
+              "gy",
+              function()
+                require("omnisharp_extended").telescope_lsp_type_definition({ reuse_win = true })
+              end,
+              desc = "Goto T[y]pe Definition",
             },
           },
           enable_roslyn_analyzers = true,
