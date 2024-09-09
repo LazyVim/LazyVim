@@ -4,10 +4,6 @@ return {
     root = "package.json",
   },
   {
-    "williamboman/mason.nvim",
-    opts = { ensure_installed = { "snakeskin-cli" } },
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
