@@ -1,8 +1,12 @@
 return {
-  recommended = {
-    ft = "ss",
-    root = "package.json",
-  },
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = {
+        "ss",
+      },
+      root = { "package.json" },
+    })
+  end,
   {
     "neovim/nvim-lspconfig",
     opts = {
