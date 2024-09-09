@@ -5,7 +5,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    opts = { ensure_installed = { "snakeskin_ls" } },
+    opts = { ensure_installed = { "snakeskin-cli" } },
   },
   {
     "neovim/nvim-lspconfig",
