@@ -1,9 +1,7 @@
 return {
   recommended = function()
     return LazyVim.extras.wants({
-      ft = {
-        "ss",
-      },
+      ft = { "ss" },
       root = { "package.json" },
     })
   end,
