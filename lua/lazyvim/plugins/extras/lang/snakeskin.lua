@@ -5,12 +5,10 @@ return {
       root = { "package.json" },
     })
   end,
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        snakeskin_ls = {},
-      },
+  "neovim/nvim-lspconfig",
+  opts = {
+    servers = {
+      snakeskin_ls = {},
     },
   },
 }
