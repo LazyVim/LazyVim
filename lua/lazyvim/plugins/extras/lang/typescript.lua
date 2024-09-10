@@ -12,7 +12,10 @@ return {
       root = { "tsconfig.json", "package.json", "jsconfig.json" },
     })
   end,
-
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "typescript", "javascript" } },
+  },
   -- correctly setup lspconfig
   {
     "neovim/nvim-lspconfig",
