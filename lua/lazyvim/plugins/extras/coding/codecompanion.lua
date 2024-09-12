@@ -14,7 +14,7 @@ return {
 
       options.strategies.chat.keymaps.close.modes = {
         n = "q",
-        i = "<C-c>",
+        i = "<Esc>",
       }
       options.strategies.chat.keymaps.stop.modes.n = "<Esc>"
       options.strategies.chat.keymaps.send.modes.n = "<CR>"
