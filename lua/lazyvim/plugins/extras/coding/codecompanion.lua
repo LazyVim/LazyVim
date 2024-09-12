@@ -9,7 +9,7 @@ return {
 
       options.strategies.chat.roles = {
         llm = "  CodeCompanion",
-        user = "  " .. user:sub(1, 1):upper() .. user:sub(2),
+        user = "  " .. user,
       }
 
       options.strategies.chat.keymaps.close.modes = {
