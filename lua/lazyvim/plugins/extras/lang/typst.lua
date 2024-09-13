@@ -12,13 +12,12 @@ return {
     },
   },
 
-  -- Wait until this package is available in the mason-registry
-  -- {
-  --   "williamboman/mason.nvim",
-  --   opts = {
-  --     ensure_installed = { "typstyle" },
-  --   },
-  -- },
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = { "typstyle" },
+    },
+  },
 
   {
     "neovim/nvim-lspconfig",
