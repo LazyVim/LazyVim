@@ -55,6 +55,14 @@ return {
     build = function()
       require("typst-preview").update()
     end,
+    keys = {
+      {
+        "<leader>cp",
+        ft = "typst",
+        "<cmd>TypstPreviewToggle<cr>",
+        desc = "Typst Preview",
+      },
+    },
     opts = {
       dependencies_bin = {
         ["typst-preview"] = "tinymist",
