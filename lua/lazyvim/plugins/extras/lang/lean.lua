@@ -6,6 +6,7 @@ return {
     })
   end,
   "Julian/lean.nvim",
+  commit = 'fd7262270c68667fae85ad4703ac84e34c84d5e1', -- See https://github.com/Julian/lean.nvim/issues/353
   event = { "BufReadPre *.lean", "BufNewFile *.lean" },
   dependencies = {
     "nvim-lua/plenary.nvim",
