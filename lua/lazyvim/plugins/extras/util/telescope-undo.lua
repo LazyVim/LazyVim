@@ -1,23 +1,23 @@
 return {
   {
-    "debugloop/telescope-undo.nvim",
+    "nvim-telescope/telescope.nvim",
+    optional = true,
     dependencies = {
       {
-        "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        "debugloop/telescope-undo.nvim",
+        keys = {
+          {
+            "<leader>fu",
+            "<cmd>Telescope undo<cr>",
+            desc = "Undo history",
+          },
+        },
+        config = function()
+          LazyVim.on_load("telescope.nvim", function()
+            require("telescope").load_extension("undo")
+          end)
+        end,
       },
     },
-    keys = {
-      {
-        "<leader>fu",
-        "<cmd>Telescope undo<cr>",
-        desc = "undo history",
-      },
-    },
-    opts = {},
-    config = function(_, opts)
-      require("telescope").setup(opts)
-      require("telescope").load_extension("undo")
-    end,
   },
 }
