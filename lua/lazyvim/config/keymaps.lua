@@ -75,6 +75,10 @@ map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
+-- Keep last yanked when pasting or deleting
+map("v", "p", '"_dP')
+map("n", "x", '"_x')
+
 -- commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
