@@ -189,6 +189,7 @@ end
 function M.browse()
   local lines = require("lazy.manage.process").exec({ "git", "remote", "-v" })
   local remotes = {} ---@type {name:string, url:string}[]
+  local branch = require("lazy.manage.process").exec({ "git", "rev-parse", "--abbrev-ref", "HEAD" })[1]
 
   for _, line in ipairs(lines) do
     local name, remote = line:match("(%S+)%s+(%S+)%s+%(fetch%)")
@@ -197,7 +198,7 @@ function M.browse()
       if url then
         table.insert(remotes, {
           name = name,
-          url = url,
+          url = (branch ~= "main" and branch ~= "master") and url .. "/tree/" .. branch or url,
         })
       end
     end
