@@ -39,7 +39,13 @@ function M.map(lhs, toggle)
 end
 
 function M.wk(lhs, toggle)
+  local keys = require("lazy.core.handler").handlers.keys
+  ---@cast keys LazyKeysHandler
+
   if not LazyVim.has("which-key.nvim") then
+    return
+  end
+  if keys.have and keys:have(lhs, "n") then
     return
   end
   local function safe_get()
