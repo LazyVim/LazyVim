@@ -127,9 +127,25 @@ M.number = M.wrap({
 M.diagnostics = M.wrap({
   name = "Diagnostics",
   get = function()
-    return vim.diagnostic.is_enabled and vim.diagnostic.is_enabled()
+    local enabled = false
+    if vim.diagnostic.is_enabled then
+      enabled = vim.diagnostic.is_enabled()
+    elseif vim.diagnostic.is_disabled then
+      enabled = not vim.diagnostic.is_disabled()
+    end
+    return enabled
   end,
-  set = vim.diagnostic.enable,
+  set = function(state)
+    if vim.fn.has("nvim-0.10") == 0 then
+      if state then
+        pcall(vim.diagnostic.enable)
+      else
+        pcall(vim.diagnostic.disable)
+      end
+    else
+      vim.diagnostic.enable(state)
+    end
+  end,
 })
 
 M.inlay_hints = M.wrap({

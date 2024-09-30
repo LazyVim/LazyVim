@@ -70,6 +70,10 @@ function M.open(opts)
       if ok then
         M.config_dir = lines[1]
         vim.env.LG_CONFIG_FILE = LazyVim.norm(M.config_dir .. "/config.yml" .. "," .. M.theme_path)
+        local custom_config = LazyVim.norm(M.config_dir .. "/custom.yml")
+        if vim.uv.fs_stat(custom_config) and vim.uv.fs_stat(custom_config).type == "file" then
+          vim.env.LG_CONFIG_FILE = vim.env.LG_CONFIG_FILE .. "," .. custom_config
+        end
       else
         ---@diagnostic disable-next-line: cast-type-mismatch
         ---@cast lines string
@@ -130,9 +134,9 @@ gui:
   ---@type string[]
   local lines = {}
   for k, v in pairs(theme) do
-    lines[#lines + 1] = ("   %s:"):format(k)
+    lines[#lines + 1] = ("    %s:"):format(k)
     for _, c in ipairs(v) do
-      lines[#lines + 1] = ("     - %q"):format(c)
+      lines[#lines + 1] = ("      - %q"):format(c)
     end
   end
   config = config .. table.concat(lines, "\n")
