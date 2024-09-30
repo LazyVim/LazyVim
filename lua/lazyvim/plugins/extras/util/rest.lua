@@ -15,7 +15,7 @@ return {
       { "<leader>Rg", "<cmd>lua require('kulala').download_graphql_schema()<cr>", desc = "Download GraphQL schema" },
       { "<leader>Rr", "<cmd>lua require('kulala').replay()<cr>", desc = "Replay the last request" },
       { "<leader>Rs", "<cmd>lua require('kulala').run()<cr>", desc = "Send the request" },
-      { "<leader>RS", "<cmd>require('kulala').show_stats()<cr>", desc = "Show stats" },
+      { "<leader>RS", "<cmd>lua require('kulala').show_stats()<cr>", desc = "Show stats" },
       { "<leader>Rt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body" },
       { "<leader>Rp", "<cmd>lua require('kulala').jump_prev()<cr>", desc = "Jump to previous request" },
       { "<leader>Rn", "<cmd>lua require('kulala').jump_next()<cr>", desc = "Jump to next request" },
