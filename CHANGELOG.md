@@ -1,5 +1,18 @@
 # Changelog
 
+## [12.41.0](https://github.com/LazyVim/LazyVim/compare/v12.40.0...v12.41.0) (2024-10-02)
+
+
+### Features
+
+* **rust:** update rustaceanvim ([#4477](https://github.com/LazyVim/LazyVim/issues/4477)) ([04515b1](https://github.com/LazyVim/LazyVim/commit/04515b139973173e90604f700d70f4e6d714da1f))
+* **toggle:** add more `M.wk` fields for better user customization ([#4521](https://github.com/LazyVim/LazyVim/issues/4521)) ([57c0c0b](https://github.com/LazyVim/LazyVim/commit/57c0c0bc9f86467d90c0c10aac680bdba8e56469))
+
+
+### Bug Fixes
+
+* **extras:** migrate away from deprecated `get_target_window()` in mini-files ([#4479](https://github.com/LazyVim/LazyVim/issues/4479)) ([b110550](https://github.com/LazyVim/LazyVim/commit/b110550393957a3434db1f4f0dc5804a9d31820f))
+
 ## [12.40.0](https://github.com/LazyVim/LazyVim/compare/v12.39.0...v12.40.0) (2024-10-02)
 
 
