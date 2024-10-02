@@ -76,7 +76,7 @@ return {
       return {
         -- How to find the root dir for a given filename. The default comes from
         -- lspconfig which provides a function specifically for java projects.
-        root_dir = require("lspconfig.configs.jdtls").default_config.root_dir,
+        root_dir = LazyVim.lsp.get_raw_config("jdtls").default_config.root_dir,
 
         -- How to find the project name for a given root dir.
         project_name = function(root_dir)
