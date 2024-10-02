@@ -17,7 +17,7 @@ return {
     --
     -- false to disable, otherwise should be a table of options to pass to `leanls`
     --
-    -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#leanls for details.
+    -- See https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#leanls for details.
     -- In particular ensure you have followed instructions setting up a callback
     -- for `LspAttach` which sets your key bindings!
     lsp = {
