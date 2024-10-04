@@ -4,8 +4,47 @@ local function get_args(config)
   config = vim.deepcopy(config)
   ---@cast args string[]
   config.args = function()
+    -- Prompt the user with the current arguments as a default input
     local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
-    return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
+    local expanded_args = vim.fn.expand(new_args) -- Expand any environment variables, wildcards, etc.
+
+    -- Initialize result table to collect parsed arguments
+    local result = {}
+
+    -- Pattern to match quoted strings or non-space sequences
+    local i = 1
+    while i <= #expanded_args do
+      local character = expanded_args:sub(i, i)
+      if character == " " then
+        i = i + 1
+      elseif character == '"' then
+        -- Handle quoted string
+        local end_quote = expanded_args:find('"', i + 1)
+        if end_quote then
+          local arg = expanded_args:sub(i + 1, end_quote - 1)
+          table.insert(result, arg)
+          i = end_quote + 1
+        else
+          -- If no closing quote found, take the rest of the string
+          table.insert(result, expanded_args:sub(i + 1))
+          break
+        end
+      else
+        -- Handle unquoted argument
+        local next_space = expanded_args:find(" ", i)
+        if next_space then
+          local arg = expanded_args:sub(i, next_space - 1)
+          table.insert(result, arg)
+          i = next_space + 1
+        else
+          -- Take the rest of the string
+          table.insert(result, expanded_args:sub(i))
+          break
+        end
+      end
+    end
+
+    return result
   end
   return config
 end
