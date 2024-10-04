@@ -22,3 +22,10 @@ _G.LazyVim = require("lazyvim.util")
 --- @param opts vim.api.keyset.create_autocmd.opts
 --- @return integer
 function vim.api.nvim_create_autocmd(event, opts) end
+
+
+---@class vim.diagnostic.config.Opts: vim.diagnostic.Opts
+---@field float? vim.diagnostic.config.Opts.Float
+---
+---@class vim.diagnostic.config.Opts.Float: vim.diagnostic.Opts.Float
+---@field border? string | string[] | string[][]
