@@ -1,5 +1,18 @@
 # Changelog
 
+## [12.42.0](https://github.com/LazyVim/LazyVim/compare/v12.41.0...v12.42.0) (2024-10-04)
+
+
+### Features
+
+* **root:** provide `vim.g.root_lsp_ignore` to ignore LSP servers ([#4332](https://github.com/LazyVim/LazyVim/issues/4332)) ([90a9231](https://github.com/LazyVim/LazyVim/commit/90a92312aed79d4ee9d231f9eb3f8cd4debc46d1))
+
+
+### Bug Fixes
+
+* **gitsigns:** change name of filetype blame ([#4243](https://github.com/LazyVim/LazyVim/issues/4243)) ([3e257fd](https://github.com/LazyVim/LazyVim/commit/3e257fdb8874d7112446dc3ca1caf9c3263d8194))
+* **neotest:** properly initialize adapter with call table. Fixes [#4538](https://github.com/LazyVim/LazyVim/issues/4538) ([327e829](https://github.com/LazyVim/LazyVim/commit/327e829c156864975785914038fe4515dadcba87))
+
 ## [12.41.0](https://github.com/LazyVim/LazyVim/compare/v12.40.0...v12.41.0) (2024-10-02)
 
 
