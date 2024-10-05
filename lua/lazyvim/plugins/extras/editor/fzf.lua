@@ -220,6 +220,13 @@ return {
       { "<leader>fg", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+      {
+        "<leader>fw",
+        function()
+          LazyVim.pick("files", { query = vim.fn.expand("<cword>") })()
+        end,
+        desc = "Find Files (Current word)",
+      },
       -- git
       { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
       { "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "Status" },
