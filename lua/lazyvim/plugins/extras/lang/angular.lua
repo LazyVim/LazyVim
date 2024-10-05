@@ -1,3 +1,10 @@
+if lazyvim_docs then
+  -- If you don't use Mason to install the `angular-language-server` you can use the following to custom path for `@angular/language-server`.
+  vim.g.pkg_path = {
+    ["@angular/language-server"] = "path_to_this_node_package",
+  }
+end
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -51,7 +58,8 @@ return {
       LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
           name = "@angular/language-server",
-          location = LazyVim.get_pkg_path("angular-language-server", "/node_modules/@angular/language-server"),
+          location = vim.g.pkg_path and vim.g.pkg_path["@angular/language-server"]
+            or LazyVim.get_pkg_path("angular-language-server", "/node_modules/@angular/language-server"),
           enableForWorkspaceTypeScriptVersions = false,
         },
       })

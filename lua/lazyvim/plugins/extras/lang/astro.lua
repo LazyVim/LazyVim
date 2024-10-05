@@ -1,3 +1,10 @@
+if lazyvim_docs then
+  -- If you don't use Mason to install the `astro-language-server` you can use the following to custom path for `@astrojs/ts-plugin`.
+  vim.g.pkg_path = {
+    ["@astro/ts-plugin"] = "path_to_this_node_package",
+  }
+end
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -37,7 +44,8 @@ return {
       LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
           name = "@astrojs/ts-plugin",
-          location = LazyVim.get_pkg_path("astro-language-server", "/node_modules/@astrojs/ts-plugin"),
+          location = vim.g.pkg_path and vim.g.pkg_path["@astro/ts-plugin"]
+            or LazyVim.get_pkg_path("astro-language-server", "/node_modules/@astrojs/ts-plugin"),
           enableForWorkspaceTypeScriptVersions = true,
         },
       })
