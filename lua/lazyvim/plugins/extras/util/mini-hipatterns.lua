@@ -46,6 +46,18 @@ M.plugin = {
           end,
           extmark_opts = { priority = 2000 },
         },
+        hsl_color = {
+          pattern = "[hsl%(]?%d+%.?%d?,? %d+%.?%d?%%?,? %d+%.?%d?%%?%)?",
+          group = function(_, match)
+            --- @type string, string, string
+            local nh, ns, nl = match:match("[hsl%(]?(%d+%.?%d?),? (%d+%.?%d?)%%?,? (%d+%.?%d?)%%?%)?")
+            --- @type number?, number?, number?
+            local h, s, l = tonumber(nh), tonumber(ns), tonumber(nl)
+            --- @type string
+            local hex_color = LazyVim.mini.hipattern_hslToHex(h, s, l)
+            return MiniHipatterns.compute_hex_color_group(hex_color, "bg")
+          end,
+        },
       },
     }
   end,
