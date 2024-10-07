@@ -177,6 +177,8 @@ M.remote_patterns = {
   { "%.git$"                            , "" },
 }
 
+M.remote_patterns = vim.list_extend(M.remote_patterns, vim.g.lazygit_remote_patterns or {})
+
 ---@param remote string
 function M.get_url(remote)
   local ret = remote
