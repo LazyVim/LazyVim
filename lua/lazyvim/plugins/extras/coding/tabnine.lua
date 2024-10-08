@@ -2,6 +2,7 @@ return {
   -- Tabnine cmp source
   {
     "nvim-cmp",
+    optional = true,
     dependencies = {
       {
         "tzachar/cmp-tabnine",
