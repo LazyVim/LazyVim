@@ -1,24 +1,90 @@
+-- exclude directories and externals
+local chezmoi_list_args = { "--include", "files", "--exclude", "externals" }
+
 local pick_chezmoi = function()
   if LazyVim.pick.picker.name == "telescope" then
     require("telescope").extensions.chezmoi.find_files()
   elseif LazyVim.pick.picker.name == "fzf" then
     local fzf_lua = require("fzf-lua")
-    local results = require("chezmoi.commands").list()
     local chezmoi = require("chezmoi.commands")
-
+    local results = chezmoi.list({ args = chezmoi_list_args })
     local opts = {
       fzf_opts = {},
       fzf_colors = true,
       actions = {
         ["default"] = function(selected)
-          chezmoi.edit({
-            targets = { "~/" .. selected[1] },
-            args = { "--watch" },
-          })
+          if not vim.tbl_isempty(selected) then
+            chezmoi.edit({ targets = "~/" .. selected[1] })
+          end
         end,
       },
     }
     fzf_lua.fzf_exec(results, opts)
+  end
+end
+
+--- pick nvim config
+local pick_config = function()
+  local chezmoi = require("chezmoi.commands")
+  local config_dir = vim.fn.stdpath("config")
+  local managed_config_files = chezmoi.list({
+    targets = config_dir,
+    args = { "--path-style", "absolute", unpack(chezmoi_list_args) },
+  })
+
+  if vim.tbl_isempty(managed_config_files) then
+    LazyVim.pick.config_files()()
+    return
+  end
+
+  if LazyVim.pick.picker.name == "telescope" then
+    local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+    local config = require("chezmoi").config
+
+    require("telescope.builtin").find_files({
+      prompt_title = "Config Files",
+      cwd = config_dir,
+      attach_mappings = function(prompt_bufnr, map)
+        local edit_action = function()
+          actions.close(prompt_bufnr)
+          local selection = action_state.get_selected_entry()
+          if selection then
+            chezmoi.edit({ targets = config_dir .. "/" .. selection.value })
+          end
+        end
+
+        for _, v in ipairs(config.telescope.select) do
+          map("i", v, "select_default")
+        end
+
+        -- it's possible that only part of nvim config files are managed with chezmoi
+        -- pick them all and edit with or without chezmoi
+        actions.select_default:replace_if(function()
+          local selection = action_state.get_selected_entry()
+          return selection and vim.tbl_contains(managed_config_files, config_dir .. "/" .. selection.value)
+        end, edit_action)
+        return true
+      end,
+    })
+  elseif LazyVim.pick.picker.name == "fzf" then
+    require("fzf-lua").files({
+      cwd = config_dir,
+      actions = {
+        ["default"] = function(selected, opts)
+          if vim.tbl_isempty(selected) then
+            return
+          end
+
+          local file = require("fzf-lua.path").entry_to_file(selected[1], opts).path
+          if vim.tbl_contains(managed_config_files, file) then
+            chezmoi.edit({ targets = file })
+          else
+            require("fzf-lua.actions").file_edit(selected, opts)
+          end
+        end,
+      },
+    })
   end
 end
 
@@ -34,11 +100,8 @@ return {
   {
     "xvzc/chezmoi.nvim",
     keys = {
-      {
-        "<leader>sz",
-        pick_chezmoi,
-        desc = "Chezmoi",
-      },
+      { "<leader>sz", pick_chezmoi, desc = "Chezmoi" },
+      { "<leader>fc", pick_config, desc = "Find Config File" },
     },
     opts = {
       edit = {
@@ -65,18 +128,29 @@ return {
     end,
   },
   {
+    "ibhagwan/fzf-lua",
+    optional = true,
+    keys = { { "<leader>fc", false } },
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    keys = { { "<leader>fc", false } },
+  },
+
+  {
     "nvimdev/dashboard-nvim",
     optional = true,
     opts = function(_, opts)
-      local projects = {
+      local chezmoi = {
         action = pick_chezmoi,
         desc = "  Config",
         icon = "",
         key = "c",
       }
 
-      projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
-      projects.key_format = "  %s"
+      chezmoi.desc = chezmoi.desc .. string.rep(" ", 43 - #chezmoi.desc)
+      chezmoi.key_format = "  %s"
 
       -- remove lazyvim config property
       for i = #opts.config.center, 1, -1 do
@@ -85,7 +159,7 @@ return {
         end
       end
 
-      table.insert(opts.config.center, 5, projects)
+      table.insert(opts.config.center, 5, chezmoi)
     end,
   },
 
