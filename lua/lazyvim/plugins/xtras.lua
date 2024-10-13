@@ -1,4 +1,6 @@
 -- Some extras need to be loaded before others
+
+---@class LazyVimExtrasPrios: table<string, integer>
 local prios = {
   ["lazyvim.plugins.extras.test.core"] = 1,
   ["lazyvim.plugins.extras.dap.core"] = 1,
@@ -6,9 +8,12 @@ local prios = {
   ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
   -- default priority is 50
+
   ["lazyvim.plugins.extras.editor.aerial"] = 100,
   ["lazyvim.plugins.extras.editor.outline"] = 100,
 }
+
+LazyVim.xtras_prios = prios
 
 ---@type string[]
 local extras = LazyVim.dedup(LazyVim.config.json.data.extras)
