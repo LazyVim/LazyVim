@@ -81,6 +81,10 @@ return {
       },
     },
     config = function(_, opts)
+      ---@diagnostic disable-next-line: param-type-mismatch
+      if type(LazyVim.config.colorscheme) == "string" and vim.startswith(LazyVim.config.colorscheme, "catppuccin") then
+        opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
+      end
       require("bufferline").setup(opts)
       -- Fix bufferline when restoring a session
       vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
