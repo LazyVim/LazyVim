@@ -35,6 +35,8 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
     vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
     vim.keymap.set("n", "<leader>ss", [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
+    vim.keymap.set("n", "]d", [[<cmd>lua require('vscode').call('editor.action.marker.next')<cr>]], { desc = "Next Diagnostic" })
+    vim.keymap.set("n", "[d", [[<cmd>lua require('vscode').call('editor.action.marker.previous')<cr>]], { desc = "Previous Diagnostic" })
   end,
 })
 
