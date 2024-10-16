@@ -1,0 +1,16 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.coding.mini-surround",
+    "lazyvim.plugins.extras.editor.fzf",
+    "lazyvim.plugins.extras.editor.inc-rename",
+    "lazyvim.plugins.extras.lang.rust",
+    "lazyvim.plugins.extras.lang.toml",
+    "lazyvim.plugins.extras.test.core",
+    "lazyvim.plugins.extras.util.dot",
+    "lazyvim.plugins.extras.util.mini-hipatterns"
+  ],
+  "news": {
+    "NEWS.md": "6520"
+  },
+  "version": 6
+}

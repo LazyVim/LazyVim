@@ -1,8 +1,0 @@
-name: "PR Labeler"
-on:
-  - pull_request_target
-
-jobs:
-  labeler:
-    uses: folke/github/.github/workflows/labeler.yml@main
-    secrets: inherit
