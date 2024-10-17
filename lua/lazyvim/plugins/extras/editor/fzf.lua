@@ -44,6 +44,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
+    dependencies = { "echasnovski/mini.icons" },
     opts = function(_, opts)
       local config = require("fzf-lua.config")
       local actions = require("fzf-lua.actions")
