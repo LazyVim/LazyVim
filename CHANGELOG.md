@@ -1,5 +1,19 @@
 # Changelog
 
+## [12.43.0](https://github.com/LazyVim/LazyVim/compare/v12.42.0...v12.43.0) (2024-10-23)
+
+
+### Features
+
+* **catppuccin:** bufferline integration. Closes [#4583](https://github.com/LazyVim/LazyVim/issues/4583). Closes [#4581](https://github.com/LazyVim/LazyVim/issues/4581) ([917c685](https://github.com/LazyVim/LazyVim/commit/917c685c1fb3774375ea2236e5e7aaa3d951fdda))
+* **extras:** expose `prios` to users for customization ([#4587](https://github.com/LazyVim/LazyVim/issues/4587)) ([e46cb62](https://github.com/LazyVim/LazyVim/commit/e46cb62a17e1f4b7f163f4e0fdd13593c4af3abd))
+* **keymaps:** allow `v:count1` when moving lines ([#4618](https://github.com/LazyVim/LazyVim/issues/4618)) ([b4eb4e1](https://github.com/LazyVim/LazyVim/commit/b4eb4e1f4a4024229fe40782fdb12683c1c69634))
+
+
+### Bug Fixes
+
+* **folds:** enable folds when treesitter available. Fixes [#4563](https://github.com/LazyVim/LazyVim/issues/4563) ([fe7003d](https://github.com/LazyVim/LazyVim/commit/fe7003de506ef7022a6c5f623476630d7bc30944))
+
 ## [12.42.0](https://github.com/LazyVim/LazyVim/compare/v12.41.0...v12.42.0) (2024-10-04)
 
 
