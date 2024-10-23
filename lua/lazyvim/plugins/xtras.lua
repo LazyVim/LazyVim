@@ -10,6 +10,10 @@ local prios = {
   ["lazyvim.plugins.extras.editor.outline"] = 100,
 }
 
+if vim.g.xtras_prios then
+  prios = vim.tbl_deep_extend("force", prios, vim.g.xtras_prios or {})
+end
+
 ---@type string[]
 local extras = LazyVim.dedup(LazyVim.config.json.data.extras)
 
