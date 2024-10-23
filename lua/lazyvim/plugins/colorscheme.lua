@@ -50,5 +50,16 @@ return {
         which_key = true,
       },
     },
+    specs = {
+      {
+        "akinsho/bufferline.nvim",
+        optional = true,
+        opts = function(_, opts)
+          if vim.g.colors_name:find("catppuccin") then
+            opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
+          end
+        end,
+      },
+    },
   },
 }
