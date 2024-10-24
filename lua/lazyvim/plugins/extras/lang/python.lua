@@ -4,6 +4,10 @@ if lazyvim_docs then
   vim.g.lazyvim_python_lsp = "pyright"
   -- Set to "ruff_lsp" to use the old LSP implementation version.
   vim.g.lazyvim_python_ruff = "ruff"
+  -- If you don't use Mason to install the `debugpy` you can use the following to custom path for `debugpy`.
+  vim.g.pkg_path = {
+    ["debugpy"] = "path_to_this_package",
+  }
 end
 
 local lsp = vim.g.lazyvim_python_lsp or "pyright"
@@ -103,10 +107,11 @@ return {
         { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
       },
       config = function()
+        local debugpy = vim.g.pkg_path and vim.g.pkg_path.debugpy
         if vim.fn.has("win32") == 1 then
-          require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
+          require("dap-python").setup(debugpy or LazyVim.get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
         else
-          require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/bin/python"))
+          require("dap-python").setup(debugpy or LazyVim.get_pkg_path("debugpy", "/venv/bin/python"))
         end
       end,
     },

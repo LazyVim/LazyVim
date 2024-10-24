@@ -1,3 +1,10 @@
+if lazyvim_docs then
+  -- If you don't use Mason to install the `js-debug-adapter` you can use the following to custom path for `js-debug-adapter`.
+  vim.g.pkg_path = {
+    ["js-debug-adapter"] = "path_to_this_node_package",
+  }
+end
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -211,7 +218,8 @@ return {
             command = "node",
             -- 💀 Make sure to update this path to point to your installation
             args = {
-              LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
+              vim.g.pkg_path and vim.g.pkg_path["js-debug-adapter"]
+                or LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
               "${port}",
             },
           },
