@@ -64,7 +64,7 @@ return {
     opts = {
       formatters_by_ft = {
         ruby = { formatter },
-        eruby = { "erb-format" },
+        eruby = { "erb_format" },
       },
     },
   },
