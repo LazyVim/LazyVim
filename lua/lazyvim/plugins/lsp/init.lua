@@ -11,7 +11,7 @@ return {
       ---@class PluginLspOpts
       local ret = {
         -- options for vim.diagnostic.config()
-        ---@type vim.diagnostic.Opts
+        ---@type vim.diagnostic.config.Opts
         diagnostics = {
           underline = true,
           update_in_insert = false,
