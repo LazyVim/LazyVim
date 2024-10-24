@@ -5,6 +5,7 @@ local prios = {
   ["lazyvim.plugins.extras.ui.edgy"] = 2,
   ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
+  ["lazyvim.plugins.extras.lang.markdown"] = 10,
   -- default priority is 50
   ["lazyvim.plugins.extras.editor.aerial"] = 100,
   ["lazyvim.plugins.extras.editor.outline"] = 100,
