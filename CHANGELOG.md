@@ -1,5 +1,16 @@
 # Changelog
 
+## [12.43.1](https://github.com/LazyVim/LazyVim/compare/v12.43.0...v12.43.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* **autocmds:** change mapping for `lazyvim_close_with_q` ([#4638](https://github.com/LazyVim/LazyVim/issues/4638)) ([5f432d9](https://github.com/LazyVim/LazyVim/commit/5f432d997e397790cea39d9bb8826c1d4ca14afb))
+* **autocmds:** close window and force delete buf on q. See [#4638](https://github.com/LazyVim/LazyVim/issues/4638) ([cb40a09](https://github.com/LazyVim/LazyVim/commit/cb40a09538dc0c417a7ffbbacdbdec90be4a792c))
+* **autocmds:** force close buffers with q. See [#4638](https://github.com/LazyVim/LazyVim/issues/4638) ([0eb4009](https://github.com/LazyVim/LazyVim/commit/0eb400908d17f4116f02c6464d7ef81456ca303c))
+* **catppuccin:** fix bufferline integration when no colorscheme is set. Closes [#4641](https://github.com/LazyVim/LazyVim/issues/4641) ([6570a14](https://github.com/LazyVim/LazyVim/commit/6570a141c0de30fccee38e2b10dcd14830624e16))
+* **dap:** remove explicit `load_launchjs` call ([#4634](https://github.com/LazyVim/LazyVim/issues/4634)) ([2f6c1f6](https://github.com/LazyVim/LazyVim/commit/2f6c1f60834108359b3404748453a65843909a03))
+
 ## [12.43.0](https://github.com/LazyVim/LazyVim/compare/v12.42.0...v12.43.0) (2024-10-23)
 
 
