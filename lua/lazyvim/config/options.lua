@@ -18,6 +18,13 @@ vim.g.lazyvim_picker = "auto"
 -- * a function with signature `function(buf) -> string|string[]`
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
+-- You can use this to extend the patterns used by `LazyVim.lazygit.browse`
+-- It should be a list of tables with two string patterns, one for the original
+-- and one for the replacement
+-- vim.g.lazygit_remote_patterns = {
+--   { "^ssh://.*@(.*)$", "https://%1" },
+-- }
+
 -- LazyVim automatically configures lazygit:
 --  * theme, based on the active colorscheme.
 --  * editPreset to nvim-remote
