@@ -8,6 +8,7 @@ local M = {}
 ---@field color_disabled? string
 ---@field get fun():boolean
 ---@field set fun(state:boolean)
+---@field silent? boolean
 
 ---@class lazyvim.Toggle.wrap: lazyvim.Toggle
 ---@operator call:boolean
@@ -18,9 +19,9 @@ function M.wrap(toggle)
     __call = function()
       toggle.set(not toggle.get())
       local state = toggle.get()
-      if state then
+      if state and not toggle.silent then
         LazyVim.info("Enabled " .. toggle.name, { title = toggle.name })
-      else
+      elseif not state and not toggle.silent then
         LazyVim.warn("Disabled " .. toggle.name, { title = toggle.name })
       end
       return state
