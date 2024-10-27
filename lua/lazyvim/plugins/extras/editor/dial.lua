@@ -120,7 +120,7 @@ return {
           months,
         },
         typescript = {
-          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.constant.alias.bool, -- boolean value (true <-> false)
           logical_alias,
           augend.constant.new({ elements = { "let", "const" } }),
