@@ -1,4 +1,5 @@
 -- better yank/paste
+local k = require("lazyvim.keymaps").get_keymaps().extras.coding.yanky
 return {
   "gbprod/yanky.nvim",
   recommended = true,
@@ -9,7 +10,7 @@ return {
   },
   keys = {
     {
-      "<leader>p",
+      k.yank_history,
       function()
         if LazyVim.pick.picker.name == "telescope" then
           require("telescope").extensions.yank_history.yank_history({})
@@ -21,22 +22,38 @@ return {
       desc = "Open Yank History",
     },
         -- stylua: ignore
-    { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
-    { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
-    { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Cursor" },
-    { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put Text After Selection" },
-    { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Selection" },
-    { "[y", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
-    { "]y", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
-    { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
-    { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
-    { "]P", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
-    { "[P", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
-    { ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put and Indent Right" },
-    { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and Indent Left" },
-    { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
-    { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
-    { "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
-    { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
+    { k.yank, "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
+    { k.put_text_after_cursor, "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
+    { k.put_text_before_cursor, "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Cursor" },
+    { k.put_text_after_selection, "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put Text After Selection" },
+    { k.put_text_before_selection, "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Selection" },
+    { k.cycle_forward_yank_history, "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
+    { k.cycle_backward_yank_history, "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
+    {
+      k.put_indent_after_cursor_linewise,
+      "<Plug>(YankyPutIndentAfterLinewise)",
+      desc = "Put Indented After Cursor (Linewise)",
+    },
+    {
+      k.put_indent_before_cursor_linewise,
+      "<Plug>(YankyPutIndentBeforeLinewise)",
+      desc = "Put Indented Before Cursor (Linewise)",
+    },
+    {
+      k.put_indent_after_cursor_linewise_alt,
+      "<Plug>(YankyPutIndentAfterLinewise)",
+      desc = "Put Indented After Cursor (Linewise)",
+    },
+    {
+      k.put_indent_before_cursor_linewise_alt,
+      "<Plug>(YankyPutIndentBeforeLinewise)",
+      desc = "Put Indented Before Cursor (Linewise)",
+    },
+    { k.put_and_indent_right, "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put and Indent Right" },
+    { k.put_and_indent_left, "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and Indent Left" },
+    { k.put_before_indent_right, "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
+    { k.put_before_indent_left, "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
+    { k.put_after_filter, "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
+    { k.put_before_filter, "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
   },
 }

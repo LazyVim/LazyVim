@@ -1,3 +1,6 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.editor.picker
+local d = require("lazyvim.keymaps").get_keymaps().ui.dashboard
+
 local pick = nil
 
 pick = function()
@@ -101,7 +104,7 @@ return {
     "nvim-telescope/telescope.nvim",
     optional = true,
     keys = {
-      { "<leader>fp", pick, desc = "Projects" },
+      { k.find_projects, pick, desc = "Projects" },
     },
   },
 
@@ -109,7 +112,7 @@ return {
     "ibhagwan/fzf-lua",
     optional = true,
     keys = {
-      { "<leader>fp", pick, desc = "Projects" },
+      { k.find_projects, pick, desc = "Projects" },
     },
   },
 
@@ -143,11 +146,15 @@ return {
     "nvimdev/dashboard-nvim",
     optional = true,
     opts = function(_, opts)
+      if not d.projects or d.projects == "" then
+        return opts
+      end
+
       local projects = {
         action = pick,
         desc = " Projects",
         icon = " ",
-        key = "p",
+        key = d.projects,
       }
 
       projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)

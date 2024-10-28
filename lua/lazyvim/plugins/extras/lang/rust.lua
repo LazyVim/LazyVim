@@ -1,3 +1,6 @@
+local map = LazyVim.keymap_set
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.rust
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -48,10 +51,10 @@ return {
     opts = {
       server = {
         on_attach = function(_, bufnr)
-          vim.keymap.set("n", "<leader>cR", function()
+          map("n", k.code_action, function()
             vim.cmd.RustLsp("codeAction")
           end, { desc = "Code Action", buffer = bufnr })
-          vim.keymap.set("n", "<leader>dr", function()
+          map("n", k.debuggables, function()
             vim.cmd.RustLsp("debuggables")
           end, { desc = "Rust Debuggables", buffer = bufnr })
         end,
@@ -98,7 +101,7 @@ return {
         taplo = {
           keys = {
             {
-              "K",
+              k.show_crate_documentation,
               function()
                 if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
                   require("crates").show_popup()

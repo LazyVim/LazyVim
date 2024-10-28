@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -51,7 +53,7 @@ return {
           },
           keys = {
             {
-              "gd",
+              k.go_to_definition,
               LazyVim.has("telescope.nvim") and function()
                 require("omnisharp_extended").telescope_lsp_definitions()
               end or function()

@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.editor.refactoring
+
 local pick = function()
   if LazyVim.pick.picker.name == "telescope" then
     return require("telescope").extensions.refactoring.refactors()
@@ -28,15 +30,15 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     keys = {
-      { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
+      { k.prefix, "", desc = "+refactor", mode = { "n", "v" } },
       {
-        "<leader>rs",
+        k.refactor,
         pick,
         mode = "v",
         desc = "Refactor",
       },
       {
-        "<leader>ri",
+        k.inline_variable,
         function()
           require("refactoring").refactor("Inline Variable")
         end,
@@ -44,42 +46,42 @@ return {
         desc = "Inline Variable",
       },
       {
-        "<leader>rb",
+        k.extract_block,
         function()
           require("refactoring").refactor("Extract Block")
         end,
         desc = "Extract Block",
       },
       {
-        "<leader>rf",
+        k.extract_block_to_file,
         function()
           require("refactoring").refactor("Extract Block To File")
         end,
         desc = "Extract Block To File",
       },
       {
-        "<leader>rP",
+        k.debug_print,
         function()
           require("refactoring").debug.printf({ below = false })
         end,
         desc = "Debug Print",
       },
       {
-        "<leader>rp",
+        k.debug_print_variable,
         function()
           require("refactoring").debug.print_var({ normal = true })
         end,
         desc = "Debug Print Variable",
       },
       {
-        "<leader>rc",
+        k.debug_cleanup,
         function()
           require("refactoring").debug.cleanup({})
         end,
         desc = "Debug Cleanup",
       },
       {
-        "<leader>rf",
+        k.extract_function,
         function()
           require("refactoring").refactor("Extract Function")
         end,
@@ -87,7 +89,7 @@ return {
         desc = "Extract Function",
       },
       {
-        "<leader>rF",
+        k.extract_function_to_file,
         function()
           require("refactoring").refactor("Extract Function To File")
         end,
@@ -95,7 +97,7 @@ return {
         desc = "Extract Function To File",
       },
       {
-        "<leader>rx",
+        k.extract_variable,
         function()
           require("refactoring").refactor("Extract Variable")
         end,
@@ -103,7 +105,7 @@ return {
         desc = "Extract Variable",
       },
       {
-        "<leader>rp",
+        k.debug_print_variable,
         function()
           require("refactoring").debug.print_var()
         end,

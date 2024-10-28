@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.util.octo
+
 return {
 
   -- depends on the git extra for highlighting and auto-completion of github issues/prs
@@ -15,22 +17,22 @@ return {
       picker = "telescope",
     },
     keys = {
-      { "<leader>gi", "<cmd>Octo issue list<CR>", desc = "List Issues (Octo)" },
-      { "<leader>gI", "<cmd>Octo issue search<CR>", desc = "Search Issues (Octo)" },
-      { "<leader>gp", "<cmd>Octo pr list<CR>", desc = "List PRs (Octo)" },
-      { "<leader>gP", "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
-      { "<leader>gr", "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
-      { "<leader>gS", "<cmd>Octo search<CR>", desc = "Search (Octo)" },
+      { k.issue_list, "<cmd>Octo issue list<CR>", desc = "List Issues (Octo)" },
+      { k.issue_search, "<cmd>Octo issue search<CR>", desc = "Search Issues (Octo)" },
+      { k.pr_list, "<cmd>Octo pr list<CR>", desc = "List PRs (Octo)" },
+      { k.pr_search, "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
+      { k.repo_list, "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
+      { k.search, "<cmd>Octo search<CR>", desc = "Search (Octo)" },
 
-      { "<leader>a", "", desc = "+assignee (Octo)", ft = "octo" },
-      { "<leader>c", "", desc = "+comment/code (Octo)", ft = "octo" },
-      { "<leader>l", "", desc = "+label (Octo)", ft = "octo" },
-      { "<leader>i", "", desc = "+issue (Octo)", ft = "octo" },
-      { "<leader>r", "", desc = "+react (Octo)", ft = "octo" },
-      { "<leader>p", "", desc = "+pr (Octo)", ft = "octo" },
-      { "<leader>v", "", desc = "+review (Octo)", ft = "octo" },
-      { "@", "@<C-x><C-o>", mode = "i", ft = "octo", silent = true },
-      { "#", "#<C-x><C-o>", mode = "i", ft = "octo", silent = true },
+      { k.assignee, "", desc = "+assignee (Octo)", ft = "octo" },
+      { k.comment_code, "", desc = "+comment/code (Octo)", ft = "octo" },
+      { k.label, "", desc = "+label (Octo)", ft = "octo" },
+      { k.issue, "", desc = "+issue (Octo)", ft = "octo" },
+      { k.react, "", desc = "+react (Octo)", ft = "octo" },
+      { k.pr, "", desc = "+pr (Octo)", ft = "octo" },
+      { k.review, "", desc = "+review (Octo)", ft = "octo" },
+      { k.insert_at, "@<C-x><C-o>", mode = "i", ft = "octo", silent = true },
+      { k.insert_hashtag, "#<C-x><C-o>", mode = "i", ft = "octo", silent = true },
     },
   },
 

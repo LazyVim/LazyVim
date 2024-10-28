@@ -1,5 +1,7 @@
 -- This file is automatically loaded by lazyvim.config.init.
 
+local k = require("lazyvim.keymaps").get_keymaps()
+
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
@@ -73,7 +75,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.schedule(function()
-      vim.keymap.set("n", "q", function()
+      LazyVim.keymap_set("n", k.quit_buffer, function()
         vim.cmd("close")
         pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
       end, {

@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.scala
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -21,14 +23,14 @@ return {
         metals = {
           keys = {
             {
-              "<leader>me",
+              k.metals_commands,
               function()
                 require("telescope").extensions.metals.commands()
               end,
               desc = "Metals commands",
             },
             {
-              "<leader>mc",
+              k.metals_compile_cascade,
               function()
                 require("metals").compile_cascade()
               end,

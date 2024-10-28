@@ -1,3 +1,6 @@
+local map = LazyVim.keymap_set
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.r
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -16,25 +19,25 @@ return {
           -- This function will be called at the FileType event
           -- of files supported by R.nvim. This is an
           -- opportunity to create mappings local to buffers.
-          vim.keymap.set("n", "<Enter>", "<Plug>RDSendLine", { buffer = true })
-          vim.keymap.set("v", "<Enter>", "<Plug>RSendSelection", { buffer = true })
+          map("n", k.send, "<Plug>RDSendLine", { buffer = true })
+          map("v", k.send, "<Plug>RSendSelection", { buffer = true })
 
           local wk = require("which-key")
           wk.add({
             buffer = true,
-            { "<localleader>a", group = "all" },
-            { "<localleader>b", group = "between marks" },
-            { "<localleader>c", group = "chunks" },
-            { "<localleader>f", group = "functions" },
-            { "<localleader>g", group = "goto" },
-            { "<localleader>i", group = "install" },
-            { "<localleader>k", group = "knit" },
-            { "<localleader>p", group = "paragraph" },
-            { "<localleader>q", group = "quarto" },
-            { "<localleader>r", group = "r general" },
-            { "<localleader>s", group = "split or send" },
-            { "<localleader>t", group = "terminal" },
-            { "<localleader>v", group = "view" },
+            { k.send_all, group = "all" },
+            { k.send_between_marks, group = "between marks" },
+            { k.send_chunks, group = "chunks" },
+            { k.send_functions, group = "functions" },
+            { k.send_goto, group = "goto" },
+            { k.send_install, group = "install" },
+            { k.send_knit, group = "knit" },
+            { k.send_paragraph, group = "paragraph" },
+            { k.send_quarto, group = "quarto" },
+            { k.send_general, group = "r general" },
+            { k.send_split_or_send, group = "split or send" },
+            { k.send_terminal, group = "terminal" },
+            { k.send_view, group = "view" },
           })
         end,
       },

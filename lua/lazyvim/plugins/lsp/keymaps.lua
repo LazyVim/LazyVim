@@ -1,4 +1,5 @@
 local M = {}
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang
 
 ---@type LazyKeysLspSpec[]|nil
 M._keys = nil
@@ -11,32 +12,86 @@ function M.get()
   if M._keys then
     return M._keys
   end
-    -- stylua: ignore
-    M._keys =  {
-      { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-      { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-      { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
-      { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-      { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-      { "K", vim.lsp.buf.hover, desc = "Hover" },
-      { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-      { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-      { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-      { "<leader>cR", LazyVim.lsp.rename_file, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-      { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-      { "<leader>cA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
-      { "]]", function() LazyVim.lsp.words.jump(vim.v.count1) end, has = "documentHighlight",
-        desc = "Next Reference", cond = function() return LazyVim.lsp.words.enabled end },
-      { "[[", function() LazyVim.lsp.words.jump(-vim.v.count1) end, has = "documentHighlight",
-        desc = "Prev Reference", cond = function() return LazyVim.lsp.words.enabled end },
-      { "<a-n>", function() LazyVim.lsp.words.jump(vim.v.count1, true) end, has = "documentHighlight",
-        desc = "Next Reference", cond = function() return LazyVim.lsp.words.enabled end },
-      { "<a-p>", function() LazyVim.lsp.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
-        desc = "Prev Reference", cond = function() return LazyVim.lsp.words.enabled end },
-    }
+  local actions = {
+    { k.lsp_info, "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+    { k.go_to_definition, vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+    { k.references, vim.lsp.buf.references, desc = "References", nowait = true },
+    { k.go_to_implementation, vim.lsp.buf.implementation, desc = "Goto Implementation" },
+    { k.go_to_type_definition, vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+    { k.go_to_declaration, vim.lsp.buf.declaration, desc = "Goto Declaration" },
+    { k.hover, vim.lsp.buf.hover, desc = "Hover" },
+    { k.signature_help, vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    { k.insert_signature_help, vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+    { k.code_action, vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+    { k.run_codelens, vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+    {
+      k.refresh_codelens,
+      vim.lsp.codelens.refresh,
+      desc = "Refresh & Display Codelens",
+      mode = { "n" },
+      has = "codeLens",
+    },
+    {
+      k.rename_file,
+      LazyVim.lsp.rename_file,
+      desc = "Rename File",
+      mode = { "n" },
+      has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
+    },
+    { k.rename, vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+    { k.source_action, LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
+    {
+      k.next_reference,
+      function()
+        LazyVim.lsp.words.jump(vim.v.count1)
+      end,
+      has = "documentHighlight",
+      desc = "Next Reference",
+      cond = function()
+        return LazyVim.lsp.words.enabled
+      end,
+    },
+    {
+      k.prev_reference,
+      function()
+        LazyVim.lsp.words.jump(-vim.v.count1)
+      end,
+      has = "documentHighlight",
+      desc = "Prev Reference",
+      cond = function()
+        return LazyVim.lsp.words.enabled
+      end,
+    },
+    {
+      k.cycle_next_reference,
+      function()
+        LazyVim.lsp.words.jump(vim.v.count1, true)
+      end,
+      has = "documentHighlight",
+      desc = "Next Reference",
+      cond = function()
+        return LazyVim.lsp.words.enabled
+      end,
+    },
+    {
+      k.cycle_prev_reference,
+      function()
+        LazyVim.lsp.words.jump(-vim.v.count1, true)
+      end,
+      has = "documentHighlight",
+      desc = "Prev Reference",
+      cond = function()
+        return LazyVim.lsp.words.enabled
+      end,
+    },
+  }
+  M._keys = {}
+
+  for _, action in ipairs(actions) do
+    if action[1] and action[1] ~= "" then
+      table.insert(M._keys, action)
+    end
+  end
 
   return M._keys
 end
@@ -91,7 +146,7 @@ function M.on_attach(_, buffer)
       opts.has = nil
       opts.silent = opts.silent ~= false
       opts.buffer = buffer
-      vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
+      LazyVim.keymap_set(keys.mode or "n", keys.lhs, keys.rhs, opts)
     end
   end
 end

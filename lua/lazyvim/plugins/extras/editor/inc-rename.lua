@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.editor.inc_rename
+
 return {
 
   -- Rename with cmdpreview
@@ -15,7 +17,7 @@ return {
     opts = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       keys[#keys + 1] = {
-        "<leader>cr",
+        k.rename,
         function()
           local inc_rename = require("inc_rename")
           return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")

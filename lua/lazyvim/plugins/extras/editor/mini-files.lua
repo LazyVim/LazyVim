@@ -1,3 +1,6 @@
+local map = LazyVim.keymap_set
+local k = require("lazyvim.keymaps").get_keymaps().extras.editor.mini_files
+
 return {
   "echasnovski/mini.files",
   opts = {
@@ -14,14 +17,14 @@ return {
   },
   keys = {
     {
-      "<leader>fm",
+      k.open_current_file_dir,
       function()
         require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
       end,
       desc = "Open mini.files (Directory of Current File)",
     },
     {
-      "<leader>fM",
+      k.open_cwd,
       function()
         require("mini.files").open(vim.uv.cwd(), true)
       end,
@@ -64,7 +67,7 @@ return {
       if close_on_file then
         desc = desc .. " and close"
       end
-      vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = desc })
+      map("n", lhs, rhs, { buffer = buf_id, desc = desc })
     end
 
     local files_set_cwd = function()
@@ -80,14 +83,14 @@ return {
       callback = function(args)
         local buf_id = args.data.buf_id
 
-        vim.keymap.set(
+        map(
           "n",
           opts.mappings and opts.mappings.toggle_hidden or "g.",
           toggle_dotfiles,
           { buffer = buf_id, desc = "Toggle hidden files" }
         )
 
-        vim.keymap.set(
+        map(
           "n",
           opts.mappings and opts.mappings.change_cwd or "gc",
           files_set_cwd,

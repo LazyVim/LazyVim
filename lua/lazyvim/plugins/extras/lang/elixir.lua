@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.elixir
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -12,7 +14,7 @@ return {
         elixirls = {
           keys = {
             {
-              "<leader>cp",
+              k.to_pipe,
               function()
                 local params = vim.lsp.util.make_position_params()
                 LazyVim.lsp.execute({
@@ -23,7 +25,7 @@ return {
               desc = "To Pipe",
             },
             {
-              "<leader>cP",
+              k.from_pipe,
               function()
                 local params = vim.lsp.util.make_position_params()
                 LazyVim.lsp.execute({

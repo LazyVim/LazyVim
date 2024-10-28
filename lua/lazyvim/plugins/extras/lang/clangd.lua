@@ -1,3 +1,4 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.clangd
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -58,7 +59,8 @@ return {
         -- Ensure mason installs the server
         clangd = {
           keys = {
-            { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+            k.switch_source_header == "" and {}
+              or { k.switch_source_header, "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
           },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(

@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.markdown
+
 LazyVim.on_very_lazy(function()
   vim.filetype.add({
     extension = { mdx = "markdown.mdx" },
@@ -81,7 +83,7 @@ return {
     end,
     keys = {
       {
-        "<leader>cp",
+        k.markdown_preview_toggle,
         ft = "markdown",
         "<cmd>MarkdownPreviewToggle<cr>",
         desc = "Markdown Preview",
@@ -108,7 +110,7 @@ return {
     ft = { "markdown", "norg", "rmd", "org" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
-      LazyVim.toggle.map("<leader>um", {
+      LazyVim.toggle.map(k.render_markdown_toggle, {
         name = "Render Markdown",
         get = function()
           return require("render-markdown.state").enabled

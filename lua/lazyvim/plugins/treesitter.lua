@@ -1,10 +1,12 @@
+local k = require("lazyvim.keymaps").get_keymaps().treesitter
+
 return {
   {
     "folke/which-key.nvim",
     opts = {
       spec = {
-        { "<BS>", desc = "Decrement Selection", mode = "x" },
-        { "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
+        { k.decrement_selection, desc = "Decrement Selection", mode = "x" },
+        { k.increment_selection, desc = "Increment Selection", mode = { "x", "n" } },
       },
     },
   },
@@ -29,8 +31,8 @@ return {
     end,
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
+      { k.increment_selection, desc = "Increment Selection" },
+      { k.decrement_selection, desc = "Decrement Selection", mode = "x" },
     },
     opts_extend = { "ensure_installed" },
     ---@type TSConfig
@@ -67,19 +69,35 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = (k.increment_selection and k.increment_selection ~= "") and k.increment_selection or false,
+          node_incremental = (k.increment_selection and k.increment_selection ~= "") and k.increment_selection or false,
           scope_incremental = false,
-          node_decremental = "<bs>",
+          node_decremental = (k.decrement_selection and k.decrement_selection ~= "") and k.decrement_selection or false,
         },
       },
       textobjects = {
         move = {
           enable = true,
-          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+          goto_next_start = {
+            [k.textobjects.goto_next_start.function_outer] = "@function.outer",
+            [k.textobjects.goto_next_start.class_outer] = "@class.outer",
+            [k.textobjects.goto_next_start.parameter_inner] = "@parameter.inner",
+          },
+          goto_next_end = {
+            [k.textobjects.goto_next_end.function_outer] = "@function.outer",
+            [k.textobjects.goto_next_end.class_outer] = "@class.outer",
+            [k.textobjects.goto_next_end.parameter_inner] = "@parameter.inner",
+          },
+          goto_previous_start = {
+            [k.textobjects.goto_previous_start.function_outer] = "@function.outer",
+            [k.textobjects.goto_previous_start.class_outer] = "@class.outer",
+            [k.textobjects.goto_previous_start.parameter_inner] = "@parameter.inner",
+          },
+          goto_previous_end = {
+            [k.textobjects.goto_previous_end.function_outer] = "@function.outer",
+            [k.textobjects.goto_previous_end.class_outer] = "@class.outer",
+            [k.textobjects.goto_previous_end.parameter_inner] = "@parameter.inner",
+          },
         },
       },
     },

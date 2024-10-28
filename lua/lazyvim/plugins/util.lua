@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().util.persistence
+
 return {
 
   -- Session management. This saves your session in the background,
@@ -9,10 +11,10 @@ return {
     opts = {},
     -- stylua: ignore
     keys = {
-      { "<leader>qs", function() require("persistence").load() end, desc = "Restore Session" },
-      { "<leader>qS", function() require("persistence").select() end,desc = "Select Session" },
-      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
-      { "<leader>qd", function() require("persistence").stop() end, desc = "Don't Save Current Session" },
+      { k.restore_session, function() require("persistence").load() end, desc = "Restore Session" },
+      { k.select_session, function() require("persistence").select() end,desc = "Select Session" },
+      { k.restore_last_session, function() require("persistence").load({ last = true }) end, desc = "Restore Last Session" },
+      { k.skip_current_session, function() require("persistence").stop() end, desc = "Don't Save Current Session" },
     },
   },
 

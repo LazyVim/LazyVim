@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.sql
+
 if lazyvim_docs then
   -- The setup below will automatically configure connections without the need for manual input each time.
 
@@ -71,7 +73,7 @@ return {
     cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
     dependencies = "vim-dadbod",
     keys = {
-      { "<leader>D", "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" },
+      { k.toggle_dbui, "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" },
     },
     init = function()
       local data_path = vim.fn.stdpath("data")

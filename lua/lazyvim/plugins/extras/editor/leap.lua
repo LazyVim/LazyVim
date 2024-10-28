@@ -1,3 +1,7 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.editor.leap
+local m = require("lazyvim.keymaps").get_keymaps().extras.coding.mini_surround
+local default = require("lazyvim.keymaps").default_keymaps.extras.coding.mini_surround
+
 return {
   -- disable flash
   { "folke/flash.nvim", enabled = false, optional = true },
@@ -20,9 +24,9 @@ return {
     "ggandor/leap.nvim",
     enabled = true,
     keys = {
-      { "s", mode = { "n", "x", "o" }, desc = "Leap Forward to" },
-      { "S", mode = { "n", "x", "o" }, desc = "Leap Backward to" },
-      { "gs", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+      { k.next, mode = { "n", "x", "o" }, desc = "Leap Forward to" },
+      { k.prev, mode = { "n", "x", "o" }, desc = "Leap Backward to" },
+      { k.from_windows, mode = { "n", "x", "o" }, desc = "Leap from Windows" },
     },
     config = function(_, opts)
       local leap = require("leap")
@@ -41,17 +45,17 @@ return {
     optional = true,
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
-        update_n_lines = "gzn", -- Update `n_lines`
+        add = m.add == default.add and "gza" or m.add, -- Add surrounding in Normal and Visual modes
+        delete = m.delete == default.delete and "gzd" or m.delete, -- Delete surrounding
+        find = m.find == default.find and "gzf" or m.find, -- Find surrounding (to the right)
+        find_left = m.find_left == default.find_left and "gzF" or m.find_left, -- Find surrounding (to the left)
+        highlight = m.highlight == default.highlight and "gzh" or m.highlight, -- Highlight surrounding
+        replace = m.replace == default.replace and "gzr" or m.replace, -- Replace surrounding
+        update_n_lines = m.update_n_lines == default.update_n_lines and "gzn" or m.update_n_lines, -- Update `n_lines`
       },
     },
     keys = {
-      { "gz", "", desc = "+surround" },
+      { m.prefix == default.prefix and "gz" or m.prefix, "", desc = "+surround" },
     },
   },
 

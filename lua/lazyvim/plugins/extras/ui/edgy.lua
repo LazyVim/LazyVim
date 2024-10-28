@@ -1,3 +1,6 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.ui.edgy
+local r = require("lazyvim.keymaps").get_keymaps().keymaps.resize_window
+
 return {
   -- edgy
   {
@@ -5,16 +8,42 @@ return {
     event = "VeryLazy",
     keys = {
       {
-        "<leader>ue",
+        k.toggle,
         function()
           require("edgy").toggle()
         end,
         desc = "Edgy Toggle",
       },
       -- stylua: ignore
-      { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
+      { k.select_window, function() require("edgy").select() end, desc = "Edgy Select Window" },
     },
     opts = function()
+      local keys = {}
+      local actions = {
+        -- increase width
+        [r.increase_width] = function(win)
+          win:resize("width", 2)
+        end,
+        -- decrease width
+        [r.decrease_width] = function(win)
+          win:resize("width", -2)
+        end,
+        -- increase height
+        [r.increase_height] = function(win)
+          win:resize("height", 2)
+        end,
+        -- decrease height
+        [r.decrease_height] = function(win)
+          win:resize("height", -2)
+        end,
+      }
+
+      for key, action in pairs(actions) do
+        if key and key ~= "" then
+          keys[key] = action
+        end
+      end
+
       local opts = {
         bottom = {
           {
@@ -59,24 +88,7 @@ return {
         right = {
           { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
         },
-        keys = {
-          -- increase width
-          ["<c-Right>"] = function(win)
-            win:resize("width", 2)
-          end,
-          -- decrease width
-          ["<c-Left>"] = function(win)
-            win:resize("width", -2)
-          end,
-          -- increase height
-          ["<c-Up>"] = function(win)
-            win:resize("height", 2)
-          end,
-          -- decrease height
-          ["<c-Down>"] = function(win)
-            win:resize("height", -2)
-          end,
-        },
+        keys = keys,
       }
 
       if LazyVim.has("neo-tree.nvim") then

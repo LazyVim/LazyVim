@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().keymaps.lazygit
+
 return {
 
   -- Ensure GitUI tool is installed
@@ -6,14 +8,14 @@ return {
     opts = { ensure_installed = { "gitui" } },
     keys = {
       {
-        "<leader>gG",
+        k.toggle_cwd,
         function()
           LazyVim.terminal.open({ "gitui" }, { esc_esc = false, ctrl_hjkl = false })
         end,
         desc = "GitUi (cwd)",
       },
       {
-        "<leader>gg",
+        k.toggle_root,
         function()
           LazyVim.terminal.open({ "gitui" }, { cwd = LazyVim.root.get(), esc_esc = false, ctrl_hjkl = false })
         end,

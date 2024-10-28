@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.editor.harpoon2
+
 return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
@@ -12,14 +14,14 @@ return {
   keys = function()
     local keys = {
       {
-        "<leader>H",
+        k.harpoon_file,
         function()
           require("harpoon"):list():add()
         end,
         desc = "Harpoon File",
       },
       {
-        "<leader>h",
+        k.harpoon_quick_menu,
         function()
           local harpoon = require("harpoon")
           harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -30,7 +32,7 @@ return {
 
     for i = 1, 5 do
       table.insert(keys, {
-        "<leader>" .. i,
+        k.harpoon_to_file_prefix .. i,
         function()
           require("harpoon"):list():select(i)
         end,

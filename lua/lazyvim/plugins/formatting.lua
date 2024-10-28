@@ -1,4 +1,5 @@
 local M = {}
+local k = require("lazyvim.keymaps").get_keymaps().formatting
 
 ---@param opts conform.setupOpts
 function M.setup(_, opts)
@@ -25,7 +26,7 @@ return {
     cmd = "ConformInfo",
     keys = {
       {
-        "<leader>cF",
+        k.conform.format,
         function()
           require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
         end,

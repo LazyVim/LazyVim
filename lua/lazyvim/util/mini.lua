@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().util.mini_pairs
+
 ---@class lazyvim.util.mini
 local M = {}
 
@@ -121,7 +123,7 @@ end
 
 ---@param opts {skip_next: string, skip_ts: string[], skip_unbalanced: boolean, markdown: boolean}
 function M.pairs(opts)
-  LazyVim.toggle.map("<leader>up", {
+  LazyVim.toggle.map(k.toggle, {
     name = "Mini Pairs",
     get = function()
       return not vim.g.minipairs_disable

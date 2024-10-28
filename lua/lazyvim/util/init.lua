@@ -194,7 +194,7 @@ function M.on_load(name, fn)
   end
 end
 
--- Wrapper around vim.keymap.set that will
+-- Wrapper around LazyVim.keymap_set that will
 -- not create a keymap if a lazy key handler exists.
 -- It will also set `silent` to true by default.
 function M.safe_keymap_set(mode, lhs, rhs, opts)
@@ -215,8 +215,19 @@ function M.safe_keymap_set(mode, lhs, rhs, opts)
       ---@diagnostic disable-next-line: no-unknown
       opts.remap = nil
     end
-    vim.keymap.set(modes, lhs, rhs, opts)
+    M.keymap_set(modes, lhs, rhs, opts)
   end
+end
+
+-- Wrapper around vim.keymap.set that will
+-- not create a keymap if lhs or rhs is empty.
+-- This is useful in case `lhs` is dynamic
+-- and users can set it to empty to disable the keymap.
+function M.keymap_set(mode, lhs, rhs, opts)
+  if not lhs or lhs == "" or not rhs or rhs == "" then
+    return
+  end
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 ---@generic T

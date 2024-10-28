@@ -1,4 +1,6 @@
 -- animations
+local k = require("lazyvim.keymaps").get_keymaps().extras.ui.mini_animate
+
 return {
   "echasnovski/mini.animate",
   recommended = true,
@@ -21,7 +23,7 @@ return {
       end,
     })
 
-    LazyVim.toggle.map("<leader>ua", {
+    LazyVim.toggle.map(k.toggle, {
       name = "Mini Animate",
       get = function()
         return not vim.g.minianimate_disable

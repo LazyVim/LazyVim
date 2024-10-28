@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().ui.dashboard
+
 return {
 
   { "nvimdev/dashboard-nvim", enabled = false },
@@ -22,17 +24,25 @@ return {
 
       dashboard.section.header.val = vim.split(logo, "\n")
       -- stylua: ignore
-      dashboard.section.buttons.val = {
-        dashboard.button("f", " " .. " Find file",       LazyVim.pick()),
-        dashboard.button("n", " " .. " New file",        [[<cmd> ene <BAR> startinsert <cr>]]),
-        dashboard.button("r", " " .. " Recent files",    LazyVim.pick("oldfiles")),
-        dashboard.button("g", " " .. " Find text",       LazyVim.pick("live_grep")),
-        dashboard.button("c", " " .. " Config",          LazyVim.pick.config_files()),
-        dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
-        dashboard.button("x", " " .. " Lazy Extras",     "<cmd> LazyExtras <cr>"),
-        dashboard.button("l", "󰒲 " .. " Lazy",            "<cmd> Lazy <cr>"),
-        dashboard.button("q", " " .. " Quit",            "<cmd> qa <cr>"),
+      dashboard.section.buttons.val = {}
+      local actions = {
+        { k.find_file, " " .. " Find file", LazyVim.pick() },
+        { k.new_file, " " .. " New file", [[<cmd> ene <BAR> startinsert <cr>]] },
+        { k.recent_files, " " .. " Recent files", LazyVim.pick("oldfiles") },
+        { k.find_text, " " .. " Find text", LazyVim.pick("live_grep") },
+        { k.config, " " .. " Config", LazyVim.pick.config_files() },
+        { k.restore_session, " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]] },
+        { k.lazy_extras, " " .. " Lazy Extras", "<cmd> LazyExtras <cr>" },
+        { k.lazy, "󰒲 " .. " Lazy", "<cmd> Lazy <cr>" },
+        { k.quit, " " .. " Quit", "<cmd> qa <cr>" },
       }
+
+      for _, action in ipairs(actions) do
+        if action[1] and action[1] ~= "" then
+          table.insert(dashboard.section.buttons.val, dashboard.button(action[1], action[2], action[3]))
+        end
+      end
+
       for _, button in ipairs(dashboard.section.buttons.val) do
         button.opts.hl = "AlphaButtons"
         button.opts.hl_shortcut = "AlphaShortcut"

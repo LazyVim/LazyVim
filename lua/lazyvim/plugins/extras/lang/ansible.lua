@@ -1,3 +1,5 @@
+local k = require("lazyvim.keymaps").get_keymaps().extras.lang.ansible
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -22,7 +24,7 @@ return {
     ft = {},
     keys = {
       {
-        "<leader>ta",
+        k.ansible_run_playbook_role,
         function()
           require("ansible").run()
         end,
