@@ -272,7 +272,10 @@ return {
         })
       end
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
-        mappings = { n = k.flash.normal == "" and {} or { [k.flash.normal] = flash }, i = k.flash.insert == "" and {} or { [k.flash.insert] = flash } },
+        mappings = {
+          n = k.flash.normal == "" and {} or { [k.flash.normal] = flash },
+          i = k.flash.insert == "" and {} or { [k.flash.insert] = flash },
+        },
       })
     end,
   },
