@@ -664,7 +664,7 @@ M.default_keymaps = {
 ---@return LazyVimKeymaps
 M.get_keymaps = function()
   if keymaps == nil then
-    keymaps = vim.tbl_deep_extend("force", {}, M.default_keymaps, vim.g.lazyvim_keymaps)
+    keymaps = vim.tbl_deep_extend("force", {}, M.default_keymaps, vim.g.lazyvim_keymaps or {})
     vim.g.lazyvim_keymaps = keymaps -- update global for retrieval
   end
   return keymaps
