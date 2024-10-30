@@ -15,6 +15,18 @@ local function extend_or_override(config, custom, ...)
   return config
 end
 
+---@param config {args?:string|fun():string?}
+local function get_args(config)
+  local args = config.args and (config.args .. " ") or ""
+  config = vim.deepcopy(config)
+  ---@cast args string
+  config.args = function()
+    local new_args = vim.fn.input("Run with args: ", args) --[[@as string]]
+    return new_args --[[@as string]]
+  end
+  return config
+end
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -229,6 +241,23 @@ return {
               -- custom init for Java debugger
               require("jdtls").setup_dap(opts.dap)
               require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
+
+              -- Java debug adapter expects "args" to be a String, while the configuration of dap.extra
+              -- passes the "args" as a table; so we defined a different ger_args function
+              wk.add({
+                {
+                  mode = { "n", "v" },
+                  buffer = args.buf,
+                  { "<leader>d", group = "+debug" },
+                  {
+                    "<leader>da",
+                    function()
+                      require("dap").continue({ before = get_args })
+                    end,
+                    desc = "Run with Args",
+                  },
+                },
+              })
 
               -- Java Test require Java debugger to work
               if opts.test and mason_registry.is_installed("java-test") then
