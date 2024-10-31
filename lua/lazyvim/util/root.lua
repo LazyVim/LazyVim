@@ -29,7 +29,11 @@ function M.detectors.lsp(buf)
     return {}
   end
   local roots = {} ---@type string[]
-  for _, client in pairs(LazyVim.lsp.get_clients({ bufnr = buf })) do
+  local clients = LazyVim.lsp.get_clients({ bufnr = buf })
+  clients = vim.tbl_filter(function(client)
+    return not vim.tbl_contains(vim.g.root_lsp_ignore or {}, client.name)
+  end, clients)
+  for _, client in pairs(clients) do
     local workspace = client.config.workspace_folders
     for _, ws in pairs(workspace or {}) do
       roots[#roots + 1] = vim.uri_to_fname(ws.uri)
