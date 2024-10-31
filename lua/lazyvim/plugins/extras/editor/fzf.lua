@@ -227,6 +227,13 @@ return {
         end,
         desc = "Find Files (Current word)",
       },
+      {
+        "<leader>fW",
+        function()
+          LazyVim.pick("files", { query = vim.fn.expand("<cWORD>") })()
+        end,
+        desc = "Find Files (Current WORD)",
+      },
       -- git
       { "<leader>gc", "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
       { "<leader>gs", "<cmd>FzfLua git_status<CR>", desc = "Status" },
