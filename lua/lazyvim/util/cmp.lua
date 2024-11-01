@@ -73,7 +73,15 @@ end
 function M.visible()
   ---@module 'cmp'
   local cmp = package.loaded["cmp"]
-  return cmp and cmp.core.view:visible()
+  if cmp then
+    return cmp.core.view:visible()
+  end
+  ---@module 'blink.cmp'
+  local blink = package.loaded["blink.cmp"]
+  if blink then
+    return blink.windows.autocomplete.win:is_open()
+  end
+  return false
 end
 
 -- This is a better implementation of `cmp.confirm`:
