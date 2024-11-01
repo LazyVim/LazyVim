@@ -9,7 +9,7 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       -- add blink.compat to dependencies
-      { "saghen/blink.compat", opts = {} },
+      -- { "saghen/blink.compat", opts = {} },
     },
     event = "InsertEnter",
 
