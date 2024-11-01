@@ -11,7 +11,7 @@ return {
       -- add blink.compat to dependencies
       { "saghen/blink.compat", opts = {} },
     },
-    lazy = false, -- lazy loading handled internally
+    event = "InsertEnter",
 
     -- use a release tag to download pre-built binaries
     version = "*",
