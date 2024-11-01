@@ -29,8 +29,6 @@ return {
       -- your own keymap. when defining your own, no keybinds will be assigned automatically.
       keymap = "default",
 
-      kind_icons = LazyVim.config.icons.kinds,
-
       highlight = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
@@ -61,6 +59,14 @@ return {
         },
       },
     },
+  },
+
+  -- add icons
+  {
+    "saghen/blink.cmp",
+    opts = function(_, opts)
+      opts.kind_icons = LazyVim.config.icons.kinds
+    end,
   },
 
   -- lazydev
