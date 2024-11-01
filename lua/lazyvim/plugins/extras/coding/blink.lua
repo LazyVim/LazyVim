@@ -39,6 +39,9 @@ return {
       -- adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
       windows = {
+        autocomplete = {
+          draw = "reversed",
+        },
         documentation = {
           auto_show = true,
         },
