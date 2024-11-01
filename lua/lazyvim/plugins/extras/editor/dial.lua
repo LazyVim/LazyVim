@@ -1,5 +1,5 @@
 local M = {}
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.dial
+local k = require("lazyvim.keymaps").get_keymaps()
 
 ---@param increment boolean
 ---@param g? boolean
@@ -19,9 +19,9 @@ return {
   -- stylua: ignore
   keys = {
     { k.increase, function() return M.dial(true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-    { k.decrement, function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
-    { k.increment_g, function() return M.dial(true, true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
-    { k.decrement_g, function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
+    { k.dial_decrement, function() return M.dial(false) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
+    { k.dial_increment_g, function() return M.dial(true, true) end, expr = true, desc = "Increment", mode = {"n", "v"} },
+    { k.dial_decrement_g, function() return M.dial(false, true) end, expr = true, desc = "Decrement", mode = {"n", "v"} },
   },
   opts = function()
     local augend = require("dial.augend")

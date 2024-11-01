@@ -1,6 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.picker
-local lang = require("lazyvim.keymaps").get_keymaps().extras.lang
-local t = require("lazyvim.keymaps").get_keymaps().editor.todo_comments
+local k = require("lazyvim.keymaps").get_keymaps()
 
 if lazyvim_docs then
   -- In case you don't want to use `:LazyExtras`,
@@ -103,8 +101,8 @@ return {
       end
 
       local default_keymaps = {
-        [k.actions.find_files_no_ignore] = { actions.toggle_ignore },
-        [k.actions.find_files_with_hidden] = { actions.toggle_hidden },
+        [k.picker_find_files_no_ignore] = { actions.toggle_ignore },
+        [k.picker_find_files_with_hidden] = { actions.toggle_hidden },
       }
       local keymaps = {}
 
@@ -215,50 +213,59 @@ return {
       { "<c-j>", "<c-j>", ft = "fzf", mode = "t", nowait = true },
       { "<c-k>", "<c-k>", ft = "fzf", mode = "t", nowait = true },
       {
-        k.switch_buffer,
+        k.picker_switch_buffer,
         "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>",
         desc = "Switch Buffer",
       },
-      { k.grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { k.command_history, "<cmd>FzfLua command_history<cr>", desc = "Command History" },
-      { k.find_files_root, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { k.picker_grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+      { k.picker_command_history, "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      { k.picker_find_files_root, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- find
-      { k.find_buffers, "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
-      { k.find_config_file, LazyVim.pick.config_files(), desc = "Find Config File" },
-      { k.find_files_root_alt, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-      { k.find_files_cwd, LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      { k.find_git_files, "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
-      { k.find_recent_files, "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
-      { k.find_recent_files_cwd, LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+      { k.picker_find_buffers, "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { k.picker_find_config_file, LazyVim.pick.config_files(), desc = "Find Config File" },
+      { k.picker_find_files_root_alt, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { k.picker_find_files_cwd, LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { k.picker_find_git_files, "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
+      { k.picker_find_recent_files, "<cmd>FzfLua oldfiles<cr>", desc = "Recent" },
+      { k.picker_find_recent_files_cwd, LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
-      { k.git_commits, "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
-      { k.git_status, "<cmd>FzfLua git_status<CR>", desc = "Status" },
+      { k.picker_git_commits, "<cmd>FzfLua git_commits<CR>", desc = "Commits" },
+      { k.picker_git_status, "<cmd>FzfLua git_status<CR>", desc = "Status" },
       -- search
-      { k.search_registers, "<cmd>FzfLua registers<cr>", desc = "Registers" },
-      { k.search_autocommands, "<cmd>FzfLua autocmds<cr>", desc = "Auto Commands" },
-      { k.search_buffer, "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
-      { k.search_command_history, "<cmd>FzfLua command_history<cr>", desc = "Command History" },
-      { k.search_commands, "<cmd>FzfLua commands<cr>", desc = "Commands" },
-      { k.search_document_diagnostics, "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
-      { k.search_workspace_diagnostics, "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
-      { k.search_grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { k.search_grep_cwd, LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
-      { k.search_help_pages, "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
-      { k.search_highlight_groups, "<cmd>FzfLua highlights<cr>", desc = "Search Highlight Groups" },
-      { k.search_jumplist, "<cmd>FzfLua jumps<cr>", desc = "Jumplist" },
-      { k.search_keymaps, "<cmd>FzfLua keymaps<cr>", desc = "Key Maps" },
-      { k.search_loclist, "<cmd>FzfLua loclist<cr>", desc = "Location List" },
-      { k.search_man_pages, "<cmd>FzfLua man_pages<cr>", desc = "Man Pages" },
-      { k.search_marks, "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
-      { k.search_resume, "<cmd>FzfLua resume<cr>", desc = "Resume" },
-      { k.search_quickfix, "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
-      { k.search_word_root, LazyVim.pick("grep_cword"), desc = "Word (Root Dir)" },
-      { k.search_word_cwd, LazyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
-      { k.search_selection_root, LazyVim.pick("grep_visual"), mode = "v", desc = "Selection (Root Dir)" },
-      { k.search_selection_cwd, LazyVim.pick("grep_visual", { root = false }), mode = "v", desc = "Selection (cwd)" },
-      { k.colorscheme_preview, LazyVim.pick("colorschemes"), desc = "Colorscheme with Preview" },
+      { k.picker_search_registers, "<cmd>FzfLua registers<cr>", desc = "Registers" },
+      { k.picker_search_autocommands, "<cmd>FzfLua autocmds<cr>", desc = "Auto Commands" },
+      { k.picker_search_buffer, "<cmd>FzfLua grep_curbuf<cr>", desc = "Buffer" },
+      { k.picker_search_command_history, "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      { k.picker_search_commands, "<cmd>FzfLua commands<cr>", desc = "Commands" },
+      { k.picker_search_document_diagnostics, "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
       {
-        k.go_to_symbol,
+        k.picker_search_workspace_diagnostics,
+        "<cmd>FzfLua diagnostics_workspace<cr>",
+        desc = "Workspace Diagnostics",
+      },
+      { k.picker_search_grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+      { k.picker_search_grep_cwd, LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { k.picker_search_help_pages, "<cmd>FzfLua help_tags<cr>", desc = "Help Pages" },
+      { k.picker_search_highlight_groups, "<cmd>FzfLua highlights<cr>", desc = "Search Highlight Groups" },
+      { k.picker_search_jumplist, "<cmd>FzfLua jumps<cr>", desc = "Jumplist" },
+      { k.picker_search_keymaps, "<cmd>FzfLua keymaps<cr>", desc = "Key Maps" },
+      { k.picker_search_loclist, "<cmd>FzfLua loclist<cr>", desc = "Location List" },
+      { k.picker_search_man_pages, "<cmd>FzfLua man_pages<cr>", desc = "Man Pages" },
+      { k.picker_search_marks, "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
+      { k.picker_search_resume, "<cmd>FzfLua resume<cr>", desc = "Resume" },
+      { k.picker_search_quickfix, "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
+      { k.picker_search_word_root, LazyVim.pick("grep_cword"), desc = "Word (Root Dir)" },
+      { k.picker_search_word_cwd, LazyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
+      { k.picker_search_selection_root, LazyVim.pick("grep_visual"), mode = "v", desc = "Selection (Root Dir)" },
+      {
+        k.picker_search_selection_cwd,
+        LazyVim.pick("grep_visual", { root = false }),
+        mode = "v",
+        desc = "Selection (cwd)",
+      },
+      { k.picker_colorscheme_preview, LazyVim.pick("colorschemes"), desc = "Colorscheme with Preview" },
+      {
+        k.picker_go_to_symbol,
         function()
           require("fzf-lua").lsp_document_symbols({
             regex_filter = symbols_filter,
@@ -267,7 +274,7 @@ return {
         desc = "Goto Symbol",
       },
       {
-        k.go_to_symbol_workspace,
+        k.picker_go_to_symbol_workspace,
         function()
           require("fzf-lua").lsp_live_workspace_symbols({
             regex_filter = symbols_filter,
@@ -283,8 +290,8 @@ return {
     optional = true,
     -- stylua: ignore
     keys = {
-      { t.todo_telescope, function() require("todo-comments.fzf").todo() end, desc = "Todo" },
-      { t.todo_fix_fixme_telescope, function () require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
+      { k.todo_telescope, function() require("todo-comments.fzf").todo() end, desc = "Todo" },
+      { k.todo_fix_fixme_telescope, function () require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     },
   },
 
@@ -294,10 +301,10 @@ return {
       local Keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
-        { lang.go_to_definition, "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Definition", has = "definition" },
-        { lang.references, "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>", desc = "References", nowait = true },
-        { lang.go_to_implementation, "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
-        { lang.go_to_type_definition, "<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
+        { k.lang_go_to_definition, "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Definition", has = "definition" },
+        { k.lang_references, "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>", desc = "References", nowait = true },
+        { k.lang_go_to_implementation, "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
+        { k.lang_go_to_type_definition, "<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
       })
     end,
   },

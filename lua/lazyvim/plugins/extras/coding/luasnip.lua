@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.coding.luasnip
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   {
@@ -39,14 +39,14 @@ return {
     -- stylua: ignore
     keys = {
       {
-        k.jump_next,
+        k.snippet_jump_next,
         function()
           return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
         end,
         expr = true, silent = true, mode = "i",
       },
-      { k.jump_next, function() require("luasnip").jump(1) end, mode = "s" },
-      { k.jump_prev, function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      { k.snippet_jump_next, function() require("luasnip").jump(1) end, mode = "s" },
+      { k.snippet_jump_prev, function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
   },
   {

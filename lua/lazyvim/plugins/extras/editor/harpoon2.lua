@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.harpoon2
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   "ThePrimeagen/harpoon",

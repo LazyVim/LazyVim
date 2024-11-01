@@ -1,7 +1,7 @@
 -- Automatically highlights other instances of the word under your cursor.
 -- This works with LSP, Treesitter, and regexp matching to find the other
 -- instances.
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.vim_illuminate
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   {
@@ -23,21 +23,21 @@ return {
         end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
       end
 
-      map(k.next, "next")
-      map(k.prev, "prev")
+      map(k.illuminate_next, "next")
+      map(k.illuminate_prev, "prev")
 
       -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
       vim.api.nvim_create_autocmd("FileType", {
         callback = function()
           local buffer = vim.api.nvim_get_current_buf()
-          map(k.next, "next", buffer)
-          map(k.prev, "prev", buffer)
+          map(k.illuminate_next, "next", buffer)
+          map(k.illuminate_prev, "prev", buffer)
         end,
       })
     end,
     keys = {
-      { k.next, desc = "Next Reference" },
-      { k.prev, desc = "Prev Reference" },
+      { k.illuminate_next, desc = "Next Reference" },
+      { k.illuminate_prev, desc = "Prev Reference" },
     },
   },
   {

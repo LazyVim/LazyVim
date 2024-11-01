@@ -1,5 +1,5 @@
 local map = LazyVim.keymap_set
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.mini_files
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   "echasnovski/mini.files",
@@ -17,14 +17,14 @@ return {
   },
   keys = {
     {
-      k.open_current_file_dir,
+      k.minifiles_open_current_file_dir,
       function()
         require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
       end,
       desc = "Open mini.files (Directory of Current File)",
     },
     {
-      k.open_cwd,
+      k.minifiles_open_cwd,
       function()
         require("mini.files").open(vim.uv.cwd(), true)
       end,

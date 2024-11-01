@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang.markdown
+local k = require("lazyvim.keymaps").get_keymaps()
 
 LazyVim.on_very_lazy(function()
   vim.filetype.add({
@@ -110,7 +110,7 @@ return {
     ft = { "markdown", "norg", "rmd", "org" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
-      LazyVim.toggle.map(k.render_markdown_toggle, {
+      LazyVim.toggle.map(k.markdown_render_markdown_toggle, {
         name = "Render Markdown",
         get = function()
           return require("render-markdown.state").enabled

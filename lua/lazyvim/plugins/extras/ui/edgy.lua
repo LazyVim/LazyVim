@@ -1,5 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.ui.edgy
-local r = require("lazyvim.keymaps").get_keymaps().keymaps.resize_window
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   -- edgy
@@ -8,32 +7,32 @@ return {
     event = "VeryLazy",
     keys = {
       {
-        k.toggle,
+        k.edgy_toggle,
         function()
           require("edgy").toggle()
         end,
         desc = "Edgy Toggle",
       },
       -- stylua: ignore
-      { k.select_window, function() require("edgy").select() end, desc = "Edgy Select Window" },
+      { k.edgy_select_window, function() require("edgy").select() end, desc = "Edgy Select Window" },
     },
     opts = function()
       local keys = {}
       local actions = {
         -- increase width
-        [r.increase_width] = function(win)
+        [k.size_increase_width] = function(win)
           win:resize("width", 2)
         end,
         -- decrease width
-        [r.decrease_width] = function(win)
+        [k.size_decrease_width] = function(win)
           win:resize("width", -2)
         end,
         -- increase height
-        [r.increase_height] = function(win)
+        [k.size_increase_height] = function(win)
           win:resize("height", 2)
         end,
         -- decrease height
-        [r.decrease_height] = function(win)
+        [k.size_decrease_height] = function(win)
           win:resize("height", -2)
         end,
       }

@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.inc_rename
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
 
@@ -17,7 +17,7 @@ return {
     opts = function()
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       keys[#keys + 1] = {
-        k.rename,
+        k.increname_rename,
         function()
           local inc_rename = require("inc_rename")
           return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")

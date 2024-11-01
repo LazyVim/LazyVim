@@ -2,7 +2,7 @@
 -- surrounding characters like brackets or quotes, this allows you
 -- to select the text inside, change or modify the surrounding characters,
 -- and more.
-local k = require("lazyvim.keymaps").get_keymaps().extras.coding.mini_surround
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   "echasnovski/mini.surround",
@@ -26,13 +26,13 @@ return {
   end,
   opts = {
     mappings = {
-      add = k.add, -- Add surrounding in Normal and Visual modes
-      delete = k.delete, -- Delete surrounding
-      find = k.find, -- Find surrounding (to the right)
-      find_left = k.find_left, -- Find surrounding (to the left)
-      highlight = k.highlight, -- Highlight surrounding
-      replace = k.replace, -- Replace surrounding
-      update_n_lines = k.update_n_lines, -- Update `n_lines`
+      add = k.minisurround_add, -- Add surrounding in Normal and Visual modes
+      delete = k.minisurround_delete, -- Delete surrounding
+      find = k.minisurround_find, -- Find surrounding (to the right)
+      find_left = k.minisurround_find_left, -- Find surrounding (to the left)
+      highlight = k.minisurround_highlight, -- Highlight surrounding
+      replace = k.minisurround_replace, -- Replace surrounding
+      update_n_lines = k.minisurround_update_n_lines, -- Update `n_lines`
     },
   },
 }

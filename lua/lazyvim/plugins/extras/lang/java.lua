@@ -1,7 +1,6 @@
 -- This is the same as in lspconfig.configs.jdtls, but avoids
 -- needing to require that when this module loads.
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang
-local t = require("lazyvim.keymaps").get_keymaps().extras.test.core
+local k = require("lazyvim.keymaps").get_keymaps()
 
 local java_filetypes = { "java" }
 
@@ -197,31 +196,32 @@ return {
               {
                 mode = "n",
                 buffer = args.buf,
-                { k.extract.prefix, group = "extract" },
-                { k.extract.variable, require("jdtls").extract_variable_all, desc = "Extract Variable" },
-                { k.extract.constant, require("jdtls").extract_constant, desc = "Extract Constant" },
-                { k.go_to_super, require("jdtls").super_implementation, desc = "Goto Super" },
-                { k.go_to_subjects, require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
-                { k.organize_imports, require("jdtls").organize_imports, desc = "Organize Imports" },
+                { k.lang_extract_prefix, group = "extract" },
+                { k.lang_extract_variable, require("jdtls").extract_variable_all, desc = "Extract Variable" },
+                { k.lang_extract_constant, require("jdtls").extract_constant, desc = "Extract Constant" },
+                { k.lang_go_to_super, require("jdtls").super_implementation, desc = "Goto Super" },
+                { k.lang_go_to_subjects, require("jdtls.tests").goto_subjects, desc = "Goto Subjects" },
+                { k.lang_organize_imports, require("jdtls").organize_imports, desc = "Organize Imports" },
               },
             })
             wk.add({
               {
                 mode = "v",
                 buffer = args.buf,
-                { k.extract.prefix, group = "extract" },
+                { k.lang_extract_prefix, group = "extract" },
                 {
-                  k.extract.method,
+                  k.lang_extract_method,
                   [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
                   desc = "Extract Method",
                 },
                 {
-                  k.extract.variable,
+                  k.lang_extract_variable,
                   [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
                   desc = "Extract Variable",
                 },
                 {
-                  k.extract.constant([[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]]),
+                  k.lang_extract_constant,
+                  [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
                   desc = "Extract Constant",
                 },
               },
@@ -239,9 +239,9 @@ return {
                   {
                     mode = "n",
                     buffer = args.buf,
-                    { t.prefix, group = "test" },
+                    { k.test_prefix, group = "test" },
                     {
-                      t.run_all_test_files,
+                      k.test_run_all_test_files,
                       function()
                         require("jdtls.dap").test_class({
                           config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
@@ -250,7 +250,7 @@ return {
                       desc = "Run All Test",
                     },
                     {
-                      t.run_nearest,
+                      k.test_run_nearest,
                       function()
                         require("jdtls.dap").test_nearest_method({
                           config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
@@ -258,7 +258,7 @@ return {
                       end,
                       desc = "Run Nearest Test",
                     },
-                    { t.run_file, require("jdtls.dap").pick_test, desc = "Run Test" },
+                    { k.test_run_file, require("jdtls.dap").pick_test, desc = "Run Test" },
                   },
                 })
               end

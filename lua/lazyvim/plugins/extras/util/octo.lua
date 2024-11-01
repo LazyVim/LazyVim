@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.util.octo
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
 
@@ -17,22 +17,22 @@ return {
       picker = "telescope",
     },
     keys = {
-      { k.issue_list, "<cmd>Octo issue list<CR>", desc = "List Issues (Octo)" },
-      { k.issue_search, "<cmd>Octo issue search<CR>", desc = "Search Issues (Octo)" },
-      { k.pr_list, "<cmd>Octo pr list<CR>", desc = "List PRs (Octo)" },
-      { k.pr_search, "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
-      { k.repo_list, "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
-      { k.search, "<cmd>Octo search<CR>", desc = "Search (Octo)" },
+      { k.octo_issue_list, "<cmd>Octo issue list<CR>", desc = "List Issues (Octo)" },
+      { k.octo_issue_search, "<cmd>Octo issue search<CR>", desc = "Search Issues (Octo)" },
+      { k.octo_pr_list, "<cmd>Octo pr list<CR>", desc = "List PRs (Octo)" },
+      { k.octo_pr_search, "<cmd>Octo pr search<CR>", desc = "Search PRs (Octo)" },
+      { k.octo_repo_list, "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
+      { k.octo_search, "<cmd>Octo search<CR>", desc = "Search (Octo)" },
 
-      { k.assignee, "", desc = "+assignee (Octo)", ft = "octo" },
-      { k.comment_code, "", desc = "+comment/code (Octo)", ft = "octo" },
-      { k.label, "", desc = "+label (Octo)", ft = "octo" },
-      { k.issue, "", desc = "+issue (Octo)", ft = "octo" },
-      { k.react, "", desc = "+react (Octo)", ft = "octo" },
-      { k.pr, "", desc = "+pr (Octo)", ft = "octo" },
-      { k.review, "", desc = "+review (Octo)", ft = "octo" },
-      { k.insert_at, "@<C-x><C-o>", mode = "i", ft = "octo", silent = true },
-      { k.insert_hashtag, "#<C-x><C-o>", mode = "i", ft = "octo", silent = true },
+      { k.octo_assignee, "", desc = "+assignee (Octo)", ft = "octo" },
+      { k.octo_comment_code, "", desc = "+comment/code (Octo)", ft = "octo" },
+      { k.octo_label, "", desc = "+label (Octo)", ft = "octo" },
+      { k.octo_issue, "", desc = "+issue (Octo)", ft = "octo" },
+      { k.octo_react, "", desc = "+react (Octo)", ft = "octo" },
+      { k.octo_pr, "", desc = "+pr (Octo)", ft = "octo" },
+      { k.octo_review, "", desc = "+review (Octo)", ft = "octo" },
+      { k.octo_insert_at, "@<C-x><C-o>", mode = "i", ft = "octo", silent = true },
+      { k.octo_insert_hashtag, "#<C-x><C-o>", mode = "i", ft = "octo", silent = true },
     },
   },
 

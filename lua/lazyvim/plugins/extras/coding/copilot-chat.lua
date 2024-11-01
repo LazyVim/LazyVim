@@ -1,5 +1,5 @@
 local M = {}
-local k = require("lazyvim.keymaps").get_keymaps().extras.coding.copilot_chat
+local k = require("lazyvim.keymaps").get_keymaps()
 
 ---@param kind string
 function M.pick(kind)
@@ -38,10 +38,10 @@ return {
       }
     end,
     keys = {
-      { k.submit_prompt, "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
-      { k.prefix, "", desc = "+ai", mode = { "n", "v" } },
+      { k.copilotchat_submit_prompt, "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
+      { k.copilotchat_prefix, "", desc = "+ai", mode = { "n", "v" } },
       {
-        k.toggle,
+        k.copilotchat_toggle,
         function()
           return require("CopilotChat").toggle()
         end,
@@ -49,7 +49,7 @@ return {
         mode = { "n", "v" },
       },
       {
-        k.clear,
+        k.copilotchat_clear,
         function()
           return require("CopilotChat").reset()
         end,
@@ -57,7 +57,7 @@ return {
         mode = { "n", "v" },
       },
       {
-        k.quick_chat,
+        k.copilotchat_quick_chat,
         function()
           local input = vim.fn.input("Quick Chat: ")
           if input ~= "" then
@@ -68,9 +68,9 @@ return {
         mode = { "n", "v" },
       },
       -- Show help actions with telescope
-      { k.diagnostic_help, M.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
+      { k.copilotchat_diagnostic_help, M.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
       -- Show prompts actions with telescope
-      { k.prompt_actions, M.pick("prompt"), desc = "Prompt Actions (CopilotChat)", mode = { "n", "v" } },
+      { k.copilotchat_prompt_actionsr, M.pick("prompt"), desc = "Prompt Actions (CopilotChat)", mode = { "n", "v" } },
     },
     config = function(_, opts)
       local chat = require("CopilotChat")

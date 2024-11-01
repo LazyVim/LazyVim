@@ -1,5 +1,5 @@
 local map = LazyVim.keymap_set
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang.clojure
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   recommended = function()
@@ -80,13 +80,13 @@ return {
 
           map(
             { "n", "v" },
-            k.jump_prev_evaluation_output,
+            k.clojure_jump_prev_evaluation_output,
             "<CMD>call search('^; -\\+$', 'bw')<CR>",
             { silent = true, buffer = true, desc = "Jumps to the beginning of previous evaluation output." }
           )
           map(
             { "n", "v" },
-            k.jump_next_evaluation_output,
+            k.clojure_jump_next_evaluation_output,
             "<CMD>call search('^; -\\+$', 'w')<CR>",
             { silent = true, buffer = true, desc = "Jumps to the beginning of next evaluation output." }
           )

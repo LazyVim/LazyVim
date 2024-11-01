@@ -1,6 +1,5 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.leap
-local m = require("lazyvim.keymaps").get_keymaps().extras.coding.mini_surround
-local default = require("lazyvim.keymaps").default_keymaps.extras.coding.mini_surround
+local k = require("lazyvim.keymaps").get_keymaps()
+local default = require("lazyvim.keymaps").default_keymaps
 
 return {
   -- disable flash
@@ -24,9 +23,9 @@ return {
     "ggandor/leap.nvim",
     enabled = true,
     keys = {
-      { k.next, mode = { "n", "x", "o" }, desc = "Leap Forward to" },
-      { k.prev, mode = { "n", "x", "o" }, desc = "Leap Backward to" },
-      { k.from_windows, mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+      { k.leap_next, mode = { "n", "x", "o" }, desc = "Leap Forward to" },
+      { k.leap_prev, mode = { "n", "x", "o" }, desc = "Leap Backward to" },
+      { k.leap_from_windows, mode = { "n", "x", "o" }, desc = "Leap from Windows" },
     },
     config = function(_, opts)
       local leap = require("leap")
@@ -45,17 +44,22 @@ return {
     optional = true,
     opts = {
       mappings = {
-        add = m.add == default.add and "gza" or m.add, -- Add surrounding in Normal and Visual modes
-        delete = m.delete == default.delete and "gzd" or m.delete, -- Delete surrounding
-        find = m.find == default.find and "gzf" or m.find, -- Find surrounding (to the right)
-        find_left = m.find_left == default.find_left and "gzF" or m.find_left, -- Find surrounding (to the left)
-        highlight = m.highlight == default.highlight and "gzh" or m.highlight, -- Highlight surrounding
-        replace = m.replace == default.replace and "gzr" or m.replace, -- Replace surrounding
-        update_n_lines = m.update_n_lines == default.update_n_lines and "gzn" or m.update_n_lines, -- Update `n_lines`
+        add = k.minisurround_add == default.minisurround_add and "gza" or k.minisurround_add, -- Add surrounding in Normal and Visual modes
+        delete = k.minisurround_delete == default.minisurround_delete and "gzd" or k.minisurround_delete, -- Delete surrounding
+        find = k.minisurround_find == default.minisurround_find and "gzf" or k.minisurround_find, -- Find surrounding (to the right)
+        find_left = k.minisurround_find_left == default.minisurround_find_left and "gzF" or k.minisurround_find_left, -- Find surrounding (to the left)
+        highlight = k.minisurround_highlight == default.minisurround_highlight and "gzh" or k.minisurround_highlight, -- Highlight surrounding
+        replace = k.minisurround_replace == default.minisurround_replace and "gzr" or k.minisurround_replace, -- Replace surrounding
+        update_n_lines = k.minisurround_update_n_lines == default.minisurround_update_n_lines and "gzn"
+          or k.minisurround_update_n_lines, -- Update `n_lines`
       },
     },
     keys = {
-      { m.prefix == default.prefix and "gz" or m.prefix, "", desc = "+surround" },
+      {
+        k.minisurround_prefix == default.minisurround_prefix and "gz" or k.minisurround_prefix,
+        "",
+        desc = "+surround",
+      },
     },
   },
 

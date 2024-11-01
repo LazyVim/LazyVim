@@ -1,5 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().editor
-local s = require("lazyvim.keymaps").get_keymaps().extras.coding.mini_surround
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
 
@@ -10,40 +9,40 @@ return {
     keys = function()
       return {
         {
-          k.neo_tree.toggle_root,
+          k.neotree_toggle_root,
           function()
             require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
           end,
           desc = "Explorer NeoTree (Root Dir)",
         },
         {
-          k.neo_tree.toggle_cwd,
+          k.neotree_toggle_cwd,
           function()
             require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
           end,
           desc = "Explorer NeoTree (cwd)",
         },
         {
-          k.neo_tree.toggle_root_alt,
-          k.neo_tree.toggle_root,
+          k.neotree_toggle_root_alt,
+          k.neotree_toggle_root,
           desc = "Explorer NeoTree (Root Dir)",
           remap = true,
         },
         {
-          k.neo_tree.toggle_cwd_alt,
-          k.neo_tree.toggle_cwd,
+          k.neotree_toggle_cwd_alt,
+          k.neotree_toggle_cwd,
           desc = "Explorer NeoTree (cwd)",
           remap = true,
         },
         {
-          k.neo_tree.toggle_git_status,
+          k.neotree_toggle_git_status,
           function()
             require("neo-tree.command").execute({ source = "git_status", toggle = true })
           end,
           desc = "Git Explorer",
         },
         {
-          k.neo_tree.toggle_buffers,
+          k.neotree_toggle_buffers,
           function()
             require("neo-tree.command").execute({ source = "buffers", toggle = true })
           end,
@@ -76,10 +75,10 @@ return {
     opts = function()
       local neo_tree_mappings = {}
       local neo_tree_actions = {
-        [k.neo_tree.window.open] = "open",
-        [k.neo_tree.window.close_node] = "close_node",
+        [k.neotree_win_open] = "open",
+        [k.neotree_win_close_node] = "close_node",
         ["<space>"] = "none",
-        [k.neo_tree.window.copy_path_to_clipboard] = {
+        [k.neotree_win_copy_path_to_clipboard] = {
           function(state)
             local node = state.tree:get_node()
             local path = node:get_id()
@@ -87,13 +86,13 @@ return {
           end,
           desc = "Copy Path to Clipboard",
         },
-        [k.neo_tree.window.open_with_system_application] = {
+        [k.neotree_win_open_with_system_application] = {
           function(state)
             require("lazy.util").open(state.tree:get_node().path, { system = true })
           end,
           desc = "Open with System Application",
         },
-        [k.neo_tree.window.toggle_preview] = { "toggle_preview", config = { use_float = false } },
+        [k.neotree_win_toggle_preview] = { "toggle_preview", config = { use_float = false } },
       }
       for key, value in pairs(neo_tree_actions) do
         if key and key ~= "" then
@@ -158,7 +157,7 @@ return {
     cmd = "GrugFar",
     keys = {
       {
-        k.grug_far.open,
+        k.grugfar_open,
         function()
           local grug = require("grug-far")
           local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
@@ -186,11 +185,11 @@ return {
     opts = {},
     -- stylua: ignore
     keys = {
-      {k.flash.jump, mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      {k.flash.treesitter, mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      {k.flash.remote, mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      {k.flash.treesitter_search, mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      {k.flash.toggle, mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      {k.flash_jump, mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      {k.flash_treesitter, mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      {k.flash_remote, mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      {k.flash_treesitter_search, mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      {k.flash_toggle, mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
 
@@ -205,33 +204,33 @@ return {
       spec = {
         {
           mode = { "n", "v" },
-          { k.which_key.group.tabs, group = "tabs" },
-          { k.which_key.group.code, group = "code" },
-          { k.which_key.group.file_find, group = "file/find" },
-          { k.which_key.group.git, group = "git" },
-          { k.which_key.group.hunks, group = "hunks" },
-          { k.which_key.group.quit_session, group = "quit/session" },
-          { k.which_key.group.search, group = "search" },
-          { k.which_key.group.ui, group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
+          { k.tabs_prefix, group = "tabs" },
+          { k.code_prefix, group = "code" },
+          { k.file_find_prefix, group = "file/find" },
+          { k.git_prefix, group = "git" },
+          { k.hunks_prefix, group = "hunks" },
+          { k.quit_session_prefix, group = "quit/session" },
+          { k.search_prefix, group = "search" },
+          { k.ui_prefix, group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
           {
-            k.which_key.group.diagnostics_quickfix,
+            k.diagnostics_quickfix_prefix,
             group = "diagnostics/quickfix",
             icon = { icon = "󱖫 ", color = "green" },
           },
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
-          { s.prefix, group = "surround" },
+          { k.minisurround_prefix, group = "surround" },
           { "z", group = "fold" },
-          k.which_key.group.buffer == "" and {} or {
-            k.which_key.group.buffer,
+          k.buffer_prefix == "" and {} or {
+            k.buffer_prefix,
             group = "buffer",
             expand = function()
               return require("which-key.extras").expand.buf()
             end,
           },
-          k.which_key.group.windows == "" and {} or {
-            k.which_key.group.windows,
+          k.windows_prefix == "" and {} or {
+            k.windows_prefix,
             group = "windows",
             proxy = "<c-w>",
             expand = function()
@@ -245,14 +244,14 @@ return {
     },
     keys = {
       {
-        k.which_key.buffer_keymaps,
+        k.buffer_keymaps,
         function()
           require("which-key").show({ global = false })
         end,
         desc = "Buffer Keymaps (which-key)",
       },
       {
-        k.which_key.window_hydra_mode,
+        k.window_hydra_mode,
         function()
           require("which-key").show({ keys = "<c-w>", loop = true })
         end,
@@ -299,33 +298,33 @@ return {
         end
 
         -- stylua: ignore start
-        map("n", k.gitsigns.next_hunk, function()
+        map("n", k.gitsigns_next_hunk, function()
           if vim.wo.diff then
             vim.cmd.normal({ "]c", bang = true })
           else
             gs.nav_hunk("next")
           end
         end, "Next Hunk")
-        map("n", k.gitsigns.prev_hunk, function()
+        map("n", k.gitsigns_prev_hunk, function()
           if vim.wo.diff then
             vim.cmd.normal({ "[c", bang = true })
           else
             gs.nav_hunk("prev")
           end
         end, "Prev Hunk")
-        map("n", k.gitsigns.last_hunk, function() gs.nav_hunk("last") end, "Last Hunk")
-        map("n", k.gitsigns.first_hunk, function() gs.nav_hunk("first") end, "First Hunk")
-        map({ "n", "v" }, k.gitsigns.stage_hunk, ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        map({ "n", "v" }, k.gitsigns.reset_hunk, ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-        map("n", k.gitsigns.stage_buffer, gs.stage_buffer, "Stage Buffer")
-        map("n", k.gitsigns.undo_stage_hunk, gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", k.gitsigns.reset_buffer, gs.reset_buffer, "Reset Buffer")
-        map("n", k.gitsigns.preview_hunk_inline, gs.preview_hunk_inline, "Preview Hunk Inline")
-        map("n", k.gitsigns.blame_line, function() gs.blame_line({ full = true }) end, "Blame Line")
-        map("n", k.gitsigns.blame_buffer, function() gs.blame() end, "Blame Buffer")
-        map("n", k.gitsigns.diff_index, gs.diffthis, "Diff This")
-        map("n", k.gitsigns.diff_commit, function() gs.diffthis("~") end, "Diff This ~")
-        map({ "o", "x" }, k.gitsigns.select_hunk, ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+        map("n", k.gitsigns_last_hunk, function() gs.nav_hunk("last") end, "Last Hunk")
+        map("n", k.gitsigns_first_hunk, function() gs.nav_hunk("first") end, "First Hunk")
+        map({ "n", "v" }, k.gitsigns_stage_hunk, ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+        map({ "n", "v" }, k.gitsigns_reset_hunk, ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+        map("n", k.gitsigns_stage_buffer, gs.stage_buffer, "Stage Buffer")
+        map("n", k.gitsigns_undo_stage_hunk, gs.undo_stage_hunk, "Undo Stage Hunk")
+        map("n", k.gitsigns_reset_buffer, gs.reset_buffer, "Reset Buffer")
+        map("n", k.gitsigns_preview_hunk_inline, gs.preview_hunk_inline, "Preview Hunk Inline")
+        map("n", k.gitsigns_blame_line, function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", k.gitsigns_blame_buffer, function() gs.blame() end, "Blame Buffer")
+        map("n", k.gitsigns_diff_index, gs.diffthis, "Diff This")
+        map("n", k.gitsigns_diff_commit, function() gs.diffthis("~") end, "Diff This ~")
+        map({ "o", "x" }, k.gitsigns_select_hunk, ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
       end,
     },
   },
@@ -342,18 +341,22 @@ return {
       },
     },
     keys = {
-      { k.trouble.diagnostics_toggle, "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { k.trouble_diagnostics_toggle, "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       {
-        k.trouble.diagnostics_buffer_toggle,
+        k.trouble_diagnostics_buffer_toggle,
         "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
         desc = "Buffer Diagnostics (Trouble)",
       },
-      { k.trouble.symbols_toggle, "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
-      { k.trouble.lsp_toggle, "<cmd>Trouble lsp toggle<cr>", desc = "LSP references/definitions/... (Trouble)" },
-      { k.trouble.loclist_toggle, "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-      { k.trouble.qflist_toggle, "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+      { k.trouble_symbols_toggle, "<cmd>Trouble symbols toggle<cr>", desc = "Symbols (Trouble)" },
       {
-        k.trouble.previous_trouble,
+        k.trouble_lsp_toggle,
+        "<cmd>Trouble lsp toggle<cr>",
+        desc = "LSP references/definitions/... (Trouble)",
+      },
+      { k.trouble_loclist_toggle, "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+      { k.trouble_qflist_toggle, "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+      {
+        k.trouble_previous_trouble,
         function()
           if require("trouble").is_open() then
             require("trouble").prev({ skip_groups = true, jump = true })
@@ -367,7 +370,7 @@ return {
         desc = "Previous Trouble/Quickfix Item",
       },
       {
-        k.trouble.next_trouble,
+        k.trouble_next_trouble,
         function()
           if require("trouble").is_open() then
             require("trouble").next({ skip_groups = true, jump = true })
@@ -392,25 +395,25 @@ return {
     opts = {},
     -- stylua: ignore
     keys = {
-      { k.todo_comments.next_todo, function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
-      { k.todo_comments.prev_todo, function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
-      { k.todo_comments.todo_trouble, "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
-      { k.todo_comments.todo_fix_fixme_trouble, "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { k.todo_comments.todo_telescope, "<cmd>TodoTelescope<cr>", desc = "Todo" },
-      { k.todo_comments.todo_fix_fixme_telescope, "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+      { k.todo_next_todo, function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
+      { k.todo_prev_todo, function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
+      { k.todo_trouble, "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
+      { k.todo_fix_fixme_trouble, "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      { k.todo_telescope, "<cmd>TodoTelescope<cr>", desc = "Todo" },
+      { k.todo_fix_fixme_telescope, "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
     },
   },
 
   {
     import = "lazyvim.plugins.extras.editor.fzf",
     enabled = function()
-      return LazyVim.pick.want() == "fzf"
+      return LazyVim.pick() == "fzf"
     end,
   },
   {
     import = "lazyvim.plugins.extras.editor.telescope",
     enabled = function()
-      return LazyVim.pick.want() == "telescope"
+      return LazyVim.pick() == "telescope"
     end,
   },
 }

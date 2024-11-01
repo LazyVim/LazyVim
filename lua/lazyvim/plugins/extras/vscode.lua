@@ -29,15 +29,15 @@ Config.options.defaults.cond = function(plugin)
 end
 
 local map = LazyVim.keymap_set
-local k = require("lazyvim.keymaps").get_keymaps().extras.vscode
+local k = require("lazyvim.keymaps").get_keymaps()
 
 -- Add some vscode specific keymaps
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimKeymapsDefaults",
   callback = function()
-    map("n", k.find, "<cmd>Find<cr>")
-    map("n", k.find_in_files, [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
-    map("n", k.go_to_symbol, [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
+    map("n", k.vscode_find, "<cmd>Find<cr>")
+    map("n", k.vscode_find_in_files, [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
+    map("n", k.vscode_go_to_symbol, [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
   end,
 })
 

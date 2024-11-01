@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang
+local k = require("lazyvim.keymaps").get_keymaps()
 
 if lazyvim_docs then
   -- LSP Server to use for Python.
@@ -42,7 +42,7 @@ return {
           },
           keys = {
             {
-              k.organize_imports,
+              k.lang_organize_imports,
               LazyVim.lsp.action["source.organizeImports"],
               desc = "Organize Imports",
             },
@@ -51,7 +51,7 @@ return {
         ruff_lsp = {
           keys = {
             {
-              k.organize_imports,
+              k.lang_organize_imports,
               LazyVim.lsp.action["source.organizeImports"],
               desc = "Organize Imports",
             },
@@ -101,8 +101,8 @@ return {
       "mfussenegger/nvim-dap-python",
       -- stylua: ignore
       keys = {
-        { k.python.debug_method, function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
-        { k.python.debug_class, function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
+        { k.python_debug_method, function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+        { k.python_debug_class, function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
       },
       config = function()
         if vim.fn.has("win32") == 1 then
@@ -130,7 +130,7 @@ return {
     },
     --  Call config for python files and load the cached venv automatically
     ft = "python",
-    keys = { { k.python.select_virtual_env, "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" } },
+    keys = { { k.python_select_virtual_env, "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" } },
   },
 
   {

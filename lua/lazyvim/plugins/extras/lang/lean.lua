@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang.lean
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   recommended = function()
@@ -62,7 +62,7 @@ return {
       },
       -- Change if you don't like the backslash
       -- (comma is a popular choice on French keyboards)
-      leader = k.abbreviations_leader,
+      leader = k.lean_abbreviations_leader,
     },
 
     -- Enable suggested mappings?

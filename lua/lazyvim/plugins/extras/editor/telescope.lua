@@ -1,6 +1,4 @@
-local extras = require("lazyvim.keymaps").get_keymaps().extras
-local k = extras.editor.picker
-local lang = extras.lang
+local k = require("lazyvim.keymaps").get_keymaps()
 
 if lazyvim_docs then
   -- In case you don't want to use `:LazyExtras`,
@@ -90,55 +88,64 @@ return {
     },
     keys = {
       {
-        k.switch_buffer,
+        k.picker_switch_buffer,
         "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
         desc = "Switch Buffer",
       },
-      { k.grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { k.command_history, "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { k.find_files_root, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { k.picker_grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+      { k.picker_command_history, "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { k.picker_find_files_root, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- find
-      { k.find_buffers, "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
-      { k.find_config_file, LazyVim.pick.config_files(), desc = "Find Config File" },
-      { k.find_files_root_alt, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
-      { k.find_files_cwd, LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
-      { k.find_git_files, "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
-      { k.find_recent_files, "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-      { k.find_files_cwd, LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+      { k.picker_find_buffers, "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+      { k.picker_find_config_file, LazyVim.pick.config_files(), desc = "Find Config File" },
+      { k.picker_find_files_root_alt, LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
+      { k.picker_find_files_cwd, LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { k.picker_find_git_files, "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
+      { k.picker_find_recent_files, "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { k.picker_find_files_cwd, LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
-      { k.git_commits, "<cmd>Telescope git_commits<CR>", desc = "Commits" },
-      { k.git_status, "<cmd>Telescope git_status<CR>", desc = "Status" },
+      { k.picker_git_commits, "<cmd>Telescope git_commits<CR>", desc = "Commits" },
+      { k.picker_git_status, "<cmd>Telescope git_status<CR>", desc = "Status" },
       -- search
-      { k.search_registers, "<cmd>Telescope registers<cr>", desc = "Registers" },
-      { k.search_autocommands, "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
-      { k.search_buffer, "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-      { k.search_command_history, "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { k.search_commands, "<cmd>Telescope commands<cr>", desc = "Commands" },
-      { k.search_document_diagnostics, "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
-      { k.search_workspace_diagnostics, "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
-      { k.search_grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
-      { k.search_grep_cwd, LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
-      { k.search_help_pages, "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-      { k.search_highlight_groups, "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
-      { k.search_jumplist, "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
-      { k.search_keymaps, "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-      { k.search_loclist, "<cmd>Telescope loclist<cr>", desc = "Location List" },
-      { k.search_man_pages, "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-      { k.search_marks, "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-      { k.search_options, "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { k.search_resume, "<cmd>Telescope resume<cr>", desc = "Resume" },
-      { k.search_quickfix, "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
-      { k.search_word_root, LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
-      { k.search_word_cwd, LazyVim.pick("grep_string", { root = false, word_match = "-w" }), desc = "Word (cwd)" },
-      { k.search_selection_root, LazyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
-      { k.search_selection_cwd, LazyVim.pick("grep_string", { root = false }), mode = "v", desc = "Selection (cwd)" },
+      { k.picker_search_registers, "<cmd>Telescope registers<cr>", desc = "Registers" },
+      { k.picker_search_autocommands, "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+      { k.picker_search_buffer, "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+      { k.picker_search_command_history, "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { k.picker_search_commands, "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { k.picker_search_document_diagnostics, "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
+      { k.picker_search_workspace_diagnostics, "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+      { k.picker_search_grep_root, LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
+      { k.picker_search_grep_cwd, LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { k.picker_search_help_pages, "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+      { k.picker_search_highlight_groups, "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+      { k.picker_search_jumplist, "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
+      { k.picker_search_keymaps, "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { k.picker_search_loclist, "<cmd>Telescope loclist<cr>", desc = "Location List" },
+      { k.picker_search_man_pages, "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+      { k.picker_search_marks, "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+      { k.picker_search_options, "<cmd>Telescope vim_options<cr>", desc = "Options" },
+      { k.picker_search_resume, "<cmd>Telescope resume<cr>", desc = "Resume" },
+      { k.picker_search_quickfix, "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
+      { k.picker_search_word_root, LazyVim.pick("grep_string", { word_match = "-w" }), desc = "Word (Root Dir)" },
       {
-        k.colorscheme_preview,
+        k.picker_search_word_cwd,
+        LazyVim.pick("grep_string", { root = false, word_match = "-w" }),
+        desc = "Word (cwd)",
+      },
+      { k.picker_search_selection_root, LazyVim.pick("grep_string"), mode = "v", desc = "Selection (Root Dir)" },
+      {
+        k.picker_search_selection_cwd,
+        LazyVim.pick("grep_string", { root = false }),
+        mode = "v",
+        desc = "Selection (cwd)",
+      },
+      {
+        k.picker_colorscheme_preview,
         LazyVim.pick("colorscheme", { enable_preview = true }),
         desc = "Colorscheme with Preview",
       },
       {
-        k.go_to_symbol,
+        k.picker_go_to_symbol,
         function()
           require("telescope.builtin").lsp_document_symbols({
             symbols = LazyVim.config.get_kind_filter(),
@@ -147,7 +154,7 @@ return {
         desc = "Goto Symbol",
       },
       {
-        k.go_to_symbol_workspace,
+        k.picker_go_to_symbol_workspace,
         function()
           require("telescope.builtin").lsp_dynamic_workspace_symbols({
             symbols = LazyVim.config.get_kind_filter(),
@@ -189,17 +196,17 @@ return {
 
       local keymaps = {
         i = {
-          { k.actions.open_with_trouble, open_with_trouble },
-          { k.actions.open_with_trouble_alt, open_with_trouble },
-          { k.actions.find_files_no_ignore, find_files_no_ignore },
-          { k.actions.find_files_with_hidden, find_files_with_hidden },
-          { k.actions.cycle_history_next, actions.cycle_history_next },
-          { k.actions.cycle_history_prev, actions.cycle_history_prev },
-          { k.actions.preview_scrolling_down, actions.preview_scrolling_down },
-          { k.actions.preview_scrolling_up, actions.preview_scrolling_up },
+          { k.picker_open_with_trouble, open_with_trouble },
+          { k.picker_open_with_trouble_alt, open_with_trouble },
+          { k.picker_find_files_no_ignore, find_files_no_ignore },
+          { k.picker_find_files_with_hidden, find_files_with_hidden },
+          { k.picker_cycle_history_next, actions.cycle_history_next },
+          { k.picker_cycle_history_prev, actions.cycle_history_prev },
+          { k.picker_preview_scrolling_down, actions.preview_scrolling_down },
+          { k.picker_preview_scrolling_up, actions.preview_scrolling_up },
         },
         n = {
-          { k.actions.close, actions.close },
+          { k.picker_close, actions.close },
         },
       }
       local mappings = {
@@ -273,8 +280,8 @@ return {
       end
       opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
         mappings = {
-          n = k.flash.normal == "" and {} or { [k.flash.normal] = flash },
-          i = k.flash.insert == "" and {} or { [k.flash.insert] = flash },
+          n = k.flash_normal == "" and {} or { [k.flash_normal] = flash },
+          i = k.flash_insert == "" and {} or { [k.flash_insert] = flash },
         },
       })
     end,
@@ -310,10 +317,10 @@ return {
       local Keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
-        { lang.go_to_definition, function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
-        { lang.references, "<cmd>Telescope lsp_references<cr>", desc = "References", nowait = true },
-        { lang.go_to_implementation, function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
-        { lang.go_to_type_definition, function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
+        { k.lang_go_to_definition, function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
+        { k.lang_references, "<cmd>Telescope lsp_references<cr>", desc = "References", nowait = true },
+        { k.lang_go_to_implementation, function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
+        { k.lang_go_to_type_definition, function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
       })
     end,
   },

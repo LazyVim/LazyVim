@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.mini_diff
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   -- disable gitsigns.nvim
@@ -13,7 +13,7 @@ return {
     event = "VeryLazy",
     keys = {
       {
-        k.toggle_overlay,
+        k.minidiff_toggle_overlay,
         function()
           require("mini.diff").toggle_overlay(0)
         end,

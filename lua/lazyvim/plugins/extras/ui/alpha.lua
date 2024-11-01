@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().ui.dashboard
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
 
@@ -26,15 +26,15 @@ return {
       -- stylua: ignore
       dashboard.section.buttons.val = {}
       local actions = {
-        { k.find_file, " " .. " Find file", LazyVim.pick() },
-        { k.new_file, " " .. " New file", [[<cmd> ene <BAR> startinsert <cr>]] },
-        { k.recent_files, " " .. " Recent files", LazyVim.pick("oldfiles") },
-        { k.find_text, " " .. " Find text", LazyVim.pick("live_grep") },
-        { k.config, " " .. " Config", LazyVim.pick.config_files() },
-        { k.restore_session, " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]] },
-        { k.lazy_extras, " " .. " Lazy Extras", "<cmd> LazyExtras <cr>" },
-        { k.lazy, "󰒲 " .. " Lazy", "<cmd> Lazy <cr>" },
-        { k.quit, " " .. " Quit", "<cmd> qa <cr>" },
+        { k.dashboard_find_file, " " .. " Find file", LazyVim.pick() },
+        { k.dashboard_new_file, " " .. " New file", [[<cmd> ene <BAR> startinsert <cr>]] },
+        { k.dashboard_recent_files, " " .. " Recent files", LazyVim.pick("oldfiles") },
+        { k.dashboard_find_text, " " .. " Find text", LazyVim.pick("live_grep") },
+        { k.dashboard_config, " " .. " Config", LazyVim.pick.config_files() },
+        { k.dashboard_restore_session, " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]] },
+        { k.dashboard_lazy_extras, " " .. " Lazy Extras", "<cmd> LazyExtras <cr>" },
+        { k.dashboard_lazy, "󰒲 " .. " Lazy", "<cmd> Lazy <cr>" },
+        { k.dashboard_quit, " " .. " Quit", "<cmd> qa <cr>" },
       }
 
       for _, action in ipairs(actions) do

@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   recommended = function()
@@ -28,7 +28,7 @@ return {
         svelte = {
           keys = {
             {
-              k.organize_imports,
+              k.lang_organize_imports,
               LazyVim.lsp.action["source.organizeImports"],
               desc = "Organize Imports",
             },

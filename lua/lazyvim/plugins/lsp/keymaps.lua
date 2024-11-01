@@ -1,5 +1,5 @@
 local M = {}
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang
+local k = require("lazyvim.keymaps").get_keymaps()
 
 ---@type LazyKeysLspSpec[]|nil
 M._keys = nil
@@ -13,35 +13,41 @@ function M.get()
     return M._keys
   end
   local actions = {
-    { k.lsp_info, "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-    { k.go_to_definition, vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-    { k.references, vim.lsp.buf.references, desc = "References", nowait = true },
-    { k.go_to_implementation, vim.lsp.buf.implementation, desc = "Goto Implementation" },
-    { k.go_to_type_definition, vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-    { k.go_to_declaration, vim.lsp.buf.declaration, desc = "Goto Declaration" },
-    { k.hover, vim.lsp.buf.hover, desc = "Hover" },
-    { k.signature_help, vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-    { k.insert_signature_help, vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-    { k.code_action, vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-    { k.run_codelens, vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+    { k.lang_lsp_info, "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+    { k.lang_go_to_definition, vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+    { k.lang_references, vim.lsp.buf.references, desc = "References", nowait = true },
+    { k.lang_go_to_implementation, vim.lsp.buf.implementation, desc = "Goto Implementation" },
+    { k.lang_go_to_type_definition, vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+    { k.lang_go_to_declaration, vim.lsp.buf.declaration, desc = "Goto Declaration" },
+    { k.lang_hover, vim.lsp.buf.hover, desc = "Hover" },
+    { k.lang_signature_help, vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     {
-      k.refresh_codelens,
+      k.lang_insert_signature_help,
+      vim.lsp.buf.signature_help,
+      mode = "i",
+      desc = "Signature Help",
+      has = "signatureHelp",
+    },
+    { k.lang_code_action, vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+    { k.lang_run_codelens, vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+    {
+      k.lang_refresh_codelens,
       vim.lsp.codelens.refresh,
       desc = "Refresh & Display Codelens",
       mode = { "n" },
       has = "codeLens",
     },
     {
-      k.rename_file,
+      k.lang_rename_file,
       LazyVim.lsp.rename_file,
       desc = "Rename File",
       mode = { "n" },
       has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
     },
-    { k.rename, vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-    { k.source_action, LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
+    { k.lang_rename, vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+    { k.lang_source_action, LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
     {
-      k.next_reference,
+      k.lang_next_reference,
       function()
         LazyVim.lsp.words.jump(vim.v.count1)
       end,
@@ -52,7 +58,7 @@ function M.get()
       end,
     },
     {
-      k.prev_reference,
+      k.lang_prev_reference,
       function()
         LazyVim.lsp.words.jump(-vim.v.count1)
       end,
@@ -63,7 +69,7 @@ function M.get()
       end,
     },
     {
-      k.cycle_next_reference,
+      k.lang_cycle_next_reference,
       function()
         LazyVim.lsp.words.jump(vim.v.count1, true)
       end,
@@ -74,7 +80,7 @@ function M.get()
       end,
     },
     {
-      k.cycle_prev_reference,
+      k.lang_cycle_prev_reference,
       function()
         LazyVim.lsp.words.jump(-vim.v.count1, true)
       end,

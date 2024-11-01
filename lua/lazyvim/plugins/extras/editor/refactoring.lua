@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.editor.refactoring
+local k = require("lazyvim.keymaps").get_keymaps()
 
 local pick = function()
   if LazyVim.pick.picker.name == "telescope" then
@@ -30,15 +30,15 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     keys = {
-      { k.prefix, "", desc = "+refactor", mode = { "n", "v" } },
+      { k.refactoring_prefix, "", desc = "+refactor", mode = { "n", "v" } },
       {
-        k.refactor,
+        k.refactoring_refactor,
         pick,
         mode = "v",
         desc = "Refactor",
       },
       {
-        k.inline_variable,
+        k.refactoring_inline_variable,
         function()
           require("refactoring").refactor("Inline Variable")
         end,
@@ -46,42 +46,42 @@ return {
         desc = "Inline Variable",
       },
       {
-        k.extract_block,
+        k.refactoring_extract_block,
         function()
           require("refactoring").refactor("Extract Block")
         end,
         desc = "Extract Block",
       },
       {
-        k.extract_block_to_file,
+        k.refactoring_extract_block_to_file,
         function()
           require("refactoring").refactor("Extract Block To File")
         end,
         desc = "Extract Block To File",
       },
       {
-        k.debug_print,
+        k.refactoring_debug_print,
         function()
           require("refactoring").debug.printf({ below = false })
         end,
         desc = "Debug Print",
       },
       {
-        k.debug_print_variable,
+        k.refactoring_debug_print_variable,
         function()
           require("refactoring").debug.print_var({ normal = true })
         end,
         desc = "Debug Print Variable",
       },
       {
-        k.debug_cleanup,
+        k.refactoring_debug_cleanup,
         function()
           require("refactoring").debug.cleanup({})
         end,
         desc = "Debug Cleanup",
       },
       {
-        k.extract_function,
+        k.refactoring_extract_function,
         function()
           require("refactoring").refactor("Extract Function")
         end,
@@ -89,7 +89,7 @@ return {
         desc = "Extract Function",
       },
       {
-        k.extract_function_to_file,
+        k.refactoring_extract_function_to_file,
         function()
           require("refactoring").refactor("Extract Function To File")
         end,
@@ -97,7 +97,7 @@ return {
         desc = "Extract Function To File",
       },
       {
-        k.extract_variable,
+        k.refactoring_extract_variable,
         function()
           require("refactoring").refactor("Extract Variable")
         end,
@@ -105,7 +105,7 @@ return {
         desc = "Extract Variable",
       },
       {
-        k.debug_print_variable,
+        k.refactoring_debug_print_variable,
         function()
           require("refactoring").debug.print_var()
         end,

@@ -1,5 +1,5 @@
 -- animations
-local k = require("lazyvim.keymaps").get_keymaps().extras.ui.mini_animate
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   "echasnovski/mini.animate",
@@ -23,7 +23,7 @@ return {
       end,
     })
 
-    LazyVim.toggle.map(k.toggle, {
+    LazyVim.toggle.map(k.minianimae_toggle, {
       name = "Mini Animate",
       get = function()
         return not vim.g.minianimate_disable

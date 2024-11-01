@@ -1,5 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().editor.trouble
-local o = require("lazyvim.keymaps").get_keymaps().extras.editor.outline
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   -- Disable `<leader>cs` keymap so it doesn't conflict with `outline.nvim`
@@ -7,12 +6,12 @@ return {
     "folke/trouble.nvim",
     optional = true,
     keys = {
-      { k.symbols_toggle, false },
+      { k.trouble_symbols_toggle, false },
     },
   },
   {
     "hedyhli/outline.nvim",
-    keys = { { k.symbols_toggle, "<cmd>Outline<cr>", desc = "Toggle Outline" } },
+    keys = { { k.trouble_symbols_toggle, "<cmd>Outline<cr>", desc = "Toggle Outline" } },
     cmd = "Outline",
     opts = function()
       local defaults = require("outline.config").defaults
@@ -25,8 +24,8 @@ return {
       }
 
       local keymaps = {
-        up_and_jump = o.up_and_jump,
-        down_and_jump = o.down_and_jump,
+        up_and_jump = k.outline_up_and_jump,
+        down_and_jump = k.outline_down_and_jump,
       }
       for key, value in pairs(keymaps) do
         if value and value ~= "" then

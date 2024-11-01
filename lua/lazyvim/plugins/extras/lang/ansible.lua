@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().extras.lang.ansible
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   recommended = function()

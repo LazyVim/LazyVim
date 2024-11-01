@@ -1,4 +1,4 @@
-local k = require("lazyvim.keymaps").get_keymaps().ui
+local k = require("lazyvim.keymaps").get_keymaps()
 
 return {
   -- Better `vim.notify()`
@@ -6,7 +6,7 @@ return {
     "rcarriga/nvim-notify",
     keys = {
       {
-        k.nvim_notify.dismiss_all_notifications,
+        k.nvimnotify_dismiss_all_notifications,
         function()
           require("notify").dismiss({ silent = true, pending = true })
         end,
@@ -42,29 +42,29 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     keys = {
-      { k.bufferline.toggle_pin, "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+      { k.bufferline_toggle_pin, "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
       {
-        k.bufferline.delete_non_pinned_buffers,
+        k.bufferline_delete_non_pinned_buffers,
         "<Cmd>BufferLineGroupClose ungrouped<CR>",
         desc = "Delete Non-Pinned Buffers",
       },
-      { k.bufferline.delete_other_buffers, "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+      { k.bufferline_delete_other_buffers, "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
       {
-        k.bufferline.delete_buffers_to_the_right,
+        k.bufferline_delete_buffers_to_the_right,
         "<Cmd>BufferLineCloseRight<CR>",
         desc = "Delete Buffers to the Right",
       },
       {
-        k.bufferline.delete_buffers_to_the_left,
+        k.bufferline_delete_buffers_to_the_left,
         "<Cmd>BufferLineCloseLeft<CR>",
         desc = "Delete Buffers to the Left",
       },
-      { k.bufferline.prev_buffer, "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { k.bufferline.next_buffer, "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { k.bufferline.prev_buffer_alt, "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { k.bufferline.next_buffer_alt, "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { k.bufferline.move_buffer_prev, "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      { k.bufferline.move_buffer_next, "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+      { k.bufferline_prev_buffer, "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { k.bufferline_next_buffer, "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { k.bufferline_prev_buffer_alt, "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
+      { k.bufferline_next_buffer_alt, "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { k.bufferline_move_buffer_prev, "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
+      { k.bufferline_move_buffer_next, "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
     },
     opts = {
       options = {
@@ -240,7 +240,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     event = "LazyFile",
     opts = function()
-      LazyVim.toggle.map(k.indent_blankline.toggle, {
+      LazyVim.toggle.map(k.indentblankline_toggle, {
         name = "Indention Guides",
         get = function()
           return require("ibl.config").get_config(0).enabled
@@ -309,15 +309,15 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { k.noice.prefix, "", desc = "+noice"},
-      { k.noice.redirect_cmdline, function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-      { k.noice.last_message, function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-      { k.noice.history, function() require("noice").cmd("history") end, desc = "Noice History" },
-      { k.noice.all, function() require("noice").cmd("all") end, desc = "Noice All" },
-      { k.noice.dismiss, function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-      { k.noice.pick, function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
-      { k.noice.scroll_forward, function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
-      { k.noice.scroll_backward, function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+      { k.noice_prefix, "", desc = "+noice"},
+      { k.noice_redirect_cmdline, function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+      { k.noice_last_message, function() require("noice").cmd("last") end, desc = "Noice Last Message" },
+      { k.noice_history, function() require("noice").cmd("history") end, desc = "Noice History" },
+      { k.noice_all, function() require("noice").cmd("all") end, desc = "Noice All" },
+      { k.noice_dismiss, function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
+      { k.noice_pick, function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
+      { k.noice_scroll_forward, function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+      { k.noice_scroll_backward, function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
     },
     config = function(_, opts)
       -- HACK: noice shows messages from before it was enabled,
@@ -374,49 +374,49 @@ return {
           action = "lua LazyVim.pick()()",
           desc = " Find File",
           icon = " ",
-          key = k.dashboard.find_file,
+          key = k.dashboard_find_file,
         },
         {
           action = "ene | startinsert",
           desc = " New File",
           icon = " ",
-          key = k.dashboard.new_file,
+          key = k.dashboard_new_file,
         },
         {
           action = 'lua LazyVim.pick("oldfiles")()',
           desc = " Recent Files",
           icon = " ",
-          key = k.dashboard.recent_files,
+          key = k.dashboard_recent_files,
         },
         {
           action = 'lua LazyVim.pick("live_grep")()',
           desc = " Find Text",
           icon = " ",
-          key = k.dashboard.find_text,
+          key = k.dashboard_find_text,
         },
         {
-          action = "lua LazyVim.pick.config_files()()",
+          action = "lua LazyVim.pick()()",
           desc = " Config",
           icon = " ",
-          key = k.dashboard.config,
+          key = k.dashboard_config,
         },
         {
           action = 'lua require("persistence").load()',
           desc = " Restore Session",
           icon = " ",
-          key = k.dashboard.restore_session,
+          key = k.dashboard_restore_session,
         },
         {
           action = "LazyExtras",
           desc = " Lazy Extras",
           icon = " ",
-          key = k.dashboard.lazy_extras,
+          key = k.dashboard_lazy_extras,
         },
         {
           action = "Lazy",
           desc = " Lazy",
           icon = "󰒲 ",
-          key = k.dashboard.lazy,
+          key = k.dashboard_lazy,
         },
         {
           action = function()
@@ -424,7 +424,7 @@ return {
           end,
           desc = " Quit",
           icon = " ",
-          key = k.dashboard.quit,
+          key = k.dashboard_quit,
         },
       }
 
