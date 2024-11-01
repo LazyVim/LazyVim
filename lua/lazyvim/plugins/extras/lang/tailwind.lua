@@ -72,4 +72,50 @@ return {
       end
     end,
   },
+
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      windows = {
+        autocomplete = {
+          draw = function(ctx)
+            _G.blink_color_cache = _G.blink_color_cache or {} ---@type table<string, boolean>
+            vim.api.nvim_create_autocmd("ColorScheme", {
+              callback = function()
+                _G.blink_color_cache = {}
+              end,
+            })
+            local A = require("blink.cmp.windows.autocomplete")
+            --- @type blink.cmp.Component[]
+            local ret = A.render_item_reversed(ctx)
+            if
+              ctx.item.kind == vim.lsp.protocol.CompletionItemKind.Color
+              and type(ctx.item.documentation) == "string"
+              and ctx.item.documentation:match("^#[a-zA-Z0-9]+$")
+            then
+              local color = ctx.item.documentation
+              local group = "BlinkColor" .. color:sub(2)
+              if not _G.blink_color_cache[group] then
+                vim.api.nvim_set_hl(0, group, { fg = color })
+                vim.api.nvim_set_hl(0, group .. "Full", { fg = color, bg = color })
+                _G.blink_color_cache[group] = true
+              end
+              for c, comp in ipairs(ret) do
+                if type(comp) == "table" and comp.hl_group == "BlinkCmpKindColor" then
+                  comp.hl_group = group
+                  table.insert(ret, c, { "   ", hl_group = group .. "Full" })
+                  table.insert(ret, c + 1, " ")
+                  break
+                end
+              end
+            end
+            return ret
+          end,
+        },
+      },
+    },
+  },
 }
