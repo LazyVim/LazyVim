@@ -5,24 +5,16 @@ return {
   },
   {
     "saghen/blink.cmp",
+    opts_extend = { "sources.completion.enabled_providers" },
     dependencies = {
       "rafamadriz/friendly-snippets",
       -- add blink.compat to dependencies
-      {
-        "saghen/blink.compat",
-        opts = {
-          -- lazydev.nvim only registers the completion source when nvim-cmp is
-          -- loaded, so pretend that we are nvim-cmp, and that nvim-cmp is loaded.
-          -- this option only has effect when using lazy.nvim
-          -- this should not be required in most cases
-          impersontate_nvim_cmp = true,
-        },
-      },
+      { "saghen/blink.compat", opts = {} },
     },
     lazy = false, -- lazy loading handled internally
 
     -- use a release tag to download pre-built binaries
-    version = "v0.*",
+    version = "*",
     -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
     -- build = 'cargo build --release',
     -- If you use nix, you can build from source using latest nightly rust with:
@@ -37,6 +29,8 @@ return {
       -- your own keymap. when defining your own, no keybinds will be assigned automatically.
       keymap = "default",
 
+      kind_icons = LazyVim.config.icons.kinds,
+
       highlight = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
@@ -45,7 +39,7 @@ return {
       },
       -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- adjusts spacing to ensure icons are aligned
-      nerd_font_variant = "normal",
+      nerd_font_variant = "mono",
       windows = {
         documentation = {
           auto_show = true,
@@ -63,21 +57,29 @@ return {
       sources = {
         completion = {
           -- remember to enable your providers here
-          enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
+          enabled_providers = { "lsp", "path", "snippets", "buffer" },
         },
+      },
+    },
+  },
 
+  -- lazydev
+  {
+    "saghen/blink.cmp",
+    opts = {
+      sources = {
+        completion = {
+          -- add lazydev to your completion providers
+          enabled_providers = { "lazydev" },
+        },
         providers = {
+          lsp = {
+            -- dont show LuaLS require statements when lazydev has items
+            fallback_for = { "lazydev" },
+          },
           lazydev = {
-            name = "lazydev", -- IMPORTANT: use the same name as you would for nvim-cmp
-            module = "blink.compat.source",
-
-            -- all blink.cmp source config options work as normal:
-            score_offset = 3,
-
-            opts = {
-              -- options for the completion source
-              -- equivalent to `option` field of nvim-cmp source config
-            },
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
           },
         },
       },
