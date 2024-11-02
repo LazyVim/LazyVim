@@ -7,6 +7,7 @@ return {
     "saghen/blink.cmp",
     -- TODO: use release version
     -- version = "*",
+    version = false,
     opts_extend = { "sources.completion.enabled_providers" },
     dependencies = {
       "rafamadriz/friendly-snippets",
