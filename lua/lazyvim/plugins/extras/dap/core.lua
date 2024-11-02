@@ -1,5 +1,20 @@
+---@param config {args?:string|fun():string?}
+local function get_args_as_string(config)
+  local args = type(config.args) == "function" and (config.args() or "") or config.args or ""
+  ---@cast args string
+  if string.len(args) > 0 then
+    args = args .. " "
+  end
+  config = vim.deepcopy(config)
+  config.args = function()
+    local new_args = vim.fn.input("Run with args: ", args) --[[@as string]]
+    return new_args --[[@as string]]
+  end
+  return config
+end
+
 ---@param config {args?:string[]|fun():string[]?}
-local function get_args(config)
+local function get_args_as_table(config)
   local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
   config = vim.deepcopy(config)
   ---@cast args string[]
@@ -8,6 +23,18 @@ local function get_args(config)
     return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
   end
   return config
+end
+
+---@param config {type?:string}
+local function get_args(config)
+  --- Java Dap expects "args" to be a string, not a table
+  if config.type and config.type == "java" then
+    ---@cast config {type?:string, args?:string|fun():string?}
+    return get_args_as_string(config)
+  else
+    ---@cast config {type?:string, args?:string[]|fun():string[]?}
+    return get_args_as_table(config)
+  end
 end
 
 return {
