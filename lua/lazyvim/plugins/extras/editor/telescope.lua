@@ -102,7 +102,7 @@ return {
       { k.picker_find_files_cwd, LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
       { k.picker_find_git_files, "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
       { k.picker_find_recent_files, "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-      { k.picker_find_files_cwd, LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+      { k.picker_find_recent_files_cwd, LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
       -- git
       { k.picker_git_commits, "<cmd>Telescope git_commits<CR>", desc = "Commits" },
       { k.picker_git_status, "<cmd>Telescope git_status<CR>", desc = "Status" },
