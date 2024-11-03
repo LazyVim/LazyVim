@@ -1,5 +1,14 @@
 # Changelog
 
+## [12.44.1](https://github.com/LazyVim/LazyVim/compare/v12.44.0...v12.44.1) (2024-11-03)
+
+
+### Bug Fixes
+
+* **blink:** use release version ([7ebed53](https://github.com/LazyVim/LazyVim/commit/7ebed5349d49dd9996d61155bc12605871058ec1))
+* **copilot:** properly process tab with copilot and blink. Fixes [#4692](https://github.com/LazyVim/LazyVim/issues/4692) ([fa37396](https://github.com/LazyVim/LazyVim/commit/fa3739678af494b8657d68ddc44bcc598f9bd00a))
+* **java:** jdtls run with args ([#4689](https://github.com/LazyVim/LazyVim/issues/4689)) ([0403e80](https://github.com/LazyVim/LazyVim/commit/0403e80a8e6250130fe94af1034a6f0760a24ca8))
+
 ## [12.44.0](https://github.com/LazyVim/LazyVim/compare/v12.43.0...v12.44.0) (2024-11-02)
 
 
