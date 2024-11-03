@@ -254,7 +254,8 @@ return {
             "mason",
             "notify",
             "toggleterm",
-            "lazyterm",
+            "snacks_float",
+            "snacks_terminal",
           },
         },
       }

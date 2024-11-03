@@ -72,15 +72,17 @@ function M.open(file, opts)
     end
   end
 
-  local float = require("lazy.util").float({
+  local float = Snacks.float({
     file = file,
-    size = { width = 0.6, height = 0.6 },
+    win = { width = 0.6, height = 0.6 },
+    wo = {
+      spell = false,
+      wrap = false,
+      signcolumn = "yes",
+      statuscolumn = " ",
+      conceallevel = 3,
+    },
   })
-  vim.opt_local.spell = false
-  vim.opt_local.wrap = false
-  vim.opt_local.signcolumn = "yes"
-  vim.opt_local.statuscolumn = " "
-  vim.opt_local.conceallevel = 3
   if vim.diagnostic.enable then
     pcall(vim.diagnostic.enable, false, { bufnr = float.buf })
   else
