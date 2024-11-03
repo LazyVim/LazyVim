@@ -197,8 +197,8 @@ function M.foldexpr()
     return "0"
   end
 
-  -- don't use treesitter folds for non-file buffers
-  if vim.bo[buf].buftype ~= "" then
+  -- don't use treesitter folds for terminal
+  if vim.bo[buf].buftype == "terminal" then
     return "0"
   end
 

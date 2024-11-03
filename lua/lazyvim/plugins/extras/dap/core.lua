@@ -1,11 +1,17 @@
----@param config {args?:string[]|fun():string[]?}
+---@param config {type?:string, args?:string[]|fun():string[]?}
 local function get_args(config)
-  local args = type(config.args) == "function" and (config.args() or {}) or config.args or {}
+  local args = type(config.args) == "function" and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
+  local args_str = type(args) == "table" and table.concat(args, " ") or args --[[@as string]]
+
   config = vim.deepcopy(config)
   ---@cast args string[]
   config.args = function()
-    local new_args = vim.fn.input("Run with args: ", table.concat(args, " ")) --[[@as string]]
-    return vim.split(vim.fn.expand(new_args) --[[@as string]], " ")
+    local new_args = vim.fn.expand(vim.fn.input("Run with args: ", args_str))
+    if config.type and config.type == "java" then
+      ---@diagnostic disable-next-line: return-type-mismatch
+      return new_args
+    end
+    return vim.split(new_args, " ")
   end
   return config
 end
@@ -68,11 +74,6 @@ return {
       local json = require("plenary.json")
       vscode.json_decode = function(str)
         return vim.json.decode(json.json_strip_comments(str))
-      end
-
-      -- Extends dap.configurations with entries read from .vscode/launch.json
-      if vim.fn.filereadable(".vscode/launch.json") then
-        vscode.load_launchjs()
       end
     end,
   },
