@@ -5,9 +5,7 @@ return {
   },
   {
     "saghen/blink.cmp",
-    -- TODO: use release version
-    -- version = "*",
-    version = false,
+    version = "*",
     opts_extend = { "sources.completion.enabled_providers" },
     dependencies = {
       "rafamadriz/friendly-snippets",
@@ -19,12 +17,6 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      fuzzy = {
-        prebuilt_binaries = {
-          download = true,
-          force_version = "v0.5.0",
-        },
-      },
       highlight = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
