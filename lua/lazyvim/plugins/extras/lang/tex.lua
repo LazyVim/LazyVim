@@ -9,6 +9,13 @@ return {
   -- Add BibTeX/LaTeX to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    init = function()
+      if
+        vim.fn.argc() > 0 and vim.fn.isdirectory(vim.fn.argv(0) --[[@as string]]) ~= 1
+      then
+        vim.g.treesitter_disable_highlight = { "latex" }
+      end
+    end,
     opts = function(_, opts)
       opts.highlight = opts.highlight or {}
       if type(opts.ensure_installed) == "table" then
