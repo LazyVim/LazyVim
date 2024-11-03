@@ -13,7 +13,7 @@ return {
       if
         vim.fn.argc() > 0 and vim.fn.isdirectory(vim.fn.argv(0) --[[@as string]]) ~= 1
       then
-        vim.g.treesitter_disable_highlight = { "latex" }
+        vim.g.treesitter_syntax_legacy = { "latex" }
       end
     end,
     opts = function(_, opts)

@@ -86,10 +86,10 @@ function M.lazy_file()
       if ft then
         -- Add treesitter highlights and fallback to syntax
         local lang = vim.treesitter.language.get_lang(ft)
-        if vim.tbl_contains(vim.g.treesitter_disable_highlight or {}, lang) then
-          lang = nil
-        end
         if not (lang and pcall(vim.treesitter.start, event.buf, lang)) then
+          vim.bo[event.buf].syntax = ft
+        end
+        if vim.tbl_contains(vim.g.treesitter_syntax_legacy or {}, lang) then
           vim.bo[event.buf].syntax = ft
         end
 
