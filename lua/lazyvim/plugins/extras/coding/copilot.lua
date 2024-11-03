@@ -111,6 +111,7 @@ return {
             elseif require("copilot.suggestion").is_visible() then
               LazyVim.create_undo()
               require("copilot.suggestion").accept()
+              return true
             else
               return cmp.select_and_accept()
             end
