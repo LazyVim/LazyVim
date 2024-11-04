@@ -15,6 +15,21 @@ return {
     config = function(_, opts)
       require("illuminate").configure(opts)
 
+      LazyVim.toggle.map("<leader>ux", {
+        name = "Illuminate",
+        get = function()
+          return not require("illuminate.engine").is_paused()
+        end,
+        set = function(enabled)
+          local m = require("illuminate")
+          if enabled then
+            m.resume()
+          else
+            m.pause()
+          end
+        end,
+      })
+
       local function map(key, dir, buffer)
         vim.keymap.set("n", key, function()
           require("illuminate")["goto_" .. dir .. "_reference"](false)
