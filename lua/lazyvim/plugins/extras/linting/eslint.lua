@@ -14,6 +14,11 @@ return {
       },
       setup = {
         eslint = function()
+          -- verify if vim.g.root_lsp_ignore table contains `eslint`
+          if vim.tbl_contains(vim.g.root_lsp_ignore or {}, "eslint") then
+            return true
+          end
+
           local function get_client(buf)
             return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
           end
