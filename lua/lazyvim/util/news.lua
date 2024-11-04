@@ -72,8 +72,7 @@ function M.open(file, opts)
     end
   end
 
-  local float = Snacks.win({
-    file = file,
+  Snacks.config.view("news", {
     win = { width = 0.6, height = 0.6 },
     wo = {
       spell = false,
@@ -83,6 +82,12 @@ function M.open(file, opts)
       conceallevel = 3,
     },
   })
+
+  local float = Snacks.win({
+    file = file,
+    view = "news",
+  })
+
   if vim.diagnostic.enable then
     pcall(vim.diagnostic.enable, false, { bufnr = float.buf })
   else
