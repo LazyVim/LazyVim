@@ -30,7 +30,7 @@ return {
     ---@type snacks.Config
     opts = {
       terminal = {
-        float = {
+        win = {
           keys = {
             nav_h = { "<C-h>", term_nav("h"), desc = "Go to Left Window", expr = true, mode = "t" },
             nav_j = { "<C-j>", term_nav("j"), desc = "Go to Lower Window", expr = true, mode = "t" },

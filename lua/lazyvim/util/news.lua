@@ -72,7 +72,7 @@ function M.open(file, opts)
     end
   end
 
-  local float = Snacks.float({
+  local float = Snacks.win({
     file = file,
     win = { width = 0.6, height = 0.6 },
     wo = {
