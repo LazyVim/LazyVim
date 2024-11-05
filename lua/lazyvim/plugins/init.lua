@@ -29,6 +29,7 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
+      toggle = { map = LazyVim.safe_keymap_set },
       terminal = {
         win = {
           keys = {
