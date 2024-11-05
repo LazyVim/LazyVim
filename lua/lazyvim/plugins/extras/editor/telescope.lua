@@ -4,6 +4,7 @@ if lazyvim_docs then
   vim.g.lazyvim_picker = "telescope"
 end
 
+local make_cmd = vim.loop.os_uname().sysname == "Linux" and "make" or "gmake"
 local have_make = vim.fn.executable("make") == 1
 local have_cmake = vim.fn.executable("cmake") == 1
 
@@ -63,7 +64,7 @@ return {
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = have_make and "make"
+        build = have_make and make_cmd
           or "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         enabled = have_make or have_cmake,
         config = function(plugin)
