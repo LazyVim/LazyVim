@@ -90,9 +90,4 @@ function M.foldexpr()
   return "0"
 end
 
----@param buf number?
-function M.bufremove(buf)
-  Snacks.bufdelete(buf)
-end
-
 return M
