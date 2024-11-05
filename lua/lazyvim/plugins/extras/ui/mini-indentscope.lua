@@ -20,7 +20,7 @@ return {
           "help",
           "lazy",
           "snacks_terminal",
-          "snacks_float",
+          "snacks_win",
           "mason",
           "neo-tree",
           "notify",

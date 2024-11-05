@@ -219,7 +219,7 @@ return {
             "mason",
             "notify",
             "toggleterm",
-            "snacks_float",
+            "snacks_win",
             "snacks_terminal",
           },
         },
