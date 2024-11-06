@@ -48,7 +48,7 @@ return {
       {
         "<leader>un",
         function()
-          Snacks.notifier:hide()
+          Snacks.notifier.hide()
         end,
         desc = "Dismiss All Notifications",
       },
