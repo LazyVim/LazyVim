@@ -110,7 +110,7 @@ return {
         })
       end
 
-      -- snacks float
+      -- snacks terminal
       for _, pos in ipairs({ "top", "bottom", "left", "right" }) do
         opts[pos] = opts[pos] or {}
         table.insert(opts[pos], {

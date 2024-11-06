@@ -72,8 +72,9 @@ function M.open(file, opts)
     end
   end
 
-  Snacks.config.view("news", {
-    win = { width = 0.6, height = 0.6 },
+  Snacks.config.style("news", {
+    width = 0.6,
+    height = 0.6,
     wo = {
       spell = false,
       wrap = false,
@@ -85,7 +86,7 @@ function M.open(file, opts)
 
   local float = Snacks.win({
     file = file,
-    view = "news",
+    style = "news",
   })
 
   if vim.diagnostic.enable then
