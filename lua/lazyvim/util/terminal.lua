@@ -1,5 +1,5 @@
 ---@class lazyvim.util.terminal
----@overload fun(cmd: string|string[], opts: snacks.terminal.Config): snacks.terminal
+---@overload fun(cmd: string|string[], opts: snacks.terminal.Opts): snacks.terminal
 local M = setmetatable({}, {
   __call = function(m, ...)
     return m.open(...)
@@ -40,7 +40,7 @@ end
 -- Opens a floating terminal (interactive by default)
 ---@deprecated use Snacks.terminal instead
 ---@param cmd? string[]|string
----@param opts? snacks.terminal.Config
+---@param opts? snacks.terminal.Opts
 function M.open(cmd, opts)
   return Snacks.terminal(cmd, opts)
 end
