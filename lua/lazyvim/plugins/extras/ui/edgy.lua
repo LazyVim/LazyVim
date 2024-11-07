@@ -54,7 +54,6 @@ return {
         },
         left = {
           { title = "Neotest Summary", ft = "neotest-summary" },
-          -- "neo-tree",
         },
         right = {
           { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
@@ -78,30 +77,6 @@ return {
           end,
         },
       }
-
-      if LazyVim.has("neo-tree.nvim") then
-        local pos = {
-          filesystem = "left",
-          buffers = "top",
-          git_status = "right",
-          document_symbols = "bottom",
-          diagnostics = "bottom",
-        }
-        local sources = LazyVim.opts("neo-tree.nvim").sources or {}
-        for i, v in ipairs(sources) do
-          table.insert(opts.left, i, {
-            title = "Neo-Tree " .. v:gsub("_", " "):gsub("^%l", string.upper),
-            ft = "neo-tree",
-            filter = function(buf)
-              return vim.b[buf].neo_tree_source == v
-            end,
-            pinned = true,
-            open = function()
-              vim.cmd(("Neotree show position=%s %s dir=%s"):format(pos[v] or "bottom", v, LazyVim.root()))
-            end,
-          })
-        end
-      end
 
       for _, pos in ipairs({ "top", "bottom", "left", "right" }) do
         opts[pos] = opts[pos] or {}
@@ -132,17 +107,6 @@ return {
         end,
       },
     },
-  },
-
-  -- prevent neo-tree from opening files in edgy windows
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.open_files_do_not_replace_types = opts.open_files_do_not_replace_types
-        or { "terminal", "Trouble", "qf", "Outline", "trouble" }
-      table.insert(opts.open_files_do_not_replace_types, "edgy")
-    end,
   },
 
   -- Fix bufferline offsets when edgy is loaded

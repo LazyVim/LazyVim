@@ -129,23 +129,8 @@ if vim.lsp.inlay_hint then
   LazyVim.toggle.map("<leader>uh", LazyVim.toggle.inlay_hints)
 end
 
--- lazygit
-map("n", "<leader>gg", function() LazyVim.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
-map("n", "<leader>gG", function() LazyVim.lazygit() end, { desc = "Lazygit (cwd)" })
-map("n", "<leader>gb", LazyVim.lazygit.blame_line, { desc = "Git Blame Line" })
-map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
-
-map("n", "<leader>gf", function()
-  local git_path = vim.api.nvim_buf_get_name(0)
-  LazyVim.lazygit({args = { "-f", vim.trim(git_path) }, cwd = LazyVim.root.git()})
-end, { desc = "Lazygit Current File History" })
-
-map("n", "<leader>gl", function()
-  LazyVim.lazygit({ args = { "log" }, cwd = LazyVim.root.git() })
-end, { desc = "Lazygit Log" })
-map("n", "<leader>gL", function()
-  LazyVim.lazygit({ args = { "log" } })
-end, { desc = "Lazygit Log (cwd)" })
+-- TODO: Change to Neogit
+-- map("n", "<leader>gg", function() LazyVim.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
