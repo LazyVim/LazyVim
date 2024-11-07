@@ -137,7 +137,7 @@ map("n", "<leader>gB", LazyVim.lazygit.browse, { desc = "Git Browse" })
 
 map("n", "<leader>gf", function()
   local git_path = vim.api.nvim_buf_get_name(0)
-  LazyVim.lazygit({args = { "-f", vim.trim(git_path) }})
+  LazyVim.lazygit({args = { "-f", vim.trim(git_path) }, cwd = LazyVim.root.git()})
 end, { desc = "Lazygit Current File History" })
 
 map("n", "<leader>gl", function()

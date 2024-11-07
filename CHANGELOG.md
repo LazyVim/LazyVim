@@ -1,5 +1,37 @@
 # Changelog
 
+## [12.44.1](https://github.com/LazyVim/LazyVim/compare/v12.44.0...v12.44.1) (2024-11-03)
+
+
+### Bug Fixes
+
+* **blink:** use release version ([7ebed53](https://github.com/LazyVim/LazyVim/commit/7ebed5349d49dd9996d61155bc12605871058ec1))
+* **copilot:** properly process tab with copilot and blink. Fixes [#4692](https://github.com/LazyVim/LazyVim/issues/4692) ([fa37396](https://github.com/LazyVim/LazyVim/commit/fa3739678af494b8657d68ddc44bcc598f9bd00a))
+* **java:** jdtls run with args ([#4689](https://github.com/LazyVim/LazyVim/issues/4689)) ([0403e80](https://github.com/LazyVim/LazyVim/commit/0403e80a8e6250130fe94af1034a6f0760a24ca8))
+
+## [12.44.0](https://github.com/LazyVim/LazyVim/compare/v12.43.0...v12.44.0) (2024-11-02)
+
+
+### Features
+
+* **blink:** use vim.o.pumblend as winblend option for autocomplete menu in blink ([28da1eb](https://github.com/LazyVim/LazyVim/commit/28da1eb073f99abda9ea9b2349e5d8b8087ffcce))
+* **extras:** blink ([#4680](https://github.com/LazyVim/LazyVim/issues/4680)) ([ad52bf9](https://github.com/LazyVim/LazyVim/commit/ad52bf91bc8f1821bbb0b7218d03768eec9a9e42))
+* **extras:** enable crates.nvim in-process lsp server ([#4684](https://github.com/LazyVim/LazyVim/issues/4684)) ([db8895b](https://github.com/LazyVim/LazyVim/commit/db8895b518278331fb73bbd81975cbe5012c8f71))
+
+
+### Bug Fixes
+
+* **autocmds:** `vim.highlight` is deprecated ([a7b4c43](https://github.com/LazyVim/LazyVim/commit/a7b4c4391bccc894f56847ead7abe4ae7a8e4fc0))
+* **autocmds:** change mapping for `lazyvim_close_with_q` ([#4638](https://github.com/LazyVim/LazyVim/issues/4638)) ([5f432d9](https://github.com/LazyVim/LazyVim/commit/5f432d997e397790cea39d9bb8826c1d4ca14afb))
+* **autocmds:** close window and force delete buf on q. See [#4638](https://github.com/LazyVim/LazyVim/issues/4638) ([cb40a09](https://github.com/LazyVim/LazyVim/commit/cb40a09538dc0c417a7ffbbacdbdec90be4a792c))
+* **autocmds:** force close buffers with q. See [#4638](https://github.com/LazyVim/LazyVim/issues/4638) ([0eb4009](https://github.com/LazyVim/LazyVim/commit/0eb400908d17f4116f02c6464d7ef81456ca303c))
+* **blink:** explicetely set version=false for now ([ec616a3](https://github.com/LazyVim/LazyVim/commit/ec616a3cecaf1e5de1687223575ff019ad688e55))
+* **catppuccin:** fix bufferline integration when no colorscheme is set. Closes [#4641](https://github.com/LazyVim/LazyVim/issues/4641) ([6570a14](https://github.com/LazyVim/LazyVim/commit/6570a141c0de30fccee38e2b10dcd14830624e16))
+* **copilot:** create undo point before accepting copilot suggestion when using blink ([6e1d099](https://github.com/LazyVim/LazyVim/commit/6e1d0994d99e63a46c3eff737c44ca47e3ecbe28))
+* **dap:** remove explicit `load_launchjs` call ([#4634](https://github.com/LazyVim/LazyVim/issues/4634)) ([2f6c1f6](https://github.com/LazyVim/LazyVim/commit/2f6c1f60834108359b3404748453a65843909a03))
+* **lazygit:** file history when cwd is outside the repo ([#4666](https://github.com/LazyVim/LazyVim/issues/4666)) ([4ee6be4](https://github.com/LazyVim/LazyVim/commit/4ee6be4499008db458089fb2573b13f6b5ec5d3b))
+* **rust:** disable rust_analyzer in the rust extra. Fixes [#4685](https://github.com/LazyVim/LazyVim/issues/4685) ([1d3d64f](https://github.com/LazyVim/LazyVim/commit/1d3d64fd1ae26581b71f39091c816e568b7a3b39))
+
 ## [12.43.0](https://github.com/LazyVim/LazyVim/compare/v12.42.0...v12.43.0) (2024-10-23)
 
 
