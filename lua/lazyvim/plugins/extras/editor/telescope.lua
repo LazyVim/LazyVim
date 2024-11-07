@@ -4,7 +4,7 @@ if lazyvim_docs then
   vim.g.lazyvim_picker = "telescope"
 end
 
-local make_cmd = vim.loop.os_uname().sysname == "Linux" and "make" or "gmake"
+local make_cmd = vim.uv.os_uname().sysname == "Linux" and "make" or "gmake"
 local have_make = vim.fn.executable("make") == 1
 local have_cmake = vim.fn.executable("cmake") == 1
 
