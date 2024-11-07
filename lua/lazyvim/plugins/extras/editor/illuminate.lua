@@ -15,7 +15,7 @@ return {
     config = function(_, opts)
       require("illuminate").configure(opts)
 
-      LazyVim.toggle.map("<leader>ux", {
+      Snacks.toggle({
         name = "Illuminate",
         get = function()
           return not require("illuminate.engine").is_paused()
@@ -28,7 +28,7 @@ return {
             m.pause()
           end
         end,
-      })
+      }):map("<leader>ux")
 
       local function map(key, dir, buffer)
         vim.keymap.set("n", key, function()
