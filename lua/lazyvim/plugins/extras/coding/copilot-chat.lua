@@ -73,8 +73,7 @@ return {
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
-      local cmp_status_ok = pcall(require, "cmp")
-      if cmp_status_ok then
+      if pcall(require, "cmp") then
         require("CopilotChat.integrations.cmp").setup()
       end
 
