@@ -18,7 +18,6 @@ return {
       servers = {
         tinymist = {
           single_file_support = true, -- Fixes LSP attachment in non-Git directories
-          root_dir = LazyVim.root.get,
           settings = {
             formatterMode = "typstyle",
           },
