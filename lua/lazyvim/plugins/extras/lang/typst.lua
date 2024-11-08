@@ -17,10 +17,8 @@ return {
     opts = {
       servers = {
         tinymist = {
-          single_file_support = true,
-          root_dir = function()
-            LazyVim.root.get()
-          end,
+          single_file_support = true, -- Fixes LSP attachment in non-Git directories
+          root_dir = LazyVim.root.get,
           settings = {
             formatterMode = "typstyle",
           },
@@ -44,7 +42,7 @@ return {
     cmd = { "TypstPreview", "TypstPreviewToggle", "TypstPreviewUpdate" },
     build = function(plugin)
       local typst_preview = require("typst-preview")
-      typst_preview.setup(plugin.opts)
+      typst_preview.setup(plugin.opts) -- Setup preview during build to avoid redundant downloads
       typst_preview.update()
     end,
     keys = {
@@ -52,7 +50,7 @@ return {
         "<leader>cp",
         ft = "typst",
         "<cmd>TypstPreviewToggle<cr>",
-        desc = "Typst Preview",
+        desc = "Toggle Typst Preview",
       },
     },
     opts = {
