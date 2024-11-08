@@ -17,6 +17,10 @@ return {
     opts = {
       servers = {
         tinymist = {
+          single_file_support = true,
+          root_dir = function()
+            LazyVim.root.get()
+          end,
           settings = {
             formatterMode = "typstyle",
           },
