@@ -1,7 +1,9 @@
 return {
-  recommended = {
-    ft = { "gitcommit", "gitconfig", "gitrebase", "gitignore", "gitattributes" },
-  },
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = { "gitcommit", "gitconfig", "gitrebase", "gitignore", "gitattributes" },
+    })
+  end,
   -- Treesitter git support
   {
     "nvim-treesitter/nvim-treesitter",
