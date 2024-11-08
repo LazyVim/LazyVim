@@ -28,7 +28,7 @@ return {
       nerd_font_variant = "mono",
       windows = {
         autocomplete = {
-          draw = "reversed",
+          -- draw = "reversed",
           winblend = vim.o.pumblend,
         },
         documentation = {
