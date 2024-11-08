@@ -6,12 +6,12 @@ local function get_args(config)
   config = vim.deepcopy(config)
   ---@cast args string[]
   config.args = function()
-    local new_args = vim.fn.expand(vim.fn.input("Run with args: ", args_str))
+    local new_args = vim.fn.expand(vim.fn.input("Run with args: ", args_str)) --[[@as string]]
     if config.type and config.type == "java" then
       ---@diagnostic disable-next-line: return-type-mismatch
       return new_args
     end
-    return vim.split(new_args, " ")
+    return require("dap.utils").splitstr(new_args)
   end
   return config
 end
