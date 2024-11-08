@@ -82,7 +82,6 @@ opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift t
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
 opt.spelllang = { "en" }
-opt.spelloptions:append("noplainbuffer")
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
