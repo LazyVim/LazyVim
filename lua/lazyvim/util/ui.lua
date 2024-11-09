@@ -53,6 +53,11 @@ local skip_check = assert(vim.uv.new_check())
 function M.foldexpr()
   local buf = vim.api.nvim_get_current_buf()
 
+  -- no highlight, no foldexpr
+  if not vim.b[buf].ts_highlight then
+    return "0"
+  end
+
   -- still in the same tick and no parser
   if M.skip_foldexpr[buf] then
     return "0"
