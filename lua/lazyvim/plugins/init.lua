@@ -31,7 +31,6 @@ return {
       ---@type snacks.Config
       return {
         toggle = { map = LazyVim.safe_keymap_set },
-        notifier = { enabled = not LazyVim.has("noice.nvim") },
         terminal = {
           win = {
             keys = {
