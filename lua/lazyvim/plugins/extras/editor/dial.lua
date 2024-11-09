@@ -120,17 +120,17 @@ return {
           months,
         },
         typescript = {
-          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.constant.alias.bool, -- boolean value (true <-> false)
           logical_alias,
           augend.constant.new({ elements = { "let", "const" } }),
         },
         yaml = {
-          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.constant.alias.bool, -- boolean value (true <-> false)
         },
         css = {
-          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.hexcolor.new({
             case = "lower",
           }),
@@ -142,11 +142,11 @@ return {
           augend.misc.alias.markdown_header,
         },
         json = {
-          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.semver.alias.semver, -- versioning (v1.1.2)
         },
         lua = {
-          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.constant.alias.bool, -- boolean value (true <-> false)
           augend.constant.new({
             elements = { "and", "or" },
@@ -155,7 +155,7 @@ return {
           }),
         },
         python = {
-          augend.integer.alias.decimal, -- nonnegative and negative decimal number
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           capitalized_boolean,
           logical_alias,
         },

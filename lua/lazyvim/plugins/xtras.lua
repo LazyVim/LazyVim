@@ -4,11 +4,16 @@ local prios = {
   ["lazyvim.plugins.extras.dap.core"] = 1,
   ["lazyvim.plugins.extras.ui.edgy"] = 2,
   ["lazyvim.plugins.extras.lang.typescript"] = 5,
+  ["lazyvim.plugins.extras.coding.blink"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
   -- default priority is 50
   ["lazyvim.plugins.extras.editor.aerial"] = 100,
   ["lazyvim.plugins.extras.editor.outline"] = 100,
 }
+
+if vim.g.xtras_prios then
+  prios = vim.tbl_deep_extend("force", prios, vim.g.xtras_prios or {})
+end
 
 ---@type string[]
 local extras = LazyVim.dedup(LazyVim.config.json.data.extras)
