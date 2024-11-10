@@ -1,6 +1,9 @@
 ---@class lazyvim.util.cmp
 local M = {}
 
+---@return string?
+function M.ai_accept() end
+
 ---@alias Placeholder {n:number, text:string}
 
 ---@param snippet string

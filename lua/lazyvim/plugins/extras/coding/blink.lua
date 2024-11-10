@@ -38,7 +38,7 @@ return {
           auto_show = true,
         },
         ghost_text = {
-          enabled = true,
+          enabled = vim.g.ai_cmp,
         },
       },
 
@@ -59,6 +59,13 @@ return {
 
       keymap = {
         preset = "enter",
+        ["<tab>"] = {
+          "snippet_forward",
+          function()
+            return LazyVim.cmp.ai_accept()
+          end,
+          "fallback",
+        },
       },
     },
     ---@param opts blink.cmp.Config

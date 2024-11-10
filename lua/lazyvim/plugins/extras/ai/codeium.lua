@@ -9,24 +9,34 @@ return {
       enable_cmp_source = vim.g.ai_cmp,
       virtual_text = {
         enabled = not vim.g.ai_cmp,
-        accept_fallback = vim.g.ai_suggest_accept,
+        accept_fallback = "<tab>",
         key_bindings = {
-          accept = vim.g.ai_suggest_accept,
-          accept_word = vim.g.ai_suggest_accept_word,
-          accept_line = vim.g.ai_suggest_accept_line,
-          next = vim.g.ai_suggest_next,
-          prev = vim.g.ai_suggest_prev,
-          clear = vim.g.ai_suggest_clear,
+          accept = "<tab>",
+          next = "<M-]>",
+          prev = "<M-[>",
         },
       },
     },
+    config = function(_, opts)
+      LazyVim.cmp.ai_accept = function()
+        if require("codeium.virtual_text").get_current_completion_item() then
+          LazyVim.create_undo()
+          vim.api.nvim_input(require("codeium.virtual_text").accept())
+          return true
+        end
+      end
+      if opts.virtual_text.key_bindings.accept == "<tab>" then
+        opts.virtual_text.key_bindings.accept = false
+      end
+      require("codeium").setup(opts)
+    end,
   },
+
   -- codeium cmp source
   {
     "nvim-cmp",
     optional = true,
     dependencies = { "codeium.nvim" },
-    ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, 1, {
         name = "codeium",

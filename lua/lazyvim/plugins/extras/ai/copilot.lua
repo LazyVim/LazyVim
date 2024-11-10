@@ -8,15 +8,12 @@ return {
     event = "InsertEnter",
     opts = {
       suggestion = {
-        enabled = true,
+        enabled = not vim.g.ai_cmp,
         auto_trigger = true,
         keymap = {
-          accept = vim.g.ai_suggest_accept,
-          accept_word = vim.g.ai_suggest_accept_word,
-          accept_line = vim.g.ai_suggest_accept_line,
-          next = vim.g.ai_suggest_next,
-          prev = vim.g.ai_suggest_prev,
-          dismiss = vim.g.ai_suggest_clear,
+          accept = "<tab>",
+          next = "<M-]>",
+          prev = "<M-[>",
         },
       },
       panel = { enabled = false },
@@ -25,7 +22,24 @@ return {
         help = true,
       },
     },
+    config = function(_, opts)
+      LazyVim.cmp.ai_accept = function()
+        if require("copilot.suggestion").is_visible() then
+          LazyVim.create_undo()
+          require("copilot.suggestion").accept()
+          return ""
+        end
+      end
+      -- tab is handled by nvim-cmp / blink.cmp
+      local key = opts.suggestion.keymap.accept
+      if key == "<tab>" then
+        opts.suggestion.keymap.accept = false
+      end
+      require("copilot").setup(opts)
+    end,
   },
+
+  -- lualine
   {
     "nvim-lualine/lualine.nvim",
     optional = true,
@@ -72,22 +86,17 @@ return {
       {
         "zbirenbaum/copilot-cmp",
         enabled = vim.g.ai_cmp, -- only enable if wanted
-        dependencies = "copilot.lua",
         opts = {},
         config = function(_, opts)
           local copilot_cmp = require("copilot_cmp")
           copilot_cmp.setup(opts)
           -- attach cmp source whenever copilot attaches
           -- fixes lazy-loading issues with the copilot cmp source
-          LazyVim.lsp.on_attach(function(client)
+          LazyVim.lsp.on_attach(function()
             copilot_cmp._on_insert_enter({})
           end, "copilot")
         end,
         specs = {
-          {
-            "zbirenbaum/copilot.lua",
-            opts = { suggestion = { enabled = false } },
-          },
           {
             "nvim-cmp",
             ---@param opts cmp.ConfigSchema
@@ -104,31 +113,18 @@ return {
     },
   },
 
+  -- blink.cmp
   {
     "saghen/blink.cmp",
     optional = true,
     opts = {
-      windows = {
-        ghost_text = {
-          enabled = false,
-        },
-      },
-      keymap = {
-        [vim.g.ai_suggest_accept] = {
-          function(cmp)
-            if cmp.is_in_snippet() then
-              return cmp.accept()
-            elseif require("copilot.suggestion").is_visible() then
-              LazyVim.create_undo()
-              require("copilot.suggestion").accept()
-              return true
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
+      windows = { ghost_text = { enabled = false } },
+    },
+    specs = {
+      -- blink has no copilot source, so force enable suggestions
+      {
+        "zbirenbaum/copilot.lua",
+        opts = { suggestion = { enabled = true } },
       },
     },
   },
