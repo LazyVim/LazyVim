@@ -6,7 +6,10 @@ return {
   {
     "saghen/blink.cmp",
     version = "*",
-    opts_extend = { "sources.completion.enabled_providers" },
+    opts_extend = {
+      "sources.completion.enabled_providers",
+      "sources.compat",
+    },
     dependencies = {
       "rafamadriz/friendly-snippets",
       -- add blink.compat to dependencies
@@ -45,6 +48,9 @@ return {
       -- experimental signature help support
       -- trigger = { signature_help = { enabled = true } }
       sources = {
+        -- adding any nvim-cmp sources here will enable them
+        -- with blink.compat
+        compat = {},
         completion = {
           -- remember to enable your providers here
           enabled_providers = { "lsp", "path", "snippets", "buffer" },
@@ -55,6 +61,20 @@ return {
         preset = "enter",
       },
     },
+    ---@param opts blink.cmp.Config
+    config = function(_, opts)
+      for _, source in ipairs(opts.sources.compat or {}) do
+        opts.sources.providers[source] = opts.sources.providers[source]
+          or {
+            name = source,
+            module = "blink.compat.source",
+          }
+        if not vim.tbl_contains(opts.sources.completion.enabled_providers, source) then
+          table.insert(opts.sources.completion.enabled_providers, source)
+        end
+      end
+      require("blink.cmp").setup(opts)
+    end,
   },
 
   -- add icons

@@ -5,8 +5,20 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
+    event = "InsertEnter",
     opts = {
-      suggestion = { enabled = false },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept = vim.g.ai_suggest_accept,
+          accept_word = vim.g.ai_suggest_accept_word,
+          accept_line = vim.g.ai_suggest_accept_line,
+          next = vim.g.ai_suggest_next,
+          prev = vim.g.ai_suggest_prev,
+          dismiss = vim.g.ai_suggest_clear,
+        },
+      },
       panel = { enabled = false },
       filetypes = {
         markdown = true,
@@ -55,9 +67,11 @@ return {
   -- copilot cmp source
   {
     "nvim-cmp",
-    dependencies = {
+    optional = true,
+    dependencies = { -- this will only be evaluated if nvim-cmp is enabled
       {
         "zbirenbaum/copilot-cmp",
+        enabled = vim.g.ai_cmp, -- only enable if wanted
         dependencies = "copilot.lua",
         opts = {},
         config = function(_, opts)
@@ -69,34 +83,30 @@ return {
             copilot_cmp._on_insert_enter({})
           end, "copilot")
         end,
+        specs = {
+          {
+            "zbirenbaum/copilot.lua",
+            opts = { suggestion = { enabled = false } },
+          },
+          {
+            "nvim-cmp",
+            ---@param opts cmp.ConfigSchema
+            opts = function(_, opts)
+              table.insert(opts.sources, 1, {
+                name = "copilot",
+                group_index = 1,
+                priority = 100,
+              })
+            end,
+          },
+        },
       },
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, 1, {
-        name = "copilot",
-        group_index = 1,
-        priority = 100,
-      })
-    end,
   },
 
   {
     "saghen/blink.cmp",
     optional = true,
-    specs = {
-      {
-        "zbirenbaum/copilot.lua",
-        event = "InsertEnter",
-        opts = {
-          suggestion = {
-            enabled = true,
-            auto_trigger = true,
-            keymap = { accept = false },
-          },
-        },
-      },
-    },
     opts = {
       windows = {
         ghost_text = {
@@ -104,7 +114,7 @@ return {
         },
       },
       keymap = {
-        ["<Tab>"] = {
+        [vim.g.ai_suggest_accept] = {
           function(cmp)
             if cmp.is_in_snippet() then
               return cmp.accept()

@@ -72,9 +72,10 @@ return {
           end,
         },
         experimental = {
-          ghost_text = {
+          -- only show ghost text when we show ai completions
+          ghost_text = vim.g.ai_cmp and {
             hl_group = "CmpGhostText",
-          },
+          } or false,
         },
         sorting = defaults.sorting,
       }

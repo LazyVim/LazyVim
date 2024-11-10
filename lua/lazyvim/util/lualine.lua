@@ -7,7 +7,7 @@ function M.cmp_source(name, icon)
     if not package.loaded["cmp"] then
       return
     end
-    for _, s in ipairs(require("cmp").core.sources) do
+    for _, s in ipairs(require("cmp").core.sources or {}) do
       if s.name == name then
         if s.source:is_available() then
           started = true
