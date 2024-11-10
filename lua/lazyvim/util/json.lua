@@ -90,6 +90,13 @@ function M.migrate()
     json.data.extras = vim.tbl_filter(function(extra)
       return not (extra == "lazyvim.plugins.extras.editor.trouble-v3")
     end, json.data.extras or {})
+  elseif json.data.version == 6 then
+    local ai = { "copilot", "codeium", "copilot-chat", "tabnine" }
+    json.data.extras = vim.tbl_map(function(extra)
+      return extra:gsub("^lazyvim%.plugins%.extras%.coding%.(.*)$", function(name)
+        return vim.tbl_contains(ai, name) and ("lazyvim.plugins.extras.ai." .. name) or extra
+      end)
+    end, json.data.extras or {})
   end
 
   M.save()
