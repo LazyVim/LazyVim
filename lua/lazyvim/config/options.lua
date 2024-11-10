@@ -15,16 +15,6 @@ vim.g.lazyvim_picker = "auto"
 -- use that instead of inline suggestions
 vim.g.ai_cmp = true
 
--- if `vim.g.ai_cmp` is false, or the completion engine does
--- not support the AI source, use inline suggestions
--- with the keymaps below
-vim.g.ai_suggest_accept = "<tab>"
-vim.g.ai_suggest_accept_word = false
-vim.g.ai_suggest_accept_line = false
-vim.g.ai_suggest_next = "<M-]>"
-vim.g.ai_suggest_prev = "<M-[>"
-vim.g.ai_suggest_clear = "<C-]>"
-
 -- LazyVim root dir detection
 -- Each entry can be:
 -- * the name of a detector function like `lsp` or `cwd`
