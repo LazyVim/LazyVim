@@ -73,16 +73,18 @@ return {
         },
       },
     },
-    ---@param opts blink.cmp.Config
+    ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
     config = function(_, opts)
+      -- setup compat sources
+      local enabled = opts.sources.completion.enabled_providers
       for _, source in ipairs(opts.sources.compat or {}) do
-        opts.sources.providers[source] = opts.sources.providers[source]
-          or {
-            name = source,
-            module = "blink.compat.source",
-          }
-        if not vim.tbl_contains(opts.sources.completion.enabled_providers, source) then
-          table.insert(opts.sources.completion.enabled_providers, source)
+        opts.sources.providers[source] = vim.tbl_deep_extend(
+          "force",
+          { name = source, module = "blink.compat.source" },
+          opts.sources.providers[source] or {}
+        )
+        if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
+          table.insert(enabled, source)
         end
       end
       require("blink.cmp").setup(opts)
