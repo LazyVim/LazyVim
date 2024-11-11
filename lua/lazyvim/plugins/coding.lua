@@ -43,6 +43,9 @@ return {
             cmp.abort()
             fallback()
           end,
+          ["<tab>"] = function(fallback)
+            return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
+          end,
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
@@ -104,29 +107,6 @@ return {
       }
       if LazyVim.has("nvim-snippets") then
         table.insert(opts.sources, { name = "snippets" })
-      end
-    end,
-    -- stylua: ignore
-    keys = {
-      {
-        "<tab>",
-        function()
-          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>"
-            or LazyVim.cmp.ai_accept()
-            or "<Tab>"
-        end,
-        expr = true, silent = true, mode = "i",
-      },
-    },
-    init = function()
-      -- Neovim enabled snippet navigation mappings by default in v0.11
-      if vim.fn.has("nvim-0.11") == 0 then
-        vim.keymap.set({ "s" }, "<Tab>", function()
-          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-        end, { expr = true, silent = true })
-        vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-          return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-        end, { expr = true, silent = true })
       end
     end,
   },

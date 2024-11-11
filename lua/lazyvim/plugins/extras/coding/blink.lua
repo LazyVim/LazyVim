@@ -1,3 +1,10 @@
+if lazyvim_docs then
+  -- set to `true` to follow the main branch
+  -- you need to have a working rust toolchain to build the plugin
+  -- in this case.
+  vim.g.lazyvim_blink_main = false
+end
+
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -5,7 +12,8 @@ return {
   },
   {
     "saghen/blink.cmp",
-    version = "*",
+    version = not vim.g.lazyvim_blink_main and "*",
+    build = vim.g.lazyvim_blink_main and "cargo build --release",
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.compat",
@@ -59,11 +67,8 @@ return {
 
       keymap = {
         preset = "enter",
-        ["<tab>"] = {
-          "snippet_forward",
-          function()
-            return LazyVim.cmp.ai_accept()
-          end,
+        ["<Tab>"] = {
+          LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
           "fallback",
         },
       },

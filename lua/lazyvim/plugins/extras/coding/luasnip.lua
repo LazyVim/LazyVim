@@ -1,4 +1,8 @@
 return {
+  -- disable builtin snippet support
+  { "garymjr/nvim-snippets", enabled = false },
+
+  -- add luasnip
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
@@ -19,6 +23,19 @@ return {
     },
   },
 
+  -- add snippet_forward action
+  {
+    "L3MON4D3/LuaSnip",
+    opts = function()
+      LazyVim.cmp.actions.snippet_forward = function()
+        if require("luasnip").jumpable(1) then
+          require("luasnip").jump(1)
+          return true
+        end
+      end
+    end,
+  },
+
   -- nvim-cmp integration
   {
     "nvim-cmp",
@@ -34,23 +51,21 @@ return {
     end,
     -- stylua: ignore
     keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next"
-            or LazyVim.cmp.ai_accept()
-            or "<tab>"
-        end,
-        expr = true, silent = true, mode = "i",
-      },
       { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
       { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
   },
-  {
-    "garymjr/nvim-snippets",
-    enabled = false,
-  },
 
-  -- TODO: blink.cmp integration
+  -- blink.cmp integration
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    opts = {
+      accept = {
+        expand_snippet = function(...)
+          return require("luasnip").lsp_expand(...)
+        end,
+      },
+    },
+  },
 }

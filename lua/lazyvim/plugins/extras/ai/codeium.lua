@@ -9,26 +9,26 @@ return {
       enable_cmp_source = vim.g.ai_cmp,
       virtual_text = {
         enabled = not vim.g.ai_cmp,
-        accept_fallback = "<tab>",
         key_bindings = {
-          accept = "<tab>",
+          accept = false, -- handled by nvim-cmp / blink.cmp
           next = "<M-]>",
           prev = "<M-[>",
         },
       },
     },
-    config = function(_, opts)
-      LazyVim.cmp.ai_accept = function()
+  },
+
+  -- add ai_accept action
+  {
+    "Exafunction/codeium.nvim",
+    opts = function()
+      LazyVim.cmp.actions.ai_accept = function()
         if require("codeium.virtual_text").get_current_completion_item() then
           LazyVim.create_undo()
           vim.api.nvim_input(require("codeium.virtual_text").accept())
           return true
         end
       end
-      if opts.virtual_text.key_bindings.accept == "<tab>" then
-        opts.virtual_text.key_bindings.accept = false
-      end
-      require("codeium").setup(opts)
     end,
   },
 
@@ -65,7 +65,7 @@ return {
     },
     dependencies = {
       "codeium.nvim",
-      vim.g.ai_cmp and { "saghen/blink.compat" } or {},
+      vim.g.ai_cmp and "saghen/blink.compat" or nil,
     },
   },
 }

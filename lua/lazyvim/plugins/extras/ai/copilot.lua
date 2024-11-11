@@ -11,7 +11,7 @@ return {
         enabled = not vim.g.ai_cmp,
         auto_trigger = true,
         keymap = {
-          accept = "<tab>",
+          accept = false, -- handled by nvim-cmp / blink.cmp
           next = "<M-]>",
           prev = "<M-[>",
         },
@@ -22,20 +22,19 @@ return {
         help = true,
       },
     },
-    config = function(_, opts)
-      LazyVim.cmp.ai_accept = function()
+  },
+
+  -- add ai_accept action
+  {
+    "zbirenbaum/copilot.lua",
+    opts = function()
+      LazyVim.cmp.actions.ai_accept = function()
         if require("copilot.suggestion").is_visible() then
           LazyVim.create_undo()
           require("copilot.suggestion").accept()
-          return ""
+          return true
         end
       end
-      -- tab is handled by nvim-cmp / blink.cmp
-      local key = opts.suggestion.keymap.accept
-      if key == "<tab>" then
-        opts.suggestion.keymap.accept = false
-      end
-      require("copilot").setup(opts)
     end,
   },
 
