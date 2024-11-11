@@ -91,6 +91,7 @@ function M.pretty_path(opts)
       return ""
     end
 
+    path = LazyVim.norm(path)
     local root = LazyVim.root.get({ normalize = true })
     local cwd = LazyVim.root.cwd()
 
