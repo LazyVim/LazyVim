@@ -31,6 +31,7 @@ return {
       ---@type snacks.Config
       return {
         toggle = { map = LazyVim.safe_keymap_set },
+        statuscolumn = { enabled = false }, -- we set this in options.lua
         terminal = {
           win = {
             keys = {
