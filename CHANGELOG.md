@@ -1,5 +1,27 @@
 # Changelog
 
+## [13.2.0](https://github.com/LazyVim/LazyVim/compare/v13.1.0...v13.2.0) (2024-11-11)
+
+
+### Features
+
+* **ai:** better completion/suggestions of AI engines ([#4752](https://github.com/LazyVim/LazyVim/issues/4752)) ([fbf881f](https://github.com/LazyVim/LazyVim/commit/fbf881f80b8f0fb2d9e4bc69d04f66323b25c4b9))
+* **ai:** move ai related extras from `coding` to `ai` ([#4751](https://github.com/LazyVim/LazyVim/issues/4751)) ([86904d2](https://github.com/LazyVim/LazyVim/commit/86904d2fb1ef406386b2dad43f42756e09b28182))
+* **keymaps:** leader-bo to close other buffers ([24665fc](https://github.com/LazyVim/LazyVim/commit/24665fc73651970e5a1e20a63d6031bd99b97637))
+* **rest:** add more keymaps to util.rest ([#4467](https://github.com/LazyVim/LazyVim/issues/4467)) ([c22db72](https://github.com/LazyVim/LazyVim/commit/c22db724351bc7a05c56046c48d23a2be8efe71b))
+
+
+### Bug Fixes
+
+* **extras:** fix alpha-nvim non-string keycodes ([#4735](https://github.com/LazyVim/LazyVim/issues/4735)) ([9c9e650](https://github.com/LazyVim/LazyVim/commit/9c9e650530dcd211afd5a8b7f5e3e33e44abd11b))
+* **snacks:** allow overriding `statuscolumn` through `options.lua` ([17a1b84](https://github.com/LazyVim/LazyVim/commit/17a1b846f08db62e3a93c76426db4017ad3cc2eb))
+* **vscode:** added snacks.nvim to allowed plugins for vscode. Fixes [#4757](https://github.com/LazyVim/LazyVim/issues/4757) ([06071dd](https://github.com/LazyVim/LazyVim/commit/06071dd452baf1e9b8b5aab140553c4f51fa522e))
+
+
+### Performance Improvements
+
+* **ui:** only enable treesitter folds if the buffer has treesitter highlighting ([b9dae57](https://github.com/LazyVim/LazyVim/commit/b9dae579612ccf1cd749150ff1603ff6dffc2610))
+
 ## [13.1.0](https://github.com/LazyVim/LazyVim/compare/v13.0.0...v13.1.0) (2024-11-09)
 
 
