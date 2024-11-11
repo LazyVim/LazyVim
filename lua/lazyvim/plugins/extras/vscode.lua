@@ -3,6 +3,7 @@ if not vim.g.vscode then
 end
 
 local enabled = {
+  "LazyVim",
   "dial.nvim",
   "flit.nvim",
   "lazy.nvim",
@@ -15,10 +16,10 @@ local enabled = {
   "nvim-treesitter",
   "nvim-treesitter-textobjects",
   "nvim-ts-context-commentstring",
+  "snacks.nvim",
   "ts-comments.nvim",
   "vim-repeat",
   "yanky.nvim",
-  "LazyVim",
 }
 
 local Config = require("lazy.core.config")
