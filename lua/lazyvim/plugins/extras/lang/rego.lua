@@ -1,17 +1,20 @@
 return {
   recommended = {
-    ft = "nu",
+    ft = "rego",
   },
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        nushell = {},
+        regols = {},
+        regal = {},
       },
     },
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "nu" } },
+    opts = {
+      ensure_installed = { "rego" },
+    },
   },
 }

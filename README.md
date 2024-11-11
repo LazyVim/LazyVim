@@ -115,7 +115,7 @@ There's a great video created by [@elijahmanor](https://github.com/elijahmanor) 
 
 [![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
 
-[@dusty-phillips](https://github.com/dusty-phillips) is working on a book called
+[@dusty-phillips](https://github.com/dusty-phillips) wrote a comprehensive book called
 [LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes)
 available for free online.
 

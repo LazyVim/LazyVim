@@ -96,7 +96,7 @@ function M.pretty_path(opts)
 
     if opts.relative == "cwd" and path:find(cwd, 1, true) == 1 then
       path = path:sub(#cwd + 2)
-    else
+    elseif path:find(root, 1, true) == 1 then
       path = path:sub(#root + 2)
     end
 
@@ -106,7 +106,7 @@ function M.pretty_path(opts)
     if opts.length == 0 then
       parts = parts
     elseif #parts > opts.length then
-      parts = { parts[1], "…", table.concat({ unpack(parts, #parts - opts.length + 2, #parts) }, sep) }
+      parts = { parts[1], "…", unpack(parts, #parts - opts.length + 2, #parts) }
     end
 
     if opts.modified_hl and vim.bo.modified then
