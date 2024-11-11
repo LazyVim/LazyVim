@@ -1,3 +1,10 @@
+if lazyvim_docs then
+  -- set to `true` to follow the main branch
+  -- you need to have a working rust toolchain to build the plugin
+  -- in this case.
+  vim.g.lazyvim_blink_main = false
+end
+
 return {
   {
     "hrsh7th/nvim-cmp",
@@ -5,8 +12,12 @@ return {
   },
   {
     "saghen/blink.cmp",
-    version = "*",
-    opts_extend = { "sources.completion.enabled_providers" },
+    version = not vim.g.lazyvim_blink_main and "*",
+    build = vim.g.lazyvim_blink_main and "cargo build --release",
+    opts_extend = {
+      "sources.completion.enabled_providers",
+      "sources.compat",
+    },
     dependencies = {
       "rafamadriz/friendly-snippets",
       -- add blink.compat to dependencies
@@ -35,7 +46,7 @@ return {
           auto_show = true,
         },
         ghost_text = {
-          enabled = true,
+          enabled = vim.g.ai_cmp,
         },
       },
 
@@ -45,6 +56,9 @@ return {
       -- experimental signature help support
       -- trigger = { signature_help = { enabled = true } }
       sources = {
+        -- adding any nvim-cmp sources here will enable them
+        -- with blink.compat
+        compat = {},
         completion = {
           -- remember to enable your providers here
           enabled_providers = { "lsp", "path", "snippets", "buffer" },
@@ -53,8 +67,28 @@ return {
 
       keymap = {
         preset = "enter",
+        ["<Tab>"] = {
+          LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
+          "fallback",
+        },
       },
     },
+    ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
+    config = function(_, opts)
+      -- setup compat sources
+      local enabled = opts.sources.completion.enabled_providers
+      for _, source in ipairs(opts.sources.compat or {}) do
+        opts.sources.providers[source] = vim.tbl_deep_extend(
+          "force",
+          { name = source, module = "blink.compat.source" },
+          opts.sources.providers[source] or {}
+        )
+        if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
+          table.insert(enabled, source)
+        end
+      end
+      require("blink.cmp").setup(opts)
+    end,
   },
 
   -- add icons

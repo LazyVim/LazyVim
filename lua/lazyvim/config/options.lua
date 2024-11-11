@@ -11,6 +11,10 @@ vim.g.autoformat = true
 -- enabled with `:LazyExtras`
 vim.g.lazyvim_picker = "auto"
 
+-- if the completion engine supports the AI source,
+-- use that instead of inline suggestions
+vim.g.ai_cmp = true
+
 -- LazyVim root dir detection
 -- Each entry can be:
 -- * the name of a detector function like `lsp` or `cwd`
