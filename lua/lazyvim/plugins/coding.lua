@@ -43,6 +43,9 @@ return {
             cmp.abort()
             fallback()
           end,
+          ["<tab>"] = function(fallback)
+            return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
+          end,
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
@@ -72,9 +75,10 @@ return {
           end,
         },
         experimental = {
-          ghost_text = {
+          -- only show ghost text when we show ai completions
+          ghost_text = vim.g.ai_cmp and {
             hl_group = "CmpGhostText",
-          },
+          } or false,
         },
         sorting = defaults.sorting,
       }
@@ -105,26 +109,6 @@ return {
         table.insert(opts.sources, { name = "snippets" })
       end
     end,
-    keys = {
-      {
-        "<Tab>",
-        function()
-          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-      {
-        "<S-Tab>",
-        function()
-          return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-    },
   },
 
   -- auto pairs
@@ -201,6 +185,7 @@ return {
       library = {
         { path = "luvit-meta/library", words = { "vim%.uv" } },
         { path = "LazyVim", words = { "LazyVim" } },
+        { path = "snacks.nvim", words = { "Snacks" } },
         { path = "lazy.nvim", words = { "LazyVim" } },
       },
     },

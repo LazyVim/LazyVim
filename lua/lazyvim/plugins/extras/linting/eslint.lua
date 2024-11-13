@@ -1,3 +1,10 @@
+if lazyvim_docs then
+  -- Set to false to disable auto format
+  vim.g.lazyvim_eslint_auto_format = true
+end
+
+local auto_format = vim.g.lazyvim_eslint_auto_format == nil or vim.g.lazyvim_eslint_auto_format
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -9,11 +16,16 @@ return {
           settings = {
             -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
             workingDirectories = { mode = "auto" },
+            format = auto_format,
           },
         },
       },
       setup = {
         eslint = function()
+          if not auto_format then
+            return
+          end
+
           local function get_client(buf)
             return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
           end

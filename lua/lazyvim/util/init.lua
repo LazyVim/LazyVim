@@ -6,8 +6,6 @@ local LazyUtil = require("lazy.core.util")
 ---@field lsp lazyvim.util.lsp
 ---@field root lazyvim.util.root
 ---@field terminal lazyvim.util.terminal
----@field lazygit lazyvim.util.lazygit
----@field toggle lazyvim.util.toggle
 ---@field format lazyvim.util.format
 ---@field plugin lazyvim.util.plugin
 ---@field extras lazyvim.util.extras
@@ -20,36 +18,17 @@ local LazyUtil = require("lazy.core.util")
 ---@field cmp lazyvim.util.cmp
 local M = {}
 
----@type table<string, string|string[]>
-local deprecated = {
-  get_clients = "lsp",
-  on_attach = "lsp",
-  on_rename = "lsp",
-  root_patterns = { "root", "patterns" },
-  get_root = { "root", "get" },
-  float_term = { "terminal", "open" },
-  toggle_diagnostics = { "toggle", "diagnostics" },
-  toggle_number = { "toggle", "number" },
-  fg = "ui",
-  telescope = "pick",
-}
-
 setmetatable(M, {
   __index = function(t, k)
     if LazyUtil[k] then
       return LazyUtil[k]
     end
-    local dep = deprecated[k]
-    if dep then
-      local mod = type(dep) == "table" and dep[1] or dep
-      local key = type(dep) == "table" and dep[2] or k
-      M.deprecate([[LazyVim.]] .. k, [[LazyVim.]] .. mod .. "." .. key)
-      ---@diagnostic disable-next-line: no-unknown
-      t[mod] = require("lazyvim.util." .. mod) -- load here to prevent loops
-      return t[mod][key]
+    if k == "lazygit" or k == "toggle" then -- HACK: special case for lazygit
+      return M.deprecated[k]()
     end
     ---@diagnostic disable-next-line: no-unknown
     t[k] = require("lazyvim.util." .. k)
+    M.deprecated.decorate(k, t[k])
     return t[k]
   end,
 })
