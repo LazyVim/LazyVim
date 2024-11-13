@@ -97,14 +97,25 @@ return {
   {
     "saghen/blink.cmp",
     optional = true,
-    opts = {
-      windows = { ghost_text = { enabled = false } },
-    },
-    specs = {
-      -- blink has no copilot source, so force enable suggestions
+    dependencies = {
       {
-        "zbirenbaum/copilot.lua",
-        opts = { suggestion = { enabled = true } },
+        "giuxtaposition/blink-cmp-copilot",
+        enabled = vim.g.ai_cmp, -- only enable if needed
+        specs = {
+          {
+            "blink.cmp",
+            opts = {
+              sources = {
+                providers = {
+                  copilot = { name = "copilot", module = "blink-cmp-copilot" },
+                },
+                completion = {
+                  enabled_providers = { "copilot" },
+                },
+              },
+            },
+          },
+        },
       },
     },
   },
