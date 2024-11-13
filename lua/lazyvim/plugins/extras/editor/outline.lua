@@ -16,7 +16,7 @@ return {
       local opts = {
         symbols = {
           icons = {},
-          filter = LazyVim.config.kind_filter,
+          filter = vim.deepcopy(LazyVim.config.kind_filter),
         },
         keymaps = {
           up_and_jump = "<up>",

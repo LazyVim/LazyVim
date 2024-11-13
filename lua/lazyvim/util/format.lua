@@ -97,10 +97,19 @@ end
 
 ---@param buf? boolean
 function M.toggle(buf)
+  M.enable(not M.enabled(), buf)
+end
+
+---@param enable? boolean
+---@param buf? boolean
+function M.enable(enable, buf)
+  if enable == nil then
+    enable = true
+  end
   if buf then
-    vim.b.autoformat = not M.enabled()
+    vim.b.autoformat = enable
   else
-    vim.g.autoformat = not M.enabled()
+    vim.g.autoformat = enable
     vim.b.autoformat = nil
   end
   M.info()
@@ -166,6 +175,22 @@ function M.setup()
   vim.api.nvim_create_user_command("LazyFormatInfo", function()
     M.info()
   end, { desc = "Show info about the formatters for the current buffer" })
+end
+
+---@param buf? boolean
+function M.snacks_toggle(buf)
+  return Snacks.toggle({
+    name = "Auto Format (" .. (buf and "Buffer" or "Global") .. ")",
+    get = function()
+      if not buf then
+        return vim.g.autoformat == nil or vim.g.autoformat
+      end
+      return LazyVim.format.enabled()
+    end,
+    set = function(state)
+      LazyVim.format.enable(state, buf)
+    end,
+  })
 end
 
 return M

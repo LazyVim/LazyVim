@@ -17,7 +17,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "astro" } },
+    opts = { ensure_installed = { "astro", "css" } },
   },
 
   -- LSP Servers

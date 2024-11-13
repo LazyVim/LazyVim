@@ -48,7 +48,7 @@ return {
     local map_split = function(buf_id, lhs, direction, close_on_file)
       local rhs = function()
         local new_target_window
-        local cur_target_window = require("mini.files").get_target_window()
+        local cur_target_window = require("mini.files").get_explorer_state().target_window
         if cur_target_window ~= nil then
           vim.api.nvim_win_call(cur_target_window, function()
             vim.cmd("belowright " .. direction .. " split")
@@ -104,7 +104,7 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "MiniFilesActionRename",
       callback = function(event)
-        LazyVim.lsp.on_rename(event.data.from, event.data.to)
+        Snacks.rename.on_rename_file(event.data.from, event.data.to)
       end,
     })
   end,

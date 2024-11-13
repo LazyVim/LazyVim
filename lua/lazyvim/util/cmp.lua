@@ -1,6 +1,36 @@
 ---@class lazyvim.util.cmp
 local M = {}
 
+---@alias lazyvim.util.cmp.Action fun():boolean?
+---@type table<string, lazyvim.util.cmp.Action>
+M.actions = {
+  -- Native Snippets
+  snippet_forward = function()
+    if vim.snippet.active({ direction = 1 }) then
+      vim.schedule(function()
+        vim.snippet.jump(1)
+      end)
+      return true
+    end
+  end,
+}
+
+---@param actions string[]
+---@param fallback? string|fun()
+function M.map(actions, fallback)
+  return function()
+    for _, name in ipairs(actions) do
+      if M.actions[name] then
+        local ret = M.actions[name]()
+        if ret then
+          return true
+        end
+      end
+    end
+    return type(fallback) == "function" and fallback() or fallback
+  end
+end
+
 ---@alias Placeholder {n:number, text:string}
 
 ---@param snippet string
@@ -71,9 +101,17 @@ function M.add_missing_snippet_docs(window)
 end
 
 function M.visible()
+  ---@module 'blink.cmp'
+  local blink = package.loaded["blink.cmp"]
+  if blink then
+    return blink.windows and blink.windows.autocomplete.win:is_open()
+  end
   ---@module 'cmp'
   local cmp = package.loaded["cmp"]
-  return cmp and cmp.core.view:visible()
+  if cmp then
+    return cmp.core.view:visible()
+  end
+  return false
 end
 
 -- This is a better implementation of `cmp.confirm`:

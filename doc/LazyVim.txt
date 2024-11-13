@@ -1,4 +1,4 @@
-*LazyVim.txt*               For Neovim               Last change: 2024 July 08
+*LazyVim.txt*             For Neovim             Last change: 2024 November 11
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
@@ -102,8 +102,8 @@ There’s a great video created by @elijahmanor
 
 <https://www.youtube.com/watch?v=N93cTbtLCIM>
 
-@dusty-phillips <https://github.com/dusty-phillips> is working on a book called
-LazyVim for Ambitious Developers
+@dusty-phillips <https://github.com/dusty-phillips> wrote a comprehensive book
+called LazyVim for Ambitious Developers
 <https://lazyvim-ambitious-devs.phillips.codes> available for free online.
 
 

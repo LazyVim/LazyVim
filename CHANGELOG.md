@@ -1,5 +1,381 @@
 # Changelog
 
+## [13.2.0](https://github.com/LazyVim/LazyVim/compare/v13.1.0...v13.2.0) (2024-11-11)
+
+
+### Features
+
+* **ai:** better completion/suggestions of AI engines ([#4752](https://github.com/LazyVim/LazyVim/issues/4752)) ([fbf881f](https://github.com/LazyVim/LazyVim/commit/fbf881f80b8f0fb2d9e4bc69d04f66323b25c4b9))
+* **ai:** move ai related extras from `coding` to `ai` ([#4751](https://github.com/LazyVim/LazyVim/issues/4751)) ([86904d2](https://github.com/LazyVim/LazyVim/commit/86904d2fb1ef406386b2dad43f42756e09b28182))
+* **keymaps:** leader-bo to close other buffers ([24665fc](https://github.com/LazyVim/LazyVim/commit/24665fc73651970e5a1e20a63d6031bd99b97637))
+* **rest:** add more keymaps to util.rest ([#4467](https://github.com/LazyVim/LazyVim/issues/4467)) ([c22db72](https://github.com/LazyVim/LazyVim/commit/c22db724351bc7a05c56046c48d23a2be8efe71b))
+
+
+### Bug Fixes
+
+* **extras:** fix alpha-nvim non-string keycodes ([#4735](https://github.com/LazyVim/LazyVim/issues/4735)) ([9c9e650](https://github.com/LazyVim/LazyVim/commit/9c9e650530dcd211afd5a8b7f5e3e33e44abd11b))
+* **snacks:** allow overriding `statuscolumn` through `options.lua` ([17a1b84](https://github.com/LazyVim/LazyVim/commit/17a1b846f08db62e3a93c76426db4017ad3cc2eb))
+* **vscode:** added snacks.nvim to allowed plugins for vscode. Fixes [#4757](https://github.com/LazyVim/LazyVim/issues/4757) ([06071dd](https://github.com/LazyVim/LazyVim/commit/06071dd452baf1e9b8b5aab140553c4f51fa522e))
+
+
+### Performance Improvements
+
+* **ui:** only enable treesitter folds if the buffer has treesitter highlighting ([b9dae57](https://github.com/LazyVim/LazyVim/commit/b9dae579612ccf1cd749150ff1603ff6dffc2610))
+
+## [13.1.0](https://github.com/LazyVim/LazyVim/compare/v13.0.0...v13.1.0) (2024-11-09)
+
+
+### Features
+
+* **terraform:** add formatter for packer files ([#4591](https://github.com/LazyVim/LazyVim/issues/4591)) ([4876d11](https://github.com/LazyVim/LazyVim/commit/4876d1137d374af6f39661e402926220517ae4ab))
+
+
+### Bug Fixes
+
+* **extras:** lazy-load telescope-terraform plugins ([#4667](https://github.com/LazyVim/LazyVim/issues/4667)) ([94b4219](https://github.com/LazyVim/LazyVim/commit/94b42193272569f8005587069733f3ba0610bc9b))
+* **options:** make sure spelling works in regular text files ([548fddd](https://github.com/LazyVim/LazyVim/commit/548fddd1d5db65a80b11500e32cfe86e69bc8777))
+* **snacks:** noice now honors `Snacks.config.notifier.enabled = false` ([220148f](https://github.com/LazyVim/LazyVim/commit/220148f47f175229232eee31982577fbdd637663))
+
+## [13.0.0](https://github.com/LazyVim/LazyVim/compare/v12.44.1...v13.0.0) (2024-11-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** move a bunch of LazyVim features to snacks.nvim ([#4706](https://github.com/LazyVim/LazyVim/issues/4706))
+
+### Features
+
+* **core:** move a bunch of LazyVim features to snacks.nvim ([#4706](https://github.com/LazyVim/LazyVim/issues/4706)) ([2f46974](https://github.com/LazyVim/LazyVim/commit/2f4697443c0186663ba4421bd4b856e36c3bd7cc))
+* **elixir:** add support for livebook files (`*.livemd`) ([#4184](https://github.com/LazyVim/LazyVim/issues/4184)) ([2fcd4cd](https://github.com/LazyVim/LazyVim/commit/2fcd4cdc5fdbed0d2ac097db31578acb0b86b8a2))
+* **eslint:** add option to disable eslint auto format ([#4225](https://github.com/LazyVim/LazyVim/issues/4225)) ([2d2e425](https://github.com/LazyVim/LazyVim/commit/2d2e425d25b02b93ef3e4ce4cb0a3edc30903fa5))
+* **extras.nushell:** update to upstream treesitter ([#4715](https://github.com/LazyVim/LazyVim/issues/4715)) ([37cc039](https://github.com/LazyVim/LazyVim/commit/37cc03948d8a2475c4889d788df17b293bb7d1e9))
+* **extras:** lang/zig ([#4437](https://github.com/LazyVim/LazyVim/issues/4437)) ([4379faf](https://github.com/LazyVim/LazyVim/commit/4379fafc7bbfe69f4e4d0da8131089cb7601f7c4))
+* **extras:** rego language support ([#4297](https://github.com/LazyVim/LazyVim/issues/4297)) ([cf86484](https://github.com/LazyVim/LazyVim/commit/cf86484797f70d1783166e8f572a4cfedd510ab5))
+* **keymaps:** only add lazygit keymaps when available. Closes [#4643](https://github.com/LazyVim/LazyVim/issues/4643). Closes [#4247](https://github.com/LazyVim/LazyVim/issues/4247) ([aa53cd4](https://github.com/LazyVim/LazyVim/commit/aa53cd47c45ad4a087a35ab9150807d1dfef65ed))
+* **lang.angular:** configure `prettier` as formatter for `angular` templates ([#4345](https://github.com/LazyVim/LazyVim/issues/4345)) ([2d6687c](https://github.com/LazyVim/LazyVim/commit/2d6687c6460e8e4ab639bc0a655d7c3f2b90d002))
+* **scala:** add key for worksheet hover ([#3853](https://github.com/LazyVim/LazyVim/issues/3853)) ([859646f](https://github.com/LazyVim/LazyVim/commit/859646f628ff0d99e6afe835ba0a48faed2972af))
+* **toggle:** add illuminate toggle for which-key ([#4708](https://github.com/LazyVim/LazyVim/issues/4708)) ([67ba582](https://github.com/LazyVim/LazyVim/commit/67ba58215b9122f4c422801c4af74412a8aa21d4))
+
+
+### Bug Fixes
+
+* **blink:** remove `draw="reversed"` for now till new release ([b841a1d](https://github.com/LazyVim/LazyVim/commit/b841a1dfc36f68033ed02866b57a0a03112b06c3))
+* **copilot-chat:** setup cmp conditionally ([#4716](https://github.com/LazyVim/LazyVim/issues/4716)) ([a86c252](https://github.com/LazyVim/LazyVim/commit/a86c25286b83d766af8935db31417c0ce417b865))
+* **dap:** use dap's splitstr when running with args. Closes [#4387](https://github.com/LazyVim/LazyVim/issues/4387) ([776994a](https://github.com/LazyVim/LazyVim/commit/776994a20703d9f9cca380dbb0398ec2a6d79bd8))
+* **dial:** follow comment explanation for integers ([#4658](https://github.com/LazyVim/LazyVim/issues/4658)) ([c879b39](https://github.com/LazyVim/LazyVim/commit/c879b397c7c4998c060247c0aa7ab68400967022))
+* **extras:** make kulala keys only for http files ([#4574](https://github.com/LazyVim/LazyVim/issues/4574)) ([b0ced33](https://github.com/LazyVim/LazyVim/commit/b0ced339a8e19253b93c147e796e921c44735418))
+* **extras:** use the correct naming when setting up eruby formatter ([#4625](https://github.com/LazyVim/LazyVim/issues/4625)) ([8534af4](https://github.com/LazyVim/LazyVim/commit/8534af4a7938d6fb8e7cfe5314ad13943414a42e))
+* **lang/r:** make keymaps in which-key menu available in visual mode ([#4565](https://github.com/LazyVim/LazyVim/issues/4565)) ([ee2ec7e](https://github.com/LazyVim/LazyVim/commit/ee2ec7e4747f1be73f56f8a5f75047e5bc64cc93))
+* **lang/ruby:** do not enable Rubocop as LSP if Solargraph is used ([#4566](https://github.com/LazyVim/LazyVim/issues/4566)) ([fd361d0](https://github.com/LazyVim/LazyVim/commit/fd361d07a295313273c64548784fdcdea59b8a69))
+* **lsp:** wrap hover and signature_help ([7616816](https://github.com/LazyVim/LazyVim/commit/76168166e565a5aa135f2b5c5dabb2ffbb8a6075))
+* **lualine:** apply highlight groups correctly to truncated pretty_paths ([#4379](https://github.com/LazyVim/LazyVim/issues/4379)) ([1d4157e](https://github.com/LazyVim/LazyVim/commit/1d4157e68128373609385452d594b3bdf77b0fc0))
+* **lualine:** make sure path is in root before substituting ([67b216c](https://github.com/LazyVim/LazyVim/commit/67b216c973dd03fee84e362465266bab96402831))
+* **navic:** use the same background color as lualine section_c ([#4231](https://github.com/LazyVim/LazyVim/issues/4231)) ([64b0f0b](https://github.com/LazyVim/LazyVim/commit/64b0f0b71d2678ca1342429c594eee61d8b9e0af))
+* **neotest:** disambiguous key map descriptions ([#4374](https://github.com/LazyVim/LazyVim/issues/4374)) ([dfde914](https://github.com/LazyVim/LazyVim/commit/dfde9148ef128d8c81a836ff85eb9cd25a01ac1f))
+* **options:** disable default ruler ([#4731](https://github.com/LazyVim/LazyVim/issues/4731)) ([da3058a](https://github.com/LazyVim/LazyVim/commit/da3058a72dbf086128b10ce19a0011000669b9ff))
+* **options:** removed deprecated options ([1e975be](https://github.com/LazyVim/LazyVim/commit/1e975be7a547f9a2dea63edb21cbaefab40d0cfa))
+* **prettier:** keep existing formatters_by_ft ([#4719](https://github.com/LazyVim/LazyVim/issues/4719)) ([4ff3606](https://github.com/LazyVim/LazyVim/commit/4ff36062dd33b852f9734d3731c55a5a8c50cf75))
+* **project.nvim:** correctly delete projects ([#4314](https://github.com/LazyVim/LazyVim/issues/4314)) ([c097355](https://github.com/LazyVim/LazyVim/commit/c09735594a26a1749b775847c958e98f566fbac5))
+* **snacks:** dont add `snacks_notif` to close_with_q ([e6f612f](https://github.com/LazyVim/LazyVim/commit/e6f612f1cc5dfe942a4b48878d8c356c32232fad))
+* **snippet:** don't set navigation mappings in nightly ([#4375](https://github.com/LazyVim/LazyVim/issues/4375)) ([1552791](https://github.com/LazyVim/LazyVim/commit/15527910c321f3a6a01e1216442f8d21e5f19247))
+* **telescope:** buffers to start at final item ([#4189](https://github.com/LazyVim/LazyVim/issues/4189)) ([f78bc3b](https://github.com/LazyVim/LazyVim/commit/f78bc3b85881b43fd082add4c80d9a75c573a882))
+* **telescope:** check for gmake if needed ([0bc09d8](https://github.com/LazyVim/LazyVim/commit/0bc09d8206cfec1a4b3481acbc3e864a548c499a))
+
+## [12.44.1](https://github.com/LazyVim/LazyVim/compare/v12.44.0...v12.44.1) (2024-11-03)
+
+
+### Bug Fixes
+
+* **blink:** use release version ([7ebed53](https://github.com/LazyVim/LazyVim/commit/7ebed5349d49dd9996d61155bc12605871058ec1))
+* **copilot:** properly process tab with copilot and blink. Fixes [#4692](https://github.com/LazyVim/LazyVim/issues/4692) ([fa37396](https://github.com/LazyVim/LazyVim/commit/fa3739678af494b8657d68ddc44bcc598f9bd00a))
+* **java:** jdtls run with args ([#4689](https://github.com/LazyVim/LazyVim/issues/4689)) ([0403e80](https://github.com/LazyVim/LazyVim/commit/0403e80a8e6250130fe94af1034a6f0760a24ca8))
+
+## [12.44.0](https://github.com/LazyVim/LazyVim/compare/v12.43.0...v12.44.0) (2024-11-02)
+
+
+### Features
+
+* **blink:** use vim.o.pumblend as winblend option for autocomplete menu in blink ([28da1eb](https://github.com/LazyVim/LazyVim/commit/28da1eb073f99abda9ea9b2349e5d8b8087ffcce))
+* **extras:** blink ([#4680](https://github.com/LazyVim/LazyVim/issues/4680)) ([ad52bf9](https://github.com/LazyVim/LazyVim/commit/ad52bf91bc8f1821bbb0b7218d03768eec9a9e42))
+* **extras:** enable crates.nvim in-process lsp server ([#4684](https://github.com/LazyVim/LazyVim/issues/4684)) ([db8895b](https://github.com/LazyVim/LazyVim/commit/db8895b518278331fb73bbd81975cbe5012c8f71))
+
+
+### Bug Fixes
+
+* **autocmds:** `vim.highlight` is deprecated ([a7b4c43](https://github.com/LazyVim/LazyVim/commit/a7b4c4391bccc894f56847ead7abe4ae7a8e4fc0))
+* **autocmds:** change mapping for `lazyvim_close_with_q` ([#4638](https://github.com/LazyVim/LazyVim/issues/4638)) ([5f432d9](https://github.com/LazyVim/LazyVim/commit/5f432d997e397790cea39d9bb8826c1d4ca14afb))
+* **autocmds:** close window and force delete buf on q. See [#4638](https://github.com/LazyVim/LazyVim/issues/4638) ([cb40a09](https://github.com/LazyVim/LazyVim/commit/cb40a09538dc0c417a7ffbbacdbdec90be4a792c))
+* **autocmds:** force close buffers with q. See [#4638](https://github.com/LazyVim/LazyVim/issues/4638) ([0eb4009](https://github.com/LazyVim/LazyVim/commit/0eb400908d17f4116f02c6464d7ef81456ca303c))
+* **blink:** explicetely set version=false for now ([ec616a3](https://github.com/LazyVim/LazyVim/commit/ec616a3cecaf1e5de1687223575ff019ad688e55))
+* **catppuccin:** fix bufferline integration when no colorscheme is set. Closes [#4641](https://github.com/LazyVim/LazyVim/issues/4641) ([6570a14](https://github.com/LazyVim/LazyVim/commit/6570a141c0de30fccee38e2b10dcd14830624e16))
+* **copilot:** create undo point before accepting copilot suggestion when using blink ([6e1d099](https://github.com/LazyVim/LazyVim/commit/6e1d0994d99e63a46c3eff737c44ca47e3ecbe28))
+* **dap:** remove explicit `load_launchjs` call ([#4634](https://github.com/LazyVim/LazyVim/issues/4634)) ([2f6c1f6](https://github.com/LazyVim/LazyVim/commit/2f6c1f60834108359b3404748453a65843909a03))
+* **lazygit:** file history when cwd is outside the repo ([#4666](https://github.com/LazyVim/LazyVim/issues/4666)) ([4ee6be4](https://github.com/LazyVim/LazyVim/commit/4ee6be4499008db458089fb2573b13f6b5ec5d3b))
+* **rust:** disable rust_analyzer in the rust extra. Fixes [#4685](https://github.com/LazyVim/LazyVim/issues/4685) ([1d3d64f](https://github.com/LazyVim/LazyVim/commit/1d3d64fd1ae26581b71f39091c816e568b7a3b39))
+
+## [12.43.0](https://github.com/LazyVim/LazyVim/compare/v12.42.0...v12.43.0) (2024-10-23)
+
+
+### Features
+
+* **catppuccin:** bufferline integration. Closes [#4583](https://github.com/LazyVim/LazyVim/issues/4583). Closes [#4581](https://github.com/LazyVim/LazyVim/issues/4581) ([917c685](https://github.com/LazyVim/LazyVim/commit/917c685c1fb3774375ea2236e5e7aaa3d951fdda))
+* **extras:** expose `prios` to users for customization ([#4587](https://github.com/LazyVim/LazyVim/issues/4587)) ([e46cb62](https://github.com/LazyVim/LazyVim/commit/e46cb62a17e1f4b7f163f4e0fdd13593c4af3abd))
+* **keymaps:** allow `v:count1` when moving lines ([#4618](https://github.com/LazyVim/LazyVim/issues/4618)) ([b4eb4e1](https://github.com/LazyVim/LazyVim/commit/b4eb4e1f4a4024229fe40782fdb12683c1c69634))
+
+
+### Bug Fixes
+
+* **folds:** enable folds when treesitter available. Fixes [#4563](https://github.com/LazyVim/LazyVim/issues/4563) ([fe7003d](https://github.com/LazyVim/LazyVim/commit/fe7003de506ef7022a6c5f623476630d7bc30944))
+
+## [12.42.0](https://github.com/LazyVim/LazyVim/compare/v12.41.0...v12.42.0) (2024-10-04)
+
+
+### Features
+
+* **root:** provide `vim.g.root_lsp_ignore` to ignore LSP servers ([#4332](https://github.com/LazyVim/LazyVim/issues/4332)) ([90a9231](https://github.com/LazyVim/LazyVim/commit/90a92312aed79d4ee9d231f9eb3f8cd4debc46d1))
+
+
+### Bug Fixes
+
+* **gitsigns:** change name of filetype blame ([#4243](https://github.com/LazyVim/LazyVim/issues/4243)) ([3e257fd](https://github.com/LazyVim/LazyVim/commit/3e257fdb8874d7112446dc3ca1caf9c3263d8194))
+* **neotest:** properly initialize adapter with call table. Fixes [#4538](https://github.com/LazyVim/LazyVim/issues/4538) ([327e829](https://github.com/LazyVim/LazyVim/commit/327e829c156864975785914038fe4515dadcba87))
+
+## [12.41.0](https://github.com/LazyVim/LazyVim/compare/v12.40.0...v12.41.0) (2024-10-02)
+
+
+### Features
+
+* **rust:** update rustaceanvim ([#4477](https://github.com/LazyVim/LazyVim/issues/4477)) ([04515b1](https://github.com/LazyVim/LazyVim/commit/04515b139973173e90604f700d70f4e6d714da1f))
+* **toggle:** add more `M.wk` fields for better user customization ([#4521](https://github.com/LazyVim/LazyVim/issues/4521)) ([57c0c0b](https://github.com/LazyVim/LazyVim/commit/57c0c0bc9f86467d90c0c10aac680bdba8e56469))
+
+
+### Bug Fixes
+
+* **extras:** migrate away from deprecated `get_target_window()` in mini-files ([#4479](https://github.com/LazyVim/LazyVim/issues/4479)) ([b110550](https://github.com/LazyVim/LazyVim/commit/b110550393957a3434db1f4f0dc5804a9d31820f))
+
+## [12.40.0](https://github.com/LazyVim/LazyVim/compare/v12.39.0...v12.40.0) (2024-10-02)
+
+
+### Features
+
+* **lang:** add ts_ls to lsp config ([#4406](https://github.com/LazyVim/LazyVim/issues/4406)) ([34f0e56](https://github.com/LazyVim/LazyVim/commit/34f0e568d4e853cc2b4f0d628749cb66cd1b9aaf))
+
+
+### Bug Fixes
+
+* **extras:** rename `lspconfig.server_configurations` to `lspconfig.configs` ([#4518](https://github.com/LazyVim/LazyVim/issues/4518)) ([7432574](https://github.com/LazyVim/LazyVim/commit/74325743e7ff9d9efe9172ba96ec063c65ee219c))
+* **lsp:** backward compat with lspconfig refactor. Fixes [#4525](https://github.com/LazyVim/LazyVim/issues/4525). See [#4518](https://github.com/LazyVim/LazyVim/issues/4518) ([6e40252](https://github.com/LazyVim/LazyVim/commit/6e4025229d4628a7278cf7c09f942af6dfea05dd))
+* **render-markdown:** remove redundant `opts.file_types` ([#4506](https://github.com/LazyVim/LazyVim/issues/4506)) ([9b17672](https://github.com/LazyVim/LazyVim/commit/9b1767205cffd958ee9c74ceca299bd6c128b5f8))
+
+## [12.39.0](https://github.com/LazyVim/LazyVim/compare/v12.38.2...v12.39.0) (2024-09-18)
+
+
+### Features
+
+* **cmp:** better c-n and c-p mapping fallback. Fixes [#4414](https://github.com/LazyVim/LazyVim/issues/4414) ([86d4f14](https://github.com/LazyVim/LazyVim/commit/86d4f14bc89b2174cadde93a4f49fc83a01df642))
+* **lazygit:** allow user to override LazyVim config with custom file ([#4367](https://github.com/LazyVim/LazyVim/issues/4367)) ([41a8f3a](https://github.com/LazyVim/LazyVim/commit/41a8f3a5fb2bb84036f33764d77049cafb0adedf))
+* **persistence:** added leader-qS to select a session ([5a0122b](https://github.com/LazyVim/LazyVim/commit/5a0122b61977b5b2c392b64eb615025f49f2aef7))
+* **vscode:** make use of vscode builtin terminal ([#4392](https://github.com/LazyVim/LazyVim/issues/4392)) ([ead5955](https://github.com/LazyVim/LazyVim/commit/ead5955befe8d6e1e06877ea923c78375dcfad1e))
+
+
+### Bug Fixes
+
+* **extra:** make copilot-chat.lua fallback to the latest model ([#4411](https://github.com/LazyVim/LazyVim/issues/4411)) ([ae17b32](https://github.com/LazyVim/LazyVim/commit/ae17b321c7fc95e8c678865368ebfcac7c2e7483))
+* **grug:** grug_far -&gt; grug.open ([#4404](https://github.com/LazyVim/LazyVim/issues/4404)) ([746ea8f](https://github.com/LazyVim/LazyVim/commit/746ea8f1e6afdad89d0fab4ad04f370cf3998f67))
+* **markdown-preview:** unknown function `mkdp#util#install` ([#4196](https://github.com/LazyVim/LazyVim/issues/4196)) ([b892861](https://github.com/LazyVim/LazyVim/commit/b892861bdee888f83401e745bda1798dc01e2c54))
+* **ocaml:** get_language_id ([#4327](https://github.com/LazyVim/LazyVim/issues/4327)) ([6dcd979](https://github.com/LazyVim/LazyVim/commit/6dcd9794b1819965eb4f3dca70a1eb3c463de3cf))
+* **omnisharp:** use Go To Definition with fzf.lua ([#4260](https://github.com/LazyVim/LazyVim/issues/4260)) ([39ca76c](https://github.com/LazyVim/LazyVim/commit/39ca76c9607a7d92aff5b97c50b7ccbf1b2d46b6))
+* **toggle:** diagnostics enable/disable. See [#4205](https://github.com/LazyVim/LazyVim/issues/4205) ([3dbace9](https://github.com/LazyVim/LazyVim/commit/3dbace941ee935c89c73fd774267043d12f57fe2))
+* **toggle:** make `diagnostics` compatible with nvim-0.9.5 ([#4205](https://github.com/LazyVim/LazyVim/issues/4205)) ([c012f85](https://github.com/LazyVim/LazyVim/commit/c012f859597c4ba3e54dd26372351098a25379cd))
+* **vue:** ensure css treesitter installed ([#4308](https://github.com/LazyVim/LazyVim/issues/4308)) ([627215a](https://github.com/LazyVim/LazyVim/commit/627215a72b7744973a778722724d07eccefa0c79))
+
+## [12.38.2](https://github.com/LazyVim/LazyVim/compare/v12.38.1...v12.38.2) (2024-07-25)
+
+
+### Bug Fixes
+
+* **news:** pcall diag when showing news for older Neovim versions ([94bf4f9](https://github.com/LazyVim/LazyVim/commit/94bf4f932482012306fb375c4418a398bb00a949))
+
+## [12.38.1](https://github.com/LazyVim/LazyVim/compare/v12.38.0...v12.38.1) (2024-07-24)
+
+
+### Bug Fixes
+
+* **autcmds:** added grug-far to close with q ([3282721](https://github.com/LazyVim/LazyVim/commit/328272144c8c0b2d96988770d48c690a72613a81))
+
+## [12.38.0](https://github.com/LazyVim/LazyVim/compare/v12.37.0...v12.38.0) (2024-07-24)
+
+
+### Features
+
+* **markdown:** markdown-render toggle ([c8d0faf](https://github.com/LazyVim/LazyVim/commit/c8d0faf9b152283b2ae74f9594287a834eae002a))
+* **markdown:** replace `headlines.nvim` by `markdown.nvim` ([#4139](https://github.com/LazyVim/LazyVim/issues/4139)) ([264abdf](https://github.com/LazyVim/LazyVim/commit/264abdf9d52fe44c1dcb66f0502dcba5a881ea43))
+
+## [12.37.0](https://github.com/LazyVim/LazyVim/compare/v12.36.0...v12.37.0) (2024-07-24)
+
+
+### Features
+
+* **catppuccin:** enable grug-far integration ([#4156](https://github.com/LazyVim/LazyVim/issues/4156)) ([4bf6d85](https://github.com/LazyVim/LazyVim/commit/4bf6d856a805d38c19c8485c7a062d6cbc5cfaa8))
+* **elixir:** add elixirls code actions ([#4148](https://github.com/LazyVim/LazyVim/issues/4148)) ([f94a059](https://github.com/LazyVim/LazyVim/commit/f94a0591b3e5838794b1c3897ec21491aeb080fe))
+
+
+### Bug Fixes
+
+* **dap:** don't mess up DAP adapters provided by nvim-dap-python ([#4141](https://github.com/LazyVim/LazyVim/issues/4141)) ([940d7df](https://github.com/LazyVim/LazyVim/commit/940d7df59aac01f6cc587f035d9b4913139fae60))
+* **dap:** extend dap.configurations from .vscode/launch.json ([#4106](https://github.com/LazyVim/LazyVim/issues/4106)) ([caf227d](https://github.com/LazyVim/LazyVim/commit/caf227dd08e83c826800cb88c34c87c600793fa3))
+* **grug-far:** use new transient option ([1c2be20](https://github.com/LazyVim/LazyVim/commit/1c2be200c185a4567c6a634da2b624d9a638fe73))
+* **keymaps:** leader-wd ([f0d8b8b](https://github.com/LazyVim/LazyVim/commit/f0d8b8b293c1fc798b576a74a87f9bd0b59714f3))
+* **keymaps:** leader-wm ([391f506](https://github.com/LazyVim/LazyVim/commit/391f506295607e12db545b85fcbe0e00b1b8efa9))
+* **news:** deprecated API ([f6cd4a3](https://github.com/LazyVim/LazyVim/commit/f6cd4a38c667e3ef56672d723705ecd8a774a0f4))
+
+## [12.36.0](https://github.com/LazyVim/LazyVim/compare/v12.35.1...v12.36.0) (2024-07-22)
+
+
+### Features
+
+* **grug-far:** no longer needed to call visual replace separately ([72d0cad](https://github.com/LazyVim/LazyVim/commit/72d0cad3530d877401ad9674f5266c79fbec396b))
+
+## [12.35.1](https://github.com/LazyVim/LazyVim/compare/v12.35.0...v12.35.1) (2024-07-21)
+
+
+### Bug Fixes
+
+* **grug-far:** only prefill files filter when file has an extension. Closes [#4130](https://github.com/LazyVim/LazyVim/issues/4130) ([6411ab0](https://github.com/LazyVim/LazyVim/commit/6411ab0897f19dad9f902dfee29e101a9a767357))
+
+## [12.35.0](https://github.com/LazyVim/LazyVim/compare/v12.34.0...v12.35.0) (2024-07-21)
+
+
+### Features
+
+* **python:** default to new ruff instead of ruff_lsp ([#4126](https://github.com/LazyVim/LazyVim/issues/4126)) ([61ce1cf](https://github.com/LazyVim/LazyVim/commit/61ce1cfaaf8365e3b5c12b1509064579ab7d80b5))
+
+## [12.34.0](https://github.com/LazyVim/LazyVim/compare/v12.33.0...v12.34.0) (2024-07-20)
+
+
+### Features
+
+* **editor:** replace nvim-spectre with grug-far.nvim ([#4099](https://github.com/LazyVim/LazyVim/issues/4099)) ([0d561a3](https://github.com/LazyVim/LazyVim/commit/0d561a3226b46f6a44c4f2c9be2288f3b52cc351))
+* **indent-blankline:** add which-key toggles ([#4122](https://github.com/LazyVim/LazyVim/issues/4122)) ([a997152](https://github.com/LazyVim/LazyVim/commit/a997152eb2307380888d640440e0732493f82727))
+
+
+### Bug Fixes
+
+* **conform:** changes for new conform.nvim config ([eed91a3](https://github.com/LazyVim/LazyVim/commit/eed91a3e4c1521dd839d1a8bc09bdd98ac2fb874))
+* **toggle:** safe toggle get ([c8ab5d7](https://github.com/LazyVim/LazyVim/commit/c8ab5d7554da9f1eff69f5d6d8a0df38309d9f81))
+
+
+### Performance Improvements
+
+* **core:** defer clipboard because xsel and pbcopy can be slow ([#4120](https://github.com/LazyVim/LazyVim/issues/4120)) ([578f06e](https://github.com/LazyVim/LazyVim/commit/578f06e1401defbbc0a82f9ff1fb505564d038cf))
+
+## [12.33.0](https://github.com/LazyVim/LazyVim/compare/v12.32.0...v12.33.0) (2024-07-19)
+
+
+### Features
+
+* **extras:** improve ruby extra by letting user chose ([#3652](https://github.com/LazyVim/LazyVim/issues/3652)) ([7839498](https://github.com/LazyVim/LazyVim/commit/783949810855556dd12ed2685e62fb37a4c9504d))
+* **lang:** add Lean 4 support ([#4080](https://github.com/LazyVim/LazyVim/issues/4080)) ([3e29fdf](https://github.com/LazyVim/LazyVim/commit/3e29fdf478383034c48477dd04fd433a7c9327ee))
+* **lang:** add OCaml ([#4079](https://github.com/LazyVim/LazyVim/issues/4079)) ([a219e10](https://github.com/LazyVim/LazyVim/commit/a219e105b0e86316edfedb57f1fa267a764eab13))
+
+
+### Bug Fixes
+
+* **ui:** trouble lualine component ([f9fdb35](https://github.com/LazyVim/LazyVim/commit/f9fdb356f2362e5ae4ef490944b1957b49dc6680))
+
+## [12.32.0](https://github.com/LazyVim/LazyVim/compare/v12.31.0...v12.32.0) (2024-07-18)
+
+
+### Features
+
+* **edgy:** added support for grug-far.nvim ([b1a4740](https://github.com/LazyVim/LazyVim/commit/b1a47405b9fa5eb9f5222876e81be73206b80792))
+* **terminal:** clear search highlight when opening a terminal ([#4090](https://github.com/LazyVim/LazyVim/issues/4090)) ([b5290fd](https://github.com/LazyVim/LazyVim/commit/b5290fd92935d2e96fa2249cfd09bdd853972869))
+* **toggle:** move toggle notifs to toggle function ([c1b76ee](https://github.com/LazyVim/LazyVim/commit/c1b76ee235a2cccff6370ecfca57bdacd5fe6258))
+
+
+### Bug Fixes
+
+* **autcmds:** desc for close_with_q ([d6561fd](https://github.com/LazyVim/LazyVim/commit/d6561fd27c17806ca972cbfc18573ca81d13e346))
+* **ui:** another typo ([b8bdebe](https://github.com/LazyVim/LazyVim/commit/b8bdebe5be7eba91db23e43575fc1226075f6a56))
+* **ui:** typo ([4ac249b](https://github.com/LazyVim/LazyVim/commit/4ac249beaae3462d606128ca21db79cb85a8c65b))
+
+## [12.31.0](https://github.com/LazyVim/LazyVim/compare/v12.30.0...v12.31.0) (2024-07-17)
+
+
+### Features
+
+* **keymaps:** proxy leader-w to ctrl-w ([bab5440](https://github.com/LazyVim/LazyVim/commit/bab54406dc312947e4e03bb728498503c09231ca))
+* **R:** added new which-key group for new install feature ([#4078](https://github.com/LazyVim/LazyVim/issues/4078)) ([5339aca](https://github.com/LazyVim/LazyVim/commit/5339acacec0996968d64fdbaf9fe8187bfea1b47))
+* **toggle:** make toggles callable. Fixes [#4081](https://github.com/LazyVim/LazyVim/issues/4081) ([150523b](https://github.com/LazyVim/LazyVim/commit/150523b77b6e848c4135a97a5fd8f6f79a6f4443))
+* **treesitter-context:** which-key toggle ([#4059](https://github.com/LazyVim/LazyVim/issues/4059)) ([ab01350](https://github.com/LazyVim/LazyVim/commit/ab0135093bc18ccf82325bc8ee14c25230a71786))
+* **which-key:** dynamic buffer mappings under leader-b ([8d9f2ad](https://github.com/LazyVim/LazyVim/commit/8d9f2ad97ee0d495135380975438ab8a8ae62b14))
+* **which-key:** dynamic window mappings under leader-w ([66bba78](https://github.com/LazyVim/LazyVim/commit/66bba787b83afdd85b5ee95aa589fbe9fbb95535))
+* **which-key:** leader-w-space starts hydra mode for window mappings ([865bf15](https://github.com/LazyVim/LazyVim/commit/865bf15f1cf4d4f6a3eda6d7509f94a59752fb36))
+
+## [12.30.0](https://github.com/LazyVim/LazyVim/compare/v12.29.2...v12.30.0) (2024-07-15)
+
+
+### Features
+
+* **keymaps:** dynamic which-key icons/descriptions for toggles ([#4050](https://github.com/LazyVim/LazyVim/issues/4050)) ([78cf032](https://github.com/LazyVim/LazyVim/commit/78cf0320bfc34050883cde5e7af267184dc60ee9))
+* **util.mini:** follow the user's mappings instead of hardcoded values ([#4043](https://github.com/LazyVim/LazyVim/issues/4043)) ([8506cb5](https://github.com/LazyVim/LazyVim/commit/8506cb5a98a528651a5557d8e447fa13bd8ac0cb))
+
+
+### Bug Fixes
+
+* **lsp:** lsp keymaps. Fixes [#4051](https://github.com/LazyVim/LazyVim/issues/4051) ([706ec4b](https://github.com/LazyVim/LazyVim/commit/706ec4b6b6be4265cbcfd326d3216f2a29952b55))
+* **yanky:** enable yank history in visual mode ([#4048](https://github.com/LazyVim/LazyVim/issues/4048)) ([6911327](https://github.com/LazyVim/LazyVim/commit/6911327a5edca85ce3bc71229236494d9af7fafa))
+
+
+### Performance Improvements
+
+* **luasnip:** luasnip wasn't lazyloaded ([#4032](https://github.com/LazyVim/LazyVim/issues/4032)) ([e80ed32](https://github.com/LazyVim/LazyVim/commit/e80ed322a79a8b9857c6ab0ad76545654917ddcb))
+
+## [12.29.2](https://github.com/LazyVim/LazyVim/compare/v12.29.1...v12.29.2) (2024-07-14)
+
+
+### Bug Fixes
+
+* **telescope:** better find_command. Fixes [#4031](https://github.com/LazyVim/LazyVim/issues/4031) ([d39cdb0](https://github.com/LazyVim/LazyVim/commit/d39cdb059624b1200f2ef762f30c6e3b74066bc5))
+
+## [12.29.1](https://github.com/LazyVim/LazyVim/compare/v12.29.0...v12.29.1) (2024-07-14)
+
+
+### Bug Fixes
+
+* **omnisharp:** don't detach coreclr debug adapter ([#4023](https://github.com/LazyVim/LazyVim/issues/4023)) ([b3e746b](https://github.com/LazyVim/LazyVim/commit/b3e746b637a0d43aa0195cc1ff3d8adf1fedfaf6))
+* **pick:** get rid of "auto" picker and set better defaults for telescope find_files ([#4024](https://github.com/LazyVim/LazyVim/issues/4024)) ([337e9dd](https://github.com/LazyVim/LazyVim/commit/337e9ddc007d32c624433b5c6f0af6e8697dfcc6))
+* **tailwind:** additional tailwind completion settings for phoenix projects ([#3961](https://github.com/LazyVim/LazyVim/issues/3961)) ([9bce054](https://github.com/LazyVim/LazyVim/commit/9bce054fafcd631ec133a82ada1ecbbd23ca5510))
+
+## [12.29.0](https://github.com/LazyVim/LazyVim/compare/v12.28.0...v12.29.0) (2024-07-14)
+
+
+### Features
+
+* **java:** new java mappings format for which-key v3 ([#4013](https://github.com/LazyVim/LazyVim/issues/4013)) ([28a7f81](https://github.com/LazyVim/LazyVim/commit/28a7f8126c1b46b41ca58845ee081b67ce6981f2))
+* shorter keymap descriptions for mini.ai / yanky ([75ff149](https://github.com/LazyVim/LazyVim/commit/75ff1496bd4209784a4250e59920d24d75a3e3b0))
+
+
+### Bug Fixes
+
+* **flit:** use which-key preset keymap descriptions ([#4000](https://github.com/LazyVim/LazyVim/issues/4000)) ([ca37162](https://github.com/LazyVim/LazyVim/commit/ca37162cb7452dce32cf3f0ad661bcd1245286c0))
+
+## [12.28.0](https://github.com/LazyVim/LazyVim/compare/v12.27.0...v12.28.0) (2024-07-12)
+
+
+### Features
+
+* new mappings format for which-key v3. Forgot to push :) ([702471e](https://github.com/LazyVim/LazyVim/commit/702471e454ff552189ab03325dc19d0f7a601704))
+
+
+### Bug Fixes
+
+* **autocmds:** fixed pattern for autocommand to autoenable wrap and spell in text files ([#3975](https://github.com/LazyVim/LazyVim/issues/3975)) ([927031a](https://github.com/LazyVim/LazyVim/commit/927031a2de93f694b032a4df5e6d93fff635a496))
+* **java:** fix `config_overrides` for tests ([#3968](https://github.com/LazyVim/LazyVim/issues/3968)) ([b481b64](https://github.com/LazyVim/LazyVim/commit/b481b644ddf9f02470ec50264e63c6dd69d444f8))
+* **outline:** use new object for `symbols.filter` ([#4006](https://github.com/LazyVim/LazyVim/issues/4006)) ([db234ef](https://github.com/LazyVim/LazyVim/commit/db234ef9cbbb1b7b0efa8e3af5c446b965e7c07a))
+* **php:** `php_cs_fixer` is the correct name ([#3991](https://github.com/LazyVim/LazyVim/issues/3991)) ([8bfd9a5](https://github.com/LazyVim/LazyVim/commit/8bfd9a50a71d8b8147f7d742e8d0f05ee6cba888))
+* **vscode:** allow overriding default vscode keymaps. Fixes [#3950](https://github.com/LazyVim/LazyVim/issues/3950) ([6765052](https://github.com/LazyVim/LazyVim/commit/67650528e47a57fb687bce2d7bb61fb4f1af8f63))
+
 ## [12.27.0](https://github.com/LazyVim/LazyVim/compare/v12.26.2...v12.27.0) (2024-07-07)
 
 

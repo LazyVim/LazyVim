@@ -7,7 +7,7 @@ function M.cmp_source(name, icon)
     if not package.loaded["cmp"] then
       return
     end
-    for _, s in ipairs(require("cmp").core.sources) do
+    for _, s in ipairs(require("cmp").core.sources or {}) do
       if s.name == name then
         if s.source:is_available() then
           started = true
@@ -91,12 +91,13 @@ function M.pretty_path(opts)
       return ""
     end
 
+    path = LazyVim.norm(path)
     local root = LazyVim.root.get({ normalize = true })
     local cwd = LazyVim.root.cwd()
 
     if opts.relative == "cwd" and path:find(cwd, 1, true) == 1 then
       path = path:sub(#cwd + 2)
-    else
+    elseif path:find(root, 1, true) == 1 then
       path = path:sub(#root + 2)
     end
 
@@ -106,7 +107,7 @@ function M.pretty_path(opts)
     if opts.length == 0 then
       parts = parts
     elseif #parts > opts.length then
-      parts = { parts[1], "…", table.concat({ unpack(parts, #parts - opts.length + 2, #parts) }, sep) }
+      parts = { parts[1], "…", unpack(parts, #parts - opts.length + 2, #parts) }
     end
 
     if opts.modified_hl and vim.bo.modified then
