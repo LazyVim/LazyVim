@@ -1,7 +1,6 @@
 return {
   {
     "supermaven-inc/supermaven-nvim",
-    build = ":SupermavenUseFree",
     opts = {
       keymaps = {
         accept_suggestion = nil, -- handled by nvim-cmp / blink.cmp
