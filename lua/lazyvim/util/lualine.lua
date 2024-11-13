@@ -1,9 +1,33 @@
 ---@class lazyvim.util.lualine
 local M = {}
 
+---@param icon string
+---@param status fun(): nil|"ok"|"error"|"pending"
+function M.status(icon, status)
+  local colors = {
+    ok = LazyVim.ui.fg("Special"),
+    error = LazyVim.ui.fg("DiagnosticError"),
+    pending = LazyVim.ui.fg("DiagnosticWarn"),
+  }
+  return {
+    function()
+      return icon
+    end,
+    cond = function()
+      return status() ~= nil
+    end,
+    color = function()
+      return colors[status()] or colors.ok
+    end,
+  }
+end
+
+---@param name string
+---@param icon? string
 function M.cmp_source(name, icon)
+  icon = icon or LazyVim.config.icons.kinds[name:sub(1, 1):upper() .. name:sub(2)]
   local started = false
-  local function status()
+  return M.status(icon, function()
     if not package.loaded["cmp"] then
       return
     end
@@ -20,25 +44,7 @@ function M.cmp_source(name, icon)
         return "ok"
       end
     end
-  end
-
-  local colors = {
-    ok = LazyVim.ui.fg("Special"),
-    error = LazyVim.ui.fg("DiagnosticError"),
-    pending = LazyVim.ui.fg("DiagnosticWarn"),
-  }
-
-  return {
-    function()
-      return icon or LazyVim.config.icons.kinds[name:sub(1, 1):upper() .. name:sub(2)]
-    end,
-    cond = function()
-      return status() ~= nil
-    end,
-    color = function()
-      return colors[status()] or colors.ok
-    end,
-  }
+  end)
 end
 
 ---@param component any
