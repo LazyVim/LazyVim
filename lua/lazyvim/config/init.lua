@@ -88,6 +88,7 @@ local defaults = {
       Snippet       = " ",
       String        = " ",
       Struct        = "󰆼 ",
+      Supermaven    = " ",
       TabNine       = "󰏚 ",
       Text          = " ",
       TypeParameter = " ",
