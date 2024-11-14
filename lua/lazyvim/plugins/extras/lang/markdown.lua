@@ -76,6 +76,7 @@ return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     build = function()
+      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
       vim.fn["mkdp#util#install"]()
     end,
     keys = {
@@ -92,31 +93,35 @@ return {
   },
 
   {
-    "lukas-reineke/headlines.nvim",
-    opts = function()
-      local opts = {}
-      for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
-        opts[ft] = {
-          headline_highlights = {},
-          -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
-          bullets = {},
-          quote_string = false,
-        }
-        for i = 1, 6 do
-          local hl = "Headline" .. i
-          vim.api.nvim_set_hl(0, hl, { link = "Headline", default = true })
-          table.insert(opts[ft].headline_highlights, hl)
-        end
-      end
-      return opts
-    end,
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      code = {
+        sign = false,
+        width = "block",
+        right_pad = 1,
+      },
+      heading = {
+        sign = false,
+        icons = {},
+      },
+    },
     ft = { "markdown", "norg", "rmd", "org" },
     config = function(_, opts)
-      -- PERF: schedule to prevent headlines slowing down opening a file
-      vim.schedule(function()
-        require("headlines").setup(opts)
-        require("headlines").refresh()
-      end)
+      require("render-markdown").setup(opts)
+      Snacks.toggle({
+        name = "Render Markdown",
+        get = function()
+          return require("render-markdown.state").enabled
+        end,
+        set = function(enabled)
+          local m = require("render-markdown")
+          if enabled then
+            m.enable()
+          else
+            m.disable()
+          end
+        end,
+      }):map("<leader>um")
     end,
   },
 }

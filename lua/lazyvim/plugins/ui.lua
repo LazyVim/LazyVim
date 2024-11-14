@@ -1,39 +1,4 @@
 return {
-  -- Better `vim.notify()`
-  {
-    "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Dismiss All Notifications",
-      },
-    },
-    opts = {
-      stages = "static",
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
-      on_open = function(win)
-        vim.api.nvim_win_set_config(win, { zindex = 100 })
-      end,
-    },
-    init = function()
-      -- when noice is not enabled, install notify on VeryLazy
-      if not LazyVim.has("noice.nvim") then
-        LazyVim.on_very_lazy(function()
-          vim.notify = require("notify")
-        end)
-      end
-    end,
-  },
-
   -- This is what powers LazyVim's fancy-looking
   -- tabs, which include filetype icons and close buttons.
   {
@@ -42,7 +7,6 @@ return {
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
       { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
       { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
       { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
@@ -55,9 +19,9 @@ return {
     opts = {
       options = {
         -- stylua: ignore
-        close_command = function(n) LazyVim.ui.bufremove(n) end,
+        close_command = function(n) Snacks.bufdelete(n) end,
         -- stylua: ignore
-        right_mouse_command = function(n) LazyVim.ui.bufremove(n) end,
+        right_mouse_command = function(n) Snacks.bufdelete(n) end,
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
@@ -225,28 +189,42 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "LazyFile",
-    opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
-      scope = { show_start = false, show_end = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
+    opts = function()
+      Snacks.toggle({
+        name = "Indention Guides",
+        get = function()
+          return require("ibl.config").get_config(0).enabled
+        end,
+        set = function(state)
+          require("ibl").setup_buffer(0, { enabled = state })
+        end,
+      }):map("<leader>ug")
+
+      return {
+        indent = {
+          char = "│",
+          tab_char = "│",
         },
-      },
-    },
+        scope = { show_start = false, show_end = false },
+        exclude = {
+          filetypes = {
+            "Trouble",
+            "alpha",
+            "dashboard",
+            "help",
+            "lazy",
+            "mason",
+            "neo-tree",
+            "notify",
+            "snacks_notif",
+            "snacks_terminal",
+            "snacks_win",
+            "toggleterm",
+            "trouble",
+          },
+        },
+      }
+    end,
     main = "ibl",
   },
 

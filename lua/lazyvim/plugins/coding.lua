@@ -33,6 +33,8 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<CR>"] = LazyVim.cmp.confirm({ select = auto_select }),
           ["<C-y>"] = LazyVim.cmp.confirm({ select = true }),
@@ -40,6 +42,9 @@ return {
           ["<C-CR>"] = function(fallback)
             cmp.abort()
             fallback()
+          end,
+          ["<tab>"] = function(fallback)
+            return LazyVim.cmp.map({ "snippet_forward", "ai_accept" }, fallback)()
           end,
         }),
         sources = cmp.config.sources({
@@ -70,9 +75,10 @@ return {
           end,
         },
         experimental = {
-          ghost_text = {
+          -- only show ghost text when we show ai completions
+          ghost_text = vim.g.ai_cmp and {
             hl_group = "CmpGhostText",
-          },
+          } or false,
         },
         sorting = defaults.sorting,
       }
@@ -83,6 +89,7 @@ return {
   -- snippets
   {
     "nvim-cmp",
+    optional = true,
     dependencies = {
       {
         "garymjr/nvim-snippets",
@@ -102,26 +109,6 @@ return {
         table.insert(opts.sources, { name = "snippets" })
       end
     end,
-    keys = {
-      {
-        "<Tab>",
-        function()
-          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-      {
-        "<S-Tab>",
-        function()
-          return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = { "i", "s" },
-      },
-    },
   },
 
   -- auto pairs
@@ -198,6 +185,7 @@ return {
       library = {
         { path = "luvit-meta/library", words = { "vim%.uv" } },
         { path = "LazyVim", words = { "LazyVim" } },
+        { path = "snacks.nvim", words = { "Snacks" } },
         { path = "lazy.nvim", words = { "LazyVim" } },
       },
     },
@@ -207,6 +195,7 @@ return {
   -- Add lazydev source to cmp
   {
     "hrsh7th/nvim-cmp",
+    optional = true,
     opts = function(_, opts)
       table.insert(opts.sources, { name = "lazydev", group_index = 0 })
     end,

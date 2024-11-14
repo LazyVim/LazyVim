@@ -16,25 +16,23 @@ return {
     })
   end,
 
-  -- Extend auto completion
+  -- LSP for Cargo.toml
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      {
-        "Saecki/crates.nvim",
-        event = { "BufRead Cargo.toml" },
-        opts = {
-          completion = {
-            cmp = { enabled = true },
-          },
+    "Saecki/crates.nvim",
+    event = { "BufRead Cargo.toml" },
+    opts = {
+      completion = {
+        crates = {
+          enabled = true,
         },
       },
+      lsp = {
+        enabled = true,
+        actions = true,
+        completion = true,
+        hover = true,
+      },
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, { name = "crates" })
-    end,
   },
 
   -- Add Rust & related to treesitter
@@ -58,7 +56,7 @@ return {
 
   {
     "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended
+    version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
     ft = { "rust" },
     opts = {
       server = {
@@ -140,6 +138,7 @@ return {
             },
           },
         },
+        rust_analyzer = { enabled = false },
       },
     },
   },
