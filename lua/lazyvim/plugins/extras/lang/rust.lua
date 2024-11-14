@@ -97,13 +97,15 @@ return {
       },
     },
     config = function(_, opts)
-      -- Configure dap with codelldb
       local package_path = require("mason-registry").get_package("codelldb"):get_install_path()
+      local codelldb = package_path .. "/extension/adapter/codelldb"
+      local library_path = package_path .. "/extension/lldb/lib/liblldb.dylib"
+      local uname = io.popen("uname"):read("*l")
+      if uname == "Linux" then
+        library_path = package_path .. "/extension/lldb/lib/liblldb.so"
+      end
       opts.dap = {
-        adapter = require("rustaceanvim.config").get_codelldb_adapter(
-          package_path .. "/codelldb",
-          package_path .. "/extension/lldb/lib/liblldb.dylib"
-        ),
+        adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
       }
       vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
       if vim.fn.executable("rust-analyzer") == 0 then
@@ -122,21 +124,6 @@ return {
       servers = {
         bacon_ls = {
           enabled = diagnostics == "bacon-ls",
-        },
-        taplo = {
-          keys = {
-            {
-              "K",
-              function()
-                if vim.fn.expand("%:t") == "Cargo.toml" and require("crates").popup_available() then
-                  require("crates").show_popup()
-                else
-                  vim.lsp.buf.hover()
-                end
-              end,
-              desc = "Show Crate Documentation",
-            },
-          },
         },
         rust_analyzer = { enabled = false },
       },
