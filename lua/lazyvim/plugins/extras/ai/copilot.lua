@@ -79,6 +79,7 @@ return {
         specs = {
           {
             "nvim-cmp",
+            optional = true,
             ---@param opts cmp.ConfigSchema
             opts = function(_, opts)
               table.insert(opts.sources, 1, {
@@ -104,6 +105,7 @@ return {
         specs = {
           {
             "blink.cmp",
+            optional = true,
             opts = {
               sources = {
                 providers = {
