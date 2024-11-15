@@ -8,9 +8,9 @@ return {
     event = "InsertEnter",
     dependencies = {
       { "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
-      { "iguanacucumber/mag-nvim-lua", name = "cmp-nvim-lua" },
       { "iguanacucumber/mag-buffer", name = "cmp-buffer" },
       { "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
+      { "https://codeberg.org/FelipeLema/cmp-async-path", name = "cmp-path" },
     },
     -- Not all LSP servers add brackets when completing a function.
     -- To better deal with this, LazyVim adds a custom option to cmp,
