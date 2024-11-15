@@ -1,5 +1,12 @@
 # Changelog
 
+## [13.3.1](https://github.com/LazyVim/LazyVim/compare/v13.3.0...v13.3.1) (2024-11-15)
+
+
+### Bug Fixes
+
+* **copilot:** don't enable blink when using copilot when blink is not installed. Fixes [#4795](https://github.com/LazyVim/LazyVim/issues/4795) ([07a0468](https://github.com/LazyVim/LazyVim/commit/07a046867dc3407b30801e539ab026fb7c180e7b))
+
 ## [13.3.0](https://github.com/LazyVim/LazyVim/compare/v13.2.0...v13.3.0) (2024-11-14)
 
 
