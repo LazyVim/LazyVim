@@ -1,5 +1,21 @@
 # Changelog
 
+## [13.4.0](https://github.com/LazyVim/LazyVim/compare/v13.3.1...v13.4.0) (2024-11-16)
+
+
+### Features
+
+* **blink:** auto-enable catppuccin integration ([#4799](https://github.com/LazyVim/LazyVim/issues/4799)) ([ffce089](https://github.com/LazyVim/LazyVim/commit/ffce089a9f1268ff73c7de7c4f45e1a366dc4d34))
+* **copilot-chat:** remove deprecated options ([#4802](https://github.com/LazyVim/LazyVim/issues/4802)) ([7a1414b](https://github.com/LazyVim/LazyVim/commit/7a1414b5e5950bde34b9bdc0dbc3dd20109f2ac9))
+* **dial:** support vue filetype ([#4785](https://github.com/LazyVim/LazyVim/issues/4785)) ([8235126](https://github.com/LazyVim/LazyVim/commit/8235126a321eaae093f319398ffec5949f1ab8be))
+* **extras:** add biome formatter ([#4448](https://github.com/LazyVim/LazyVim/issues/4448)) ([b8407f4](https://github.com/LazyVim/LazyVim/commit/b8407f4b128891c3bdf35a2c403ba23d1e01f3ff))
+* **vscode:** automatically enable the vscode extra when running in vscode ([1c5a330](https://github.com/LazyVim/LazyVim/commit/1c5a330b6be8007088d84361fee5d2b08771598c))
+
+
+### Bug Fixes
+
+* **terminal:** set shellcmdflags for powershell to recommended values. Closes [#4805](https://github.com/LazyVim/LazyVim/issues/4805) ([1db2af2](https://github.com/LazyVim/LazyVim/commit/1db2af267eeb9046550ac29bd543f3b3021cdd7b))
+
 ## [13.3.1](https://github.com/LazyVim/LazyVim/compare/v13.3.0...v13.3.1) (2024-11-15)
 
 
