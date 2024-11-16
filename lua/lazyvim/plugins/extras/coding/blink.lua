@@ -121,4 +121,12 @@ return {
       },
     },
   },
+  -- catppuccin support
+  {
+    "catppuccin",
+    optional = true,
+    opts = {
+      integrations = { blink_cmp = true },
+    },
+  },
 }
