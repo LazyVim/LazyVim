@@ -1,5 +1,51 @@
 # Changelog
 
+## [13.4.0](https://github.com/LazyVim/LazyVim/compare/v13.3.1...v13.4.0) (2024-11-16)
+
+
+### Features
+
+* **blink:** auto-enable catppuccin integration ([#4799](https://github.com/LazyVim/LazyVim/issues/4799)) ([ffce089](https://github.com/LazyVim/LazyVim/commit/ffce089a9f1268ff73c7de7c4f45e1a366dc4d34))
+* **copilot-chat:** remove deprecated options ([#4802](https://github.com/LazyVim/LazyVim/issues/4802)) ([7a1414b](https://github.com/LazyVim/LazyVim/commit/7a1414b5e5950bde34b9bdc0dbc3dd20109f2ac9))
+* **dial:** support vue filetype ([#4785](https://github.com/LazyVim/LazyVim/issues/4785)) ([8235126](https://github.com/LazyVim/LazyVim/commit/8235126a321eaae093f319398ffec5949f1ab8be))
+* **extras:** add biome formatter ([#4448](https://github.com/LazyVim/LazyVim/issues/4448)) ([b8407f4](https://github.com/LazyVim/LazyVim/commit/b8407f4b128891c3bdf35a2c403ba23d1e01f3ff))
+* **vscode:** automatically enable the vscode extra when running in vscode ([1c5a330](https://github.com/LazyVim/LazyVim/commit/1c5a330b6be8007088d84361fee5d2b08771598c))
+
+
+### Bug Fixes
+
+* **terminal:** set shellcmdflags for powershell to recommended values. Closes [#4805](https://github.com/LazyVim/LazyVim/issues/4805) ([1db2af2](https://github.com/LazyVim/LazyVim/commit/1db2af267eeb9046550ac29bd543f3b3021cdd7b))
+
+## [13.3.1](https://github.com/LazyVim/LazyVim/compare/v13.3.0...v13.3.1) (2024-11-15)
+
+
+### Bug Fixes
+
+* **copilot:** don't enable blink when using copilot when blink is not installed. Fixes [#4795](https://github.com/LazyVim/LazyVim/issues/4795) ([07a0468](https://github.com/LazyVim/LazyVim/commit/07a046867dc3407b30801e539ab026fb7c180e7b))
+
+## [13.3.0](https://github.com/LazyVim/LazyVim/compare/v13.2.0...v13.3.0) (2024-11-14)
+
+
+### Features
+
+* **copilot:** added support for blink.cmp source ([a7eca05](https://github.com/LazyVim/LazyVim/commit/a7eca056096486b20ce37b20979c0d712e49fe76))
+* **extras:** add supermaven ([#3491](https://github.com/LazyVim/LazyVim/issues/3491)) ([c1e8e3c](https://github.com/LazyVim/LazyVim/commit/c1e8e3c80d1d9d44e3795022b3f7d2703abccec6))
+
+
+### Bug Fixes
+
+* **dial.nvim:** added boolean and logical toggles to default group. Fixes [#4515](https://github.com/LazyVim/LazyVim/issues/4515) ([5e485d3](https://github.com/LazyVim/LazyVim/commit/5e485d39b4cc5aca1aedae4d441fb2bfb3bfbf67))
+* **fzf:** decouple `defaults` from `opts` to easy switch profiles ([#4190](https://github.com/LazyVim/LazyVim/issues/4190)) ([0819f93](https://github.com/LazyVim/LazyVim/commit/0819f9396e94a4188522b6739ade3d6024d2b8a7))
+* **lsp:** wrap signature_help ([#4791](https://github.com/LazyVim/LazyVim/issues/4791)) ([deb9fd8](https://github.com/LazyVim/LazyVim/commit/deb9fd85b150e50053e127f94f3df6273a9f5faf))
+* **lualine:** dynamically fetch the color used in lualine ([#4788](https://github.com/LazyVim/LazyVim/issues/4788)) ([e50b435](https://github.com/LazyVim/LazyVim/commit/e50b43544f1261d140bc391a9a1de6e3923b490d))
+* **lualine:** normalize paths before calculating pretty path. Fixes [#4763](https://github.com/LazyVim/LazyVim/issues/4763) ([ea266e7](https://github.com/LazyVim/LazyVim/commit/ea266e73265e32183acbec0bd39f8108e213770f))
+* **snacks:** explicitely enable snakcs plugins ([c0b623c](https://github.com/LazyVim/LazyVim/commit/c0b623c332b42b3d75e78e06fa1912417bfca71f))
+
+
+### Performance Improvements
+
+* **treesitter:** better foldtext and foldexpr ([1d7b9a1](https://github.com/LazyVim/LazyVim/commit/1d7b9a1a61596a61019d5d84be9ed679d90c4a38))
+
 ## [13.2.0](https://github.com/LazyVim/LazyVim/compare/v13.1.0...v13.2.0) (2024-11-11)
 
 

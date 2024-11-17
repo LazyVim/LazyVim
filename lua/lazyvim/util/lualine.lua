@@ -5,9 +5,9 @@ local M = {}
 ---@param status fun(): nil|"ok"|"error"|"pending"
 function M.status(icon, status)
   local colors = {
-    ok = LazyVim.ui.fg("Special"),
-    error = LazyVim.ui.fg("DiagnosticError"),
-    pending = LazyVim.ui.fg("DiagnosticWarn"),
+    ok = "Special",
+    error = "DiagnosticError",
+    pending = "DiagnosticWarn",
   }
   return {
     function()
@@ -17,7 +17,7 @@ function M.status(icon, status)
       return status() ~= nil
     end,
     color = function()
-      return colors[status()] or colors.ok
+      return LazyVim.ui.fg(colors[status()] or colors.ok)
     end,
   }
 end
@@ -145,7 +145,9 @@ function M.root_dir(opts)
     parent = true,
     other = true,
     icon = "󱉭 ",
-    color = LazyVim.ui.fg("Special"),
+    color = function()
+      return LazyVim.ui.fg("Special")
+    end,
   }, opts or {})
 
   local function get()
