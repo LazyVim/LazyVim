@@ -30,11 +30,9 @@ return {
     opts = function()
       ---@type snacks.Config
       return {
+        bigfile = { enabled = true },
         notifier = { enabled = true },
         quickfile = { enabled = true },
-        bigfile = { enabled = true },
-        words = { enabled = true },
-        toggle = { map = LazyVim.safe_keymap_set },
         statuscolumn = { enabled = false }, -- we set this in options.lua
         terminal = {
           win = {
@@ -46,6 +44,8 @@ return {
             },
           },
         },
+        toggle = { map = LazyVim.safe_keymap_set },
+        words = { enabled = true },
       }
     end,
     keys = {

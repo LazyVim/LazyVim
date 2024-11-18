@@ -8,7 +8,6 @@ return {
         "tzachar/cmp-tabnine",
         build = {
           LazyVim.is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
-          ":CmpTabnineHub",
         },
         dependencies = "hrsh7th/nvim-cmp",
         opts = {
