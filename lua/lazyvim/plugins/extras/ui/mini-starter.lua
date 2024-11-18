@@ -1,8 +1,7 @@
 -- start screen
 return {
   -- disable alpha
-  { "goolord/alpha-nvim", enabled = false },
-  { "nvimdev/dashboard-nvim", enabled = false },
+  { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
 
   -- enable mini.starter
   {
