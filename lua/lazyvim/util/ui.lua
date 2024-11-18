@@ -15,7 +15,11 @@ function M.foldexpr()
     if vim.bo[buf].filetype == "" then
       return "0"
     end
-    vim.b[buf].ts_folds = pcall(vim.treesitter.get_parser, buf)
+    if vim.bo[buf].filetype:find("dashboard") then
+      vim.b[buf].ts_folds = false
+    else
+      vim.b[buf].ts_folds = pcall(vim.treesitter.get_parser, buf)
+    end
   end
   return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
 end
