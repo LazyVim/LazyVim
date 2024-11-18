@@ -1,7 +1,6 @@
 return {
 
-  { "nvimdev/dashboard-nvim", enabled = false },
-  { "echasnovski/mini.starter", enabled = false },
+  { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
   -- Dashboard. This runs when neovim starts, and is what displays
   -- the "LAZYVIM" banner.
   {
