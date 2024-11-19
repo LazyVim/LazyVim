@@ -1,5 +1,16 @@
 # Changelog
 
+## [13.5.1](https://github.com/LazyVim/LazyVim/compare/v13.5.0...v13.5.1) (2024-11-19)
+
+
+### Bug Fixes
+
+* **copilot:** work-around to get copilot working again on nightly ([5961528](https://github.com/LazyVim/LazyVim/commit/59615281f80f68fb91a9e428835c8164a6a6f99f))
+* **extras:** add blink.cmp integration for SQL extra ([#4833](https://github.com/LazyVim/LazyVim/issues/4833)) ([0bb1da6](https://github.com/LazyVim/LazyVim/commit/0bb1da6d57a32495ed4159f8933d074674066d20))
+* **snacks:** alignment of header ([4df9392](https://github.com/LazyVim/LazyVim/commit/4df9392cb8c597193411b668d49a3882941e816b))
+* **snacks:** cleaner way to adjust keys preset ([9c31004](https://github.com/LazyVim/LazyVim/commit/9c310043657fc11db0946ca4a328f29941b72b02))
+* **snacks:** make sure early notifications show up in noice ([b873f9a](https://github.com/LazyVim/LazyVim/commit/b873f9a7e7ca77f329b40b17741ee244520a1306))
+
 ## [13.5.0](https://github.com/LazyVim/LazyVim/compare/v13.4.0...v13.5.0) (2024-11-18)
 
 
