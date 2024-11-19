@@ -1,5 +1,12 @@
 # Changelog
 
+## [13.5.2](https://github.com/LazyVim/LazyVim/compare/v13.5.1...v13.5.2) (2024-11-19)
+
+
+### Bug Fixes
+
+* **keymaps:** `gitbrowse` also in Visual mode ([#4818](https://github.com/LazyVim/LazyVim/issues/4818)) ([86dc548](https://github.com/LazyVim/LazyVim/commit/86dc548ff9564a37524c2f9259eeb8603a70d5d5))
+
 ## [13.5.1](https://github.com/LazyVim/LazyVim/compare/v13.5.0...v13.5.1) (2024-11-19)
 
 
