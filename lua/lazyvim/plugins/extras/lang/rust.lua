@@ -50,7 +50,7 @@ return {
           vim.keymap.set("n", "<leader>co", function() vim.cmd.RustLsp("openDocs") end, { desc = "Open Docs (Rust)", buffer = bufnr })
           vim.keymap.set("n", "<leader>cO", function() vim.cmd.RustLsp("openCargo") end, { desc = "Open Cargo.toml (Rust)", buffer = bufnr })
           vim.keymap.set("n", "<leader>cp", function() vim.cmd.RustLsp("parentModule") end, { desc = "Open Parent Module (Rust)", buffer = bufnr })
-          vim.keymap.set("n", "<leader>dr", function() vim.cmd.RustLsp("debuggables") end, { desc = "Debuggables (Rust)", buffer = bufnr })
+          vim.keymap.set("n", "<leader>dR", function() vim.cmd.RustLsp("debuggables") end, { desc = "Debuggables (Rust)", buffer = bufnr })
         end,
         default_settings = {
           -- rust-analyzer language server configuration
