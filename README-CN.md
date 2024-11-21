@@ -120,6 +120,7 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 ## 📂 文件结构
 
 config 下的文件会在适当的时候被自动加载，所以你不需要手动引入这些文件。
+
 **LazyVim** 带有一组默认配置文件，这些文件会在您的配置**之前**被加载。
 请看[这里](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
 
