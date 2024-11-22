@@ -106,14 +106,13 @@ return {
         json = "json",
         lua = "lua",
         markdown = "markdown",
-        python = "python",
         sass = "css",
         scss = "css",
-        yaml = "yaml",
       },
       groups = {
         default = {
           augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
+          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
           augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
           ordinal_numbers,
@@ -124,25 +123,14 @@ return {
           logical_alias,
         },
         vue = {
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
-          augend.constant.alias.bool, -- boolean value (true <-> false)
-          logical_alias,
           augend.constant.new({ elements = { "let", "const" } }),
           augend.hexcolor.new({ case = "lower" }),
           augend.hexcolor.new({ case = "upper" }),
         },
         typescript = {
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
-          augend.constant.alias.bool, -- boolean value (true <-> false)
-          logical_alias,
           augend.constant.new({ elements = { "let", "const" } }),
         },
-        yaml = {
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
-          augend.constant.alias.bool, -- boolean value (true <-> false)
-        },
         css = {
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.hexcolor.new({
             case = "lower",
           }),
@@ -154,27 +142,25 @@ return {
           augend.misc.alias.markdown_header,
         },
         json = {
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
           augend.semver.alias.semver, -- versioning (v1.1.2)
         },
         lua = {
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
-          augend.constant.alias.bool, -- boolean value (true <-> false)
           augend.constant.new({
             elements = { "and", "or" },
             word = true, -- if false, "sand" is incremented into "sor", "doctor" into "doctand", etc.
             cyclic = true, -- "or" is incremented into "and".
           }),
         },
-        python = {
-          augend.integer.alias.decimal_int, -- nonnegative and negative decimal number
-          capitalized_boolean,
-          logical_alias,
-        },
       },
     }
   end,
   config = function(_, opts)
+    -- copy defaults to each group
+    for name, group in pairs(opts.groups) do
+      if name ~= "default" then
+        vim.list_extend(group, opts.groups.default)
+      end
+    end
     require("dial.config").augends:register_group(opts.groups)
     vim.g.dials_by_ft = opts.dials_by_ft
   end,
