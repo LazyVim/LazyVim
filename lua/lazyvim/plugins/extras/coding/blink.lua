@@ -21,7 +21,12 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       -- add blink.compat to dependencies
-      -- { "saghen/blink.compat", opts = {} },
+      {
+        "saghen/blink.compat",
+        optional = true, -- make optional so it's only enabled if any extras need it
+        opts = {},
+        version = not vim.g.lazyvim_blink_main and "*",
+      },
     },
     event = "InsertEnter",
 
@@ -39,7 +44,6 @@ return {
       nerd_font_variant = "mono",
       windows = {
         autocomplete = {
-          -- draw = "reversed",
           winblend = vim.o.pumblend,
         },
         documentation = {
