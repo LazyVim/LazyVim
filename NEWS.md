@@ -1,5 +1,26 @@
 # What's new?
 
+## 13.x
+
+- **LazyVim** now uses `Snacks.dashboard` as the default dashboard.
+  Check the [docs](https://github.com/folke/snacks.nvim/blob/main/docs/dashboard.md),
+  for more information and examples.
+
+- A new [dashboard-nvim](https://github.com/nvimdev/dashboard-nvim) extra
+  is available for those who prefer the old dashboard.
+
+- Big new release with a lot of changes and improvements!
+
+- The biggest change is the move of a bunch of core features to
+  [snacks.nvim](https://github.com/folke/snacks.nvim) and fully
+  integrating it into **LazyVim**.
+
+- I highly suggest having a look at the **snacks.nvim** documentation
+  to see all the new features and improvements. Most important changes:
+  - `Snacks.notifier` for notifications instead of `nvim-notify`
+  - `Snacks.terminal` is similar to `lazyterm`, but has more features
+    and creates bottom splits by default (similar to the `edgy` integrating)
+
 ## 12.x
 
 - **Markdown Extra**: [headlines.nvim](https://github.com/lukas-reineke/headlines.nvim) has been removed in favor of [markdown.nvim](https://github.com/MeanderingProgrammer/markdown.nvim)

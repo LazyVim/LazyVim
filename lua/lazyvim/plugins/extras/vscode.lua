@@ -3,6 +3,7 @@ if not vim.g.vscode then
 end
 
 local enabled = {
+  "LazyVim",
   "dial.nvim",
   "flit.nvim",
   "lazy.nvim",
@@ -15,10 +16,10 @@ local enabled = {
   "nvim-treesitter",
   "nvim-treesitter-textobjects",
   "nvim-ts-context-commentstring",
+  "snacks.nvim",
   "ts-comments.nvim",
   "vim-repeat",
   "yanky.nvim",
-  "LazyVim",
 }
 
 local Config = require("lazy.core.config")
@@ -33,10 +34,14 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimKeymapsDefaults",
   callback = function()
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
-    vim.keymap.set("n", "<leader>/", [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
-    vim.keymap.set("n", "<leader>ss", [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
+    vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
+    vim.keymap.set("n", "<leader>ss", [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
   end,
 })
+
+function LazyVim.terminal()
+  require("vscode").action("workbench.action.terminal.toggleTerminal")
+end
 
 return {
   {

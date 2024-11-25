@@ -122,6 +122,25 @@ return {
     end,
   },
 
+  -- blink.cmp integration
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    opts = {
+      sources = {
+        completion = {
+          enabled_providers = { "dadbod" },
+        },
+        providers = {
+          dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        },
+      },
+    },
+    dependencies = {
+      "kristijanhusak/vim-dadbod-completion",
+    },
+  },
+
   -- Linters & formatters
   {
     "williamboman/mason.nvim",
