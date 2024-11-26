@@ -216,6 +216,7 @@ return {
             "mason",
             "neo-tree",
             "notify",
+            "snacks_dashboard",
             "snacks_notif",
             "snacks_terminal",
             "snacks_win",
