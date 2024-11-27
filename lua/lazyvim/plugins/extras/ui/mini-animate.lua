@@ -3,7 +3,8 @@ return {
   "echasnovski/mini.animate",
   recommended = true,
   event = "VeryLazy",
-  opts = function()
+  cond = vim.g.neovide == nil,
+  opts = function(_, opts)
     -- don't use animate when scrolling with the mouse
     local mouse_scrolled = false
     for _, scroll in ipairs({ "Up", "Down" }) do
@@ -32,7 +33,7 @@ return {
     }):map("<leader>ua")
 
     local animate = require("mini.animate")
-    return {
+    return vim.tbl_deep_extend("force", opts, {
       resize = {
         timing = animate.gen_timing.linear({ duration = 50, unit = "total" }),
       },
@@ -48,6 +49,6 @@ return {
           end,
         }),
       },
-    }
+    })
   end,
 }
