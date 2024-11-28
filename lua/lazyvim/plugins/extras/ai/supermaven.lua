@@ -64,8 +64,10 @@ return {
   {
     "saghen/blink.cmp",
     optional = true,
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {
-      windows = { ghost_text = { enabled = false } },
+      completion = { ghost_text = { enabled = false } },
     },
     dependencies = {
       {

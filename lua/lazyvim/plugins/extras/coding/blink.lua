@@ -42,12 +42,13 @@ return {
       -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
       -- adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
-      windows = {
-        autocomplete = {
+      completion = {
+        menu = {
           winblend = vim.o.pumblend,
         },
         documentation = {
           auto_show = true,
+          auto_show_delay_ms = 200,
         },
         ghost_text = {
           enabled = vim.g.ai_cmp,
