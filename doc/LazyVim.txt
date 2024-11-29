@@ -1,4 +1,4 @@
-*LazyVim.txt*             For Neovim             Last change: 2024 November 28
+*LazyVim.txt*             For Neovim             Last change: 2024 November 29
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
