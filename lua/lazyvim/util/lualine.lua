@@ -101,7 +101,7 @@ function M.pretty_path(opts)
     local root = LazyVim.root.get({ normalize = true })
     local cwd = LazyVim.root.cwd()
 
-    -- original path is preserved to provide user with expected result of pretty_path, not a normalized one, 
+    -- original path is preserved to provide user with expected result of pretty_path, not a normalized one,
     -- which might be confusing
     local norm_path = path
 
