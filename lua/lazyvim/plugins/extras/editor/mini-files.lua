@@ -137,10 +137,10 @@ return {
         callback = function(args)
           local buf_id = args.data.buf_id
 
-          vim.keymap.set("n", "<M-l>", open_in_window, { buffer = buf_id, desc = "Open file in window" })
+          vim.keymap.set("n", "<M-l>", open_in_window, { buffer = buf_id, desc = "Open in picked window" })
           vim.keymap.set("n", "<M-L>", function()
             open_in_window(true)
-          end, { buffer = buf_id, desc = "Open file in window and close" })
+          end, { buffer = buf_id, desc = "Open in picked window and close" })
         end,
       })
     end
