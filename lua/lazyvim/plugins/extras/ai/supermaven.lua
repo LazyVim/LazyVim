@@ -44,38 +44,19 @@ return {
   },
 
   -- blink.cmp integration
-  --
-  -- FIXME: this currently doesn't work properly
-  -- {
-  --   "saghen/blink.cmp",
-  --   optional = true,
-  --   opts = {
-  --     sources = {
-  --       compat = vim.g.ai_cmp and { "supermaven" } or nil,
-  --     },
-  --   },
-  --   dependencies = {
-  --     "supermaven-nvim",
-  --     vim.g.ai_cmp and "saghen/blink.compat" or nil,
-  --   },
-  -- },
-  --
-  -- Disabble cmp integration for now
   {
     "saghen/blink.cmp",
     optional = true,
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      completion = { ghost_text = { enabled = false } },
+      sources = {
+        compat = vim.g.ai_cmp and { "supermaven" } or nil,
+      },
     },
     dependencies = {
-      {
-        "supermaven-nvim",
-        opts = {
-          disable_inline_completion = false,
-        },
-      },
+      "supermaven-nvim",
+      vim.g.ai_cmp and "saghen/blink.compat" or nil,
     },
   },
 
