@@ -50,8 +50,8 @@ return {
     opts = {
       sources = {
         compat = { "supermaven" },
+        providers = { supermaven = { kind = "Supermaven" } },
       },
-      providers = { supermaven = { kind = "Supermaven" } },
     },
   } or nil,
 

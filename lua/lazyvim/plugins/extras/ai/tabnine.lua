@@ -41,8 +41,8 @@ return {
     opts = {
       sources = {
         compat = { "cmp_tabnine" },
+        providers = { cmp_tabnine = { kind = "TabNine" } },
       },
-      providers = { cmp_tabnine = { kind = "TabNine" } },
     },
   },
 
