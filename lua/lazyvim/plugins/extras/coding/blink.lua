@@ -44,7 +44,6 @@ return {
       nerd_font_variant = "mono",
       completion = {
         menu = {
-          winblend = vim.o.pumblend,
           draw = {
             override_kind_by_source_name = {},
             treesitter = true,
