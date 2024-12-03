@@ -94,31 +94,23 @@ return {
     },
   },
 
-  -- blink.cmp
-  {
+  vim.g.ai_cmp and {
     "saghen/blink.cmp",
     optional = true,
-    dependencies = {
-      {
-        "giuxtaposition/blink-cmp-copilot",
-        enabled = vim.g.ai_cmp, -- only enable if needed
-        specs = {
-          {
-            "blink.cmp",
-            optional = true,
-            opts = {
-              sources = {
-                providers = {
-                  copilot = { name = "copilot", module = "blink-cmp-copilot" },
-                },
-                completion = {
-                  enabled_providers = { "copilot" },
-                },
-              },
-            },
+    dependencies = { "giuxtaposition/blink-cmp-copilot" },
+    opts = {
+      sources = {
+        completion = {
+          enabled_providers = { "copilot" },
+        },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            kind = "Copilot",
           },
         },
       },
     },
-  },
+  } or nil,
 }

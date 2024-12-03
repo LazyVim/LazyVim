@@ -55,17 +55,15 @@ return {
     end,
   },
 
-  {
+  vim.g.ai_cmp and {
     "saghen/blink.cmp",
     optional = true,
+    dependencies = { "codeium.nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = vim.g.ai_cmp and { "codeium" } or nil,
+        compat = { "codeium" },
+        providers = { codeium = { kind = "Codeium" } },
       },
     },
-    dependencies = {
-      "codeium.nvim",
-      vim.g.ai_cmp and "saghen/blink.compat" or nil,
-    },
-  },
+  } or nil,
 }

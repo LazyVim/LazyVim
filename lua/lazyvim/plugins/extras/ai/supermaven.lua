@@ -43,22 +43,17 @@ return {
     end,
   },
 
-  -- blink.cmp integration
-  {
+  vim.g.ai_cmp and {
     "saghen/blink.cmp",
     optional = true,
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
+    dependencies = { "supermaven-nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = vim.g.ai_cmp and { "supermaven" } or nil,
+        compat = { "supermaven" },
+        providers = { supermaven = { kind = "Supermaven" } },
       },
     },
-    dependencies = {
-      "supermaven-nvim",
-      vim.g.ai_cmp and "saghen/blink.compat" or nil,
-    },
-  },
+  } or nil,
 
   {
     "nvim-lualine/lualine.nvim",
