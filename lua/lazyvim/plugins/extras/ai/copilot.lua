@@ -94,31 +94,37 @@ return {
     },
   },
 
-  -- blink.cmp
-  {
+  vim.g.ai_cmp and {
     "saghen/blink.cmp",
     optional = true,
-    dependencies = {
-      {
-        "giuxtaposition/blink-cmp-copilot",
-        enabled = vim.g.ai_cmp, -- only enable if needed
-        specs = {
-          {
-            "blink.cmp",
-            optional = true,
-            opts = {
-              sources = {
-                providers = {
-                  copilot = { name = "copilot", module = "blink-cmp-copilot" },
-                },
-                completion = {
-                  enabled_providers = { "copilot" },
-                },
+    dependencies = { "giuxtaposition/blink-cmp-copilot" },
+    opts = {
+      sources = {
+        completion = {
+          enabled_providers = { "copilot" },
+        },
+        providers = {
+          copilot = { name = "copilot", module = "blink-cmp-copilot" },
+        },
+      },
+      completion = {
+        menu = {
+          draw = {
+            components = {
+              kind = {
+                text = function(ctx)
+                  return ctx.source_name == "copilot" and "Copilot" or ctx.kind
+                end,
+                highlight = function(ctx)
+                  return ctx.source_name == "copilot" and "BlinkCmpKindCopilot"
+                    or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
+                    or ("BlinkCmpKind" .. ctx.kind)
+                end,
               },
             },
           },
         },
       },
     },
-  },
+  } or nil,
 }

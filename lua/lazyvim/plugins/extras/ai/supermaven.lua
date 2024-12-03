@@ -43,22 +43,34 @@ return {
     end,
   },
 
-  -- blink.cmp integration
-  {
+  vim.g.ai_cmp and {
     "saghen/blink.cmp",
     optional = true,
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
+    dependencies = { "supermaven-nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = vim.g.ai_cmp and { "supermaven" } or nil,
+        compat = { "supermaven" },
+      },
+      completion = {
+        menu = {
+          draw = {
+            components = {
+              kind = {
+                text = function(ctx)
+                  return ctx.source_name == "supermaven" and "Supermaven" or ctx.kind
+                end,
+                highlight = function(ctx)
+                  return ctx.source_name == "supermaven" and "BlinkCmpKindSupermaven"
+                    or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
+                    or ("BlinkCmpKind" .. ctx.kind)
+                end,
+              },
+            },
+          },
+        },
       },
     },
-    dependencies = {
-      "supermaven-nvim",
-      vim.g.ai_cmp and "saghen/blink.compat" or nil,
-    },
-  },
+  } or nil,
 
   {
     "nvim-lualine/lualine.nvim",

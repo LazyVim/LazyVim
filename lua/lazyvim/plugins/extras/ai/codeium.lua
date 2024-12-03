@@ -55,17 +55,32 @@ return {
     end,
   },
 
-  {
+  vim.g.ai_cmp and {
     "saghen/blink.cmp",
     optional = true,
+    dependencies = { "codeium.nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = vim.g.ai_cmp and { "codeium" } or nil,
+        compat = { "codeium" },
+      },
+      completion = {
+        menu = {
+          draw = {
+            components = {
+              kind = {
+                text = function(ctx)
+                  return ctx.source_name == "codeium" and "Codeium" or ctx.kind
+                end,
+                highlight = function(ctx)
+                  return ctx.source_name == "codeium" and "BlinkCmpKindCodeium"
+                    or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
+                    or ("BlinkCmpKind" .. ctx.kind)
+                end,
+              },
+            },
+          },
+        },
       },
     },
-    dependencies = {
-      "codeium.nvim",
-      vim.g.ai_cmp and "saghen/blink.compat" or nil,
-    },
-  },
+  } or nil,
 }
