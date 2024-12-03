@@ -63,13 +63,7 @@ return {
       sources = {
         compat = { "codeium" },
       },
-      completion = {
-        menu = {
-          draw = {
-            override_kind_by_source_name = { codeium = "Codeium" },
-          },
-        },
-      },
+      providers = { codeium = { kind = "Codeium" } },
     },
   } or nil,
 }

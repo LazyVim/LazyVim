@@ -42,13 +42,7 @@ return {
       sources = {
         compat = { "cmp_tabnine" },
       },
-      completion = {
-        menu = {
-          draw = {
-            override_kind_by_source_name = { cmp_tabnine = "TabNine" },
-          },
-        },
-      },
+      providers = { cmp_tabnine = { kind = "TabNine" } },
     },
   },
 

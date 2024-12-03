@@ -104,13 +104,10 @@ return {
           enabled_providers = { "copilot" },
         },
         providers = {
-          copilot = { name = "copilot", module = "blink-cmp-copilot" },
-        },
-      },
-      completion = {
-        menu = {
-          draw = {
-            override_kind_by_source_name = { copilot = "Copilot" },
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            kind = "Copilot",
           },
         },
       },

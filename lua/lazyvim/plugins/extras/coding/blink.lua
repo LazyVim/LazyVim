@@ -45,7 +45,6 @@ return {
       completion = {
         menu = {
           draw = {
-            override_kind_by_source_name = {},
             treesitter = true,
           },
         },
@@ -96,22 +95,22 @@ return {
         end
       end
 
-      local override_kind_by_source_name = opts.completion.menu.draw.override_kind_by_source_name or {}
-      local kind = {
-        text = function(ctx)
-          local kind_override = override_kind_by_source_name[ctx.source_name]
-          return kind_override and kind_override or ctx.kind
-        end,
-        highlight = function(ctx)
-          local kind_override = override_kind_by_source_name[ctx.source_name]
-          return kind_override and "BlinkCmpKind" .. kind_override
-            or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
-            or ("BlinkCmpKind" .. ctx.kind)
-        end,
-      }
+      -- check if we need to override symbol kinds
+      for _, provider in pairs(opts.sources.providers or {}) do
+        ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
+        if provider.kind then
+          require("blink.cmp.types").CompletionItemKind[provider.kind] = provider.kind
+          ---@param ctx blink.cmp.Context
+          ---@param items blink.cmp.CompletionItem[]
+          provider.transform_items = function(ctx, items)
+            for _, item in ipairs(items) do
+              item.kind = provider.kind or item.kind
+            end
+            return items
+          end
+        end
+      end
 
-      opts.completion.menu.draw.components =
-        vim.tbl_deep_extend("force", { kind = kind }, opts.completion.menu.draw.components or {})
       require("blink.cmp").setup(opts)
     end,
   },

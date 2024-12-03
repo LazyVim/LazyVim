@@ -51,13 +51,7 @@ return {
       sources = {
         compat = { "supermaven" },
       },
-      completion = {
-        menu = {
-          draw = {
-            override_kind_by_source_name = { supermaven = "Supermaven" },
-          },
-        },
-      },
+      providers = { supermaven = { kind = "Supermaven" } },
     },
   } or nil,
 
