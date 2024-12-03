@@ -54,18 +54,7 @@ return {
       completion = {
         menu = {
           draw = {
-            components = {
-              kind = {
-                text = function(ctx)
-                  return ctx.source_name == "supermaven" and "Supermaven" or ctx.kind
-                end,
-                highlight = function(ctx)
-                  return ctx.source_name == "supermaven" and "BlinkCmpKindSupermaven"
-                    or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
-                    or ("BlinkCmpKind" .. ctx.kind)
-                end,
-              },
-            },
+            override_kind_by_source_name = { supermaven = "Supermaven" },
           },
         },
       },

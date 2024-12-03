@@ -110,18 +110,7 @@ return {
       completion = {
         menu = {
           draw = {
-            components = {
-              kind = {
-                text = function(ctx)
-                  return ctx.source_name == "copilot" and "Copilot" or ctx.kind
-                end,
-                highlight = function(ctx)
-                  return ctx.source_name == "copilot" and "BlinkCmpKindCopilot"
-                    or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
-                    or ("BlinkCmpKind" .. ctx.kind)
-                end,
-              },
-            },
+            override_kind_by_source_name = { copilot = "Copilot" },
           },
         },
       },

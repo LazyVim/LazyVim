@@ -45,7 +45,10 @@ return {
       completion = {
         menu = {
           winblend = vim.o.pumblend,
-          draw = { treesitter = true },
+          draw = {
+            override_kind_by_source_name = {},
+            treesitter = true,
+          },
         },
         documentation = {
           auto_show = true,
@@ -93,6 +96,23 @@ return {
           table.insert(enabled, source)
         end
       end
+
+      local override_kind_by_source_name = opts.completion.menu.draw.override_kind_by_source_name or {}
+      local kind = {
+        text = function(ctx)
+          local kind_override = override_kind_by_source_name[ctx.source_name]
+          return kind_override and kind_override or ctx.kind
+        end,
+        highlight = function(ctx)
+          local kind_override = override_kind_by_source_name[ctx.source_name]
+          return kind_override and "BlinkCmpKind" .. kind_override
+            or require("blink.cmp.completion.windows.render.tailwind").get_hl(ctx)
+            or ("BlinkCmpKind" .. ctx.kind)
+        end,
+      }
+
+      opts.completion.menu.draw.components =
+        vim.tbl_deep_extend("force", { kind = kind }, opts.completion.menu.draw.components or {})
       require("blink.cmp").setup(opts)
     end,
   },
