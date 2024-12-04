@@ -46,6 +46,22 @@ return {
     },
     config = function(_, opts)
       require("bufferline").setup(opts)
+
+      -- Add Keymap to Show/Hide Bufferline
+      Snacks.toggle({
+        name = "Bufferline",
+        get = function()
+          return vim.o.showtabline == 1 or vim.o.showtabline == 2
+        end,
+        set = function(state)
+          if vim.o.showtabline == 2 then
+            vim.o.showtabline = 0
+          else
+            vim.o.showtabline = 2
+          end
+        end,
+      }):map("<leader>uy")
+
       -- Fix bufferline when restoring a session
       vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
         callback = function()
