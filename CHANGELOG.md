@@ -1,5 +1,28 @@
 # Changelog
 
+## [13.7.0](https://github.com/LazyVim/LazyVim/compare/v13.6.0...v13.7.0) (2024-12-05)
+
+
+### Features
+
+* **blink:** enabled treesitter highlighting ([0a9447c](https://github.com/LazyVim/LazyVim/commit/0a9447c1b1776c2d8d7b7d495538ddfab7c6cd08))
+* **extras.ai:** blink.cmp integration and kind overrides for menu drawing ([#4942](https://github.com/LazyVim/LazyVim/issues/4942)) ([f841ecf](https://github.com/LazyVim/LazyVim/commit/f841ecf6bdde98a0983e44171b1ad8513e159e29))
+* **rust:** add bacon-ls and improve debugging ([#3212](https://github.com/LazyVim/LazyVim/issues/3212)) ([ea794ff](https://github.com/LazyVim/LazyVim/commit/ea794ffd94adeb2b1d2870ed97dbd3f000d911b3))
+* **snacks:** silence copy url keymap ([#4939](https://github.com/LazyVim/LazyVim/issues/4939)) ([03e203b](https://github.com/LazyVim/LazyVim/commit/03e203bfbe1e5de38cfc0082e5d1b720cab83c0e))
+* **toggle:** added leader-A to toggle tabline. Closes [#4951](https://github.com/LazyVim/LazyVim/issues/4951) ([8232651](https://github.com/LazyVim/LazyVim/commit/8232651c4a4a80da34f8b6c1742b04144ae4b959))
+
+
+### Bug Fixes
+
+* **blink:** update config for latest changes ([#4953](https://github.com/LazyVim/LazyVim/issues/4953)) ([090ca75](https://github.com/LazyVim/LazyVim/commit/090ca75d3b326280a67e727ef77e15920a90e3c9))
+* **copilot:** CopilotChat.nvim has moved to main ([#4931](https://github.com/LazyVim/LazyVim/issues/4931)) ([0d6026a](https://github.com/LazyVim/LazyVim/commit/0d6026a3e8a255cf825ad293de101bc1e1a667eb))
+* **extras.treesitter-context:** change event back to `LazyFile` ([#4940](https://github.com/LazyVim/LazyVim/issues/4940)) ([83017ff](https://github.com/LazyVim/LazyVim/commit/83017ff28afa8b8ddf9254564d8b4a9c96ec3f7d))
+* **supermaven:** blink.cmp integration ([#4941](https://github.com/LazyVim/LazyVim/issues/4941)) ([d714711](https://github.com/LazyVim/LazyVim/commit/d71471151b8906155e048ea3d3fe2fa7d651990e))
+* **tex:** specify filetype for &lt;localleader&gt;l ([#4905](https://github.com/LazyVim/LazyVim/issues/4905)) ([12e3752](https://github.com/LazyVim/LazyVim/commit/12e37529e718b926e7513d0397e32771aeb6e049))
+* **ui:** actually disable mini-indentscope on snacks_dashboard ([#4947](https://github.com/LazyVim/LazyVim/issues/4947)) ([bfe29fb](https://github.com/LazyVim/LazyVim/commit/bfe29fb01330d2bfdfe14582133907217f4b8192))
+* **ui:** disable mini.indentscope on `ft=snacks_dashboard` ([#4928](https://github.com/LazyVim/LazyVim/issues/4928)) ([4bf3a39](https://github.com/LazyVim/LazyVim/commit/4bf3a392234f4c4421af644683d95d8aab945382))
+* **ui:** properly clear maximize state on exit. See [#4934](https://github.com/LazyVim/LazyVim/issues/4934) ([9ec253b](https://github.com/LazyVim/LazyVim/commit/9ec253b9b6bf9673f610035d741a345d6be7a44f))
+
 ## [13.6.0](https://github.com/LazyVim/LazyVim/compare/v13.5.3...v13.6.0) (2024-12-01)
 
 
