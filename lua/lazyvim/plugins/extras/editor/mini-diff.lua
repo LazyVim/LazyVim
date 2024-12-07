@@ -35,10 +35,10 @@ return {
       Snacks.toggle({
         name = "Mini Diff Signs",
         get = function()
-          return vim.b.minidiff_disable ~= true
+          return vim.g.minidiff_disable ~= true
         end,
         set = function(state)
-          vim.b.minidiff_disable = not state
+          vim.g.minidiff_disable = not state
           if state then
             require("mini.diff").enable(0)
           else
