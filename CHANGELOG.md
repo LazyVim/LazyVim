@@ -1,5 +1,20 @@
 # Changelog
 
+## [13.8.0](https://github.com/LazyVim/LazyVim/compare/v13.7.0...v13.8.0) (2024-12-07)
+
+
+### Features
+
+* **git:** added toggles for gitsigns.nvim and mini.diff ([2ebba15](https://github.com/LazyVim/LazyVim/commit/2ebba15e1274f5437a418ddacfe9dbf342fd8a18))
+
+
+### Bug Fixes
+
+* **dot:** kitty ft with bash treesitter highlights ([7ef2dfd](https://github.com/LazyVim/LazyVim/commit/7ef2dfd3ba9a3dffaa8c57c1bb5e130b9aa74217))
+* **keymaps:** toggle name ([b2f7505](https://github.com/LazyVim/LazyVim/commit/b2f750558a3737879f8151e741e7a3988886e37f))
+* **mini.diff:** toggle ([3f4b1ff](https://github.com/LazyVim/LazyVim/commit/3f4b1ff00364d089e19f4b3c738fd5298243fadb))
+* **rust:** only use mason.nvim if it is present ([#4963](https://github.com/LazyVim/LazyVim/issues/4963)) ([5ddad99](https://github.com/LazyVim/LazyVim/commit/5ddad99bac203e87e6f78f3ab7567a49b0d1d8a6))
+
 ## [13.7.0](https://github.com/LazyVim/LazyVim/compare/v13.6.0...v13.7.0) (2024-12-05)
 
 
