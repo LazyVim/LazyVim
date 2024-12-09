@@ -1,5 +1,12 @@
 # Changelog
 
+## [13.8.1](https://github.com/LazyVim/LazyVim/compare/v13.8.0...v13.8.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* **autocmds:** remove snacks_win from close_with_q, since they have their own keymaps ([99c361f](https://github.com/LazyVim/LazyVim/commit/99c361f708924ddc63599115580bda537cc7f119))
+
 ## [13.8.0](https://github.com/LazyVim/LazyVim/compare/v13.7.0...v13.8.0) (2024-12-07)
 
 
