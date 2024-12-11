@@ -17,6 +17,7 @@ return {
     opts_extend = {
       "sources.completion.enabled_providers",
       "sources.compat",
+      "sources.default",
     },
     dependencies = {
       "rafamadriz/friendly-snippets",
@@ -70,10 +71,7 @@ return {
         -- adding any nvim-cmp sources here will enable them
         -- with blink.compat
         compat = {},
-        completion = {
-          -- remember to enable your providers here
-          enabled_providers = { "lsp", "path", "snippets", "buffer" },
-        },
+        default = { "lsp", "path", "snippets", "buffer" },
       },
 
       keymap = {
@@ -87,7 +85,7 @@ return {
     ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
     config = function(_, opts)
       -- setup compat sources
-      local enabled = opts.sources.completion.enabled_providers
+      local enabled = opts.sources.default
       for _, source in ipairs(opts.sources.compat or {}) do
         opts.sources.providers[source] = vim.tbl_deep_extend(
           "force",
@@ -97,6 +95,12 @@ return {
         if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
           table.insert(enabled, source)
         end
+      end
+
+      -- TODO: remove when blink made a new release > 0.7.6
+      if not vim.g.lazyvim_blink_main then
+        opts.sources.completion = opts.sources.completion or {}
+        opts.sources.completion.enabled_providers = enabled
       end
 
       -- check if we need to override symbol kinds
@@ -136,15 +140,9 @@ return {
     "saghen/blink.cmp",
     opts = {
       sources = {
-        completion = {
-          -- add lazydev to your completion providers
-          enabled_providers = { "lazydev" },
-        },
+        -- add lazydev to your completion providers
+        default = { "lazydev" },
         providers = {
-          lsp = {
-            -- dont show LuaLS require statements when lazydev has items
-            fallback_for = { "lazydev" },
-          },
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",

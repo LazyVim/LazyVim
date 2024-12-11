@@ -100,9 +100,7 @@ return {
     dependencies = { "giuxtaposition/blink-cmp-copilot" },
     opts = {
       sources = {
-        completion = {
-          enabled_providers = { "copilot" },
-        },
+        default = { "copilot" },
         providers = {
           copilot = {
             name = "copilot",
