@@ -24,11 +24,4 @@ function M.foldexpr()
   return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
 end
 
----@return {fg?:string}?
-function M.fg(name)
-  local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
-  local fg = hl and hl.fg or hl.foreground
-  return fg and { fg = string.format("#%06x", fg) } or nil
-end
-
 return M
