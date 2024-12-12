@@ -45,8 +45,8 @@ vim.g.snacks_animate = false
 
 ### Keymaps
 
-- `<leader>z` to toggle [zen mode](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md)
-- `<leader>Z` to toggle [zoom mode](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md)
+- `<leader>uz` to toggle [zen mode](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md)
+- `<leader>uZ` & `<leader>wm` to toggle [zoom mode](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md)
 - `<leader>uD` to toggle [dimming](https://github.com/folke/snacks.nvim/blob/main/docs/dim.md)
 - `<leader>ua` to toggle [animations](https://github.com/folke/snacks.nvim/blob/main/docs/animate.md)
 - `<leader>uS` to toggle [scroll](https://github.com/folke/snacks.nvim/blob/main/docs/scroll.md)
