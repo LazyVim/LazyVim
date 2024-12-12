@@ -94,12 +94,6 @@ return {
       end
       opts.sources.compat = nil
 
-      -- TODO: remove when blink made a new release > 0.7.6
-      if not vim.g.lazyvim_blink_main then
-        opts.sources.completion = opts.sources.completion or {}
-        opts.sources.completion.enabled_providers = enabled
-      end
-
       -- check if we need to override symbol kinds
       for _, provider in pairs(opts.sources.providers or {}) do
         ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
