@@ -34,6 +34,7 @@ return {
         notifier = { enabled = true },
         quickfile = { enabled = true },
         statuscolumn = { enabled = false }, -- we set this in options.lua
+        scroll = { enabled = true },
         indent = { enabled = true },
         terminal = {
           win = {
