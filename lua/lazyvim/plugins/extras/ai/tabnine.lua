@@ -40,8 +40,14 @@ return {
     dependencies = { "tzachar/cmp-tabnine", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = { "cmp_tabnine" },
-        providers = { cmp_tabnine = { kind = "TabNine" } },
+        default = { "cmp_tabnine" },
+        providers = {
+          cmp_tabnine = {
+            name = "cmp_tabnine",
+            module = "blink.compat.source",
+            kind = "TabNine",
+          },
+        },
       },
     },
   },

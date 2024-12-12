@@ -61,8 +61,14 @@ return {
     dependencies = { "codeium.nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = { "codeium" },
-        providers = { codeium = { kind = "Codeium" } },
+        default = { "codeium" },
+        providers = {
+          codeium = {
+            name = "codeium",
+            module = "blink.compat.source",
+            kind = "Codeium",
+          },
+        },
       },
     },
   } or nil,

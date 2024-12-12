@@ -49,8 +49,14 @@ return {
     dependencies = { "supermaven-nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = { "supermaven" },
-        providers = { supermaven = { kind = "Supermaven" } },
+        default = { "supermaven" },
+        providers = {
+          supermaven = {
+            name = "supermaven",
+            module = "blink.compat.source",
+            kind = "Supermaven",
+          },
+        },
       },
     },
   } or nil,

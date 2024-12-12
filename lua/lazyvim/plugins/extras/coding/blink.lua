@@ -12,7 +12,6 @@ return {
     build = vim.g.lazyvim_blink_main and "cargo build --release",
     opts_extend = {
       "sources.completion.enabled_providers",
-      "sources.compat",
       "sources.default",
     },
     dependencies = {
@@ -64,9 +63,6 @@ return {
       -- signature = { enabled = true },
 
       sources = {
-        -- adding any nvim-cmp sources here will enable them
-        -- with blink.compat
-        compat = {},
         default = { "lsp", "path", "snippets", "buffer" },
       },
 
@@ -80,18 +76,7 @@ return {
     },
     ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
     config = function(_, opts)
-      -- setup compat sources
       local enabled = opts.sources.default
-      for _, source in ipairs(opts.sources.compat or {}) do
-        opts.sources.providers[source] = vim.tbl_deep_extend(
-          "force",
-          { name = source, module = "blink.compat.source" },
-          opts.sources.providers[source] or {}
-        )
-        if type(enabled) == "table" and not vim.tbl_contains(enabled, source) then
-          table.insert(enabled, source)
-        end
-      end
 
       -- TODO: remove when blink made a new release > 0.7.6
       if not vim.g.lazyvim_blink_main then
