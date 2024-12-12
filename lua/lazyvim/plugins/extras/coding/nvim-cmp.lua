@@ -48,6 +48,7 @@ return {
           end,
         }),
         sources = cmp.config.sources({
+          { name = "lazydev" },
           { name = "nvim_lsp" },
           { name = "path" },
         }, {
@@ -86,19 +87,9 @@ return {
     main = "lazyvim.util.cmp",
   },
 
-  -- Add lazydev source to cmp
-  {
-    "hrsh7th/nvim-cmp",
-    optional = true,
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "lazydev", group_index = 0 })
-    end,
-  },
-
   -- snippets
   {
     "nvim-cmp",
-    optional = true,
     dependencies = {
       {
         "garymjr/nvim-snippets",
