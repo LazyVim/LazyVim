@@ -92,6 +92,7 @@ return {
           table.insert(enabled, source)
         end
       end
+      opts.sources.compat = nil
 
       -- TODO: remove when blink made a new release > 0.7.6
       if not vim.g.lazyvim_blink_main then
