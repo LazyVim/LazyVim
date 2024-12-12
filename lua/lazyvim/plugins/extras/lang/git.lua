@@ -10,6 +10,7 @@ return {
 
   {
     "nvim-cmp",
+    optional = true,
     dependencies = {
       { "petertriho/cmp-git", opts = {} },
     },
