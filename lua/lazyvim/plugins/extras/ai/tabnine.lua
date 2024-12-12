@@ -14,7 +14,7 @@ return {
   },
 
   {
-    "nvim-cmp",
+    "hrsh7th/nvim-cmp",
     optional = true,
     dependencies = { "tzachar/cmp-tabnine" },
     ---@param opts cmp.ConfigSchema

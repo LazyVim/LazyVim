@@ -62,7 +62,7 @@ return {
       and {
         -- copilot cmp source
         {
-          "nvim-cmp",
+          "hrsh7th/nvim-cmp",
           optional = true,
           dependencies = { -- this will only be evaluated if nvim-cmp is enabled
             {
@@ -79,7 +79,7 @@ return {
               end,
               specs = {
                 {
-                  "nvim-cmp",
+                  "hrsh7th/nvim-cmp",
                   optional = true,
                   ---@param opts cmp.ConfigSchema
                   opts = function(_, opts)

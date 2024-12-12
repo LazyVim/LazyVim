@@ -89,7 +89,7 @@ return {
 
   -- snippets
   {
-    "nvim-cmp",
+    "hrsh7th/nvim-cmp",
     dependencies = {
       {
         "garymjr/nvim-snippets",
