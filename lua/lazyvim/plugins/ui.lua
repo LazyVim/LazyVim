@@ -105,6 +105,7 @@ return {
             { LazyVim.lualine.pretty_path() },
           },
           lualine_x = {
+            Snacks.profiler.status(),
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
