@@ -146,34 +146,30 @@ return {
     config = function(_, opts)
       -- Find the extra bundles that should be passed on the jdtls command-line
       -- if nvim-dap is enabled with java debug/test.
-      local mason_registry = require("mason-registry")
       local bundles = {} ---@type string[]
-      if
-        LazyVim.has("mason.nvim")
-        and opts.dap
-        and LazyVim.has("nvim-dap")
-        and mason_registry.is_installed("java-debug-adapter")
-      then
-        local java_dbg_pkg = mason_registry.get_package("java-debug-adapter")
-        local java_dbg_path = java_dbg_pkg:get_install_path()
-        local jar_patterns = {
-          java_dbg_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar",
-        }
-        -- java-test also depends on java-debug-adapter.
-        if opts.test and mason_registry.is_installed("java-test") then
-          local java_test_pkg = mason_registry.get_package("java-test")
-          local java_test_path = java_test_pkg:get_install_path()
-          vim.list_extend(jar_patterns, {
-            java_test_path .. "/extension/server/*.jar",
-          })
-        end
-        for _, jar_pattern in ipairs(jar_patterns) do
-          for _, bundle in ipairs(vim.split(vim.fn.glob(jar_pattern), "\n")) do
-            table.insert(bundles, bundle)
+      if LazyVim.has("mason.nvim") then
+        local mason_registry = require("mason-registry")
+        if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+          local java_dbg_pkg = mason_registry.get_package("java-debug-adapter")
+          local java_dbg_path = java_dbg_pkg:get_install_path()
+          local jar_patterns = {
+            java_dbg_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar",
+          }
+          -- java-test also depends on java-debug-adapter.
+          if opts.test and mason_registry.is_installed("java-test") then
+            local java_test_pkg = mason_registry.get_package("java-test")
+            local java_test_path = java_test_pkg:get_install_path()
+            vim.list_extend(jar_patterns, {
+              java_test_path .. "/extension/server/*.jar",
+            })
+          end
+          for _, jar_pattern in ipairs(jar_patterns) do
+            for _, bundle in ipairs(vim.split(vim.fn.glob(jar_pattern), "\n")) do
+              table.insert(bundles, bundle)
+            end
           end
         end
       end
-
       local function attach_jdtls()
         local fname = vim.api.nvim_buf_get_name(0)
 
@@ -245,45 +241,43 @@ return {
               },
             })
 
-            if
-              LazyVim.has("mason.nvim")
-              and opts.dap
-              and LazyVim.has("nvim-dap")
-              and mason_registry.is_installed("java-debug-adapter")
-            then
-              -- custom init for Java debugger
-              require("jdtls").setup_dap(opts.dap)
-              require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
+            if LazyVim.has("mason.nvim") then
+              local mason_registry = require("mason-registry")
+              if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
+                -- custom init for Java debugger
+                require("jdtls").setup_dap(opts.dap)
+                require("jdtls.dap").setup_dap_main_class_configs(opts.dap_main)
 
-              -- Java Test require Java debugger to work
-              if opts.test and mason_registry.is_installed("java-test") then
-                -- custom keymaps for Java test runner (not yet compatible with neotest)
-                wk.add({
-                  {
-                    mode = "n",
-                    buffer = args.buf,
-                    { "<leader>t", group = "test" },
+                -- Java Test require Java debugger to work
+                if opts.test and mason_registry.is_installed("java-test") then
+                  -- custom keymaps for Java test runner (not yet compatible with neotest)
+                  wk.add({
                     {
-                      "<leader>tt",
-                      function()
-                        require("jdtls.dap").test_class({
-                          config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
-                        })
-                      end,
-                      desc = "Run All Test",
+                      mode = "n",
+                      buffer = args.buf,
+                      { "<leader>t", group = "test" },
+                      {
+                        "<leader>tt",
+                        function()
+                          require("jdtls.dap").test_class({
+                            config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                          })
+                        end,
+                        desc = "Run All Test",
+                      },
+                      {
+                        "<leader>tr",
+                        function()
+                          require("jdtls.dap").test_nearest_method({
+                            config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
+                          })
+                        end,
+                        desc = "Run Nearest Test",
+                      },
+                      { "<leader>tT", require("jdtls.dap").pick_test, desc = "Run Test" },
                     },
-                    {
-                      "<leader>tr",
-                      function()
-                        require("jdtls.dap").test_nearest_method({
-                          config_overrides = type(opts.test) ~= "boolean" and opts.test.config_overrides or nil,
-                        })
-                      end,
-                      desc = "Run Nearest Test",
-                    },
-                    { "<leader>tT", require("jdtls.dap").pick_test, desc = "Run Test" },
-                  },
-                })
+                  })
+                end
               end
             end
 
