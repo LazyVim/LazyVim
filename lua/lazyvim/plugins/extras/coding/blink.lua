@@ -107,7 +107,12 @@ return {
       for _, provider in pairs(opts.sources.providers or {}) do
         ---@cast provider blink.cmp.SourceProviderConfig|{kind?:string}
         if provider.kind then
-          require("blink.cmp.types").CompletionItemKind[provider.kind] = provider.kind
+          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+          local kind_idx = #CompletionItemKind + 1
+
+          CompletionItemKind[kind_idx] = provider.kind
+          CompletionItemKind[provider.kind] = kind_idx
+
           ---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
           local transform_items = provider.transform_items
           ---@param ctx blink.cmp.Context
@@ -115,7 +120,7 @@ return {
           provider.transform_items = function(ctx, items)
             items = transform_items and transform_items(ctx, items) or items
             for _, item in ipairs(items) do
-              item.kind = provider.kind or item.kind
+              item.kind = kind_idx or item.kind
             end
             return items
           end
