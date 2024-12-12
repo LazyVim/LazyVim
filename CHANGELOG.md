@@ -1,5 +1,12 @@
 # Changelog
 
+## [13.9.1](https://github.com/LazyVim/LazyVim/compare/v13.9.0...v13.9.1) (2024-12-12)
+
+
+### Bug Fixes
+
+* **blink:** set kind to int, not string, if overriding ([#4999](https://github.com/LazyVim/LazyVim/issues/4999)) ([cee60a6](https://github.com/LazyVim/LazyVim/commit/cee60a6d3040181ac9c5b709d79e80e180b34d48))
+
 ## [13.9.0](https://github.com/LazyVim/LazyVim/compare/v13.8.0...v13.9.0) (2024-12-11)
 
 
