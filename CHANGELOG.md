@@ -1,5 +1,26 @@
 # Changelog
 
+## [13.9.1](https://github.com/LazyVim/LazyVim/compare/v13.9.0...v13.9.1) (2024-12-12)
+
+
+### Bug Fixes
+
+* **blink:** set kind to int, not string, if overriding ([#4999](https://github.com/LazyVim/LazyVim/issues/4999)) ([cee60a6](https://github.com/LazyVim/LazyVim/commit/cee60a6d3040181ac9c5b709d79e80e180b34d48))
+
+## [13.9.0](https://github.com/LazyVim/LazyVim/compare/v13.8.0...v13.9.0) (2024-12-11)
+
+
+### Features
+
+* **luasnip:** add default user snippet location ([#4987](https://github.com/LazyVim/LazyVim/issues/4987)) ([8c79ab6](https://github.com/LazyVim/LazyVim/commit/8c79ab601af19b5370d560aa619567371ac70d86))
+* **vscode:** add vscode-specific keymaps and sync undo/redo with vscode ([#4983](https://github.com/LazyVim/LazyVim/issues/4983)) ([9ad1c49](https://github.com/LazyVim/LazyVim/commit/9ad1c49b67a5c4330e366cde41ab11b156de03f2))
+
+
+### Bug Fixes
+
+* **autocmds:** remove snacks_win from close_with_q, since they have their own keymaps ([99c361f](https://github.com/LazyVim/LazyVim/commit/99c361f708924ddc63599115580bda537cc7f119))
+* **blink:** config breaking changes. Fixes [#4990](https://github.com/LazyVim/LazyVim/issues/4990) ([439340b](https://github.com/LazyVim/LazyVim/commit/439340bd8a970aa23d513aea96c93e84b3af42dc))
+
 ## [13.8.0](https://github.com/LazyVim/LazyVim/compare/v13.7.0...v13.8.0) (2024-12-07)
 
 

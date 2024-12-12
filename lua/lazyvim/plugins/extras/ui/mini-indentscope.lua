@@ -43,11 +43,24 @@ return {
       })
     end,
   },
+
+  -- disable inent-blankline scope when mini-indentscope is enabled
   {
     "lukas-reineke/indent-blankline.nvim",
+    optional = true,
     event = "LazyFile",
     opts = {
       scope = { enabled = false },
+    },
+  },
+
+  -- disable snacks scroll when mini-indentscope is enabled
+  {
+    "snacks.nvim",
+    opts = {
+      indent = {
+        scope = { enabled = false },
+      },
     },
   },
 }
