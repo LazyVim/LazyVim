@@ -85,8 +85,12 @@ return {
     dependencies = { "folke/which-key.nvim" },
     ft = java_filetypes,
     opts = function()
-      local mason_registry = require("mason-registry")
-      local lombok_jar = mason_registry.get_package("jdtls"):get_install_path() .. "/lombok.jar"
+      local cmd = { vim.fn.exepath("jdtls") }
+      if LazyVim.has("mason.nvim") then
+        local mason_registry = require("mason-registry")
+        local lombok_jar = mason_registry.get_package("jdtls"):get_install_path() .. "/lombok.jar"
+        table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
+      end
       return {
         -- How to find the root dir for a given filename. The default comes from
         -- lspconfig which provides a function specifically for java projects.
@@ -107,10 +111,7 @@ return {
 
         -- How to run jdtls. This can be overridden to a full java command-line
         -- if the Python wrapper script doesn't suffice.
-        cmd = {
-          vim.fn.exepath("jdtls"),
-          string.format("--jvm-arg=-javaagent:%s", lombok_jar),
-        },
+        cmd = cmd,
         full_cmd = function(opts)
           local fname = vim.api.nvim_buf_get_name(0)
           local root_dir = opts.root_dir(fname)
