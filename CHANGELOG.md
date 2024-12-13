@@ -1,5 +1,17 @@
 # Changelog
 
+## [14.1.0](https://github.com/LazyVim/LazyVim/compare/v14.0.2...v14.1.0) (2024-12-13)
+
+
+### Features
+
+* **blink:** use block vs. icon for colors ([#5037](https://github.com/LazyVim/LazyVim/issues/5037)) ([4488cb2](https://github.com/LazyVim/LazyVim/commit/4488cb24f72e04dd5adb2e7c0388a51c2b36f4f0))
+
+
+### Bug Fixes
+
+* **blink:** add backward compat for config ([1517ec9](https://github.com/LazyVim/LazyVim/commit/1517ec9bb46b454d253186aff5e5abd41e96d723))
+
 ## [14.0.2](https://github.com/LazyVim/LazyVim/compare/v14.0.1...v14.0.2) (2024-12-13)
 
 
