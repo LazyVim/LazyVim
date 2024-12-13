@@ -385,6 +385,11 @@ return {
     },
   },
 
+  -- Heuristically set buffer options (tab size, expand tabs to spaces)
+  {
+    "tpope/vim-sleuth",
+  },
+
   {
     import = "lazyvim.plugins.extras.editor.fzf",
     enabled = function()
