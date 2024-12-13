@@ -8,6 +8,7 @@ end
 return {
   {
     "hrsh7th/nvim-cmp",
+    optional = true,
     enabled = false,
   },
   {
@@ -52,7 +53,7 @@ return {
         },
         menu = {
           draw = {
-            treesitter = true,
+            treesitter = { "lsp" },
           },
         },
         documentation = {
@@ -72,6 +73,7 @@ return {
         -- with blink.compat
         compat = {},
         default = { "lsp", "path", "snippets", "buffer" },
+        cmdline = {},
       },
 
       keymap = {
@@ -97,11 +99,17 @@ return {
         end
       end
 
-      -- TODO: remove when blink made a new release > 0.7.6
+      ---  NOTE: compat with latest version. Currenlty 0.7.6
       if not vim.g.lazyvim_blink_main then
         opts.sources.completion = opts.sources.completion or {}
         opts.sources.completion.enabled_providers = enabled
+        if vim.tbl_get(opts, "completion", "menu", "draw", "treesitter") then
+          opts.completion.menu.draw.treesitter = true
+        end
       end
+
+      -- Unset custom prop to pass blink.cmp validation
+      opts.sources.compat = nil
 
       -- check if we need to override symbol kinds
       for _, provider in pairs(opts.sources.providers or {}) do
@@ -124,6 +132,9 @@ return {
             end
             return items
           end
+
+          -- Unset custom prop to pass blink.cmp validation
+          provider.kind = nil
         end
       end
 
@@ -137,6 +148,9 @@ return {
     opts = function(_, opts)
       opts.appearance = opts.appearance or {}
       opts.appearance.kind_icons = LazyVim.config.icons.kinds
+
+      -- Use block instead of icon for color items to make swatches more usable
+      opts.appearance.kind_icons.Color = "██"
     end,
   },
 

@@ -17,7 +17,7 @@ function M.status(icon, status)
       return status() ~= nil
     end,
     color = function()
-      return LazyVim.ui.fg(colors[status()] or colors.ok)
+      return { fg = Snacks.util.color(colors[status()] or colors.ok) }
     end,
   }
 end
@@ -146,7 +146,7 @@ function M.root_dir(opts)
     other = true,
     icon = "󱉭 ",
     color = function()
-      return LazyVim.ui.fg("Special")
+      return { fg = Snacks.util.color("Special") }
     end,
   }, opts or {})
 
