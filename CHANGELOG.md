@@ -1,5 +1,59 @@
 # Changelog
 
+## [14.0.0](https://github.com/LazyVim/LazyVim/compare/v13.9.1...v14.0.0) (2024-12-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **cmp:** moved `nvim-cmp` to extras and prefer `blink.cmp` on Neovim >= `0.10` as default completion engine
+* **cmp:** moved `nvim-cmp` to extras and prefer `blink.cmp` on Neovim >= `0.10` as default completion engine
+* **snacks:** use `snacks.scope` indent objects in favor of custom `mini.ai` indent objects
+* **snacks:** use `snacks.indent` and moved `indent-blankline` to extras
+* **pick:** make fzf the default picker for LazyVim
+
+### Features
+
+* **cmp:** moved `nvim-cmp` to extras and prefer `blink.cmp` on Neovim &gt;= `0.10` as default completion engine ([152f9d1](https://github.com/LazyVim/LazyVim/commit/152f9d113fa2b4fc2af72d2846c4dd68c31b7596))
+* **cmp:** moved `nvim-cmp` to extras and prefer `blink.cmp` on Neovim &gt;= `0.10` as default completion engine ([2cbfb9b](https://github.com/LazyVim/LazyVim/commit/2cbfb9b6b7b9b4bb1c9ce94ad02ab0a851310fc0))
+* **keymaps:** added leader-uD to toggle dim mode ([9b97388](https://github.com/LazyVim/LazyVim/commit/9b973882b8bcbab32f850da7c553cdc6388af4ad))
+* **keymaps:** added leader-z to toggle zen mode ([e6d6a09](https://github.com/LazyVim/LazyVim/commit/e6d6a096b34ad887b9f954a3f43bcc3fd7833f73))
+* **keymaps:** added leader-Z to toggle zoom ([f2e1cac](https://github.com/LazyVim/LazyVim/commit/f2e1cac965e41d7761073856b11bea223cac1e4d))
+* **lualine:** add snacks profiler status ([7bc8490](https://github.com/LazyVim/LazyVim/commit/7bc8490d46e002d624f45037fc507e8dd10d4b70))
+* **pick:** make fzf the default picker for LazyVim ([ae2340f](https://github.com/LazyVim/LazyVim/commit/ae2340f60a012df125c87fe46e6d98d0be04bd10))
+* **rust:** exclude bad directories from rust-analyzer ([#5021](https://github.com/LazyVim/LazyVim/issues/5021)) ([94f6df0](https://github.com/LazyVim/LazyVim/commit/94f6df048fbecfdf2f65ab96156b713555df40dc))
+* **snacks:** added `snacks.input` ([54bece1](https://github.com/LazyVim/LazyVim/commit/54bece17b390453ea0beac41e419394d5e0d69ff))
+* **snacks:** added leader-ua to toggle global animations ([303980d](https://github.com/LazyVim/LazyVim/commit/303980d267577972bb12e34ef152a0e8b9a953e2))
+* **snacks:** added leader-ug to toggle indent guides ([b3ac642](https://github.com/LazyVim/LazyVim/commit/b3ac642317cd60e9b35869068dd74fe779a22146))
+* **snacks:** added leader-uS to toggle scroll ([cded8d4](https://github.com/LazyVim/LazyVim/commit/cded8d4d2808250db5ea864fb8e479fd8b5a4a2c))
+* **snacks:** added profiler keymaps ([a8332c6](https://github.com/LazyVim/LazyVim/commit/a8332c6d50106cf35e45953cdaa463cbb6c5b085))
+* **snacks:** enable `snacks.scroll` ([1a1a484](https://github.com/LazyVim/LazyVim/commit/1a1a48497c53e232b0f525baab87d5f23a2205b2))
+* **snacks:** use `snacks.indent` and moved `indent-blankline` to extras ([94fdc42](https://github.com/LazyVim/LazyVim/commit/94fdc421a11b960e116888658dd9b2b85c3b58fc))
+* **snacks:** use `snacks.scope` indent objects in favor of custom `mini.ai` indent objects ([d904a1e](https://github.com/LazyVim/LazyVim/commit/d904a1ef47638e4defede775a7f0966fb8e0a2b4))
+* **snacks:** use `Snacks.zen.zoom()` instead of custom **maximize** ([e389a5a](https://github.com/LazyVim/LazyVim/commit/e389a5ada955c253771ff5c9f8301e2f17c206d2))
+* **which-key:** make `helix` the default which-key preset ([44c712a](https://github.com/LazyVim/LazyVim/commit/44c712aa31e7e05971259841e1f87c9f3d9c6cd5))
+* **zen:** zoom with leader-wm and leader-uZ. zen with leader-uz ([2acedaa](https://github.com/LazyVim/LazyVim/commit/2acedaa3a8312e53d84a299bd82d616e1c26328a))
+
+
+### Bug Fixes
+
+* **blink:** disable cmdline integration for now since it doesn't work well with the enter keymap ([20eff4f](https://github.com/LazyVim/LazyVim/commit/20eff4fc3f55fbeb1e415f0cc5a2d1f3019e5da6))
+* **blink:** remove unneeded code ([d95e530](https://github.com/LazyVim/LazyVim/commit/d95e530c02cbb2bcf36da5bb3e235780bdf6d239))
+* **blink:** unset provider.kind ([#5024](https://github.com/LazyVim/LazyVim/issues/5024)) ([29c4dea](https://github.com/LazyVim/LazyVim/commit/29c4dea4e75b82ad4b06c21e360eefa3951a3fba))
+* **blink:** unset sources.compat. Fixes [#5016](https://github.com/LazyVim/LazyVim/issues/5016). Closes [#5017](https://github.com/LazyVim/LazyVim/issues/5017) ([2946031](https://github.com/LazyVim/LazyVim/commit/29460318f302b6dceaf16bd06c45cb3ed58d5fd8))
+* **clangd:** avoid nil-indexing the completion sorting comparators ([#5011](https://github.com/LazyVim/LazyVim/issues/5011)) ([c4b0d6d](https://github.com/LazyVim/LazyVim/commit/c4b0d6d0d1ee11c07c0ab4ed3f87f97b76a6f592))
+* **clangd:** nvim-cmp optional ([94be6fb](https://github.com/LazyVim/LazyVim/commit/94be6fb78786e9a53e914db9d5cfab09b13225ba))
+* **copliot:** restructure copilot-cmp spec ([34d2bdc](https://github.com/LazyVim/LazyVim/commit/34d2bdcac6fabe5d02e157bffa3475391ca1f7ec))
+* fqn for nvim-cmp ([a9a273d](https://github.com/LazyVim/LazyVim/commit/a9a273d041e2dd0e5654b5b492fd29138259fe68))
+* **git:** make nvim-cmp optional for the git extra ([ec92fa8](https://github.com/LazyVim/LazyVim/commit/ec92fa85586b4082f04b30ad94cb98b24463665e))
+* **java:** only setup debug adapter config if mason is installed ([#5013](https://github.com/LazyVim/LazyVim/issues/5013)) ([aad0edb](https://github.com/LazyVim/LazyVim/commit/aad0edbf749bcbe16e9ef8d2a65a19dd3fe2bd87))
+* **java:** only setup debug adapter config if mason is installed (for real this time) ([#5014](https://github.com/LazyVim/LazyVim/issues/5014)) ([5b1b6b2](https://github.com/LazyVim/LazyVim/commit/5b1b6b29d717adeffb0528cffef9f1a3972d3701))
+* **java:** only use mason-registry if mason installed ([#4991](https://github.com/LazyVim/LazyVim/issues/4991)) ([21b02f0](https://github.com/LazyVim/LazyVim/commit/21b02f056d924d0a3cb3513b163e3dbdfa9c15ec))
+* **mini.animate:** disable `snacks.scroll` when `mini.animate` is enabled ([9b07544](https://github.com/LazyVim/LazyVim/commit/9b07544e89ecead354ef0f17ebc3127f3fa5bbd8))
+* **mini.indentscope:** disable snacks and indent-blankline scope ([98c77f1](https://github.com/LazyVim/LazyVim/commit/98c77f1de479b12bc29dc8339fbfe694959d99ed))
+* **nvim-cmp:** set high prio for loading the nvim-cmp extra to prevent issues with opts ([adf8db6](https://github.com/LazyVim/LazyVim/commit/adf8db69ed91f8c15fe3cf37df9dc0801dbaeb39))
+* **nvim-cmp:** specs ([88e77b0](https://github.com/LazyVim/LazyVim/commit/88e77b0e2439a27d06e95e89839227f1e9446c74))
+* **ui:** use `Snacks.util.color` instead of `LazyVim.ui.fg` ([6d774ba](https://github.com/LazyVim/LazyVim/commit/6d774ba8f21f87aaa8bf9dbeb0a84b747541b349))
+
 ## [13.9.1](https://github.com/LazyVim/LazyVim/compare/v13.9.0...v13.9.1) (2024-12-12)
 
 
