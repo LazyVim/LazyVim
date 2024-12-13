@@ -10,7 +10,7 @@ With these changes, default **LazyVim** is now just `34` plugins.
 
 - [fzf-lua](https://github.com/ibhagwan/fzf-lua) as a replacement for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
   - to use **telescope.nvim** instead, enable the `ui.telescope` extra
-- [blink.cmp](https://github.com/saghm/blink.cmp) as a replacement for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- [blink.cmp](https://github.com/saghen/blink.cmp) as a replacement for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
   - to use **nvim-cmp** instead, enable the `nvim-cmp` extra
 
 ### Removed Plugins
