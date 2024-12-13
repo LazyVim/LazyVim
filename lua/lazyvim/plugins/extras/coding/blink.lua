@@ -134,6 +134,9 @@ return {
     opts = function(_, opts)
       opts.appearance = opts.appearance or {}
       opts.appearance.kind_icons = LazyVim.config.icons.kinds
+
+      -- Use block instead of icon for color items to make swatches more usable
+      opts.appearance.kind_icons.Color = "██"
     end,
   },
 
