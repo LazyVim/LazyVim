@@ -269,7 +269,7 @@ end
 function M.cmp_engine()
   vim.g.lazyvim_cmp = vim.g.lazyvim_cmp or "auto"
   if vim.g.lazyvim_cmp == "auto" then
-    return LazyVim.has_extra("nvim-cmp") and "nvim-cmp" or "blink.cmp"
+    return LazyVim.has_extra("coding.nvim-cmp") and "nvim-cmp" or "blink.cmp"
   end
   return vim.g.lazyvim_cmp
 end

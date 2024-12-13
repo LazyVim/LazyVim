@@ -1,5 +1,13 @@
 # Changelog
 
+## [14.0.2](https://github.com/LazyVim/LazyVim/compare/v14.0.1...v14.0.2) (2024-12-13)
+
+
+### Bug Fixes
+
+* **cmp:** disable nvim-cmp/blink.cmp when needed ([60b7704](https://github.com/LazyVim/LazyVim/commit/60b77045d57d5473e50042b9b879c9c1054e6a10))
+* **cmp:** wrong extras check for nvim-cmp ([009e358](https://github.com/LazyVim/LazyVim/commit/009e3587be1badc04c9a8b8b459e8555b405509c))
+
 ## [14.0.1](https://github.com/LazyVim/LazyVim/compare/v14.0.0...v14.0.1) (2024-12-13)
 
 
