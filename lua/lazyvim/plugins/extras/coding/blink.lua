@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 if lazyvim_docs then
   -- set to `true` to follow the main branch
   -- you need to have a working rust toolchain to build the plugin
@@ -101,9 +102,11 @@ return {
 
       ---  NOTE: compat with latest version. Currenlty 0.7.6
       if not vim.g.lazyvim_blink_main then
+        ---@diagnostic disable-next-line: inject-field
         opts.sources.completion = opts.sources.completion or {}
         opts.sources.completion.enabled_providers = enabled
         if vim.tbl_get(opts, "completion", "menu", "draw", "treesitter") then
+          ---@diagnostic disable-next-line: assign-type-mismatch
           opts.completion.menu.draw.treesitter = true
         end
       end
@@ -119,6 +122,7 @@ return {
           local kind_idx = #CompletionItemKind + 1
 
           CompletionItemKind[kind_idx] = provider.kind
+          ---@diagnostic disable-next-line: no-unknown
           CompletionItemKind[provider.kind] = kind_idx
 
           ---@type fun(ctx: blink.cmp.Context, items: blink.cmp.CompletionItem[]): blink.cmp.CompletionItem[]
