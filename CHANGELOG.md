@@ -1,5 +1,12 @@
 # Changelog
 
+## [14.0.1](https://github.com/LazyVim/LazyVim/compare/v14.0.0...v14.0.1) (2024-12-13)
+
+
+### Bug Fixes
+
+* **NEWS:** typo ([0fd7140](https://github.com/LazyVim/LazyVim/commit/0fd7140a6de936edb27a4ba4f4825153ae801c21))
+
 ## [14.0.0](https://github.com/LazyVim/LazyVim/compare/v13.9.1...v14.0.0) (2024-12-13)
 
 
