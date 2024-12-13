@@ -99,10 +99,13 @@ return {
         end
       end
 
-      -- TODO: remove when blink made a new release > 0.7.6
+      ---  NOTE: compat with latest version. Currenlty 0.7.6
       if not vim.g.lazyvim_blink_main then
         opts.sources.completion = opts.sources.completion or {}
         opts.sources.completion.enabled_providers = enabled
+        if vim.tbl_get(opts, "completion", "menu", "draw", "treesitter") then
+          opts.completion.menu.draw.treesitter = true
+        end
       end
 
       -- Unset custom prop to pass blink.cmp validation
