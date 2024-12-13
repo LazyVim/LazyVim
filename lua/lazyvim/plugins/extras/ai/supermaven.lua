@@ -49,6 +49,9 @@ return {
     dependencies = { "supermaven-nvim", "saghen/blink.compat" },
     opts = {
       sources = {
+        completion = {
+          enabled_providers = { "lsp", "path", "snippets", "buffer", "supermaven" },
+        },
         compat = { "supermaven" },
         providers = { supermaven = { kind = "Supermaven" } },
       },
