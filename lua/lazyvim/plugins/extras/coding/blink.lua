@@ -53,7 +53,7 @@ return {
         },
         menu = {
           draw = {
-            treesitter = true,
+            treesitter = { "lsp" },
           },
         },
         documentation = {
