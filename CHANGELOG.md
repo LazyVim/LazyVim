@@ -1,5 +1,21 @@
 # Changelog
 
+## [14.2.0](https://github.com/LazyVim/LazyVim/compare/v14.1.0...v14.2.0) (2024-12-14)
+
+
+### Features
+
+* **blink:** add `&lt;c-y&gt;` to keymaps ([3866fbc](https://github.com/LazyVim/LazyVim/commit/3866fbcd40dfd52f4012dfbb434208a9f953cf05))
+
+
+### Bug Fixes
+
+* **blink:** `draw.treesitter` expects table ([#5044](https://github.com/LazyVim/LazyVim/issues/5044)) ([08a7f7e](https://github.com/LazyVim/LazyVim/commit/08a7f7e3f92aeced3092c5ec462d784f765e8654))
+* **blink:** compat with 0.7.6 ([63eab6d](https://github.com/LazyVim/LazyVim/commit/63eab6d9a54b6d9e93d3cc445d57014bbe8cc271))
+* **blink:** only override color symbol kind for blink ([b07378d](https://github.com/LazyVim/LazyVim/commit/b07378dde40f1fa98b099cbd496129f5ca376e2c))
+* **health:** added `fzf` to healthchecks ([380cea9](https://github.com/LazyVim/LazyVim/commit/380cea97bf92fda3ad4ae14d1d4d37acffe5019a))
+* **health:** added curl to health checks ([5de1532](https://github.com/LazyVim/LazyVim/commit/5de15329fb5f7a846140fca96f9c5587245d63c1))
+
 ## [14.1.0](https://github.com/LazyVim/LazyVim/compare/v14.0.2...v14.1.0) (2024-12-13)
 
 
