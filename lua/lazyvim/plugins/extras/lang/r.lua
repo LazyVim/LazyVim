@@ -48,6 +48,22 @@ return {
     end,
   },
   {
+    "saghen/blink.cmp",
+    optional = true,
+    dependencies = {
+      "R-nvim/cmp-r",
+    },
+    opts = function(_, opts)
+      table.insert(opts.sources.compat or {}, "cmp_r")
+
+      opts.sources.providers["cmp-r"] = vim.tbl_deep_extend(
+        "force",
+        opts.sources.providers["cmp-r"] or {},
+        { name = "cmp_r", module = "blink.compat.source" }
+      )
+    end,
+  },
+  {
     "hrsh7th/nvim-cmp",
     optional = true,
     dependencies = { "R-nvim/cmp-r" },
