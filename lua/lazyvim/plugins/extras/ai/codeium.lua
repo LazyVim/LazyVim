@@ -62,7 +62,13 @@ return {
     opts = {
       sources = {
         compat = { "codeium" },
-        providers = { codeium = { kind = "Codeium" } },
+        providers = {
+          codeium = {
+            kind = "Codeium",
+            score_offset = 100,
+            async = true,
+          },
+        },
       },
     },
   } or nil,

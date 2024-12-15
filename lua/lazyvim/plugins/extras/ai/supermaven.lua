@@ -50,7 +50,13 @@ return {
     opts = {
       sources = {
         compat = { "supermaven" },
-        providers = { supermaven = { kind = "Supermaven" } },
+        providers = {
+          supermaven = {
+            kind = "Supermaven",
+            score_offset = 100,
+            async = true,
+          },
+        },
       },
     },
   } or nil,
