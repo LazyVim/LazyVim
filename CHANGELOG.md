@@ -1,5 +1,19 @@
 # Changelog
 
+## [14.4.0](https://github.com/LazyVim/LazyVim/compare/v14.3.0...v14.4.0) (2024-12-15)
+
+
+### Features
+
+* **blink:** boost results from ai providers and enable async, to get much faster completions ([6bc56e4](https://github.com/LazyVim/LazyVim/commit/6bc56e4e8142e3d453f2fbfea8ace62fcfc3750f))
+* **keymaps:** unlink luasnip on `esc` ([ef91026](https://github.com/LazyVim/LazyVim/commit/ef9102677f9b7a31d0bb7cfcd76f24401a7385fc))
+
+
+### Bug Fixes
+
+* **blink:** allow overriding `&lt;Tab&gt;` key. Fixes [#5095](https://github.com/LazyVim/LazyVim/issues/5095). Closes [#5099](https://github.com/LazyVim/LazyVim/issues/5099) ([89314cb](https://github.com/LazyVim/LazyVim/commit/89314cb2aae76b434122592ac8da264fa689bdff))
+* **keymaps:** better escape ([8f113a5](https://github.com/LazyVim/LazyVim/commit/8f113a514c130cba8d0f79acdd091d18ef997829))
+
 ## [14.3.0](https://github.com/LazyVim/LazyVim/compare/v14.2.0...v14.3.0) (2024-12-15)
 
 
