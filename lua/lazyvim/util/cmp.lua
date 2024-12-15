@@ -13,6 +13,11 @@ M.actions = {
       return true
     end
   end,
+  snippet_stop = function()
+    if vim.snippet then
+      vim.snippet.stop()
+    end
+  end,
 }
 
 ---@param actions string[]

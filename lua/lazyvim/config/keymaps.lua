@@ -7,9 +7,7 @@ local map = LazyVim.safe_keymap_set
 -- Clear search and stop snippet on escape
 Snacks.util.on_key("<esc>", function()
   vim.cmd("noh")
-  if vim.snippet then
-    vim.snippet.stop()
-  end
+  LazyVim.cmp.actions.snippet_stop()
 end)
 
 -- better up/down
