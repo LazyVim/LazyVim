@@ -101,6 +101,21 @@ return {
         end
       end
 
+      -- fix super-tab completion
+      if opts.keymap.preset == "super-tab" then
+        opts.keymap["<Tab>"] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
+          "fallback",
+        }
+      end
+
       ---  NOTE: compat with latest version. Currenlty 0.7.6
       if not vim.g.lazyvim_blink_main then
         ---@diagnostic disable-next-line: inject-field
