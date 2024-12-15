@@ -1,5 +1,18 @@
 # Changelog
 
+## [14.3.0](https://github.com/LazyVim/LazyVim/compare/v14.2.0...v14.3.0) (2024-12-15)
+
+
+### Features
+
+* **config:** better icon for snippets ([195a6e6](https://github.com/LazyVim/LazyVim/commit/195a6e611495da9dbb1afef4b470926cc2535f19))
+* **keymaps:** stop native snippets on escape. Closes [#5083](https://github.com/LazyVim/LazyVim/issues/5083) ([15c81fd](https://github.com/LazyVim/LazyVim/commit/15c81fdbb839f0c657fe4c077114475e82f423fe))
+
+
+### Bug Fixes
+
+* **blink:** super-tab and ai completions ([413566a](https://github.com/LazyVim/LazyVim/commit/413566af591e9152f156944bff35c89d5d973148))
+
 ## [14.2.0](https://github.com/LazyVim/LazyVim/compare/v14.1.0...v14.2.0) (2024-12-14)
 
 
