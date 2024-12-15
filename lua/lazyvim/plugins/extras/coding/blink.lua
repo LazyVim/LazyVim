@@ -102,7 +102,7 @@ return {
       end
 
       -- fix super-tab completion
-      if opts.keymap.preset == "super-tab" then
+      if opts.keymap.preset == "super-tab" and not opts.keymap["<Tab>"] then
         opts.keymap["<Tab>"] = {
           function(cmp)
             if cmp.snippet_active() then
