@@ -38,31 +38,32 @@ return {
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
-      ensure_installed = {
-        "bash",
-        "c",
-        "diff",
-        "html",
-        "javascript",
-        "jsdoc",
-        "json",
-        "jsonc",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "printf",
-        "python",
-        "query",
-        "regex",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
+      ensure_installed = {},
+      ensure_installed_map = {
+        bash = true,
+        c = true,
+        diff = true,
+        html = true,
+        javascript = true,
+        jsdoc = true,
+        json = true,
+        jsonc = true,
+        lua = true,
+        luadoc = true,
+        luap = true,
+        markdown = true,
+        markdown_inline = true,
+        printf = true,
+        python = true,
+        query = true,
+        regex = true,
+        toml = true,
+        tsx = true,
+        typescript = true,
+        vim = true,
+        vimdoc = true,
+        xml = true,
+        yaml = true,
       },
       incremental_selection = {
         enable = true,
@@ -85,9 +86,28 @@ return {
     },
     ---@param opts TSConfig
     config = function(_, opts)
+      local ensure_installed = nil
       if type(opts.ensure_installed) == "table" then
-        opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)
+        ensure_installed = {}
+        for _, x in ipairs(opts.ensure_installed) do
+          ensure_installed[x] = true
+        end
       end
+      if type(opts.ensure_installed_map) == "table" then
+        ensure_installed = vim.tbl_extend("force", ensure_installed or {}, opts.ensure_installed_map)
+      end
+      if ensure_installed ~= nil then
+        opts.ensure_installed = {}
+        for item, enabled in pairs(ensure_installed) do
+          if enabled then
+            table.insert(opts.ensure_installed, item)
+          end
+        end
+      end
+
+      -- Remove unofficial opts
+      opts.ensure_installed_map = nil
+
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
