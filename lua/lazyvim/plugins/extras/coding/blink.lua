@@ -109,13 +109,7 @@ return {
       if not opts.keymap["<Tab>"] then
         if opts.keymap.preset == "super-tab" then -- super-tab
           opts.keymap["<Tab>"] = {
-            function(cmp)
-              if cmp.snippet_active() then
-                return cmp.accept()
-              else
-                return cmp.select_and_accept()
-              end
-            end,
+            require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
             LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
             "fallback",
           }
