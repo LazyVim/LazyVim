@@ -2,6 +2,9 @@
 -- This works with LSP, Treesitter, and regexp matching to find the other
 -- instances.
 return {
+  -- disable snacks words
+  { "snacks.nvim", opts = { words = { enabled = false } } },
+
   {
     "RRethy/vim-illuminate",
     event = "LazyFile",
