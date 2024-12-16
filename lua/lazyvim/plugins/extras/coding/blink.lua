@@ -57,9 +57,6 @@ return {
             enabled = true,
           },
         },
-        trigger = {
-          show_on_insert_on_trigger_character = false,
-        },
         menu = {
           draw = {
             treesitter = { "lsp" },
