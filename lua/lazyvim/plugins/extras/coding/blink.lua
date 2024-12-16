@@ -110,7 +110,7 @@ return {
         if opts.keymap.preset == "super-tab" then -- super-tab
           opts.keymap["<Tab>"] = {
             function(cmp)
-              if cmp.snippet_active() then
+              if cmp.snippet_active() or opts.completion.list.selection == "manual" then
                 return cmp.accept()
               else
                 return cmp.select_and_accept()
