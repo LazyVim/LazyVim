@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "13.0.0" -- x-release-please-version
+M.version = "14.5.0" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -85,9 +85,10 @@ local defaults = {
       Package       = " ",
       Property      = " ",
       Reference     = " ",
-      Snippet       = " ",
+      Snippet       = "󱄽 ",
       String        = " ",
       Struct        = "󰆼 ",
+      Supermaven    = " ",
       TabNine       = "󰏚 ",
       Text          = " ",
       TypeParameter = " ",
@@ -135,7 +136,7 @@ local defaults = {
 }
 
 M.json = {
-  version = 6,
+  version = 7,
   path = vim.g.lazyvim_json or vim.fn.stdpath("config") .. "/lazyvim.json",
   data = {
     version = nil, ---@type string?
