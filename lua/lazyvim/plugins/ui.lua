@@ -105,29 +105,30 @@ return {
             { LazyVim.lualine.pretty_path() },
           },
           lualine_x = {
+            Snacks.profiler.status(),
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = function() return LazyVim.ui.fg("Statement") end,
+              color = function() return { fg = Snacks.util.color("Statement") } end,
             },
             -- stylua: ignore
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = function() return LazyVim.ui.fg("Constant") end,
+              color = function() return { fg = Snacks.util.color("Constant") } end,
             },
             -- stylua: ignore
             {
               function() return "  " .. require("dap").status() end,
               cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = function() return LazyVim.ui.fg("Debug") end,
+              color = function() return { fg = Snacks.util.color("Debug") } end,
             },
             -- stylua: ignore
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = function() return LazyVim.ui.fg("Special") end,
+              color = function() return { fg = Snacks.util.color("Special") } end,
             },
             {
               "diff",
@@ -183,50 +184,6 @@ return {
 
       return opts
     end,
-  },
-
-  -- indent guides for Neovim
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "LazyFile",
-    opts = function()
-      Snacks.toggle({
-        name = "Indention Guides",
-        get = function()
-          return require("ibl.config").get_config(0).enabled
-        end,
-        set = function(state)
-          require("ibl").setup_buffer(0, { enabled = state })
-        end,
-      }):map("<leader>ug")
-
-      return {
-        indent = {
-          char = "│",
-          tab_char = "│",
-        },
-        scope = { show_start = false, show_end = false },
-        exclude = {
-          filetypes = {
-            "Trouble",
-            "alpha",
-            "dashboard",
-            "help",
-            "lazy",
-            "mason",
-            "neo-tree",
-            "notify",
-            "snacks_dashboard",
-            "snacks_notif",
-            "snacks_terminal",
-            "snacks_win",
-            "toggleterm",
-            "trouble",
-          },
-        },
-      }
-    end,
-    main = "ibl",
   },
 
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
@@ -308,7 +265,26 @@ return {
   { "MunifTanjim/nui.nvim", lazy = true },
 
   {
-    "folke/snacks.nvim",
+    "snacks.nvim",
+    opts = {
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = false }, -- we set this in options.lua
+      toggle = { map = LazyVim.safe_keymap_set },
+      words = { enabled = true },
+    },
+    -- stylua: ignore
+    keys = {
+      { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
+    },
+  },
+
+  {
+    "snacks.nvim",
     opts = {
       dashboard = {
         preset = {

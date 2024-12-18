@@ -1,25 +1,22 @@
 return {
   -- Tabnine cmp source
   {
-    "nvim-cmp",
-    optional = true,
-    dependencies = {
-      {
-        "tzachar/cmp-tabnine",
-        build = {
-          LazyVim.is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
-        },
-        dependencies = "hrsh7th/nvim-cmp",
-        opts = {
-          max_lines = 1000,
-          max_num_results = 3,
-          sort = true,
-        },
-        config = function(_, opts)
-          require("cmp_tabnine.config"):setup(opts)
-        end,
-      },
+    "tzachar/cmp-tabnine",
+    build = LazyVim.is_win() and "pwsh -noni .\\install.ps1" or "./install.sh",
+    opts = {
+      max_lines = 1000,
+      max_num_results = 3,
+      sort = true,
     },
+    config = function(_, opts)
+      require("cmp_tabnine.config"):setup(opts)
+    end,
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    optional = true,
+    dependencies = { "tzachar/cmp-tabnine" },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       table.insert(opts.sources, 1, {
@@ -36,6 +33,25 @@ return {
       end)
     end,
   },
+
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    dependencies = { "tzachar/cmp-tabnine", "saghen/blink.compat" },
+    opts = {
+      sources = {
+        compat = { "cmp_tabnine" },
+        providers = {
+          cmp_tabnine = {
+            kind = "TabNine",
+            score_offset = 100,
+            async = true,
+          },
+        },
+      },
+    },
+  },
+
   -- Show TabNine status in lualine
   {
     "nvim-lualine/lualine.nvim",

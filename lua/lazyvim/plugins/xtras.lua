@@ -2,6 +2,7 @@
 local prios = {
   ["lazyvim.plugins.extras.test.core"] = 1,
   ["lazyvim.plugins.extras.dap.core"] = 1,
+  ["lazyvim.plugins.extras.coding.nvim-cmp"] = 2,
   ["lazyvim.plugins.extras.ui.edgy"] = 2,
   ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.coding.blink"] = 5,
