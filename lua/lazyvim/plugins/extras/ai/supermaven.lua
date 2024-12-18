@@ -1,6 +1,19 @@
 return {
   {
     "supermaven-inc/supermaven-nvim",
+    event = "InsertEnter",
+    cmd = {
+      "SupermavenStart",
+      "SupermavenStop",
+      "SupermavenRestart",
+      "SupermavenToggle",
+      "SupermavenStatus",
+      "SupermavenUseFree",
+      "SupermavenUsePro",
+      "SupermavenLogout",
+      "SupermavenShowLog",
+      "SupermavenClearLog",
+    },
     opts = {
       keymaps = {
         accept_suggestion = nil, -- handled by nvim-cmp / blink.cmp
