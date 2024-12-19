@@ -34,6 +34,9 @@
     <a href="https://twitter.com/intent/follow?screen_name=folke">
       <img alt="follow on Twitter" src="https://img.shields.io/twitter/follow/folke?style=for-the-badge&logo=twitter&color=8aadf3&logoColor=D9E0EE&labelColor=302D41" />
     </a>
+    <a href="https://gurubase.io/g/lazyvim">
+      <img alt="Gurubase" src="https://img.shields.io/badge/Gurubase-Ask%20LazyVim%20Guru-006BFF?style=for-the-badge&logo=starship&color=006BFF&logoColor=D9E0EE&labelColor=302D41" />
+    </a>
 </div>
 
 LazyVim is a Neovim setup powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
