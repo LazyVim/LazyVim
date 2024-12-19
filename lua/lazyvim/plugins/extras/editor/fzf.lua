@@ -89,6 +89,9 @@ return {
       return {
         "default-title",
         fzf_colors = true,
+        fzf_opts = {
+          ["--no-scrollbar"] = true,
+        },
         defaults = {
           -- formatter = "path.filename_first",
           formatter = "path.dirname_first",
@@ -112,9 +115,6 @@ return {
             winopts = {
               title = " " .. vim.trim((fzf_opts.prompt or "Select"):gsub("%s*:%s*$", "")) .. " ",
               title_pos = "center",
-              preview = {
-                scrollbar = false,
-              },
             },
           }, fzf_opts.kind == "codeaction" and {
             winopts = {
