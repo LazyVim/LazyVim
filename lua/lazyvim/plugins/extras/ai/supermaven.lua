@@ -8,7 +8,7 @@ return {
     },
     opts = {
       keymaps = {
-        accept_suggestion = nil, -- handled by nvim-cmp / blink.cmp
+        accept_suggestion = not vim.g.ai_cmp and "<M-l>" or nil, -- handled by nvim-cmp / blink.cmp
       },
       disable_inline_completion = vim.g.ai_cmp,
       ignore_filetypes = { "bigfile", "snacks_input", "snacks_notif" },

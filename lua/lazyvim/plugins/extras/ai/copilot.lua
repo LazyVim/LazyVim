@@ -11,9 +11,7 @@ return {
         enabled = not vim.g.ai_cmp,
         auto_trigger = true,
         keymap = {
-          accept = false, -- handled by nvim-cmp / blink.cmp
-          next = "<M-]>",
-          prev = "<M-[>",
+          accept = not vim.g.ai_cmp and "<M-l>" or false, -- handled by nvim-cmp / blink.cmp
         },
       },
       panel = { enabled = false },
