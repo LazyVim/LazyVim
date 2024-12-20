@@ -56,6 +56,10 @@ return {
 
   {
     "folke/ts-comments.nvim",
-    opts = { lang = { typst = "// %s" } },
+    opts = {
+      lang = {
+        typst = { "// %s", "/* %s */" },
+      },
+    },
   },
 }
