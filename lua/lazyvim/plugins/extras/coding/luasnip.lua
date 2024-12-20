@@ -72,7 +72,15 @@ return {
       { "saadparwaiz1/cmp_luasnip" },
     },
     opts = {
-      sources = { compat = { "luasnip" } },
+      sources = {
+        default = { "luasnip" },
+        providers = {
+          luasnip = {
+            name = "Luasnip",
+            module = "blink.compat.source",
+          },
+        },
+      },
       snippets = {
         expand = function(snippet)
           require("luasnip").lsp_expand(snippet)
