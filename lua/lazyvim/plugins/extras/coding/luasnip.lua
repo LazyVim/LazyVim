@@ -68,7 +68,6 @@ return {
     "saghen/blink.cmp",
     optional = true,
     opts = {
-      sources = { default = { "luasnip" } },
       snippets = {
         expand = function(snippet)
           require("luasnip").lsp_expand(snippet)
@@ -84,5 +83,17 @@ return {
         end,
       },
     },
+  },
+
+  -- Luasnip sources for blink
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    opts = function(_, opts)
+      table.insert(opts.sources.default, "luasnip")
+      opts.sources.default = vim.tbl_filter(function(p)
+        return p ~= "snippets"
+      end, opts.sources.default)
+    end,
   },
 }
