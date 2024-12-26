@@ -1,5 +1,48 @@
 # Changelog
 
+## [14.6.0](https://github.com/LazyVim/LazyVim/compare/v14.5.0...v14.6.0) (2024-12-20)
+
+
+### Features
+
+* **colorscheme:** add fzf integration to catppuccin ([#5175](https://github.com/LazyVim/LazyVim/issues/5175)) ([751803f](https://github.com/LazyVim/LazyVim/commit/751803f98bf3baaf7db1c1e2ddd28e082396124a))
+* **lualine:** add fzf extensions. ([#5203](https://github.com/LazyVim/LazyVim/issues/5203)) ([7a16a75](https://github.com/LazyVim/LazyVim/commit/7a16a752ba1fa535bb54d6492fb8df6c72ab8ba0))
+
+
+### Bug Fixes
+
+* **blink:** remove compatibility with 0.7.6 release ([#5212](https://github.com/LazyVim/LazyVim/issues/5212)) ([857f330](https://github.com/LazyVim/LazyVim/commit/857f330c2139c328cfce0251b11713dc179d6a81))
+* **codeium:** doesnt automatically load when `vim.g.ai_cmp` is set to false ([#5182](https://github.com/LazyVim/LazyVim/issues/5182)) ([b51279c](https://github.com/LazyVim/LazyVim/commit/b51279c6d727a09cd3d2bf3c9d0cf829810280bb))
+* **fzf:** fzf.lua compatible hidden scrollbar ([#5177](https://github.com/LazyVim/LazyVim/issues/5177)) ([3a79273](https://github.com/LazyVim/LazyVim/commit/3a79273f3c3bbd22bcdba795b7b8fe6a949db96e))
+* **luasnip:** use blink's luasnip source. Closes [#5211](https://github.com/LazyVim/LazyVim/issues/5211) ([86de9c9](https://github.com/LazyVim/LazyVim/commit/86de9c9e443572b0244ee9bbdcf5f10ecaabaf74))
+
+
+### Performance Improvements
+
+* **supermaven:** add lazy-loading ([#5183](https://github.com/LazyVim/LazyVim/issues/5183)) ([a3a28bf](https://github.com/LazyVim/LazyVim/commit/a3a28bf8e43f7239316942c2f2bac6e74b28586b))
+
+
+### Reverts
+
+* fix(fzf): fzf.lua compatible hidden scrollbar ([#5177](https://github.com/LazyVim/LazyVim/issues/5177)) ([c40692c](https://github.com/LazyVim/LazyVim/commit/c40692c1b0a95492eead8cc093972c634d54043b))
+
+## [14.5.0](https://github.com/LazyVim/LazyVim/compare/v14.4.0...v14.5.0) (2024-12-17)
+
+
+### Features
+
+* **blink:** increase lazydev scores ([22015e0](https://github.com/LazyVim/LazyVim/commit/22015e0b4835ae148c19b459bf494fe5f72b415b))
+
+
+### Bug Fixes
+
+* **blink:** add `vim.snippet` fixes to blink (was already added to cmp). Fixes [#5067](https://github.com/LazyVim/LazyVim/issues/5067) ([5ea3cfa](https://github.com/LazyVim/LazyVim/commit/5ea3cfa48e6ac88b90282da86dba7799f67b2e30))
+* **blink:** don't trigger automatically on insert ([2cf3d23](https://github.com/LazyVim/LazyVim/commit/2cf3d234bfc31a1a4eda282ddabc12987f762893))
+* **blink:** remove show_on_insert_on_trigger_character since this has been fixed for {} and others ([0f3a120](https://github.com/LazyVim/LazyVim/commit/0f3a1201861e6d6e8834aa8937dcf3e4a70a937a))
+* **illuminate:** disable snacks.words when illuminate extra is enabled. Fixes [#5125](https://github.com/LazyVim/LazyVim/issues/5125) ([d025115](https://github.com/LazyVim/LazyVim/commit/d0251155ab2a293136c933b4e925e1fa16d39a2d))
+* **supermaven:** don't attach to bigfile and some snacks ft. Fixes [#5139](https://github.com/LazyVim/LazyVim/issues/5139) ([25ee13c](https://github.com/LazyVim/LazyVim/commit/25ee13ce29ad8c4e10d677e641955cfd3c810fb5))
+* **vscode:** disable some snacks plugins in vscode. Closes [#5124](https://github.com/LazyVim/LazyVim/issues/5124) ([301135b](https://github.com/LazyVim/LazyVim/commit/301135b2749affe71645c610001c8253ae78c591))
+
 ## [14.4.0](https://github.com/LazyVim/LazyVim/compare/v14.3.0...v14.4.0) (2024-12-15)
 
 

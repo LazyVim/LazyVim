@@ -36,6 +36,11 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      snippets = {
+        expand = function(snippet, _)
+          return LazyVim.cmp.expand(snippet)
+        end,
+      },
       appearance = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
@@ -101,13 +106,7 @@ return {
       if not opts.keymap["<Tab>"] then
         if opts.keymap.preset == "super-tab" then -- super-tab
           opts.keymap["<Tab>"] = {
-            function(cmp)
-              if cmp.snippet_active() then
-                return cmp.accept()
-              else
-                return cmp.select_and_accept()
-              end
-            end,
+            require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
             LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
             "fallback",
           }
@@ -116,17 +115,6 @@ return {
             LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
             "fallback",
           }
-        end
-      end
-
-      ---  NOTE: compat with latest version. Currenlty 0.7.6
-      if not vim.g.lazyvim_blink_main then
-        ---@diagnostic disable-next-line: inject-field
-        opts.sources.completion = opts.sources.completion or {}
-        opts.sources.completion.enabled_providers = enabled
-        if vim.tbl_get(opts, "completion", "menu", "draw", "treesitter") then
-          ---@diagnostic disable-next-line: assign-type-mismatch
-          opts.completion.menu.draw.treesitter = true
         end
       end
 
@@ -187,6 +175,7 @@ return {
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
+            score_offset = 100, -- show at a higher priority than lsp
           },
         },
       },
