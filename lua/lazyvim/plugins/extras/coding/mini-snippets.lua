@@ -4,17 +4,24 @@ This extra for mini.snippets activates the following:
 1. During completion with either cmp or blink, expand lsp snippets
 2. To use other snippets: Press <c-j> in insert mode
 
-Note that there is no completion source. 
-Other snippets(custom or from friendly-snippets) are handled by pressing <c-j> in insert mode.
+Do note that there are no sources yet for `nvim-cmp` or `blink.cmp`. 
+This extra will be updated when those sources become available.
+
+For now, non-lsp snippets(custom or from a plugin aka friendly-snippets) 
+are handled exclusively by mini.snippets(<c-j> in insert mode).
+This approach is also how the author uses the plugin.
 
 In default LazyVim, neither cmp nor blink define the default mappings used by mini.snippets:
-- "<c-j>" to expand
-- "<c-l>" to jump next (dynamically created when in snippet context)
-- "<c-h>" to jump previous (dynamically created when in snippet context)
+- <c-j> to expand
+- <c-l> to jump next (dynamically created when in snippet context)
+- <c-h> to jump previous (dynamically created when in snippet context)
 
-It's difficult to have jump_next or jump_previous working in all cases when mapped to "<tab>"/"<s-tab>".
-For now, pressing tab inside a snippet just inserts a tab.
+It's difficult to have jump_next or jump_previous working in all cases when mapped to <tab>/<s-tab>.
+
+For now, the tab key inside a snippet just inserts a tab.
 LazyVim will warn the user when jump_next of jump_previous are overriden.
+
+Currently, mini.snippets is in "beta": See https://github.com/echasnovski/mini.nvim/issues/1428
 
 Example override for your own config:
 return {
