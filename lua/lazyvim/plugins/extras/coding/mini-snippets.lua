@@ -49,25 +49,25 @@ local function expand(args)
   insert({ body = args.body }) -- insert at cursor
 end
 
-local snippet_select_for_cmp = function(snippets, insert, opts)
+local snippet_select_for_cmp = function(snippets, insert)
   local cmp = require("cmp")
   if cmp.visible() then
     cmp.close()
   end
 
-  MiniSnippets.default_select(snippets, insert, opts)
+  MiniSnippets.default_select(snippets, insert)
 end
-local snippet_select_for_blink = function(snippets, insert, opts)
+local snippet_select_for_blink = function(snippets, insert)
   -- Blink's cancel uses vim.schedule!
   require("blink.cmp").cancel()
 
   -- Schedule, otherwise blink's virtual text is not removed on vim.ui.select
   vim.schedule(function()
-    MiniSnippets.default_select(snippets, insert, opts)
+    MiniSnippets.default_select(snippets, insert)
   end)
 end
-local snippet_select_without_completion_engine = function(snippets, insert, opts)
-  MiniSnippets.default_select(snippets, insert, opts)
+local snippet_select_without_completion_engine = function(snippets, insert)
+  MiniSnippets.default_select(snippets, insert)
 end
 local snippet_select = snippet_select_without_completion_engine
 
@@ -150,9 +150,9 @@ return {
           expand({ body = snippet }) -- provide snippet expansion for lsp
         end,
         active = function()
-          return false -- mini.snippets operates independently
+          return false -- mini.snippets operates independently, blink is closed
         end,
-        jump = function() end, -- mini.snippets operates independently
+        jump = function() end, -- mini.snippets operates independently, blink is closed
       }
     end,
   },
