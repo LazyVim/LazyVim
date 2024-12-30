@@ -7,11 +7,15 @@ This extra for mini.snippets activates the following:
 Note that there is no completion source. 
 Other snippets(custom or from friendly-snippets) are handled by pressing <c-j> in insert mode.
 
-In default LazyVim, neither cmp nor blink define the default mappings used by mini.snippets
-For now, pressing tab and shift-tab inside a snippet just inserts a tab
+In default LazyVim, neither cmp nor blink define the default mappings used by mini.snippets:
+- "<c-j>" to expand
+- "<c-l>" to jump next (dynamically created when in snippet context)
+- "<c-h>" to jump previous (dynamically created when in snippet context)
 
--- TODO: Find a way to incorporate user defined mappings including super-tab
--- TODO: Find a way to more easily support lang_patterns for snippets.gen_loader.from_lang
+It's difficult to have jump_next or jump_previous working in all cases when mapped to "<tab>"/"<s-tab>".
+For now, pressing tab and shift-tab inside a snippet just inserts a tab.
+LazyVim will warn the user when jump_next of jump_previous are overriden.
+
 --]]
 local function expand(args)
   ---@diagnostic disable-next-line: undefined-global
@@ -76,6 +80,16 @@ return {
           end,
         },
       }
+    end,
+    config = function(_, opts)
+      if opts.mappings and (opts.mappings.jump_next or opts.mappings.jump_previous) then
+        LazyVim["warn"]({
+          "`mini.snippets`:",
+          "Don't override jump_next or jump_previous.",
+          "This does not work correctly in all cases.",
+        }, { title = "LazyVim" })
+      end
+      require("mini.snippets").setup(opts)
     end,
   },
 
