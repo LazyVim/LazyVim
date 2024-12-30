@@ -13,10 +13,36 @@ In default LazyVim, neither cmp nor blink define the default mappings used by mi
 - "<c-h>" to jump previous (dynamically created when in snippet context)
 
 It's difficult to have jump_next or jump_previous working in all cases when mapped to "<tab>"/"<s-tab>".
-For now, pressing tab and shift-tab inside a snippet just inserts a tab.
+For now, pressing tab inside a snippet just inserts a tab.
 LazyVim will warn the user when jump_next of jump_previous are overriden.
 
+Example override for your own config:
+return {
+  {
+    "echasnovski/mini.snippets",
+    opts = function(_, opts)
+      -- By default, for opts.snippets, the extra for mini.snippets only adds gen_loader.from_lang()
+      -- This provides a sensible quickstart, integrating with friendly-snippets
+      -- and your own language-specific snippets
+      --
+      -- In order to change opts.snippets, replace the entire table inside your own opts
+
+      local snippets, config_path = require("mini.snippets"), vim.fn.stdpath("config")
+
+      opts.snippets = { -- override opts.snippets provided by extra...
+        -- Load custom file with global snippets first (order matters)
+        snippets.gen_loader.from_file(config_path .. "/snippets/global.json"),
+
+        -- Load snippets based on current language by reading files from
+        -- "snippets/" subdirectories from 'runtimepath' directories.
+        snippets.gen_loader.from_lang(), -- this is the default in the extra...
+      }
+    end,
+  },
+}
+
 --]]
+
 local function expand(args)
   ---@diagnostic disable-next-line: undefined-global
   local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
@@ -52,7 +78,7 @@ return {
   { "L3MON4D3/LuaSnip", optional = true, enabled = false },
 
   -- add mini.snippets
-  desc = "Manage and expand snippets (alternative for luasnip), currently in beta",
+  desc = "Beta testing mini.snippets, a plugin to manage and expand snippets (alternative for luasnip)",
   {
     "echasnovski/mini.snippets",
     event = "InsertEnter",
@@ -72,11 +98,13 @@ return {
       local snippets = require("mini.snippets")
       return {
         snippets = {
+          -- Load snippets based on current language by reading files from
+          -- "snippets/" subdirectories from 'runtimepath' directories.
           snippets.gen_loader.from_lang(),
         },
         expand = {
           select = function(...)
-            snippet_select(...) -- close completion windows on snippet select
+            snippet_select(...) -- if needed, close completion windows on snippet select
           end,
         },
       }
