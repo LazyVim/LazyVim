@@ -1,5 +1,4 @@
 --[[
-
 This extra for mini.snippets activates the following:
 1. During completion with either cmp or blink, expand lsp snippets
 2. To use other snippets: Press <c-j> in insert mode
@@ -47,7 +46,6 @@ return {
     end,
   },
 }
-
 --]]
 
 local function expand(args)
