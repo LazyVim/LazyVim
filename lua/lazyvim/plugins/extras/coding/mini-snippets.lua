@@ -7,6 +7,10 @@ if lazyvim_docs then
 
   -- NOTE: Blink has an open issue to address mini.snippets integration: #741
   -- For now, blink ignores vim.g.lazyvim_mini_snippets_in_cmp, operating as if it where false.
+
+  -- NOTE: Please also read:
+  -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-snippets.md#expand
+  -- :h MiniSnippets-session
 end
 
 -- Blink: hardcoded to false, see #741:
