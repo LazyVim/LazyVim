@@ -138,12 +138,17 @@ return {
       snippets_in_cmp = false
       snippet_select = snippet_select_for_blink
 
-      opts.sources.default = vim.tbl_filter(function(source) -- rm builtin snippets
-        if source == "snippets" then
-          return false
-        end
-        return true
-      end, opts.sources.default)
+      if snippets_in_cmp then
+        opts.sources.default = { "mini_snippets" }
+      else
+        -- No snippets in completion, remove  blink's builtin snippets
+        opts.sources.default = vim.tbl_filter(function(source)
+          if source == "snippets" then
+            return false
+          end
+          return true
+        end, opts.sources.default)
+      end
 
       -- Blink defines the <s-tab> key.
       opts.snippets = {
