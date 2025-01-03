@@ -15,7 +15,6 @@ return {
       return ret
     end,
     opts = { labeled_modes = "nx" },
-  },
   {
     "ggandor/leap.nvim",
     enabled = true,
