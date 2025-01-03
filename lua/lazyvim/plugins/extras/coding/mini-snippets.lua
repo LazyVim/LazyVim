@@ -120,8 +120,9 @@ return {
       -- stylua: ignore
       -- Use mini.snippets to expand snippets from lsp:
       opts.snippet = { expand = function(args) expand(args) end }
+
+      -- Show the snippets provided by mini.snippets in the completion popup:
       if snippets_in_cmp then
-        -- show the snippets provided by mini.snippets in the completion popup:
         table.insert(opts.sources, { name = "mini_snippets" })
       end
     end,
@@ -138,16 +139,14 @@ return {
       snippets_in_cmp = false
       snippet_select = snippet_select_for_blink
 
+      -- Remove builtin snippets source
+      opts.sources.default = vim.tbl_filter(function(source)
+        return source ~= "snippets"
+      end, opts.sources.default)
+
+      -- Show the snippets provided by mini.snippets in the completion popup:
       if snippets_in_cmp then
-        opts.sources.default = { "mini_snippets" }
-      else
-        -- No snippets in completion, remove  blink's builtin snippets
-        opts.sources.default = vim.tbl_filter(function(source)
-          if source == "snippets" then
-            return false
-          end
-          return true
-        end, opts.sources.default)
+        table.insert(opts.sources.default, "mini_snippets")
       end
 
       -- Blink defines the <s-tab> key.
