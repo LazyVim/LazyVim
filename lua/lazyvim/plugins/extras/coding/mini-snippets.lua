@@ -43,6 +43,11 @@ return {
 }
 --]]
 
+-- Start with a default snippet_select that also works when the user disables a competion engine
+local snippet_select = function(snippets, insert)
+  MiniSnippets.default_select(snippets, insert)
+end
+
 local snippet_select_for_cmp = function(snippets, insert)
   local cmp = require("cmp")
   if cmp.visible() then
@@ -50,6 +55,7 @@ local snippet_select_for_cmp = function(snippets, insert)
   end
   MiniSnippets.default_select(snippets, insert)
 end
+
 local snippet_select_for_blink = function(snippets, insert)
   -- Blink's cancel uses vim.schedule!
   require("blink.cmp").cancel()
@@ -57,9 +63,6 @@ local snippet_select_for_blink = function(snippets, insert)
   vim.schedule(function()
     MiniSnippets.default_select(snippets, insert)
   end)
-end
-local snippet_select = function(snippets, insert)
-  MiniSnippets.default_select(snippets, insert)
 end
 
 local function expand(args)
@@ -86,8 +89,7 @@ return {
   desc = "mini.snippets(beta), a plugin to manage and expand snippets (alternative for luasnip)",
   {
     "echasnovski/mini.snippets",
-    lazy = true,
-    event = not snippets_in_cmp and { "InsertEnter" } or nil,
+    event = "InsertEnter", -- don't depend on other plugins to load...
     dependencies = "rafamadriz/friendly-snippets",
     opts = function()
       local snippets = require("mini.snippets")
@@ -97,14 +99,14 @@ return {
       local ret = { snippets = { snippets.gen_loader.from_lang() } }
 
       LazyVim.cmp.actions.snippet_stop = function() end -- by design, <esc> should not stop the session!
-      if not snippets_in_cmp then
+      if snippets_in_cmp then
+        -- stylua: ignore
+        LazyVim.cmp.actions.snippet_forward = function() return jump("next") end
+      else
         LazyVim.cmp.actions.snippet_forward = nil
         -- stylua: ignore
         -- Close completion windows on snippet select to handle virtual text:
         ret.expand = { select = function(...) snippet_select(...) end, }
-      else
-        -- stylua: ignore
-        LazyVim.cmp.actions.snippet_forward = function() return jump("next") end
       end
       return ret
     end,
@@ -149,14 +151,14 @@ return {
         table.insert(opts.sources.default, "mini_snippets")
       end
 
-      -- Blink defines the <s-tab> key.
+      -- Note: blink defines the <s-tab> key...
       opts.snippets = {
         -- Use mini.snippets to expand snippets from lsp:
         expand = function(snippet)
           expand({ body = snippet })
         end,
         active = function()
-          return require("mini.snippets").session.get(false) ~= nil -- lazy loading...
+          return MiniSnippets.session.get(false) ~= nil
         end,
         jump = function(direction)
           jump(direction < 0 and "prev" or "next")
