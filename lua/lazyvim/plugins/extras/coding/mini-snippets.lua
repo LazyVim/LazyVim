@@ -105,7 +105,8 @@ return {
       else
         LazyVim.cmp.actions.snippet_forward = nil
         -- stylua: ignore
-        -- Close completion windows on snippet select to handle virtual text:
+        -- Close completion windows on snippet select to remove virtual text
+        -- Needed for fzf-lua and telescope, but not for mini.pick...
         ret.expand = { select = function(...) snippet_select(...) end, }
       end
       return ret
