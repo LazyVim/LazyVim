@@ -37,11 +37,11 @@
 </div>
 
 LazyVim est une configuration Neovim basée sur [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
-rendant facile la personalisation et les extensions.
-Plutôt qu'avoir à choisir entre partir de rien et utiliser
-une distribution pre-faite, LazyVim offre le meilleur des deux mondes.
-La flexibilitée de pouvoir ajuster sa propre configuration a son besoin,
-avec l'avantage d'utiliser une configuration initiale.
+facilitant la personnalisation et l'ajout d'extensions.
+Plutôt que d'imposer le choix entre partir de rien et utiliser
+une distribution toute faite, LazyVim offre le meilleur des deux mondes
+: la flexibilité d'une config ajustable selon vos besoins, et le confort
+d'une configuration pensée et peaufinée à l'avance.
 
 ![image](https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png)
 
@@ -49,11 +49,11 @@ avec l'avantage d'utiliser une configuration initiale.
 
 ## ✨ Fonctionnalités
 
-- 🔥 Transforme Neovim en un éditeur de texte fonctionnel
-- 💤 Facile de configurer et d'étendre [lazy.nvim](https://github.com/folke/lazy.nvim)
-- 🚀 Terriblement rapide !
-- 🧹 Configuration par défaut intuitive pour options, autocmds, et keymaps
-- 📦 Délivré avec une variété de plugins pre-configuré et prêt à être utilisé
+- 🔥 Transforme Neovim en un environnement de développement complet
+- 💤 Customise et étends ta config sans effort grâce à [lazy.nvim](https://github.com/folke/lazy.nvim)
+- 🚀 Rapide comme l'éclair !
+- 🧹 Configuration par défaut propre et intuitive pour les options, les autocmds, et les keymaps 
+- 📦 Livré avec une variété de plugins pre-configurés et prêts à être utilisés
 
 ## ⚡️ Pré-requis
 
@@ -81,51 +81,52 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 <details><summary>Installer le <a href="https://github.com/LazyVim/starter">LazyVim Starter</a></summary>
 
-- Faire une sauvegarde de votre configuration Neovim:
+- Sauvegardez votre configuration Neovim :
 
   ```sh
   mv ~/.config/nvim ~/.config/nvim.bak
   mv ~/.local/share/nvim ~/.local/share/nvim.bak
   ```
 
-- Cloner le starter
+- Clonez le starter
 
   ```sh
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   ```
 
-- Enlevez le dossier `.git`, pour permettre de l'ajouter à votre repo plus tard
+- Supprimez le dossier `.git`, afin que vous puissiez l'ajouter à votre repo plus tard
 
   ```sh
   rm -rf ~/.config/nvim/.git
   ```
 
-- Lancez Neovim!
+- Lancez Neovim !
 
   ```sh
   nvim
   ```
 
-  Consultez les commentaires dans les fichiers pour savoir comment personaliser **LazyVim**.
+  Consultez les commentaires dans les fichiers pour savoir comment personnaliser **LazyVim**.
 
 </details>
 
 ---
 
-Il y a une superbe vidéo de [@elijahmanor](https://github.com/elijahmanor) qui vous guide pas-à-pas pour commencer.
+Il y a une superbe vidéo (en anglais) de [@elijahmanor](https://github.com/elijahmanor)
+qui vous guide pas-à-pas pour commencer.
 
 [![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
 
-[@dusty-phillips](https://github.com/dusty-phillips) a écrit un livre complet nommé
-[LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes)
+[@dusty-phillips](https://github.com/dusty-phillips) a écrit un livre exhaustif
+sur LazyVim, nommé [LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes)
 disponible gratuitement en ligne.
 
 ## 📂 Structure de fichier
 
 Les fichiers dans le dossier config vont être chargés automatiquement en temps voulu,
 donc pas besoin de `require` ces fichiers manuellement.
-**LazyVim** vient avec un ensemble de fichiers de configuration par défaut
-qui seront chargés **_avant_** les votres. Voir [ici](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
+**LazyVim** vient avec un ensemble de fichiers de configuration par défaut qui seront chargés
+**_avant_** les vôtres. Voir [ici](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
 
 Vous pouvez ajouter vos configurations de plugins sous `lua/plugins/`.
 Ici, tous les fichiers seront automatiquement chargés par [lazy.nvim](https://github.com/folke/lazy.nvim)
@@ -147,4 +148,4 @@ Ici, tous les fichiers seront automatiquement chargés par [lazy.nvim](https://g
 
 ## ⚙️ Configuration
 
-Voir la [documentation](https://lazyvim.github.io)
+Veuillez vous référer à la [documentation](https://lazyvim.github.io)
