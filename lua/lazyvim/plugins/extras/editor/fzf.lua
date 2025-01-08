@@ -45,8 +45,9 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     opts = function(_, opts)
-      local config = require("fzf-lua.config")
-      local actions = require("fzf-lua.actions")
+      local fzf = require("fzf-lua")
+      local config = fzf.config
+      local actions = fzf.actions
 
       -- Quickfix
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
