@@ -1,5 +1,14 @@
 # Changelog
 
+## [14.6.1](https://github.com/LazyVim/LazyVim/compare/v14.6.0...v14.6.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* **blink:** added new luasnip preset ([8d2d9a9](https://github.com/LazyVim/LazyVim/commit/8d2d9a9bd965aab0a752f24ec327d2f391a8406b))
+* **luasnip:** correctly remove duplicate snippets ([#5214](https://github.com/LazyVim/LazyVim/issues/5214)) ([05c3447](https://github.com/LazyVim/LazyVim/commit/05c3447558fa6eef7ae3c0d3e7ed1c281572274d))
+* **nlua:** debugger not responding ([#5319](https://github.com/LazyVim/LazyVim/issues/5319)) ([4e746d0](https://github.com/LazyVim/LazyVim/commit/4e746d0e5625662e1f121b39f63836b653ed728b))
+
 ## [14.6.0](https://github.com/LazyVim/LazyVim/compare/v14.5.0...v14.6.0) (2024-12-20)
 
 
