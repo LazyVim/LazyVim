@@ -1,20 +1,14 @@
----@diagnostic disable: duplicate-set-field
-
 if lazyvim_docs then
-  -- set to `false` to prevent "non-lsp snippets"" from appearing inside completion popups
+  -- set to `false` to prevent "non-lsp snippets"" from appearing inside completion windows
   -- motivation: less clutter in completion windows and a more direct usage of snippits
   vim.g.lazyvim_mini_snippets_in_cmp = true
-
-  -- NOTE: Blink has an open issue to address mini.snippets integration: #741
-  -- For now, blink ignores vim.g.lazyvim_mini_snippets_in_cmp, operating as if it where false.
 
   -- NOTE: Please also read:
   -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-snippets.md#expand
   -- :h MiniSnippets-session
 end
 
--- Blink: hardcoded to false, see #741:
-local snippets_in_cmp = vim.g.lazyvim_mini_snippets_in_cmp == nil or vim.g.lazyvim_mini_snippets_in_cmp
+local snippets_in_completion = vim.g.lazyvim_mini_snippets_in_cmp == nil or vim.g.lazyvim_mini_snippets_in_cmp
 
 --[[
 Example override for your own config:
@@ -43,32 +37,9 @@ return {
 }
 --]]
 
--- Start with a default snippet_select that also works when the user disables a competion engine
-local snippet_select = function(snippets, insert)
-  MiniSnippets.default_select(snippets, insert)
-end
-
-local snippet_select_for_cmp = function(snippets, insert)
-  local cmp = require("cmp")
-  if cmp.visible() then
-    cmp.close()
-  end
-  MiniSnippets.default_select(snippets, insert)
-end
-
-local snippet_select_for_blink = function(snippets, insert)
-  -- Blink's cancel uses vim.schedule!
-  require("blink.cmp").cancel()
-  -- Schedule, otherwise blink's virtual text is not removed on vim.ui.select
-  vim.schedule(function()
-    MiniSnippets.default_select(snippets, insert)
-  end)
-end
-
-local function expand(args)
-  ---@diagnostic disable-next-line: undefined-global
+local function expand_from_lsp(snippet)
   local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
-  insert({ body = args.body }) -- insert at cursor
+  insert({ body = snippet })
 end
 
 local function jump(direction)
@@ -78,6 +49,9 @@ local function jump(direction)
     return true
   end
 end
+
+---@type fun(snippets, insert) | nil
+local on_mini_expand_select = nil
 
 return {
   -- disable builtin snippet support:
@@ -92,24 +66,28 @@ return {
     event = "InsertEnter", -- don't depend on other plugins to load...
     dependencies = "rafamadriz/friendly-snippets",
     opts = function()
-      local snippets = require("mini.snippets")
-
-      -- Load snippets based on current language by reading files from
-      -- "snippets/" subdirectories from 'runtimepath' directories.
-      local ret = { snippets = { snippets.gen_loader.from_lang() } }
-
+      ---@diagnostic disable-next-line: duplicate-set-field
       LazyVim.cmp.actions.snippet_stop = function() end -- by design, <esc> should not stop the session!
-      if snippets_in_cmp then
-        -- stylua: ignore
-        LazyVim.cmp.actions.snippet_forward = function() return jump("next") end
-      else
-        LazyVim.cmp.actions.snippet_forward = nil
-        -- stylua: ignore
-        -- Close completion windows on snippet select to remove virtual text
-        -- Needed for fzf-lua and telescope, but not for mini.pick...
-        ret.expand = { select = function(...) snippet_select(...) end, }
+      ---@diagnostic disable-next-line: duplicate-set-field
+      LazyVim.cmp.actions.snippet_forward = function()
+        return jump("next")
       end
-      return ret
+
+      local mini_snippets = require("mini.snippets")
+      return {
+        snippets = { mini_snippets.gen_loader.from_lang() },
+        expand = {
+          -- If applicable, close completion window on snippet select - vim.ui.select
+          -- Needed to remove virtual text for fzf-lua and telescope, but not for mini.pick...
+          select = function(snippets, insert)
+            if on_mini_expand_select then
+              on_mini_expand_select(snippets, insert)
+            else
+              MiniSnippets.default_select(snippets, insert)
+            end
+          end,
+        },
+      }
     end,
   },
 
@@ -117,21 +95,32 @@ return {
   {
     "hrsh7th/nvim-cmp",
     optional = true,
-    dependencies = snippets_in_cmp and { "abeldekat/cmp-mini-snippets" } or nil,
+    dependencies = snippets_in_completion and { "abeldekat/cmp-mini-snippets" } or nil,
     opts = function(_, opts)
-      snippet_select = snippet_select_for_cmp
-      -- stylua: ignore
-      -- Use mini.snippets to expand snippets from lsp:
-      opts.snippet = { expand = function(args) expand(args) end }
-
-      -- Show the snippets provided by mini.snippets in the completion popup:
-      if snippets_in_cmp then
+      opts.snippet = {
+        expand = function(args)
+          expand_from_lsp(args.body)
+        end,
+      }
+      if snippets_in_completion then -- return early when snippets_in_completion
         table.insert(opts.sources, { name = "mini_snippets" })
+        return
+      end
+
+      -- Standalone --
+      local function close_cmp()
+        local cmp = require("cmp")
+        -- stylua: ignore
+        if cmp.visible() then cmp.close() end
+      end
+      on_mini_expand_select = function(snippets, insert)
+        close_cmp()
+        MiniSnippets.default_select(snippets, insert)
       end
     end,
     -- stylua: ignore
     -- counterpart to <tab> defined in cmp.mappings
-    keys = snippets_in_cmp and { { "<s-tab>", function() jump("prev") end, mode = "i" } } or nil,
+    keys = snippets_in_completion and { { "<s-tab>", function() jump("prev") end, mode = "i" } } or nil,
   },
 
   -- blink.cmp integration
@@ -139,30 +128,35 @@ return {
     "saghen/blink.cmp",
     optional = true,
     opts = function(_, opts)
-      snippets_in_cmp = false
-      snippet_select = snippet_select_for_blink
+      if snippets_in_completion then -- return early when snippets_in_completion
+        opts.snippets = { preset = "mini_snippets" }
+        return
+      end
 
-      -- Remove builtin snippets source
+      -- Standalone --
+      local function close_cmp()
+        require("blink.cmp").cancel()
+      end
+      on_mini_expand_select = function(snippets, insert)
+        -- Schedule, otherwise blink's virtual text is not removed on vim.ui.select
+        close_cmp()
+        vim.schedule(function()
+          MiniSnippets.default_select(snippets, insert)
+        end)
+      end
+      --
+      -- Blink performs a require on blink.cmp.sources.snippets.default
+      -- By removing the source, the default engine will not be used
       opts.sources.default = vim.tbl_filter(function(source)
         return source ~= "snippets"
       end, opts.sources.default)
-
-      -- Show the snippets provided by mini.snippets in the completion popup:
-      if snippets_in_cmp then
-        table.insert(opts.sources.default, "mini_snippets")
-      end
-
-      -- Note: blink defines the <s-tab> key...
-      opts.snippets = {
-        -- Use mini.snippets to expand snippets from lsp:
-        expand = function(snippet)
-          expand({ body = snippet })
-        end,
+      opts.snippets = { -- need to repeat blink's preset here
+        expand = expand_from_lsp,
         active = function()
           return MiniSnippets.session.get(false) ~= nil
         end,
         jump = function(direction)
-          jump(direction < 0 and "prev" or "next")
+          jump(direction == -1 and "prev" or "next")
         end,
       }
     end,
