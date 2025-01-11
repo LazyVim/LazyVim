@@ -9,44 +9,44 @@ if lazyvim_docs then
   -- Also, those completions do not appear when using luasnip or native snippets
   --
   -- Set to `false` to enable completion suggestions directly after inserting a snippet
-  vim.g.lazyvim_mini_snippets_expand_insert_override = true
+  vim.g.lazyvim_mini_snippets_override_expand_insert = true
 
   -- NOTE: Please also read:
   -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-snippets.md#expand
   -- :h MiniSnippets-session
+
+  -- Example override for your own config:
+  --[[
+  return {
+    {
+      "echasnovski/mini.snippets",
+      opts = function(_, opts)
+        -- By default, for opts.snippets, the extra for mini.snippets only adds gen_loader.from_lang()
+        -- This provides a sensible quickstart, integrating with friendly-snippets
+        -- and your own language-specific snippets
+        --
+        -- In order to change opts.snippets, replace the entire table inside your own opts
+
+        local snippets, config_path = require("mini.snippets"), vim.fn.stdpath("config")
+
+        opts.snippets = { -- override opts.snippets provided by extra...
+          -- Load custom file with global snippets first (order matters)
+          snippets.gen_loader.from_file(config_path .. "/snippets/global.json"),
+
+          -- Load snippets based on current language by reading files from
+          -- "snippets/" subdirectories from 'runtimepath' directories.
+          snippets.gen_loader.from_lang(), -- this is the default in the extra...
+        }
+      end,
+    },
+  }
+--]]
 end
 
 local include_in_completion = vim.g.lazyvim_mini_snippets_in_completion == nil
   or vim.g.lazyvim_mini_snippets_in_completion
-local override_expand_insert = vim.g.lazyvim_mini_snippets_expand_insert_override == nil
-  or vim.g.lazyvim_mini_snippets_expand_insert_override
-
---[[
-Example override for your own config:
-return {
-  {
-    "echasnovski/mini.snippets",
-    opts = function(_, opts)
-      -- By default, for opts.snippets, the extra for mini.snippets only adds gen_loader.from_lang()
-      -- This provides a sensible quickstart, integrating with friendly-snippets
-      -- and your own language-specific snippets
-      --
-      -- In order to change opts.snippets, replace the entire table inside your own opts
-
-      local snippets, config_path = require("mini.snippets"), vim.fn.stdpath("config")
-
-      opts.snippets = { -- override opts.snippets provided by extra...
-        -- Load custom file with global snippets first (order matters)
-        snippets.gen_loader.from_file(config_path .. "/snippets/global.json"),
-
-        -- Load snippets based on current language by reading files from
-        -- "snippets/" subdirectories from 'runtimepath' directories.
-        snippets.gen_loader.from_lang(), -- this is the default in the extra...
-      }
-    end,
-  },
-}
---]]
+local override_expand_insert = vim.g.lazyvim_mini_snippets_override_expand_insert == nil
+  or vim.g.lazyvim_mini_snippets_override_expand_insert
 
 local function expand_from_lsp(snippet)
   local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
@@ -90,6 +90,13 @@ return {
       local mini_snippets = require("mini.snippets")
       return {
         snippets = { mini_snippets.gen_loader.from_lang() },
+
+        -- Following the behavior of vim.snippets,
+        -- the intended usage of <esc> is to be able to temporarily exit into normal mode for quick edits.
+        --
+        -- If you'd rather stop the snippet on <esc>, activate the line below in your own config:
+        -- mappings = { stop = "<esc>" }, -- <c-c> by default, see :h MiniSnippets-session
+
         expand = {
           select = function(snippets, insert)
             -- Close completion window on snippet select - vim.ui.select
