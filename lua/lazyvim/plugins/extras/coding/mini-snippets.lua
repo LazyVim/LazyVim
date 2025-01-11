@@ -1,14 +1,25 @@
 if lazyvim_docs then
-  -- set to `false` to prevent "non-lsp snippets"" from appearing inside completion windows
-  -- motivation: less clutter in completion windows and a more direct usage of snippits
-  vim.g.lazyvim_mini_snippets_in_cmp = true
+  -- Set to `false` to prevent "non-lsp snippets"" from appearing inside completion windows
+  -- Motivation: Less clutter in completion windows and a more direct usage of snippits
+  vim.g.lazyvim_mini_snippets_in_completion = true
+
+  -- Using default mini.snippets, completion suggestions might appear directly after inserting a snippet
+  -- This extra prevents that from happening.
+  -- Motivation: A better display of the current snippet.
+  -- Also, those completions do not appear when using luasnip or native snippets
+  --
+  -- Set to `false` to enable completion suggestions directly after inserting a snippet
+  vim.g.lazyvim_mini_snippets_expand_insert_override = true
 
   -- NOTE: Please also read:
   -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-snippets.md#expand
   -- :h MiniSnippets-session
 end
 
-local snippets_in_completion = vim.g.lazyvim_mini_snippets_in_cmp == nil or vim.g.lazyvim_mini_snippets_in_cmp
+local include_in_completion = vim.g.lazyvim_mini_snippets_in_completion == nil
+  or vim.g.lazyvim_mini_snippets_in_completion
+local override_expand_insert = vim.g.lazyvim_mini_snippets_expand_insert_override == nil
+  or vim.g.lazyvim_mini_snippets_expand_insert_override
 
 --[[
 Example override for your own config:
@@ -51,7 +62,10 @@ local function jump(direction)
 end
 
 ---@type fun(snippets, insert) | nil
-local on_mini_expand_select = nil
+local expand_select_override = nil
+
+---@type fun(snippet) | nil
+local expand_insert_override = nil
 
 return {
   -- disable builtin snippet support:
@@ -77,14 +91,16 @@ return {
       return {
         snippets = { mini_snippets.gen_loader.from_lang() },
         expand = {
-          -- If applicable, close completion window on snippet select - vim.ui.select
-          -- Needed to remove virtual text for fzf-lua and telescope, but not for mini.pick...
           select = function(snippets, insert)
-            if on_mini_expand_select then
-              on_mini_expand_select(snippets, insert)
-            else
-              MiniSnippets.default_select(snippets, insert)
-            end
+            -- Close completion window on snippet select - vim.ui.select
+            -- Needed to remove virtual text for fzf-lua and telescope, but not for mini.pick...
+            local select = expand_select_override or MiniSnippets.default_select
+            select(snippets, insert)
+          end,
+          insert = function(snippet)
+            -- Prevent completion suggestions directly after snippet insert
+            local insert = expand_insert_override or MiniSnippets.default_insert
+            insert(snippet)
           end,
         },
       }
@@ -95,14 +111,20 @@ return {
   {
     "hrsh7th/nvim-cmp",
     optional = true,
-    dependencies = snippets_in_completion and { "abeldekat/cmp-mini-snippets" } or nil,
+    dependencies = include_in_completion and { "abeldekat/cmp-mini-snippets" } or nil,
     opts = function(_, opts)
-      opts.snippet = {
-        expand = function(args)
-          expand_from_lsp(args.body)
-        end,
-      }
-      if snippets_in_completion then -- return early when snippets_in_completion
+      if override_expand_insert then
+        expand_insert_override = function(snippet)
+          MiniSnippets.default_insert(snippet)
+          require("cmp.config").set_onetime({ sources = {} })
+        end
+      end
+
+      -- stylua: ignore
+      opts.snippet = { expand = function(args) expand_from_lsp(args.body) end }
+
+      -- Return early
+      if include_in_completion then
         table.insert(opts.sources, { name = "mini_snippets" })
         return
       end
@@ -113,14 +135,14 @@ return {
         -- stylua: ignore
         if cmp.visible() then cmp.close() end
       end
-      on_mini_expand_select = function(snippets, insert)
+      expand_select_override = function(snippets, insert)
         close_cmp()
         MiniSnippets.default_select(snippets, insert)
       end
     end,
     -- stylua: ignore
     -- counterpart to <tab> defined in cmp.mappings
-    keys = snippets_in_completion and { { "<s-tab>", function() jump("prev") end, mode = "i" } } or nil,
+    keys = include_in_completion and { { "<s-tab>", function() jump("prev") end, mode = "i" } } or nil,
   },
 
   -- blink.cmp integration
@@ -128,7 +150,8 @@ return {
     "saghen/blink.cmp",
     optional = true,
     opts = function(_, opts)
-      if snippets_in_completion then -- return early when snippets_in_completion
+      -- Return early
+      if include_in_completion then
         opts.snippets = { preset = "mini_snippets" }
         return
       end
@@ -137,7 +160,7 @@ return {
       local function close_cmp()
         require("blink.cmp").cancel()
       end
-      on_mini_expand_select = function(snippets, insert)
+      expand_select_override = function(snippets, insert)
         -- Schedule, otherwise blink's virtual text is not removed on vim.ui.select
         close_cmp()
         vim.schedule(function()
