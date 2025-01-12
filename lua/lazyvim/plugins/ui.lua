@@ -40,7 +40,11 @@ return {
         },
         ---@param opts bufferline.IconFetcherOpts
         get_element_icon = function(opts)
-          return LazyVim.config.icons.ft[opts.filetype]
+          local lazyvim_icon = LazyVim.config.icons.ft[opts.filetype]
+          if lazyvim_icon then
+            return lazyvim_icon
+          end
+          return require("nvim-web-devicons").get_icon_by_filetype(opts.filetype, { default = false })
         end,
       },
     },
