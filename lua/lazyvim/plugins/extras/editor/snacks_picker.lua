@@ -68,7 +68,6 @@ return {
       { "<leader>sw", LazyVim.pick("grep_word"), desc = "Word (Root Dir)", mode = { "n", "x" } },
       { "<leader>sW", LazyVim.pick("grep_word", { root = false }), desc = "Word (cwd)", mode = { "n", "x" } },
       { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-      { "<leader>ss", function() Snacks.picker.lsp_symbols() end },
       { "<leader>qp", function() Snacks.picker.projects() end },
     },
   },
@@ -85,6 +84,7 @@ return {
         { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
         { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
         { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+        { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols", has = "documentSymbol" },
       })
     end,
   },
