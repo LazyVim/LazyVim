@@ -47,6 +47,7 @@ return {
       { "<leader>fr", LazyVim.pick("oldfiles"), desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { only_cwd = true }), desc = "Recent (cwd)" },
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
       { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
       { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
       { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
