@@ -1,5 +1,12 @@
 # Changelog
 
+## [14.7.0](https://github.com/LazyVim/LazyVim/compare/v14.6.1...v14.7.0) (2025-01-14)
+
+
+### Features
+
+* **extras:** added extra for snacks picker ([#5368](https://github.com/LazyVim/LazyVim/issues/5368)) ([13044c2](https://github.com/LazyVim/LazyVim/commit/13044c298ed1837a2d938b64710528d359dc8407))
+
 ## [14.6.1](https://github.com/LazyVim/LazyVim/compare/v14.6.0...v14.6.1) (2025-01-08)
 
 
