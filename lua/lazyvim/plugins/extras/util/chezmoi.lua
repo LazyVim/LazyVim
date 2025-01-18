@@ -32,12 +32,9 @@ local pick_chezmoi = function()
     })
     local items = {}
 
-    for i, czFile in ipairs(results) do
+    for _, czFile in ipairs(results) do
       table.insert(items, {
-        idx = i,
-        score = i,
         text = czFile,
-        name = czFile,
         file = czFile,
       })
     end
@@ -45,7 +42,6 @@ local pick_chezmoi = function()
     ---@type snacks.picker.Config
     local opts = {
       items = items,
-      format = "filename",
       confirm = function(picker, item)
         picker:close()
         require("chezmoi.commands").edit({
