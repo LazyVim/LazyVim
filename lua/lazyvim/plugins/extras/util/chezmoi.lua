@@ -46,8 +46,8 @@ local pick_chezmoi = function()
     local opts = {
       items = items,
       format = "filename",
-      confirm = function(_, item)
-        -- picker:close()
+      confirm = function(picker, item)
+        picker:close()
         require("chezmoi.commands").edit({
           targets = { item.text },
           args = { "--watch" },
