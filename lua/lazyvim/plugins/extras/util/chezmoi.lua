@@ -19,6 +19,42 @@ local pick_chezmoi = function()
       },
     }
     fzf_lua.fzf_exec(results, opts)
+  elseif LazyVim.pick.picker.name == "snacks" then
+    local results = require("chezmoi.commands").list({
+      args = {
+        "--path-style",
+        "absolute",
+        "--include",
+        "files",
+        "--exclude",
+        "externals",
+      },
+    })
+    local items = {}
+
+    for i, czFile in ipairs(results) do
+      table.insert(items, {
+        idx = i,
+        score = i,
+        text = czFile,
+        name = czFile,
+        file = czFile,
+      })
+    end
+
+    ---@type snacks.picker.Config
+    local opts = {
+      items = items,
+      format = "filename",
+      confirm = function(_, item)
+        -- picker:close()
+        require("chezmoi.commands").edit({
+          targets = { item.text },
+          args = { "--watch" },
+        })
+      end,
+    }
+    Snacks.picker.pick(opts)
   end
 end
 
