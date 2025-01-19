@@ -9,8 +9,9 @@ function M.pick(kind)
       LazyVim.warn("No " .. kind .. " found on the current line")
       return
     end
-    local ok = pcall(require, "fzf-lua")
-    require("CopilotChat.integrations." .. (ok and "fzflua" or "telescope")).pick(items)
+    local fzf_ok = pcall(require, "fzf-lua")
+    local snacks_ok = pcall(require, "snacks")
+    require("CopilotChat.integrations." .. (fzf_ok and "fzflua" or snacks_ok and "snacks" or "telescope")).pick(items)
   end
 end
 
