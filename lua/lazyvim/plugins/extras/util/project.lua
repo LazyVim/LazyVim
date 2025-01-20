@@ -79,9 +79,9 @@ pick = function()
     }
 
     fzf_lua.fzf_exec(results, opts)
+  elseif LazyVim.pick.picker.name == "snacks" then
+    Snacks.picker.projects()
   end
-elseif LazyVim.pick.picker.name == "snacks" then
-  Snacks.picker.projects()
 end
 
 return {
