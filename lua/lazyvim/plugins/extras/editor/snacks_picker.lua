@@ -74,7 +74,7 @@ return {
       { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
       { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
       { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-      { "<leader>qp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
     },
   },
   {
