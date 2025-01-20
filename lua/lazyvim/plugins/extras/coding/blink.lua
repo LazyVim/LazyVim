@@ -118,17 +118,6 @@ return {
         end
       end
 
-      ---  NOTE: compat with latest version. Currenlty 0.7.6
-      if not vim.g.lazyvim_blink_main then
-        ---@diagnostic disable-next-line: inject-field
-        opts.sources.completion = opts.sources.completion or {}
-        opts.sources.completion.enabled_providers = enabled
-        if vim.tbl_get(opts, "completion", "menu", "draw", "treesitter") then
-          ---@diagnostic disable-next-line: assign-type-mismatch
-          opts.completion.menu.draw.treesitter = true
-        end
-      end
-
       -- Unset custom prop to pass blink.cmp validation
       opts.sources.compat = nil
 
@@ -169,9 +158,7 @@ return {
     "saghen/blink.cmp",
     opts = function(_, opts)
       opts.appearance = opts.appearance or {}
-      opts.appearance.kind_icons = vim.tbl_extend("keep", {
-        Color = "██", -- Use block instead of icon for color items to make swatches more usable
-      }, LazyVim.config.icons.kinds)
+      opts.appearance.kind_icons = vim.tbl_extend("force", opts.appearance.kind_icons or {}, LazyVim.config.icons.kinds)
     end,
   },
 

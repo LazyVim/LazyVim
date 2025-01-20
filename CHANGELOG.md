@@ -1,5 +1,70 @@
 # Changelog
 
+## [14.8.0](https://github.com/LazyVim/LazyVim/compare/v14.7.0...v14.8.0) (2025-01-20)
+
+
+### Features
+
+* **chezmoi:** add snacks picker integration for chezmoi files ([#5429](https://github.com/LazyVim/LazyVim/issues/5429)) ([970d1a0](https://github.com/LazyVim/LazyVim/commit/970d1a05da37554aa17b671c869431a7b387d8be))
+* **dial:** add checkbox augend for markdown ([#5411](https://github.com/LazyVim/LazyVim/issues/5411)) ([b19f207](https://github.com/LazyVim/LazyVim/commit/b19f2070b847a3067436f4d16a0cc5b84a9f9819))
+* **snacks.picker:** added leader-sS to search lsp workspace symbols ([8787ec1](https://github.com/LazyVim/LazyVim/commit/8787ec1227e10123ad7291cf916020d9a8626525))
+* **snacks:** added git diff keymap to pick hunks with leader-gd ([62cb4a4](https://github.com/LazyVim/LazyVim/commit/62cb4a465c490c7d41f7a3bf52fb0e222f2cf83b))
+
+
+### Bug Fixes
+
+* **markdown:** disable checkbox rendering since it's annoying to edit ([4f31bfa](https://github.com/LazyVim/LazyVim/commit/4f31bfab86402c819e5ea1e18b3c5d139628c864))
+* **snacks.picker:** fix mapping for `Recent (cwd)` ([#5407](https://github.com/LazyVim/LazyVim/issues/5407)) ([8307b0f](https://github.com/LazyVim/LazyVim/commit/8307b0fe506a38417f3b7835e2c4b43d9a970946))
+* **snacks.picker:** fix mapping for Projects for consistency ([#5433](https://github.com/LazyVim/LazyVim/issues/5433)) ([eb7b453](https://github.com/LazyVim/LazyVim/commit/eb7b453b48ab7e3008013e0edf2822f622111e97))
+* **snacks.picker:** respect lazyvim.config.kind_filter ([#5415](https://github.com/LazyVim/LazyVim/issues/5415)) ([df7426e](https://github.com/LazyVim/LazyVim/commit/df7426eefa79d5dfa2fcbe2f381abfb2cca70bad))
+
+
+### Performance Improvements
+
+* **java:** setting opts.dap_main to false to disable main class scan ([#5391](https://github.com/LazyVim/LazyVim/issues/5391)) ([66c3577](https://github.com/LazyVim/LazyVim/commit/66c3577bc779d31a7c2addd47de7cc6d215795ba))
+
+## [14.7.0](https://github.com/LazyVim/LazyVim/compare/v14.6.1...v14.7.0) (2025-01-14)
+
+
+### Features
+
+* **extras:** added extra for snacks picker ([#5368](https://github.com/LazyVim/LazyVim/issues/5368)) ([13044c2](https://github.com/LazyVim/LazyVim/commit/13044c298ed1837a2d938b64710528d359dc8407))
+
+## [14.6.1](https://github.com/LazyVim/LazyVim/compare/v14.6.0...v14.6.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* **blink:** added new luasnip preset ([8d2d9a9](https://github.com/LazyVim/LazyVim/commit/8d2d9a9bd965aab0a752f24ec327d2f391a8406b))
+* **luasnip:** correctly remove duplicate snippets ([#5214](https://github.com/LazyVim/LazyVim/issues/5214)) ([05c3447](https://github.com/LazyVim/LazyVim/commit/05c3447558fa6eef7ae3c0d3e7ed1c281572274d))
+* **nlua:** debugger not responding ([#5319](https://github.com/LazyVim/LazyVim/issues/5319)) ([4e746d0](https://github.com/LazyVim/LazyVim/commit/4e746d0e5625662e1f121b39f63836b653ed728b))
+
+## [14.6.0](https://github.com/LazyVim/LazyVim/compare/v14.5.0...v14.6.0) (2024-12-20)
+
+
+### Features
+
+* **colorscheme:** add fzf integration to catppuccin ([#5175](https://github.com/LazyVim/LazyVim/issues/5175)) ([751803f](https://github.com/LazyVim/LazyVim/commit/751803f98bf3baaf7db1c1e2ddd28e082396124a))
+* **lualine:** add fzf extensions. ([#5203](https://github.com/LazyVim/LazyVim/issues/5203)) ([7a16a75](https://github.com/LazyVim/LazyVim/commit/7a16a752ba1fa535bb54d6492fb8df6c72ab8ba0))
+
+
+### Bug Fixes
+
+* **blink:** remove compatibility with 0.7.6 release ([#5212](https://github.com/LazyVim/LazyVim/issues/5212)) ([857f330](https://github.com/LazyVim/LazyVim/commit/857f330c2139c328cfce0251b11713dc179d6a81))
+* **codeium:** doesnt automatically load when `vim.g.ai_cmp` is set to false ([#5182](https://github.com/LazyVim/LazyVim/issues/5182)) ([b51279c](https://github.com/LazyVim/LazyVim/commit/b51279c6d727a09cd3d2bf3c9d0cf829810280bb))
+* **fzf:** fzf.lua compatible hidden scrollbar ([#5177](https://github.com/LazyVim/LazyVim/issues/5177)) ([3a79273](https://github.com/LazyVim/LazyVim/commit/3a79273f3c3bbd22bcdba795b7b8fe6a949db96e))
+* **luasnip:** use blink's luasnip source. Closes [#5211](https://github.com/LazyVim/LazyVim/issues/5211) ([86de9c9](https://github.com/LazyVim/LazyVim/commit/86de9c9e443572b0244ee9bbdcf5f10ecaabaf74))
+
+
+### Performance Improvements
+
+* **supermaven:** add lazy-loading ([#5183](https://github.com/LazyVim/LazyVim/issues/5183)) ([a3a28bf](https://github.com/LazyVim/LazyVim/commit/a3a28bf8e43f7239316942c2f2bac6e74b28586b))
+
+
+### Reverts
+
+* fix(fzf): fzf.lua compatible hidden scrollbar ([#5177](https://github.com/LazyVim/LazyVim/issues/5177)) ([c40692c](https://github.com/LazyVim/LazyVim/commit/c40692c1b0a95492eead8cc093972c634d54043b))
+
 ## [14.5.0](https://github.com/LazyVim/LazyVim/compare/v14.4.0...v14.5.0) (2024-12-17)
 
 
