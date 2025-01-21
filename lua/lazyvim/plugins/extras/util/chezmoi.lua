@@ -8,7 +8,7 @@ local pick_chezmoi = function()
         fzf_lua.actions.vimcmd_entry("ChezmoiEdit", selected, { cwd = os.getenv("HOME") })
       end,
     }
-    require("fzf-lua").files({ cmd = "chezmoi managed --include=files,symlinks", actions = actions })
+    fzf_lua.files({ cmd = "chezmoi managed --include=files,symlinks", actions = actions })
   elseif LazyVim.pick.picker.name == "snacks" then
     local results = require("chezmoi.commands").list({
       args = {
