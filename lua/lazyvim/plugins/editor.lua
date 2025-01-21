@@ -397,4 +397,10 @@ return {
       return LazyVim.pick.want() == "telescope"
     end,
   },
+  {
+    import = "lazyvim.plugins.extras.editor.snacks_picker",
+    enabled = function()
+      return LazyVim.pick.want() == "snacks"
+    end,
+  },
 }

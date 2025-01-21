@@ -45,8 +45,9 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     opts = function(_, opts)
-      local config = require("fzf-lua.config")
-      local actions = require("fzf-lua.actions")
+      local fzf = require("fzf-lua")
+      local config = fzf.config
+      local actions = fzf.actions
 
       -- Quickfix
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
@@ -285,6 +286,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function()
+      if LazyVim.pick.want() ~= "fzf" then
+        return
+      end
       local Keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
