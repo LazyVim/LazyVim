@@ -68,6 +68,7 @@ return {
       { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git-files)" },
       { "<leader>fr", LazyVim.pick("oldfiles"), desc = "Recent" },
       { "<leader>fR", LazyVim.pick("oldfiles", { filter = { cwd = true }}), desc = "Recent (cwd)" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       -- git
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
@@ -94,8 +95,9 @@ return {
       { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
       { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
       { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+      { "<leader>su", function() Snacks.picker.undo() end, desc = "Undotree" },
+      -- ui
       { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
     },
   },
   {
