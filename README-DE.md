@@ -68,7 +68,7 @@ Sie können eine Startvorlage für **LazyVim** [hier](https://github.com/LazyVim
 
 ```sh
 docker run -w /root -it --rm alpine:edge sh -uelic '
-  apk add git lazygit neovim ripgrep alpine-sdk --update
+  apk add git lazygit fzf curl neovim ripgrep alpine-sdk --update
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   cd ~/.config/nvim
   nvim

@@ -104,6 +104,9 @@ return {
         sign = false,
         icons = {},
       },
+      checkbox = {
+        enabled = false,
+      },
     },
     ft = { "markdown", "norg", "rmd", "org" },
     config = function(_, opts)

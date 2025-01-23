@@ -4,6 +4,7 @@ return {
   {
     "Exafunction/codeium.nvim",
     cmd = "Codeium",
+    event = "InsertEnter",
     build = ":Codeium Auth",
     opts = {
       enable_cmp_source = vim.g.ai_cmp,
@@ -34,7 +35,7 @@ return {
 
   -- codeium cmp source
   {
-    "nvim-cmp",
+    "hrsh7th/nvim-cmp",
     optional = true,
     dependencies = { "codeium.nvim" },
     opts = function(_, opts)
@@ -55,17 +56,21 @@ return {
     end,
   },
 
-  {
+  vim.g.ai_cmp and {
     "saghen/blink.cmp",
     optional = true,
+    dependencies = { "codeium.nvim", "saghen/blink.compat" },
     opts = {
       sources = {
-        compat = vim.g.ai_cmp and { "codeium" } or nil,
+        compat = { "codeium" },
+        providers = {
+          codeium = {
+            kind = "Codeium",
+            score_offset = 100,
+            async = true,
+          },
+        },
       },
     },
-    dependencies = {
-      "codeium.nvim",
-      vim.g.ai_cmp and "saghen/blink.compat" or nil,
-    },
-  },
+  } or nil,
 }

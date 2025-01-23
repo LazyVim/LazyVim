@@ -14,6 +14,7 @@ return {
         "rafamadriz/friendly-snippets",
         config = function()
           require("luasnip.loaders.from_vscode").lazy_load()
+          require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
         end,
       },
     },
@@ -33,12 +34,18 @@ return {
           return true
         end
       end
+      LazyVim.cmp.actions.snippet_stop = function()
+        if require("luasnip").expand_or_jumpable() then -- or just jumpable(1) is fine?
+          require("luasnip").unlink_current()
+          return true
+        end
+      end
     end,
   },
 
   -- nvim-cmp integration
   {
-    "nvim-cmp",
+    "hrsh7th/nvim-cmp",
     optional = true,
     dependencies = { "saadparwaiz1/cmp_luasnip" },
     opts = function(_, opts)
@@ -60,25 +67,9 @@ return {
   {
     "saghen/blink.cmp",
     optional = true,
-    dependencies = {
-      { "saghen/blink.compat", opts = { impersonate_nvim_cmp = true } },
-      { "saadparwaiz1/cmp_luasnip" },
-    },
     opts = {
-      sources = { compat = { "luasnip" } },
       snippets = {
-        expand = function(snippet)
-          require("luasnip").lsp_expand(snippet)
-        end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require("luasnip").jumpable(filter.direction)
-          end
-          return require("luasnip").in_snippet()
-        end,
-        jump = function(direction)
-          require("luasnip").jump(direction)
-        end,
+        preset = "luasnip",
       },
     },
   },
