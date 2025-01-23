@@ -62,6 +62,7 @@ return {
       { "<leader><space>", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       -- find
       { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader>fB", function() Snacks.picker.buffers({ hidden = true, nofile = true }) end, desc = "Buffers (all)" },
       { "<leader>fc", LazyVim.pick.config_files(), desc = "Find Config File" },
       { "<leader>ff", LazyVim.pick("files"), desc = "Find Files (Root Dir)" },
       { "<leader>fF", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
