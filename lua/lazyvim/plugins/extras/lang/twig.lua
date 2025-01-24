@@ -1,7 +1,6 @@
 return {
   recommended = {
     ft = "twig",
-    root = { "composer.json", ".phpactor.json", ".phpactor.yml" },
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -21,10 +20,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        ["twiggy-language-server"] = {
-          enabled = true,
-        },
-        lsp = {
+        ["twiggy_language_server"] = {
           enabled = true,
         },
       },
