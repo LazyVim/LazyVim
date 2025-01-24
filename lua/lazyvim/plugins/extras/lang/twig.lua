@@ -12,7 +12,6 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "twiggy-language-server",
         "twigcs",
         "twig-cs-fixer",
       },
@@ -22,7 +21,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        ["twiggy_language_server"] = {
+        twiggy_language_server = {
           enabled = true,
         },
       },
