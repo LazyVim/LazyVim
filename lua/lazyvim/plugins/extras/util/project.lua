@@ -3,6 +3,8 @@ local pick = nil
 pick = function()
   if LazyVim.pick.picker.name == "telescope" then
     return vim.cmd("Telescope projects")
+  elseif LazyVim.pick.picker.name == "snacks" then
+    require("snacks").picker.projects()
   elseif LazyVim.pick.picker.name == "fzf" then
     local fzf_lua = require("fzf-lua")
     local project = require("project_nvim.project")
