@@ -136,11 +136,6 @@ pick = function()
           ---@diagnostic disable-next-line: missing-fields
           Snacks.picker.pick("files", {
             cwd = item.file,
-            on_show = function()
-              vim.schedule(function()
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("i", true, false, true), "n", false)
-              end)
-            end,
           })
         end,
         tabedit = function(_, item)
@@ -148,32 +143,17 @@ pick = function()
           ---@diagnostic disable-next-line: missing-fields
           Snacks.picker.pick("files", {
             cwd = item.file,
-            on_show = function()
-              vim.schedule(function()
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("i", true, false, true), "n", false)
-              end)
-            end,
           })
         end,
         live_grep = function(_, item)
           Snacks.picker.pick("grep", {
             cwd = item.file,
-            on_show = function()
-              vim.schedule(function()
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("i", true, false, true), "n", false)
-              end)
-            end,
           })
         end,
         oldfiles = function(_, item)
           ---@diagnostic disable-next-line: missing-fields
           Snacks.picker.pick("recent", {
             filter = { cwd = item.file },
-            on_show = function()
-              vim.schedule(function()
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("i", true, false, true), "n", false)
-              end)
-            end,
           })
         end,
         change_dir = function(picker, item)
