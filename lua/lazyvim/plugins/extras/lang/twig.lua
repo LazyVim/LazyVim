@@ -1,8 +1,9 @@
 return {
-  recommended = {
-    ft = "twig",
-    root = {},
-  },
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "twig",
+    })
+  end,
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "twig" } },
