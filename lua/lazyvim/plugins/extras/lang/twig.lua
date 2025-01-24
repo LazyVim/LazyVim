@@ -1,6 +1,7 @@
 return {
   recommended = {
     ft = "twig",
+    root = { }
   },
   {
     "nvim-treesitter/nvim-treesitter",
