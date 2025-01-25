@@ -16,6 +16,10 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
+-- Delete an entire word in insert mode with <ctrl> backspace
+map("i", "<C-BS>", "<C-w>", { desc = "Delete entire word in insert mode" })
+map("i", "<C-H>", "<C-w>", { desc = "Delete entire word in insert mode" })
+
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
