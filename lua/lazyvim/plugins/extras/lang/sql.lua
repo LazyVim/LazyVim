@@ -48,7 +48,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = sql_ft,
         callback = function()
-          if LazyVim.has("nvim-cmp") then
+          if LazyVim.cmp_engine() == "nvim-cmp" then
             local cmp = require("cmp")
 
             -- global sources
