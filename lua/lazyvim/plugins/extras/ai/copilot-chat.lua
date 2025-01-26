@@ -9,9 +9,25 @@ function M.pick(kind)
       LazyVim.warn("No " .. kind .. " found on the current line")
       return
     end
-    local fzf_ok = pcall(require, "fzf-lua")
-    local snacks_ok = pcall(require, "snacks")
-    require("CopilotChat.integrations." .. (fzf_ok and "fzflua" or snacks_ok and "snacks" or "telescope")).pick(items)
+
+    -- Get the picker wanted (configured) by the user
+    local configured_picker = LazyVim.pick.want()
+
+    -- Sanity check if a valid picker for CopilotChat is configured
+    local valid_pickers = { "telescope", "fzf", "snacks" }
+
+    if not vim.tbl_contains(valid_pickers, configured_picker) then
+      LazyVim.error(
+        ("Invalid picker: '%s'. Ensure one of the following is installed and configured: %s"):format(
+          configured_picker,
+          table.concat(valid_pickers, ", ")
+        )
+      )
+      return
+    end
+
+    -- Use the valid picker
+    require("CopilotChat.integrations." .. configured_picker).pick(items)
   end
 end
 
