@@ -14,14 +14,12 @@ function M.pick(kind)
     local picker = LazyVim.pick.want()
 
     -- Map LazyVim picker names to CopilotChat integration modules
-    local picker_map = {
+    -- and get the corresponding CopilotChat integration module
+    local integration = ({
       telescope = "telescope",
-      fzf = "fzflua", -- Map "fzf" to "fzflua"
+      fzf = "fzflua",
       snacks = "snacks",
-    }
-
-    -- Get the corresponding CopilotChat integration module
-    local integration = picker_map[picker]
+    })[picker]
 
     if not integration then
       LazyVim.warn(
