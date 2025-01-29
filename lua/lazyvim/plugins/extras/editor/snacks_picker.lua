@@ -184,7 +184,7 @@ return {
                   },
                   action = function(match)
                     local idx = picker.list:row2idx(match.pos[1])
-                    picker.list:move(idx, true)
+                    picker.list:_move(idx, true, true)
                   end,
                 })
               end,
