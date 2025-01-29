@@ -154,7 +154,7 @@ return {
     },
   },
   {
-    "folke/snacks.nvim",
+    "folke/flash.nvim",
     optional = true,
     specs = {
       {
