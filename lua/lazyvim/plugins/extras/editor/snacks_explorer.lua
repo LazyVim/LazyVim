@@ -7,14 +7,14 @@ return {
       {
         "<leader>fe",
         function()
-          Snacks.picker.explorer({ cwd = LazyVim.root() })
+          Snacks.explorer({ cwd = LazyVim.root() })
         end,
         desc = "Explorer Snacks (root dir)",
       },
       {
         "<leader>fE",
         function()
-          Snacks.picker.explorer()
+          Snacks.explorer()
         end,
         desc = "Explorer Snacks (cwd)",
       },
