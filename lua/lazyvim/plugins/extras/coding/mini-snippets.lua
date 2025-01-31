@@ -61,7 +61,7 @@ return {
   { "L3MON4D3/LuaSnip", optional = true, enabled = false },
 
   -- add mini.snippets
-  desc = "mini.snippets(beta), a plugin to manage and expand snippets (alternative for luasnip)",
+  desc = "Manage and expand snippets (alternative to Luasnip)",
   {
     "echasnovski/mini.snippets",
     event = "InsertEnter", -- don't depend on other plugins to load...
@@ -149,7 +149,7 @@ return {
       end
       --
       -- Blink performs a require on blink.cmp.sources.snippets.default
-      -- By removing the source, the default engine will not be used
+      -- By removing the source, that default engine will not be used
       opts.sources.default = vim.tbl_filter(function(source)
         return source ~= "snippets"
       end, opts.sources.default)
