@@ -149,7 +149,7 @@ return {
       end
       --
       -- Blink performs a require on blink.cmp.sources.snippets.default
-      -- By removing the source, that default engine will not be used
+      -- By removing the source, the default engine will not be used
       opts.sources.default = vim.tbl_filter(function(source)
         return source ~= "snippets"
       end, opts.sources.default)
