@@ -1,5 +1,33 @@
 # Changelog
 
+## [14.9.0](https://github.com/LazyVim/LazyVim/compare/v14.8.0...v14.9.0) (2025-01-30)
+
+
+### Features
+
+* **markdown:** added markdown support for codecompanion ([e9db488](https://github.com/LazyVim/LazyVim/commit/e9db488acaa04f1a9eca6d022e57fed4271b8af8))
+* **snacks.picker:** added &lt;leader&gt;si to search icons ([#5460](https://github.com/LazyVim/LazyVim/issues/5460)) ([eea52be](https://github.com/LazyVim/LazyVim/commit/eea52be3447502dde77d9e6fa75fd597a0b5a86a))
+* **snacks.picker:** added &lt;leader&gt;su to search undotree ([#5447](https://github.com/LazyVim/LazyVim/issues/5447)) ([332b320](https://github.com/LazyVim/LazyVim/commit/332b32080c52727a16db90e06989caa0c378caa1))
+* **snacks.picker:** added `leader-fB` to find any buffer (including hidden & nofile) ([83bf636](https://github.com/LazyVim/LazyVim/commit/83bf6360a1f28a3fc1afe31ae300247fc01c7a90))
+* **snacks.picker:** added `leader-sp` to search for plugin spec ([7cf4185](https://github.com/LazyVim/LazyVim/commit/7cf4185dc4d1fe49ad004d33a6703603fb4500ff))
+* **snacks.picker:** added alt-c to toggle between cwd/root dir ([6be7c4f](https://github.com/LazyVim/LazyVim/commit/6be7c4fee4fb755ff07f7bcc13eac96e1d8c279a))
+* **snacks.picker:** flash.nvim integration ([5d24aa6](https://github.com/LazyVim/LazyVim/commit/5d24aa63111af68fbada8c97fedb75b07b8c3c92))
+* **snacks.picker:** use snacks picker for notifications when enabled ([01a70cc](https://github.com/LazyVim/LazyVim/commit/01a70cc60ed2760afc819510177fb8d12a371b25))
+* **snacks:** extra for snacks explorer (replacement for neo-tree) ([e20d9af](https://github.com/LazyVim/LazyVim/commit/e20d9afcbc980510093a3753a3991d8c934cbb75))
+* **snippets:** an extra for mini.snippets ([#5274](https://github.com/LazyVim/LazyVim/issues/5274)) ([8b4e6ff](https://github.com/LazyVim/LazyVim/commit/8b4e6ff70d682cad3b1f4999623c3f0ac639fa82))
+
+
+### Bug Fixes
+
+* **keymaps:** remove unneeded and ambiguous `&lt;leader&gt;w` keymap ([#5459](https://github.com/LazyVim/LazyVim/issues/5459)) ([132986a](https://github.com/LazyVim/LazyVim/commit/132986a624b49bf740161d90ce94f16dd5ea5883))
+* **luasnip:** schedule `jump` to be compatible with blink, nvim-cmp still works after change ([#5470](https://github.com/LazyVim/LazyVim/issues/5470)) ([0350934](https://github.com/LazyVim/LazyVim/commit/0350934d56579f3e6a9d40fa47313b2970d74772))
+* **root:** pass args to root.get ([dc8512f](https://github.com/LazyVim/LazyVim/commit/dc8512fce1ec1cd4b0ca52d1077b2ed3894d51c8))
+* **snacks.picker:** flash integration ([b5cd0d0](https://github.com/LazyVim/LazyVim/commit/b5cd0d0e27081be3ef1905475a0fe541b7661870))
+* **snacks.picker:** snacks =&gt; flash ([3de7b24](https://github.com/LazyVim/LazyVim/commit/3de7b24cf6ed844772ea047476a400c56d5f4b42))
+* **snacks:** use `Snacks.picker` for recent files ([#5485](https://github.com/LazyVim/LazyVim/issues/5485)) ([f0d2629](https://github.com/LazyVim/LazyVim/commit/f0d2629bd859eeac343999b0fe145f9beb227c4a))
+* **sql:** better nvim-cmp check. Closes [#5188](https://github.com/LazyVim/LazyVim/issues/5188) ([1e83b4f](https://github.com/LazyVim/LazyVim/commit/1e83b4f843f88678189df81b1c88a400c53abdbc))
+* **vscode:** diabled some snacks plugins. Fixes [#5364](https://github.com/LazyVim/LazyVim/issues/5364) ([c7a7ab5](https://github.com/LazyVim/LazyVim/commit/c7a7ab51129692927ae47f4e57ce22d10d48467e))
+
 ## [14.8.0](https://github.com/LazyVim/LazyVim/compare/v14.7.0...v14.8.0) (2025-01-20)
 
 
