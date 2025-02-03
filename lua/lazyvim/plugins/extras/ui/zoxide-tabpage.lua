@@ -25,6 +25,7 @@ return {
       -- auto-rename tab when enter
       vim.api.nvim_create_autocmd("TabNewEntered", {
         callback = function()
+          vim.notify("Tab renamed to " .. getCurrentCwdDirName())
           -- Schedule the renaming after the tab is fully entered
           vim.schedule(function()
             vim.cmd("BufferLineTabRename " .. getCurrentCwdDirName())
@@ -41,10 +42,8 @@ return {
         end
       end
 
-      -- hook into persistence.nvim to rename tabs after restoring a session
       vim.api.nvim_create_autocmd("User", {
-        pattern = "PersistenceLoadPost",
-        once = true,
+        pattern = "VeryLazy",
         callback = function()
           vim.defer_fn(function()
             if vim.fn.exists(":BufferLineTabRename") == 2 then
@@ -53,6 +52,7 @@ return {
           end, 1000)
         end,
       })
+
       return opts
     end,
   },
