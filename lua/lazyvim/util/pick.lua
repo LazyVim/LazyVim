@@ -42,11 +42,13 @@ function M.register(picker)
   return true
 end
 
----@return "telescope" | "fzf"
+---@return "telescope" | "fzf" | "snacks"
 function M.want()
   vim.g.lazyvim_picker = vim.g.lazyvim_picker or "auto"
   if vim.g.lazyvim_picker == "auto" then
-    return LazyVim.has_extra("editor.telescope") and "telescope" or "fzf"
+    return LazyVim.has_extra("editor.snacks_picker") and "snacks"
+      or LazyVim.has_extra("editor.telescope") and "telescope"
+      or "fzf"
   end
   return vim.g.lazyvim_picker
 end
