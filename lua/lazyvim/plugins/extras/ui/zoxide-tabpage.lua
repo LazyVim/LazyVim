@@ -10,7 +10,7 @@ end
 return {
   -- tabpage rename with cmd name
   {
-    "akinsho/bufferline.nvim",
+    "LazyVim/LazyVim",
     opts = function(_, opts)
       -- custom tabpage naming pattern
       local function getCurrentCwdDirName()
