@@ -61,7 +61,7 @@ return {
   { "L3MON4D3/LuaSnip", optional = true, enabled = false },
 
   -- add mini.snippets
-  desc = "mini.snippets(beta), a plugin to manage and expand snippets (alternative for luasnip)",
+  desc = "Manage and expand snippets (alternative to Luasnip)",
   {
     "echasnovski/mini.snippets",
     event = "InsertEnter", -- don't depend on other plugins to load...
