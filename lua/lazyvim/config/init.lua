@@ -206,6 +206,26 @@ function M.setup(opts)
         "desc",
         "vscode",
       })
+
+      -- Check lazy.nvim import order
+      local imports = require("lazy.core.config").spec.modules
+      local function find(pat, last)
+        for i = last and #imports or 1, last and 1 or #imports, last and -1 or 1 do
+          if imports[i]:find(pat) then
+            return i
+          end
+        end
+      end
+      local lazyvim_plugins = find("^lazyvim%.plugins$")
+      local extras = find("^lazyvim%.plugins%.extras%.", true) or lazyvim_plugins
+      local plugins = find("^plugins$") or math.huge
+      if lazyvim_plugins ~= 1 or extras > plugins then
+        vim.notify(
+          "The order of your `lazy.nvim` imports is incorrect:\n- `lazyvim.plugins` should be first\n- followed by any `lazyvim.plugins.extras`\n- and finally your own `plugins`",
+          "warn",
+          { title = "LazyVim" }
+        )
+      end
     end,
   })
 
