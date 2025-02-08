@@ -37,6 +37,9 @@ return {
             highlight = "Directory",
             text_align = "left",
           },
+          {
+            filetype = "snacks_layout_box",
+          },
         },
         ---@param opts bufferline.IconFetcherOpts
         get_element_icon = function(opts)
@@ -321,5 +324,19 @@ return {
         },
       },
     },
+  },
+  {
+    "folke/snacks.nvim",
+    opts = function(_, opts)
+      if not opts.picker then
+        return
+      end
+      table.insert(opts.dashboard.preset.keys, 3, {
+        icon = " ",
+        key = "p",
+        desc = "Projects",
+        action = ":lua Snacks.picker.projects()",
+      })
+    end,
   },
 }
