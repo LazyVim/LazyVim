@@ -81,7 +81,7 @@ end
 function M.fix_imports()
   local defaults ---@type table<string, LazyVimDefault>
   Plugin.Spec.import = LazyVim.inject.args(Plugin.Spec.import, function(_, spec)
-    if LazyVim.config.json_loaded then
+    if LazyVim.config.json.loaded then
       -- extra disabled by defaults?
       defaults = defaults or LazyVim.config.get_defaults()
       local def = defaults[spec.import]

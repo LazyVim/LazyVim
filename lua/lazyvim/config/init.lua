@@ -136,18 +136,19 @@ local defaults = {
 }
 
 M.json = {
-  version = 7,
+  version = 8,
+  loaded = false,
   path = vim.g.lazyvim_json or vim.fn.stdpath("config") .. "/lazyvim.json",
   data = {
-    version = nil, ---@type string?
+    version = nil, ---@type number?
+    install_version = nil, ---@type number?
     news = {}, ---@type table<string, string>
     extras = {}, ---@type string[]
   },
 }
-M.json_loaded = false
 
 function M.json.load()
-  M.json_loaded = true
+  M.json.loaded = true
   local f = io.open(M.json.path, "r")
   if f then
     local data = f:read("*a")
@@ -159,6 +160,8 @@ function M.json.load()
         LazyVim.json.migrate()
       end
     end
+  else
+    M.json.data.install_version = M.json.version
   end
 end
 
@@ -334,8 +337,8 @@ function M.get_defaults()
   ---@type table<string, LazyVimDefault[]>
   local checks = {
     picker = {
-      { name = "fzf", extra = "editor.fzf" },
       { name = "snacks", extra = "editor.snacks_picker" },
+      { name = "fzf", extra = "editor.fzf" },
       { name = "telescope", extra = "editor.telescope" },
     },
     cmp = {
@@ -343,10 +346,17 @@ function M.get_defaults()
       { name = "nvim-cmp", extra = "coding.nvim-cmp" },
     },
     explorer = {
-      { name = "neo-tree", extra = "editor.neo-tree" },
       { name = "snacks", extra = "editor.snacks_explorer" },
+      { name = "neo-tree", extra = "editor.neo-tree" },
     },
   }
+
+  -- existing installs keep their defaults
+  if (LazyVim.config.json.data.install_version or 7) < 8 then
+    table.insert(checks.picker, 1, table.remove(checks.picker, 2))
+    table.insert(checks.explorer, 1, table.remove(checks.explorer, 2))
+  end
+
   default_extras = {}
   for name, check in pairs(checks) do
     local valid = {} ---@type string[]
