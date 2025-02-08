@@ -271,7 +271,6 @@ function X:extra(extra)
         message = "This extra is included by default",
       })
     else
-      dd(origin)
       self:diagnostic({
         message = "Not managed by LazyExtras (config)",
         severity = vim.diagnostic.severity.WARN,
