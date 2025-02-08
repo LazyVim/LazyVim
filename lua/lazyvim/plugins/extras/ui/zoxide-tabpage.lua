@@ -1,6 +1,6 @@
 ---action after zoxide dir selection
 ---@param path string
-local function action(path)
+local function open_zoxide_dir_in_tab(path)
   vim.cmd("tabnew")
   vim.cmd.tcd(path)
   vim.cmd("setl bufhidden=wipe")
@@ -60,27 +60,36 @@ return {
   {
     "folke/snacks.nvim",
     optional = true,
-    opts = {
-      picker = {
-        ---@type table<string, snacks.picker.Config|{}>
-        sources = {
-          zoxide = {
-            confirm = function(picker, item)
-              picker:close()
-              if item then
-                action(item.text)
-              end
-            end,
-          },
-        },
-      },
-    },
     keys = {
       {
         "<leader>sz",
-        function()
-          Snacks.picker.zoxide()
-        end,
+        LazyVim.pick("zoxide", {
+          confirm = function(picker, item)
+            picker:close()
+            if item then
+              open_zoxide_dir_in_tab(item.text)
+            end
+          end,
+        }),
+        desc = "Zoxide",
+      },
+    },
+  },
+  -- fzf integration
+  {
+    "ibhagwan/fzf-lua",
+    optional = true,
+    keys = {
+      {
+        "<leader>sz",
+        LazyVim.pick("zoxide", {
+          actions = {
+            enter = function(selected)
+              local cwd = selected[1]:match("[^\t]+$") or selected[1]
+              open_zoxide_dir_in_tab(cwd)
+            end,
+          },
+        }),
         desc = "Zoxide",
       },
     },
@@ -98,7 +107,7 @@ return {
           mappings = {
             default = {
               action = function(selection)
-                action(selection.path)
+                open_zoxide_dir_in_tab(selection.path)
               end,
             },
           },
@@ -108,7 +117,7 @@ return {
     keys = {
       {
         "<leader>sz",
-        [[<cmd>Telescope zoxide list theme=dropdown previewer=false<cr>]],
+        [[<cmd>Telescope zoxide list<cr>]],
         desc = "Zoxide",
       },
     },
