@@ -212,6 +212,10 @@ function M.setup(opts)
         "vscode",
       })
 
+      if vim.g.lazyvim_check_order == false then
+        return
+      end
+
       -- Check lazy.nvim import order
       local imports = require("lazy.core.config").spec.modules
       local function find(pat, last)
