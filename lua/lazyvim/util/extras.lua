@@ -248,6 +248,9 @@ end
 
 ---@param extra LazyExtra
 function X:extra(extra)
+  local defaults = LazyVim.config.get_defaults()
+  local def = defaults[extra.module]
+  local origin = def and (def.origin or "user") or nil
   if not extra.managed then
     ---@type LazyExtra[]
     local parents = {}
@@ -263,11 +266,12 @@ function X:extra(extra)
       self:diagnostic({
         message = "Required by " .. table.concat(pp, ", "),
       })
-    elseif vim.tbl_contains(LazyVim.plugin.core_imports, extra.module) then
+    elseif vim.tbl_contains(LazyVim.plugin.core_imports, extra.module) or origin == "default" then
       self:diagnostic({
         message = "This extra is included by default",
       })
     else
+      dd(origin)
       self:diagnostic({
         message = "Not managed by LazyExtras (config)",
         severity = vim.diagnostic.severity.WARN,
