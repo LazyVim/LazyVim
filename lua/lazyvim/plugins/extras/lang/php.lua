@@ -23,6 +23,15 @@ return {
       servers = {
         phpactor = {
           enabled = lsp == "phpactor",
+          init_options = {
+            composerJsonPath = "composer.json",
+            enableCache = true,
+            completionProvider = { addUseDeclaration = true },
+            staticAnalysis = true,
+            diagnostics = {
+              missingDocs = false,
+            },
+          },
         },
         intelephense = {
           enabled = lsp == "intelephense",
@@ -40,6 +49,7 @@ return {
       ensure_installed = {
         "phpcs",
         "php-cs-fixer",
+        "phpcbf",
       },
     },
   },
@@ -63,7 +73,7 @@ return {
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
       table.insert(opts.sources, nls.builtins.formatting.phpcsfixer)
-      table.insert(opts.sources, nls.builtins.diagnostics.phpcs)
+      table.insert(opts.sources, nls.builtins.formatting.phpcbf)
     end,
   },
   {
@@ -80,7 +90,7 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        php = { "php_cs_fixer" },
+        php = { "php_cs_fixer", "phpcbf", "blade-formatter" },
       },
     },
   },
