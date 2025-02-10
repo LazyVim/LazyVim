@@ -40,7 +40,6 @@ end
 
 return {
   desc = "Awesome picker for FZF (alternative to Telescope)",
-  recommended = true,
   {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
