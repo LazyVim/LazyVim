@@ -13,7 +13,7 @@ function M.get()
   end
     -- stylua: ignore
     M._keys =  {
-      { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+      { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
       { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
       { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
       { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
