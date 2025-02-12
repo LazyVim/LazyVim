@@ -5,6 +5,7 @@ local M = {}
 
 ---@type string[]
 M.core_imports = {}
+M.handle_defaults = true
 
 M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
@@ -79,7 +80,16 @@ function M.lazy_file()
 end
 
 function M.fix_imports()
+  local defaults ---@type table<string, LazyVimDefault>
   Plugin.Spec.import = LazyVim.inject.args(Plugin.Spec.import, function(_, spec)
+    if M.handle_defaults and LazyVim.config.json.loaded then
+      -- extra disabled by defaults?
+      defaults = defaults or LazyVim.config.get_defaults()
+      local def = defaults[spec.import]
+      if def and def.enabled == false then
+        return false
+      end
+    end
     local dep = M.deprecated_extras[spec and spec.import]
     if dep then
       dep = dep .. "\n" .. "Please remove the extra from `lazyvim.json` to hide this warning."
