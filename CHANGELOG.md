@@ -1,5 +1,13 @@
 # Changelog
 
+## [14.13.0](https://github.com/LazyVim/LazyVim/compare/v14.12.0...v14.13.0) (2025-02-12)
+
+
+### Features
+
+* **editor:** update parameter for fzf-lua ([#5584](https://github.com/LazyVim/LazyVim/issues/5584)) ([0a5965b](https://github.com/LazyVim/LazyVim/commit/0a5965b787e4d513b5a2e1182b35bd11ceafeeb3))
+* **lsp:** use lsp_config picker instead of `LspInfo` ([7529773](https://github.com/LazyVim/LazyVim/commit/75297733710951e81b505d88b2d728a5b0a9b6ab))
+
 ## [14.12.0](https://github.com/LazyVim/LazyVim/compare/v14.11.0...v14.12.0) (2025-02-10)
 
 
