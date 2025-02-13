@@ -1,5 +1,6 @@
 return {
   "danymat/neogen",
+  dependencies = LazyVim.has("mini.snippets") and { "mini.snippets" } or {},
   cmd = "Neogen",
   keys = {
     {
@@ -27,11 +28,6 @@ return {
         opts.snippet_engine = engine
         return
       end
-    end
-
-    -- NOTE: neogen does not require mini.snippets
-    if opts.snippet_engine == "mini" then
-      require("mini.snippets")
     end
 
     if vim.snippet then
