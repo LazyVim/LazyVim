@@ -17,6 +17,7 @@ return {
 
     local map = {
       ["LuaSnip"] = "luasnip",
+      ["mini.snippets"] = "mini",
       ["nvim-snippy"] = "snippy",
       ["vim-vsnip"] = "vsnip",
     }
@@ -26,6 +27,11 @@ return {
         opts.snippet_engine = engine
         return
       end
+    end
+
+    -- NOTE: neogen does not require mini.snippets
+    if opts.snippet_engine == "mini" then
+      require("mini.snippets")
     end
 
     if vim.snippet then
