@@ -1,5 +1,6 @@
 return {
   "danymat/neogen",
+  dependencies = LazyVim.has("mini.snippets") and { "mini.snippets" } or {},
   cmd = "Neogen",
   keys = {
     {
@@ -17,6 +18,7 @@ return {
 
     local map = {
       ["LuaSnip"] = "luasnip",
+      ["mini.snippets"] = "mini",
       ["nvim-snippy"] = "snippy",
       ["vim-vsnip"] = "vsnip",
     }
