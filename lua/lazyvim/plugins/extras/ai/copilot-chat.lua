@@ -9,8 +9,17 @@ function M.pick(kind)
       LazyVim.warn("No " .. kind .. " found on the current line")
       return
     end
-    local ok = pcall(require, "fzf-lua")
-    require("CopilotChat.integrations." .. (ok and "fzflua" or "telescope")).pick(items)
+    local map = {
+      telescope = "telescope",
+      fzf = "fzflua",
+      snacks = "snacks",
+    }
+    for _, def in pairs(LazyVim.config.get_defaults()) do
+      if def.enabled and map[def.name] then
+        return require("CopilotChat.integrations." .. map[def.name]).pick(items)
+      end
+    end
+    Snacks.notify.error("No picker found")
   end
 end
 

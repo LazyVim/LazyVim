@@ -1,5 +1,27 @@
 # Changelog
 
+## [14.13.0](https://github.com/LazyVim/LazyVim/compare/v14.12.0...v14.13.0) (2025-02-12)
+
+
+### Features
+
+* **editor:** update parameter for fzf-lua ([#5584](https://github.com/LazyVim/LazyVim/issues/5584)) ([0a5965b](https://github.com/LazyVim/LazyVim/commit/0a5965b787e4d513b5a2e1182b35bd11ceafeeb3))
+* **lsp:** use lsp_config picker instead of `LspInfo` ([7529773](https://github.com/LazyVim/LazyVim/commit/75297733710951e81b505d88b2d728a5b0a9b6ab))
+
+## [14.12.0](https://github.com/LazyVim/LazyVim/compare/v14.11.0...v14.12.0) (2025-02-10)
+
+
+### Features
+
+* **config:** add option to disable the order check to warning message ([da3b515](https://github.com/LazyVim/LazyVim/commit/da3b5159df326bc31d5a0ebdfa2c5cbbd32df9d2))
+* **config:** allow disabling the order check with `vim.g.lazyvim_check_order = false` ([0bbce17](https://github.com/LazyVim/LazyVim/commit/0bbce1775b7d6750d3c4d761f3ad1bcfb77fb805))
+
+
+### Bug Fixes
+
+* **copilot-chat:** added support for snacks picker. Closes [#5432](https://github.com/LazyVim/LazyVim/issues/5432). Closes [#5552](https://github.com/LazyVim/LazyVim/issues/5552) ([2a608f0](https://github.com/LazyVim/LazyVim/commit/2a608f00d47bb6679a27a313fb0404e4d3a2196c))
+* **extras:** disable import handling when loading `:LazyExtras` + changed some recommendations ([121a2e2](https://github.com/LazyVim/LazyVim/commit/121a2e27ef0f4d8ab64bf76768b9600c45fd2364))
+
 ## [14.11.0](https://github.com/LazyVim/LazyVim/compare/v14.10.0...v14.11.0) (2025-02-08)
 
 

@@ -83,6 +83,7 @@ end
 ---@param modname string
 ---@param source LazyExtraSource
 function M.get_extra(source, modname)
+  LazyVim.plugin.handle_defaults = false
   local enabled = vim.tbl_contains(M.state, modname)
   local spec = Plugin.Spec.new(nil, { optional = true, pkg = false })
   spec:parse({ import = modname })
