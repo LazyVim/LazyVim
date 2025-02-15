@@ -81,6 +81,10 @@ return {
         default = { "lsp", "path", "snippets", "buffer" },
       },
 
+      cmdline = {
+        sources = {},
+      },
+
       keymap = {
         preset = "enter",
         ["<C-y>"] = { "select_and_accept" },
@@ -88,15 +92,6 @@ return {
     },
     ---@param opts blink.cmp.Config | { sources: { compat: string[] } }
     config = function(_, opts)
-      -- HACK: remove when next `blink.cmp` stable release is available
-      -- and just do `opts.cmdline.sources = {}` directly in `opts`
-      -- Should be greater than current 0.11.0
-      if not vim.g.lazyvim_blink_main then
-        opts.sources["cmdline"] = {}
-      else
-        opts.cmdline = opts.cmdline or {}
-        opts.cmdline.sources = {}
-      end
       -- setup compat sources
       local enabled = opts.sources.default
       for _, source in ipairs(opts.sources.compat or {}) do
