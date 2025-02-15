@@ -82,6 +82,7 @@ return {
       },
 
       cmdline = {
+        enabled = false,
         sources = {},
       },
 
