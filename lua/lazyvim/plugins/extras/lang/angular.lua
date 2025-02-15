@@ -34,7 +34,7 @@ return {
         angularls = {
           -- Make sure it works for Nx workspaces as well
           root_dir = function(fname)
-            return require("lspconfig.util").root_pattern("nx.json", "angular.json")(fname) or vim.loop.cwd()
+            return require("lspconfig.util").root_pattern("nx.json", "angular.json")(fname)
           end,
         },
       },
