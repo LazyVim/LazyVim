@@ -1,5 +1,22 @@
 # Changelog
 
+## [14.14.0](https://github.com/LazyVim/LazyVim/compare/v14.13.0...v14.14.0) (2025-02-15)
+
+
+### Features
+
+* **extras:** setup neogen and mini.snippets integration ([#5594](https://github.com/LazyVim/LazyVim/issues/5594)) ([5788b9d](https://github.com/LazyVim/LazyVim/commit/5788b9d1e06dfb5f99f92354dc550c9f2c5a6710))
+* **keymaps:** enable toggling in quickfix list and location list ([#5608](https://github.com/LazyVim/LazyVim/issues/5608)) ([32e575a](https://github.com/LazyVim/LazyVim/commit/32e575aa75792c63f710f0bdc3e2fb5aa8ea75ad))
+* **snacks.picker:** added support for Project shortcuts in other dashboards ([#5607](https://github.com/LazyVim/LazyVim/issues/5607)) ([401ef48](https://github.com/LazyVim/LazyVim/commit/401ef48fcd617534b017ef471309bb1bd6465131))
+* **snacks.picker:** move trouble keymap from `ctrl+t` -&gt; `alt+t` ([4aff006](https://github.com/LazyVim/LazyVim/commit/4aff0063a42bbc499cfa03feb6e58d4339c0950d))
+
+
+### Bug Fixes
+
+* **blink:** `blink` released new version, remove previous hack ([#5616](https://github.com/LazyVim/LazyVim/issues/5616)) ([b35015a](https://github.com/LazyVim/LazyVim/commit/b35015ac59f0c630b2efe18ccf10d693397d0ca4))
+* **blink:** `cmdline` is now top-level on main branch ([#5615](https://github.com/LazyVim/LazyVim/issues/5615)) ([0458e46](https://github.com/LazyVim/LazyVim/commit/0458e46dcca49cc404062e04a9054a8bd058dcd3))
+* **blink:** enable Neovim native mapping with `&lt;Tab&gt;` ([#5617](https://github.com/LazyVim/LazyVim/issues/5617)) ([e7f8e4f](https://github.com/LazyVim/LazyVim/commit/e7f8e4faba0c6d397526238923f1aeff1740d09c))
+
 ## [14.13.0](https://github.com/LazyVim/LazyVim/compare/v14.12.0...v14.13.0) (2025-02-12)
 
 
