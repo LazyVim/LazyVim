@@ -72,7 +72,6 @@ return {
       { "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = true }}) end, desc = "Recent (cwd)" },
       { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       -- git
-      { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
       { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
