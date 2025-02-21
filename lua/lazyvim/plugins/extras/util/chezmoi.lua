@@ -97,6 +97,24 @@ return {
     end,
   },
   {
+    "folke/snacks.nvim",
+    opts = function(_, opts)
+      local projects = {
+        icon = "",
+        key = "c",
+        desc = "Config",
+        action = pick_chezmoi,
+      }
+
+      for i = #opts.dashboard.preset.keys, 1, -1 do
+        if opts.dashboard.preset.keys[i].key == "c" then
+          table.remove(opts.dashboard.preset.keys, i)
+          table.insert(opts.dashboard.preset.keys, i, projects)
+        end
+      end
+    end,
+  },
+  {
     "nvimdev/dashboard-nvim",
     optional = true,
     opts = function(_, opts)
