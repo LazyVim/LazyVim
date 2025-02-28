@@ -7,38 +7,15 @@ if lazyvim_docs then
   -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-snippets.md#expand
   -- :h MiniSnippets-session
 
-  -- NOTE: To add your own snippets, you will need an extension manifest
-  -- in a runtime directory (e.g. ~/.config/nvim/package.json)
-  -- See https://github.com/rafamadriz/friendly-snippets/blob/main/package.json
-  -- for friendly-snippets' manifest
-  -- See https://code.visualstudio.com/api/references/extension-manifest
-  -- and https://code.visualstudio.com/api/references/contribution-points#contributes.snippets
-  -- for the original spec
-  --
-  -- To add other snippets to a filetype, add them to opts.filetype_additions
-  -- To override a lang's filetypes, add an entry to opts.lang_filetypes
-  -- For example:
-  --[[
-  return {
-    {
-      "echasnovski/mini.snippets",
-      opts = {
-        filetype_additions = { plaintext = { "license", "loremipsum" } },
-        -- use "plaintext" snippets when context.lang is "text"
-        lang_filetypes = { text = { "plaintext" } },
-      },
-    },
-  }
-  --]]
-
   -- Example override for your own config:
   --[[
   return {
     {
       "echasnovski/mini.snippets",
       opts = function(_, opts)
-        -- By default, for opts.snippets, the extra for mini.snippets only adds from_package_json()
+        -- By default, for opts.snippets, the extra for mini.snippets adds from_package_json()
         -- This provides a sensible quickstart, integrating with friendly-snippets
+        -- and your own language-specific snippets
         --
         -- In order to change opts.snippets, replace the entire table inside your own opts
 
@@ -89,7 +66,7 @@ return {
     "echasnovski/mini.snippets",
     event = "InsertEnter", -- don't depend on other plugins to load...
     dependencies = "rafamadriz/friendly-snippets",
-    config = function(_, opts)
+    opts = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       LazyVim.cmp.actions.snippet_stop = function() end -- by design, <esc> should not stop the session!
       ---@diagnostic disable-next-line: duplicate-set-field
@@ -97,176 +74,14 @@ return {
         return jump("next")
       end
 
-      local mini_snippets = require("mini.snippets")
-
-      local function from_package_json()
-        local filetype_additions, lang_filetypes = opts.filetype_additions or {}, opts.lang_filetypes or {}
-
-        local cache = { filetype_snippets = {}, lang_snippets = {}, paths = nil }
-
-        local function get_paths(filetype)
-          if cache.paths ~= nil then
-            cache.paths[filetype] = cache.paths[filetype] or {}
-            return cache.paths[filetype]
-          end
-
-          cache.paths = {}
-
-          local function insert_path(lang, root, path)
-            cache.paths[lang] = cache.paths[lang] or {}
-            table.insert(cache.paths[lang], vim.fs.joinpath(root, path))
-          end
-
-          local manifests = vim.api.nvim_get_runtime_file("package.json", true)
-          for _, manifest in ipairs(manifests) do
-            local function warn_of_manifest(msg)
-              LazyVim.warn({ "Could not parse", manifest, "", msg }, { title = "mini-snippets extra" })
-            end
-
-            if vim.fn.filereadable(manifest) ~= 1 then
-              warn_of_manifest("File is not readable")
-              goto continue
-            end
-
-            local file, err = io.open(manifest)
-
-            if file == nil then
-              warn_of_manifest(err)
-              goto continue
-            end
-
-            local contents = file:read("*a")
-
-            file:close()
-
-            local ok, json = pcall(vim.json.decode, contents)
-
-            if not ok then
-              warn_of_manifest(json)
-              goto continue
-            end
-
-            if type(json) ~= "table" then
-              warn_of_manifest("Contents should be a table")
-              goto continue
-            end
-
-            local snippets = vim.tbl_get(json, "contributes", "snippets")
-
-            if snippets == nil then
-              goto continue
-            end
-
-            if type(snippets) ~= "table" then
-              warn_of_manifest("`snippets` should be a table")
-              goto continue
-            end
-
-            local i = 0
-            for _ in pairs(snippets) do
-              i = i + 1
-
-              local snippet = snippets[i]
-
-              if snippet == nil or type(snippet) ~= "table" then
-                warn_of_manifest("`snippets` should be a list of tables")
-                goto continue
-              end
-
-              if type(snippet.path) ~= "string" then
-                warn_of_manifest("`path` of snippet #" .. i .. " should be a string")
-                goto continue
-              end
-
-              local language = snippet.language
-              if type(language) == "table" then
-                local j = 0
-                for _ in pairs(language) do
-                  j = j + 1
-
-                  if type(language[j]) ~= "string" then
-                    warn_of_manifest(
-                      "`language` of snippet #"
-                        .. i
-                        .. " should be a string, a list of strings, or nil for global snippets"
-                    )
-                    goto continue
-                  end
-                end
-              elseif not (type(language) == "string" or language == nil) then
-                warn_of_manifest(
-                  "`language` of snippet #" .. i .. " should be a string, a list of strings, or nil for global snippets"
-                )
-                goto continue
-              end
-            end
-
-            local root = vim.fs.dirname(manifest)
-
-            for _, snippet in ipairs(snippets) do
-              local language = snippet.language
-              local path = snippet.path
-
-              if type(language) == "table" then
-                for _, ft in ipairs(language) do
-                  insert_path(ft, root, path)
-                end
-              elseif type(language) == "string" then
-                insert_path(language, root, path)
-              else
-                insert_path("global", root, path)
-              end
-            end
-
-            ::continue::
-          end
-
-          cache.paths[filetype] = cache.paths[filetype] or {}
-          return cache.paths[filetype]
-        end
-
-        local function get_filetype_snippets(filetype)
-          if type(filetype) == "string" then
-            if cache.filetype_snippets[filetype] ~= nil then
-              return cache.filetype_snippets[filetype]
-            end
-
-            local paths = {}
-            for _, ft in ipairs(filetype_additions[filetype] or {}) do
-              for _, path in ipairs(get_paths(ft)) do
-                table.insert(paths, path)
-              end
-            end
-            for _, path in ipairs(get_paths(filetype)) do
-              table.insert(paths, path)
-            end
-
-            cache.filetype_snippets[filetype] = vim.tbl_map(mini_snippets.read_file, paths)
-            return cache.filetype_snippets[filetype]
-          end
-
-          return vim.tbl_map(get_filetype_snippets, filetype)
-        end
-
-        local function get_lang_snippets(lang)
-          cache.lang_snippets[lang] = cache.lang_snippets[lang]
-            or get_filetype_snippets(lang_filetypes[lang] or { vim.treesitter.language.get_filetypes(lang), "global" })
-          return cache.lang_snippets[lang]
-        end
-
-        return function(context)
-          local lang = (context or {}).lang
-
-          if type(lang) ~= "string" then
-            return get_lang_snippets("global")
-          end
-
-          return get_lang_snippets(lang)
-        end
-      end
-
-      opts = vim.tbl_deep_extend("force", {
-        snippets = { from_package_json() },
+      return {
+        -- custom LazyVim option to configure package.json support
+        package_json = {
+          ctx_langs = {},
+          dirs = {},
+          from_lang_compat = true,
+          lang_additions = {},
+        },
 
         -- Following the behavior of vim.snippets,
         -- the intended usage of <esc> is to be able to temporarily exit into normal mode for quick edits.
@@ -282,8 +97,76 @@ return {
             select(snippets, insert)
           end,
         },
-      }, opts)
+      }
+    end,
+    config = function(_, opts)
+      local mini_snippets = require("mini.snippets")
 
+      if opts.snippets then
+        return mini_snippets.setup(opts)
+      end
+
+      local ctx_langs, dirs, from_lang_compat, lang_additions =
+        opts.package_json.ctx_langs,
+        opts.package_json.dirs,
+        opts.package_json.from_lang_compat,
+        opts.package_json.lang_additions
+
+      -- override "friendly-snippets" with the user's snippets
+      table.insert(dirs, 1, LazyVim.get_plugin_path("friendly-snippets"))
+
+      local compat_loader = from_lang_compat and mini_snippets.gen_loader.from_lang()
+        or function()
+          return nil
+        end
+
+      local function from_package_json()
+        local cache = { lang_snippets = {}, paths = {} }
+
+        for _, dir in ipairs(dirs) do
+          local file = io.open(vim.fs.joinpath(dir, "package.json"))
+          if file then
+            local data = file:read("*a")
+            file:close()
+            for _, snippet in ipairs(vim.json.decode(data).contributes.snippets) do
+              local langs = snippet.language or { "global" }
+              langs = type(langs) == "string" and { langs } or langs
+              for _, lang in ipairs(langs) do
+                cache.paths[lang] = cache.paths[lang] or {}
+                table.insert(cache.paths[lang], vim.fs.joinpath(dir, snippet.path))
+              end
+            end
+          end
+        end
+
+        local function get_lang_snippets(lang)
+          local key = type(lang) == "string" and lang or vim.inspect(lang)
+          if cache.lang_snippets[key] then
+            return cache.lang_snippets[key]
+          end
+
+          if type(lang) == "table" then
+            cache.lang_snippets[key] = vim.tbl_map(get_lang_snippets, lang)
+          else
+            local snippets = vim.tbl_map(mini_snippets.read_file, cache.paths[lang] or {})
+            table.insert(snippets, lang_additions[lang] and get_lang_snippets(lang_additions[lang]))
+            table.insert(snippets, compat_loader({ lang = lang }))
+            cache.lang_snippets[key] = snippets
+          end
+          return cache.lang_snippets[key]
+        end
+
+        return function(context)
+          local ctx_lang = (context or {}).lang
+          if type(ctx_lang) ~= "string" then
+            return get_lang_snippets(ctx_langs.global or "global")
+          end
+
+          return get_lang_snippets(ctx_langs[ctx_lang] or { vim.treesitter.language.get_filetypes(ctx_lang), "global" })
+        end
+      end
+
+      opts.snippets = { from_package_json() }
       mini_snippets.setup(opts)
     end,
   },
