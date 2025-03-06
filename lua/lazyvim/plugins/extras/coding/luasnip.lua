@@ -1,6 +1,6 @@
 return {
   -- disable builtin snippet support
-  { "garymjr/nvim-snippets", enabled = false },
+  { "garymjr/nvim-snippets", optional = true, enabled = false },
 
   -- add luasnip
   {
