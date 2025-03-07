@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "14.9.0" -- x-release-please-version
+M.version = "14.14.0" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -136,16 +136,19 @@ local defaults = {
 }
 
 M.json = {
-  version = 7,
+  version = 8,
+  loaded = false,
   path = vim.g.lazyvim_json or vim.fn.stdpath("config") .. "/lazyvim.json",
   data = {
-    version = nil, ---@type string?
+    version = nil, ---@type number?
+    install_version = nil, ---@type number?
     news = {}, ---@type table<string, string>
     extras = {}, ---@type string[]
   },
 }
 
 function M.json.load()
+  M.json.loaded = true
   local f = io.open(M.json.path, "r")
   if f then
     local data = f:read("*a")
@@ -157,6 +160,8 @@ function M.json.load()
         LazyVim.json.migrate()
       end
     end
+  else
+    M.json.data.install_version = M.json.version
   end
 end
 
@@ -206,6 +211,37 @@ function M.setup(opts)
         "desc",
         "vscode",
       })
+
+      if vim.g.lazyvim_check_order == false then
+        return
+      end
+
+      -- Check lazy.nvim import order
+      local imports = require("lazy.core.config").spec.modules
+      local function find(pat, last)
+        for i = last and #imports or 1, last and 1 or #imports, last and -1 or 1 do
+          if imports[i]:find(pat) then
+            return i
+          end
+        end
+      end
+      local lazyvim_plugins = find("^lazyvim%.plugins$")
+      local extras = find("^lazyvim%.plugins%.extras%.", true) or lazyvim_plugins
+      local plugins = find("^plugins$") or math.huge
+      if lazyvim_plugins ~= 1 or extras > plugins then
+        local msg = {
+          "The order of your `lazy.nvim` imports is incorrect:",
+          "- `lazyvim.plugins` should be first",
+          "- followed by any `lazyvim.plugins.extras`",
+          "- and finally your own `plugins`",
+          "",
+          "If you think you know what you're doing, you can disable this check with:",
+          "```lua",
+          "vim.g.lazyvim_check_order = false",
+          "```",
+        }
+        vim.notify(table.concat(msg, "\n"), "warn", { title = "LazyVim" })
+      end
     end,
   })
 
@@ -300,6 +336,69 @@ function M.init()
 
   LazyVim.plugin.setup()
   M.json.load()
+end
+
+---@alias LazyVimDefault {name: string, extra: string, enabled?: boolean, origin?: "global" | "default" | "extra" }
+
+local default_extras ---@type table<string, LazyVimDefault>
+function M.get_defaults()
+  if default_extras then
+    return default_extras
+  end
+  ---@type table<string, LazyVimDefault[]>
+  local checks = {
+    picker = {
+      { name = "snacks", extra = "editor.snacks_picker" },
+      { name = "fzf", extra = "editor.fzf" },
+      { name = "telescope", extra = "editor.telescope" },
+    },
+    cmp = {
+      { name = "blink.cmp", extra = "coding.blink", enabled = vim.fn.has("nvim-0.10") == 1 },
+      { name = "nvim-cmp", extra = "coding.nvim-cmp" },
+    },
+    explorer = {
+      { name = "snacks", extra = "editor.snacks_explorer" },
+      { name = "neo-tree", extra = "editor.neo-tree" },
+    },
+  }
+
+  -- existing installs keep their defaults
+  if (LazyVim.config.json.data.install_version or 7) < 8 then
+    table.insert(checks.picker, 1, table.remove(checks.picker, 2))
+    table.insert(checks.explorer, 1, table.remove(checks.explorer, 2))
+  end
+
+  default_extras = {}
+  for name, check in pairs(checks) do
+    local valid = {} ---@type string[]
+    for _, extra in ipairs(check) do
+      if extra.enabled ~= false then
+        valid[#valid + 1] = extra.name
+      end
+    end
+    local origin = "default"
+    local use = vim.g["lazyvim_" .. name]
+    use = vim.tbl_contains(valid, use or "auto") and use or nil
+    origin = use and "global" or origin
+    for _, extra in ipairs(use and {} or check) do
+      if extra.enabled ~= false and LazyVim.has_extra(extra.extra) then
+        use = extra.name
+        break
+      end
+    end
+    origin = use and "extra" or origin
+    use = use or valid[1]
+    for _, extra in ipairs(check) do
+      local import = "lazyvim.plugins.extras." .. extra.extra
+      extra = vim.deepcopy(extra)
+      extra.enabled = extra.name == use
+      if extra.enabled then
+        extra.origin = origin
+      end
+      default_extras[import] = extra
+    end
+  end
+  return default_extras
 end
 
 setmetatable(M, {

@@ -55,12 +55,33 @@ function M.has(plugin)
   return M.get_plugin(plugin) ~= nil
 end
 
+--- Checks if the extras is enabled:
+--- * If the module was imported
+--- * If the module was added by LazyExtras
+--- * If the module is in the user's lazy imports
 ---@param extra string
 function M.has_extra(extra)
   local Config = require("lazyvim.config")
   local modname = "lazyvim.plugins.extras." .. extra
-  return vim.tbl_contains(require("lazy.core.config").spec.modules, modname)
-    or vim.tbl_contains(Config.json.data.extras, modname)
+  local LazyConfig = require("lazy.core.config")
+  -- check if it was imported already
+  if vim.tbl_contains(LazyConfig.spec.modules, modname) then
+    return true
+  end
+  -- check if it was added by LazyExtras
+  if vim.tbl_contains(Config.json.data.extras, modname) then
+    return true
+  end
+  -- check if it's in the imports
+  local spec = LazyConfig.options.spec
+  if type(spec) == "table" then
+    for _, s in ipairs(spec) do
+      if type(s) == "table" and s.import == modname then
+        return true
+      end
+    end
+  end
+  return false
 end
 
 ---@param fn fun()
@@ -263,15 +284,6 @@ function M.memoize(fn)
     end
     return cache[fn][key]
   end
-end
-
----@return "nvim-cmp" | "blink.cmp"
-function M.cmp_engine()
-  vim.g.lazyvim_cmp = vim.g.lazyvim_cmp or "auto"
-  if vim.g.lazyvim_cmp == "auto" then
-    return LazyVim.has_extra("coding.nvim-cmp") and "nvim-cmp" or "blink.cmp"
-  end
-  return vim.g.lazyvim_cmp
 end
 
 return M

@@ -7,17 +7,40 @@ local prios = {
   ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.coding.blink"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
+  -- default core extra priority is 20
   -- default priority is 50
   ["lazyvim.plugins.extras.editor.aerial"] = 100,
   ["lazyvim.plugins.extras.editor.outline"] = 100,
+  ["lazyvim.plugins.extras.ui.alpha"] = 19,
+  ["lazyvim.plugins.extras.ui.dashboard-nvim"] = 19,
+  ["lazyvim.plugins.extras.ui.mini-starter"] = 19,
 }
 
 if vim.g.xtras_prios then
   prios = vim.tbl_deep_extend("force", prios, vim.g.xtras_prios or {})
 end
 
+local extras = {} ---@type string[]
+local defaults = LazyVim.config.get_defaults()
+
+-- Add extras from LazyExtras that are not disabled
+for _, extra in ipairs(LazyVim.config.json.data.extras) do
+  local def = defaults[extra]
+  if not (def and def.enabled == false) then
+    extras[#extras + 1] = extra
+  end
+end
+
+-- Add default extras
+for name, extra in pairs(defaults) do
+  if extra.enabled then
+    prios[name] = prios[name] or 20
+    extras[#extras + 1] = name
+  end
+end
+
 ---@type string[]
-local extras = LazyVim.dedup(LazyVim.config.json.data.extras)
+extras = LazyVim.dedup(extras)
 
 local version = vim.version()
 local v = version.major .. "_" .. version.minor
