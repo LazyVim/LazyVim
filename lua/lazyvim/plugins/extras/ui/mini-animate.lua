@@ -60,5 +60,14 @@ return {
         },
       })
     end,
+    keys = {
+      {
+        "<leader>ua",
+        function()
+          Snacks.toggle.animate()
+        end,
+        desc = "Toggle Animation",
+      },
+    },
   },
 }
