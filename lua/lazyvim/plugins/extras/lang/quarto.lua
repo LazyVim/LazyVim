@@ -6,16 +6,10 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {},
-    config = function(opts)
-      local quarto = require("quarto")
-      local wk = require("which-key")
-      quarto.setup(opts)
-      wk.add({
-        {
-          mode = "n",
-          { "<leader>qp", quarto.quartoPreview, desc = "quarto preview", icon = "" },
-        },
-      })
-    end,
   },
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "quarto",
+    })
+  end,
 }
