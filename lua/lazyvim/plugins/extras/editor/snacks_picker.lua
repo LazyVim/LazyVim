@@ -72,9 +72,9 @@ return {
       { "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = true }}) end, desc = "Recent (cwd)" },
       { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       -- git
-      { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+      { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
       -- Grep
       { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
@@ -85,10 +85,12 @@ return {
       { "<leader>sW", LazyVim.pick("grep_word", { root = false }), desc = "Visual selection or word (cwd)", mode = { "n", "x" } },
       -- search
       { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+      { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
       { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
       { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
       { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
       { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+      { "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
       { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
       { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
       { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
@@ -118,7 +120,7 @@ return {
             win = {
               input = {
                 keys = {
-                  ["<c-t>"] = {
+                  ["<a-t>"] = {
                     "trouble_open",
                     mode = { "n", "i" },
                   },
@@ -133,9 +135,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function()
-      if LazyVim.pick.want() ~= "snacks" then
-        return
-      end
       local Keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
@@ -156,6 +155,61 @@ return {
       { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
       { "<leader>sT", function () Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     },
+  },
+  {
+    "folke/snacks.nvim",
+    opts = function(_, opts)
+      table.insert(opts.dashboard.preset.keys, 3, {
+        icon = " ",
+        key = "p",
+        desc = "Projects",
+        action = ":lua Snacks.picker.projects()",
+      })
+    end,
+  },
+  {
+    "goolord/alpha-nvim",
+    optional = true,
+    opts = function(_, dashboard)
+      local button = dashboard.button("p", " " .. " Projects", [[<cmd> lua Snacks.picker.projects() <cr>]])
+      button.opts.hl = "AlphaButtons"
+      button.opts.hl_shortcut = "AlphaShortcut"
+      table.insert(dashboard.section.buttons.val, 4, button)
+    end,
+  },
+  {
+    "echasnovski/mini.starter",
+    optional = true,
+    opts = function(_, opts)
+      local items = {
+        {
+          name = "Projects",
+          action = [[lua Snacks.picker.projects()]],
+          section = string.rep(" ", 22) .. "Telescope",
+        },
+      }
+      vim.list_extend(opts.items, items)
+    end,
+  },
+  {
+    "nvimdev/dashboard-nvim",
+    optional = true,
+    opts = function(_, opts)
+      if not vim.tbl_get(opts, "config", "center") then
+        return
+      end
+      local projects = {
+        action = "lua Snacks.picker.projects()",
+        desc = " Projects",
+        icon = " ",
+        key = "p",
+      }
+
+      projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
+      projects.key_format = "  %s"
+
+      table.insert(opts.config.center, 3, projects)
+    end,
   },
   {
     "folke/flash.nvim",

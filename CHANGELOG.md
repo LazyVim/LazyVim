@@ -1,5 +1,84 @@
 # Changelog
 
+## [14.14.0](https://github.com/LazyVim/LazyVim/compare/v14.13.0...v14.14.0) (2025-02-15)
+
+
+### Features
+
+* **extras:** setup neogen and mini.snippets integration ([#5594](https://github.com/LazyVim/LazyVim/issues/5594)) ([5788b9d](https://github.com/LazyVim/LazyVim/commit/5788b9d1e06dfb5f99f92354dc550c9f2c5a6710))
+* **keymaps:** enable toggling in quickfix list and location list ([#5608](https://github.com/LazyVim/LazyVim/issues/5608)) ([32e575a](https://github.com/LazyVim/LazyVim/commit/32e575aa75792c63f710f0bdc3e2fb5aa8ea75ad))
+* **snacks.picker:** added support for Project shortcuts in other dashboards ([#5607](https://github.com/LazyVim/LazyVim/issues/5607)) ([401ef48](https://github.com/LazyVim/LazyVim/commit/401ef48fcd617534b017ef471309bb1bd6465131))
+* **snacks.picker:** move trouble keymap from `ctrl+t` -&gt; `alt+t` ([4aff006](https://github.com/LazyVim/LazyVim/commit/4aff0063a42bbc499cfa03feb6e58d4339c0950d))
+
+
+### Bug Fixes
+
+* **blink:** `blink` released new version, remove previous hack ([#5616](https://github.com/LazyVim/LazyVim/issues/5616)) ([b35015a](https://github.com/LazyVim/LazyVim/commit/b35015ac59f0c630b2efe18ccf10d693397d0ca4))
+* **blink:** `cmdline` is now top-level on main branch ([#5615](https://github.com/LazyVim/LazyVim/issues/5615)) ([0458e46](https://github.com/LazyVim/LazyVim/commit/0458e46dcca49cc404062e04a9054a8bd058dcd3))
+* **blink:** enable Neovim native mapping with `&lt;Tab&gt;` ([#5617](https://github.com/LazyVim/LazyVim/issues/5617)) ([e7f8e4f](https://github.com/LazyVim/LazyVim/commit/e7f8e4faba0c6d397526238923f1aeff1740d09c))
+
+## [14.13.0](https://github.com/LazyVim/LazyVim/compare/v14.12.0...v14.13.0) (2025-02-12)
+
+
+### Features
+
+* **editor:** update parameter for fzf-lua ([#5584](https://github.com/LazyVim/LazyVim/issues/5584)) ([0a5965b](https://github.com/LazyVim/LazyVim/commit/0a5965b787e4d513b5a2e1182b35bd11ceafeeb3))
+* **lsp:** use lsp_config picker instead of `LspInfo` ([7529773](https://github.com/LazyVim/LazyVim/commit/75297733710951e81b505d88b2d728a5b0a9b6ab))
+
+## [14.12.0](https://github.com/LazyVim/LazyVim/compare/v14.11.0...v14.12.0) (2025-02-10)
+
+
+### Features
+
+* **config:** add option to disable the order check to warning message ([da3b515](https://github.com/LazyVim/LazyVim/commit/da3b5159df326bc31d5a0ebdfa2c5cbbd32df9d2))
+* **config:** allow disabling the order check with `vim.g.lazyvim_check_order = false` ([0bbce17](https://github.com/LazyVim/LazyVim/commit/0bbce1775b7d6750d3c4d761f3ad1bcfb77fb805))
+
+
+### Bug Fixes
+
+* **copilot-chat:** added support for snacks picker. Closes [#5432](https://github.com/LazyVim/LazyVim/issues/5432). Closes [#5552](https://github.com/LazyVim/LazyVim/issues/5552) ([2a608f0](https://github.com/LazyVim/LazyVim/commit/2a608f00d47bb6679a27a313fb0404e4d3a2196c))
+* **extras:** disable import handling when loading `:LazyExtras` + changed some recommendations ([121a2e2](https://github.com/LazyVim/LazyVim/commit/121a2e27ef0f4d8ab64bf76768b9600c45fd2364))
+
+## [14.11.0](https://github.com/LazyVim/LazyVim/compare/v14.10.0...v14.11.0) (2025-02-08)
+
+
+### Features
+
+* **config:** show a warning when lazy.nvim imports order is incorrect ([83988ea](https://github.com/LazyVim/LazyVim/commit/83988ea46eccbe20953cd807984d2e89d679aa6e))
+* **defaults:** new installs now default to snacks picker/explorer. Existing installs don't change. ([25d90b5](https://github.com/LazyVim/LazyVim/commit/25d90b54a3b1863cb4428fd309ab855732289710))
+* **extras:** big rework of default extras ([525377d](https://github.com/LazyVim/LazyVim/commit/525377dee9ac3d19f53e333538e4e85586163ad8))
+* **util:** `has_extra` now also checks for manual imports in `lazy.lua` ([0416376](https://github.com/LazyVim/LazyVim/commit/041637673371db7866f8bf00d77fc2fb6cc673c6))
+
+
+### Bug Fixes
+
+* **extras:** remove debug ([b4c24a3](https://github.com/LazyVim/LazyVim/commit/b4c24a3fe882c21555e60a1ec44087526e856eb9))
+* **snacks.explorer:** no longer needed to disable neo-tree ([2d6b492](https://github.com/LazyVim/LazyVim/commit/2d6b49281d2550222be6aada0b7eeca07bb26e10))
+* **snacks.picker:** move dashboard shortcut to picker extra. Closes [#5549](https://github.com/LazyVim/LazyVim/issues/5549) ([2b3bcf3](https://github.com/LazyVim/LazyVim/commit/2b3bcf36b2392bef94afefc07e2fcf32960960d7))
+
+## [14.10.0](https://github.com/LazyVim/LazyVim/compare/v14.9.0...v14.10.0) (2025-02-07)
+
+
+### Features
+
+* **bufferline:** support for snacks picker sidebars ([3500d6a](https://github.com/LazyVim/LazyVim/commit/3500d6a826a32d06d921f3e22342734c61ef09fe))
+* **refactoring:** fallback to using vim ui select for refactoring.nvim ([#5540](https://github.com/LazyVim/LazyVim/issues/5540)) ([23a1bbd](https://github.com/LazyVim/LazyVim/commit/23a1bbdae90f37aab4a86bfb4c113531a28e7f71))
+* **snacks.explorer:** enabled netrw integration ([4f006f1](https://github.com/LazyVim/LazyVim/commit/4f006f1fba5fdaa0150c544ad7966b96ec9cb04a))
+* **snacks.picker:** add projects picker to dashboard if snacks picker is enabled ([fb256f2](https://github.com/LazyVim/LazyVim/commit/fb256f2b688cb7ac9875f704fe6c00f27efc2354))
+* **snacks.picker:** some extra keymaps ([ab30442](https://github.com/LazyVim/LazyVim/commit/ab304426527723e116742cd7862fc976f876107c))
+* **snippets:** mini.snippets is out of beta ([#5505](https://github.com/LazyVim/LazyVim/issues/5505)) ([4a81a37](https://github.com/LazyVim/LazyVim/commit/4a81a370d7868d7db32042f69b0fc5a6218059c5))
+
+
+### Bug Fixes
+
+* **copilot:** remove load on BufReadPost instead of InsertEnter ([8f4e9b8](https://github.com/LazyVim/LazyVim/commit/8f4e9b8c1e43e354d91529484aedca54f04bdcf6))
+* **go:** update go.lua to eliminate fieldalignment from analyses ([#5170](https://github.com/LazyVim/LazyVim/issues/5170)) ([5c97327](https://github.com/LazyVim/LazyVim/commit/5c9732733de62a4e15988826f53d16a4dfdf960c))
+
+
+### Performance Improvements
+
+* **snacks_picker:** lazy-load trouble open action ([1a4d948](https://github.com/LazyVim/LazyVim/commit/1a4d948e0dae360836187be8c86283d7e814b7ef))
+
 ## [14.9.0](https://github.com/LazyVim/LazyVim/compare/v14.8.0...v14.9.0) (2025-01-30)
 
 

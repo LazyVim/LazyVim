@@ -1,17 +1,4 @@
 return {
-  {
-    import = "lazyvim.plugins.extras.coding.nvim-cmp",
-    enabled = function()
-      return LazyVim.cmp_engine() == "nvim-cmp"
-    end,
-  },
-  {
-    import = "lazyvim.plugins.extras.coding.blink",
-    enabled = function()
-      return LazyVim.cmp_engine() == "blink.cmp"
-    end,
-  },
-
   -- auto pairs
   {
     "echasnovski/mini.pairs",

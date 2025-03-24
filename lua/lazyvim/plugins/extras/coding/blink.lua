@@ -79,7 +79,10 @@ return {
         -- with blink.compat
         compat = {},
         default = { "lsp", "path", "snippets", "buffer" },
-        cmdline = {},
+      },
+
+      cmdline = {
+        enabled = false,
       },
 
       keymap = {
@@ -140,6 +143,7 @@ return {
             items = transform_items and transform_items(ctx, items) or items
             for _, item in ipairs(items) do
               item.kind = kind_idx or item.kind
+              item.kind_icon = LazyVim.config.icons.kinds[item.kind_name] or item.kind_icon or nil
             end
             return items
           end
