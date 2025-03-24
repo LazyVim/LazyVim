@@ -9,13 +9,13 @@ return {
   end,
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "markdown", "markdown_inline" } },
+    -- needs treesitter, but no additional grammar,
+    -- because quarto uses the markdown grammar
   },
   {
     "quarto-dev/quarto-nvim",
     dependencies = {
       "jmbuhr/otter.nvim",
-      "nvim-treesitter/nvim-treesitter",
     },
     opts = {},
   },
