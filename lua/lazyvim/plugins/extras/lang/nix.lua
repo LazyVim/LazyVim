@@ -4,6 +4,10 @@ return {
     root = "flake.nix",
   },
   {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = { "nixfmt" } },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "nix" } },
   },
