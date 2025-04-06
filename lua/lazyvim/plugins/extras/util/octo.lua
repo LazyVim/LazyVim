@@ -47,7 +47,7 @@ return {
       elseif LazyVim.has("fzf-lua") then
         opts.picker = "fzf-lua"
       else
-        LazyVim.error("`octo.nvim` requires `telescope.nvim` or `fzf-lua`")
+        opts.picker = "snacks"
       end
 
       -- Keep some empty windows in sessions
