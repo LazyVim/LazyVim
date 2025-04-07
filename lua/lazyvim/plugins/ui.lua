@@ -37,6 +37,9 @@ return {
             highlight = "Directory",
             text_align = "left",
           },
+          {
+            filetype = "snacks_layout_box",
+          },
         },
         ---@param opts bufferline.IconFetcherOpts
         get_element_icon = function(opts)
@@ -278,7 +281,13 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      { "<leader>n", function()
+        if Snacks.config.picker and Snacks.config.picker.enabled then
+          Snacks.picker.notifications()
+        else
+          Snacks.notifier.show_history()
+        end
+      end, desc = "Notification History" },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     },
   },

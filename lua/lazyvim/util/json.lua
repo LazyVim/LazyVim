@@ -97,6 +97,8 @@ function M.migrate()
         return vim.tbl_contains(ai, name) and ("lazyvim.plugins.extras.ai." .. name) or extra
       end)
     end, json.data.extras or {})
+  elseif json.data.version == 7 then
+    json.data.install_version = 7
   end
 
   M.save()
