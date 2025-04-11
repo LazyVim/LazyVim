@@ -72,7 +72,6 @@ return {
       { "<leader>fR", function() Snacks.picker.recent({ filter = { cwd = true }}) end, desc = "Recent (cwd)" },
       { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       -- git
-      { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (hunks)" },
       { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
       { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
@@ -121,7 +120,7 @@ return {
             win = {
               input = {
                 keys = {
-                  ["<c-t>"] = {
+                  ["<a-t>"] = {
                     "trouble_open",
                     mode = { "n", "i" },
                   },
@@ -166,6 +165,50 @@ return {
         desc = "Projects",
         action = ":lua Snacks.picker.projects()",
       })
+    end,
+  },
+  {
+    "goolord/alpha-nvim",
+    optional = true,
+    opts = function(_, dashboard)
+      local button = dashboard.button("p", " " .. " Projects", [[<cmd> lua Snacks.picker.projects() <cr>]])
+      button.opts.hl = "AlphaButtons"
+      button.opts.hl_shortcut = "AlphaShortcut"
+      table.insert(dashboard.section.buttons.val, 4, button)
+    end,
+  },
+  {
+    "echasnovski/mini.starter",
+    optional = true,
+    opts = function(_, opts)
+      local items = {
+        {
+          name = "Projects",
+          action = [[lua Snacks.picker.projects()]],
+          section = string.rep(" ", 22) .. "Telescope",
+        },
+      }
+      vim.list_extend(opts.items, items)
+    end,
+  },
+  {
+    "nvimdev/dashboard-nvim",
+    optional = true,
+    opts = function(_, opts)
+      if not vim.tbl_get(opts, "config", "center") then
+        return
+      end
+      local projects = {
+        action = "lua Snacks.picker.projects()",
+        desc = " Projects",
+        icon = " ",
+        key = "p",
+      }
+
+      projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
+      projects.key_format = "  %s"
+
+      table.insert(opts.config.center, 3, projects)
     end,
   },
   {

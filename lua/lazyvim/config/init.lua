@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "14.11.0" -- x-release-please-version
+M.version = "14.14.0" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -229,11 +229,18 @@ function M.setup(opts)
       local extras = find("^lazyvim%.plugins%.extras%.", true) or lazyvim_plugins
       local plugins = find("^plugins$") or math.huge
       if lazyvim_plugins ~= 1 or extras > plugins then
-        vim.notify(
-          "The order of your `lazy.nvim` imports is incorrect:\n- `lazyvim.plugins` should be first\n- followed by any `lazyvim.plugins.extras`\n- and finally your own `plugins`",
-          "warn",
-          { title = "LazyVim" }
-        )
+        local msg = {
+          "The order of your `lazy.nvim` imports is incorrect:",
+          "- `lazyvim.plugins` should be first",
+          "- followed by any `lazyvim.plugins.extras`",
+          "- and finally your own `plugins`",
+          "",
+          "If you think you know what you're doing, you can disable this check with:",
+          "```lua",
+          "vim.g.lazyvim_check_order = false",
+          "```",
+        }
+        vim.notify(table.concat(msg, "\n"), "warn", { title = "LazyVim" })
       end
     end,
   })

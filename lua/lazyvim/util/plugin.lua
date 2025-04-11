@@ -5,6 +5,7 @@ local M = {}
 
 ---@type string[]
 M.core_imports = {}
+M.handle_defaults = true
 
 M.lazy_file_events = { "BufReadPost", "BufNewFile", "BufWritePre" }
 
@@ -81,7 +82,7 @@ end
 function M.fix_imports()
   local defaults ---@type table<string, LazyVimDefault>
   Plugin.Spec.import = LazyVim.inject.args(Plugin.Spec.import, function(_, spec)
-    if LazyVim.config.json.loaded then
+    if M.handle_defaults and LazyVim.config.json.loaded then
       -- extra disabled by defaults?
       defaults = defaults or LazyVim.config.get_defaults()
       local def = defaults[spec.import]
