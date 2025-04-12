@@ -62,8 +62,9 @@ function M.migrate()
       ---@diagnostic disable-next-line: no-unknown
       json.data.hashes = nil
     end
+    -- prepend the extras module prefix if it's not yet using that
     json.data.extras = vim.tbl_map(function(extra)
-      return "lazyvim.plugins.extras." .. extra
+      return extra:match("^lazyvim%.plugins%.extras%.") and extra or "lazyvim.plugins.extras." .. extra
     end, json.data.extras or {})
   elseif json.data.version == 1 then
     json.data.extras = vim.tbl_map(function(extra)
