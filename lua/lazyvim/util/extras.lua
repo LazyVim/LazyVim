@@ -83,6 +83,7 @@ end
 ---@param modname string
 ---@param source LazyExtraSource
 function M.get_extra(source, modname)
+  LazyVim.plugin.handle_defaults = false
   local enabled = vim.tbl_contains(M.state, modname)
   local spec = Plugin.Spec.new(nil, { optional = true, pkg = false })
   spec:parse({ import = modname })
@@ -248,6 +249,9 @@ end
 
 ---@param extra LazyExtra
 function X:extra(extra)
+  local defaults = LazyVim.config.get_defaults()
+  local def = defaults[extra.module]
+  local origin = def and (def.origin or "user") or nil
   if not extra.managed then
     ---@type LazyExtra[]
     local parents = {}
@@ -263,7 +267,7 @@ function X:extra(extra)
       self:diagnostic({
         message = "Required by " .. table.concat(pp, ", "),
       })
-    elseif vim.tbl_contains(LazyVim.plugin.core_imports, extra.module) then
+    elseif vim.tbl_contains(LazyVim.plugin.core_imports, extra.module) or origin == "default" then
       self:diagnostic({
         message = "This extra is included by default",
       })
