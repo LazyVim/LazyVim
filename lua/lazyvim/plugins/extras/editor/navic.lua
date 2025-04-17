@@ -8,7 +8,10 @@ return {
     init = function()
       vim.g.navic_silence = true
       LazyVim.lsp.on_attach(function(client, buffer)
-        if client.supports_method("textDocument/documentSymbol") then
+        if
+          vim.fn.has("nvim-0.11") == 0 and client.supports_method("textDocument/documentSymbol")
+          or client:supports_method("textDocument/documentSymbol")
+        then
           require("nvim-navic").attach(client, buffer)
         end
       end)
