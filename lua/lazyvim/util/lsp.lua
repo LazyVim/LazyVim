@@ -5,10 +5,12 @@ local M = {}
 ---@param method string
 ---@param bufnr? integer
 local function supports_method(client, method, bufnr)
-  if vim.fn.has("nvim-0.11") == 0 then
+  return client:supports_method(method, bufnr)
+end
+if vim.fn.has("nvim-0.11") == 0 then
+  function supports_method(client, method, bufnr)
     return client.supports_method and client.supports_method(method, { bufnr = bufnr })
   end
-  return client:supports_method(method, bufnr) and client:supports_method(method, bufnr)
 end
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
