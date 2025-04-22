@@ -2,6 +2,8 @@
 
 -- DO NOT USE `LazyVim.safe_keymap_set` IN YOUR OWN CONFIG!!
 -- use `vim.keymap.set` instead
+-- or use local `wk = require("which-key")` and `wk.add`, to utilise the popup from the which-key plugin.
+-- for more information, go to https://github.com/folke/which-key.nvim
 local map = LazyVim.safe_keymap_set
 
 -- better up/down
