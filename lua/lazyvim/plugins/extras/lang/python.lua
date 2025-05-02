@@ -113,7 +113,7 @@ return {
           local pypath = ((ncf.lspconfig or {}).pyright or {})["python.pythonPath"]
           if pypath ~= nil then
             pypath = vim.fn.expand(pypath)
-            require('dap-python').setup(nil, { pythonPath = pypath })
+            require("dap-python").setup(nil, { pythonPath = pypath })
             return
           end
         end
