@@ -105,10 +105,20 @@ return {
       config = function()
         if vim.fn.has("win32") == 1 then
           require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
-        else
-          require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/bin/python"))
+          return
         end
-      end,
+        -- try loading python path configured in neoconf (pyright)
+        if LazyVim.has("neoconf.nvim") and LazyVim.is_loaded("neoconf.nvim") then
+          local ncf = require("neoconf").get()
+          local pypath = ((ncf.lspconfig or {}).pyright or {})["python.pythonPath"]
+          if pypath ~= nil then
+            pypath = vim.fn.expand(pypath)
+            require('dap-python').setup(nil, {pythonPath = pypath})
+            return
+          end
+        end
+        require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/bin/python"))
+      end
     },
   },
 
