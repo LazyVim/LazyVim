@@ -71,8 +71,7 @@ return {
     dependencies = { "folke/which-key.nvim" },
     ft = java_filetypes,
     opts = function()
-      local mason_registry = require("mason-registry")
-      local lombok_jar = mason_registry.get_package("jdtls"):get_install_path() .. "/lombok.jar"
+      local lombok_jar = vim.fn.exepath("jdtls") .. "/lombok.jar"
       return {
         -- How to find the root dir for a given filename. The default comes from
         -- lspconfig which provides a function specifically for java projects.
@@ -135,14 +134,14 @@ return {
       local bundles = {} ---@type string[]
       if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
         local java_dbg_pkg = mason_registry.get_package("java-debug-adapter")
-        local java_dbg_path = java_dbg_pkg:get_install_path()
+        local java_dbg_path = vim.fn.expand(java_dbg_pkg)
         local jar_patterns = {
           java_dbg_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar",
         }
         -- java-test also depends on java-debug-adapter.
         if opts.test and mason_registry.is_installed("java-test") then
           local java_test_pkg = mason_registry.get_package("java-test")
-          local java_test_path = java_test_pkg:get_install_path()
+          local java_test_path = vim.fn.expand(java_test_pkg)
           vim.list_extend(jar_patterns, {
             java_test_path .. "/extension/server/*.jar",
           })
