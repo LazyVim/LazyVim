@@ -35,7 +35,7 @@ return {
   },
 
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "phpcs",
@@ -48,7 +48,7 @@ return {
     optional = true,
     opts = function()
       local dap = require("dap")
-      local path = require("mason-registry").get_package("php-debug-adapter"):get_install_path()
+      local path = LazyVim.get_pkg_path("php-debug-adapter")
       dap.adapters.php = {
         type = "executable",
         command = "node",
