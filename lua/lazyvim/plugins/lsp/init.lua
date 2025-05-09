@@ -211,8 +211,11 @@ return {
       -- get all the servers that are available through mason-lspconfig
       local have_mason, mlsp = pcall(require, "mason-lspconfig")
       local all_mslp_servers = {}
-      if have_mason then
-        all_mslp_servers = require("mason-lspconfig").get_mappings().lspconfig_to_package
+      if have_mason and vim.fn.has("nvim-0.11") == 1 then
+        -- all_mslp_servers = vim.tbl_keys(require("mason-lspconfig").get_mappings().lspconfig_to_package)
+        all_mslp_servers = require("mason-lspconfig").get_available_servers())
+      elseif have_mason then
+        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
       end
 
       local ensure_installed = {} ---@type string[]
