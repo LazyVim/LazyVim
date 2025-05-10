@@ -237,6 +237,7 @@ return {
             ensure_installed,
             LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}
           ),
+          automatic_enable = true,
           handlers = { setup },
         })
       end
