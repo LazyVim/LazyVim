@@ -21,35 +21,35 @@ end
 -- register all text objects with which-key
 ---@param opts table
 function M.ai_whichkey(opts)
-  local objects = {
-    { " ", desc = "whitespace" },
-    { '"', desc = '" string' },
-    { "'", desc = "' string" },
-    { "(", desc = "() block" },
-    { ")", desc = "() block with ws" },
-    { "<", desc = "<> block" },
-    { ">", desc = "<> block with ws" },
-    { "?", desc = "user prompt" },
-    { "U", desc = "use/call without dot" },
-    { "[", desc = "[] block" },
-    { "]", desc = "[] block with ws" },
-    { "_", desc = "underscore" },
-    { "`", desc = "` string" },
-    { "a", desc = "argument" },
-    { "b", desc = ")]} block" },
-    { "c", desc = "class" },
-    { "d", desc = "digit(s)" },
-    { "e", desc = "CamelCase / snake_case" },
-    { "f", desc = "function" },
-    { "g", desc = "entire file" },
-    { "i", desc = "indent" },
-    { "o", desc = "block, conditional, loop" },
-    { "q", desc = "quote `\"'" },
-    { "t", desc = "tag" },
-    { "u", desc = "use/call" },
-    { "{", desc = "{} block" },
-    { "}", desc = "{} with ws" },
-  }
+  local objects = vim.tbl_deep_extend("force", {
+    [" "] = { desc = "whitespace" },
+    ['"'] = { desc = '" string' },
+    ["'"] = { desc = "' string" },
+    ["("] = { desc = "() block" },
+    [")"] = { desc = "() block with ws" },
+    ["<"] = { desc = "<> block" },
+    [">"] = { desc = "<> block with ws" },
+    ["?"] = { desc = "user prompt" },
+    ["U"] = { desc = "use/call without dot" },
+    ["["] = { desc = "[] block" },
+    ["]"] = { desc = "[] block with ws" },
+    ["_"] = { desc = "underscore" },
+    ["`"] = { desc = "` string" },
+    ["a"] = { desc = "argument" },
+    ["b"] = { desc = ")]} block" },
+    ["c"] = { desc = "class" },
+    ["d"] = { desc = "digit(s)" },
+    ["e"] = { desc = "CamelCase / snake_case" },
+    ["f"] = { desc = "function" },
+    ["g"] = { desc = "entire file" },
+    ["i"] = { desc = "indent" },
+    ["o"] = { desc = "block, conditional, loop" },
+    ["q"] = { desc = "quote `\"'" },
+    ["t"] = { desc = "tag" },
+    ["u"] = { desc = "use/call" },
+    ["{"] = { desc = "{} block" },
+    ["}"] = { desc = "{} with ws" },
+  }, opts.objects or {})
 
   ---@type wk.Spec[]
   local ret = { mode = { "o", "x" } }
@@ -68,12 +68,14 @@ function M.ai_whichkey(opts)
   for name, prefix in pairs(mappings) do
     name = name:gsub("^around_", ""):gsub("^inside_", "")
     ret[#ret + 1] = { prefix, group = name }
-    for _, obj in ipairs(objects) do
-      local desc = obj.desc
-      if prefix:sub(1, 1) == "i" then
-        desc = desc:gsub(" with ws", "")
+    for key, obj in pairs(objects) do
+      if obj then
+        local desc = obj.desc
+        if prefix:sub(1, 1) == "i" then
+          desc = desc:gsub(" with ws", "")
+        end
+        ret[#ret + 1] = { prefix .. key, desc = obj.desc }
       end
-      ret[#ret + 1] = { prefix .. obj[1], desc = obj.desc }
     end
   end
   require("which-key").add(ret, { notify = false })
