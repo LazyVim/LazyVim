@@ -14,7 +14,7 @@ return {
       end
       return ret
     end,
-    opts = { labeled_modes = "nx" },
+    opts = { labeled_modes = "nxo" },
   },
   {
     "ggandor/leap.nvim",
@@ -41,17 +41,17 @@ return {
     optional = true,
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
-        update_n_lines = "gzn", -- Update `n_lines`
+        add = "gaa", -- Add surrounding in Normal and Visual modes
+        delete = "gad", -- Delete surrounding
+        find = "gaf", -- Find surrounding (to the right)
+        find_left = "gaF", -- Find surrounding (to the left)
+        highlight = "gah", -- Highlight surrounding
+        replace = "gar", -- Replace surrounding
+        update_n_lines = "gan", -- Update `n_lines`
       },
     },
     keys = {
-      { "gz", "", desc = "+surround" },
+      { "ga", "", desc = "+surround" },
     },
   },
 
