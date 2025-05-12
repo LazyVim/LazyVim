@@ -27,7 +27,7 @@ return {
   },
 
   -- Add s-exp mappings
-  { "PaterJason/nvim-treesitter-sexp", opts = {}, event = "LazyFile" },
+  { "julienvincent/nvim-paredit", opts = {}, event = "LazyFile" },
 
   -- Colorize the output of the log buffer
   {
