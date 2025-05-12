@@ -8,8 +8,8 @@ require("lazy.minit").setup({
   spec = {
     { dir = vim.uv.cwd() },
     "LazyVim/starter",
-    "williamboman/mason-lspconfig.nvim",
-    "williamboman/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     "nvim-treesitter/nvim-treesitter",
     { "echasnovski/mini.icons", opts = {} },
   },
