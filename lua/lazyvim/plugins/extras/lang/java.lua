@@ -85,10 +85,13 @@ return {
     dependencies = { "folke/which-key.nvim" },
     ft = java_filetypes,
     opts = function()
-      local cmd = { vim.fn.exepath("jdtls") }
+      local cmd = { vim.fn.exepath("jdtls") } -- Can be empty if executed too early
       if LazyVim.has("mason.nvim") then
         local mason_registry = require("mason-registry")
         local lombok_jar = mason_registry.get_package("jdtls"):get_install_path() .. "/lombok.jar"
+
+        -- Should be re-executed after require("mason-registry") to get a real value
+        cmd = { vim.fn.exepath("jdtls") }
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
       return {
