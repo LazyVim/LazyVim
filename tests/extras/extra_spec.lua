@@ -44,7 +44,7 @@ describe("Extra", function()
         local mod = require(extra.modname)
         assert.is_not_nil(mod)
         local spec = Plugin.Spec.new({
-          { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
+          { "mason-org/mason.nvim", opts = { ensure_installed = {} } },
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
           mod,
         }, { optional = true })
@@ -60,7 +60,7 @@ describe("Extra", function()
 
       local mod = require(extra.modname)
       local spec = Plugin.Spec.new({
-        { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
+        { "mason-org/mason.nvim", opts = { ensure_installed = {} } },
         { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
         mod,
       }, { optional = true })
