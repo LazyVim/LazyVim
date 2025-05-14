@@ -37,8 +37,12 @@ vim.api.nvim_create_autocmd("User", {
   callback = function()
     -- VSCode-specific keymaps for search and navigation
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
-    vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
-    vim.keymap.set("n", "<leader>ss", [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
+    vim.keymap.set("n", "<leader>/", function()
+      vscode.call("workbench.action.findInFiles")
+    end)
+    vim.keymap.set("n", "<leader>ss", function()
+      vscode.call("workbench.action.gotoSymbol")
+    end)
 
     -- Toggle VS Code integrated terminal
     for _, lhs in ipairs({ "<leader>ft", "<leader>fT", "<c-/>" }) do
@@ -48,12 +52,20 @@ vim.api.nvim_create_autocmd("User", {
     end
 
     -- Keep undo/redo lists in sync with VsCode
-    vim.keymap.set("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
-    vim.keymap.set("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
+    vim.keymap.set("n", "u", function()
+      vscode.call("undo")
+    end)
+    vim.keymap.set("n", "<C-r>", function()
+      vscode.call("redo")
+    end)
 
     -- Navigate VSCode tabs like lazyvim buffers
-    vim.keymap.set("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
-    vim.keymap.set("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
+    vim.keymap.set("n", "<S-h>", function()
+      vscode.call("workbench.action.previousEditor")
+    end)
+    vim.keymap.set("n", "<S-l>", function()
+      vscode.call("workbench.action.nextEditor")
+    end)
   end,
 })
 
