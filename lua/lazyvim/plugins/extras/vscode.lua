@@ -23,6 +23,7 @@ local enabled = {
 }
 
 local Config = require("lazy.core.config")
+local vscode = require("vscode")
 Config.options.checker.enabled = false
 Config.options.change_detection.enabled = false
 Config.options.defaults.cond = function(plugin)
@@ -39,6 +40,13 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
     vim.keymap.set("n", "<leader>ss", [[<cmd>lua require('vscode').action('workbench.action.gotoSymbol')<cr>]])
 
+    -- Toggle VS Code integrated terminal
+    for _, lhs in ipairs({ "<leader>ft", "<leader>fT", "<c-/>" }) do
+      vim.keymap.set("n", lhs, function()
+        vscode.call("workbench.action.terminal.toggleTerminal")
+      end)
+    end
+
     -- Keep undo/redo lists in sync with VsCode
     vim.keymap.set("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
     vim.keymap.set("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
@@ -48,10 +56,6 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
   end,
 })
-
-function LazyVim.terminal()
-  require("vscode").action("workbench.action.terminal.toggleTerminal")
-end
 
 return {
   {
