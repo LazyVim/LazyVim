@@ -87,7 +87,7 @@ return {
     opts = function()
       local cmd = { vim.fn.exepath("jdtls") }
       if LazyVim.has("mason.nvim") then
-        local lombok_jar = LazyVim.get_pkg_path("jdtls", "/lombok.jar")
+        local lombok_jar = vim.fn.expand "$MASON/share/jdtls/lombok.jar"
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
       return {
