@@ -50,7 +50,7 @@ return {
       local dap = require("dap")
       dap.adapters.php = {
         type = "executable",
-        command = "php-debug-adapter",
+        command = vim.fn.exepath("php-debug-adapter"),
         args = {},
       }
     end,

@@ -26,7 +26,12 @@ describe("Extra", function()
     return not vim.tbl_contains(ignore, extra.modname)
   end, extras)
 
-  local lsp_to_pkg = require("mason-lspconfig").get_mappings().lspconfig_to_package
+  local lsp_to_pkg = {}
+  if vim.fn.has("nvim-0.11") == 1 then
+    lsp_to_pkg = require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package
+  else
+    lsp_to_pkg = require("mason-lspconfig.mappings.server").lspconfig_to_package
+  end
 
   local tsspec = Plugin.Spec.new({
     import = "lazyvim.plugins.treesitter",
