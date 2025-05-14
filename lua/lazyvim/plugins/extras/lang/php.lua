@@ -46,6 +46,16 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
+    specs = {
+      {
+        "mason-org/mason.nvim",
+        opts = {
+          ensure_installed = {
+            "php-debug-adapter",
+          },
+        },
+      },
+    },
     opts = function()
       local dap = require("dap")
       local path = require("mason-registry").get_package("php-debug-adapter"):get_install_path()
