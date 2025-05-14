@@ -254,10 +254,17 @@ function M.get_pkg_path(pkg, path, opts)
   opts.warn = opts.warn == nil and true or opts.warn
   path = path or ""
   local ret = vim.fs.normalize(root .. "/packages/" .. pkg .. "/" .. path)
-  if opts.warn and not vim.loop.fs_stat(ret) and not require("lazy.core.config").headless() then
-    M.warn(
-      ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(pkg, path)
-    )
+  if opts.warn then
+    vim.schedule(function()
+      if not require("lazy.core.config").headless() and not vim.loop.fs_stat(ret) then
+        M.warn(
+          ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
+            pkg,
+            path
+          )
+        )
+      end
+    end)
   end
   return ret
 end
