@@ -26,7 +26,7 @@ describe("Extra", function()
     return not vim.tbl_contains(ignore, extra.modname)
   end, extras)
 
-  local lsp_to_pkg = require("mason-lspconfig.mappings.server").lspconfig_to_package
+  local lsp_to_pkg = require("mason-lspconfig").get_mappings().lspconfig_to_package
 
   local tsspec = Plugin.Spec.new({
     import = "lazyvim.plugins.treesitter",
