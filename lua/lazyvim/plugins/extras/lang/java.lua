@@ -87,7 +87,7 @@ return {
     opts = function()
       local cmd = { vim.fn.exepath("jdtls") }
       if LazyVim.has("mason.nvim") then
-        local lombok_jar = vim.fn.expand "$MASON/share/jdtls/lombok.jar"
+        local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
       return {
@@ -150,15 +150,13 @@ return {
       if LazyVim.has("mason.nvim") then
         local mason_registry = require("mason-registry")
         if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
-          local java_dbg_path = LazyVim.get_pkg_path("java-debug-adapter")
           local jar_patterns = {
-            vim.fn.expand "$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar",
+            vim.fn.expand("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar"),
           }
           -- java-test also depends on java-debug-adapter.
           if opts.test and mason_registry.is_installed("java-test") then
-            local java_test_path = LazyVim.get_pkg_path("java-test")
             vim.list_extend(jar_patterns, {
-              vim.fn.expand "$MASON/share/java-test/*.jar",
+              vim.fn.expand("$MASON/share/java-test/*.jar"),
             })
           end
           for _, jar_pattern in ipairs(jar_patterns) do

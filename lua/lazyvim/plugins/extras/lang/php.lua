@@ -48,11 +48,10 @@ return {
     optional = true,
     opts = function()
       local dap = require("dap")
-      local path = LazyVim.get_pkg_path("php-debug-adapter")
       dap.adapters.php = {
         type = "executable",
-        command = "node",
-        args = { path .. "/extension/out/phpDebug.js" },
+        command = "php-debug-adapter",
+        args = {},
       }
     end,
   },
