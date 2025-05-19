@@ -154,4 +154,17 @@ return {
       },
     },
   },
+
+  -- Show `impl` blocks in outline.nvim
+  {
+    "hedyhli/outline.nvim",
+    optional = true,
+    opts = {
+      symbols = {
+        filter = {
+          rust = vim.list_extend(vim.deepcopy(LazyVim.config.kind_filter["default"]), { "Object" }),
+        },
+      },
+    },
+  },
 }
