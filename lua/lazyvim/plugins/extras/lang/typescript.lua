@@ -55,6 +55,11 @@ return {
               suggest = {
                 completeFunctionCalls = true,
               },
+              preferences = {
+                removeUnusedImports = true,
+                organizeImportsOnSave = true,
+                includePackageJsonAutoImports = "auto",
+              },
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = true },
@@ -62,6 +67,17 @@ return {
                 parameterTypes = { enabled = true },
                 propertyDeclarationTypes = { enabled = true },
                 variableTypes = { enabled = false },
+              },
+            },
+            javascript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              preferences = {
+                removeUnusedImports = true,
+                organizeImportsOnSave = true,
+                includePackageJsonAutoImports = "auto",
               },
             },
           },
@@ -132,6 +148,33 @@ return {
         end,
         vtsls = function(_, opts)
           LazyVim.lsp.on_attach(function(client, buffer)
+            -- Auto-organize imports and remove unused on save
+            if client.name == "vtsls" then
+              local ts_group = vim.api.nvim_create_augroup("TypeScriptAutoFix", { clear = true })
+
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                group = ts_group,
+                buffer = buffer,
+                callback = function()
+                  -- Remove unused imports
+                  vim.lsp.buf.code_action({
+                    apply = true,
+                    filter = function(action)
+                      return action.kind == "source.removeUnused.ts"
+                    end,
+                  })
+
+                  -- Organize imports
+                  vim.lsp.buf.code_action({
+                    apply = true,
+                    filter = function(action)
+                      return action.kind == "source.organizeImports"
+                    end,
+                  })
+                end,
+              })
+            end
+
             client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
               ---@type string, string, lsp.Range
               local action, uri, range = unpack(command.arguments)
