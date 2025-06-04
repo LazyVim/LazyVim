@@ -7,10 +7,10 @@ load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/ma
 require("lazy.minit").setup({
   spec = {
     { dir = vim.uv.cwd() },
-    "LazyVim/starter",
-    "williamboman/mason-lspconfig.nvim",
-    "williamboman/mason.nvim",
-    "nvim-treesitter/nvim-treesitter",
+    { "LazyVim/starter" },
+    { "nvim-treesitter/nvim-treesitter" },
+    { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
+    { "mason-org/mason.nvim", version = "^1.0.0" },
     { "echasnovski/mini.icons", opts = {} },
   },
 })
