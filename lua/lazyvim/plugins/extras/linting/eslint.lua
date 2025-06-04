@@ -1,9 +1,11 @@
 if lazyvim_docs then
   -- Set to false to disable auto format
   vim.g.lazyvim_eslint_auto_format = true
+  vim.g.lazyvim_eslint_auto_fix_all = true
 end
 
 local auto_format = vim.g.lazyvim_eslint_auto_format == nil or vim.g.lazyvim_eslint_auto_format
+local auto_fix_all = vim.g.lazyvim_eslint_auto_fix_all == nil or vim.g.lazyvim_eslint_auto_fix_all
 
 return {
   {
@@ -17,6 +19,24 @@ return {
             -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
             workingDirectories = { mode = "auto" },
             format = auto_format,
+            codeActionOnSave = {
+              enable = true,
+              mode = "all",
+            },
+            validate = "on",
+            probe = {
+              "javascript",
+              "javascriptreact",
+              "typescript",
+              "typescriptreact",
+              "vue",
+              "html",
+              "markdown",
+              "json",
+              "jsonc",
+            },
+            autoFixOnSave = auto_fix_all,
+            quiet = false,
           },
         },
       },
