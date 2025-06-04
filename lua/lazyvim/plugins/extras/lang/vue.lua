@@ -2,7 +2,7 @@ return {
   recommended = function()
     return LazyVim.extras.wants({
       ft = "vue",
-      root = { "vue.config.js" },
+      root = { "vue.config.js", "vite.config.js", "vite.config.ts", "nuxt.config.ts" },
     })
   end,
 
@@ -11,7 +11,7 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "vue", "css" } },
+    opts = { ensure_installed = { "vue", "css", "typescript", "javascript" } },
   },
 
   -- Add LSP servers
@@ -20,13 +20,35 @@ return {
     opts = {
       servers = {
         volar = {
+          filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
           init_options = {
             vue = {
-              hybridMode = true,
+              hybridMode = false,
+            },
+            typescript = {
+              tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+            },
+          },
+          settings = {
+            vue = {
+              updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                completeFunctionCalls = true,
+              },
             },
           },
         },
-        vtsls = {},
+        vtsls = {
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+            "vue",
+          },
+        },
       },
     },
   },
@@ -35,7 +57,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      table.insert(opts.servers.vtsls.filetypes, "vue")
+      if not vim.tbl_contains(opts.servers.vtsls.filetypes or {}, "vue") then
+        table.insert(opts.servers.vtsls.filetypes, "vue")
+      end
       LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
           name = "@vue/typescript-plugin",
