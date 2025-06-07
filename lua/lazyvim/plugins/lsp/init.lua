@@ -207,17 +207,14 @@ return {
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
         }, servers[server] or {})
-        if server_opts.enabled == false then
-          return
-        end
 
         if opts.setup[server] then
           if opts.setup[server](server, server_opts) then
-            return
+            return true
           end
         elseif opts.setup["*"] then
           if opts.setup["*"](server, server_opts) then
-            return
+            return true
           end
         end
         if vim.fn.has("nvim-0.11") == 1 then
@@ -249,6 +246,8 @@ return {
             else
               ensure_installed[#ensure_installed + 1] = server
             end
+          else
+            exclude_automatic_enable[#exclude_automatic_enable + 1] = server
           end
         end
       end
@@ -325,8 +324,4 @@ return {
       end)
     end,
   },
-
-  -- pin to v1 for now
-  { "mason-org/mason.nvim", version = "^1.0.0" },
-  { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
 }
