@@ -37,6 +37,7 @@ return {
             "typescript",
             "typescriptreact",
             "typescript.tsx",
+            "vue",
           },
           settings = {
             complete_function_calls = true,

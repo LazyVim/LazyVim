@@ -19,11 +19,11 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        volar = {
+        vue_ls = {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
           init_options = {
             vue = {
-              hybridMode = false,
+              hybridMode = true,
             },
             typescript = {
               tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
@@ -39,6 +39,17 @@ return {
           },
         },
         vtsls = {
+          init_options = {
+            plugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+                languages = { "vue" },
+                configNamespace = "typescript",
+                enableForWorkspaceTypeScriptVersions = true,
+              },
+            },
+          },
           filetypes = {
             "javascript",
             "javascriptreact",
