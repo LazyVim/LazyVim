@@ -19,7 +19,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        volar = {
+        vue_ls = {
           filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
           init_options = {
             vue = {
@@ -27,6 +27,14 @@ return {
             },
             typescript = {
               tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+              inlayHints = {
+                enumMemberValues = { enabled = false },
+                functionLikeReturnTypes = { enabled = false },
+                parameterNames = { enabled = false },
+                parameterTypes = { enabled = false },
+                propertyDeclarationTypes = { enabled = false },
+                variableTypes = { enabled = false },
+              },
             },
           },
           settings = {
