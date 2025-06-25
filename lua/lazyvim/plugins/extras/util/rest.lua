@@ -52,7 +52,17 @@ return {
         ft = { "http", "rest" },
       },
     },
-    opts = {},
+    opts = {
+      ui = {
+        icons = {
+          inlay = {
+            loading = "",
+            done = "",
+            error = "",
+          },
+        },
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
