@@ -16,7 +16,7 @@ return {
         ft = { "http", "rest" },
       },
       { "<leader>Rc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL", ft = { "http", "rest" } },
-      { "<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from curl", ft = { "http", "rest" } },
+      { "<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from cURL", ft = { "http", "rest" } },
       {
         "<leader>Rg",
         "<cmd>lua require('kulala').download_graphql_schema()<cr>",
