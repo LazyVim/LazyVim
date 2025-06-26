@@ -40,12 +40,14 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "kulala-fmt",
-      },
-    },
+    "mason-org/mason.nvim",
+    opts = function(_, opts)
+      opts.registries = opts.registries or {}
+      table.insert(opts.registries, "github:mistweaverco/zana-registry")
+      opts.ensure_installed = opts.ensure_installed or {}
+      table.insert(opts.ensure_installed, "kulala-fmt")
+      table.insert(opts.ensure_installed, "kulala-ls")
+    end,
   },
   {
     "stevearc/conform.nvim",
