@@ -10,9 +10,24 @@ end
 
 require("lazyvim.config").init()
 
+local Git = require("lazy.manage.git")
+local Util = require("lazy.core.util")
+
+local function find_actual_origin_spec()
+  local current_dir = vim.fn.fnamemodify(Util.get_source(), ":h")
+  return {
+    url = Git.get_origin(Util.find_git_root(current_dir)),
+    priority = 10000,
+    lazy = false,
+    opts = {},
+    cond = true,
+    version = "*",
+  }
+end
+
 return {
   { "folke/lazy.nvim", version = "*" },
-  { "LazyVim/LazyVim", priority = 10000, lazy = false, opts = {}, cond = true, version = "*" },
+  find_actual_origin_spec(),
   {
     "folke/snacks.nvim",
     priority = 1000,
