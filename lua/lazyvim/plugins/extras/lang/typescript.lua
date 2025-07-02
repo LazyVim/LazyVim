@@ -62,11 +62,11 @@ return {
                 includePackageJsonAutoImports = "auto",
               },
               inlayHints = {
-                enumMemberValues = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
+                enumMemberValues = { enabled = false }, -- Disabled for Vue
+                functionLikeReturnTypes = { enabled = false }, -- Disabled for Vue
+                parameterNames = { enabled = "off" }, -- Disabled for Vue
+                parameterTypes = { enabled = false }, -- Disabled for Vue
+                propertyDeclarationTypes = { enabled = false }, -- Disabled for Vue
                 variableTypes = { enabled = false },
               },
             },
