@@ -19,9 +19,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Remove the old volar configuration entirely
-        volar = false, -- This disables the old volar setup
-
         -- Updated VTSLS configuration for vue-language-tools
         vtsls = {
           init_options = {
@@ -55,7 +52,7 @@ return {
         },
 
         -- New vue_ls configuration
-        vue_ls = {
+        volar = {
           on_init = function(client)
             client.handlers["tsserver/request"] = function(_, result, context)
               local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
@@ -104,7 +101,7 @@ return {
       LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
           name = "@vue/typescript-plugin",
-          location = LazyVim.get_pkg_path("vue-language-server", "/node_modules/@vue/language-server"),
+          location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
           languages = { "vue" },
           configNamespace = "typescript",
           enableForWorkspaceTypeScriptVersions = true,
