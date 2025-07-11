@@ -68,8 +68,12 @@ return {
       },
       window = {
         mappings = {
-          ["l"] = "open",
           ["h"] = "close_node",
+          ["n"] = "next_source",
+          ["e"] = "prev_source",
+          ["i"] = "open",
+          ["<C-n>"] = "list_down",
+          ["<C-e>"] = "list_up",
           ["<space>"] = "none",
           ["Y"] = {
             function(state)
