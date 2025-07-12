@@ -24,6 +24,14 @@ return {
           filetypes_include = {},
           -- to fully override the default_config, change the below
           -- filetypes = {}
+          root_dir = function(fname)
+            local node_modules = vim.fs.dirname(vim.fs.find("node_modules", { path = fname, upward = true })[1])
+            if not node_modules then
+              return nil
+            else
+              return node_modules
+            end
+          end,
         },
       },
       setup = {
