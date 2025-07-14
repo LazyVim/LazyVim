@@ -25,7 +25,6 @@ return {
       -- Luckily, the only things that those plugins need are the custom queries, which we make available
       -- during startup.
       require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
     end,
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
@@ -88,40 +87,18 @@ return {
       if type(opts.ensure_installed) == "table" then
         opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)
       end
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
+      require("nvim-treesitter").install(opts.ensure_installed)
+      -- register and start parsers for filetypes
+      for _, parser in ipairs(opts.ensure_installed) do
+        local filetypes = parser -- In this case, parser is the filetype/language name
+        vim.treesitter.language.register(parser, filetypes)
 
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
-    enabled = true,
-    config = function()
-      -- If treesitter is already loaded, we need to run config again for textobjects
-      if LazyVim.is_loaded("nvim-treesitter") then
-        local opts = LazyVim.opts("nvim-treesitter")
-        require("nvim-treesitter.configs").setup({ textobjects = opts.textobjects })
-      end
-
-      -- When in diff mode, we want to use the default
-      -- vim text objects c & C instead of the treesitter ones.
-      local move = require("nvim-treesitter.textobjects.move") ---@type table<string,fun(...)>
-      local configs = require("nvim-treesitter.configs")
-      for name, fn in pairs(move) do
-        if name:find("goto") == 1 then
-          move[name] = function(q, ...)
-            if vim.wo.diff then
-              local config = configs.get_module("textobjects.move")[name] ---@type table<string,string>
-              for key, query in pairs(config or {}) do
-                if q == query and key:find("[%]%[][cC]") then
-                  vim.cmd("normal! " .. key)
-                  return
-                end
-              end
-            end
-            return fn(q, ...)
-          end
-        end
+        vim.api.nvim_create_autocmd({ "FileType" }, {
+          pattern = filetypes,
+          callback = function(event)
+            vim.treesitter.start(event.buf, parser)
+          end,
+        })
       end
     end,
   },
