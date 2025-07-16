@@ -18,6 +18,12 @@ return {
     opts = {
       servers = {
         tailwindcss = {
+          -- exclude a filetype from the default_config
+          filetypes_exclude = { "markdown" },
+          -- add additional filetypes to the default_config
+          filetypes_include = {},
+          -- to fully override the default_config, change the below
+          -- filetypes = {}
           root_dir = function(fname)
             local node_modules = vim.fs.find("node_modules", { path = fname, upward = true })[1]
             local root = vim.fs.dirname(node_modules)
@@ -25,8 +31,6 @@ return {
               return nil
             else
               local tailwind_path = node_modules .. "/tailwindcss"
-              print("TailwindCSS root path: " .. tailwind_path)
-              print(vim.inspect(vim.fn.isdirectory(tailwind_path)))
 
               if vim.fn.isdirectory(tailwind_path) ~= 0 then
                 return root
