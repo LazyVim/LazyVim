@@ -148,6 +148,12 @@ return {
       -- Find the extra bundles that should be passed on the jdtls command-line
       -- if nvim-dap is enabled with java debug/test.
       local bundles = {} ---@type string[]
+
+      -- Allow users to add custom bundles through opts.init_options.bundles
+      if opts.init_options and opts.init_options.bundles then
+        vim.list_extend(bundles, opts.init_options.bundles)
+      end
+
       if LazyVim.has("mason.nvim") then
         local mason_registry = require("mason-registry")
         if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
