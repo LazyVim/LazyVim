@@ -8,7 +8,7 @@ return {
     -- Populate the keys based on the user's options
     local opts = LazyVim.opts("mini.surround")
     local mappings = {
-      { opts.mappings.add, desc = "Add Surrounding", mode = { "n", "v" } },
+      { opts.mappings.add, desc = "Add Surrounding", mode = { "n", "x" } },
       { opts.mappings.delete, desc = "Delete Surrounding" },
       { opts.mappings.find, desc = "Find Right Surrounding" },
       { opts.mappings.find_left, desc = "Find Left Surrounding" },

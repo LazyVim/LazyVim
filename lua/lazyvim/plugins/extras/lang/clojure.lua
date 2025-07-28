@@ -76,13 +76,13 @@ return {
           end
 
           vim.keymap.set(
-            { "n", "v" },
+            { "n", "x" },
             "[c",
             "<CMD>call search('^; -\\+$', 'bw')<CR>",
             { silent = true, buffer = true, desc = "Jumps to the begining of previous evaluation output." }
           )
           vim.keymap.set(
-            { "n", "v" },
+            { "n", "x" },
             "]c",
             "<CMD>call search('^; -\\+$', 'w')<CR>",
             { silent = true, buffer = true, desc = "Jumps to the begining of next evaluation output." }
