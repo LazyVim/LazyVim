@@ -31,26 +31,90 @@ return {
       },
     },
 
-    -- stylua: ignore
-    keys = {
-      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-      { "<leader>dc", function() require("dap").continue() end, desc = "Run/Continue" },
-      { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
-      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-      { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
-      { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-      { "<leader>dj", function() require("dap").down() end, desc = "Down" },
-      { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-      { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-      { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-      { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
-      { "<leader>dP", function() require("dap").pause() end, desc = "Pause" },
-      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-      { "<leader>ds", function() require("dap").session() end, desc = "Session" },
-      { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
-    },
+    keys = function(_, keys)
+      local dap = require("dap")
+
+      local function edit_breakpoint()
+        -- Search for an existing breakpoint on this line in this buffer
+        ---@return dap.SourceBreakpoint bp that was either found, or an empty placeholder
+        local function find_bp()
+          local buf_bps = require("dap.breakpoints").get(vim.fn.bufnr())[vim.fn.bufnr()]
+          ---@type dap.SourceBreakpoint
+          local bp = { condition = "", logMessage = "", hitCondition = "", line = vim.fn.line(".") }
+          for _, candidate in ipairs(buf_bps) do
+            if candidate.line and candidate.line == vim.fn.line(".") then
+              bp = candidate
+              break
+            end
+          end
+          return bp
+        end
+
+        -- Elicit customization via a UI prompt
+        ---@param bp dap.SourceBreakpoint a breakpoint
+        local function customize_bp(bp)
+          local props = {
+            ["Condition"] = {
+              value = bp.condition,
+              setter = function(v)
+                bp.condition = v
+              end,
+            },
+            ["Hit Condition"] = {
+              value = bp.hitCondition,
+              setter = function(v)
+                bp.hitCondition = v
+              end,
+            },
+            ["Log Message"] = {
+              value = bp.logMessage,
+              setter = function(v)
+                bp.logMessage = v
+              end,
+            },
+          }
+          local menu_options = {}
+          for k, v in pairs(props) do
+            table.insert(menu_options, ("%s: %s"):format(k, v.value))
+          end
+          vim.ui.select(menu_options, {
+            prompt = "Edit Breakpoint",
+          }, function(choice)
+            local prompt = (tostring(choice)):gsub(":.*", "")
+            props[prompt].setter(vim.fn.input({
+              prompt = prompt,
+              default = props[prompt].value,
+            }))
+
+            -- Set breakpoint for current line, with customizations (see h:dap.set_breakpoint())
+            dap.set_breakpoint(bp.condition, bp.hitCondition, bp.logMessage)
+          end)
+        end
+
+        customize_bp(find_bp())
+      end
+      -- stylua: ignore
+      local default_keys = {
+        { "<leader>dB", edit_breakpoint, desc = "Breakpoint Condition" },
+        { "<leader>db", function() dap.toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+        { "<leader>dc", function() dap.continue() end, desc = "Run/Continue" },
+        { "<leader>da", function() dap.continue({ before = get_args }) end, desc = "Run with Args" },
+        { "<leader>dC", function() dap.run_to_cursor() end, desc = "Run to Cursor" },
+        { "<leader>dg", function() dap.goto_() end, desc = "Go to Line (No Execute)" },
+        { "<leader>di", function() dap.step_into() end, desc = "Step Into" },
+        { "<leader>dj", function() dap.down() end, desc = "Down" },
+        { "<leader>dk", function() dap.up() end, desc = "Up" },
+        { "<leader>dl", function() dap.run_last() end, desc = "Run Last" },
+        { "<leader>do", function() dap.step_out() end, desc = "Step Out" },
+        { "<leader>dO", function() dap.step_over() end, desc = "Step Over" },
+        { "<leader>dP", function() dap.pause() end, desc = "Pause" },
+        { "<leader>dr", function() dap.repl.toggle() end, desc = "Toggle REPL" },
+        { "<leader>ds", function() dap.session() end, desc = "Session" },
+        { "<leader>dt", function() dap.terminate() end, desc = "Terminate" },
+        { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+      }
+      return vim.tbl_deep_extend("force", default_keys, keys)
+    end,
 
     config = function()
       -- load mason-nvim-dap here, after all adapters have been setup
