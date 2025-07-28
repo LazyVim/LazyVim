@@ -221,7 +221,7 @@ return {
             })
             wk.add({
               {
-                mode = "v",
+                mode = "x",
                 buffer = args.buf,
                 { "<leader>cx", group = "extract" },
                 {
