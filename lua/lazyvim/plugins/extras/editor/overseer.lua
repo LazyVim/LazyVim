@@ -99,4 +99,13 @@ return {
       require("overseer").enable_dap()
     end,
   },
+  {
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    opts = {
+      sections = {
+        lualine_x = { "overseer" },
+      },
+    },
+  },
 }
