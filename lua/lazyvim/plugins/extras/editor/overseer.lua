@@ -102,10 +102,9 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     optional = true,
-    opts = {
-      sections = {
-        lualine_x = { "overseer" },
-      },
-    },
+    opts = function(_, opts)
+      opts.extensions = opts.extensions or {}
+      opts.extensions[#opts.extensions + 1] = "overseer"
+    end,
   },
 }
