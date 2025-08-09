@@ -257,6 +257,14 @@ return {
     end,
   },
 
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    optional = true,
+    opts = {
+      automatic_installation = { exclude = { "chrome" } },
+    },
+  },
+
   -- Filetype icons
   {
     "echasnovski/mini.icons",
