@@ -234,10 +234,6 @@ return {
 
       local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
 
-      local vscode = require("dap.ext.vscode")
-      vscode.type_to_filetypes["node"] = js_filetypes
-      vscode.type_to_filetypes["pwa-node"] = js_filetypes
-
       for _, language in ipairs(js_filetypes) do
         if not dap.configurations[language] then
           dap.configurations[language] = {
