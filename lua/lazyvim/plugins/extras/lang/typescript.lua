@@ -308,6 +308,14 @@ return {
     end,
   },
 
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    optional = true,
+    opts = {
+      automatic_installation = { exclude = { "chrome" } },
+    },
+  },
+
   -- Filetype icons
   {
     "nvim-mini/mini.icons",
