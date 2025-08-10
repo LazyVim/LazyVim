@@ -12,9 +12,9 @@ return {
       },
     },
     dependencies = {
-      { "nvim-lua/plenary.nvim", optional = true },
-      { "MunifTanjim/nui.nvim", optional = true },
-      --- The below dependencies are optional,
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "zbirenbaum/copilot.lua",
       { "echasnovski/mini.pick", optional = true }, -- for file_selector provider mini.pick
       { "nvim-telescope/telescope.nvim", optional = true }, -- for file_selector provider telescope
       { "hrsh7th/nvim-cmp", optional = true }, -- autocompletion for avante commands and mentions
@@ -22,7 +22,6 @@ return {
       { "stevearc/dressing.nvim", optional = true }, -- for input provider dressing
       { "folke/snacks.nvim", optional = true }, -- for input provider snacks
       { "nvim-tree/nvim-web-devicons", optional = true }, -- or echasnovski/mini.icons
-      { "zbirenbaum/copilot.lua", optional = true }, -- for providers='copilot'
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
