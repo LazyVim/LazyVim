@@ -50,18 +50,15 @@ return {
         ft = { "markdown", "Avante" },
       },
       {
-        "Kaiser-Yang/blink-cmp-avante",
-        lazy = true,
-        specs = {
-          {
-            "saghen/blink.cmp",
-            optional = true,
-            opts = {
-              sources = {
-                default = { "avante" },
-                providers = { avante = { module = "blink-cmp-avante", name = "Avante" } },
-              },
-            },
+        "saghen/blink.cmp",
+        optional = true,
+        dependencies = {
+          "Kaiser-Yang/blink-cmp-avante",
+        },
+        opts = {
+          sources = {
+            default = { "avante" },
+            providers = { avante = { module = "blink-cmp-avante", name = "Avante" } },
           },
         },
       },
