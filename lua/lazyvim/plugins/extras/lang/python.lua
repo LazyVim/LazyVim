@@ -114,7 +114,6 @@ return {
 
   {
     "linux-cultist/venv-selector.nvim",
-    branch = "regexp", -- Use this branch for the new version
     cmd = "VenvSelect",
     opts = {
       settings = {
@@ -123,7 +122,7 @@ return {
         },
       },
     },
-    --  Call config for python files and load the cached venv automatically
+    --  Call config for Python files and load the cached venv automatically
     ft = "python",
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" } },
   },
