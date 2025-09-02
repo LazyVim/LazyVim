@@ -114,7 +114,7 @@ return {
 
   {
     "linux-cultist/venv-selector.nvim",
-    branch = "regexp", -- Use this branch for the new version
+    branch = "main", -- Important: VenvSelect is now using `main` as the updated branch again.
     cmd = "VenvSelect",
     enabled = function()
       return LazyVim.has("telescope.nvim")
