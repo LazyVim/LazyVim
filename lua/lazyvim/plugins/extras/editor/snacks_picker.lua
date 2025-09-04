@@ -18,6 +18,7 @@ local picker = {
   ---@param source string
   ---@param opts? snacks.picker.Config
   open = function(source, opts)
+    opts = vim.tbl_deep_extend("force", opts or {}, Snacks.config.picker[source] or {})
     return Snacks.picker.pick(source, opts)
   end,
 }
