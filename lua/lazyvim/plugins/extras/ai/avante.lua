@@ -15,7 +15,7 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       "zbirenbaum/copilot.lua",
-      { "echasnovski/mini.pick", optional = true }, -- for file_selector provider mini.pick
+      { "nvim-mini/mini.pick", optional = true }, -- for file_selector provider mini.pick
       { "nvim-telescope/telescope.nvim", optional = true }, -- for file_selector provider telescope
       { "hrsh7th/nvim-cmp", optional = true }, -- autocompletion for avante commands and mentions
       { "ibhagwan/fzf-lua", optional = true }, -- for file_selector provider fzf
