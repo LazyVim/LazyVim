@@ -1,3 +1,4 @@
+local Meta = require("lazy.core.meta")
 local Plugin = require("lazy.core.plugin")
 
 ---@class lazyvim.util.plugin
@@ -102,9 +103,17 @@ function M.fix_imports()
 end
 
 function M.fix_renames()
-  Plugin.Spec.add = LazyVim.inject.args(Plugin.Spec.add, function(self, plugin)
+  ---@param plugin LazyPluginSpec
+  Meta.add = LazyVim.inject.args(Meta.add, function(self, plugin)
     if type(plugin) == "table" then
-      if M.renames[plugin[1]] then
+      local name = plugin[1]
+      if not name then
+        return
+      end
+      if name:find("echasnovski") then
+        M.renames[name] = name:gsub("echasnovski", "nvim-mini")
+      end
+      if M.renames[name] then
         LazyVim.warn(
           ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
             plugin[1],
@@ -113,7 +122,7 @@ function M.fix_renames()
           ),
           { title = "LazyVim" }
         )
-        plugin[1] = M.renames[plugin[1]]
+        plugin[1] = M.renames[name]
       end
     end
   end)
