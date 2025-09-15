@@ -7,8 +7,8 @@ return {
     version = false,
     opts = {
       provider = "copilot",
-      hints = {
-        enabled = false,
+      selection = {
+        hint_display = "none",
       },
     },
     dependencies = {
