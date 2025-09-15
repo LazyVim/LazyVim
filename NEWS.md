@@ -1,5 +1,19 @@
 # What's new?
 
+## 15.x
+
+**Neovim** `>= 0.11.0` includes a lot of changes to the underlying LSP implementation.
+
+Going forward, **LazyVim** requires **Neovim** `>= 0.11.0`, and drops support for older versions.
+
+### Changes
+
+- removed compatibility code for Neovim `< 0.11`
+- updated all LSP code to use the new LSP implementation
+- migrated **mason.nvim** and **mason-lspconfig.nvim** to `v2.x`
+- added new `treesitter-main` extra to test the new `main` branch of `nvim-treesitter`
+  - after enabling, you will get errors. Update with `:Lazy` and restart Neovim
+
 ## 14.x
 
 Big new release with a lot of changes and improvements!
@@ -110,7 +124,6 @@ vim.g.snacks_animate = false
 ## 11.x
 
 - **Keymaps:**
-
   - `<leader>gB` to open the current repo in the browser
   - `gco` and `gcO` to add a comment below or above the current line
   - `<leader>wm` to toggle window maximize
@@ -123,7 +136,6 @@ vim.g.snacks_animate = false
   It's a great plugin that enhances the native text objects.
 
 - `:LazyExtras` now has multiple new sections:
-
   - **Enabled**: extras that are currently enabled
   - **Recommended Languages**: language extras recommended for the current buffer / directory
   - **Recommended Plugins**: extras that are recommended for most users
@@ -161,7 +173,6 @@ Additionally, some core plugins have been moved to extras.
   ```
 
 - plugins moved to extras:
-
   - `mini.surround`
   - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
   - `nvim-treesitter-context`
@@ -179,7 +190,6 @@ Additionally, some core plugins have been moved to extras.
   You can find the updated docs [here](https://github.com/folke/trouble.nvim/tree/dev)
 
 - The **lazygit** integration now configures:
-
   - the theme based on the colorscheme
   - nerd font icons (v3)
   - editor preset is set to `nvim-remote` for better interop with Neovim
@@ -220,9 +230,7 @@ Additionally, some core plugins have been moved to extras.
 - New `:LazyExtras` command for managing **LazyVim** extras
 
 - Improved **formatting**:
-
   - **LazyVim** can now work with multiple formatters. Types:
-
     - **primary**: only one primary formatter can be active at a time.
       _(conform, none-ls, LSP)_
     - **secondary**: multiple secondary formatters can be active _(eslint, ...)_
@@ -241,18 +249,15 @@ Additionally, some core plugins have been moved to extras.
     ```
 
 - `none-ls.nvim` is no longer installed by default
-
   - `conform.nvim` is now the default formatter
   - `nvim-lint` is now the default linter
   - If you want to keep using `none-ls.nvim`,
     you can enable the **lsp.none-ls** extra
 
 - `dashboard.nvim` is the new default dashboard plugin
-
   - If you want to keep using `alpha.nvim`, you can enable the **ui.alpha** extra
 
 - Improved **root detection**:
-
   - New `:LazyRoot` command that shows info about the root dir detection
   - Configurable with `vim.g.root_spec`
 

@@ -1,4 +1,4 @@
-*LazyVim.txt*                For Neovim               Last change: 2025 May 12
+*LazyVim.txt*             For Neovim            Last change: 2025 September 15
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
@@ -53,7 +53,7 @@ FEATURES                                                    *LazyVim-features*
 
 REQUIREMENTS                                            *LazyVim-requirements*
 
-- Neovim >= **0.9.0** (needs to be built with **LuaJIT**)
+- Neovim >= **0.11.0** (needs to be built with **LuaJIT**)
 - Git >= **2.19.0** (for partial clones support)
 - a Nerd Font <https://www.nerdfonts.com/> **(optional)**
 - a **C** compiler for `nvim-treesitter`. See here <https://github.com/nvim-treesitter/nvim-treesitter#requirements>

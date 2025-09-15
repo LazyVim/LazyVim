@@ -115,9 +115,6 @@ return {
   {
     "linux-cultist/venv-selector.nvim",
     cmd = "VenvSelect",
-    enabled = function()
-      return LazyVim.has("telescope.nvim")
-    end,
     opts = {
       settings = {
         options = {
@@ -125,7 +122,7 @@ return {
         },
       },
     },
-    --  Call config for python files and load the cached venv automatically
+    --  Call config for Python files and load the cached venv automatically
     ft = "python",
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv", ft = "python" } },
   },
