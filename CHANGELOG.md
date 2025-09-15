@@ -1,5 +1,15 @@
 # Changelog
 
+## [14.15.1](https://github.com/LazyVim/LazyVim/compare/v14.15.0...v14.15.1) (2025-09-15)
+
+
+### Bug Fixes
+
+* **blink:** use .get method to access presets ([#6183](https://github.com/LazyVim/LazyVim/issues/6183)) ([1a729e2](https://github.com/LazyVim/LazyVim/commit/1a729e2d4c4162501fe13224d669a654849deb36))
+* **extras.ai.copilot:** update status retrieval for lualine ([#5900](https://github.com/LazyVim/LazyVim/issues/5900)) ([55e9944](https://github.com/LazyVim/LazyVim/commit/55e9944e2b1e152b5acdc9cc015978a905fc2966))
+* **lang.python:** enable venv-selector even when telescope is not available ([#5829](https://github.com/LazyVim/LazyVim/issues/5829)) ([10e5bf5](https://github.com/LazyVim/LazyVim/commit/10e5bf5c5b5fb4da0afbb2d4d2b75595502c9690))
+* **lsp:** fixed deprecated warnings ([bed725a](https://github.com/LazyVim/LazyVim/commit/bed725a054ed3e8c8c56dce7e2100335e567cf01))
+
 ## [14.15.0](https://github.com/LazyVim/LazyVim/compare/v14.14.0...v14.15.0) (2025-05-12)
 
 
