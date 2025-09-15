@@ -28,6 +28,7 @@ return {
 
       if #install > 0 then
         TS.install(install, { summary = true })
+        vim.list_extend(installed, install)
       end
 
       -- backwards compatibility with the old treesitter config for indent
@@ -38,8 +39,11 @@ return {
       -- backwards compatibility with the old treesitter config for highlight
       if vim.tbl_get(opts, "highlight", "enable") then
         vim.api.nvim_create_autocmd("FileType", {
-          callback = function()
-            pcall(vim.treesitter.start)
+          callback = function(ev)
+            local lang = vim.treesitter.language.get_lang(ev.match)
+            if vim.tbl_contains(installed, lang) then
+              pcall(vim.treesitter.start)
+            end
           end,
         })
       end
