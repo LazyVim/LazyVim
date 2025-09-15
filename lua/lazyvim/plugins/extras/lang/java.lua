@@ -91,9 +91,7 @@ return {
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
       return {
-        -- How to find the root dir for a given filename. The default comes from
-        -- lspconfig which provides a function specifically for java projects.
-        root_dir = LazyVim.lsp.get_raw_config("jdtls").default_config.root_dir,
+        root_dir = vim.fs.root(0, vim.lsp.config.jdtls.root_markers),
 
         -- How to find the project name for a given root dir.
         project_name = function(root_dir)

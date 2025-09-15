@@ -60,28 +60,22 @@ return {
           keys = {
             { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
           },
-          root_dir = function(bufnr, ondir)
-            local root_directory = function(fname)
-              return require("lspconfig.util").root_pattern(
-                "Makefile",
-                "configure.ac",
-                "configure.in",
-                "config.h.in",
-                "meson.build",
-                "meson_options.txt",
-                "build.ninja"
-              )(fname) or require("lspconfig.util").root_pattern(
-                "compile_commands.json",
-                "compile_flags.txt"
-              )(fname) or require("lspconfig.util").find_git_ancestor(fname)
-            end
-            if type(bufnr) == "string" then
-              return root_directory(bufnr)
-            else
-              local fname = vim.api.nvim_buf_get_name(bufnr)
-              ondir(root_directory(fname))
-            end
-          end,
+          root_markers = {
+            ".clangd",
+            ".clang-tidy",
+            ".clang-format",
+            "compile_commands.json",
+            "compile_flags.txt",
+            "configure.ac", -- AutoTools
+            "Makefile",
+            "configure.ac",
+            "configure.in",
+            "config.h.in",
+            "meson.build",
+            "meson_options.txt",
+            "build.ninja",
+            ".git",
+          },
           capabilities = {
             offsetEncoding = { "utf-16" },
           },

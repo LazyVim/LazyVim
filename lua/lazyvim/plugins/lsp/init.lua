@@ -228,15 +228,22 @@ return {
         })
       end
 
-      if LazyVim.lsp.is_enabled("denols") and LazyVim.lsp.is_enabled("vtsls") then
-        local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-        LazyVim.lsp.disable("vtsls", is_deno)
-        LazyVim.lsp.disable("denols", function(root_dir, config)
-          if not is_deno(root_dir) then
-            config.settings.deno.enable = false
-          end
-          return false
-        end)
+      if vim.lsp.is_enabled("denols") and vim.lsp.is_enabled("vtsls") then
+        ---@param server string
+        ---@param markers string[]
+        local resolve = function(server, markers)
+          vim.lsp.config(server, {
+            root_dir = function(bufnr, on_dir)
+              local is_deno = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" }) ~= nil
+              if is_deno == (server == "denols") then
+                local root = vim.fs.root(bufnr, markers)
+                return root and on_dir(root)
+              end
+            end,
+          })
+        end
+        resolve("denols", vim.lsp.config.denols.root_markers)
+        resolve("vtsls", vim.lsp.config.vtsls.root_markers)
       end
     end,
   },
