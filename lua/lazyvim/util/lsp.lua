@@ -1,16 +1,51 @@
 ---@class lazyvim.util.lsp
 local M = {}
 
----@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}
+---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: vim.lsp.Client):boolean}
+
+--- Neovim 0.11 uses a lua class for clients, while older versions use a table.
+--- Wraps older style clients to be compatible with the new style.
+---@param client vim.lsp.Client
+---@return vim.lsp.Client
+local function wrap(client)
+  local meta = getmetatable(client)
+  if meta and meta.request then
+    return client
+  end
+  ---@diagnostic disable-next-line: undefined-field
+  if client.wrapped then
+    return client
+  end
+  local methods = { "request", "supports_method", "cancel_request", "notify" }
+  -- old style
+  return setmetatable({ wrapped = true }, {
+    __index = function(_, k)
+      if k == "supports_method" then
+        -- supports_method doesn't support the bufnr argument
+        return function(_, method)
+          return client[k](method)
+        end
+      end
+      if vim.tbl_contains(methods, k) then
+        return function(_, ...)
+          return client[k](...)
+        end
+      end
+      return client[k]
+    end,
+  })
+end
 
 ---@param opts? lsp.Client.filter
 function M.get_clients(opts)
   local ret = {} ---@type vim.lsp.Client[]
   if vim.lsp.get_clients then
     ret = vim.lsp.get_clients(opts)
+    ret = vim.tbl_map(wrap, ret)
   else
     ---@diagnostic disable-next-line: deprecated
     ret = vim.lsp.get_active_clients(opts)
+    ret = vim.tbl_map(wrap, ret)
     if opts and opts.method then
       ---@param client vim.lsp.Client
       ret = vim.tbl_filter(function(client)
@@ -29,7 +64,7 @@ function M.on_attach(on_attach, name)
       local buffer = args.buf ---@type number
       local client = vim.lsp.get_client_by_id(args.data.client_id)
       if client and (not name or client.name == name) then
-        return on_attach(client, buffer)
+        return on_attach(wrap(client), buffer)
       end
     end,
   })
@@ -75,7 +110,7 @@ function M._check_methods(client, buffer)
   for method, clients in pairs(M._supports_method) do
     clients[client] = clients[client] or {}
     if not clients[client][buffer] then
-      if client.supports_method and client.supports_method(method, { bufnr = buffer }) then
+      if client.supports_method and client:supports_method(method, { bufnr = buffer }) then
         clients[client][buffer] = true
         vim.api.nvim_exec_autocmds("User", {
           pattern = "LspSupportsMethod",
