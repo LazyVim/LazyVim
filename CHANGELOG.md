@@ -1,5 +1,34 @@
 # Changelog
 
+## [14.15.1](https://github.com/LazyVim/LazyVim/compare/v14.15.0...v14.15.1) (2025-09-15)
+
+
+### Bug Fixes
+
+* **blink:** use .get method to access presets ([#6183](https://github.com/LazyVim/LazyVim/issues/6183)) ([1a729e2](https://github.com/LazyVim/LazyVim/commit/1a729e2d4c4162501fe13224d669a654849deb36))
+* **extras.ai.copilot:** update status retrieval for lualine ([#5900](https://github.com/LazyVim/LazyVim/issues/5900)) ([55e9944](https://github.com/LazyVim/LazyVim/commit/55e9944e2b1e152b5acdc9cc015978a905fc2966))
+* **lang.python:** enable venv-selector even when telescope is not available ([#5829](https://github.com/LazyVim/LazyVim/issues/5829)) ([10e5bf5](https://github.com/LazyVim/LazyVim/commit/10e5bf5c5b5fb4da0afbb2d4d2b75595502c9690))
+* **lsp:** fixed deprecated warnings ([bed725a](https://github.com/LazyVim/LazyVim/commit/bed725a054ed3e8c8c56dce7e2100335e567cf01))
+
+## [14.15.0](https://github.com/LazyVim/LazyVim/compare/v14.14.0...v14.15.0) (2025-05-12)
+
+
+### Features
+
+* **chezmoi:** enhance fzf-lua chezmoi picker and add snacks.dasbhoard entry ([#5275](https://github.com/LazyVim/LazyVim/issues/5275)) ([759a19e](https://github.com/LazyVim/LazyVim/commit/759a19e785735eb8513b4f8d4483ec5ab1b75307))
+* **keymaps:** show lang when opening treesitter inspect ([9c59668](https://github.com/LazyVim/LazyVim/commit/9c596681f684c549e69652a5c77a68bd5ecc93e3))
+* **octo:** add support for snacks picker ([#5625](https://github.com/LazyVim/LazyVim/issues/5625)) ([16a7724](https://github.com/LazyVim/LazyVim/commit/16a772452a515790c3304b358dd66a618fda3260))
+* **snippets:** mini.snippets standalone and blink.resubscribe ([#5507](https://github.com/LazyVim/LazyVim/issues/5507)) ([f2f2aea](https://github.com/LazyVim/LazyVim/commit/f2f2aea6722b530281b476c08ec60f2d320f1c3d))
+
+
+### Bug Fixes
+
+* **blink:** make sure to use `LazyVim.config.icons.kinds` ([#5668](https://github.com/LazyVim/LazyVim/issues/5668)) ([771089f](https://github.com/LazyVim/LazyVim/commit/771089f6928512ab0f431e9db04e7dc802a5e1a5))
+* **blink:** remove unnecessary `sources` from `cmdline` ([#5620](https://github.com/LazyVim/LazyVim/issues/5620)) ([5b94baa](https://github.com/LazyVim/LazyVim/commit/5b94baa1d2e7d8ec7e9a9cab82fabd8c3655d369))
+* **copilot-chat:** switch from deprecated picker integrations ([#5707](https://github.com/LazyVim/LazyVim/issues/5707)) ([b0334fd](https://github.com/LazyVim/LazyVim/commit/b0334fd57cdb920e03afab3c1940114ad43e4fbe))
+* **mason:** rename and pin to v1 ([c20c402](https://github.com/LazyVim/LazyVim/commit/c20c4022958780617424a090eee2360d560eb939))
+* **snacks.picker:** remove redundant leader-gc keymap. Closes [#5646](https://github.com/LazyVim/LazyVim/issues/5646) ([606b964](https://github.com/LazyVim/LazyVim/commit/606b96466eeb39b1c1bb576c9b99041b64705f43))
+
 ## [14.14.0](https://github.com/LazyVim/LazyVim/compare/v14.13.0...v14.14.0) (2025-02-15)
 
 

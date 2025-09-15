@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "14.14.0" -- x-release-please-version
+M.version = "14.15.1" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -353,7 +353,7 @@ function M.get_defaults()
       { name = "telescope", extra = "editor.telescope" },
     },
     cmp = {
-      { name = "blink.cmp", extra = "coding.blink", enabled = vim.fn.has("nvim-0.10") == 1 },
+      { name = "blink.cmp", extra = "coding.blink" },
       { name = "nvim-cmp", extra = "coding.nvim-cmp" },
     },
     explorer = {
