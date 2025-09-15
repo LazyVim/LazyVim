@@ -6,16 +6,13 @@ return {
     build = ":TSUpdate",
     lazy = true,
     cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
-    enabled = function()
-      if vim.fn.executable("tree-sitter") == 0 then
-        LazyVim.error("**treesitter-main** requires the `tree-sitter` executable to be installed")
-        return false
-      end
-      return true
-    end,
     init = function() end,
     ---@param opts TSConfig
     config = function(_, opts)
+      if vim.fn.executable("tree-sitter") == 0 then
+        LazyVim.error("**treesitter-main** requires the `tree-sitter` executable to be installed")
+        return
+      end
       if type(opts.ensure_installed) ~= "table" then
         error("opts.ensure_installed must be a table")
       end
