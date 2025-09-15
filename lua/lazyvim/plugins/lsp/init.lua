@@ -2,14 +2,10 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    event = vim.fn.has("nvim-0.11") == 1 and { "BufReadPre", "BufNewFile", "BufWritePre" } or "LazyFile",
+    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
     dependencies = {
       "mason.nvim",
-      {
-        "mason-org/mason-lspconfig.nvim",
-        version = vim.fn.has("nvim-0.11") == 0 and "1.32.0" or false,
-        config = function() end,
-      },
+      { "mason-org/mason-lspconfig.nvim", config = function() end },
     },
     opts = function()
       ---@class PluginLspOpts
@@ -181,11 +177,7 @@ return {
       -- get all the servers that are available through mason-lspconfig
       local have_mason, mlsp = pcall(require, "mason-lspconfig")
       local all_mslp_servers = {}
-      if have_mason and vim.fn.has("nvim-0.11") == 1 then
-        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
-      elseif have_mason then
-        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-      end
+      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
 
       local exclude_automatic_enable = {} ---@type string[]
 
@@ -203,19 +195,11 @@ return {
             return true
           end
         end
-        if vim.fn.has("nvim-0.11") == 1 then
-          vim.lsp.config(server, server_opts)
-        else
-          require("lspconfig")[server].setup(server_opts)
-        end
+        vim.lsp.config(server, server_opts)
 
         -- manually enable if mason=false or if this is a server that cannot be installed with mason-lspconfig
         if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-          if vim.fn.has("nvim-0.11") == 1 then
-            vim.lsp.enable(server)
-          else
-            configure(server)
-          end
+          vim.lsp.enable(server)
           return true
         end
         return false
@@ -247,13 +231,9 @@ return {
           ),
         }
 
-        if vim.fn.has("nvim-0.11") == 1 then
-          setup_config.automatic_enable = {
-            exclude = exclude_automatic_enable,
-          }
-        else
-          setup_config.handlers = { configure }
-        end
+        setup_config.automatic_enable = {
+          exclude = exclude_automatic_enable,
+        }
 
         mlsp.setup(setup_config)
       end
@@ -276,7 +256,6 @@ return {
 
     "mason-org/mason.nvim",
     cmd = "Mason",
-    version = vim.fn.has("nvim-0.11") == 0 and "1.11.0" or false,
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
     opts_extend = { "ensure_installed" },
