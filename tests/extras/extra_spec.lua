@@ -27,11 +27,7 @@ describe("Extra", function()
   end, extras)
 
   local lsp_to_pkg = {}
-  if require("lazy.core.config").spec.plugins["mason-lspconfig.nvim"].version == "^1.0.0" then
-    lsp_to_pkg = require("mason-lspconfig.mappings.server").lspconfig_to_package
-  else
-    lsp_to_pkg = require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package
-  end
+  lsp_to_pkg = require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package
 
   local tsspec = Plugin.Spec.new({
     import = "lazyvim.plugins.treesitter",
