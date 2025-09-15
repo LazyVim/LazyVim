@@ -353,7 +353,7 @@ function M.get_defaults()
       { name = "telescope", extra = "editor.telescope" },
     },
     cmp = {
-      { name = "blink.cmp", extra = "coding.blink", enabled = vim.fn.has("nvim-0.10") == 1 },
+      { name = "blink.cmp", extra = "coding.blink" },
       { name = "nvim-cmp", extra = "coding.nvim-cmp" },
     },
     explorer = {
