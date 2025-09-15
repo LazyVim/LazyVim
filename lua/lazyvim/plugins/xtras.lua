@@ -42,15 +42,7 @@ end
 ---@type string[]
 extras = LazyVim.dedup(extras)
 
-local version = vim.version()
-local v = version.major .. "_" .. version.minor
-
-local compat = { "0_9" }
-
 LazyVim.plugin.save_core()
-if vim.tbl_contains(compat, v) then
-  table.insert(extras, 1, "lazyvim.plugins.compat.nvim-" .. v)
-end
 if vim.g.vscode then
   table.insert(extras, 1, "lazyvim.plugins.extras.vscode")
 end
