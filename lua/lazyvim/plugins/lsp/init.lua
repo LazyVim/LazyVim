@@ -63,7 +63,7 @@ return {
           timeout_ms = nil,
         },
         -- LSP Server Settings
-        ---@type lspconfig.options
+        ---@type table<string, vim.lsp.Config>
         servers = {
           lua_ls = {
             -- mason = false, -- set to false if you don't want this server to be installed with mason
@@ -99,7 +99,7 @@ return {
         },
         -- you can do any additional lsp server setup here
         -- return true if you don't want this server to be setup with lspconfig
-        ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+        ---@type table<string, fun(server:string, opts: vim.lsp.Config):boolean?>
         setup = {
           -- example to setup with typescript.nvim
           -- tsserver = function(_, opts)
@@ -149,6 +149,7 @@ return {
         end)
       end
 
+      -- diagnostics
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = function(diagnostic)
           local icons = LazyVim.config.icons.diagnostics
@@ -157,48 +158,42 @@ return {
               return icon
             end
           end
+          return "●"
         end
       end
-
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-      local servers = opts.servers
-      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-      local has_blink, blink = pcall(require, "blink.cmp")
       local capabilities = vim.tbl_deep_extend(
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
-        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-        has_blink and blink.get_lsp_capabilities() or {},
+        LazyVim.has("nvim-cmp") and require("cmp_nvim_lsp").default_capabilities() or {},
+        LazyVim.has("blink.nvim") and require("blink.cmp").get_lsp_capabilities() or {},
         opts.capabilities or {}
       )
 
       -- get all the servers that are available through mason-lspconfig
-      local have_mason, mlsp = pcall(require, "mason-lspconfig")
-      local all_mslp_servers = {}
-      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
+      local have_mason = LazyVim.has("mason-lspconfig.nvim")
+      local mason_all = have_mason
+          and vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
+        or {} --[[ @as string[] ]]
 
       local exclude_automatic_enable = {} ---@type string[]
 
       local function configure(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
-        }, servers[server] or {})
+        }, opts.servers[server] or {})
 
-        if opts.setup[server] then
-          if opts.setup[server](server, server_opts) then
-            return true
-          end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then
-            return true
-          end
+        local setup = opts.setup[server] or opts.setup["*"]
+        if setup and setup(server, server_opts) then
+          return true -- lsp will be setup by the setup function
         end
+
         vim.lsp.config(server, server_opts)
 
         -- manually enable if mason=false or if this is a server that cannot be installed with mason-lspconfig
-        if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
+        if server_opts.mason == false or not vim.tbl_contains(mason_all, server) then
           vim.lsp.enable(server)
           return true
         end
@@ -206,36 +201,31 @@ return {
       end
 
       local ensure_installed = {} ---@type string[]
-      for server, server_opts in pairs(servers) do
-        if server_opts then
-          server_opts = server_opts == true and {} or server_opts
-          if server_opts.enabled ~= false then
-            -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-            if configure(server) then
-              exclude_automatic_enable[#exclude_automatic_enable + 1] = server
-            else
-              ensure_installed[#ensure_installed + 1] = server
-            end
-          else
+      for server, server_opts in pairs(opts.servers) do
+        server_opts = server_opts == true and {} or server_opts or false
+        if server_opts and server_opts.enabled ~= false then
+          -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
+          if configure(server) then
             exclude_automatic_enable[#exclude_automatic_enable + 1] = server
+          else
+            ensure_installed[#ensure_installed + 1] = server
           end
+        else
+          exclude_automatic_enable[#exclude_automatic_enable + 1] = server
         end
       end
 
       if have_mason then
-        local setup_config = {
+        require("mason-lspconfig").setup({
           ensure_installed = vim.tbl_deep_extend(
             "force",
             ensure_installed,
             LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}
           ),
-        }
-
-        setup_config.automatic_enable = {
-          exclude = exclude_automatic_enable,
-        }
-
-        mlsp.setup(setup_config)
+          automatic_enable = {
+            exclude = exclude_automatic_enable,
+          },
+        })
       end
 
       if LazyVim.lsp.is_enabled("denols") and LazyVim.lsp.is_enabled("vtsls") then
