@@ -1,5 +1,17 @@
 # What's new?
 
+## 15.x
+
+**Neovim** `>= 0.11.0` includes a lot of changes to the underlying LSP implementation.
+
+Going forward, **LazyVim** requires **Neovim** `>= 0.11.0`, and drops support for older versions.
+
+### Changes
+
+- removed compatibility code for Neovim `< 0.11`
+- updated all LSP code to use the new LSP implementation
+- migrated **mason.nvim** and **mason-lspconfig.nvim** to `v2.x`
+
 ## 14.x
 
 Big new release with a lot of changes and improvements!
