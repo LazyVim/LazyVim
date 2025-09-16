@@ -51,6 +51,7 @@ return {
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
       },
+
       completion = {
         accept = {
           -- experimental auto-brackets support
@@ -185,8 +186,9 @@ return {
     "saghen/blink.cmp",
     opts = {
       sources = {
-        -- add lazydev to your completion providers
-        default = { "lazydev" },
+        per_filetype = {
+          lua = { inherit_defaults = true, "lazydev" },
+        },
         providers = {
           lazydev = {
             name = "LazyDev",
