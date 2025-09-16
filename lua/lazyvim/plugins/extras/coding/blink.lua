@@ -84,7 +84,7 @@ return {
       },
 
       cmdline = {
-        enabled = false,
+        enabled = true,
         keymap = {
           preset = "cmdline",
           -- ["<Tab>"] = { "show", "accept" },
