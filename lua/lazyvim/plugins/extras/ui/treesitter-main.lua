@@ -31,18 +31,20 @@ return {
         vim.list_extend(installed, install)
       end
 
-      -- backwards compatibility with the old treesitter config for indent
-      if vim.tbl_get(opts, "indent", "enable") then
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-      end
-
-      -- backwards compatibility with the old treesitter config for highlight
-      if vim.tbl_get(opts, "highlight", "enable") then
+      -- backwards compatibility with the old treesitter config for highlight and indent
+      local highlight, indent = vim.tbl_get(opts, "highlight", "enable"), vim.tbl_get(opts, "indent", "enable")
+      if highlight or indent then
         vim.api.nvim_create_autocmd("FileType", {
           callback = function(ev)
             local lang = vim.treesitter.language.get_lang(ev.match)
-            if vim.tbl_contains(installed, lang) then
+            if not vim.tbl_contains(installed, lang) then
+              return
+            end
+            if highlight then
               pcall(vim.treesitter.start)
+            end
+            if indent then
+              vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end
           end,
         })
