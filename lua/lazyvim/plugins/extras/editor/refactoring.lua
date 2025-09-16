@@ -1,3 +1,26 @@
+-- Source: https://github.com/ThePrimeagen/refactoring.nvim/blob/2be7ea3f10b7e59658f5abf6dffc50b5d61964d6/lua/refactoring/config/init.lua#L57
+local refactoring_supported_ft = {
+  "ts",
+  "js",
+  "typescriptreact",
+  "javascriptreact",
+  "vue",
+  "typescript",
+  "javascript",
+  "java",
+  "lua",
+  "go",
+  "php",
+  "cpp",
+  "c",
+  "h",
+  "hpp",
+  "cxx",
+  "python",
+  "ruby",
+  "cs",
+}
+
 local pick = function()
   local refactoring = require("refactoring")
   if LazyVim.pick.picker.name == "telescope" then
@@ -29,11 +52,19 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
+    ft = refactoring_supported_ft,
     keys = {
-      { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
+      {
+        "<leader>r",
+        "",
+        ft = refactoring_supported_ft,
+        mode = { "n", "v" },
+        desc = "+refactor",
+      },
       {
         "<leader>rs",
         pick,
+        ft = refactoring_supported_ft,
         mode = "v",
         desc = "Refactor",
       },
@@ -42,6 +73,7 @@ return {
         function()
           require("refactoring").refactor("Inline Variable")
         end,
+        ft = refactoring_supported_ft,
         mode = { "n", "v" },
         desc = "Inline Variable",
       },
@@ -50,6 +82,7 @@ return {
         function()
           require("refactoring").refactor("Extract Block")
         end,
+        ft = refactoring_supported_ft,
         desc = "Extract Block",
       },
       {
@@ -57,6 +90,7 @@ return {
         function()
           require("refactoring").refactor("Extract Block To File")
         end,
+        ft = refactoring_supported_ft,
         desc = "Extract Block To File",
       },
       {
@@ -64,6 +98,7 @@ return {
         function()
           require("refactoring").debug.printf({ below = false })
         end,
+        ft = refactoring_supported_ft,
         desc = "Debug Print",
       },
       {
@@ -71,6 +106,7 @@ return {
         function()
           require("refactoring").debug.print_var({ normal = true })
         end,
+        ft = refactoring_supported_ft,
         desc = "Debug Print Variable",
       },
       {
@@ -78,6 +114,7 @@ return {
         function()
           require("refactoring").debug.cleanup({})
         end,
+        ft = refactoring_supported_ft,
         desc = "Debug Cleanup",
       },
       {
@@ -85,6 +122,7 @@ return {
         function()
           require("refactoring").refactor("Extract Function")
         end,
+        ft = refactoring_supported_ft,
         mode = "v",
         desc = "Extract Function",
       },
@@ -93,6 +131,7 @@ return {
         function()
           require("refactoring").refactor("Extract Function To File")
         end,
+        ft = refactoring_supported_ft,
         mode = "v",
         desc = "Extract Function To File",
       },
@@ -101,6 +140,7 @@ return {
         function()
           require("refactoring").refactor("Extract Variable")
         end,
+        ft = refactoring_supported_ft,
         mode = "v",
         desc = "Extract Variable",
       },
@@ -109,6 +149,7 @@ return {
         function()
           require("refactoring").debug.print_var()
         end,
+        ft = refactoring_supported_ft,
         mode = "v",
         desc = "Debug Print Variable",
       },
