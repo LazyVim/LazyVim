@@ -85,12 +85,9 @@ return {
 
       cmdline = {
         enabled = true,
-        keymap = {
-          preset = "cmdline",
-          -- ["<Tab>"] = { "show", "accept" },
-          -- ["<CR>"] = { "accept_and_enter", "fallback" },
-        },
+        keymap = { preset = "cmdline" },
         completion = {
+          list = { selection = { preselect = false } },
           menu = {
             auto_show = function(ctx)
               return vim.fn.getcmdtype() == ":"
