@@ -31,7 +31,7 @@ return {
         version = not vim.g.lazyvim_blink_main and "*",
       },
     },
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -41,6 +41,7 @@ return {
           return LazyVim.cmp.expand(snippet)
         end,
       },
+
       appearance = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
@@ -83,6 +84,19 @@ return {
 
       cmdline = {
         enabled = false,
+        keymap = {
+          preset = "cmdline",
+          -- ["<Tab>"] = { "show", "accept" },
+          -- ["<CR>"] = { "accept_and_enter", "fallback" },
+        },
+        completion = {
+          menu = {
+            auto_show = function(ctx)
+              return vim.fn.getcmdtype() == ":"
+            end,
+          },
+          ghost_text = { enabled = true },
+        },
       },
 
       keymap = {
