@@ -2,7 +2,7 @@ local LazyUtil = require("lazy.core.util")
 
 ---@class lazyvim.util: LazyUtilCore
 ---@field config LazyVimConfig
----@field ui lazyvim.util.ui
+---@field treesitter lazyvim.util.treesitter
 ---@field lsp lazyvim.util.lsp
 ---@field root lazyvim.util.root
 ---@field terminal lazyvim.util.terminal
@@ -16,14 +16,16 @@ local LazyUtil = require("lazy.core.util")
 ---@field mini lazyvim.util.mini
 ---@field pick lazyvim.util.pick
 ---@field cmp lazyvim.util.cmp
+---@field deprecated lazyvim.util.deprecated
 local M = {}
+M.deprecated = require("lazyvim.util.deprecated")
 
 setmetatable(M, {
   __index = function(t, k)
     if LazyUtil[k] then
       return LazyUtil[k]
     end
-    if k == "lazygit" or k == "toggle" then -- HACK: special case for lazygit
+    if M.deprecated[k] then
       return M.deprecated[k]()
     end
     ---@diagnostic disable-next-line: no-unknown
@@ -125,13 +127,17 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
-function M.deprecate(old, new)
-  M.warn(("`%s` is deprecated. Please use `%s` instead"):format(old, new), {
-    title = "LazyVim",
-    once = true,
-    stacktrace = true,
-    stacklevel = 6,
-  })
+---@param opts? LazyNotifyOpts
+function M.deprecate(old, new, opts)
+  M.warn(
+    ("`%s` is deprecated. Please use `%s` instead"):format(old, new),
+    vim.tbl_extend("force", {
+      title = "LazyVim",
+      once = true,
+      stacktrace = true,
+      stacklevel = 6,
+    }, opts or {})
+  )
 end
 
 -- delay notifications till vim.notify was replaced or after 500ms

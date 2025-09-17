@@ -68,7 +68,7 @@ opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
-opt.foldexpr = "v:lua.LazyVim.ui.foldexpr()" -- treesitter folds
+opt.foldexpr = "v:lua.LazyVim.treesitter.foldexpr()" -- treesitter folds
 opt.foldlevel = 99
 opt.foldmethod = "expr"
 opt.foldtext = ""
@@ -78,7 +78,7 @@ opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- preview incremental substitute
-opt.indentexpr = "v:lua.LazyVim.ui.indentexpr()" -- treesitter indents
+opt.indentexpr = "v:lua.LazyVim.treesitter.indentexpr()" -- treesitter indents
 opt.jumpoptions = "view"
 opt.laststatus = 3 -- global statusline
 opt.linebreak = true -- Wrap lines at convenient points

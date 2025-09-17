@@ -19,7 +19,9 @@ return {
     event = { "LazyFile", "VeryLazy" },
     cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     opts_extend = { "ensure_installed" },
+    ---@class lazyvim.TSConfig: TSConfig
     opts = {
+      -- LazyVim config for treesitter
       ensure_installed = {
         "bash",
         "c",
@@ -47,43 +49,39 @@ return {
         "yaml",
       },
     },
-    ---@param plugin LazyPlugin
-    ---@param opts TSConfig
-    config = function(plugin, opts)
-      if vim.fn.executable("tree-sitter") == 0 then
-        LazyVim.error({
+    ---@param opts lazyvim.TSConfig
+    config = function(_, opts)
+      local TS = require("nvim-treesitter")
+
+      -- some quick sanity checks
+      if not TS.get_installed then
+        return LazyVim.error("Please use `:Lazy` and update `nvim-treesitter`")
+      elseif vim.fn.executable("tree-sitter") == 0 then
+        return LazyVim.error({
           "**treesitter-main** requires the `tree-sitter` CLI executable to be installed.",
           "Run `:checkhealth nvim-treesitter` for more information.",
         })
-        return
-      end
-      if type(opts.ensure_installed) ~= "table" then
-        LazyVim.error("`nvim-treesitter` opts.ensure_installed must be a table")
+      elseif type(opts.ensure_installed) ~= "table" then
+        return LazyVim.error("`nvim-treesitter` opts.ensure_installed must be a table")
       end
 
-      local TS = require("nvim-treesitter")
-      if not TS.get_installed then
-        LazyVim.error("Please use `:Lazy` and update `nvim-treesitter`")
-        return
-      end
+      -- setup treesitter
       TS.setup(opts)
 
-      local needed = LazyVim.dedup(opts.ensure_installed --[[@as string[] ]])
-      LazyVim.ui.installed = TS.get_installed("parsers")
-
+      -- install missing parsers
       local install = vim.tbl_filter(function(lang)
-        return not LazyVim.ui.have(lang)
-      end, needed)
-
+        return not LazyVim.treesitter.have(lang)
+      end, opts.ensure_installed or {})
       if #install > 0 then
         TS.install(install, { summary = true }):await(function()
-          LazyVim.ui.installed = TS.get_installed("parsers")
+          LazyVim.treesitter.get_installed(true) -- refresh the installed langs
         end)
       end
 
+      -- treesitter highlighting
       vim.api.nvim_create_autocmd("FileType", {
         callback = function(ev)
-          if LazyVim.ui.have(ev.match) then
+          if LazyVim.treesitter.have(ev.match) then
             pcall(vim.treesitter.start)
           end
         end,
