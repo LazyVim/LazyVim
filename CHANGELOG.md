@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.0.1](https://github.com/LazyVim/LazyVim/compare/v15.0.0...v15.0.1) (2025-09-17)
+
+
+### Bug Fixes
+
+* **treesitter:** TS update during inital build ([2d56d3b](https://github.com/LazyVim/LazyVim/commit/2d56d3b37c275890a403845c00b5c8d38cb387e6))
+
 ## [15.0.0](https://github.com/LazyVim/LazyVim/compare/v14.15.1...v15.0.0) (2025-09-17)
 
 
