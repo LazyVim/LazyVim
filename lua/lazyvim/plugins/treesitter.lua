@@ -13,7 +13,7 @@ return {
         LazyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
         return
       end
-      vim.cmd.TSUpdate()
+      TS.update(nil, { summary = true })
     end,
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     event = { "LazyFile", "VeryLazy" },
