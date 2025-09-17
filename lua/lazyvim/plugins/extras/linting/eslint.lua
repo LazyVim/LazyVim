@@ -10,7 +10,7 @@ return {
     "neovim/nvim-lspconfig",
     -- other settings removed for brevity
     opts = {
-      ---@type lspconfig.options
+      ---@type table<string, vim.lsp.Config>
       servers = {
         eslint = {
           settings = {
@@ -26,34 +26,12 @@ return {
             return
           end
 
-          local function get_client(buf)
-            return vim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
-          end
-
           local formatter = LazyVim.lsp.formatter({
             name = "eslint: lsp",
             primary = false,
             priority = 200,
             filter = "eslint",
           })
-
-          -- Use EslintFixAll on Neovim < 0.10.0
-          if not pcall(require, "vim.lsp._dynamic") then
-            formatter.name = "eslint: EslintFixAll"
-            formatter.sources = function(buf)
-              local client = get_client(buf)
-              return client and { "eslint" } or {}
-            end
-            formatter.format = function(buf)
-              local client = get_client(buf)
-              if client then
-                local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-                if #diag > 0 then
-                  vim.cmd("EslintFixAll")
-                end
-              end
-            end
-          end
 
           -- register the formatter with LazyVim
           LazyVim.format.register(formatter)
