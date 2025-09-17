@@ -9,6 +9,8 @@ return {
         "compile_commands.json",
         "compile_flags.txt",
         "configure.ac", -- AutoTools
+        "meson.build",
+        "build.ninja",
       },
     })
   end,
