@@ -63,9 +63,6 @@ return {
             { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
           },
           root_markers = {
-            ".clangd",
-            ".clang-tidy",
-            ".clang-format",
             "compile_commands.json",
             "compile_flags.txt",
             "configure.ac", -- AutoTools
