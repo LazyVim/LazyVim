@@ -13,7 +13,7 @@ Going forward, **LazyVim** requires **Neovim** `>= 0.11.2`, and drops support fo
 - migrated **mason.nvim** and **mason-lspconfig.nvim** to `v2.x`
 - migrated to [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/tree/main) **main** branch
   - with the new version, the `tree-sitter` cli is **required** to install parsers
-  - best to run `:checkhealth nvim_treesitter` after updating
+  - best to run `:checkhealth nvim-treesitter` after updating
 - replace `nvim-treesitter` incremental selection with `flash.nvim`, since it is no longer supported
 - enabled [blink.cmp](https://github.com/saghen/blink.cmp) **cmdline** completions
 - use **LSP** based folding when available (disable with `nvim-lspconfig.folds.enabled = false`)

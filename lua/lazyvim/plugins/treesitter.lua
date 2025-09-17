@@ -53,7 +53,7 @@ return {
       if vim.fn.executable("tree-sitter") == 0 then
         LazyVim.error({
           "**treesitter-main** requires the `tree-sitter` CLI executable to be installed.",
-          "Run `:checkhealth nvim_treesitter` for more information.",
+          "Run `:checkhealth nvim-treesitter` for more information.",
         })
         return
       end
