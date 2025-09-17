@@ -51,7 +51,10 @@ return {
     ---@param opts TSConfig
     config = function(plugin, opts)
       if vim.fn.executable("tree-sitter") == 0 then
-        LazyVim.error("**treesitter-main** requires the `tree-sitter` executable to be installed")
+        LazyVim.error({
+          "**treesitter-main** requires the `tree-sitter` CLI executable to be installed.",
+          "Run `:checkhealth nvim_treesitter` for more information.",
+        })
         return
       end
       if type(opts.ensure_installed) ~= "table" then
