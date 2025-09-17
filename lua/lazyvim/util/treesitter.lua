@@ -22,12 +22,12 @@ end
 
 function M.foldexpr()
   local buf = vim.api.nvim_get_current_buf()
-  return M.have(vim.b[buf].filetype) and vim.treesitter.foldexpr() or "0"
+  return M.have(vim.bo[buf].filetype) and vim.treesitter.foldexpr() or "0"
 end
 
 function M.indentexpr()
   local buf = vim.api.nvim_get_current_buf()
-  return M.have(vim.b[buf].filetype) and require("nvim-treesitter").indentexpr() or -1
+  return M.have(vim.bo[buf].filetype) and require("nvim-treesitter").indentexpr() or -1
 end
 
 return M

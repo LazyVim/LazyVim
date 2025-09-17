@@ -80,9 +80,18 @@ return {
 
       -- treesitter highlighting
       vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("lazyvim_treesitter", { clear = true }),
         callback = function(ev)
           if LazyVim.treesitter.have(ev.match) then
             pcall(vim.treesitter.start)
+
+            -- check if ftplugins changed foldexpr/indentexpr
+            for _, option in ipairs({ "foldexpr", "indentexpr" }) do
+              local expr = "v:lua.LazyVim.treesitter." .. option .. "()"
+              if vim.opt_global[option]:get() == expr then
+                vim.opt_local[option] = expr
+              end
+            end
           end
         end,
       })
