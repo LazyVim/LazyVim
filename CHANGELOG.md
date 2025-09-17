@@ -1,5 +1,13 @@
 # Changelog
 
+## [15.0.2](https://github.com/LazyVim/LazyVim/compare/v15.0.1...v15.0.2) (2025-09-17)
+
+
+### Bug Fixes
+
+* **python:** remove the wrapping `settings` key from `setup()` options ([#6069](https://github.com/LazyVim/LazyVim/issues/6069)) ([ed3aa74](https://github.com/LazyVim/LazyVim/commit/ed3aa74c107de7dc3e06367ce4afb20056710441))
+* **treesitter:** indentexpr/foldexpr now work as intended and override ftplugin settings. Fixes [#6447](https://github.com/LazyVim/LazyVim/issues/6447) ([a6b38de](https://github.com/LazyVim/LazyVim/commit/a6b38de763addf2d22e8a43a1e679cc855dc376d))
+
 ## [15.0.1](https://github.com/LazyVim/LazyVim/compare/v15.0.0...v15.0.1) (2025-09-17)
 
 
