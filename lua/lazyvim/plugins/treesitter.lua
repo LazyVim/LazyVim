@@ -68,6 +68,8 @@ return {
       -- setup treesitter
       TS.setup(opts)
 
+      LazyVim.treesitter.get_installed(true) -- initialize the installed langs
+
       -- install missing parsers
       local install = vim.tbl_filter(function(lang)
         return not LazyVim.treesitter.have(lang)

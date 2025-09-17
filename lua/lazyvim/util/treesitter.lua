@@ -3,15 +3,15 @@ local M = {}
 
 M._installed = nil ---@type table<string,string>?
 
----@param force boolean?
-function M.get_installed(force)
-  if not M._installed or force then
+---@param update boolean?
+function M.get_installed(update)
+  if update then
     M._installed = {}
     for _, lang in ipairs(require("nvim-treesitter").get_installed("parsers")) do
       M._installed[lang] = lang
     end
   end
-  return M._installed
+  return M._installed or {}
 end
 
 ---@param ft string
