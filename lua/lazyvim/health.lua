@@ -8,10 +8,10 @@ local error = vim.health.error or vim.health.report_error
 function M.check()
   start("LazyVim")
 
-  if vim.fn.has("nvim-0.11.0") == 1 then
-    ok("Using Neovim >= 0.11.0")
+  if vim.fn.has("nvim-0.11.2") == 1 then
+    ok("Using Neovim >= 0.11.2")
   else
-    error("Neovim >= 0.11.0 is required")
+    error("Neovim >= 0.11.2 is required")
   end
 
   for _, cmd in ipairs({ "git", "rg", { "fd", "fdfind" }, "lazygit", "fzf", "curl" }) do
