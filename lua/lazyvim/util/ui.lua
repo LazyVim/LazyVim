@@ -1,7 +1,7 @@
 ---@class lazyvim.util.ui
 local M = {}
 
--- optimized treesitter foldexpr for Neovim >= 0.10.0
+-- optimized treesitter foldexpr
 function M.foldexpr()
   local buf = vim.api.nvim_get_current_buf()
   if vim.b[buf].ts_folds == nil then
