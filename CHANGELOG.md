@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.0.3](https://github.com/LazyVim/LazyVim/compare/v15.0.2...v15.0.3) (2025-09-17)
+
+
+### Bug Fixes
+
+* **treesitter:** properly update installedd languages after setup ([c28f599](https://github.com/LazyVim/LazyVim/commit/c28f599d4f5d175f3d259a621c4e7b5d0b2a0759))
+
 ## [15.0.2](https://github.com/LazyVim/LazyVim/compare/v15.0.1...v15.0.2) (2025-09-17)
 
 
