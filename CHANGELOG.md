@@ -1,5 +1,18 @@
 # Changelog
 
+## [15.1.0](https://github.com/LazyVim/LazyVim/compare/v15.0.3...v15.1.0) (2025-09-18)
+
+
+### Features
+
+* **treesitter:** automatically install and use mason's tree-sitter-cli if not installed on system ([725d048](https://github.com/LazyVim/LazyVim/commit/725d048e009b866425b2a0cc620ba2c413e8b65f))
+* **treesitter:** refactored setting up treesitter indent/highlight/folds ([b93303d](https://github.com/LazyVim/LazyVim/commit/b93303d2339b1117171780cebed1d710fd3805d5))
+
+
+### Bug Fixes
+
+* **snacks:** safe wrapper around snacks statuscolumn to prevent errors when LazyVim is still installing ([5bf2378](https://github.com/LazyVim/LazyVim/commit/5bf237820d7938b1b6490164fbd75e4117d341c1))
+
 ## [15.0.3](https://github.com/LazyVim/LazyVim/compare/v15.0.2...v15.0.3) (2025-09-17)
 
 
