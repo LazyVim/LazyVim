@@ -1,5 +1,14 @@
 # Changelog
 
+## [15.1.1](https://github.com/LazyVim/LazyVim/compare/v15.1.0...v15.1.1) (2025-09-18)
+
+
+### Bug Fixes
+
+* **core:** check for outdated nightly. See [#6458](https://github.com/LazyVim/LazyVim/issues/6458) ([cfac3c9](https://github.com/LazyVim/LazyVim/commit/cfac3c9a85526ad7406f9b246097a1ec4fa1a2c3))
+* **lspconfig:** remove all usage of `lspconfig` ([36b4191](https://github.com/LazyVim/LazyVim/commit/36b41911ab90fe19505af306a31a5a699342d3c3))
+* **lsp:** schedule_wrap setting up LSPs to work around root cause of [#6456](https://github.com/LazyVim/LazyVim/issues/6456). Fixes [#6456](https://github.com/LazyVim/LazyVim/issues/6456) ([75a3809](https://github.com/LazyVim/LazyVim/commit/75a3809e15a0ecff9adc46c6cd3aaac51d99b561))
+
 ## [15.1.0](https://github.com/LazyVim/LazyVim/compare/v15.0.3...v15.1.0) (2025-09-18)
 
 
