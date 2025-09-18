@@ -22,6 +22,9 @@ return {
     ---@class lazyvim.TSConfig: TSConfig
     opts = {
       -- LazyVim config for treesitter
+      indent = { enable = true },
+      highlight = { enable = true },
+      folds = { enable = true },
       ensure_installed = {
         "bash",
         "c",
@@ -80,20 +83,27 @@ return {
         end)
       end
 
-      -- treesitter highlighting
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("lazyvim_treesitter", { clear = true }),
         callback = function(ev)
-          if LazyVim.treesitter.have(ev.match) then
-            pcall(vim.treesitter.start)
+          if not LazyVim.treesitter.have(ev.match) then
+            return
+          end
 
-            -- check if ftplugins changed foldexpr/indentexpr
-            for _, option in ipairs({ "foldexpr", "indentexpr" }) do
-              local expr = "v:lua.LazyVim.treesitter." .. option .. "()"
-              if vim.opt_global[option]:get() == expr then
-                vim.opt_local[option] = expr
-              end
-            end
+          -- highlighting
+          if vim.tbl_get(opts, "highlight", "enable") ~= false then
+            pcall(vim.treesitter.start)
+          end
+
+          -- indents
+          if vim.tbl_get(opts, "indent", "enable") ~= false then
+            vim.bo[ev.buf].indentexpr = "v:lua.LazyVim.treesitter.indentexpr()"
+          end
+
+          -- folds
+          if vim.tbl_get(opts, "folds", "enable") ~= false then
+            vim.wo.foldmethod = "expr"
+            vim.wo.foldexpr = "v:lua.LazyVim.treesitter.foldexpr()"
           end
         end,
       })

@@ -14,20 +14,23 @@ function M.get_installed(update)
   return M._installed or {}
 end
 
----@param ft string
-function M.have(ft)
-  local lang = vim.treesitter.language.get_lang(ft)
-  return lang and M.get_installed()[lang]
+---@param what string|number|nil
+---@overload fun(buf?:number):boolean
+---@overload fun(ft:string):boolean
+---@return boolean
+function M.have(what)
+  what = what or vim.api.nvim_get_current_buf()
+  what = type(what) == "number" and vim.bo[what].filetype or what --[[@as string]]
+  local lang = vim.treesitter.language.get_lang(what)
+  return lang ~= nil and M.get_installed()[lang] ~= nil
 end
 
 function M.foldexpr()
-  local buf = vim.api.nvim_get_current_buf()
-  return M.have(vim.bo[buf].filetype) and vim.treesitter.foldexpr() or "0"
+  return M.have() and vim.treesitter.foldexpr() or "0"
 end
 
 function M.indentexpr()
-  local buf = vim.api.nvim_get_current_buf()
-  return M.have(vim.bo[buf].filetype) and require("nvim-treesitter").indentexpr() or -1
+  return M.have() and require("nvim-treesitter").indentexpr() or -1
 end
 
 return M
