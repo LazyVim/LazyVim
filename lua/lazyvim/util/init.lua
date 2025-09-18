@@ -310,36 +310,35 @@ local _defaults = {} ---@type table<string, boolean>
 --
 -- It will only set the option if:
 -- * it is the same as the global value
--- * it is the same as a previously set default value
+-- * it's current value is a default value
 -- * it was last set by a script in $VIMRUNTIME
 ---@param option string
 ---@param value string|number|boolean
 ---@return boolean was_set
 function M.set_default(option, value)
-  local key = ("%s=%s"):format(option, value)
-  _defaults[key] = true
+  local l = vim.api.nvim_get_option_value(option, { scope = "local" })
+  local g = vim.api.nvim_get_option_value(option, { scope = "global" })
 
-  if not _defaults[key] then
-    local l = vim.api.nvim_get_option_value(option, { scope = "local" })
-    local g = vim.api.nvim_get_option_value(option, { scope = "global" })
+  _defaults[("%s=%s"):format(option, value)] = true
+  local key = ("%s=%s"):format(option, l)
 
-    if l ~= g then
-      -- Option changed, so check if it was set by an ft plugin
-      local info = vim.api.nvim_get_option_info2(option, { scope = "local" })
-      ---@param e vim.fn.getscriptinfo.ret
-      local scriptinfo = vim.tbl_filter(function(e)
-        return e.sid == info.last_set_sid
-      end, vim.fn.getscriptinfo())
-      local by_rtp = #scriptinfo == 1 and vim.startswith(scriptinfo[1].name, vim.fn.expand("$VIMRUNTIME"))
-      if not by_rtp then
-        if vim.g.lazyvim_debug_set_default then
-          LazyVim.warn(
-            ("Not setting option `%s` to `%s` because it was changed by a filetype plugin."):format(option, value),
-            { title = "LazyVim", once = true }
-          )
-        end
-        return false
+  if l ~= g and not _defaults[key] then
+    -- Option does not match global and is not a default value
+    -- Check if it was set by a script in $VIMRUNTIME
+    local info = vim.api.nvim_get_option_info2(option, { scope = "local" })
+    ---@param e vim.fn.getscriptinfo.ret
+    local scriptinfo = vim.tbl_filter(function(e)
+      return e.sid == info.last_set_sid
+    end, vim.fn.getscriptinfo())
+    local by_rtp = #scriptinfo == 1 and vim.startswith(scriptinfo[1].name, vim.fn.expand("$VIMRUNTIME"))
+    if not by_rtp then
+      if vim.g.lazyvim_debug_set_default then
+        LazyVim.warn(
+          ("Not setting option `%s` to `%s` because it was changed by a filetype plugin."):format(option, value),
+          { title = "LazyVim", once = true }
+        )
       end
+      return false
     end
   end
 
