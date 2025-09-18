@@ -95,13 +95,14 @@ return {
 
           -- indents
           if vim.tbl_get(opts, "indent", "enable") ~= false then
-            vim.bo[ev.buf].indentexpr = "v:lua.LazyVim.treesitter.indentexpr()"
+            LazyVim.set_default("indentexpr", "v:lua.LazyVim.treesitter.indentexpr()")
           end
 
           -- folds
           if vim.tbl_get(opts, "folds", "enable") ~= false then
-            vim.wo.foldmethod = "expr"
-            vim.wo.foldexpr = "v:lua.LazyVim.treesitter.foldexpr()"
+            if LazyVim.set_default("foldmethod", "expr") then
+              LazyVim.set_default("foldexpr", "v:lua.LazyVim.treesitter.foldexpr()")
+            end
           end
         end,
       })

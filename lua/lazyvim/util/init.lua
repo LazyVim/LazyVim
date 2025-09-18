@@ -304,4 +304,51 @@ function M.statuscolumn()
   return package.loaded.snacks and require("snacks.statuscolumn").get() or ""
 end
 
+local _defaults = {} ---@type table<string, boolean>
+
+-- Determines whether it's safe to set an option to a default value.
+--
+-- It will only set the option if:
+-- * it is the same as the global value
+-- * it is the same as a previously set default value
+-- * it was last set by a script in $VIMRUNTIME
+---@param option string
+---@param value string|number|boolean
+---@return boolean was_set
+function M.set_default(option, value)
+  local key = ("%s=%s"):format(option, value)
+  _defaults[key] = true
+
+  if not _defaults[key] then
+    local l = vim.api.nvim_get_option_value(option, { scope = "local" })
+    local g = vim.api.nvim_get_option_value(option, { scope = "global" })
+
+    if l ~= g then
+      -- Option changed, so check if it was set by an ft plugin
+      local info = vim.api.nvim_get_option_info2(option, { scope = "local" })
+      ---@param e vim.fn.getscriptinfo.ret
+      local scriptinfo = vim.tbl_filter(function(e)
+        return e.sid == info.last_set_sid
+      end, vim.fn.getscriptinfo())
+      local by_rtp = #scriptinfo == 1 and vim.startswith(scriptinfo[1].name, vim.fn.expand("$VIMRUNTIME"))
+      if not by_rtp then
+        if vim.g.lazyvim_debug_set_default then
+          LazyVim.warn(
+            ("Not setting option `%s` to `%s` because it was changed by a filetype plugin."):format(option, value),
+            { title = "LazyVim", once = true }
+          )
+        end
+        return false
+      end
+    end
+  end
+
+  if vim.g.lazyvim_debug_set_default then
+    LazyVim.info(("Setting option `%s` to `%s`"):format(option, value), { title = "LazyVim", once = true })
+  end
+
+  vim.api.nvim_set_option_value(option, value, { scope = "local" })
+  return true
+end
+
 return M
