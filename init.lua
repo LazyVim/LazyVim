@@ -12,3 +12,4 @@ vim.api.nvim_echo({
 
 vim.fn.getchar()
 vim.cmd([[quit]])
+
