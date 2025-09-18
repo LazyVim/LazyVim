@@ -4,30 +4,8 @@ return {
     root = { "composer.json", "artisan" },
   },
   {
-    "nvim-tressiter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "blade", "php" })
-      end
-
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-      parser_config.blade = {
-        install_info = {
-          url = "https://github.com/EmranMR/tree-sitter-blade",
-          files = { "src/parser.c" },
-          branch = "main",
-        },
-        filetype = "blade",
-      }
-
-      vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-        pattern = { "*.blade.php" },
-        callback = function()
-          vim.treesitter.start(nil, "blade")
-          vim.opt.filetype = "blade"
-        end,
-      })
-    end,
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "blade" } },
   },
   {
     "mason-org/mason.nvim",
