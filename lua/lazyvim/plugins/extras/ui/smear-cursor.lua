@@ -1,3 +1,4 @@
+-- Animates cursor movement with a smear effect.
 return {
   "sphamba/smear-cursor.nvim",
   event = "VeryLazy",
@@ -9,7 +10,7 @@ return {
   specs = {
     -- disable mini.animate cursor
     {
-      "echasnovski/mini.animate",
+      "nvim-mini/mini.animate",
       optional = true,
       opts = {
         cursor = { enable = false },
