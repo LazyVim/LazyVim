@@ -299,4 +299,9 @@ function M.memoize(fn)
   end
 end
 
+-- Safe wrapper around snacks to prevent errors when LazyVim is still installing
+function M.statuscolumn()
+  return package.loaded.snacks and require("snacks.statuscolumn").get() or ""
+end
+
 return M
