@@ -4,7 +4,7 @@ return {
   {
     "MagicDuck/grug-far.nvim",
     opts = { headerMaxWidth = 80 },
-    cmd = "GrugFar",
+    cmd = { "GrugFar", "GrugFarWithin" },
     keys = {
       {
         "<leader>sr",
@@ -40,6 +40,16 @@ return {
       { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      -- Simulate nvim-treesitter incremental selection
+      { "<c-space>", mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter({
+            actions = {
+              ["<c-space>"] = "next",
+              ["<BS>"] = "prev"
+            }
+          }) 
+        end, desc = "Treesitter Incremental Selection" },
     },
   },
 
@@ -64,8 +74,8 @@ return {
           { "<leader>gh", group = "hunks" },
           { "<leader>q", group = "quit/session" },
           { "<leader>s", group = "search" },
-          { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
-          { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+          { "<leader>u", group = "ui" },
+          { "<leader>x", group = "diagnostics/quickfix" },
           { "[", group = "prev" },
           { "]", group = "next" },
           { "g", group = "goto" },
@@ -143,7 +153,7 @@ return {
         local gs = package.loaded.gitsigns
 
         local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc, silent = true })
         end
 
         -- stylua: ignore start

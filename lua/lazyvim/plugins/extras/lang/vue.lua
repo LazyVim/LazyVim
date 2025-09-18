@@ -19,75 +19,8 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Updated VTSLS configuration for vue-language-tools
-        vtsls = {
-          init_options = {
-            plugins = {
-              {
-                name = "@vue/typescript-plugin",
-                location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
-                languages = { "vue" },
-                configNamespace = "typescript",
-              },
-            },
-            typescript = {
-              -- Keep your existing TypeScript settings if needed
-              inlayHints = {
-                enumMemberValues = { enabled = false },
-                functionLikeReturnTypes = { enabled = false },
-                parameterNames = { enabled = false },
-                parameterTypes = { enabled = false },
-                propertyDeclarationTypes = { enabled = false },
-                variableTypes = { enabled = false },
-              },
-            },
-          },
-          filetypes = {
-            "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-            "vue",
-          },
-        },
-
-        -- New vue_ls configuration
-        volar = {
-          on_init = function(client)
-            client.handlers["tsserver/request"] = function(_, result, context)
-              local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
-              if #clients == 0 then
-                vim.notify(
-                  "Could not found `vtsls` lsp client, vue_lsp would not work without it.",
-                  vim.log.levels.ERROR
-                )
-                return
-              end
-              local ts_client = clients[1]
-              local param = unpack(result)
-              local id, command, payload = unpack(param)
-              ts_client:exec_cmd({
-                command = "typescript.tsserverRequest",
-                arguments = {
-                  command,
-                  payload,
-                },
-              }, { bufnr = context.bufnr }, function(_, r)
-                local response_data = { { id, r.body } }
-                ---@diagnostic disable-next-line: param-type-mismatch
-                client:notify("tsserver/response", response_data)
-              end)
-            end
-          end,
-          settings = {
-            vue = {
-              updateImportsOnFileMove = { enabled = "always" },
-              suggest = {
-                completeFunctionCalls = true,
-              },
-            },
-          },
-        },
+        vue_ls = {},
+        vtsls = {},
       },
     },
   },
