@@ -147,8 +147,11 @@ return {
       if opts.folds.enabled then
         LazyVim.lsp.on_supports_method("textDocument/foldingRange", function(client, buffer)
           local win = vim.api.nvim_get_current_win()
-          vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-          vim.wo[win][0].foldmethod = "expr"
+          -- Don't overwrite diff foldmethod as plugins like octo.nvim rely on it
+          if vim.wo[win][0].foldmethod ~= "diff" then
+            vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+            vim.wo[win][0].foldmethod = "expr"
+          end
         end)
       end
 

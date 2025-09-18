@@ -100,8 +100,11 @@ return {
 
           -- folds
           if vim.tbl_get(opts, "folds", "enable") ~= false then
-            vim.wo.foldmethod = "expr"
-            vim.wo.foldexpr = "v:lua.LazyVim.treesitter.foldexpr()"
+            -- Don't overwrite diff foldmethod as plugins like octo.nvim rely on it
+            if vim.wo.foldmethod ~= "diff" then
+              vim.wo.foldmethod = "expr"
+              vim.wo.foldexpr = "v:lua.LazyVim.treesitter.foldexpr()"
+            end
           end
         end,
       })
