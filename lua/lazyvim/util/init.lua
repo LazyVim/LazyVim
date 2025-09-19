@@ -317,11 +317,12 @@ local _defaults = {} ---@type table<string, boolean>
 ---@return boolean was_set
 function M.set_default(option, value)
   local l = vim.api.nvim_get_option_value(option, { scope = "local" })
-  local g = vim.api.nvim_get_option_value(option, { scope = "global" })
+  local g = LazyVim.config._options[option] or vim.api.nvim_get_option_value(option, { scope = "global" })
 
   _defaults[("%s=%s"):format(option, value)] = true
   local key = ("%s=%s"):format(option, l)
 
+  local source = ""
   if l ~= g and not _defaults[key] then
     -- Option does not match global and is not a default value
     -- Check if it was set by a script in $VIMRUNTIME
@@ -330,11 +331,12 @@ function M.set_default(option, value)
     local scriptinfo = vim.tbl_filter(function(e)
       return e.sid == info.last_set_sid
     end, vim.fn.getscriptinfo())
+    source = scriptinfo[1] and scriptinfo[1].name or ""
     local by_rtp = #scriptinfo == 1 and vim.startswith(scriptinfo[1].name, vim.fn.expand("$VIMRUNTIME"))
     if not by_rtp then
       if vim.g.lazyvim_debug_set_default then
         LazyVim.warn(
-          ("Not setting option `%s` to `%s` because it was changed by a filetype plugin."):format(option, value),
+          ("Not setting option `%s` to `%q` because it was changed by a plugin."):format(option, value),
           { title = "LazyVim", once = true }
         )
       end
@@ -343,7 +345,13 @@ function M.set_default(option, value)
   end
 
   if vim.g.lazyvim_debug_set_default then
-    LazyVim.info(("Setting option `%s` to `%s`"):format(option, value), { title = "LazyVim", once = true })
+    LazyVim.info({
+      ("Setting option `%s` to `%q`"):format(option, value),
+      ("Was: %q"):format(l),
+      ("Global: %q"):format(g),
+      source ~= "" and ("Last set by: %s"):format(source) or "",
+      "buf: " .. vim.api.nvim_buf_get_name(0),
+    }, { title = "LazyVim", once = true })
   end
 
   vim.api.nvim_set_option_value(option, value, { scope = "local" })
