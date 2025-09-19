@@ -1,23 +1,20 @@
-local fail = nil
 if vim.fn.has("nvim-0.11.2") == 0 then
-  fail = {
+  vim.api.nvim_echo({
     { "LazyVim requires Neovim >= 0.11.2\n", "ErrorMsg" },
     { "For more info, see: https://github.com/LazyVim/LazyVim/issues/6421\n", "Comment" },
     { "Press any key to exit", "MoreMsg" },
-  }
-elseif vim.fn.has("nvim-0.12") == 1 and not vim.lsp.is_enabled then
-  fail = {
-    { "LazyVim requires Neovim >= 0.11.2 or a recent Nightly\n", "ErrorMsg" },
-    { "Your nightly is too old, please update to a more recent version.\n", "Comment" },
-    { "Press any key to exit", "MoreMsg" },
-  }
-end
-
-if fail then
-  vim.api.nvim_echo(fail, true, {})
+  }, true, {})
   vim.fn.getchar()
   vim.cmd([[quit]])
   return {}
+elseif not vim.lsp.is_enabled then
+  vim.schedule(function()
+    LazyVim.warn({
+      "You're using an **old** `nightly` version of **Neovim**",
+      "Please update to a recent `nightly`,",
+      "or a stable version (`>= 0.11.2`).",
+    })
+  end)
 end
 
 require("lazyvim.config").init()
