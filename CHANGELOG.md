@@ -1,5 +1,24 @@
 # Changelog
 
+## [15.2.0](https://github.com/LazyVim/LazyVim/compare/v15.1.1...v15.2.0) (2025-09-20)
+
+
+### Features
+
+* **clojure:** use 'nvim-paredit' instead 'nvim-treesitter-sexp' as clojure S-exp Plugin ([#5876](https://github.com/LazyVim/LazyVim/issues/5876)) ([2659028](https://github.com/LazyVim/LazyVim/commit/26590285ead7a89bb45f309714f7f40136c89267))
+* **core:** relax hard requirement for `vim.lsp.is_enabled`. Show warning instead ([3ca7b47](https://github.com/LazyVim/LazyVim/commit/3ca7b47365c85a07047e48cad450feff66c8bdd6))
+* **options:** don't overwrite indentexpr/foldexpr/foldmethod when set by plugins. Fixes [#6464](https://github.com/LazyVim/LazyVim/issues/6464) ([ccbaf55](https://github.com/LazyVim/LazyVim/commit/ccbaf55c2f8bc691f8f64fe40ce00a1abda4fbac))
+* **yanky:** use snacks picker for improved yank history navigation ([#5802](https://github.com/LazyVim/LazyVim/issues/5802)) ([55e762a](https://github.com/LazyVim/LazyVim/commit/55e762a8888cd5f336e4e2d4b2cc6b8b1b950663))
+
+
+### Bug Fixes
+
+* **editor:** calculate the height passed to the prompt of fzf-lua properly ([#6481](https://github.com/LazyVim/LazyVim/issues/6481)) ([65e38d3](https://github.com/LazyVim/LazyVim/commit/65e38d3b34cab653a05318c1a9014df3c89fdb53))
+* **lang.clojure:** correct cmp-conjure source name ([#6208](https://github.com/LazyVim/LazyVim/issues/6208)) ([55b5c1f](https://github.com/LazyVim/LazyVim/commit/55b5c1fecb0b7e71c5eb40555b17d1e4820690f0))
+* **options:** set_default option ([2401d5f](https://github.com/LazyVim/LazyVim/commit/2401d5fca6f2a2fcaca4f9c4c84c4b713c602352))
+* **options:** track some initial options right after loading `options.lua`. See [#6463](https://github.com/LazyVim/LazyVim/issues/6463) ([9c611b0](https://github.com/LazyVim/LazyVim/commit/9c611b0c5758d0d659e7fdb29119b7083a56f989))
+* **treesitter:** check if queries for indent/fold exists before enabling it. Fixes [#6474](https://github.com/LazyVim/LazyVim/issues/6474) ([5ce7cd6](https://github.com/LazyVim/LazyVim/commit/5ce7cd650a5fffc257e0312b82fffd26abe2a1fa))
+
 ## [15.1.1](https://github.com/LazyVim/LazyVim/compare/v15.1.0...v15.1.1) (2025-09-18)
 
 
