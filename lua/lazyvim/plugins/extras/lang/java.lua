@@ -91,7 +91,9 @@ return {
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
       return {
-        root_dir = require("lspconfig.util").root_pattern(vim.lsp.config.jdtls.root_markers),
+        root_dir = function(path)
+          return vim.fs.root(path, vim.lsp.config.jdtls.root_markers)
+        end,
 
         -- How to find the project name for a given root dir.
         project_name = function(root_dir)

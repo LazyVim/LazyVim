@@ -2,7 +2,7 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile", "BufWritePre" },
+    event = "LazyFile",
     dependencies = {
       "mason.nvim",
       { "mason-org/mason-lspconfig.nvim", config = function() end },
@@ -118,7 +118,7 @@ return {
       return ret
     end,
     ---@param opts PluginLspOpts
-    config = function(_, opts)
+    config = vim.schedule_wrap(function(_, opts)
       -- setup autoformat
       LazyVim.format.register(LazyVim.lsp.formatter())
 
@@ -146,9 +146,9 @@ return {
       -- folds
       if opts.folds.enabled then
         LazyVim.lsp.on_supports_method("textDocument/foldingRange", function(client, buffer)
-          local win = vim.api.nvim_get_current_win()
-          vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-          vim.wo[win][0].foldmethod = "expr"
+          if LazyVim.set_default("foldmethod", "expr") then
+            LazyVim.set_default("foldexpr", "v:lua.vim.lsp.foldexpr()")
+          end
         end)
       end
 
@@ -235,7 +235,7 @@ return {
         })
       end
 
-      if vim.lsp.is_enabled("denols") and vim.lsp.is_enabled("vtsls") then
+      if vim.lsp.is_enabled and vim.lsp.is_enabled("denols") and vim.lsp.is_enabled("vtsls") then
         ---@param server string
         local resolve = function(server)
           local markers, root_dir = vim.lsp.config[server].root_markers, vim.lsp.config[server].root_dir
@@ -256,7 +256,7 @@ return {
         resolve("denols")
         resolve("vtsls")
       end
-    end,
+    end),
   },
 
   -- cmdline tools and lsp servers

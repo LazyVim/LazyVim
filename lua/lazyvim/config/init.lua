@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "15.1.0" -- x-release-please-version
+M.version = "15.2.0" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -304,6 +304,8 @@ function M.load(name)
 end
 
 M.did_init = false
+M._options = {} ---@type vim.wo|vim.bo
+
 function M.init()
   if M.did_init then
     return
@@ -326,6 +328,12 @@ function M.init()
   -- this is needed to make sure options will be correctly applied
   -- after installing missing plugins
   M.load("options")
+
+  -- save some options to track defaults
+  M._options.indentexpr = vim.o.indentexpr
+  M._options.foldmethod = vim.o.foldmethod
+  M._options.foldexpr = vim.o.foldexpr
+
   -- defer built-in clipboard handling: "xsel" and "pbcopy" can be slow
   lazy_clipboard = vim.opt.clipboard
   vim.opt.clipboard = ""
