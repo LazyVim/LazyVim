@@ -25,6 +25,9 @@ return {
     -- }
     -- ```
     opts = function()
+      -- Register nvim-cmp lsp capabilities
+      vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
+
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()

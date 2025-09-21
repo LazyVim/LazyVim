@@ -8,9 +8,10 @@ return {
     },
   },
 
-  -- setup animate
+  -- Animates many common Neovim actions, like scrolling,
+  -- moving the cursor, and resizing windows.
   {
-    "echasnovski/mini.animate",
+    "nvim-mini/mini.animate",
     event = "VeryLazy",
     cond = vim.g.neovide == nil,
     opts = function(_, opts)
