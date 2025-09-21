@@ -234,28 +234,6 @@ return {
           },
         })
       end
-
-      if vim.lsp.is_enabled and vim.lsp.is_enabled("denols") and vim.lsp.is_enabled("vtsls") then
-        ---@param server string
-        local resolve = function(server)
-          local markers, root_dir = vim.lsp.config[server].root_markers, vim.lsp.config[server].root_dir
-          vim.lsp.config(server, {
-            root_dir = function(bufnr, on_dir)
-              local is_deno = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" }) ~= nil
-              if is_deno == (server == "denols") then
-                if root_dir then
-                  return root_dir(bufnr, on_dir)
-                elseif type(markers) == "table" then
-                  local root = vim.fs.root(bufnr, markers)
-                  return root and on_dir(root)
-                end
-              end
-            end,
-          })
-        end
-        resolve("denols")
-        resolve("vtsls")
-      end
     end),
   },
 
