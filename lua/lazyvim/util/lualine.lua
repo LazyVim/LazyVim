@@ -124,7 +124,7 @@ function M.pretty_path(opts)
     if opts.length == 0 then
       parts = parts
     elseif #parts > opts.length then
-      parts = { parts[1], "…", unpack(parts, #parts - opts.length + 2, #parts) }
+      parts = { parts[1], "… ", unpack(parts, #parts - opts.length + 2, #parts) }
     end
 
     if opts.modified_hl and vim.bo.modified then
