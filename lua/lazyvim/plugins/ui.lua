@@ -18,6 +18,11 @@ return {
     },
     opts = {
       options = {
+        hover = {
+          enabled = true,
+          delay = 200,
+          reveal = { "close" },
+        },
         -- stylua: ignore
         close_command = function(n) Snacks.bufdelete(n) end,
         -- stylua: ignore
