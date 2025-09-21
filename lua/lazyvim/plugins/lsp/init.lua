@@ -210,9 +210,9 @@ return {
         end
       end
 
+      local servers = vim.tbl_keys(opts.servers)
+      local exclude = vim.tbl_filter(configure, servers)
       if have_mason then
-        local servers = vim.tbl_keys(opts.servers)
-        local exclude = vim.tbl_filter(configure, servers)
         require("mason-lspconfig").setup({
           ensure_installed = vim.tbl_filter(function(server)
             return not vim.tbl_contains(exclude, server)
