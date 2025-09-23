@@ -187,7 +187,7 @@ return {
       local mason_all = have_mason
           and vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
         or {} --[[ @as string[] ]]
-      local mason_exclude = {}, {} ---@type string[]
+      local mason_exclude = {} ---@type string[]
 
       ---@return boolean? exclude automatic setup
       local function configure(server)
