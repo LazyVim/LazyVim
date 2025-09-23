@@ -131,20 +131,42 @@ return {
           return true
         end,
         vtsls = function(_, opts)
+          if vim.lsp.config.denols and vim.lsp.config.vtsls then
+            ---@param server string
+            local resolve = function(server)
+              local markers, root_dir = vim.lsp.config[server].root_markers, vim.lsp.config[server].root_dir
+              vim.lsp.config(server, {
+                root_dir = function(bufnr, on_dir)
+                  local is_deno = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" }) ~= nil
+                  if is_deno == (server == "denols") then
+                    if root_dir then
+                      return root_dir(bufnr, on_dir)
+                    elseif type(markers) == "table" then
+                      local root = vim.fs.root(bufnr, markers)
+                      return root and on_dir(root)
+                    end
+                  end
+                end,
+              })
+            end
+            resolve("denols")
+            resolve("vtsls")
+          end
+
           LazyVim.lsp.on_attach(function(client, buffer)
             client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
               ---@type string, string, lsp.Range
               local action, uri, range = unpack(command.arguments)
 
               local function move(newf)
-                client.request("workspace/executeCommand", {
+                client:request("workspace/executeCommand", {
                   command = command.command,
                   arguments = { action, uri, range, newf },
                 })
               end
 
               local fname = vim.uri_to_fname(uri)
-              client.request("workspace/executeCommand", {
+              client:request("workspace/executeCommand", {
                 command = "typescript.tsserverRequest",
                 arguments = {
                   "getMoveToRefactoringFileSuggestions",
@@ -263,7 +285,7 @@ return {
 
   -- Filetype icons
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     opts = {
       file = {
         [".eslintrc.js"] = { glyph = "󰱺", hl = "MiniIconsYellow" },

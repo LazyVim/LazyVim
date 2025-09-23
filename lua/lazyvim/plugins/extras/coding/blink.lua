@@ -31,7 +31,7 @@ return {
         version = not vim.g.lazyvim_blink_main and "*",
       },
     },
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -41,6 +41,7 @@ return {
           return LazyVim.cmp.expand(snippet)
         end,
       },
+
       appearance = {
         -- sets the fallback highlight groups to nvim-cmp's highlight groups
         -- useful for when your theme doesn't support blink.cmp
@@ -50,6 +51,7 @@ return {
         -- adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
       },
+
       completion = {
         accept = {
           -- experimental auto-brackets support
@@ -82,7 +84,17 @@ return {
       },
 
       cmdline = {
-        enabled = false,
+        enabled = true,
+        keymap = { preset = "cmdline" },
+        completion = {
+          list = { selection = { preselect = false } },
+          menu = {
+            auto_show = function(ctx)
+              return vim.fn.getcmdtype() == ":"
+            end,
+          },
+          ghost_text = { enabled = true },
+        },
       },
 
       keymap = {
@@ -109,7 +121,7 @@ return {
       if not opts.keymap["<Tab>"] then
         if opts.keymap.preset == "super-tab" then -- super-tab
           opts.keymap["<Tab>"] = {
-            require("blink.cmp.keymap.presets")["super-tab"]["<Tab>"][1],
+            require("blink.cmp.keymap.presets").get("super-tab")["<Tab>"][1],
             LazyVim.cmp.map({ "snippet_forward", "ai_accept" }),
             "fallback",
           }
@@ -171,8 +183,9 @@ return {
     "saghen/blink.cmp",
     opts = {
       sources = {
-        -- add lazydev to your completion providers
-        default = { "lazydev" },
+        per_filetype = {
+          lua = { inherit_defaults = true, "lazydev" },
+        },
         providers = {
           lazydev = {
             name = "LazyDev",
