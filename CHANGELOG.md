@@ -1,5 +1,24 @@
 # Changelog
 
+## [15.3.0](https://github.com/LazyVim/LazyVim/compare/v15.2.0...v15.3.0) (2025-09-23)
+
+
+### Features
+
+* **copilot:** use `blink-copilot` as blink.cmp copilot source ([#5551](https://github.com/LazyVim/LazyVim/issues/5551)) ([13069f2](https://github.com/LazyVim/LazyVim/commit/13069f20183655d8a02f3acbd21d0ac4c9ce811c))
+* **treesitter:** show an error if the user tries to set a custom treesitter compiler ([89ff1fd](https://github.com/LazyVim/LazyVim/commit/89ff1fd600bb6ff4cf2c9edbc2217a40ecb8d160))
+
+
+### Bug Fixes
+
+* **jdtls:** allow mason jdtls installation ([#6498](https://github.com/LazyVim/LazyVim/issues/6498)) ([80990ec](https://github.com/LazyVim/LazyVim/commit/80990ec62fd36fc4b6b921a9041f55858e33e030))
+* **jdtls:** bundle configuration bug fix ([#6499](https://github.com/LazyVim/LazyVim/issues/6499)) ([c423765](https://github.com/LazyVim/LazyVim/commit/c4237659621e406089f4d13d32192954d52c4924))
+* **keymaps:** enable snacks git keybindings ([#6323](https://github.com/LazyVim/LazyVim/issues/6323)) ([720e06a](https://github.com/LazyVim/LazyVim/commit/720e06a908cbf6e3afb4eccc049d58df9ace770a))
+* **lsp:** fix mason install/exclude. Closes [#6504](https://github.com/LazyVim/LazyVim/issues/6504) ([37b1ec4](https://github.com/LazyVim/LazyVim/commit/37b1ec41ae57e8396d5c923a4bfdf7050215b4d6))
+* **lsp:** fixup for when not using mason ([a90b565](https://github.com/LazyVim/LazyVim/commit/a90b56518f4f2291985952d79472d4f935c0bad0))
+* **luasnip:** add missing optional tag to garymjr/nvim-snippets ([#5733](https://github.com/LazyVim/LazyVim/issues/5733)) ([37a1c1a](https://github.com/LazyVim/LazyVim/commit/37a1c1af5dbbcf069bb94a71b4dda3626fbda77a))
+* **vtsls:** fix and move denols/vtsls disambigutaion to typescript extra. Fixes [#6476](https://github.com/LazyVim/LazyVim/issues/6476) ([775621a](https://github.com/LazyVim/LazyVim/commit/775621ac0af42486ef1cd4254d1a6625a190040b))
+
 ## [15.2.0](https://github.com/LazyVim/LazyVim/compare/v15.1.1...v15.2.0) (2025-09-20)
 
 
