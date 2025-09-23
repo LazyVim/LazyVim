@@ -215,7 +215,7 @@ return {
       if have_mason then
         require("mason-lspconfig").setup({
           ensure_installed = vim.tbl_filter(function(server)
-            return not vim.tbl_contains(exclude, server)
+            return opts.servers[server].enabled ~= false
           end, vim.list_extend(servers, LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {})),
           automatic_enable = { exclude = exclude },
         })
