@@ -187,37 +187,36 @@ return {
       local mason_all = have_mason
           and vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
         or {} --[[ @as string[] ]]
+      local mason_exclude = {}, {} ---@type string[]
 
       ---@return boolean? exclude automatic setup
       local function configure(server)
         local sopts = opts.servers[server]
         sopts = sopts == true and {} or (not sopts) and { enabled = false } or sopts --[[@as lazyvim.lsp.Config]]
+
         if sopts.enabled == false then
-          return true
+          mason_exclude[#mason_exclude + 1] = server
+          return
         end
 
+        local use_mason = sopts.mason ~= false and vim.tbl_contains(mason_all, server)
         local setup = opts.setup[server] or opts.setup["*"]
         if setup and setup(server, sopts) then
-          return true -- lsp will be configured and enabled by the setup function
+          mason_exclude[#mason_exclude + 1] = server
+        else
+          vim.lsp.config(server, sopts) -- configure the server
+          if not use_mason then
+            vim.lsp.enable(server)
+          end
         end
-
-        vim.lsp.config(server, sopts) -- configure the server
-
-        -- manually enable if mason=false or if this is a server that cannot be installed with mason-lspconfig
-        if sopts.mason == false or not vim.tbl_contains(mason_all, server) then
-          vim.lsp.enable(server)
-          return true
-        end
+        return use_mason
       end
 
-      local servers = vim.tbl_keys(opts.servers)
-      local exclude = vim.tbl_filter(configure, servers)
+      local install = vim.tbl_filter(configure, vim.tbl_keys(opts.servers))
       if have_mason then
         require("mason-lspconfig").setup({
-          ensure_installed = vim.tbl_filter(function(server)
-            return not vim.tbl_contains(exclude, server)
-          end, vim.list_extend(servers, LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {})),
-          automatic_enable = { exclude = exclude },
+          ensure_installed = vim.list_extend(install, LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}),
+          automatic_enable = { exclude = mason_exclude },
         })
       end
     end),
