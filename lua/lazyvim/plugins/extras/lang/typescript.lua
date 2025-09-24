@@ -148,6 +148,28 @@ return {
           return true
         end,
         vtsls = function(_, opts)
+          if vim.lsp.config.denols and vim.lsp.config.vtsls then
+            ---@param server string
+            local resolve = function(server)
+              local markers, root_dir = vim.lsp.config[server].root_markers, vim.lsp.config[server].root_dir
+              vim.lsp.config(server, {
+                root_dir = function(bufnr, on_dir)
+                  local is_deno = vim.fs.root(bufnr, { "deno.json", "deno.jsonc" }) ~= nil
+                  if is_deno == (server == "denols") then
+                    if root_dir then
+                      return root_dir(bufnr, on_dir)
+                    elseif type(markers) == "table" then
+                      local root = vim.fs.root(bufnr, markers)
+                      return root and on_dir(root)
+                    end
+                  end
+                end,
+              })
+            end
+            resolve("denols")
+            resolve("vtsls")
+          end
+
           LazyVim.lsp.on_attach(function(client, buffer)
             -- Auto-organize imports and remove unused on save
             if client.name == "vtsls" then
