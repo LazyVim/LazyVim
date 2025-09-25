@@ -16,6 +16,7 @@ if LazyVim.has_extra("ai.copilot-native") then
 end
 
 vim.g.ai_cmp = false
+local status = {} ---@type table<number, "ok" | "error" | "pending">
 
 return {
   desc = "Native Copilot LSP integration. Requires Neovim >= 0.12",
@@ -24,10 +25,22 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        copilot = {},
+        copilot = {
+          handlers = {
+            didChangeStatus = function(err, res, ctx)
+              if err then
+                return
+              end
+              status[ctx.client_id] = res.kind ~= "Normal" and "error" or res.busy and "pending" or "ok"
+              if res.status == "Error" then
+                LazyVim.error("Please use `:LspCopilotSignIn` to sign in to Copilot")
+              end
+            end,
+          },
+        },
       },
       setup = {
-        copilot = function(_, opts)
+        copilot = function()
           vim.lsp.inline_completion.enable()
           LazyVim.cmp.actions.ai_accept = function()
             return vim.lsp.inline_completion.get()
@@ -43,7 +56,14 @@ return {
     optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.lsp("copilot"))
+      table.insert(
+        opts.sections.lualine_x,
+        2,
+        LazyVim.lualine.status(LazyVim.config.icons.kinds.Copilot, function()
+          local clients = vim.lsp.get_clients({ name = "copilot", bufnr = 0 })
+          return #clients > 0 and status[clients[1].id] or nil
+        end)
+      )
     end,
   },
 }
