@@ -49,6 +49,7 @@ map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   LazyVim.cmp.actions.snippet_stop()
+  LazyVim.cmp.actions.ai_stop()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
