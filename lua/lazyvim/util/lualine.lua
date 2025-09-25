@@ -22,6 +22,42 @@ function M.status(icon, status)
   }
 end
 
+--- Status indicator for LSP server activity
+---@param server string
+---@param opts? { methods?: string[], icon?: string }
+function M.lsp(server, opts)
+  opts = opts or {}
+  local methods = opts.methods or { "textDocument/completion", "textDocument/inlineCompletion" }
+  local pending = {} ---@type table<number,true>
+  vim.api.nvim_create_autocmd("LspRequest", {
+    group = vim.api.nvim_create_augroup("lazyvim.lualine.lsp." .. server, { clear = true }),
+    callback = function(args)
+      ---@class LspRequestData
+      ---@field client_id number
+      ---@field request { bufnr: number, method: string, type: "pending" | "cancel" | "complete" | string }
+      ---@field request_id number
+      local data = args.data
+      local client = vim.lsp.get_client_by_id(data.client_id)
+      if client and client.name == server and vim.tbl_contains(methods, data.request.method) then
+        pending[data.request_id] = data.request.type == "pending" or nil
+      end
+    end,
+  })
+  return {
+    function()
+      return opts.icon
+        or LazyVim.config.icons.kinds[server:sub(1, 1):upper() .. server:sub(2)]
+        or LazyVim.config.icons.diagnostics.Hint
+    end,
+    cond = function()
+      return #vim.lsp.get_clients({ name = server, bufnr = 0 }) > 0
+    end,
+    color = function()
+      return { fg = Snacks.util.color(vim.tbl_isempty(pending) and "Special" or "DiagnosticWarn") }
+    end,
+  }
+end
+
 ---@param name string
 ---@param icon? string
 function M.cmp_source(name, icon)
