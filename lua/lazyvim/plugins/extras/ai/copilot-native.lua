@@ -26,17 +26,6 @@ return {
     opts = {
       servers = {
         copilot = {
-          handlers = {
-            didChangeStatus = function(err, res, ctx)
-              if err then
-                return
-              end
-              status[ctx.client_id] = res.kind ~= "Normal" and "error" or res.busy and "pending" or "ok"
-              if res.status == "Error" then
-                LazyVim.error("Please use `:LspCopilotSignIn` to sign in to Copilot")
-              end
-            end,
-          },
           -- stylua: ignore
           keys = {
             {
@@ -57,13 +46,25 @@ return {
       setup = {
         copilot = function()
           vim.lsp.inline_completion.enable()
-
           -- Accept inline suggestions or next edits
           LazyVim.cmp.actions.ai_accept = function()
-            if vim.lsp.inline_completion.get() then
-              -- nes_update() -- ensure nes update is triggered after inline completion
-              return true
-            end
+            return vim.lsp.inline_completion.get()
+          end
+
+          if not LazyVim.has_extra("ai.sidekick") then
+            vim.lsp.config("copilot", {
+              handlers = {
+                didChangeStatus = function(err, res, ctx)
+                  if err then
+                    return
+                  end
+                  status[ctx.client_id] = res.kind ~= "Normal" and "error" or res.busy and "pending" or "ok"
+                  if res.status == "Error" then
+                    LazyVim.error("Please use `:LspCopilotSignIn` to sign in to Copilot")
+                  end
+                end,
+              },
+            })
           end
         end,
       },
@@ -76,6 +77,9 @@ return {
     optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
+      if LazyVim.has_extra("ai.sidekick") then
+        return
+      end
       table.insert(
         opts.sections.lualine_x,
         2,
