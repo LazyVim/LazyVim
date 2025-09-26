@@ -1,5 +1,22 @@
 # Changelog
 
+## [15.4.0](https://github.com/LazyVim/LazyVim/compare/v15.3.0...v15.4.0) (2025-09-26)
+
+
+### Features
+
+* **copilot-native:** added experimental support for next edit suggestions. check the docs to enable ([c83df9e](https://github.com/LazyVim/LazyVim/commit/c83df9e68dd41f5a3f7df5a7048169ee286a7da8))
+* **copilot-native:** added keymaps to cycle suggestions ([6bd630c](https://github.com/LazyVim/LazyVim/commit/6bd630cec6f905665691d593dc5d0fb3d54f560c))
+* **copilot-native:** better lualine status ([9913e16](https://github.com/LazyVim/LazyVim/commit/9913e1665d783d9c4407633bc33475d403aff433))
+* **copilot-native:** removed experimental **nes** support with `copilot_lsp` for now, since it's not the best experience right now ([ed637bb](https://github.com/LazyVim/LazyVim/commit/ed637bb0f7f418de069a4d5a7ed8a7b3b93eb425))
+* **copilot:** added `copilot-native` extra to setup native inline completions in Neovim ([3b02963](https://github.com/LazyVim/LazyVim/commit/3b0296358508da1eb258c8716df163dd04fa6449))
+
+
+### Bug Fixes
+
+* **catppuccin:** follow-up on api change ([#6505](https://github.com/LazyVim/LazyVim/issues/6505)) ([af6e250](https://github.com/LazyVim/LazyVim/commit/af6e2505b54270c30145e8f4191b865870537287))
+* **treesitter:** create buffer-local textobjects keymaps only when available. Closes [#6508](https://github.com/LazyVim/LazyVim/issues/6508) ([5985ca0](https://github.com/LazyVim/LazyVim/commit/5985ca0cf1a0c1ddee8b2b718c730f988cec7001))
+
 ## [15.3.0](https://github.com/LazyVim/LazyVim/compare/v15.2.0...v15.3.0) (2025-09-23)
 
 
