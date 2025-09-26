@@ -2,9 +2,6 @@
 if lazyvim_docs then
   -- Native inline completions don't support being shown as regular completions
   vim.g.ai_cmp = false
-
-  -- Set to `true` in your `options.lua` to enable experimental support for Next Edit Suggestions
-  vim.g.copilot_nes = false
 end
 
 if LazyVim.has_extra("ai.copilot-native") then
@@ -61,36 +58,8 @@ return {
         copilot = function()
           vim.lsp.inline_completion.enable()
 
-          -- Only trigger NES updates:
-          -- * when leaving insert mode
-          -- * when text is changed (in normal mode)
-          -- * when accepting a next edit suggestion
-          local nes_update = Snacks.util.debounce(function()
-            return vim.g.copilot_nes and require("copilot-lsp.nes").request_nes("copilot")
-          end, { ms = 100 })
-
-          vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-            group = vim.api.nvim_create_augroup("lazyvim.copilot-native.complete", { clear = true }),
-            callback = nes_update,
-          })
-
           -- Accept inline suggestions or next edits
           LazyVim.cmp.actions.ai_accept = function()
-            if vim.b.nes_state then
-              local nes = require("copilot-lsp.nes")
-
-              -- Try to jump to the start of the suggestion edit.
-              if nes.walk_cursor_start_edit() then
-                return true
-              end
-
-              -- apply the pending suggestion and jump to the end of the edit.
-              if nes.apply_pending_nes() then
-                nes.walk_cursor_end_edit()
-                nes_update() -- trigger new nes update after accept
-                return true
-              end
-            end
             if vim.lsp.inline_completion.get() then
               -- nes_update() -- ensure nes update is triggered after inline completion
               return true
@@ -117,34 +86,4 @@ return {
       )
     end,
   },
-
-  vim.g.copilot_nes
-      and {
-        "copilotlsp-nvim/copilot-lsp",
-        init = function()
-          vim.api.nvim_create_autocmd("BufEnter", {
-            callback = function(ev)
-              local buf = ev.buf
-              local client = vim.lsp.get_clients({ name = "copilot", bufnr = buf })[1]
-              if not client then
-                return
-              end
-              client:notify("textDocument/didFocus", {
-                textDocument = {
-                  uri = vim.uri_from_bufnr(buf),
-                },
-              })
-            end,
-          })
-
-          LazyVim.cmp.actions.ai_stop = function()
-            require("copilot-lsp.nes").clear()
-          end
-        end,
-        keys = {
-          -- nes is also useful in normal mode
-          { "<tab>", LazyVim.cmp.map({ "ai_accept" }, "<tab>"), mode = { "n" }, expr = true },
-        },
-      }
-    or nil,
 }
