@@ -18,7 +18,6 @@ M.actions = {
       vim.snippet.stop()
     end
   end,
-  ai_stop = function() end,
 }
 
 ---@param actions string[]
