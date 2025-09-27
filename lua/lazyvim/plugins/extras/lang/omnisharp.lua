@@ -1,15 +1,15 @@
 return {
   recommended = function()
     return LazyVim.extras.wants({
-      ft = { "cs", "vb" },
-      root = { "*.sln", "*.csproj", "omnisharp.json", "function.json" },
+      ft = { "cs", "vb", "fsharp" },
+      root = { "*.sln", "*.csproj", "*.fsproj", "omnisharp.json", "function.json", "paket.dependencies", "paket.lock" },
     })
   end,
 
   { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "c_sharp" } },
+    opts = { ensure_installed = { "c_sharp", "fsharp" } },
   },
   {
     "nvimtools/none-ls.nvim",
@@ -18,6 +18,7 @@ return {
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
       table.insert(opts.sources, nls.builtins.formatting.csharpier)
+      table.insert(opts.sources, nls.builtins.formatting.fantomas)
     end,
   },
   {
@@ -26,6 +27,7 @@ return {
     opts = {
       formatters_by_ft = {
         cs = { "csharpier" },
+        fsharp = { "fantomas" },
       },
       formatters = {
         csharpier = {
@@ -37,7 +39,7 @@ return {
   },
   {
     "mason-org/mason.nvim",
-    opts = { ensure_installed = { "csharpier", "netcoredbg" } },
+    opts = { ensure_installed = { "csharpier", "netcoredbg", "fsautocomplete", "fantomas" } },
   },
   {
     "neovim/nvim-lspconfig",
