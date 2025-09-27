@@ -1,5 +1,19 @@
 # Changelog
 
+## [15.5.0](https://github.com/LazyVim/LazyVim/compare/v15.4.0...v15.5.0) (2025-09-27)
+
+
+### Features
+
+* **ai.copilot-native:** let sidekick.nvim handle some things if available ([b25ea9c](https://github.com/LazyVim/LazyVim/commit/b25ea9c153e76d11579731e1d5529f275a36f91d))
+* **ai:** added completion hooks for next edit suggestions ([30a325d](https://github.com/LazyVim/LazyVim/commit/30a325d67184a80006dc55352d9663cdf01082d5))
+* **extras:** added extra for `sidekick.nvim` (Copilot LSP integration) ([dbfe209](https://github.com/LazyVim/LazyVim/commit/dbfe20996ce62d6b0048245ab4e304610548da04))
+
+
+### Bug Fixes
+
+* **ai.copilot:** disable copilot lsp if installed. copilot.lua needs its own version of the LSP ([e9bc607](https://github.com/LazyVim/LazyVim/commit/e9bc6074d1ea69e921a6195d1dc34333eaa310f8))
+
 ## [15.4.0](https://github.com/LazyVim/LazyVim/compare/v15.3.0...v15.4.0) (2025-09-26)
 
 
