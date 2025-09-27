@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.6.0](https://github.com/LazyVim/LazyVim/compare/v15.5.0...v15.6.0) (2025-09-27)
+
+
+### Features
+
+* **sidekick:** fancier lualine component ([b889978](https://github.com/LazyVim/LazyVim/commit/b8899781516da71ba0f63afa93fb4a6b25dff144))
+
 ## [15.5.0](https://github.com/LazyVim/LazyVim/compare/v15.4.0...v15.5.0) (2025-09-27)
 
 
