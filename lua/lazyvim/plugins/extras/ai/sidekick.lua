@@ -64,12 +64,12 @@ return {
         desc = "Sidekick Toggle",
       },
       {
-        "<leader>as",
+        "<leader>an",
         function()
           require("sidekick.cli").select_tool()
         end,
         mode = { "n" },
-        desc = "Sidekick Select Tool",
+        desc = "Sidekick New Tool",
       },
       {
         "<c-.>",
