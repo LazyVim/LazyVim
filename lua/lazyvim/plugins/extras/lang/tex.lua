@@ -212,7 +212,7 @@ return {
               {
                 "dsd",
                 "<plug>(vimtex-delim-delete)",
-                desc = "delimeter",
+                desc = "delimiter",
                 icon = { icon = "󰅩", color = "red" },
               },
               {
@@ -241,7 +241,7 @@ return {
               {
                 "csd",
                 "<plug>(vimtex-delim-change-math)",
-                desc = "delimeter",
+                desc = "delimiter",
                 icon = { icon = "󰅩", color = "blue" },
               },
               {
@@ -297,14 +297,14 @@ return {
               {
                 "tsd",
                 "<plug>(vimtex-delim-toggle-modifier)",
-                desc = "delimeter",
+                desc = "delimiter",
                 icon = { icon = "󰅩", color = "yellow" },
                 mode = "nx",
               },
               {
                 "tsD",
                 "<plug>(vimtex-delim-toggle-modifier-reverse)",
-                desc = "revers surrounding delimeter",
+                desc = "reverse surrounding delimiter",
                 icon = { icon = "󰅩", color = "yellow" },
                 mode = "nx",
               },
@@ -318,7 +318,7 @@ return {
               {
                 "]]",
                 "<plug>(vimtex-delim-close)",
-                desc = "Close delimeter",
+                desc = "Close delimiter",
                 icon = { icon = "󰅩", color = "green" },
                 mode = "i",
               },
