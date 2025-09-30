@@ -1,5 +1,20 @@
 # Changelog
 
+## [15.6.0](https://github.com/LazyVim/LazyVim/compare/v15.5.0...v15.6.0) (2025-09-30)
+
+
+### Features
+
+* **sidekick:** added keymaps to work with AI cli tools ([5d18a46](https://github.com/LazyVim/LazyVim/commit/5d18a46b6a7bb5b946a6c87b9a45a2738c9ec9c3))
+* **sidekick:** fancier lualine component ([b889978](https://github.com/LazyVim/LazyVim/commit/b8899781516da71ba0f63afa93fb4a6b25dff144))
+
+
+### Bug Fixes
+
+* **config:** clipboard:get() ([22851dc](https://github.com/LazyVim/LazyVim/commit/22851dce979c4cac379c6795ca7885c83c1c7eaf))
+* **copilot-native:** change  Copilot-native's `<M-[>` description to "Prev Suggestion" ([#6553](https://github.com/LazyVim/LazyVim/issues/6553)) ([089d0a5](https://github.com/LazyVim/LazyVim/commit/089d0a5ac1ab85238804e017ac1ef0dc0a8341f0))
+* **sidekick:** changed keymap to open new tool ([3d3739b](https://github.com/LazyVim/LazyVim/commit/3d3739b4b8943b5e7143d37f60bb0adbb6cf82f3))
+
 ## [15.5.0](https://github.com/LazyVim/LazyVim/compare/v15.4.0...v15.5.0) (2025-09-27)
 
 
