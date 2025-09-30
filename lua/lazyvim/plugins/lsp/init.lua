@@ -71,6 +71,7 @@ return {
         ---@alias lazyvim.lsp.Config vim.lsp.Config|{mason?:boolean, enabled?:boolean}
         ---@type table<string, lazyvim.lsp.Config|boolean>
         servers = {
+          stylua = { enabled = false },
           lua_ls = {
             -- mason = false, -- set to false if you don't want this server to be installed with mason
             -- Use this to add any additional keymaps
