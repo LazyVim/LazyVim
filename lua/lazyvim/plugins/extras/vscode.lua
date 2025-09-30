@@ -34,6 +34,14 @@ vim.g.snacks_animate = false
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimKeymapsDefaults",
   callback = function()
+    -- better up/down in vscode requires remap
+    local downopts = { desc = "Down", expr = true, silent = true, remap = true }
+    local upopts = { desc = "Up", expr = true, silent = true, remap = true }
+    vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", downopts)
+    vim.keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", downopts)
+    vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", upopts)
+    vim.keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", upopts)
+
     -- VSCode-specific keymaps for search and navigation
     vim.keymap.set("n", "<leader><space>", "<cmd>Find<cr>")
     vim.keymap.set("n", "<leader>/", [[<cmd>lua require('vscode').action('workbench.action.findInFiles')<cr>]])
