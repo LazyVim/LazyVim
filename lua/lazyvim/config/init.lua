@@ -335,7 +335,7 @@ function M.init()
   M._options.foldexpr = vim.o.foldexpr
 
   -- defer built-in clipboard handling: "xsel" and "pbcopy" can be slow
-  lazy_clipboard = vim.opt.clipboard
+  lazy_clipboard = vim.opt.clipboard:get()
   vim.opt.clipboard = ""
 
   if vim.g.deprecation_warnings == false then
