@@ -51,41 +51,39 @@ return {
         end
       end
     end,
+    -- stylua: ignore
     keys = {
       -- nes is also useful in normal mode
       { "<tab>", LazyVim.cmp.map({ "ai_nes" }, "<tab>"), mode = { "n" }, expr = true },
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<leader>aa",
-        function()
-          require("sidekick.cli").toggle()
-        end,
-        mode = { "n" },
-        desc = "Sidekick Toggle",
+        function() require("sidekick.cli").toggle() end,
+        desc = "Sidekick Toggle CLI",
       },
       {
         "<leader>as",
-        function()
-          require("sidekick.cli").select()
-        end,
+        function() require("sidekick.cli").select() end,
         mode = { "n" },
-        desc = "Sidekick Select",
+        desc = "Sidekick Select CLI",
       },
       {
-        "<c-.>",
-        function()
-          require("sidekick.cli").focus()
-        end,
-        mode = { "n", "x", "i", "t" },
-        desc = "Sidekick Switch Focus",
+        "<leader>as",
+        function() require("sidekick.cli").send() end,
+        mode = { "v" },
+        desc = "Sidekick Send Visual Selection",
       },
       {
         "<leader>ap",
-        function()
-          require("sidekick.cli").prompt()
-        end,
-        desc = "Sidekick Prompt",
+        function() require("sidekick.cli").prompt() end,
+        desc = "Sidekick Select Prompt",
         mode = { "n", "v" },
+      },
+      {
+        "<c-.>",
+        function() require("sidekick.cli").focus() end,
+        mode = { "n", "x", "i", "t" },
+        desc = "Sidekick Switch Focus",
       },
     },
   },
