@@ -26,17 +26,19 @@ return {
             "reason",
             "dune",
           },
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "*.opam",
-              "esy.json",
-              "package.json",
-              ".git",
-              "dune-project",
-              "dune-workspace",
-              "*.ml"
-            )(fname)
-          end,
+          root_markers = {
+            function(name)
+              return name:match(".*%.opam$")
+            end,
+            "esy.json",
+            "package.json",
+            ".git",
+            "dune-project",
+            "dune-workspace",
+            function(name)
+              return name:match(".*%.ml$")
+            end,
+          },
         },
       },
     },
