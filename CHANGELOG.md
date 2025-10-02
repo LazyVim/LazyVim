@@ -1,5 +1,19 @@
 # Changelog
 
+## [15.7.0](https://github.com/LazyVim/LazyVim/compare/v15.6.0...v15.7.0) (2025-10-01)
+
+
+### Features
+
+* **sidekick:** updated keymaps for sidekick ([2942bd4](https://github.com/LazyVim/LazyVim/commit/2942bd4a0d738d693af51354e96aa7be5407d105))
+
+
+### Bug Fixes
+
+* **copilot-native:** schedule inline_completion.enable ([23b1da1](https://github.com/LazyVim/LazyVim/commit/23b1da170f6367fafe0be47b9c141770ed75a78e))
+* **sidekick:** better keymaps ([aabc03f](https://github.com/LazyVim/LazyVim/commit/aabc03f88d30b0424926d9d894adc5c91eb84ec2))
+* **stylua:** stylua is now also an LSP. Disable it since we use the CLI tool. ([2f76d57](https://github.com/LazyVim/LazyVim/commit/2f76d572a2b172e5e7e236d3e972443242c36b66))
+
 ## [15.6.0](https://github.com/LazyVim/LazyVim/compare/v15.5.0...v15.6.0) (2025-09-30)
 
 
