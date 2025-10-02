@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "15.5.0" -- x-release-please-version
+M.version = "15.7.1" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -335,7 +335,7 @@ function M.init()
   M._options.foldexpr = vim.o.foldexpr
 
   -- defer built-in clipboard handling: "xsel" and "pbcopy" can be slow
-  lazy_clipboard = vim.opt.clipboard
+  lazy_clipboard = vim.opt.clipboard:get()
   vim.opt.clipboard = ""
 
   if vim.g.deprecation_warnings == false then

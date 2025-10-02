@@ -37,7 +37,7 @@ return {
             {
               "<M-[>",
               function() vim.lsp.inline_completion.select({ count = -1 }) end,
-              desc = "Next Copilot Suggestion",
+              desc = "Prev Copilot Suggestion",
               mode = { "i", "n" },
             },
           },
@@ -45,7 +45,9 @@ return {
       },
       setup = {
         copilot = function()
-          vim.lsp.inline_completion.enable()
+          vim.schedule(function()
+            vim.lsp.inline_completion.enable()
+          end)
           -- Accept inline suggestions or next edits
           LazyVim.cmp.actions.ai_accept = function()
             return vim.lsp.inline_completion.get()
