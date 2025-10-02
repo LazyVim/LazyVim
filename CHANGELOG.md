@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.7.1](https://github.com/LazyVim/LazyVim/compare/v15.7.0...v15.7.1) (2025-10-02)
+
+
+### Bug Fixes
+
+* **sidekick:** better keymaps ([188b288](https://github.com/LazyVim/LazyVim/commit/188b2886147acb4d9e2a5c8ae7b73770fd66a92c))
+
 ## [15.7.0](https://github.com/LazyVim/LazyVim/compare/v15.6.0...v15.7.0) (2025-10-01)
 
 
