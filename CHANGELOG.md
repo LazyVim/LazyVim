@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.7.2](https://github.com/LazyVim/LazyVim/compare/v15.7.1...v15.7.2) (2025-10-02)
+
+
+### Bug Fixes
+
+* **keymaps:** update deprecated diagnostic keymap to latest api change ([#6574](https://github.com/LazyVim/LazyVim/issues/6574)) ([b9d38f6](https://github.com/LazyVim/LazyVim/commit/b9d38f692015fecaa72d55282b74a3d601e4c9fa))
+
 ## [15.7.1](https://github.com/LazyVim/LazyVim/compare/v15.7.0...v15.7.1) (2025-10-02)
 
 
