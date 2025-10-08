@@ -57,6 +57,12 @@ return {
       { "<tab>", LazyVim.cmp.map({ "ai_nes" }, "<tab>"), mode = { "n" }, expr = true },
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       {
+        "<c-.>",
+        function() require("sidekick.cli").toggle() end,
+        desc = "Sidekick Toggle",
+        mode = { "n", "t", "i", "x" },
+      },
+      {
         "<leader>aa",
         function() require("sidekick.cli").toggle() end,
         desc = "Sidekick Toggle CLI",
@@ -75,6 +81,11 @@ return {
         desc = "Send This",
       },
       {
+        "<leader>af",
+        function() require("sidekick.cli").send({ msg = "{file}" }) end,
+        desc = "Send File",
+      },
+      {
         "<leader>av",
         function() require("sidekick.cli").send({ msg = "{selection}" }) end,
         mode = { "x" },
@@ -85,18 +96,6 @@ return {
         function() require("sidekick.cli").prompt() end,
         mode = { "n", "x" },
         desc = "Sidekick Select Prompt",
-      },
-      {
-        "<c-.>",
-        function() require("sidekick.cli").focus() end,
-        mode = { "n", "x", "i", "t" },
-        desc = "Sidekick Switch Focus",
-      },
-      -- Example of a keybinding to open Claude directly
-      {
-        "<leader>ac",
-        function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
-        desc = "Sidekick Claude Toggle",
       },
     },
   },
