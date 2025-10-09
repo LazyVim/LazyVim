@@ -85,7 +85,11 @@ return {
 
       cmdline = {
         enabled = true,
-        keymap = { preset = "cmdline" },
+        keymap = {
+          preset = "cmdline",
+          ["<Right>"] = false,
+          ["<Left>"] = false,
+        },
         completion = {
           list = { selection = { preselect = false } },
           menu = {
