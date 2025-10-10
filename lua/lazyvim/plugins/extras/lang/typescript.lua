@@ -269,6 +269,10 @@ return {
               name = "Launch file",
               program = "${file}",
               cwd = "${workspaceFolder}",
+              sourceMaps = true,
+              resolveSourceMapLocations = { "${workspaceFolder}/buid/**/*.js" },
+              skipFiles = { "<node_internals>/**", "node_modules/**" },
+              runtimeExecutable = "ts-node",
             },
             {
               type = "pwa-node",
@@ -276,6 +280,10 @@ return {
               name = "Attach",
               processId = require("dap.utils").pick_process,
               cwd = "${workspaceFolder}",
+              sourceMaps = true,
+              resolveSourceMapLocations = { "${workspaceFolder}/buid/**/*.js" },
+              skipFiles = { "<node_internals>/**", "node_modules/**" },
+              runtimeExecutable = "ts-node",
             },
           }
         end
