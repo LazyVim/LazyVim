@@ -11,7 +11,7 @@ return {
       { "<leader>R", "", desc = "+Rest", ft = "http" },
       { "<leader>Rb", "<cmd>lua require('kulala').scratchpad()<cr>", desc = "Open scratchpad", ft = "http" },
       { "<leader>Rc", "<cmd>lua require('kulala').copy()<cr>", desc = "Copy as cURL", ft = "http" },
-      { "<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from curl", ft = "http" },
+      { "<leader>RC", "<cmd>lua require('kulala').from_curl()<cr>", desc = "Paste from cURL", ft = "http" },
       {
         "<leader>Rg",
         "<cmd>lua require('kulala').download_graphql_schema()<cr>",
@@ -27,7 +27,35 @@ return {
       { "<leader>RS", "<cmd>lua require('kulala').show_stats()<cr>", desc = "Show stats", ft = "http" },
       { "<leader>Rt", "<cmd>lua require('kulala').toggle_view()<cr>", desc = "Toggle headers/body", ft = "http" },
     },
-    opts = {},
+    opts = {
+      ui = {
+        icons = {
+          inlay = {
+            loading = "",
+            done = "",
+            error = "",
+          },
+        },
+      },
+    },
+  },
+  {
+    "mason-org/mason.nvim",
+    opts = function(_, opts)
+      opts.registries = opts.registries or {}
+      table.insert(opts.registries, "github:mistweaverco/zana-registry")
+      opts.ensure_installed = opts.ensure_installed or {}
+      table.insert(opts.ensure_installed, "kulala-fmt")
+      table.insert(opts.ensure_installed, "kulala-ls")
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        http = { "kulala-fmt" },
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
