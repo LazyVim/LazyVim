@@ -1,5 +1,24 @@
 # Changelog
 
+## [15.8.0](https://github.com/LazyVim/LazyVim/compare/v15.7.1...v15.8.0) (2025-10-11)
+
+
+### Features
+
+* **sidekick:** added `<leader>ad` to close/detach a terminal/session ([f8b062b](https://github.com/LazyVim/LazyVim/commit/f8b062b130177f07d3c1c13b642402d42e980df5))
+* **sidekick:** changed default keymaps for sidekick. Please check updated docs at sidekick.nvim ([a3e52dd](https://github.com/LazyVim/LazyVim/commit/a3e52dd346ea35db5521b66e46dca95d32f00cb4))
+* **treesitter:** added support for `disable` langs to indent/highlight/folds. Closes [#6608](https://github.com/LazyVim/LazyVim/issues/6608) ([0e8069c](https://github.com/LazyVim/LazyVim/commit/0e8069c78ee92279055236388df8c2019476767a))
+
+
+### Bug Fixes
+
+* **blink:** disable blink left/right key in the cmdline ([94c4603](https://github.com/LazyVim/LazyVim/commit/94c4603b6838fbe75343b6e3342b4343744157dc))
+* **keymaps:** update deprecated diagnostic keymap to latest api change ([#6574](https://github.com/LazyVim/LazyVim/issues/6574)) ([b9d38f6](https://github.com/LazyVim/LazyVim/commit/b9d38f692015fecaa72d55282b74a3d601e4c9fa))
+* **sidekick:** only add copilot to lspconfig when `opts.nes.enabled ~= false` ([049db39](https://github.com/LazyVim/LazyVim/commit/049db39de0f272e8368a4b3881ac5a13f0d04b09))
+* **terminal:** term toggle keymaps now only work for snacks terminals. Closes [#6573](https://github.com/LazyVim/LazyVim/issues/6573) ([4efd0e2](https://github.com/LazyVim/LazyVim/commit/4efd0e2bea2a387d6fcdea8cf36a62049e8bafed))
+* **treesiter:** check that `disable` options are tables ([e8c5fa7](https://github.com/LazyVim/LazyVim/commit/e8c5fa7eae06539c883699507caeadb46d74f401))
+* **xtras:** load `copilot-native` before `blink` ([#6588](https://github.com/LazyVim/LazyVim/issues/6588)) ([aa2c436](https://github.com/LazyVim/LazyVim/commit/aa2c43633adee0f80faf8d743d6476ea4f8ba5ca))
+
 ## [15.7.1](https://github.com/LazyVim/LazyVim/compare/v15.7.0...v15.7.1) (2025-10-02)
 
 
