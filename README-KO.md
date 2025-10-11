@@ -52,7 +52,7 @@ LazyVim은 [💤 lazy.nvim](https://github.com/folke/lazy.nvim)를 기반으로 
 
 ## ⚡️ 요구사항
 
-- **0.9.0**이상의 Neovim (LuaJIT과 함께 개발이 되어져있어야함니다.)
+- **0.11.2**이상의 Neovim (LuaJIT과 함께 개발이 되어져있어야함니다.)
 - **2.19.0**이상의 Git (이것은 부분적인 클론기능을 지원하기 위함입니다.)
 - [Nerd Font](https://www.nerdfonts.com/) **_(옵션)_**
 - `nvim-treesitter`를 위한 **C** 컴파일러. [이 문서](https://github.com/nvim-treesitter/nvim-treesitter#requirements)를 확인해주시기바랍니다.
