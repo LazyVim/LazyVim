@@ -28,7 +28,7 @@ return {
   },
 
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = { ensure_installed = { "haskell-language-server" } },
   },
 
@@ -37,7 +37,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = { ensure_installed = { "haskell-debug-adapter" } },
       },
     },
@@ -70,7 +70,7 @@ return {
     "luc-tielen/telescope_hoogle",
     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
     dependencies = {
-      { "nvim-telescope/telescope.nvim" },
+      { "nvim-telescope/telescope.nvim", optional = true },
     },
     config = function()
       local ok, telescope = pcall(require, "telescope")

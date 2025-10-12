@@ -134,7 +134,7 @@ return {
   },
 
   {
-    "echasnovski/mini.starter",
+    "nvim-mini/mini.starter",
     optional = true,
     opts = function(_, opts)
       local items = {
@@ -152,6 +152,9 @@ return {
     "nvimdev/dashboard-nvim",
     optional = true,
     opts = function(_, opts)
+      if not vim.tbl_get(opts, "config", "center") then
+        return
+      end
       local projects = {
         action = pick,
         desc = " Projects",
@@ -163,6 +166,19 @@ return {
       projects.key_format = "  %s"
 
       table.insert(opts.config.center, 3, projects)
+    end,
+  },
+
+  {
+    "folke/snacks.nvim",
+    optional = true,
+    opts = function(_, opts)
+      table.insert(opts.dashboard.preset.keys, 3, {
+        action = pick,
+        desc = "Projects",
+        icon = " ",
+        key = "p",
+      })
     end,
   },
 }

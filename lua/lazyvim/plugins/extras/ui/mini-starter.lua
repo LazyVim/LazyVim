@@ -1,12 +1,11 @@
 -- start screen
 return {
   -- disable alpha
-  { "goolord/alpha-nvim", enabled = false },
-  { "nvimdev/dashboard-nvim", enabled = false },
+  { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
 
   -- enable mini.starter
   {
-    "echasnovski/mini.starter",
+    "nvim-mini/mini.starter",
     version = false, -- wait till new 0.7.0 release to put it back on semver
     event = "VimEnter",
     opts = function()
@@ -68,7 +67,7 @@ return {
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
           local pad_footer = string.rep(" ", 8)
           starter.config.footer = pad_footer .. "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-          -- INFO: based on @echasnovski's recommendation (thanks a lot!!!)
+          -- INFO: based on @nvim-mini's recommendation (thanks a lot!!!)
           if vim.bo[ev.buf].filetype == "ministarter" then
             pcall(starter.refresh)
           end

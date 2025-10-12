@@ -40,13 +40,13 @@ end
 
 return {
   desc = "Awesome picker for FZF (alternative to Telescope)",
-  recommended = true,
   {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     opts = function(_, opts)
-      local config = require("fzf-lua.config")
-      local actions = require("fzf-lua.actions")
+      local fzf = require("fzf-lua")
+      local config = fzf.config
+      local actions = fzf.actions
 
       -- Quickfix
       config.defaults.keymap.fzf["ctrl-q"] = "select-all+accept"
@@ -74,18 +74,6 @@ return {
       config.defaults.actions.files["alt-c"] = config.defaults.actions.files["ctrl-r"]
       config.set_action_helpstr(config.defaults.actions.files["ctrl-r"], "toggle-root-dir")
 
-      -- use the same prompt for all
-      local defaults = require("fzf-lua.profiles.default-title")
-      local function fix(t)
-        t.prompt = t.prompt ~= nil and " " or nil
-        for _, v in pairs(t) do
-          if type(v) == "table" then
-            fix(v)
-          end
-        end
-      end
-      fix(defaults)
-
       local img_previewer ---@type string[]?
       for _, v in ipairs({
         { cmd = "ueberzug", args = {} },
@@ -98,7 +86,8 @@ return {
         end
       end
 
-      return vim.tbl_deep_extend("force", defaults, {
+      return {
+        "default-title",
         fzf_colors = true,
         fzf_opts = {
           ["--no-scrollbar"] = true,
@@ -131,9 +120,9 @@ return {
             winopts = {
               layout = "vertical",
               -- height is number of items minus 15 lines for the preview, with a max of 80% screen height
-              height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 2) + 0.5) + 16,
+              height = math.floor(math.min(vim.o.lines * 0.8 - 16, #items + 4) + 0.5) + 16,
               width = 0.5,
-              preview = not vim.tbl_isempty(LazyVim.lsp.get_clients({ bufnr = 0, name = "vtsls" })) and {
+              preview = not vim.tbl_isempty(vim.lsp.get_clients({ bufnr = 0, name = "vtsls" })) and {
                 layout = "vertical",
                 vertical = "down:15,border-top",
                 hidden = "hidden",
@@ -146,7 +135,7 @@ return {
             winopts = {
               width = 0.5,
               -- height is number of items, with a max of 80% screen height
-              height = math.floor(math.min(vim.o.lines * 0.8, #items + 2) + 0.5),
+              height = math.floor(math.min(vim.o.lines * 0.8, #items + 4) + 0.5),
             },
           })
         end,
@@ -186,9 +175,24 @@ return {
             previewer = vim.fn.executable("delta") == 1 and "codeaction_native" or nil,
           },
         },
-      })
+      }
     end,
     config = function(_, opts)
+      if opts[1] == "default-title" then
+        -- use the same prompt for all pickers for profile `default-title` and
+        -- profiles that use `default-title` as base profile
+        local function fix(t)
+          t.prompt = t.prompt ~= nil and " " or nil
+          for _, v in pairs(t) do
+            if type(v) == "table" then
+              fix(v)
+            end
+          end
+          return t
+        end
+        opts = vim.tbl_deep_extend("force", fix(require("fzf-lua.profiles.default-title")), opts)
+        opts[1] = nil
+      end
       require("fzf-lua").setup(opts)
     end,
     init = function()
@@ -284,10 +288,10 @@ return {
       local Keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- stylua: ignore
       vim.list_extend(Keys, {
-        { "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Definition", has = "definition" },
-        { "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>", desc = "References", nowait = true },
-        { "gI", "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
-        { "gy", "<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
+        { "gd", "<cmd>FzfLua lsp_definitions     jump1=true ignore_current_line=true<cr>", desc = "Goto Definition", has = "definition" },
+        { "gr", "<cmd>FzfLua lsp_references      jump1=true ignore_current_line=true<cr>", desc = "References", nowait = true },
+        { "gI", "<cmd>FzfLua lsp_implementations jump1=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
+        { "gy", "<cmd>FzfLua lsp_typedefs        jump1=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
       })
     end,
   },

@@ -1,10 +1,10 @@
 local pick = function()
+  local refactoring = require("refactoring")
   if LazyVim.pick.picker.name == "telescope" then
     return require("telescope").extensions.refactoring.refactors()
   elseif LazyVim.pick.picker.name == "fzf" then
     local fzf_lua = require("fzf-lua")
-    local results = require("refactoring").get_refactors()
-    local refactoring = require("refactoring")
+    local results = refactoring.get_refactors()
 
     local opts = {
       fzf_opts = {},
@@ -16,6 +16,8 @@ local pick = function()
       },
     }
     fzf_lua.fzf_exec(results, opts)
+  else
+    refactoring.select_refactor()
   end
 end
 
@@ -28,34 +30,39 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     keys = {
-      { "<leader>r", "", desc = "+refactor", mode = { "n", "v" } },
+      { "<leader>r", "", desc = "+refactor", mode = { "n", "x" } },
       {
         "<leader>rs",
         pick,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Refactor",
       },
       {
         "<leader>ri",
         function()
-          require("refactoring").refactor("Inline Variable")
+          return require("refactoring").refactor("Inline Variable")
         end,
-        mode = { "n", "v" },
+        mode = { "n", "x" },
         desc = "Inline Variable",
+        expr = true,
       },
       {
         "<leader>rb",
         function()
-          require("refactoring").refactor("Extract Block")
+          return require("refactoring").refactor("Extract Block")
         end,
+        mode = { "n", "x" },
         desc = "Extract Block",
+        expr = true,
       },
       {
         "<leader>rf",
         function()
-          require("refactoring").refactor("Extract Block To File")
+          return require("refactoring").refactor("Extract Block To File")
         end,
+        mode = { "n", "x" },
         desc = "Extract Block To File",
+        expr = true,
       },
       {
         "<leader>rP",
@@ -69,6 +76,7 @@ return {
         function()
           require("refactoring").debug.print_var({ normal = true })
         end,
+        mode = { "n", "x" },
         desc = "Debug Print Variable",
       },
       {
@@ -81,33 +89,36 @@ return {
       {
         "<leader>rf",
         function()
-          require("refactoring").refactor("Extract Function")
+          return require("refactoring").refactor("Extract Function")
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Extract Function",
+        expr = true,
       },
       {
         "<leader>rF",
         function()
-          require("refactoring").refactor("Extract Function To File")
+          return require("refactoring").refactor("Extract Function To File")
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Extract Function To File",
+        expr = true,
       },
       {
         "<leader>rx",
         function()
-          require("refactoring").refactor("Extract Variable")
+          return require("refactoring").refactor("Extract Variable")
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Extract Variable",
+        expr = true,
       },
       {
         "<leader>rp",
         function()
           require("refactoring").debug.print_var()
         end,
-        mode = "v",
+        mode = { "n", "x" },
         desc = "Debug Print Variable",
       },
     },

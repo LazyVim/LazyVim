@@ -26,7 +26,8 @@ describe("Extra", function()
     return not vim.tbl_contains(ignore, extra.modname)
   end, extras)
 
-  local lsp_to_pkg = require("mason-lspconfig.mappings.server").lspconfig_to_package
+  local lsp_to_pkg = {}
+  lsp_to_pkg = require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package
 
   local tsspec = Plugin.Spec.new({
     import = "lazyvim.plugins.treesitter",
@@ -44,7 +45,7 @@ describe("Extra", function()
         local mod = require(extra.modname)
         assert.is_not_nil(mod)
         local spec = Plugin.Spec.new({
-          { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
+          { "mason-org/mason.nvim", opts = { ensure_installed = {} } },
           { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
           mod,
         }, { optional = true })
@@ -60,7 +61,7 @@ describe("Extra", function()
 
       local mod = require(extra.modname)
       local spec = Plugin.Spec.new({
-        { "williamboman/mason.nvim", opts = { ensure_installed = {} } },
+        { "mason-org/mason.nvim", opts = { ensure_installed = {} } },
         { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
         mod,
       }, { optional = true })

@@ -28,10 +28,6 @@ function M.register(picker)
     return true
   end
 
-  if M.picker and M.picker.name ~= M.want() then
-    M.picker = nil
-  end
-
   if M.picker and M.picker.name ~= picker.name then
     LazyVim.warn(
       "`LazyVim.pick`: picker already set to `" .. M.picker.name .. "`,\nignoring new picker `" .. picker.name .. "`"
@@ -40,14 +36,6 @@ function M.register(picker)
   end
   M.picker = picker
   return true
-end
-
-function M.want()
-  vim.g.lazyvim_picker = vim.g.lazyvim_picker or "auto"
-  if vim.g.lazyvim_picker == "auto" then
-    return LazyVim.has_extra("editor.fzf") and "fzf" or "telescope"
-  end
-  return vim.g.lazyvim_picker
 end
 
 ---@param command? string

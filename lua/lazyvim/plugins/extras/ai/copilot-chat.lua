@@ -1,39 +1,18 @@
-local M = {}
-
----@param kind string
-function M.pick(kind)
-  return function()
-    local actions = require("CopilotChat.actions")
-    local items = actions[kind .. "_actions"]()
-    if not items then
-      LazyVim.warn("No " .. kind .. " found on the current line")
-      return
-    end
-    local ok = pcall(require, "fzf-lua")
-    require("CopilotChat.integrations." .. (ok and "fzflua" or "telescope")).pick(items)
-  end
-end
-
 return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch = "main",
     cmd = "CopilotChat",
     opts = function()
       local user = vim.env.USER or "User"
       user = user:sub(1, 1):upper() .. user:sub(2)
       return {
         auto_insert_mode = true,
-        show_help = true,
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
         window = {
           width = 0.4,
         },
-        selection = function(source)
-          local select = require("CopilotChat.select")
-          return select.visual(source) or select.buffer(source)
-        end,
       }
     end,
     keys = {
@@ -58,24 +37,28 @@ return {
       {
         "<leader>aq",
         function()
-          local input = vim.fn.input("Quick Chat: ")
-          if input ~= "" then
-            require("CopilotChat").ask(input)
-          end
+          vim.ui.input({
+            prompt = "Quick Chat: ",
+          }, function(input)
+            if input ~= "" then
+              require("CopilotChat").ask(input)
+            end
+          end)
         end,
         desc = "Quick Chat (CopilotChat)",
         mode = { "n", "v" },
       },
-      -- Show help actions with telescope
-      { "<leader>ad", M.pick("help"), desc = "Diagnostic Help (CopilotChat)", mode = { "n", "v" } },
-      -- Show prompts actions with telescope
-      { "<leader>ap", M.pick("prompt"), desc = "Prompt Actions (CopilotChat)", mode = { "n", "v" } },
+      {
+        "<leader>ap",
+        function()
+          require("CopilotChat").select_prompt()
+        end,
+        desc = "Prompt Actions (CopilotChat)",
+        mode = { "n", "v" },
+      },
     },
     config = function(_, opts)
       local chat = require("CopilotChat")
-      if pcall(require, "cmp") then
-        require("CopilotChat.integrations.cmp").setup()
-      end
 
       vim.api.nvim_create_autocmd("BufEnter", {
         pattern = "copilot-chat",
@@ -101,5 +84,25 @@ return {
         size = { width = 50 },
       })
     end,
+  },
+
+  -- Blink integration
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      sources = {
+        providers = {
+          path = {
+            -- Path sources triggered by "/" interfere with CopilotChat commands
+            enabled = function()
+              return vim.bo.filetype ~= "copilot-chat"
+            end,
+          },
+        },
+      },
+    },
   },
 }

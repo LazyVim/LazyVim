@@ -22,13 +22,16 @@ return {
       { "<leader>gr", "<cmd>Octo repo list<CR>", desc = "List Repos (Octo)" },
       { "<leader>gS", "<cmd>Octo search<CR>", desc = "Search (Octo)" },
 
-      { "<leader>a", "", desc = "+assignee (Octo)", ft = "octo" },
-      { "<leader>c", "", desc = "+comment/code (Octo)", ft = "octo" },
-      { "<leader>l", "", desc = "+label (Octo)", ft = "octo" },
-      { "<leader>i", "", desc = "+issue (Octo)", ft = "octo" },
-      { "<leader>r", "", desc = "+react (Octo)", ft = "octo" },
-      { "<leader>p", "", desc = "+pr (Octo)", ft = "octo" },
-      { "<leader>v", "", desc = "+review (Octo)", ft = "octo" },
+      { "<localleader>a", "", desc = "+assignee (Octo)", ft = "octo" },
+      { "<localleader>c", "", desc = "+comment/code (Octo)", ft = "octo" },
+      { "<localleader>l", "", desc = "+label (Octo)", ft = "octo" },
+      { "<localleader>i", "", desc = "+issue (Octo)", ft = "octo" },
+      { "<localleader>r", "", desc = "+react (Octo)", ft = "octo" },
+      { "<localleader>p", "", desc = "+pr (Octo)", ft = "octo" },
+      { "<localleader>pr", "", desc = "+rebase (Octo)", ft = "octo" },
+      { "<localleader>ps", "", desc = "+squash (Octo)", ft = "octo" },
+      { "<localleader>v", "", desc = "+review (Octo)", ft = "octo" },
+      { "<localleader>g", "", desc = "+goto_issue (Octo)", ft = "octo" },
       { "@", "@<C-x><C-o>", mode = "i", ft = "octo", silent = true },
       { "#", "#<C-x><C-o>", mode = "i", ft = "octo", silent = true },
     },
@@ -39,12 +42,14 @@ return {
     "pwntester/octo.nvim",
     opts = function(_, opts)
       vim.treesitter.language.register("markdown", "octo")
-      if LazyVim.has("telescope.nvim") then
+      if LazyVim.has_extra("editor.telescope") then
         opts.picker = "telescope"
-      elseif LazyVim.has("fzf-lua") then
+      elseif LazyVim.has_extra("editor.fzf") then
         opts.picker = "fzf-lua"
+      elseif LazyVim.has_extra("editor.snacks_picker") then
+        opts.picker = "snacks"
       else
-        LazyVim.error("`octo.nvim` requires `telescope.nvim` or `fzf-lua`")
+        LazyVim.error("`octo.nvim` requires `telescope.nvim` or `fzf-lua` or `snacks.nvim`")
       end
 
       -- Keep some empty windows in sessions

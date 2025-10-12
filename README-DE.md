@@ -56,7 +56,7 @@ und die Einfachheit von einem vorgefertigten Setup.
 
 ## ⚡️ Vorraussetzungen
 
-- Neovim >= **0.8.0** (gebraucht um mit **LuaJIT** zu bauen)
+- Neovim >= **0.11.2** (gebraucht um mit **LuaJIT** zu bauen)
 - Git >= **2.19.0** (um Teil-Klone zu unterstützen)
 - eine [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
 
@@ -68,7 +68,7 @@ Sie können eine Startvorlage für **LazyVim** [hier](https://github.com/LazyVim
 
 ```sh
 docker run -w /root -it --rm alpine:edge sh -uelic '
-  apk add git lazygit neovim ripgrep alpine-sdk --update
+  apk add git lazygit fzf curl neovim ripgrep alpine-sdk --update
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   cd ~/.config/nvim
   nvim

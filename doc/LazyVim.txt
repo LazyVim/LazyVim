@@ -1,4 +1,4 @@
-*LazyVim.txt*             For Neovim             Last change: 2024 November 08
+*LazyVim.txt*              For Neovim             Last change: 2025 October 11
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
@@ -53,7 +53,7 @@ FEATURES                                                    *LazyVim-features*
 
 REQUIREMENTS                                            *LazyVim-requirements*
 
-- Neovim >= **0.9.0** (needs to be built with **LuaJIT**)
+- Neovim >= **0.11.2** (needs to be built with **LuaJIT**)
 - Git >= **2.19.0** (for partial clones support)
 - a Nerd Font <https://www.nerdfonts.com/> **(optional)**
 - a **C** compiler for `nvim-treesitter`. See here <https://github.com/nvim-treesitter/nvim-treesitter#requirements>
@@ -68,7 +68,7 @@ Try it with Docker ~
 
 >sh
     docker run -w /root -it --rm alpine:edge sh -uelic '
-      apk add git lazygit neovim ripgrep alpine-sdk --update
+      apk add git lazygit fzf curl neovim ripgrep alpine-sdk --update
       git clone https://github.com/LazyVim/starter ~/.config/nvim
       cd ~/.config/nvim
       nvim

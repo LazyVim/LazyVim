@@ -57,7 +57,7 @@ como necessário, junto com a conveniência de um setup pré-configurado.
 
 ## ⚡️ Requesitos
 
-- Neovim >= **0.9.0** (preciso fazer build com **LuaJIT**)
+- Neovim >= **0.11.2** (preciso fazer build com **LuaJIT**)
 - Git >= **2.19.0** (para suporte parcial de clones)
 - uma [Nerd Font](https://www.nerdfonts.com/) **_(opcional)_**
 - um compilador de **C** para `nvim-treesitter`. Mais informações [aqui](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
@@ -70,7 +70,7 @@ Podes encontrar uma template **LazyVim** starter para começar, [aqui](https://g
 
 ```sh
 docker run -w /root -it --rm alpine:edge sh -uelic '
-  apk add git lazygit neovim ripgrep alpine-sdk --update
+  apk add git lazygit fzf curl neovim ripgrep alpine-sdk --update
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   cd ~/.config/nvim
   nvim

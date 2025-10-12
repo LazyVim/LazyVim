@@ -1,6 +1,86 @@
 # What's new?
 
+## 15.x
+
+**Neovim** `>= 0.11.2` includes a lot of changes to the underlying LSP implementation.
+
+Going forward, **LazyVim** requires **Neovim** `>= 0.11.2`, and drops support for older versions.
+
+### Changes
+
+- removed compatibility code for Neovim `< 0.11.2`
+- configure **LSP** with the native `vim.lsp.config`
+- migrated **mason.nvim** and **mason-lspconfig.nvim** to `v2.x`
+- migrated to [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/tree/main) **main** branch
+  - with the new version, the `tree-sitter` cli is **required** to install parsers
+  - best to run `:checkhealth nvim-treesitter` after updating
+- replace `nvim-treesitter` incremental selection with `flash.nvim`, since it is no longer supported
+- enabled [blink.cmp](https://github.com/saghen/blink.cmp) **cmdline** completions
+- use **LSP** based folding when available (disable with `nvim-lspconfig.folds.enabled = false`)
+
+## 14.x
+
+Big new release with a lot of changes and improvements!
+Two new plugins have been added, and a lot of plugins have been replaced.
+With these changes, default **LazyVim** is now just `34` plugins.
+
+### Added Plugins
+
+- [fzf-lua](https://github.com/ibhagwan/fzf-lua) as a replacement for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+  - to use **telescope.nvim** instead, enable the `editor.telescope` extra
+- [blink.cmp](https://github.com/saghen/blink.cmp) as a replacement for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+  - to use **nvim-cmp** instead, enable the `coding.nvim-cmp` extra
+
+### Removed Plugins
+
+- [dressing.nvim](https://github.com/stevearc/dressing.nvim) (replaced with [fzf-lua](https://github.com/ibhagwan/fzf-lua) and [snacks.input](https://github.com/folke/snacks.nvim))
+- [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim) (replaced with [fzf-lua](https://github.com/ibhagwan/fzf-lua))
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) (replaced with [fzf-lua](https://github.com/ibhagwan/fzf-lua))
+- [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) (replaced with [snacks.indent](https://github.com/Folke/snacks.nvim))
+  - to use **indent-blankline.nvim** instead, enable the `indent-blankline` extra
+- [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) (replaced with [blink](https://github.com/Saghen/blink.cmp))
+- [nvim-snippets](https://github.com/hrsh7th/vim-vsnip) (replaced with [blink](https://github.com/Saghen/blink.cmp))
+- [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) (replaced with [blink](https://github.com/Saghen/blink.cmp))
+- [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) (replaced with [blink](https://github.com/Saghen/blink.cmp))
+- [cmp-path](https://github.com/hrsh7th/cmp-path) (replaced with [blink](https://github.com/Saghen/blink.cmp))
+
+### Changes
+
+- added [`snacks.input`](https://github.com/folke/snacks.nvim/blob/main/docs/input.md)
+- added [`snacks.scroll`](https://github.com/folke/snacks.nvim/blob/main/docs/scroll.md)
+- added [`snacks.indent`](https://github.com/folke/snacks.nvim/blob/main/docs/indent.md)
+- added [`snacks.scope`](https://github.com/folke/snacks.nvim/blob/main/docs/scope.md)
+- added [`snacks.dim`](https://github.com/folke/snacks.nvim/blob/main/docs/dim.md)
+- added [`snacks.zen`](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md)
+- changed default [`which-key`](https://github.com/folke/which-key.nvim) preset to `helix`
+- drop `LazyVim.ui.fg` in favor of [`Snacks.util.color`](https://github.com/folke/snacks.nvim/blob/main/docs/util.md)
+
+To disable **all animations**, add the following to your `options.lua`:
+
+```lua
+vim.g.snacks_animate = false
+```
+
+### Keymaps
+
+- `<leader>uz` to toggle [zen mode](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md)
+- `<leader>uZ` & `<leader>wm` to toggle [zoom mode](https://github.com/folke/snacks.nvim/blob/main/docs/zen.md)
+- `<leader>uD` to toggle [dimming](https://github.com/folke/snacks.nvim/blob/main/docs/dim.md)
+- `<leader>ua` to toggle [animations](https://github.com/folke/snacks.nvim/blob/main/docs/animate.md)
+- `<leader>uS` to toggle [scroll](https://github.com/folke/snacks.nvim/blob/main/docs/scroll.md)
+- `<leader>ug` to toggle [indent guides](https://github.com/folke/snacks.nvim/blob/main/docs/indent.md)
+- [`snacks.profiler`](https://github.com/folke/snacks.nvim/blob/main/docs/profiler.md) keymaps under `<leader>dp`
+
+---
+
 ## 13.x
+
+- **LazyVim** now uses `Snacks.dashboard` as the default dashboard.
+  Check the [docs](https://github.com/folke/snacks.nvim/blob/main/docs/dashboard.md),
+  for more information and examples.
+
+- A new [dashboard-nvim](https://github.com/nvimdev/dashboard-nvim) extra
+  is available for those who prefer the old dashboard.
 
 - Big new release with a lot of changes and improvements!
 
@@ -13,6 +93,8 @@
   - `Snacks.notifier` for notifications instead of `nvim-notify`
   - `Snacks.terminal` is similar to `lazyterm`, but has more features
     and creates bottom splits by default (similar to the `edgy` integrating)
+
+---
 
 ## 12.x
 
@@ -41,10 +123,11 @@
 - moved `neoconf.nvim` to extras. Project specific LSP settings
   can be done with a `.lazy.lua` file instead.
 
+---
+
 ## 11.x
 
 - **Keymaps:**
-
   - `<leader>gB` to open the current repo in the browser
   - `gco` and `gcO` to add a comment below or above the current line
   - `<leader>wm` to toggle window maximize
@@ -57,7 +140,6 @@
   It's a great plugin that enhances the native text objects.
 
 - `:LazyExtras` now has multiple new sections:
-
   - **Enabled**: extras that are currently enabled
   - **Recommended Languages**: language extras recommended for the current buffer / directory
   - **Recommended Plugins**: extras that are recommended for most users
@@ -95,10 +177,11 @@ Additionally, some core plugins have been moved to extras.
   ```
 
 - plugins moved to extras:
-
   - `mini.surround`
   - `mini.indentscope` scopes are now also highlighted with `indent-blankline`
   - `nvim-treesitter-context`
+
+---
 
 ## 10.x
 
@@ -111,7 +194,6 @@ Additionally, some core plugins have been moved to extras.
   You can find the updated docs [here](https://github.com/folke/trouble.nvim/tree/dev)
 
 - The **lazygit** integration now configures:
-
   - the theme based on the colorscheme
   - nerd font icons (v3)
   - editor preset is set to `nvim-remote` for better interop with Neovim
@@ -152,9 +234,7 @@ Additionally, some core plugins have been moved to extras.
 - New `:LazyExtras` command for managing **LazyVim** extras
 
 - Improved **formatting**:
-
   - **LazyVim** can now work with multiple formatters. Types:
-
     - **primary**: only one primary formatter can be active at a time.
       _(conform, none-ls, LSP)_
     - **secondary**: multiple secondary formatters can be active _(eslint, ...)_
@@ -173,18 +253,15 @@ Additionally, some core plugins have been moved to extras.
     ```
 
 - `none-ls.nvim` is no longer installed by default
-
   - `conform.nvim` is now the default formatter
   - `nvim-lint` is now the default linter
   - If you want to keep using `none-ls.nvim`,
     you can enable the **lsp.none-ls** extra
 
 - `dashboard.nvim` is the new default dashboard plugin
-
   - If you want to keep using `alpha.nvim`, you can enable the **ui.alpha** extra
 
 - Improved **root detection**:
-
   - New `:LazyRoot` command that shows info about the root dir detection
   - Configurable with `vim.g.root_spec`
 
