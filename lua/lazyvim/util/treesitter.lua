@@ -51,6 +51,13 @@ function M.indentexpr()
   return M.have(nil, "indents") and require("nvim-treesitter").indentexpr() or -1
 end
 
+---@return string?
+local function win_find_cl()
+  local path = "C:/Program Files (x86)/Microsoft Visual Studio"
+  local pattern = "*/*/VC/Tools/MSVC/*/bin/Hostx64/x64/cl.exe"
+  return vim.fn.globpath(path, pattern, true, true)[1]
+end
+
 ---@return boolean ok, lazyvim.util.treesitter.Health health
 function M.check()
   local is_win = vim.fn.has("win32") == 1
@@ -60,10 +67,17 @@ function M.check()
     return (win == nil or is_win == win) and vim.fn.executable(tool) == 1
   end
 
+  local have_cc = vim.env.CC ~= nil or have("cc", false) or have("cl", true) or (is_win and win_find_cl() ~= nil)
+
+  if not have_cc and is_win and vim.fn.executable("gcc") == 1 then
+    vim.env.CC = "gcc"
+    have_cc = true
+  end
+
   ---@class lazyvim.util.treesitter.Health: table<string,boolean>
   local ret = {
     ["tree-sitter (CLI)"] = have("tree-sitter"),
-    ["C compiler"] = vim.env.CC or have("cc", false) or have("cl", true),
+    ["C compiler"] = have_cc,
     tar = have("tar"),
     curl = have("curl"),
     node = have("node"),

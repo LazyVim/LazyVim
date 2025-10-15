@@ -59,16 +59,6 @@ return {
     config = function(_, opts)
       local TS = require("nvim-treesitter")
 
-      -- On Windows, use `gcc` if `cl` is not available, and `gcc` is.
-      if
-        not vim.env.CC
-        and vim.fn.has("win32") == 1
-        and vim.fn.executable("cl") == 0
-        and vim.fn.executable("gcc") == 1
-      then
-        vim.env.CC = "gcc"
-      end
-
       setmetatable(require("nvim-treesitter.install"), {
         __newindex = function(_, k)
           if k == "compilers" then
