@@ -93,6 +93,9 @@ function M.build(cb)
         "See the requirements at [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#requirements)",
         "Run `:checkhealth nvim-treesitter` for more information.",
       })
+      if vim.fn.has("win32") == 1 and not health["C compiler"] then
+        lines[#lines + 1] = "Install a C compiler with `winget install --id=BrechtSanders.WinLibs.POSIX.UCRT -e`"
+      end
       vim.list_extend(lines, err and { "", err } or {})
       LazyVim.error(lines, { title = "LazyVim Treesitter" })
     end
