@@ -13,7 +13,7 @@ return {
         LazyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
         return
       end
-      LazyVim.treesitter.ensure_treesitter_cli(function()
+      LazyVim.treesitter.build(function()
         TS.update(nil, { summary = true })
       end)
     end,
@@ -100,7 +100,7 @@ return {
         return not LazyVim.treesitter.have(lang)
       end, opts.ensure_installed or {})
       if #install > 0 then
-        LazyVim.treesitter.ensure_treesitter_cli(function()
+        LazyVim.treesitter.build(function()
           TS.install(install, { summary = true }):await(function()
             LazyVim.treesitter.get_installed(true) -- refresh the installed langs
           end)
