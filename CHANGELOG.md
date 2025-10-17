@@ -1,5 +1,35 @@
 # Changelog
 
+## [15.8.0](https://github.com/LazyVim/LazyVim/compare/v15.7.1...v15.8.0) (2025-10-17)
+
+
+### Features
+
+* **gleam:** add conform ([#5640](https://github.com/LazyVim/LazyVim/issues/5640)) ([02b8dd3](https://github.com/LazyVim/LazyVim/commit/02b8dd3f4bd55f06be133471fad027f3131238f4))
+* **sidekick:** added `<leader>ad` to close/detach a terminal/session ([f8b062b](https://github.com/LazyVim/LazyVim/commit/f8b062b130177f07d3c1c13b642402d42e980df5))
+* **sidekick:** changed default keymaps for sidekick. Please check updated docs at sidekick.nvim ([a3e52dd](https://github.com/LazyVim/LazyVim/commit/a3e52dd346ea35db5521b66e46dca95d32f00cb4))
+* **sidekick:** use `<a-a>` in any snacks picker to send the (selected) results to an AI tool ([26c43a9](https://github.com/LazyVim/LazyVim/commit/26c43a9b931f3ab04a8c449671250182ac9ddca6))
+* **treesitter:** add installation instructions to get a C compiler on windows ([37032da](https://github.com/LazyVim/LazyVim/commit/37032dabd657ae567011e7ab4f881ecbf476eb76))
+* **treesitter:** added support for `disable` langs to indent/highlight/folds. Closes [#6608](https://github.com/LazyVim/LazyVim/issues/6608) ([0e8069c](https://github.com/LazyVim/LazyVim/commit/0e8069c78ee92279055236388df8c2019476767a))
+* **treesitter:** better health checks for treesitter requirements ([413b9d5](https://github.com/LazyVim/LazyVim/commit/413b9d5fa91c5bd5088b28c6d1764caa88542cb1))
+* **treesitter:** on windows, use `gcc` if available and `cl.exe` is not available for building parsers ([2a1f3c3](https://github.com/LazyVim/LazyVim/commit/2a1f3c370145c3465c0142deade3e3b2660ce829))
+
+
+### Bug Fixes
+
+* **blink:** disable blink left/right key in the cmdline ([94c4603](https://github.com/LazyVim/LazyVim/commit/94c4603b6838fbe75343b6e3342b4343744157dc))
+* **keymaps:** update deprecated diagnostic keymap to latest api change ([#6574](https://github.com/LazyVim/LazyVim/issues/6574)) ([b9d38f6](https://github.com/LazyVim/LazyVim/commit/b9d38f692015fecaa72d55282b74a3d601e4c9fa))
+* **sidekick:** only add copilot to lspconfig when `opts.nes.enabled ~= false` ([049db39](https://github.com/LazyVim/LazyVim/commit/049db39de0f272e8368a4b3881ac5a13f0d04b09))
+* **terminal:** term toggle keymaps now only work for snacks terminals. Closes [#6573](https://github.com/LazyVim/LazyVim/issues/6573) ([4efd0e2](https://github.com/LazyVim/LazyVim/commit/4efd0e2bea2a387d6fcdea8cf36a62049e8bafed))
+* **treesiter:** check that `disable` options are tables ([e8c5fa7](https://github.com/LazyVim/LazyVim/commit/e8c5fa7eae06539c883699507caeadb46d74f401))
+* **treesitter:** better check on windows if microsoft build tools is installed ([5effc77](https://github.com/LazyVim/LazyVim/commit/5effc77185f94f557809375b5650d427e7171c32))
+* **xtras:** load `copilot-native` before `blink` ([#6588](https://github.com/LazyVim/LazyVim/issues/6588)) ([aa2c436](https://github.com/LazyVim/LazyVim/commit/aa2c43633adee0f80faf8d743d6476ea4f8ba5ca))
+
+
+### Performance Improvements
+
+* **ansible:** load on ft=yaml and run should only be mapped on ft=yaml.ansible ([ebdcf1b](https://github.com/LazyVim/LazyVim/commit/ebdcf1ba7ef18daa8c897c8922a5ef770e8bcffb))
+
 ## [15.7.1](https://github.com/LazyVim/LazyVim/compare/v15.7.0...v15.7.1) (2025-10-02)
 
 
