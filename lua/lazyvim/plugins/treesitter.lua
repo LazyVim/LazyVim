@@ -13,6 +13,8 @@ return {
         LazyVim.error("Please restart Neovim and run `:TSUpdate` to use the `nvim-treesitter` **main** branch.")
         return
       end
+      -- make sure we're using the latest treesitter util
+      package.loaded["lazyvim.util.treesitter"] = nil
       LazyVim.treesitter.build(function()
         TS.update(nil, { summary = true })
       end)
