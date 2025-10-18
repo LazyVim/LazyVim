@@ -44,7 +44,7 @@ return {
     end,
   },
 
-  -- disable inent-blankline scope when mini-indentscope is enabled
+  -- disable indent-blankline scope when mini-indentscope is enabled
   {
     "lukas-reineke/indent-blankline.nvim",
     optional = true,
