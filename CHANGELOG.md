@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.8.1](https://github.com/LazyVim/LazyVim/compare/v15.8.0...v15.8.1) (2025-10-18)
+
+
+### Bug Fixes
+
+* **treesitter:** reload lazyvim.tresitter.util to prevent issues with stale modules when upgrading ([62ce8a2](https://github.com/LazyVim/LazyVim/commit/62ce8a23d89fa766956447a3df01d9f3448e9a66))
+
 ## [15.8.0](https://github.com/LazyVim/LazyVim/compare/v15.7.1...v15.8.0) (2025-10-17)
 
 
