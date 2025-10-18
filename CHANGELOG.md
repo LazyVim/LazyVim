@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.8.2](https://github.com/LazyVim/LazyVim/compare/v15.8.1...v15.8.2) (2025-10-18)
+
+
+### Bug Fixes
+
+* **treesitter:** attach textobject keymaps to existing buffers on load. Closes [#6642](https://github.com/LazyVim/LazyVim/issues/6642). Closes [#6639](https://github.com/LazyVim/LazyVim/issues/6639) ([92a7728](https://github.com/LazyVim/LazyVim/commit/92a77287321236f52ff38648a38cf314ab223137))
+
 ## [15.8.1](https://github.com/LazyVim/LazyVim/compare/v15.8.0...v15.8.1) (2025-10-18)
 
 
