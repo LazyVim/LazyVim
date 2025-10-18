@@ -141,6 +141,7 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
     event = "VeryLazy",
+    lazy = vim.fn.argc(-1) == 0, -- load treesitter-textobjects early when opening a file from the cmdline
     opts = {
       move = {
         enable = true,
