@@ -225,40 +225,39 @@ return {
     },
     opts = function()
       local dap = require("dap")
-      if not dap.adapters["pwa-node"] then
-        require("dap").adapters["pwa-node"] = {
-          type = "server",
-          host = "localhost",
-          port = "${port}",
-          executable = {
-            command = "node",
-            -- 💀 Make sure to update this path to point to your installation
-            args = {
-              LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
-              "${port}",
+
+      for _, adapterType in ipairs({ "node", "chrome", "msedge" }) do
+        local pwaType = "pwa-" .. adapterType
+
+        if not dap.adapters[pwaType] then
+          dap.adapters[pwaType] = {
+            type = "server",
+            host = "localhost",
+            port = "${port}",
+            executable = {
+              command = "js-debug-adapter",
+              args = { "${port}" },
             },
-          },
-        }
-      end
-      if not dap.adapters["node"] then
-        dap.adapters["node"] = function(cb, config)
-          if config.type == "node" then
-            config.type = "pwa-node"
-          end
-          local nativeAdapter = dap.adapters["pwa-node"]
-          if type(nativeAdapter) == "function" then
-            nativeAdapter(cb, config)
-          else
-            cb(nativeAdapter)
+          }
+        end
+
+        -- Define adapters without the "pwa-" prefix for VSCode compatibility
+        if not dap.adapters[adapterType] then
+          dap.adapters[adapterType] = function(cb, config)
+            local nativeAdapter = dap.adapters[pwaType]
+
+            config.type = pwaType
+
+            if type(nativeAdapter) == "function" then
+              nativeAdapter(cb, config)
+            else
+              cb(nativeAdapter)
+            end
           end
         end
       end
 
       local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
-
-      local vscode = require("dap.ext.vscode")
-      vscode.type_to_filetypes["node"] = js_filetypes
-      vscode.type_to_filetypes["pwa-node"] = js_filetypes
 
       for _, language in ipairs(js_filetypes) do
         if not dap.configurations[language] then
@@ -281,6 +280,14 @@ return {
         end
       end
     end,
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    optional = true,
+    opts = {
+      automatic_installation = { exclude = { "chrome" } },
+    },
   },
 
   -- Filetype icons
