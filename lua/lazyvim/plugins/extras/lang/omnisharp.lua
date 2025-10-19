@@ -27,12 +27,6 @@ return {
       formatters_by_ft = {
         cs = { "csharpier" },
       },
-      formatters = {
-        csharpier = {
-          command = "dotnet-csharpier",
-          args = { "--write-stdout" },
-        },
-      },
     },
   },
   {
@@ -109,12 +103,12 @@ return {
     "nvim-neotest/neotest",
     optional = true,
     dependencies = {
-      "Issafalcon/neotest-dotnet",
+      "Nsidorenco/neotest-vstest",
     },
     opts = {
       adapters = {
-        ["neotest-dotnet"] = {
-          -- Here we can set options for neotest-dotnet
+        ["neotest-vstest"] = {
+          -- Here we can set options for neotest-vstest
         },
       },
     },

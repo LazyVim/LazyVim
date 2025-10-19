@@ -37,9 +37,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
       snippets = {
-        expand = function(snippet, _)
-          return LazyVim.cmp.expand(snippet)
-        end,
+        preset = "default",
       },
 
       appearance = {
@@ -85,7 +83,11 @@ return {
 
       cmdline = {
         enabled = true,
-        keymap = { preset = "cmdline" },
+        keymap = {
+          preset = "cmdline",
+          ["<Right>"] = false,
+          ["<Left>"] = false,
+        },
         completion = {
           list = { selection = { preselect = false } },
           menu = {

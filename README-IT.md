@@ -57,7 +57,7 @@ insieme alla comodità di un setup preconfigurato.
 
 ## ⚡️ Requisiti
 
-- Neovim >= **0.9.0** (deve essere compilato con **LuaJIT**)
+- Neovim >= **0.11.2** (deve essere compilato con **LuaJIT**)
 - Git >= **2.19.0** (per supportare cloni parziali)
 - a [Nerd Font](https://www.nerdfonts.com/) **_(opzionale)_**
 - un compilatore **C** per `nvim-treesitter`. Leggi [qui](https://github.com/nvim-treesitter/nvim-treesitter#requirements)

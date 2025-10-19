@@ -5,8 +5,9 @@ local prios = {
   ["lazyvim.plugins.extras.coding.nvim-cmp"] = 2,
   ["lazyvim.plugins.extras.editor.neo-tree"] = 2,
   ["lazyvim.plugins.extras.ui.edgy"] = 3,
-  ["lazyvim.plugins.extras.lang.typescript"] = 5,
+  ["lazyvim.plugins.extras.ai.copilot-native"] = 4,
   ["lazyvim.plugins.extras.coding.blink"] = 5,
+  ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
   -- default core extra priority is 20
   -- default priority is 50
