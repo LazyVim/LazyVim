@@ -104,12 +104,12 @@ return {
     "nvim-neotest/neotest",
     optional = true,
     dependencies = {
-      "Issafalcon/neotest-dotnet",
+      "Nsidorenco/neotest-vstest",
     },
     opts = {
       adapters = {
-        ["neotest-dotnet"] = {
-          -- Here we can set options for neotest-dotnet
+        ["neotest-vstest"] = {
+          -- Here we can set options for neotest-vstest
         },
       },
     },
