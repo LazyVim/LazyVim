@@ -87,9 +87,10 @@ return {
               enable = true,
             },
             files = {
-              excludeDirs = {
+              exclude = {
                 ".direnv",
                 ".git",
+                ".jj",
                 ".github",
                 ".gitlab",
                 "bin",
