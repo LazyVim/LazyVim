@@ -8,7 +8,7 @@ return {
         "docker-compose.yml",
         "compose.yml",
         "docker-compose.yaml",
-        "compose.yaml"
+        "compose.yaml",
       },
     })
   end,
