@@ -33,12 +33,13 @@ return {
   },
   {
     "mason-org/mason.nvim",
-    opts = { ensure_installed = { "csharpier", "netcoredbg", "fsautocomplete", "fantomas" } },
+    opts = { ensure_installed = { "csharpier", "netcoredbg", "fantomas" } },
   },
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
+        fsautocomplete = {},
         omnisharp = {
           handlers = {
             ["textDocument/definition"] = function(...)
