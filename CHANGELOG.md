@@ -1,5 +1,48 @@
 # Changelog
 
+## [15.10.0](https://github.com/LazyVim/LazyVim/compare/v15.9.0...v15.10.0) (2025-10-20)
+
+
+### Features
+
+* **ai:** add avante.nvim for a better AI experience ([#4440](https://github.com/LazyVim/LazyVim/issues/4440)) ([2682ce0](https://github.com/LazyVim/LazyVim/commit/2682ce0ab95c0a88867855ada41948107db8232e))
+* **extra:** allow users to add custom bundles through opts.init_options.bundles to jdtls ([#6265](https://github.com/LazyVim/LazyVim/issues/6265)) ([faeb24b](https://github.com/LazyVim/LazyVim/commit/faeb24ba956f103c5551bde11506991d8b594bc5))
+* **extras:** add Dart language ([#4749](https://github.com/LazyVim/LazyVim/issues/4749)) ([90f84e7](https://github.com/LazyVim/LazyVim/commit/90f84e7e755f72bb99dc8a9dedbfef05e58eb09d))
+* **extras:** added ember lang support ([#6203](https://github.com/LazyVim/LazyVim/issues/6203)) ([ac4cce0](https://github.com/LazyVim/LazyVim/commit/ac4cce0f2f436b3e2dd93ad9179178436ab8c600))
+* **extras:** added twig language ([#5464](https://github.com/LazyVim/LazyVim/issues/5464)) ([a6eb51e](https://github.com/LazyVim/LazyVim/commit/a6eb51e5b5897749bed8721ce98cd2491b2ea8e2))
+* **extras:** ai: add `claudecode.nvim` ([#6229](https://github.com/LazyVim/LazyVim/issues/6229)) ([e7a3e80](https://github.com/LazyVim/LazyVim/commit/e7a3e80ee1327ac012c7bb7257bb2d49f9f2fd89))
+* **extras:** automatically update lazyvim.json for renamed or deprecated extras ([37ecd06](https://github.com/LazyVim/LazyVim/commit/37ecd06fad65d5c188ad2d2e55d47a8fd1594d16))
+* **extras:** renamed extra omnisharp -&gt; dotnet + added fautocomplete to lspconfig ([1b2e6e8](https://github.com/LazyVim/LazyVim/commit/1b2e6e8986b3cfee19635920129fc08df4f32b38))
+* **extras:** utils: add `gh.nvim` ([#6250](https://github.com/LazyVim/LazyVim/issues/6250)) ([8db9c75](https://github.com/LazyVim/LazyVim/commit/8db9c75e8d3a8609926dcb868d2e462e0f0b1d3d))
+* **go:** add linting with golangci-lint ([#6311](https://github.com/LazyVim/LazyVim/issues/6311)) ([248876a](https://github.com/LazyVim/LazyVim/commit/248876adb6b1f54031be350e45bbf0c7835d486f))
+* **haskell:** update `haskell-tools` version and add formatters + linters ([#6230](https://github.com/LazyVim/LazyVim/issues/6230)) ([82382f4](https://github.com/LazyVim/LazyVim/commit/82382f455ad37bc4fa928fe4a6fb9379a924fa3a))
+* **lang/fsharp:** add F# support to omnisharp extra ([#6538](https://github.com/LazyVim/LazyVim/issues/6538)) ([80a980a](https://github.com/LazyVim/LazyVim/commit/80a980ab00a871777c37ec3f0db9c394509b2465))
+* **lang:** add neotest config for PHP tests ([#5958](https://github.com/LazyVim/LazyVim/issues/5958)) ([9b077c7](https://github.com/LazyVim/LazyVim/commit/9b077c7a8ec96050f3a3b73219c8b904d3d83ab0))
+* **lang:** add solidity language support ([#4742](https://github.com/LazyVim/LazyVim/issues/4742)) ([2cd46d4](https://github.com/LazyVim/LazyVim/commit/2cd46d42ba357a42b11c5e4f5e16641bde0516d6))
+* **lang:** add Typst language support ([#4042](https://github.com/LazyVim/LazyVim/issues/4042)) ([645846b](https://github.com/LazyVim/LazyVim/commit/645846be5c7d798c7e87e61d00e8cae4fd3741c7))
+* **lang:** julia support ([#6231](https://github.com/LazyVim/LazyVim/issues/6231)) ([5d186c0](https://github.com/LazyVim/LazyVim/commit/5d186c009a85efbdad2b92115d4268c7c4a7aa18))
+* **lang:** nix add `statix` linter ([#6244](https://github.com/LazyVim/LazyVim/issues/6244)) ([2a866f6](https://github.com/LazyVim/LazyVim/commit/2a866f6c8c974c88cb9c723560cbec4308d304a2))
+* **sidekick:** added sidekick cli status to lualine ([16917db](https://github.com/LazyVim/LazyVim/commit/16917db94a056fe01b3bac604bc89da4077bd9cd))
+
+
+### Bug Fixes
+
+* **extras.lang:** fix Scala extra by using nvimMetals only ([#5726](https://github.com/LazyVim/LazyVim/issues/5726)) ([f118dca](https://github.com/LazyVim/LazyVim/commit/f118dca334d40cf8e78e0f0d5aa3108b972e8d84))
+* **fzf-lua:** added some missing keymaps similar to snacks picker. Closes [#6036](https://github.com/LazyVim/LazyVim/issues/6036). Closes [#5830](https://github.com/LazyVim/LazyVim/issues/5830) ([69a5744](https://github.com/LazyVim/LazyVim/commit/69a57448032253ca086d999c0d53d6e33ad4e505))
+* **helm:** broken helm highlighting ([#5335](https://github.com/LazyVim/LazyVim/issues/5335)) ([4d0d87f](https://github.com/LazyVim/LazyVim/commit/4d0d87f6268969987e5c58f59e086c886e77e1ae))
+* **keymap:** remove select mode remaps of printable characters ([#6296](https://github.com/LazyVim/LazyVim/issues/6296)) ([83468be](https://github.com/LazyVim/LazyVim/commit/83468be35062d06896c233d90d2f1c1cd24d84f3))
+* **tailwind:** additional settings ([#5266](https://github.com/LazyVim/LazyVim/issues/5266)) ([d2f9885](https://github.com/LazyVim/LazyVim/commit/d2f9885d6b8244818066cc16a5c72cb656748f6c))
+* **telescope:** sync keymaps with snacks picker + added some that were missing ([1a08e9f](https://github.com/LazyVim/LazyVim/commit/1a08e9f50f8c11a329c3017c4bfdd4b96b7ec541))
+* **twig:** correct mason url ([9d345de](https://github.com/LazyVim/LazyVim/commit/9d345dec446f577f75d36a147164ae258ffc2d8c))
+* **typescript:** better default pwa-node DAP config. Closes [#6386](https://github.com/LazyVim/LazyVim/issues/6386) ([e4d3432](https://github.com/LazyVim/LazyVim/commit/e4d34328f244fc0c7f91587258e767bfb55d0648))
+* **typescript:** support chrome, node and msedge dap adapters ([#6649](https://github.com/LazyVim/LazyVim/issues/6649)) ([0b65d33](https://github.com/LazyVim/LazyVim/commit/0b65d33d8545d179207c8827025f40764de61d06))
+* **util.project:** different mapping on dashboard than `snacks.projects` ([#5737](https://github.com/LazyVim/LazyVim/issues/5737)) ([e389447](https://github.com/LazyVim/LazyVim/commit/e38944799e7fc45baea0483f5c955472f3ffde27))
+
+
+### Reverts
+
+* "feat(extra): allow users to add custom bundles through opts.init_options.bundles to jdtls ([#6265](https://github.com/LazyVim/LazyVim/issues/6265))" ([#6650](https://github.com/LazyVim/LazyVim/issues/6650)) ([a582f00](https://github.com/LazyVim/LazyVim/commit/a582f004473a3bade99c19c62fea649fb0b1c20f))
+
 ## [15.9.0](https://github.com/LazyVim/LazyVim/compare/v15.8.1...v15.9.0) (2025-10-19)
 
 
