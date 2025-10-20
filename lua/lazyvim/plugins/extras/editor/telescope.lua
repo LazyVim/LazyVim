@@ -115,7 +115,7 @@ return {
       { "<leader>gS", "<cmd>Telescope git_stash<cr>", desc = "Git Stash" },
       -- search
       { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
-      { '<leader>s/', "<cmd>Telescope search_history<cr>", desc = "Search History" },
+      { "<leader>s/", "<cmd>Telescope search_history<cr>", desc = "Search History" },
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer Lines" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },

@@ -233,7 +233,7 @@ return {
       { "<leader>gS", "<cmd>FzfLua git_stash<cr>", desc = "Git Stash" },
       -- search
       { '<leader>s"', "<cmd>FzfLua registers<cr>", desc = "Registers" },
-      { '<leader>s/', "<cmd>FzfLua search_history<cr>", desc = "Search History" },
+      { "<leader>s/", "<cmd>FzfLua search_history<cr>", desc = "Search History" },
       { "<leader>sa", "<cmd>FzfLua autocmds<cr>", desc = "Auto Commands" },
       { "<leader>sb", "<cmd>FzfLua lines<cr>", desc = "Buffer Lines" },
       { "<leader>sc", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
