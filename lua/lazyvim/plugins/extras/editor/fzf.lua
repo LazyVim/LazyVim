@@ -253,8 +253,8 @@ return {
       { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
       { "<leader>sw", LazyVim.pick("grep_cword"), desc = "Word (Root Dir)" },
       { "<leader>sW", LazyVim.pick("grep_cword", { root = false }), desc = "Word (cwd)" },
-      { "<leader>sw", LazyVim.pick("grep_visual"), mode = "v", desc = "Selection (Root Dir)" },
-      { "<leader>sW", LazyVim.pick("grep_visual", { root = false }), mode = "v", desc = "Selection (cwd)" },
+      { "<leader>sw", LazyVim.pick("grep_visual"), mode = "x", desc = "Selection (Root Dir)" },
+      { "<leader>sW", LazyVim.pick("grep_visual", { root = false }), mode = "x", desc = "Selection (cwd)" },
       { "<leader>uC", LazyVim.pick("colorschemes"), desc = "Colorscheme with Preview" },
       {
         "<leader>ss",
