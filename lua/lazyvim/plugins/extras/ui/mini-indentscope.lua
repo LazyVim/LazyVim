@@ -3,7 +3,7 @@ return {
   -- code, this highlights the current level of indentation, and animates
   -- the highlighting.
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     version = false, -- wait till new 0.7.0 release to put it back on semver
     event = "LazyFile",
     opts = {
@@ -23,6 +23,7 @@ return {
           "mason",
           "neo-tree",
           "notify",
+          "sidekick_terminal",
           "snacks_dashboard",
           "snacks_notif",
           "snacks_terminal",
@@ -44,7 +45,7 @@ return {
     end,
   },
 
-  -- disable inent-blankline scope when mini-indentscope is enabled
+  -- disable indent-blankline scope when mini-indentscope is enabled
   {
     "lukas-reineke/indent-blankline.nvim",
     optional = true,
