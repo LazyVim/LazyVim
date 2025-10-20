@@ -1,17 +1,17 @@
 if lazyvim_docs then
   -- Set to `false` to prevent "non-lsp snippets"" from appearing inside completion windows
-  -- Motivation: Less clutter in completion windows and a more direct usage of snippits
+  -- Motivation: Less clutter in completion windows and a more direct usage of snippets
   vim.g.lazyvim_mini_snippets_in_completion = true
 
   -- NOTE: Please also read:
-  -- https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-snippets.md#expand
+  -- https://github.com/nvim-mini/mini.nvim/blob/main/readmes/mini-snippets.md#expand
   -- :h MiniSnippets-session
 
   -- Example override for your own config:
   --[[
   return {
     {
-      "echasnovski/mini.snippets",
+      "nvim-mini/mini.snippets",
       opts = function(_, opts)
         -- By default, for opts.snippets, the extra for mini.snippets only adds gen_loader.from_lang()
         -- This provides a sensible quickstart, integrating with friendly-snippets
@@ -63,7 +63,7 @@ return {
   -- add mini.snippets
   desc = "Manage and expand snippets (alternative to Luasnip)",
   {
-    "echasnovski/mini.snippets",
+    "nvim-mini/mini.snippets",
     event = "InsertEnter", -- don't depend on other plugins to load...
     dependencies = "rafamadriz/friendly-snippets",
     opts = function()
