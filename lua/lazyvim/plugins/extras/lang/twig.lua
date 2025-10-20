@@ -9,7 +9,7 @@ return {
     opts = { ensure_installed = { "twig" } },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "twigcs",
