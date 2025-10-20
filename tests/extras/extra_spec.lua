@@ -1,4 +1,5 @@
 ---@module 'luassert'
+---@module 'lazy'
 
 local Icons = require("mini.icons")
 
@@ -72,6 +73,17 @@ describe("Extra", function()
         { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
         mod,
       }, { optional = true })
+
+      it("it has no renamed plugins", function()
+        for _, p in pairs(spec.plugins) do
+          local short_url = p[1]
+          assert(
+            not LazyVim.plugin.renames[short_url],
+            "Plugin " .. short_url .. " has been renamed to " .. (LazyVim.plugin.renames[short_url] or "")
+          )
+        end
+      end)
+
       local lspconfig = spec.plugins["nvim-lspconfig"]
       if lspconfig then
         it("does not install LSP servers with mason.nvim", function()
