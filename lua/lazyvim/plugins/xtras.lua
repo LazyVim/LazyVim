@@ -3,31 +3,65 @@ local prios = {
   ["lazyvim.plugins.extras.test.core"] = 1,
   ["lazyvim.plugins.extras.dap.core"] = 1,
   ["lazyvim.plugins.extras.coding.nvim-cmp"] = 2,
-  ["lazyvim.plugins.extras.ui.edgy"] = 2,
-  ["lazyvim.plugins.extras.lang.typescript"] = 5,
+  ["lazyvim.plugins.extras.editor.neo-tree"] = 2,
+  ["lazyvim.plugins.extras.ui.edgy"] = 3,
+  ["lazyvim.plugins.extras.ai.copilot-native"] = 4,
   ["lazyvim.plugins.extras.coding.blink"] = 5,
+  ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
+  -- default core extra priority is 20
   -- default priority is 50
   ["lazyvim.plugins.extras.editor.aerial"] = 100,
   ["lazyvim.plugins.extras.editor.outline"] = 100,
+  ["lazyvim.plugins.extras.ui.alpha"] = 19,
+  ["lazyvim.plugins.extras.ui.dashboard-nvim"] = 19,
+  ["lazyvim.plugins.extras.ui.mini-starter"] = 19,
 }
 
 if vim.g.xtras_prios then
   prios = vim.tbl_deep_extend("force", prios, vim.g.xtras_prios or {})
 end
 
+local extras = {} ---@type string[]
+local defaults = LazyVim.config.get_defaults()
+
+local changed = false
+local updated = {} ---@type string[]
+
+-- Add extras from LazyExtras that are not disabled
+for _, extra in ipairs(LazyVim.config.json.data.extras) do
+  if LazyVim.plugin.renamed_extras[extra] then
+    extra = LazyVim.plugin.renamed_extras[extra]
+    changed = true
+  end
+  if LazyVim.plugin.deprecated_extras[extra] then
+    changed = true
+  else
+    updated[#updated + 1] = extra
+    local def = defaults[extra]
+    if not (def and def.enabled == false) then
+      extras[#extras + 1] = extra
+    end
+  end
+end
+
+if changed then
+  LazyVim.config.json.data.extras = updated
+  LazyVim.json.save()
+end
+
+-- Add default extras
+for name, extra in pairs(defaults) do
+  if extra.enabled then
+    prios[name] = prios[name] or 20
+    extras[#extras + 1] = name
+  end
+end
+
 ---@type string[]
-local extras = LazyVim.dedup(LazyVim.config.json.data.extras)
-
-local version = vim.version()
-local v = version.major .. "_" .. version.minor
-
-local compat = { "0_9" }
+extras = LazyVim.dedup(extras)
 
 LazyVim.plugin.save_core()
-if vim.tbl_contains(compat, v) then
-  table.insert(extras, 1, "lazyvim.plugins.compat.nvim-" .. v)
-end
 if vim.g.vscode then
   table.insert(extras, 1, "lazyvim.plugins.extras.vscode")
 end

@@ -13,7 +13,7 @@ function M.get()
   end
     -- stylua: ignore
     M._keys =  {
-      { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+      { "<leader>cl", function() Snacks.picker.lsp_config() end, desc = "Lsp Info" },
       { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
       { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
       { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
@@ -22,8 +22,8 @@ function M.get()
       { "K", function() return vim.lsp.buf.hover() end, desc = "Hover" },
       { "gK", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
       { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
+      { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" }, has = "codeLens" },
       { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
       { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
       { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
@@ -52,9 +52,9 @@ function M.has(buffer, method)
     return false
   end
   method = method:find("/") and method or "textDocument/" .. method
-  local clients = LazyVim.lsp.get_clients({ bufnr = buffer })
+  local clients = vim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
-    if client.supports_method(method) then
+    if client:supports_method(method) then
       return true
     end
   end
@@ -69,7 +69,7 @@ function M.resolve(buffer)
   end
   local spec = vim.tbl_extend("force", {}, M.get())
   local opts = LazyVim.opts("nvim-lspconfig")
-  local clients = LazyVim.lsp.get_clients({ bufnr = buffer })
+  local clients = vim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
     vim.list_extend(spec, maps)

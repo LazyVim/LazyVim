@@ -37,6 +37,9 @@ return {
             highlight = "Directory",
             text_align = "left",
           },
+          {
+            filetype = "snacks_layout_box",
+          },
         },
         ---@param opts bufferline.IconFetcherOpts
         get_element_icon = function(opts)
@@ -57,7 +60,8 @@ return {
     end,
   },
 
-  -- statusline
+  -- Displays a fancy status line with git status,
+  -- LSP diagnostics, filetype information, and more.
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -242,7 +246,7 @@ return {
 
   -- icons
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     lazy = true,
     opts = {
       file = {
@@ -278,7 +282,13 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      { "<leader>n", function()
+        if Snacks.config.picker and Snacks.config.picker.enabled then
+          Snacks.picker.notifications()
+        else
+          Snacks.notifier.show_history()
+        end
+      end, desc = "Notification History" },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     },
   },
@@ -288,6 +298,9 @@ return {
     opts = {
       dashboard = {
         preset = {
+          pick = function(cmd, opts)
+            return LazyVim.pick(cmd, opts)()
+          end,
           header = [[
           ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
           ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    

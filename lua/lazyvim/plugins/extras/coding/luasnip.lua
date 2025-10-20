@@ -1,6 +1,6 @@
 return {
   -- disable builtin snippet support
-  { "garymjr/nvim-snippets", enabled = false },
+  { "garymjr/nvim-snippets", optional = true, enabled = false },
 
   -- add luasnip
   {
@@ -30,7 +30,9 @@ return {
     opts = function()
       LazyVim.cmp.actions.snippet_forward = function()
         if require("luasnip").jumpable(1) then
-          require("luasnip").jump(1)
+          vim.schedule(function()
+            require("luasnip").jump(1)
+          end)
           return true
         end
       end
@@ -68,20 +70,8 @@ return {
     "saghen/blink.cmp",
     optional = true,
     opts = {
-      sources = { default = { "luasnip" } },
       snippets = {
-        expand = function(snippet)
-          require("luasnip").lsp_expand(snippet)
-        end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require("luasnip").jumpable(filter.direction)
-          end
-          return require("luasnip").in_snippet()
-        end,
-        jump = function(direction)
-          require("luasnip").jump(direction)
-        end,
+        preset = "luasnip",
       },
     },
   },

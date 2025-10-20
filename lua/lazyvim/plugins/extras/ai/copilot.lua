@@ -5,11 +5,12 @@ return {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
-    event = "InsertEnter",
+    event = "BufReadPost",
     opts = {
       suggestion = {
         enabled = not vim.g.ai_cmp,
         auto_trigger = true,
+        hide_during_completion = vim.g.ai_cmp,
         keymap = {
           accept = false, -- handled by nvim-cmp / blink.cmp
           next = "<M-]>",
@@ -20,6 +21,17 @@ return {
       filetypes = {
         markdown = true,
         help = true,
+      },
+    },
+  },
+
+  -- copilot-language-server
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- copilot.lua only works with its own copilot lsp server
+        copilot = { enabled = false },
       },
     },
   },
@@ -48,9 +60,9 @@ return {
         opts.sections.lualine_x,
         2,
         LazyVim.lualine.status(LazyVim.config.icons.kinds.Copilot, function()
-          local clients = package.loaded["copilot"] and LazyVim.lsp.get_clients({ name = "copilot", bufnr = 0 }) or {}
+          local clients = package.loaded["copilot"] and vim.lsp.get_clients({ name = "copilot", bufnr = 0 }) or {}
           if #clients > 0 then
-            local status = require("copilot.api").status.data.status
+            local status = require("copilot.status").data.status
             return (status == "InProgress" and "pending") or (status == "Warning" and "error") or "ok"
           end
         end)
@@ -97,15 +109,14 @@ return {
         {
           "saghen/blink.cmp",
           optional = true,
-          dependencies = { "giuxtaposition/blink-cmp-copilot" },
+          dependencies = { "fang2hou/blink-copilot" },
           opts = {
             sources = {
               default = { "copilot" },
               providers = {
                 copilot = {
                   name = "copilot",
-                  module = "blink-cmp-copilot",
-                  kind = "Copilot",
+                  module = "blink-copilot",
                   score_offset = 100,
                   async = true,
                 },

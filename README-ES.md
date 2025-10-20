@@ -52,7 +52,7 @@ LazyVim es una configuración de Neovim impulsada por [💤 lazy.nvim](https://g
 
 ## ⚡️ Requisitos
 
-- Neovim >= **0.9.0** (debe ser compilado con **LuaJIT**)
+- Neovim >= **0.11.2** (debe ser compilado con **LuaJIT**)
 - Git >= **2.19.0** (para soporte de clones parciales)
 - una [Fuente Nerd](https://www.nerdfonts.com/) **_(opcional)_**
 - un compilador **C** para `nvim-treesitter`. Consulta [aquí](https://github.com/nvim-treesitter/nvim-treesitter#requirements)

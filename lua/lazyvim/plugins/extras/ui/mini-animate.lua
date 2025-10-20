@@ -8,9 +8,10 @@ return {
     },
   },
 
-  -- setup animate
+  -- Animates many common Neovim actions, like scrolling,
+  -- moving the cursor, and resizing windows.
   {
-    "echasnovski/mini.animate",
+    "nvim-mini/mini.animate",
     event = "VeryLazy",
     cond = vim.g.neovide == nil,
     opts = function(_, opts)
@@ -31,15 +32,19 @@ return {
         end,
       })
 
-      Snacks.toggle({
-        name = "Mini Animate",
-        get = function()
-          return not vim.g.minianimate_disable
-        end,
-        set = function(state)
-          vim.g.minianimate_disable = not state
-        end,
-      }):map("<leader>ua")
+      -- schedule setting the mapping to override the default mapping from `keymaps.lua`
+      -- seems `keymaps.lua` is the last event to execute on `VeryLazy` and it overwrites it
+      vim.schedule(function()
+        Snacks.toggle({
+          name = "Mini Animate",
+          get = function()
+            return not vim.g.minianimate_disable
+          end,
+          set = function(state)
+            vim.g.minianimate_disable = not state
+          end,
+        }):map("<leader>ua")
+      end)
 
       local animate = require("mini.animate")
       return vim.tbl_deep_extend("force", opts, {

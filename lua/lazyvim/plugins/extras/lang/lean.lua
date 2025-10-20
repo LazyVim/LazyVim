@@ -108,7 +108,7 @@ return {
       priority = 10,
     },
 
-    -- Redirect Lean's stderr messages somehwere (to a buffer by default)
+    -- Redirect Lean's stderr messages somewhere (to a buffer by default)
     stderr = {
       enable = true,
       -- height of the window

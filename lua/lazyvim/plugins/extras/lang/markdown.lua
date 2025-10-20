@@ -40,7 +40,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = { ensure_installed = { "markdownlint-cli2", "markdown-toc" } },
   },
   {
@@ -104,23 +104,17 @@ return {
         sign = false,
         icons = {},
       },
+      checkbox = {
+        enabled = false,
+      },
     },
-    ft = { "markdown", "norg", "rmd", "org" },
+    ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
       Snacks.toggle({
         name = "Render Markdown",
-        get = function()
-          return require("render-markdown.state").enabled
-        end,
-        set = function(enabled)
-          local m = require("render-markdown")
-          if enabled then
-            m.enable()
-          else
-            m.disable()
-          end
-        end,
+        get = require("render-markdown").get,
+        set = require("render-markdown").set,
       }):map("<leader>um")
     end,
   },

@@ -28,6 +28,11 @@ end
 
 local sql_ft = { "sql", "mysql", "plsql" }
 
+-- disable nvim default `sql_completion` plugin to be compatible with blink.cmp's omni
+-- while still showing some keywords from the syntax autocomplete sources
+vim.g.omni_sql_default_compl_type = "syntax"
+vim.g.loaded_sql_completion = true
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -48,7 +53,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = sql_ft,
         callback = function()
-          if LazyVim.has("nvim-cmp") then
+          if LazyVim.has_extra("coding.nvim-cmp") then
             local cmp = require("cmp")
 
             -- global sources
@@ -143,7 +148,7 @@ return {
 
   -- Linters & formatters
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = { ensure_installed = { "sqlfluff" } },
   },
   {
