@@ -26,17 +26,18 @@ return {
   },
   -- Formatter for Solidity
   {
-    "conform.nvim",
-    opts = function(_, opts)
-      opts.formatters_by_ft = opts.formatters_by_ft or {}
-      opts.formatters_by_ft.solidity = { "forge_fmt" }
-
-      opts.formatters = {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        solidity = { "forge_fmt" },
+      },
+      formatters = {
         forge_fmt = {
           command = "forge",
           args = { "fmt" },
         },
-      }
-    end,
+      },
+    },
   },
 }
