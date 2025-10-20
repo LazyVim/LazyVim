@@ -11,6 +11,9 @@ return {
       selection = {
         hint_display = "none",
       },
+      behaviour = {
+        auto_set_keymaps = false,
+      },
     },
     cmd = {
       "AvanteAsk",
