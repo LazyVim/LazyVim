@@ -17,6 +17,7 @@ M.deprecated_extras = {
   ["lazyvim.plugins.extras.ui.dashboard"] = "`dashboard.nvim` is now the default **LazyVim** starter.",
   ["lazyvim.plugins.extras.coding.native_snippets"] = "Native snippets are now the default for **Neovim >= 0.10**",
   ["lazyvim.plugins.extras.ui.treesitter-rewrite"] = "Disabled `treesitter-rewrite` extra for now. Not ready yet.",
+  ["lazyvim.plugins.extras.ui.treesitter-main"] = "the `nvim-treesitter` main branch is now used by default",
   ["lazyvim.plugins.extras.coding.mini-ai"] = "`mini.ai` is now a core LazyVim plugin (again)",
   ["lazyvim.plugins.extras.lazyrc"] = "local spec files are now a lazy.nvim feature",
   ["lazyvim.plugins.extras.editor.trouble-v3"] = "Trouble v3 has been merged in main",
@@ -24,6 +25,9 @@ M.deprecated_extras = {
   because it's causing too many issues.
   Either use `basedpyright`, or copy the [old extra](https://github.com/LazyVim/LazyVim/blob/c1f5fcf9c7ed2659c9d5ac41b3bb8a93e0a3c6a0/lua/lazyvim/plugins/extras/lang/python-semshi.lua#L1) to your own config.
   ]],
+}
+M.renamed_extras = {
+  ["lazyvim.plugins.extras.lang.omnisharp"] = "lazyvim.plugins.extras.lang.dotnet",
 }
 
 M.deprecated_modules = {}
@@ -92,6 +96,18 @@ function M.fix_imports()
       if def and def.enabled == false then
         return false
       end
+    end
+    local rename = M.renamed_extras[spec.import]
+    if rename then
+      LazyVim.warn(
+        ("The extra `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
+          spec.import,
+          rename,
+          spec.importing or "LazyVim"
+        ),
+        { title = "LazyVim" }
+      )
+      spec.import = rename
     end
     local dep = M.deprecated_extras[spec and spec.import]
     if dep then

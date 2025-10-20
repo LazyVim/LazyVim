@@ -2,7 +2,7 @@ local LazyUtil = require("lazy.core.util")
 
 ---@class lazyvim.util: LazyUtilCore
 ---@field config LazyVimConfig
----@field ui lazyvim.util.ui
+---@field treesitter lazyvim.util.treesitter
 ---@field lsp lazyvim.util.lsp
 ---@field root lazyvim.util.root
 ---@field terminal lazyvim.util.terminal
@@ -16,14 +16,16 @@ local LazyUtil = require("lazy.core.util")
 ---@field mini lazyvim.util.mini
 ---@field pick lazyvim.util.pick
 ---@field cmp lazyvim.util.cmp
+---@field deprecated lazyvim.util.deprecated
 local M = {}
+M.deprecated = require("lazyvim.util.deprecated")
 
 setmetatable(M, {
   __index = function(t, k)
     if LazyUtil[k] then
       return LazyUtil[k]
     end
-    if k == "lazygit" or k == "toggle" then -- HACK: special case for lazygit
+    if M.deprecated[k] then
       return M.deprecated[k]()
     end
     ---@diagnostic disable-next-line: no-unknown
@@ -125,13 +127,17 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
-function M.deprecate(old, new)
-  M.warn(("`%s` is deprecated. Please use `%s` instead"):format(old, new), {
-    title = "LazyVim",
-    once = true,
-    stacktrace = true,
-    stacklevel = 6,
-  })
+---@param opts? LazyNotifyOpts
+function M.deprecate(old, new, opts)
+  M.warn(
+    ("`%s` is deprecated. Please use `%s` instead"):format(old, new),
+    vim.tbl_extend("force", {
+      title = "LazyVim",
+      once = true,
+      stacktrace = true,
+      stacklevel = 6,
+    }, opts or {})
+  )
 end
 
 -- delay notifications till vim.notify was replaced or after 500ms
@@ -291,6 +297,65 @@ function M.memoize(fn)
     end
     return cache[fn][key]
   end
+end
+
+-- Safe wrapper around snacks to prevent errors when LazyVim is still installing
+function M.statuscolumn()
+  return package.loaded.snacks and require("snacks.statuscolumn").get() or ""
+end
+
+local _defaults = {} ---@type table<string, boolean>
+
+-- Determines whether it's safe to set an option to a default value.
+--
+-- It will only set the option if:
+-- * it is the same as the global value
+-- * it's current value is a default value
+-- * it was last set by a script in $VIMRUNTIME
+---@param option string
+---@param value string|number|boolean
+---@return boolean was_set
+function M.set_default(option, value)
+  local l = vim.api.nvim_get_option_value(option, { scope = "local" })
+  local g = LazyVim.config._options[option] or vim.api.nvim_get_option_value(option, { scope = "global" })
+
+  _defaults[("%s=%s"):format(option, value)] = true
+  local key = ("%s=%s"):format(option, l)
+
+  local source = ""
+  if l ~= g and not _defaults[key] then
+    -- Option does not match global and is not a default value
+    -- Check if it was set by a script in $VIMRUNTIME
+    local info = vim.api.nvim_get_option_info2(option, { scope = "local" })
+    ---@param e vim.fn.getscriptinfo.ret
+    local scriptinfo = vim.tbl_filter(function(e)
+      return e.sid == info.last_set_sid
+    end, vim.fn.getscriptinfo())
+    source = scriptinfo[1] and scriptinfo[1].name or ""
+    local by_rtp = #scriptinfo == 1 and vim.startswith(scriptinfo[1].name, vim.fn.expand("$VIMRUNTIME"))
+    if not by_rtp then
+      if vim.g.lazyvim_debug_set_default then
+        LazyVim.warn(
+          ("Not setting option `%s` to `%q` because it was changed by a plugin."):format(option, value),
+          { title = "LazyVim", once = true }
+        )
+      end
+      return false
+    end
+  end
+
+  if vim.g.lazyvim_debug_set_default then
+    LazyVim.info({
+      ("Setting option `%s` to `%q`"):format(option, value),
+      ("Was: %q"):format(l),
+      ("Global: %q"):format(g),
+      source ~= "" and ("Last set by: %s"):format(source) or "",
+      "buf: " .. vim.api.nvim_buf_get_name(0),
+    }, { title = "LazyVim", once = true })
+  end
+
+  vim.api.nvim_set_option_value(option, value, { scope = "local" })
+  return true
 end
 
 return M

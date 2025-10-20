@@ -36,36 +36,34 @@
     </a>
 </div>
 
-LazyVim is a Neovim setup powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
-to make it easy to customize and extend your config.
-Rather than having to choose between starting from scratch or using a
-pre-made distro, LazyVim offers the best of both worlds - the flexibility
-to tweak your config as needed, along with the convenience of a pre-configured setup.
+LazyVim to konfiguracja Neovim oparta na [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
+która ułatwia dostosowywanie i rozszerzanie konfiguracji.
+Zamiast wybierać między rozpoczynaniem od zera a używaniem gotowej dystrybucji, LazyVim oferuje najlepsze z obu światów – elastyczność pozwalającą na dostosowanie konfiguracji do własnych potrzeb oraz wygodę wstępnie skonfigurowanego środowiska.
 
 ![image](https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png)
 
 ![image](https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png)
 
-## ✨ Features
+## ✨ Funkcje
 
-- 🔥 Transform your Neovim into a full-fledged IDE
-- 💤 Easily customize and extend your config with [lazy.nvim](https://github.com/folke/lazy.nvim)
-- 🚀 Blazingly fast
-- 🧹 Sane default settings for options, autocmds, and keymaps
-- 📦 Comes with a wealth of plugins pre-configured and ready to use
+- 🔥 Przekształć Neovim w pełnoprawne IDE
+- 💤 Łatwo dostosowuj i rozszerzaj swoją konfigurację dzięki [lazy.nvim](https://github.com/folke/lazy.nvim)
+- 🚀 Niezwykle szybkie działanie
+- 🧹 Przemyślane domyślne ustawienia opcji, autocmd i skrótów klawiszowych
+- 📦 Zawiera bogaty zestaw wstępnie skonfigurowanych wtyczek gotowych do użycia
 
-## ⚡️ Requirements
+## ⚡️ Wymagania
 
-- Neovim >= **0.11.2** (needs to be built with **LuaJIT**)
-- Git >= **2.19.0** (for partial clones support)
-- a [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
-- a **C** compiler for `nvim-treesitter`. See [here](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
+- Neovim >= **0.9.0** (musi być skompilowany z **LuaJIT**)
+- Git >= **2.19.0** (dla obsługi częściowego klonowania repozytoriów)
+- [Nerd Font](https://www.nerdfonts.com/) **_(opcjonalnie)_**
+- Kompilator **C** wymagany dla `nvim-treesitter`. Szczegóły [tutaj](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
 
-## 🚀 Getting Started
+## 🚀 Pierwsze kroki
 
-You can find a starter template for **LazyVim** [here](https://github.com/LazyVim/starter)
+Szablon startowy dla **LazyVim** znajdziesz [tutaj](https://github.com/LazyVim/starter)
 
-<details><summary>Try it with Docker</summary>
+<details><summary>Wypróbuj z Dockerem</summary>
 
 ```sh
 docker run -w /root -it --rm alpine:edge sh -uelic '
@@ -78,56 +76,56 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 </details>
 
-<details><summary>Install the <a href="https://github.com/LazyVim/starter">LazyVim Starter</a></summary>
+<details><summary>Zainstaluj <a href="https://github.com/LazyVim/starter">Starter LazyVim</a></summary>
 
-- Make a backup of your current Neovim files:
+- Wykonaj kopię zapasową swoich obecnych plików Neovim:
 
   ```sh
   mv ~/.config/nvim ~/.config/nvim.bak
   mv ~/.local/share/nvim ~/.local/share/nvim.bak
   ```
 
-- Clone the starter
+- Sklonuj repozytorium startowe:
 
   ```sh
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   ```
 
-- Remove the `.git` folder, so you can add it to your own repo later
+- Usuń folder `.git`, aby później móc dodać własne repozytorium:
 
   ```sh
   rm -rf ~/.config/nvim/.git
   ```
 
-- Start Neovim!
+- Uruchom Neovim!
 
   ```sh
   nvim
   ```
 
-  Refer to the comments in the files on how to customize **LazyVim**.
+  W plikach znajdziesz komentarze, które pomogą Ci dostosować **LazyVim**.
 
 </details>
 
 ---
 
-There's a great video created by [@elijahmanor](https://github.com/elijahmanor) with a walkthrough to get started.
+[@elijahmanor](https://github.com/elijahmanor) stworzył świetne wideo z przewodnikiem, jak zacząć.
 
-[![Watch the video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
+[![Obejrzyj wideo](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
 
-[@dusty-phillips](https://github.com/dusty-phillips) wrote a comprehensive book called
-[LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes)
-available for free online.
+[@dusty-phillips](https://github.com/dusty-phillips) napisał obszerną książkę
+[LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes),
+która jest dostępna za darmo online.
 
-## 📂 File Structure
+## 📂 Struktura plików
 
-The files under config will be automatically loaded at the appropriate time,
-so you don't need to require those files manually.
-**LazyVim** comes with a set of default config files that will be loaded
-**_before_** your own. See [here](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
+Pliki w katalogu `config` są automatycznie ładowane w odpowiednim momencie,
+więc nie musisz ich ręcznie dołączać.
+**LazyVim** zawiera zestaw domyślnych plików konfiguracyjnych,
+które zostaną załadowane **_przed_** Twoimi własnymi. Szczegóły znajdziesz [tutaj](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config).
 
-You can add your custom plugin specs under `lua/plugins/`. All files there
-will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
+Możesz dodać własne specyfikacje wtyczek w katalogu `lua/plugins/`.
+Wszystkie pliki w tym folderze zostaną automatycznie załadowane przez [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 <pre>
 ~/.config/nvim
@@ -144,6 +142,6 @@ will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
 └── init.lua
 </pre>
 
-## ⚙️ Configuration
+## ⚙️ Konfiguracja
 
-Refer to the [docs](https://lazyvim.github.io)
+Zapoznaj się z [dokumentacją](https://lazyvim.github.io).

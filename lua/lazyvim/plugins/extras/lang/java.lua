@@ -91,9 +91,9 @@ return {
         table.insert(cmd, string.format("--jvm-arg=-javaagent:%s", lombok_jar))
       end
       return {
-        -- How to find the root dir for a given filename. The default comes from
-        -- lspconfig which provides a function specifically for java projects.
-        root_dir = LazyVim.lsp.get_raw_config("jdtls").default_config.root_dir,
+        root_dir = function(path)
+          return vim.fs.root(path, vim.lsp.config.jdtls.root_markers)
+        end,
 
         -- How to find the project name for a given root dir.
         project_name = function(root_dir)
@@ -150,19 +150,10 @@ return {
       if LazyVim.has("mason.nvim") then
         local mason_registry = require("mason-registry")
         if opts.dap and LazyVim.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
-          local jar_patterns = {
-            vim.fn.expand("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar"),
-          }
+          bundles = vim.fn.glob("$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin-*jar", false, true)
           -- java-test also depends on java-debug-adapter.
           if opts.test and mason_registry.is_installed("java-test") then
-            vim.list_extend(jar_patterns, {
-              vim.fn.expand("$MASON/share/java-test/*.jar"),
-            })
-          end
-          for _, jar_pattern in ipairs(jar_patterns) do
-            for _, bundle in ipairs(vim.split(vim.fn.glob(jar_pattern), "\n")) do
-              table.insert(bundles, bundle)
-            end
+            vim.list_extend(bundles, vim.fn.glob("$MASON/share/java-test/*.jar", false, true))
           end
         end
       end
@@ -178,7 +169,9 @@ return {
           },
           settings = opts.settings,
           -- enable CMP capabilities
-          capabilities = LazyVim.has("cmp-nvim-lsp") and require("cmp_nvim_lsp").default_capabilities() or nil,
+          capabilities = LazyVim.has("blink.cmp") and require("blink.cmp").get_lsp_capabilities() or LazyVim.has(
+            "cmp-nvim-lsp"
+          ) and require("cmp_nvim_lsp").default_capabilities() or nil,
         }, opts.jdtls)
 
         -- Existing server will be reused if the root_dir matches.
@@ -216,7 +209,7 @@ return {
             })
             wk.add({
               {
-                mode = "v",
+                mode = "x",
                 buffer = args.buf,
                 { "<leader>cx", group = "extract" },
                 {

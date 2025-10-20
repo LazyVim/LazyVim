@@ -53,7 +53,7 @@ local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
--- integration works automatically. Requires Neovim >= 0.10.0
+-- integration works automatically.
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
@@ -68,11 +68,10 @@ opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
-opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
 opt.foldlevel = 99
-opt.foldmethod = "expr"
+opt.foldmethod = "indent"
 opt.foldtext = ""
-opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
+opt.formatexpr = "v:lua.LazyVim.format.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -103,7 +102,7 @@ opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
-opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+opt.statuscolumn = [[%!v:lua.LazyVim.statuscolumn()]]
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
