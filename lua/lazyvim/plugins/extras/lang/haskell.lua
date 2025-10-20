@@ -16,53 +16,38 @@ return {
     "mrcjkb/haskell-tools.nvim",
     version = false,
     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    dependencies = {
-      { "nvim-telescope/telescope.nvim", optional = true },
-    },
     keys = {
       {
-        "<leader>ce",
-        ft = "haskell",
+        "<localleader>e",
         "<cmd>HlsEvalAll<cr>",
-        desc = "Haskell Evaluate All",
+        ft = "haskell",
+        desc = "Evaluate All",
       },
       {
-        "<leader>so",
-        ft = "haskell",
+        "<localleader>h",
         function()
           require("haskell-tools").hoogle.hoogle_signature()
         end,
-        desc = "Hoogle (Function Signature)",
+        ft = "haskell",
+        desc = "Hoogle Signature",
       },
-      LazyVim.has("telescope.nvim") and {
-        "<leader>sO",
-        ft = "haskell",
-        "<cmd>Telescope hoogle<cr>",
-        desc = "Hoogle (Global)",
-      } or nil,
       {
-        "<leader>fl",
-        ft = "haskell",
+        "<localleader>r",
         function()
           require("haskell-tools").repl.toggle()
         end,
-        desc = "GHCi REPL (Package)",
+        ft = "haskell",
+        desc = "REPL (Package)",
       },
       {
-        "<leader>fL",
-        ft = "haskell",
+        "<localleader>R",
         function()
           require("haskell-tools").repl.toggle(vim.api.nvim_buf_get_name(0))
         end,
-        desc = "GHCi REPL (Current File)",
+        ft = "haskell",
+        desc = "REPL (Buffer)",
       },
     },
-    config = function()
-      local ok, telescope = pcall(require, "telescope")
-      if ok then
-        telescope.load_extension("ht")
-      end
-    end,
   },
 
   {
@@ -105,17 +90,27 @@ return {
   },
 
   {
-    "luc-tielen/telescope_hoogle",
-    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    dependencies = {
-      { "nvim-telescope/telescope.nvim", optional = true },
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    specs = {
+      {
+        "luc-tielen/telescope_hoogle",
+        ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+        opts = function()
+          LazyVim.on_load("telescope.nvim", function()
+            require("telescope").load_extension("ht")
+          end)
+        end,
+        keys = {
+          {
+            "<localleader>H",
+            "<cmd>Telescope hoogle<cr>",
+            ft = "haskell",
+            desc = "Hoogle",
+          },
+        },
+      },
     },
-    config = function()
-      local ok, telescope = pcall(require, "telescope")
-      if ok then
-        telescope.load_extension("hoogle")
-      end
-    end,
   },
 
   {
