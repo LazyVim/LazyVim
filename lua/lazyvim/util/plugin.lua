@@ -1,3 +1,4 @@
+local Meta = require("lazy.core.meta")
 local Plugin = require("lazy.core.plugin")
 
 ---@class lazyvim.util.plugin
@@ -16,6 +17,7 @@ M.deprecated_extras = {
   ["lazyvim.plugins.extras.ui.dashboard"] = "`dashboard.nvim` is now the default **LazyVim** starter.",
   ["lazyvim.plugins.extras.coding.native_snippets"] = "Native snippets are now the default for **Neovim >= 0.10**",
   ["lazyvim.plugins.extras.ui.treesitter-rewrite"] = "Disabled `treesitter-rewrite` extra for now. Not ready yet.",
+  ["lazyvim.plugins.extras.ui.treesitter-main"] = "the `nvim-treesitter` main branch is now used by default",
   ["lazyvim.plugins.extras.coding.mini-ai"] = "`mini.ai` is now a core LazyVim plugin (again)",
   ["lazyvim.plugins.extras.lazyrc"] = "local spec files are now a lazy.nvim feature",
   ["lazyvim.plugins.extras.editor.trouble-v3"] = "Trouble v3 has been merged in main",
@@ -102,9 +104,17 @@ function M.fix_imports()
 end
 
 function M.fix_renames()
-  Plugin.Spec.add = LazyVim.inject.args(Plugin.Spec.add, function(self, plugin)
+  ---@param plugin LazyPluginSpec
+  Meta.add = LazyVim.inject.args(Meta.add, function(self, plugin)
     if type(plugin) == "table" then
-      if M.renames[plugin[1]] then
+      local name = plugin[1]
+      if not name then
+        return
+      end
+      if name:find("echasnovski") then
+        M.renames[name] = name:gsub("echasnovski", "nvim-mini")
+      end
+      if M.renames[name] then
         LazyVim.warn(
           ("Plugin `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
             plugin[1],
@@ -113,7 +123,7 @@ function M.fix_renames()
           ),
           { title = "LazyVim" }
         )
-        plugin[1] = M.renames[plugin[1]]
+        plugin[1] = M.renames[name]
       end
     end
   end)

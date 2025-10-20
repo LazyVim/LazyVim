@@ -21,13 +21,13 @@ return {
     },
     opts = function(_, opts)
       if type(opts.sources) == "table" then
-        vim.list_extend(opts.sources, { name = "clojure" })
+        vim.list_extend(opts.sources, { name = "conjure" })
       end
     end,
   },
 
   -- Add s-exp mappings
-  { "PaterJason/nvim-treesitter-sexp", opts = {}, event = "LazyFile" },
+  { "julienvincent/nvim-paredit", opts = {}, event = "LazyFile" },
 
   -- Colorize the output of the log buffer
   {

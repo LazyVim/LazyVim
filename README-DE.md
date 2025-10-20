@@ -56,7 +56,7 @@ und die Einfachheit von einem vorgefertigten Setup.
 
 ## ⚡️ Vorraussetzungen
 
-- Neovim >= **0.8.0** (gebraucht um mit **LuaJIT** zu bauen)
+- Neovim >= **0.11.2** (gebraucht um mit **LuaJIT** zu bauen)
 - Git >= **2.19.0** (um Teil-Klone zu unterstützen)
 - eine [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
 

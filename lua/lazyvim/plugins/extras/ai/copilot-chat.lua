@@ -8,8 +8,11 @@ return {
       user = user:sub(1, 1):upper() .. user:sub(2)
       return {
         auto_insert_mode = true,
-        question_header = "  " .. user .. " ",
-        answer_header = "  Copilot ",
+        headers = {
+          user = "  " .. user .. " ",
+          assistant = "  Copilot ",
+          tool = "󰊳  Tool ",
+        },
         window = {
           width = 0.4,
         },
@@ -84,5 +87,25 @@ return {
         size = { width = 50 },
       })
     end,
+  },
+
+  -- Blink integration
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      sources = {
+        providers = {
+          path = {
+            -- Path sources triggered by "/" interfere with CopilotChat commands
+            enabled = function()
+              return vim.bo.filetype ~= "copilot-chat"
+            end,
+          },
+        },
+      },
+    },
   },
 }
