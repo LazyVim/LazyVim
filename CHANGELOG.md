@@ -1,5 +1,14 @@
 # Changelog
 
+## [15.10.1](https://github.com/LazyVim/LazyVim/compare/v15.10.0...v15.10.1) (2025-10-20)
+
+
+### Bug Fixes
+
+* **avante:** correct key mapping declarations ([#6656](https://github.com/LazyVim/LazyVim/issues/6656)) ([41d1b8d](https://github.com/LazyVim/LazyVim/commit/41d1b8dc72d4270c49db3365edba670d9fa01fbd))
+* **blink:** added work-around back for unsupported native snippets ([899533a](https://github.com/LazyVim/LazyVim/commit/899533a101e4bacf35dadf091977b4d12875dbf6))
+* **treesitter:** added buf to treesitter start just to be sure ([3ffb471](https://github.com/LazyVim/LazyVim/commit/3ffb471c187a66562b19bdf68382be9f82ac670d))
+
 ## [15.10.0](https://github.com/LazyVim/LazyVim/compare/v15.9.0...v15.10.0) (2025-10-20)
 
 
