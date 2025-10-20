@@ -3,61 +3,49 @@ return {
   -- depends on the git extra for highlighting and auto-completion of github issues/prs
   { import = "lazyvim.plugins.extras.lang.git" },
 
+  { "ldelossa/litee.nvim", lazy = true },
+
   -- gh.nvim
   {
     "ldelossa/gh.nvim",
-    dependencies = {
-      {
-        "ldelossa/litee.nvim",
-        config = function()
-          require("litee.lib").setup()
-        end,
-      },
-    },
-    config = function()
-      require("litee.gh").setup()
+    opts = {},
+    config = function(_, opts)
+      require("litee.lib").setup()
+      require("litee.gh").setup(opts)
     end,
     keys = {
-      { "<leader>gcc", "<cmd>GHCloseCommit<cr>", desc = "Close" },
-      { "<leader>gce", "<cmd>GHExpandCommit<cr>", desc = "Expand" },
-      { "<leader>gco", "<cmd>GHOpenToCommit<cr>", desc = "Open To" },
-      { "<leader>gcp", "<cmd>GHPopOutCommit<cr>", desc = "Pop Out" },
-      { "<leader>gcz", "<cmd>GHCollapseCommit<cr>", desc = "Collapse" },
-
-      { "<leader>gpc", "<cmd>GHClosePR<cr>", desc = "Close" },
-      { "<leader>gpd", "<cmd>GHPRDetails<cr>", desc = "Details" },
-      { "<leader>gpe", "<cmd>GHExpandPR<cr>", desc = "Expand" },
-      { "<leader>gpo", "<cmd>GHOpenPR<cr>", desc = "Open" },
-      { "<leader>gpp", "<cmd>GHPopOutPR<cr>", desc = "Pop Out" },
-      { "<leader>gpr", "<cmd>GHRefreshPR<cr>", desc = "Refresh" },
-      { "<leader>gpt", "<cmd>GHOpenToPR<cr>", desc = "Open To" },
-      { "<leader>gpz", "<cmd>GHCollapsePR<cr>", desc = "Collapse" },
-
-      { "<leader>grb", "<cmd>GHStartReview<cr>", desc = "Begin" },
-      { "<leader>grc", "<cmd>GHCloseReview<cr>", desc = "Close" },
-      { "<leader>grd", "<cmd>GHDeleteReview<cr>", desc = "Delete" },
-      { "<leader>gre", "<cmd>GHExpandReview<cr>", desc = "Expand" },
-      { "<leader>grs", "<cmd>GHSubmitReview<cr>", desc = "Submit" },
-      { "<leader>grz", "<cmd>GHCollapseReview<cr>", desc = "Collapse" },
-
-      { "<leader>gtc", "<cmd>GHCreateThread<cr>", desc = "Create" },
-      { "<leader>gtn", "<cmd>GHNextThread<cr>", desc = "Next" },
-      { "<leader>gtt", "<cmd>GHToggleThread<cr>", desc = "Toggle" },
-
-      { "<leader>ge", "<cmd>LTPanel<cr>", desc = "Toggle GitHub Panel" },
-    },
-  },
-
-  {
-    "folke/which-key.nvim",
-    opts = {
-      spec = {
-        { "<leader>gc", group = "commits", icon = { icon = "", color = "green" } },
-        { "<leader>gp", group = "pr", icon = { icon = "", color = "green" } },
-        { "<leader>gr", group = "review", icon = { icon = "", color = "green" } },
-        { "<leader>gt", group = "threads", icon = { icon = "", color = "green" } },
-        { "<leader>gi", "<cmd>GHOpenIssue<cr>", desc = "List Issues", icon = { icon = "", color = "green" } },
-      },
+      { "<leader>G", "", desc = "+Github" },
+      { "<leader>Gc", "", desc = "+Commits" },
+      { "<leader>Gcc", "<cmd>GHCloseCommit<cr>", desc = "Close" },
+      { "<leader>Gce", "<cmd>GHExpandCommit<cr>", desc = "Expand" },
+      { "<leader>Gco", "<cmd>GHOpenToCommit<cr>", desc = "Open To" },
+      { "<leader>Gcp", "<cmd>GHPopOutCommit<cr>", desc = "Pop Out" },
+      { "<leader>Gcz", "<cmd>GHCollapseCommit<cr>", desc = "Collapse" },
+      { "<leader>Gi", "", desc = "+Issues" },
+      { "<leader>Gip", "<cmd>GHPreviewIssue<cr>", desc = "Preview" },
+      { "<leader>Gio", "<cmd>GHOpenIssue<cr>", desc = "Open" },
+      { "<leader>Gl", "", desc = "+Litee" },
+      { "<leader>Glt", "<cmd>LTPanel<cr>", desc = "Toggle Panel" },
+      { "<leader>Gp", "", desc = "+Pull Request" },
+      { "<leader>Gpc", "<cmd>GHClosePR<cr>", desc = "Close" },
+      { "<leader>Gpd", "<cmd>GHPRDetails<cr>", desc = "Details" },
+      { "<leader>Gpe", "<cmd>GHExpandPR<cr>", desc = "Expand" },
+      { "<leader>Gpo", "<cmd>GHOpenPR<cr>", desc = "Open" },
+      { "<leader>Gpp", "<cmd>GHPopOutPR<cr>", desc = "PopOut" },
+      { "<leader>Gpr", "<cmd>GHRefreshPR<cr>", desc = "Refresh" },
+      { "<leader>Gpt", "<cmd>GHOpenToPR<cr>", desc = "Open To" },
+      { "<leader>Gpz", "<cmd>GHCollapsePR<cr>", desc = "Collapse" },
+      { "<leader>Gr", "", desc = "+Review" },
+      { "<leader>Grb", "<cmd>GHStartReview<cr>", desc = "Begin" },
+      { "<leader>Grc", "<cmd>GHCloseReview<cr>", desc = "Close" },
+      { "<leader>Grd", "<cmd>GHDeleteReview<cr>", desc = "Delete" },
+      { "<leader>Gre", "<cmd>GHExpandReview<cr>", desc = "Expand" },
+      { "<leader>Grs", "<cmd>GHSubmitReview<cr>", desc = "Submit" },
+      { "<leader>Grz", "<cmd>GHCollapseReview<cr>", desc = "Collapse" },
+      { "<leader>Gt", "", desc = "+Threads" },
+      { "<leader>Gtc", "<cmd>GHCreateThread<cr>", desc = "Create" },
+      { "<leader>Gtn", "<cmd>GHNextThread<cr>", desc = "Next" },
+      { "<leader>Gtt", "<cmd>GHToggleThread<cr>", desc = "Toggle" },
     },
   },
 }
