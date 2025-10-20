@@ -20,12 +20,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        solidity_ls = {
-          filetypes = { "solidity" },
-          root_dir = function(fname)
-            return require("lspconfig").util.root_pattern("foundry.toml", "hardhat.config.*", ".git")(fname)
-          end,
-        },
+        solidity_ls = {},
       },
     },
   },
