@@ -51,14 +51,6 @@ vim.api.nvim_create_autocmd("User", {
       end)
     end
 
-    -- Keep undo/redo lists in sync with VsCode
-    vim.keymap.set("n", "u", function()
-      vscode.call("undo")
-    end)
-    vim.keymap.set("n", "<C-r>", function()
-      vscode.call("redo")
-    end)
-
     -- Navigate VSCode tabs like lazyvim buffers
     vim.keymap.set("n", "<S-h>", function()
       vscode.call("workbench.action.previousEditor")
