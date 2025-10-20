@@ -3,9 +3,11 @@ local prios = {
   ["lazyvim.plugins.extras.test.core"] = 1,
   ["lazyvim.plugins.extras.dap.core"] = 1,
   ["lazyvim.plugins.extras.coding.nvim-cmp"] = 2,
-  ["lazyvim.plugins.extras.ui.edgy"] = 2,
-  ["lazyvim.plugins.extras.lang.typescript"] = 5,
+  ["lazyvim.plugins.extras.editor.neo-tree"] = 2,
+  ["lazyvim.plugins.extras.ui.edgy"] = 3,
+  ["lazyvim.plugins.extras.ai.copilot-native"] = 4,
   ["lazyvim.plugins.extras.coding.blink"] = 5,
+  ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
   -- default core extra priority is 20
   -- default priority is 50
@@ -23,12 +25,29 @@ end
 local extras = {} ---@type string[]
 local defaults = LazyVim.config.get_defaults()
 
+local changed = false
+local updated = {} ---@type string[]
+
 -- Add extras from LazyExtras that are not disabled
 for _, extra in ipairs(LazyVim.config.json.data.extras) do
-  local def = defaults[extra]
-  if not (def and def.enabled == false) then
-    extras[#extras + 1] = extra
+  if LazyVim.plugin.renamed_extras[extra] then
+    extra = LazyVim.plugin.renamed_extras[extra]
+    changed = true
   end
+  if LazyVim.plugin.deprecated_extras[extra] then
+    changed = true
+  else
+    updated[#updated + 1] = extra
+    local def = defaults[extra]
+    if not (def and def.enabled == false) then
+      extras[#extras + 1] = extra
+    end
+  end
+end
+
+if changed then
+  LazyVim.config.json.data.extras = updated
+  LazyVim.json.save()
 end
 
 -- Add default extras
@@ -42,15 +61,7 @@ end
 ---@type string[]
 extras = LazyVim.dedup(extras)
 
-local version = vim.version()
-local v = version.major .. "_" .. version.minor
-
-local compat = { "0_9" }
-
 LazyVim.plugin.save_core()
-if vim.tbl_contains(compat, v) then
-  table.insert(extras, 1, "lazyvim.plugins.compat.nvim-" .. v)
-end
 if vim.g.vscode then
   table.insert(extras, 1, "lazyvim.plugins.extras.vscode")
 end
