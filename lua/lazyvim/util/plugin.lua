@@ -26,6 +26,9 @@ M.deprecated_extras = {
   Either use `basedpyright`, or copy the [old extra](https://github.com/LazyVim/LazyVim/blob/c1f5fcf9c7ed2659c9d5ac41b3bb8a93e0a3c6a0/lua/lazyvim/plugins/extras/lang/python-semshi.lua#L1) to your own config.
   ]],
 }
+M.renamed_extras = {
+  ["lazyvim.plugins.extras.lang.omnisharp"] = "lazyvim.plugins.extras.lang.dotnet",
+}
 
 M.deprecated_modules = {}
 
@@ -93,6 +96,18 @@ function M.fix_imports()
       if def and def.enabled == false then
         return false
       end
+    end
+    local rename = M.renamed_extras[spec.import]
+    if rename then
+      LazyVim.warn(
+        ("The extra `%s` was renamed to `%s`.\nPlease update your config for `%s`"):format(
+          spec.import,
+          rename,
+          spec.importing or "LazyVim"
+        ),
+        { title = "LazyVim" }
+      )
+      spec.import = rename
     end
     local dep = M.deprecated_extras[spec and spec.import]
     if dep then

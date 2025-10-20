@@ -39,6 +39,19 @@ return {
           return { fg = Snacks.util.color(hl) }
         end,
       })
+
+      table.insert(opts.sections.lualine_x, 2, {
+        function()
+          local status = require("sidekick.status").cli()
+          return " " .. (#status > 1 and #status or "")
+        end,
+        cond = function()
+          return #require("sidekick.status").cli() > 0
+        end,
+        color = function()
+          return { fg = Snacks.util.color("Special") }
+        end,
+      })
     end,
   },
 
@@ -103,6 +116,30 @@ return {
         function() require("sidekick.cli").prompt() end,
         mode = { "n", "x" },
         desc = "Sidekick Select Prompt",
+      },
+    },
+  },
+
+  {
+    "folke/snacks.nvim",
+    optional = true,
+    opts = {
+      picker = {
+        actions = {
+          sidekick_send = function(...)
+            return require("sidekick.cli.picker.snacks").send(...)
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ["<a-a>"] = {
+                "sidekick_send",
+                mode = { "n", "i" },
+              },
+            },
+          },
+        },
       },
     },
   },

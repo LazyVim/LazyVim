@@ -1,4 +1,5 @@
 ---@module 'luassert'
+---@module 'lazy'
 
 local Icons = require("mini.icons")
 
@@ -26,8 +27,15 @@ describe("Extra", function()
     return not vim.tbl_contains(ignore, extra.modname)
   end, extras)
 
+  require("mason").setup()
+  local mr = require("mason-registry")
+  mr.refresh()
+
   local lsp_to_pkg = {}
   lsp_to_pkg = require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package
+  it("can get lspconfig to package map", function()
+    assert(not vim.tbl_isempty(lsp_to_pkg), "Could not get lspconfig to package map")
+  end)
 
   local tsspec = Plugin.Spec.new({
     import = "lazyvim.plugins.treesitter",
@@ -65,6 +73,17 @@ describe("Extra", function()
         { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
         mod,
       }, { optional = true })
+
+      it("it has no renamed plugins", function()
+        for _, p in pairs(spec.plugins) do
+          local short_url = p[1]
+          assert(
+            not LazyVim.plugin.renames[short_url],
+            "Plugin " .. short_url .. " has been renamed to " .. (LazyVim.plugin.renames[short_url] or "")
+          )
+        end
+      end)
+
       local lspconfig = spec.plugins["nvim-lspconfig"]
       if lspconfig then
         it("does not install LSP servers with mason.nvim", function()

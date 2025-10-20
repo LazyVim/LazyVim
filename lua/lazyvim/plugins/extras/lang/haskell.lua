@@ -14,17 +14,40 @@ return {
 
   {
     "mrcjkb/haskell-tools.nvim",
-    version = "^3",
+    version = false,
     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    dependencies = {
-      { "nvim-telescope/telescope.nvim", optional = true },
+    keys = {
+      {
+        "<localleader>e",
+        "<cmd>HlsEvalAll<cr>",
+        ft = "haskell",
+        desc = "Evaluate All",
+      },
+      {
+        "<localleader>h",
+        function()
+          require("haskell-tools").hoogle.hoogle_signature()
+        end,
+        ft = "haskell",
+        desc = "Hoogle Signature",
+      },
+      {
+        "<localleader>r",
+        function()
+          require("haskell-tools").repl.toggle()
+        end,
+        ft = "haskell",
+        desc = "REPL (Package)",
+      },
+      {
+        "<localleader>R",
+        function()
+          require("haskell-tools").repl.toggle(vim.api.nvim_buf_get_name(0))
+        end,
+        ft = "haskell",
+        desc = "REPL (Buffer)",
+      },
     },
-    config = function()
-      local ok, telescope = pcall(require, "telescope")
-      if ok then
-        telescope.load_extension("ht")
-      end
-    end,
   },
 
   {
@@ -67,17 +90,48 @@ return {
   },
 
   {
-    "luc-tielen/telescope_hoogle",
-    ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
-    dependencies = {
-      { "nvim-telescope/telescope.nvim", optional = true },
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    specs = {
+      {
+        "luc-tielen/telescope_hoogle",
+        ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+        opts = function()
+          LazyVim.on_load("telescope.nvim", function()
+            require("telescope").load_extension("ht")
+          end)
+        end,
+        keys = {
+          {
+            "<localleader>H",
+            "<cmd>Telescope hoogle<cr>",
+            ft = "haskell",
+            desc = "Hoogle",
+          },
+        },
+      },
     },
-    config = function()
-      local ok, telescope = pcall(require, "telescope")
-      if ok then
-        telescope.load_extension("hoogle")
-      end
-    end,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        haskell = { "fourmolu" },
+        cabal = { "cabal_fmt" },
+      },
+    },
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        haskell = { "hlint" },
+      },
+    },
   },
 
   -- Make sure lspconfig doesn't start hls,
