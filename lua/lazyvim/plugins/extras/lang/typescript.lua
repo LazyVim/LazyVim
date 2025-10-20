@@ -263,6 +263,10 @@ return {
 
       for _, language in ipairs(js_filetypes) do
         if not dap.configurations[language] then
+          local runtimeExecutable = nil
+          if language:find("typescript") then
+            runtimeExecutable = vim.fn.executable("tsx") == 1 and "tsx" or "ts-node"
+          end
           dap.configurations[language] = {
             {
               type = "pwa-node",
@@ -270,6 +274,16 @@ return {
               name = "Launch file",
               program = "${file}",
               cwd = "${workspaceFolder}",
+              sourceMaps = true,
+              runtimeExecutable = runtimeExecutable,
+              skipFiles = {
+                "<node_internals>/**",
+                "node_modules/**",
+              },
+              resolveSourceMapLocations = {
+                "${workspaceFolder}/**",
+                "!**/node_modules/**",
+              },
             },
             {
               type = "pwa-node",
@@ -277,6 +291,16 @@ return {
               name = "Attach",
               processId = require("dap.utils").pick_process,
               cwd = "${workspaceFolder}",
+              sourceMaps = true,
+              runtimeExecutable = runtimeExecutable,
+              skipFiles = {
+                "<node_internals>/**",
+                "node_modules/**",
+              },
+              resolveSourceMapLocations = {
+                "${workspaceFolder}/**",
+                "!**/node_modules/**",
+              },
             },
           }
         end
