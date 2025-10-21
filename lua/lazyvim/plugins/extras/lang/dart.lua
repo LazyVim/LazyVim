@@ -22,7 +22,7 @@ return {
     opts = {
       formatters = {
         dart_format = {
-          args = { "format", "--line-length", "120" },
+          args = { "format", "--line-length", "120", "$FILENAME" },
         },
       },
       formatters_by_ft = {
