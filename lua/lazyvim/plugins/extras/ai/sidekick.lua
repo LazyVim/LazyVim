@@ -65,6 +65,26 @@ return {
           return true
         end
       end
+
+      return {
+        cli = {
+          win = {
+            keys = {
+              open_terminal = {
+                "<C-/>",
+                function(_)
+                  vim.cmd.stopinsert()
+                  vim.schedule(function()
+                    Snacks.terminal(nil, { cwd = LazyVim.root() })
+                  end)
+                end,
+                mode = "nt",
+                desc = "Terminal (Root Dir)",
+              },
+            },
+          },
+        },
+      }
     end,
     -- stylua: ignore
     keys = {
