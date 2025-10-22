@@ -32,12 +32,6 @@ return {
       formatters_by_ft = {
         solidity = { "forge_fmt" },
       },
-      formatters = {
-        forge_fmt = {
-          command = "forge",
-          args = { "fmt" },
-        },
-      },
     },
   },
 }
