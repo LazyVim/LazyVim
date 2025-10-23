@@ -5,6 +5,9 @@ return {
   desc = "Better Yank/Paste",
   event = "LazyFile",
   opts = {
+    system_clipboard = {
+      sync_with_ring = not vim.env.SSH_CONNECTION,
+    },
     highlight = { timer = 150 },
   },
   keys = {
