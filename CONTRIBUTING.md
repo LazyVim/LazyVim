@@ -29,3 +29,21 @@
 - Every language extra requires a `recommended` section as part of the extra.
   Check lspconfig server configurations for the proper filetypes and root directories.
   Refer to other extras for creating the `recommended` section.
+
+### Language-Specific Keymaps
+
+- Use `<localleader>` for language-specific keymaps (follows Vim/Neovim convention for filetype-specific mappings).
+- For LSP servers, define keymaps in the server's `keys` field, not in `on_attach`:
+  ```lua
+  servers = {
+    rust_analyzer = {
+      keys = {
+        { "<localleader>e", function() vim.cmd.RustLsp("expandMacro") end, desc = "Expand Macro" },
+      }
+    }
+  }
+  ```
+- LazyVim's LSP system will automatically resolve and apply these keymaps (see `lua/lazyvim/plugins/lsp/keymaps.lua`).
+- Don't override standard LSP keymaps (like `K` for hover, `gd` for definition) unless absolutely necessary.
+- Use standard `<leader>c*` keymaps where they make sense (e.g., `<leader>co` for organize imports).
+- Refer to the R and Haskell extras for examples of proper `<localleader>` usage.
