@@ -1,5 +1,19 @@
 # Changelog
 
+## [15.11.0](https://github.com/LazyVim/LazyVim/compare/v15.10.1...v15.11.0) (2025-10-23)
+
+
+### Features
+
+* **snacks_picker:** added gai/gao keymaps for calls incoming/outgoing ([b6e48a5](https://github.com/LazyVim/LazyVim/commit/b6e48a57fb4ad7a79f24646016926eef68ce3002))
+* **snacks.picker:** added `<leader>gD` to diff against merge base of branch/PR ([f0a91d9](https://github.com/LazyVim/LazyVim/commit/f0a91d9fa5f0cf27d6ba5fac759fa1d4e0df97a3))
+
+
+### Bug Fixes
+
+* **avante:** unset default keymaps ([#6657](https://github.com/LazyVim/LazyVim/issues/6657)) ([e8a1d8b](https://github.com/LazyVim/LazyVim/commit/e8a1d8b6286f82d75e5830de5ea93bd7622cec8c))
+* **extras:** remove custom formatter opts for dart/solidity. Closes [#6665](https://github.com/LazyVim/LazyVim/issues/6665) ([b38de4e](https://github.com/LazyVim/LazyVim/commit/b38de4e2fe4ad887cae1604fd9f1fbd230e0118f))
+
 ## [15.10.1](https://github.com/LazyVim/LazyVim/compare/v15.10.0...v15.10.1) (2025-10-20)
 
 
