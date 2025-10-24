@@ -2,7 +2,7 @@ return {
   recommended = function()
     return LazyVim.extras.wants({
       ft = { "handlebars", "typescript", "javascript", "typescript.glimmer", "javascript.glimmer" },
-      root = { "ember-cli-build.js", ".git" },
+      root = { "ember-cli-build.js" },
     })
   end,
   {
