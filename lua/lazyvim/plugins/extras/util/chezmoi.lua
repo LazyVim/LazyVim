@@ -3,12 +3,13 @@ local pick_chezmoi = function()
     require("telescope").extensions.chezmoi.find_files()
   elseif LazyVim.pick.picker.name == "fzf" then
     local fzf_lua = require("fzf-lua")
+    local dest_dir = os.getenv("HOME")
     local actions = {
       ["enter"] = function(selected)
-        fzf_lua.actions.vimcmd_entry("ChezmoiEdit", selected, { cwd = os.getenv("HOME") })
+        fzf_lua.actions.vimcmd_entry("ChezmoiEdit", selected, { cwd = dest_dir })
       end,
     }
-    fzf_lua.files({ cmd = "chezmoi managed --include=files,symlinks", actions = actions, hidden = false })
+    fzf_lua.files({ cmd = "chezmoi managed --include=files,symlinks", actions = actions, cwd = dest_dir, hidden = false })
   elseif LazyVim.pick.picker.name == "snacks" then
     local results = require("chezmoi.commands").list({
       args = {
