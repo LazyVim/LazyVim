@@ -1,5 +1,23 @@
 # Changelog
 
+## [15.12.0](https://github.com/LazyVim/LazyVim/compare/v15.11.0...v15.12.0) (2025-10-25)
+
+
+### Features
+
+* **keymaps:** added `<localleader>r` to run the selection/file with lua ([acc3538](https://github.com/LazyVim/LazyVim/commit/acc35382294d91b279b319510b906249a03b2764))
+* **lsp:** lsp keymaps can now be configured with `lsp-config.opts.servers['*'].keys` like for lsp servers ([cd8c497](https://github.com/LazyVim/LazyVim/commit/cd8c4977a0a8e80750ed6a10992f988f811c6417))
+* **lsp:** refactor lsp code to use `Snacks.util.lsp.on` ([3964433](https://github.com/LazyVim/LazyVim/commit/39644330624139dddb857ed833987c1cfd8432cf))
+* **sidekick:** added NES toggle `<leader>uN`. Closes [#6692](https://github.com/LazyVim/LazyVim/issues/6692) ([84ca4df](https://github.com/LazyVim/LazyVim/commit/84ca4dffdbf175a5e7bc39904157700854d8b2ad))
+
+
+### Bug Fixes
+
+* **chezmoi:** use vim.env.HOME instead of os.getenv("HOME") for Windows compatibility ([231e476](https://github.com/LazyVim/LazyVim/commit/231e476ec9292b56258f86e28773843cddaf34b8))
+* **clipboard:** connecting via vscpde's remote-ssh extension causes severe lag during yank and copy operations.  ([#6664](https://github.com/LazyVim/LazyVim/issues/6664)) ([5098a69](https://github.com/LazyVim/LazyVim/commit/5098a6987009199d5a5c4bfb8086d0fe4a94e0bb))
+* **lang.ember:** remove '.git' lang.ember ([#6685](https://github.com/LazyVim/LazyVim/issues/6685)) ([4796fb4](https://github.com/LazyVim/LazyVim/commit/4796fb4ac54744b69a45a6044655543b1c4231f0))
+* **root:** don't use fs_realpath on windows ([46e419d](https://github.com/LazyVim/LazyVim/commit/46e419d27efb5b7282a5ab17a49f4745ce23b55a))
+
 ## [15.11.0](https://github.com/LazyVim/LazyVim/compare/v15.10.1...v15.11.0) (2025-10-23)
 
 
