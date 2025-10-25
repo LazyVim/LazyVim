@@ -7,10 +7,8 @@ return {
     lazy = true,
     init = function()
       vim.g.navic_silence = true
-      LazyVim.lsp.on_attach(function(client, buffer)
-        if client:supports_method("textDocument/documentSymbol") then
-          require("nvim-navic").attach(client, buffer)
-        end
+      Snacks.util.lsp.on({ method = "textDocument/documentSymbol" }, function(buffer, client)
+        require("nvim-navic").attach(client, buffer)
       end)
     end,
     opts = function()
