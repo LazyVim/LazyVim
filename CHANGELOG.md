@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.12.1](https://github.com/LazyVim/LazyVim/compare/v15.12.0...v15.12.1) (2025-10-25)
+
+
+### Bug Fixes
+
+* **fzf-lua:** LSP keymaps. Closes [#6698](https://github.com/LazyVim/LazyVim/issues/6698) ([b5ea1e9](https://github.com/LazyVim/LazyVim/commit/b5ea1e9d25202e38a47f0b03ac35cc587c80e6d7))
+
 ## [15.12.0](https://github.com/LazyVim/LazyVim/compare/v15.11.0...v15.12.0) (2025-10-25)
 
 
