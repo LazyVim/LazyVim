@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.12.2](https://github.com/LazyVim/LazyVim/compare/v15.12.1...v15.12.2) (2025-10-26)
+
+
+### Bug Fixes
+
+* **lsp.keymaps:** make cond -&gt; enabled work again. Closes [#6697](https://github.com/LazyVim/LazyVim/issues/6697) ([1a40162](https://github.com/LazyVim/LazyVim/commit/1a401627146c66beaeb213f66dd02662f1006e82))
+
 ## [15.12.1](https://github.com/LazyVim/LazyVim/compare/v15.12.0...v15.12.1) (2025-10-26)
 
 
