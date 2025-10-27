@@ -222,7 +222,7 @@ return {
       -- get all the servers that are available through mason-lspconfig
       local have_mason = LazyVim.has("mason-lspconfig.nvim")
       local mason_all = have_mason
-          and vim.tbl_keys(require("mason-lspconfig.mappings").get_mason_map().lspconfig_to_package)
+          and vim.tbl_keys(require("mason-lspconfig").get_mappings().lspconfig_to_package)
         or {} --[[ @as string[] ]]
       local mason_exclude = {} ---@type string[]
 
