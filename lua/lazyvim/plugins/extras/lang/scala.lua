@@ -13,6 +13,14 @@ return {
     "scalameta/nvim-metals",
     keys = {
       {
+        "<localleader>e",
+        function()
+          require("metals").commands()
+        end,
+        ft = { "scala", "sbt", "java" },
+        desc = "Metals commands",
+      },
+      {
         "<localleader>c",
         function()
           require("metals").compile_cascade()
@@ -91,19 +99,5 @@ return {
         },
       }
     end,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    optional = true,
-    keys = {
-      {
-        "<localleader>e",
-        function()
-          require("telescope").extensions.metals.commands()
-        end,
-        ft = { "scala", "sbt", "java" },
-        desc = "Metals commands",
-      },
-    },
   },
 }
