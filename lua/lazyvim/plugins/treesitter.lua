@@ -171,8 +171,14 @@ return {
 
         for method, keymaps in pairs(moves) do
           for key, query in pairs(keymaps) do
-            local desc = query:gsub("@", ""):gsub("%..*", "")
-            desc = desc:sub(1, 1):upper() .. desc:sub(2)
+            local queries = type(query) == "table" and query or { query }
+            local parts = {}
+            for _, q in ipairs(queries) do
+              local part = q:gsub("@", ""):gsub("%..*", "")
+              part = part:sub(1, 1):upper() .. part:sub(2)
+              table.insert(parts, part)
+            end
+            local desc = table.concat(parts, " or ")
             desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
             desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
             if not (vim.wo.diff and key:find("[cC]")) then
