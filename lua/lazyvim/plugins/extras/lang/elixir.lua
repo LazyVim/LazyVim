@@ -7,9 +7,9 @@ return {
   end,
   {
     "neovim/nvim-lspconfig",
-    opts = { 
-      servers = { 
-        expert = {}, 
+    opts = {
+      servers = {
+        expert = {},
       },
     },
   },
