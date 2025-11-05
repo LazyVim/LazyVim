@@ -6,8 +6,12 @@ return {
     })
   end,
   {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "expert" } },
+    "neovim/nvim-lspconfig",
+    opts = { 
+      servers = { 
+        expert = {}, 
+      },
+    },
   },
   {
     "nvim-treesitter/nvim-treesitter",
