@@ -52,6 +52,9 @@ return {
             },
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
+              preferences = {
+                useAliasesForRenames = false,
+              },
               suggest = {
                 completeFunctionCalls = true,
               },
