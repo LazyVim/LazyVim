@@ -74,6 +74,18 @@ return {
           require("sidekick.nes").enable(state)
         end,
       }):map("<leader>uN")
+      local opts = {
+        cli = {
+          win = {
+            --stylua: ignore
+            keys = {
+              terminal_slash = { "<C-/>", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, desc = "Terminal (Root Dir)", mode = "t" },
+              terminal_underscore = { "<C-_>", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, desc = "which_key_ignore", mode = "t" },
+            },
+          },
+        },
+      }
+      return opts
     end,
     -- stylua: ignore
     keys = {
