@@ -1,5 +1,32 @@
 # Changelog
 
+## [15.13.0](https://github.com/LazyVim/LazyVim/compare/v15.12.2...v15.13.0) (2025-11-01)
+
+
+### Features
+
+* **snacks:** `snacks.gh` integration. Enabled by default, unless the `util.octo` extra is enabled. ([5e981f9](https://github.com/LazyVim/LazyVim/commit/5e981f9a8cd75eb6f49756e188411037b82b8045))
+
+
+### Bug Fixes
+
+* **treesitter:** remove node requirement ([6b52a30](https://github.com/LazyVim/LazyVim/commit/6b52a3059e52eed062b6ff3f56e70cffcbf879fe))
+
+## [15.12.2](https://github.com/LazyVim/LazyVim/compare/v15.12.1...v15.12.2) (2025-10-26)
+
+
+### Bug Fixes
+
+* **lsp.keymaps:** make cond -&gt; enabled work again. Closes [#6697](https://github.com/LazyVim/LazyVim/issues/6697) ([1a40162](https://github.com/LazyVim/LazyVim/commit/1a401627146c66beaeb213f66dd02662f1006e82))
+
+## [15.12.1](https://github.com/LazyVim/LazyVim/compare/v15.12.0...v15.12.1) (2025-10-26)
+
+
+### Bug Fixes
+
+* **fzf-lua:** LSP keymaps. Closes [#6698](https://github.com/LazyVim/LazyVim/issues/6698) ([b5ea1e9](https://github.com/LazyVim/LazyVim/commit/b5ea1e9d25202e38a47f0b03ac35cc587c80e6d7))
+* **navic:** navic attach. Closes [#6702](https://github.com/LazyVim/LazyVim/issues/6702) ([d2d0c64](https://github.com/LazyVim/LazyVim/commit/d2d0c641ed443f8d2ea9e131ec90df59ea149d0a))
+
 ## [15.12.0](https://github.com/LazyVim/LazyVim/compare/v15.11.0...v15.12.0) (2025-10-25)
 
 

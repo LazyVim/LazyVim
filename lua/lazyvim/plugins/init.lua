@@ -7,14 +7,6 @@ if vim.fn.has("nvim-0.11.2") == 0 then
   vim.fn.getchar()
   vim.cmd([[quit]])
   return {}
-elseif not vim.lsp.is_enabled then
-  vim.schedule(function()
-    LazyVim.warn({
-      "You're using an **old** `nightly` version of **Neovim**",
-      "Please update to a recent `nightly`,",
-      "or a stable version (`>= 0.11.2`).",
-    })
-  end)
 end
 
 require("lazyvim.config").init()
