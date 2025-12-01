@@ -126,7 +126,7 @@ return {
     "goolord/alpha-nvim",
     optional = true,
     opts = function(_, dashboard)
-      local button = dashboard.button("P", " " .. " Projects (util.project)", pick)
+      local button = dashboard.button("p", " " .. " Projects (util.project)", pick)
       button.opts.hl = "AlphaButtons"
       button.opts.hl_shortcut = "AlphaShortcut"
       table.insert(dashboard.section.buttons.val, 4, button)
@@ -159,7 +159,7 @@ return {
         action = pick,
         desc = " Projects (util.project)",
         icon = " ",
-        key = "P",
+        key = "p",
       }
 
       projects.desc = projects.desc .. string.rep(" ", 43 - #projects.desc)
@@ -177,7 +177,7 @@ return {
         action = pick,
         desc = "Projects (util.project)",
         icon = " ",
-        key = "P",
+        key = "p",
       })
     end,
   },
