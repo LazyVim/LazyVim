@@ -35,10 +35,10 @@ return {
       },
       setup = {
         angularls = function()
-          LazyVim.lsp.on_attach(function(client)
+          Snacks.util.lsp.on({ name = "angularls" }, function(_, client)
             --HACK: disable angular renaming capability due to duplicate rename popping up
             client.server_capabilities.renameProvider = false
-          end, "angularls")
+          end)
         end,
       },
     },

@@ -5,7 +5,7 @@ if lazyvim_docs then
 end
 
 if LazyVim.has_extra("ai.copilot-native") then
-  if not vim.lsp.inline_completion then
+  if vim.fn.has("nvim-0.12") == 0 then
     LazyVim.error("You need Neovim >= 0.12 to use the `ai.copilot-native` extra.")
     return {}
   end

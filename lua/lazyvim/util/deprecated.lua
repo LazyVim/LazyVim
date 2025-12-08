@@ -6,6 +6,22 @@ M.moved = {
     rename_file = { "Snacks.rename.rename_file" },
     on_rename = { "Snacks.rename.on_rename_file" },
     words = { "Snacks.words" },
+    on_supports_method = {
+      "Snacks.util.lsp.on",
+      fn = function(method, cb)
+        return Snacks.util.lsp.on({ method = method }, function(buffer, client)
+          cb(client, buffer)
+        end)
+      end,
+    },
+    on_attach = {
+      "Snacks.util.lsp.on",
+      fn = function(cb, name)
+        return Snacks.util.lsp.on({ name = name }, function(buffer, client)
+          cb(client, buffer)
+        end)
+      end,
+    },
   },
   terminal = {
     open = { "Snacks.terminal" },

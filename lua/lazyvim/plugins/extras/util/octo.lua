@@ -3,6 +3,16 @@ return {
   -- depends on the git extra for highlighting and auto-completion of github issues/prs
   { import = "lazyvim.plugins.extras.lang.git" },
 
+  {
+    "folke/snacks.nvim",
+    keys = { -- disable conflicting keymaps
+      { "<leader>gi", false },
+      { "<leader>gI", false },
+      { "<leader>gp", false },
+      { "<leader>gP", false },
+    },
+  },
+
   -- Octo
   {
     "pwntester/octo.nvim",

@@ -221,7 +221,7 @@ function M.safe_keymap_set(mode, lhs, rhs, opts)
       ---@diagnostic disable-next-line: no-unknown
       opts.remap = nil
     end
-    vim.keymap.set(modes, lhs, rhs, opts)
+    Snacks.keymap.set(modes, lhs, rhs, opts)
   end
 end
 

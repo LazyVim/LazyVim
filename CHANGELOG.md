@@ -1,5 +1,64 @@
 # Changelog
 
+## [15.13.0](https://github.com/LazyVim/LazyVim/compare/v15.12.2...v15.13.0) (2025-11-01)
+
+
+### Features
+
+* **snacks:** `snacks.gh` integration. Enabled by default, unless the `util.octo` extra is enabled. ([5e981f9](https://github.com/LazyVim/LazyVim/commit/5e981f9a8cd75eb6f49756e188411037b82b8045))
+
+
+### Bug Fixes
+
+* **treesitter:** remove node requirement ([6b52a30](https://github.com/LazyVim/LazyVim/commit/6b52a3059e52eed062b6ff3f56e70cffcbf879fe))
+
+## [15.12.2](https://github.com/LazyVim/LazyVim/compare/v15.12.1...v15.12.2) (2025-10-26)
+
+
+### Bug Fixes
+
+* **lsp.keymaps:** make cond -&gt; enabled work again. Closes [#6697](https://github.com/LazyVim/LazyVim/issues/6697) ([1a40162](https://github.com/LazyVim/LazyVim/commit/1a401627146c66beaeb213f66dd02662f1006e82))
+
+## [15.12.1](https://github.com/LazyVim/LazyVim/compare/v15.12.0...v15.12.1) (2025-10-26)
+
+
+### Bug Fixes
+
+* **fzf-lua:** LSP keymaps. Closes [#6698](https://github.com/LazyVim/LazyVim/issues/6698) ([b5ea1e9](https://github.com/LazyVim/LazyVim/commit/b5ea1e9d25202e38a47f0b03ac35cc587c80e6d7))
+* **navic:** navic attach. Closes [#6702](https://github.com/LazyVim/LazyVim/issues/6702) ([d2d0c64](https://github.com/LazyVim/LazyVim/commit/d2d0c641ed443f8d2ea9e131ec90df59ea149d0a))
+
+## [15.12.0](https://github.com/LazyVim/LazyVim/compare/v15.11.0...v15.12.0) (2025-10-25)
+
+
+### Features
+
+* **keymaps:** added `<localleader>r` to run the selection/file with lua ([acc3538](https://github.com/LazyVim/LazyVim/commit/acc35382294d91b279b319510b906249a03b2764))
+* **lsp:** lsp keymaps can now be configured with `lsp-config.opts.servers['*'].keys` like for lsp servers ([cd8c497](https://github.com/LazyVim/LazyVim/commit/cd8c4977a0a8e80750ed6a10992f988f811c6417))
+* **lsp:** refactor lsp code to use `Snacks.util.lsp.on` ([3964433](https://github.com/LazyVim/LazyVim/commit/39644330624139dddb857ed833987c1cfd8432cf))
+* **sidekick:** added NES toggle `<leader>uN`. Closes [#6692](https://github.com/LazyVim/LazyVim/issues/6692) ([84ca4df](https://github.com/LazyVim/LazyVim/commit/84ca4dffdbf175a5e7bc39904157700854d8b2ad))
+
+
+### Bug Fixes
+
+* **chezmoi:** use vim.env.HOME instead of os.getenv("HOME") for Windows compatibility ([231e476](https://github.com/LazyVim/LazyVim/commit/231e476ec9292b56258f86e28773843cddaf34b8))
+* **clipboard:** connecting via vscpde's remote-ssh extension causes severe lag during yank and copy operations.  ([#6664](https://github.com/LazyVim/LazyVim/issues/6664)) ([5098a69](https://github.com/LazyVim/LazyVim/commit/5098a6987009199d5a5c4bfb8086d0fe4a94e0bb))
+* **lang.ember:** remove '.git' lang.ember ([#6685](https://github.com/LazyVim/LazyVim/issues/6685)) ([4796fb4](https://github.com/LazyVim/LazyVim/commit/4796fb4ac54744b69a45a6044655543b1c4231f0))
+* **root:** don't use fs_realpath on windows ([46e419d](https://github.com/LazyVim/LazyVim/commit/46e419d27efb5b7282a5ab17a49f4745ce23b55a))
+
+## [15.11.0](https://github.com/LazyVim/LazyVim/compare/v15.10.1...v15.11.0) (2025-10-23)
+
+
+### Features
+
+* **snacks_picker:** added gai/gao keymaps for calls incoming/outgoing ([b6e48a5](https://github.com/LazyVim/LazyVim/commit/b6e48a57fb4ad7a79f24646016926eef68ce3002))
+* **snacks.picker:** added `<leader>gD` to diff against merge base of branch/PR ([f0a91d9](https://github.com/LazyVim/LazyVim/commit/f0a91d9fa5f0cf27d6ba5fac759fa1d4e0df97a3))
+
+
+### Bug Fixes
+
+* **avante:** unset default keymaps ([#6657](https://github.com/LazyVim/LazyVim/issues/6657)) ([e8a1d8b](https://github.com/LazyVim/LazyVim/commit/e8a1d8b6286f82d75e5830de5ea93bd7622cec8c))
+* **extras:** remove custom formatter opts for dart/solidity. Closes [#6665](https://github.com/LazyVim/LazyVim/issues/6665) ([b38de4e](https://github.com/LazyVim/LazyVim/commit/b38de4e2fe4ad887cae1604fd9f1fbd230e0118f))
+
 ## [15.10.1](https://github.com/LazyVim/LazyVim/compare/v15.10.0...v15.10.1) (2025-10-20)
 
 
