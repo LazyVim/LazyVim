@@ -21,7 +21,6 @@ return {
     "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "matlab_language_server" })
       if formatter == "miss_hit" then
         vim.list_extend(opts.ensure_installed, { "miss_hit" })
       end
