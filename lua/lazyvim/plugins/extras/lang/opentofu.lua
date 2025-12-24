@@ -5,6 +5,13 @@ vim.filetype.add({
 })
 
 return {
+  recommended = function()
+    return LazyVim.extras.wants({
+      ft = "hcl",
+      root = ".tofu",
+    })
+  end,
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -20,10 +27,6 @@ return {
         tofu_ls = {},
       },
     },
-  },
-  {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "tofu-ls" } },
   },
   {
     "nvimtools/none-ls.nvim",
