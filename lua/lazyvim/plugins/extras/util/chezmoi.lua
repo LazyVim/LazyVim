@@ -55,7 +55,18 @@ return {
     "alker0/chezmoi.vim",
     init = function()
       vim.g["chezmoi#use_tmp_buffer"] = 1
-      vim.g["chezmoi#source_dir_path"] = vim.env.HOME .. "/.local/share/chezmoi"
+      -- Handle .chezmoiroot for users who organize source files in subdirectories
+      local source = vim.env.HOME .. "/.local/share/chezmoi"
+      local root_file = source .. "/.chezmoiroot"
+      local f = io.open(root_file, "r")
+      if f then
+        local root = f:read("*l")
+        f:close()
+        if root and root ~= "" then
+          source = source .. "/" .. vim.trim(root)
+        end
+      end
+      vim.g["chezmoi#source_dir_path"] = source
     end,
   },
   {
