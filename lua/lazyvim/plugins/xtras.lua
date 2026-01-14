@@ -59,9 +59,9 @@ for name, extra in pairs(defaults) do
   end
 end
 
--- Add user defined extras via `vim.g.lazyvim_user_extras`
-local user_defined_extras = vim.g.lazyvim_user_extras or {}
-for k, v in pairs(user_defined_extras) do
+-- Add user enabled extras via `vim.g.lazyvim_user_extras`
+local user_enabled_extras = vim.g.lazyvim_user_extras or {}
+for k, v in pairs(user_enabled_extras) do
   local is_atomic_value = type(k) == "number"
   local name = is_atomic_value and v or k
   local priority = is_atomic_value and default_prio or v
