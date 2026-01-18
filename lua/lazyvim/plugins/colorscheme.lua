@@ -1,5 +1,7 @@
 return {
-
+  {
+    "whatyouhide/vim-gotham"
+  },
   -- tokyonight
   {
     "folke/tokyonight.nvim",
