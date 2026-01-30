@@ -1,4 +1,5 @@
 return {
+  desc = "LunarVim-style buffer picker with letter key navigation",
   "Masalale/buffer-jump.nvim",
   opts = {
     width = 55,
