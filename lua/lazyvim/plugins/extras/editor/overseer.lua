@@ -13,7 +13,8 @@ return {
       "OverseerClose",
       "OverseerToggle",
       "OverseerShell",
-      "OverseerRun"
+      "OverseerRun",
+      "OverseerTaskAction",
     },
     opts = {
       dap = false,
