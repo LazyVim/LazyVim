@@ -51,7 +51,7 @@ function M.open(file, opts)
     end
     file = plugin.dir .. "/" .. file
   elseif opts.rtp then
-    file = vim.api.nvim_get_runtime_file(file, false)[1]
+    file = vim.fs.joinpath(vim.env.VIMRUNTIME, "doc", "news.txt")
   end
 
   if not file then
