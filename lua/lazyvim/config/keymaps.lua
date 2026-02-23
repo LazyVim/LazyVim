@@ -62,10 +62,34 @@ map(
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+map("n", "n", function()
+  local old = vim.g.snacks_scroll
+  vim.g.snacks_scroll = false
+
+  local key = (vim.v.searchforward and "n" or "N") .. "zv"
+
+  -- without `vim.schedule`, the mapping did not behave consistently, sometimes opening
+  -- the fold and highlighting the word and sometimes not
+  vim.schedule(function()
+    vim.g.snacks_scroll = old
+  end)
+
+  return key
+end, { expr = true, desc = "Next Search Result" })
 map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
 map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+map("n", "N", function()
+  local old = vim.g.snacks_scroll
+  vim.g.snacks_scroll = false
+
+  local key = (vim.v.searchforward and "n" or "N") .. "zv"
+
+  vim.schedule(function()
+    vim.g.snacks_scroll = old
+  end)
+
+  return key
+end, { expr = true, desc = "Prev Search Result" })
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
