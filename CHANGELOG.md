@@ -1,5 +1,12 @@
 # Changelog
 
+## [15.14.1](https://github.com/LazyVim/LazyVim/compare/v15.14.0...v15.14.1) (2026-03-01)
+
+
+### Reverts
+
+* **lsp:** revert changes for [#6456](https://github.com/LazyVim/LazyVim/issues/6456). Closes [#6779](https://github.com/LazyVim/LazyVim/issues/6779) ([d0fe8c8](https://github.com/LazyVim/LazyVim/commit/d0fe8c896f4dca003e8d56e2091ee5ec7da7af75))
+
 ## [15.14.0](https://github.com/LazyVim/LazyVim/compare/v15.13.0...v15.14.0) (2026-03-01)
 
 
