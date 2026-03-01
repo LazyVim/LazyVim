@@ -1,37 +1,94 @@
+-- A helper function making it easier to set "clever-f" behavior
+-- (use f/F or t/T instead of ;/, - see the plugin clever-f.vim).
+local function clever(...)
+  return require("leap.user").with_traversal_keys(...)
+end
+
+local function ft(key_specific_args)
+  require("leap").leap(vim.tbl_deep_extend("keep", key_specific_args, {
+    inputlen = 1,
+    inclusive = true,
+    opts = {
+      labels = "",
+      safe_labels = vim.fn.mode(true):match("no?") and "" or nil,
+    },
+  }))
+end
+
 return {
   -- disable flash
   { "folke/flash.nvim", enabled = false, optional = true },
 
-  -- easily jump to any location and enhanced f/t motions for Leap
+  -- Leap provides improved vim-sneak-style navigation with live label
+  -- preview and multi-window scope, and also extra features like remote
+  -- operations and incremental treesitter node selection.
   {
     url = "https://codeberg.org/andyg/leap.nvim.git",
-    enabled = true,
-    keys = function()
-      ---@type LazyKeysSpec[]
-      local ret = {}
-      for _, key in ipairs({ "f", "F", "t", "T" }) do
-        ret[#ret + 1] = { key, mode = { "n", "x", "o" } }
-      end
-      return ret
-    end,
-    opts = { labeled_modes = "nx" },
-  },
-  {
-    url = "https://codeberg.org/andyg/leap.nvim.git",
-    enabled = true,
     keys = {
-      { "s", mode = { "n", "x", "o" }, desc = "Leap Forward to" },
-      { "S", mode = { "n", "x", "o" }, desc = "Leap Backward to" },
-      { "gs", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
+      { "s", mode = { "n", "x", "o" }, "<Plug>(leap)", desc = "Leap" },
+      { "S", mode = { "n" }, "<Plug>(leap-from-window)", desc = "Leap from Window" },
+      -- Enhanced f/t motions.
+      -- To keep using `;`/`,` just set `opts = clever(";", ",")` everywhere.
+      {
+        "f",
+        mode = { "n", "x", "o" },
+        function()
+          ft({ opts = clever("f", "F") })
+        end,
+      },
+      {
+        "F",
+        mode = { "n", "x", "o" },
+        function()
+          ft({ backward = true, opts = clever("f", "F") })
+        end,
+      },
+      {
+        "t",
+        mode = { "n", "x", "o" },
+        function()
+          ft({ offset = -1, opts = clever("t", "T") })
+        end,
+      },
+      {
+        "T",
+        mode = { "n", "x", "o" },
+        function()
+          ft({ backward = true, offset = 1, opts = clever("t", "T") })
+        end,
+      },
+      -- See the documentation for extras, like setting up automatic
+      -- pasting after yank operations or defining remote text objects.
+      {
+        "gs",
+        mode = { "n", "o" },
+        function()
+          -- Automatically enter Visual mode when coming from Normal.
+          require("leap.remote").action({ input = vim.fn.mode(true):match("o") and "" or "v" })
+        end,
+        desc = "Remote Operation",
+      },
+      {
+        "R",
+        mode = { "x", "o" },
+        function()
+          require("leap.treesitter").select({ opts = clever("R", "r") })
+        end,
+        desc = "Leap Treesitter",
+      },
+    },
+    opts = {
+      -- Exclude whitespace and the middle of alphabetic words from preview.
+      preview = function(ch0, ch1, ch2)
+        return not (ch1:match("%s") or ch0:match("%a") and ch1:match("%a") and ch2:match("%a"))
+      end,
+      equivalence_classes = { " \t\n\r", "[({", "})]", "\"'`" },
     },
     config = function(_, opts)
       local leap = require("leap")
       for k, v in pairs(opts) do
         leap.opts[k] = v
       end
-      leap.add_default_mappings(true)
-      vim.keymap.del({ "x", "o" }, "x")
-      vim.keymap.del({ "x", "o" }, "X")
     end,
   },
 
