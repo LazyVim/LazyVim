@@ -56,6 +56,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "PlenaryTestPopup",
     "checkhealth",
+    "dap-float",
     "dbout",
     "gitsigns-blame",
     "grug-far",
