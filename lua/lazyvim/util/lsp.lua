@@ -70,9 +70,18 @@ M.action = setmetatable({}, {
 ---@class LspCommand: lsp.ExecuteCommandParams
 ---@field open? boolean
 ---@field handler? lsp.Handler
+---@field filter? string|vim.lsp.get_clients.Filter
+---@field title? string
 
 ---@param opts LspCommand
 function M.execute(opts)
+  local filter = opts.filter or {}
+  filter = type(filter) == "string" and { name = filter } or filter
+  local buf = vim.api.nvim_get_current_buf()
+
+  ---@cast filter vim.lsp.get_clients.Filter
+  local client = vim.lsp.get_clients(LazyVim.merge({}, filter, { bufnr = buf }))[1]
+
   local params = {
     command = opts.command,
     arguments = opts.arguments,
@@ -83,7 +92,8 @@ function M.execute(opts)
       params = params,
     })
   else
-    return vim.lsp.buf_request(0, "workspace/executeCommand", params, opts.handler)
+    vim.list_extend(params, { title = opts.title })
+    return client:exec_cmd(params, { bufnr = buf }, opts.handler)
   end
 end
 
