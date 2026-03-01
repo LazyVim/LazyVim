@@ -2,7 +2,7 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    event = "LazyFile",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "mason.nvim",
       { "mason-org/mason-lspconfig.nvim", config = function() end },
@@ -150,7 +150,7 @@ return {
       return ret
     end,
     ---@param opts PluginLspOpts
-    config = vim.schedule_wrap(function(_, opts)
+    config = function(_, opts)
       -- setup autoformat
       LazyVim.format.register(LazyVim.lsp.formatter())
 
@@ -259,7 +259,7 @@ return {
           automatic_enable = { exclude = mason_exclude },
         })
       end
-    end),
+    end,
   },
 
   -- cmdline tools and lsp servers
