@@ -42,6 +42,7 @@ M.renames = {
   ["markdown.nvim"] = "render-markdown.nvim",
   ["williamboman/mason.nvim"] = "mason-org/mason.nvim",
   ["williamboman/mason-lspconfig.nvim"] = "mason-org/mason-lspconfig.nvim",
+  ["ggandor/leap.nvim"] = "https://codeberg.org/andyg/leap.nvim.git",
 }
 
 function M.save_core()
