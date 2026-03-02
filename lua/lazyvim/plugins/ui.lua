@@ -39,7 +39,7 @@ return {
             text_align = "left",
           },
           {
-            filetype = "snacks_layout_box",
+            filetype = "snacks_explorer",
           },
         },
         ---@param opts bufferline.IconFetcherOpts
