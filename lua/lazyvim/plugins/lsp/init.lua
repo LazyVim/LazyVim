@@ -155,7 +155,14 @@ return {
       LazyVim.format.register(LazyVim.lsp.formatter())
 
       -- setup keymaps
-      for server, server_opts in pairs(opts.servers) do
+      local keys = {}
+      for server in pairs(opts.servers) do
+        table.insert(keys, server)
+      end
+      table.sort(keys)
+
+      for _, server in ipairs(keys) do
+        local server_opts = opts.servers[server]
         if type(server_opts) == "table" and server_opts.keys then
           require("lazyvim.plugins.lsp.keymaps").set({ name = server ~= "*" and server or nil }, server_opts.keys)
         end
