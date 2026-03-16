@@ -267,7 +267,27 @@ return {
 
     "mason-org/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = {
+      {
+        "<leader>cm",
+        function()
+          -- Close any floating windows that might be the lazy menu
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local config = vim.api.nvim_win_get_config(win)
+            if config.relative ~= "" then
+              local buf = vim.api.nvim_win_get_buf(win)
+              local bufname = vim.api.nvim_buf_get_name(buf)
+              -- Close floating windows that are likely from lazy.nvim
+              if bufname:find("lazy", 1, true) or vim.bo[buf].filetype == "lazy" then
+                vim.api.nvim_win_close(win, false)
+              end
+            end
+          end
+          vim.cmd("Mason")
+        end,
+        desc = "Mason",
+      },
+    },
     build = ":MasonUpdate",
     opts_extend = { "ensure_installed" },
     opts = {
