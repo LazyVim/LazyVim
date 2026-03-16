@@ -4,7 +4,7 @@ return {
   {
     "Exafunction/codeium.nvim",
     cmd = "Codeium",
-    event = "InsertEnter",
+    event = "BufReadPost",
     build = ":Codeium Auth",
     opts = {
       enable_cmp_source = vim.g.ai_cmp,
@@ -52,7 +52,13 @@ return {
     optional = true,
     event = "VeryLazy",
     opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.cmp_source("codeium"))
+      table.insert(opts.sections.lualine_x, 2, LazyVim.lualine.status(LazyVim.config.icons.kinds.Codeium, function()
+        local codeium_enabled = package.loaded["codeium"] ~= nil
+        if not codeium_enabled then
+          return
+        end
+        return "ok"
+      end))
     end,
   },
 
