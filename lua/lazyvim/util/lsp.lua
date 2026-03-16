@@ -76,7 +76,14 @@ function M.execute(opts)
   local buf = vim.api.nvim_get_current_buf()
 
   ---@cast filter vim.lsp.get_clients.Filter
-  local client = vim.lsp.get_clients(LazyVim.merge({}, filter, { bufnr = buf }))[1]
+  local clients = vim.lsp.get_clients(LazyVim.merge({}, filter, { bufnr = buf }))
+  local client = clients[1]
+
+  if not client then
+    local filter_name = type(opts.filter) == "string" and opts.filter or (filter.name or "any")
+    LazyVim.warn("No LSP client found for filter: " .. filter_name, { title = "LSP Execute" })
+    return
+  end
 
   local params = {
     command = opts.command,
@@ -89,7 +96,14 @@ function M.execute(opts)
     })
   else
     vim.list_extend(params, { title = opts.title })
-    return client:exec_cmd(params, { bufnr = buf }, opts.handler)
+    local ok, result = pcall(function()
+      return client:exec_cmd(params, { bufnr = buf }, opts.handler)
+    end)
+    if not ok then
+      LazyVim.warn("Failed to execute command '" .. opts.command .. "': " .. tostring(result), { title = "LSP Execute" })
+      return
+    end
+    return result
   end
 end
 
