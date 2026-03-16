@@ -14,6 +14,7 @@ return {
       "OverseerClose",
       "OverseerToggle",
       "OverseerRun",
+      "OverseerShell",
       "OverseerTaskAction",
     },
     opts = {
@@ -40,6 +41,7 @@ return {
       { "<leader>ow", "<cmd>OverseerToggle!<cr>",    desc = "Task list" },
       { "<leader>oo", "<cmd>OverseerRun<cr>",        desc = "Run task" },
       { "<leader>ot", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
+      { "<leader>os", "<cmd>OverseerShell<cr>",      desc = "Run shell command" },
     },
   },
   {
