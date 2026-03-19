@@ -78,7 +78,11 @@ function M.realpath(path)
   if path == "" or path == nil then
     return nil
   end
-  path = vim.fn.has("win32") == 0 and vim.uv.fs_realpath(path) or path
+  if vim.fn.has("win32") == 0 then
+    path = vim.uv.fs_realpath(path)
+  elseif path == "." then
+    path = vim.uv.cwd()
+  end
   return LazyVim.norm(path)
 end
 
