@@ -51,7 +51,9 @@ function M.open(file, opts)
     end
     file = plugin.dir .. "/" .. file
   elseif opts.rtp then
-    file = vim.api.nvim_get_runtime_file(file, false)[1]
+    -- first check if file exists in VIMRUNTIME, then check the full runtimepath
+    local path = vim.env.VIMRUNTIME .. "/" .. file --[[@as string]]
+    file = vim.uv.fs_stat(path) and path or vim.api.nvim_get_runtime_file(file, false)[1]
   end
 
   if not file then

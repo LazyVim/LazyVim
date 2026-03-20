@@ -1,5 +1,31 @@
 # Changelog
 
+## [15.14.0](https://github.com/LazyVim/LazyVim/compare/v15.13.0...v15.14.0) (2026-03-01)
+
+
+### Features
+
+* **bufferline:** add &lt;leader&gt;bj keymap for BufferLinePick ([#6968](https://github.com/LazyVim/LazyVim/issues/6968)) ([a50072f](https://github.com/LazyVim/LazyVim/commit/a50072fa16cfc1f00b1ae282150bc667f1d1e096))
+* **dap:** close dap-float window with `q`. ([#6884](https://github.com/LazyVim/LazyVim/issues/6884)) ([87c0027](https://github.com/LazyVim/LazyVim/commit/87c002789220d922bb94637c690b444bd1ba5611))
+* **treesitter:** support query table in treesitter-textobjects mappings ([#6736](https://github.com/LazyVim/LazyVim/issues/6736)) ([42c9f71](https://github.com/LazyVim/LazyVim/commit/42c9f7152b9bd1a4f739b115390370c208dc2a55))
+
+
+### Bug Fixes
+
+* **editor.overseer:** migrate to v2 ([#6907](https://github.com/LazyVim/LazyVim/issues/6907)) ([27824d7](https://github.com/LazyVim/LazyVim/commit/27824d79a952c54cd9d93c85a699543e4a031dd4))
+* **fzf:** correct git_diff description from 'hunks' to 'files' ([#6983](https://github.com/LazyVim/LazyVim/issues/6983)) ([e77d4ab](https://github.com/LazyVim/LazyVim/commit/e77d4ab0d6574efb7142ec40f4f5dcff750a3ee9))
+* **lang.clang:** fix `clangd_extensions.nvim` ([#6804](https://github.com/LazyVim/LazyVim/issues/6804)) ([730b691](https://github.com/LazyVim/LazyVim/commit/730b69114d56834f4499fd3e5aecf18920234c39))
+* **leap:** update urls to new leap.nvim repo. Fixes [#6958](https://github.com/LazyVim/LazyVim/issues/6958) ([244af66](https://github.com/LazyVim/LazyVim/commit/244af66f8b4e376d60c6604f9b3fd758165f5799))
+* **news:** resolve news.txt from $VIMRUNTIME first ([60fea62](https://github.com/LazyVim/LazyVim/commit/60fea6236e342e1f4aa34d078461746d5f587c74)), closes [#7019](https://github.com/LazyVim/LazyVim/issues/7019)
+* **python:** set venv-selector.nvim override_notify = false ([#6936](https://github.com/LazyVim/LazyVim/issues/6936)) ([b2917bd](https://github.com/LazyVim/LazyVim/commit/b2917bd3bfe61c40e686f5a2c20f540430945b73))
+* **terminal:** add -NoProfile to powershell shellcmdflag ([#6757](https://github.com/LazyVim/LazyVim/issues/6757)) ([a507822](https://github.com/LazyVim/LazyVim/commit/a507822c0f67df661d1411f9274a65ca9cc832f5))
+* **terminal:** partially revert previous mappings ([#6770](https://github.com/LazyVim/LazyVim/issues/6770)) ([c64a617](https://github.com/LazyVim/LazyVim/commit/c64a61734fc9d45470a72603395c02137802bc6f))
+* **treesitter:** fix `]c` textobject mappings when in diff mode ([#6911](https://github.com/LazyVim/LazyVim/issues/6911)) ([16713e6](https://github.com/LazyVim/LazyVim/commit/16713e6e1200eb90ad4b4a394bb7254fb5612484))
+* **treesitter:** remove deleted jsonc parser ([#6848](https://github.com/LazyVim/LazyVim/issues/6848)) ([92607e7](https://github.com/LazyVim/LazyVim/commit/92607e79e09a2761d930877a09edc00438b97fc3))
+* **util.lsp:** `LazyVim.lsp.execute` only request single client ([#6904](https://github.com/LazyVim/LazyVim/issues/6904)) ([a4e19e9](https://github.com/LazyVim/LazyVim/commit/a4e19e9c9c939c1a3fc2f30ffefe37311d3ecadf))
+* **util.lsp:** pass `formatters_by_ft` to `opts` ([#6894](https://github.com/LazyVim/LazyVim/issues/6894)) ([03f1293](https://github.com/LazyVim/LazyVim/commit/03f1293e33541073288f23abdaf581a8e0dec4c4))
+* **vtsls:** remove redundant deno logic, upstreamed in `nvim-lspconfig` ([#7011](https://github.com/LazyVim/LazyVim/issues/7011)) ([8652c95](https://github.com/LazyVim/LazyVim/commit/8652c9570377678a78ecb19dbd33695e0e4ec4fc))
+
 ## [15.13.0](https://github.com/LazyVim/LazyVim/compare/v15.12.2...v15.13.0) (2025-11-01)
 
 

@@ -4,7 +4,7 @@ return {
 
   -- easily jump to any location and enhanced f/t motions for Leap
   {
-    "ggandor/flit.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim.git",
     enabled = true,
     keys = function()
       ---@type LazyKeysSpec[]
@@ -17,7 +17,7 @@ return {
     opts = { labeled_modes = "nx" },
   },
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim.git",
     enabled = true,
     keys = {
       { "s", mode = { "n", "x", "o" }, desc = "Leap Forward to" },

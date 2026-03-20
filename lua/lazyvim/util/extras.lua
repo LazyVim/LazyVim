@@ -65,7 +65,7 @@ function M.get()
     if root then
       LazyVim.walk(root, function(path, name, type)
         if (type == "file" or type == "link") and name:match("%.lua$") then
-          name = path:sub(#root + 2, -5):gsub("/", ".")
+          name = path:sub(#root + 2, -5):gsub("/", "."):gsub("%.init$", "")
           local ok, extra = pcall(M.get_extra, source, source.module .. "." .. name)
           if ok then
             extras[#extras + 1] = extra

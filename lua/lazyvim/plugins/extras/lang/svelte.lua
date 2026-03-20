@@ -23,15 +23,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        svelte = {
-          keys = {
-            {
-              "<leader>co",
-              LazyVim.lsp.action["source.organizeImports"],
-              desc = "Organize Imports",
-            },
-          },
-        },
+        svelte = {},
       },
     },
   },

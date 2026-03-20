@@ -28,6 +28,7 @@ M.deprecated_extras = {
 }
 M.renamed_extras = {
   ["lazyvim.plugins.extras.lang.omnisharp"] = "lazyvim.plugins.extras.lang.dotnet",
+  ["lazyvim.plugins.extras.formatting.biome"] = "lazyvim.plugins.extras.lang.typescript.biome",
 }
 
 M.deprecated_modules = {}
@@ -42,6 +43,7 @@ M.renames = {
   ["markdown.nvim"] = "render-markdown.nvim",
   ["williamboman/mason.nvim"] = "mason-org/mason.nvim",
   ["williamboman/mason-lspconfig.nvim"] = "mason-org/mason-lspconfig.nvim",
+  ["ggandor/leap.nvim"] = "https://codeberg.org/andyg/leap.nvim.git",
 }
 
 function M.save_core()

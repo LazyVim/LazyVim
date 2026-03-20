@@ -77,10 +77,12 @@ describe("Extra", function()
       it("it has no renamed plugins", function()
         for _, p in pairs(spec.plugins) do
           local short_url = p[1]
-          assert(
-            not LazyVim.plugin.renames[short_url],
-            "Plugin " .. short_url .. " has been renamed to " .. (LazyVim.plugin.renames[short_url] or "")
-          )
+          if short_url then
+            assert(
+              not LazyVim.plugin.renames[short_url],
+              "Plugin " .. short_url .. " has been renamed to " .. (LazyVim.plugin.renames[short_url] or "")
+            )
+          end
         end
       end)
 

@@ -82,8 +82,8 @@ return {
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<c-.>",
-        function() require("sidekick.cli").toggle() end,
-        desc = "Sidekick Toggle",
+        function() require("sidekick.cli").focus() end,
+        desc = "Sidekick Focus",
         mode = { "n", "t", "i", "x" },
       },
       {
