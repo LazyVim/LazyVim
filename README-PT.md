@@ -64,7 +64,7 @@ como necessário, junto com a conveniência de um setup pré-configurado.
 
 ## 🚀 Como Começar
 
-Podes encontrar uma template **LazyVim** starter para começar, [aqui](https://github.com/LazyVim/starter)
+Podes encontrar um template **LazyVim** starter para começar, [aqui](https://github.com/LazyVim/starter)
 
 <details><summary>Experimenta com docker</summary>
 
