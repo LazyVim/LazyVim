@@ -121,7 +121,7 @@ Existe um excelente video criado por [@elijahmanor](https://github.com/elijahman
 Os ficheiros no diretório **config** serão carregados automaticamente
 no momento apropriado, por isso não é necessário carregar os plugins manualmente.
 **LazyVim** vem com um conjunto de ficheiros
-que serão carregados **_antes_** dos teus. Lẽ mais [aqui](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
+que serão carregados **_antes_** dos teus. Lê mais [aqui](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
 
 Tu podes acrescentar a tua configuração em `lua/plugins`. Todos os ficheiros
 neste diretório serão carregados automaticamente por [lazy.nvim](https://github.com/folke/lazy.nvim)
