@@ -73,7 +73,7 @@ function M.bufpath(buf)
   if vim.fn.has("win32") == 1 and path and path:find(":/.*:/") then
     path = path:gsub("^.-%:/", "", 1)
   end
-  return LazyVim.root.realpath(path)
+  return M.realpath(path)
 end
 
 function M.cwd()
