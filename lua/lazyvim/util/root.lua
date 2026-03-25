@@ -67,9 +67,13 @@ function M.detectors.pattern(buf, patterns)
 end
 
 function M.bufpath(buf)
-  local path = LazyVim.norm(vim.api.nvim_buf_get_name(assert(buf)))
-  -- Use pattern to extract path for terminal windows
-  return M.realpath(path and path:match("^term:/([^:]+)") or path)
+  local name = LazyVim.norm(vim.api.nvim_buf_get_name(assert(buf)))
+  local path = name and name:match("^term:/(.+/%d+):") or name
+  -- fix duplicated driver letters for Windows
+  if vim.fn.has("win32") == 1 and path and path:find(":/.*:/") then
+    path = path:gsub("^.-%:/", "", 1)
+  end
+  return LazyVim.root.realpath(path)
 end
 
 function M.cwd()
