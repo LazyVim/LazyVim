@@ -116,7 +116,7 @@ Existe um excelente video criado por [@elijahmanor](https://github.com/elijahman
 
 [![Vê o video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
 
-## 📂 Extrutura de ficheiros
+## 📂 Estrutura de ficheiros
 
 Os ficheiros no diretório **config** serão carregados automaticamente
 no momento apropriado, por isso não é necessário carregar os plugins manualmente.
