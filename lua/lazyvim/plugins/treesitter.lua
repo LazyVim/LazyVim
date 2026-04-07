@@ -6,6 +6,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
+    commit = vim.fn.has("nvim-0.12") == 0 and "7caec274fd19c12b55902a5b795100d21531391f" or nil,
     version = false, -- last release is way too old and doesn't work on Windows
     build = function()
       local TS = require("nvim-treesitter")
@@ -37,7 +38,6 @@ return {
         "javascript",
         "jsdoc",
         "json",
-        "jsonc",
         "lua",
         "luadoc",
         "luap",
@@ -181,15 +181,16 @@ return {
             local desc = table.concat(parts, " or ")
             desc = (key:sub(1, 1) == "[" and "Prev " or "Next ") .. desc
             desc = desc .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
-            if not (vim.wo.diff and key:find("[cC]")) then
-              vim.keymap.set({ "n", "x", "o" }, key, function()
-                require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
-              end, {
-                buffer = buf,
-                desc = desc,
-                silent = true,
-              })
-            end
+            vim.keymap.set({ "n", "x", "o" }, key, function()
+              if vim.wo.diff and key:find("[cC]") then
+                return vim.cmd("normal! " .. key)
+              end
+              require("nvim-treesitter-textobjects.move")[method](query, "textobjects")
+            end, {
+              buffer = buf,
+              desc = desc,
+              silent = true,
+            })
           end
         end
       end

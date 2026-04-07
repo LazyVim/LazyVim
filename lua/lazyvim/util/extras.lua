@@ -65,7 +65,7 @@ function M.get()
     if root then
       LazyVim.walk(root, function(path, name, type)
         if (type == "file" or type == "link") and name:match("%.lua$") then
-          name = path:sub(#root + 2, -5):gsub("/", ".")
+          name = path:sub(#root + 2, -5):gsub("/", "."):gsub("%.init$", "")
           local ok, extra = pcall(M.get_extra, source, source.module .. "." .. name)
           if ok then
             extras[#extras + 1] = extra
@@ -113,6 +113,13 @@ function M.get_extra(source, modname)
     recommended = recommended() or false
   elseif type(recommended) == "table" then
     recommended = M.wants(recommended)
+  end
+
+  -- language extras that are disabled because a conflict with another extra is enabled are not recommended
+  local defaults = LazyVim.config.get_defaults()
+  local def = defaults[modname]
+  if def and def.enabled == false and vim.startswith(modname, "lazyvim.plugins.extras.lang.") then
+    recommended = false
   end
 
   ---@type LazyExtra

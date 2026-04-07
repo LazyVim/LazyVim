@@ -3,7 +3,7 @@ _G.LazyVim = require("lazyvim.util")
 ---@class LazyVimConfig: LazyVimOptions
 local M = {}
 
-M.version = "15.13.0" -- x-release-please-version
+M.version = "15.15.0" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
@@ -348,13 +348,81 @@ function M.init()
   M.json.load()
 end
 
----@alias LazyVimDefault {name: string, extra: string, enabled?: boolean, origin?: "global" | "default" | "extra" }
-
+---@alias LazyVimDefault {name: string, group: string, extra: string, import: string, enabled?: boolean, origin?: "global" | "default" | "extra" }
+---
 local default_extras ---@type table<string, LazyVimDefault>
+
+---@param name string
+---@param extras LazyVimDefault[]
+function M.register_defaults(name, extras)
+  assert(default_extras, "defaults should be loaded by now, this should never happen")
+  local valid = vim.tbl_map(function(extra)
+    return extra.name
+  end, extras) --[[@as string[] ]]
+
+  local origin = "default"
+  local ret ---@type LazyVimDefault?
+  local use ---@type string?
+
+  local global = vim.g["lazyvim_" .. name]
+  if vim.tbl_contains(valid, global) then
+    origin = "global" -- was set by the user in their config
+    use = global
+  else
+    if global and global ~= "auto" then
+      vim.notify(
+        ("Invalid value for `vim.g.lazyvim_%s`: `%s`\nValid options are: %s"):format(
+          name,
+          global,
+          table.concat(valid, ", ")
+        ),
+        vim.log.levels.ERROR,
+        { title = "LazyVim" }
+      )
+    end
+    for _, extra in ipairs(extras) do
+      if LazyVim.has_extra(extra.extra) then
+        use = extra.name -- was imported by the user in their lazy spec or added by LazyExtras
+        origin = "extra"
+        break
+      end
+    end
+  end
+
+  use = use or valid[1] -- fallback to the first one if nothing was set
+
+  for _, extra in ipairs(extras) do
+    local import = "lazyvim.plugins.extras." .. extra.extra
+    extra = vim.deepcopy(extra)
+    extra.enabled = extra.name == use
+    extra.import = import
+    extra.group = name
+    if extra.enabled then
+      extra.origin = origin
+      ret = extra
+    end
+    default_extras[import] = extra
+  end
+
+  return assert(ret, "One of the extras should be enabled, this should never happen")
+end
+
+---@param group string
+---@return LazyVimDefault?
+function M.get_default(group)
+  for _, extra in pairs(M.get_defaults()) do
+    if extra.group == group and extra.enabled then
+      return extra
+    end
+  end
+end
+
 function M.get_defaults()
   if default_extras then
     return default_extras
   end
+  default_extras = {}
+
   ---@type table<string, LazyVimDefault[]>
   local checks = {
     picker = {
@@ -378,36 +446,10 @@ function M.get_defaults()
     table.insert(checks.explorer, 1, table.remove(checks.explorer, 2))
   end
 
-  default_extras = {}
-  for name, check in pairs(checks) do
-    local valid = {} ---@type string[]
-    for _, extra in ipairs(check) do
-      if extra.enabled ~= false then
-        valid[#valid + 1] = extra.name
-      end
-    end
-    local origin = "default"
-    local use = vim.g["lazyvim_" .. name]
-    use = vim.tbl_contains(valid, use or "auto") and use or nil
-    origin = use and "global" or origin
-    for _, extra in ipairs(use and {} or check) do
-      if extra.enabled ~= false and LazyVim.has_extra(extra.extra) then
-        use = extra.name
-        break
-      end
-    end
-    origin = use and "extra" or origin
-    use = use or valid[1]
-    for _, extra in ipairs(check) do
-      local import = "lazyvim.plugins.extras." .. extra.extra
-      extra = vim.deepcopy(extra)
-      extra.enabled = extra.name == use
-      if extra.enabled then
-        extra.origin = origin
-      end
-      default_extras[import] = extra
-    end
+  for name, extras in pairs(checks) do
+    M.register_defaults(name, extras)
   end
+
   return default_extras
 end
 

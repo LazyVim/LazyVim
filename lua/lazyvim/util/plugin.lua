@@ -28,6 +28,7 @@ M.deprecated_extras = {
 }
 M.renamed_extras = {
   ["lazyvim.plugins.extras.lang.omnisharp"] = "lazyvim.plugins.extras.lang.dotnet",
+  ["lazyvim.plugins.extras.formatting.biome"] = "lazyvim.plugins.extras.lang.typescript.biome",
 }
 
 M.deprecated_modules = {}
@@ -42,6 +43,7 @@ M.renames = {
   ["markdown.nvim"] = "render-markdown.nvim",
   ["williamboman/mason.nvim"] = "mason-org/mason.nvim",
   ["williamboman/mason-lspconfig.nvim"] = "mason-org/mason-lspconfig.nvim",
+  ["ggandor/leap.nvim"] = "https://codeberg.org/andyg/leap.nvim.git",
 }
 
 function M.save_core()
@@ -109,13 +111,41 @@ function M.fix_imports()
       )
       spec.import = rename
     end
-    local dep = M.deprecated_extras[spec and spec.import]
+    local dep = M.deprecated_extras[spec.import]
     if dep then
       dep = dep .. "\n" .. "Please remove the extra from `lazyvim.json` to hide this warning."
       LazyVim.warn(dep, { title = "LazyVim", once = true, stacktrace = true, stacklevel = 6 })
       return false
     end
+
+    local modname = spec.import
+    if type(modname) == "string" and vim.startswith(modname, "lazyvim.plugins.extras.") then
+      M.single_import(spec)
+    end
   end)
+end
+
+---@param spec LazySpecImport
+function M.single_import(spec)
+  local modname = spec.import
+  if type(modname) ~= "string" then
+    return
+  end
+  spec.name = modname
+  spec.import = function()
+    local modinfo = vim.loader.find(modname)[1]
+    local modpath = modinfo and modinfo.modpath
+    local mod, err = loadfile(modpath)
+    if mod then
+      local ret, foo = mod()
+      if foo then
+        return nil, "Spec module returned more than one value. Expected a single value."
+      end
+      return ret
+    else
+      return nil, err
+    end
+  end
 end
 
 function M.fix_renames()

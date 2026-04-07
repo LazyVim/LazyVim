@@ -70,60 +70,58 @@ return {
     end,
   },
 
-  vim.g.ai_cmp
-      and {
-        -- copilot cmp source
+  vim.g.ai_cmp and {
+    -- copilot cmp source
+    {
+      "hrsh7th/nvim-cmp",
+      optional = true,
+      dependencies = { -- this will only be evaluated if nvim-cmp is enabled
         {
-          "hrsh7th/nvim-cmp",
-          optional = true,
-          dependencies = { -- this will only be evaluated if nvim-cmp is enabled
+          "zbirenbaum/copilot-cmp",
+          opts = {},
+          config = function(_, opts)
+            local copilot_cmp = require("copilot_cmp")
+            copilot_cmp.setup(opts)
+            -- attach cmp source whenever copilot attaches
+            -- fixes lazy-loading issues with the copilot cmp source
+            Snacks.util.lsp.on({ name = "copilot" }, function()
+              copilot_cmp._on_insert_enter({})
+            end)
+          end,
+          specs = {
             {
-              "zbirenbaum/copilot-cmp",
-              opts = {},
-              config = function(_, opts)
-                local copilot_cmp = require("copilot_cmp")
-                copilot_cmp.setup(opts)
-                -- attach cmp source whenever copilot attaches
-                -- fixes lazy-loading issues with the copilot cmp source
-                Snacks.util.lsp.on({ name = "copilot" }, function()
-                  copilot_cmp._on_insert_enter({})
-                end)
-              end,
-              specs = {
-                {
-                  "hrsh7th/nvim-cmp",
-                  optional = true,
-                  ---@param opts cmp.ConfigSchema
-                  opts = function(_, opts)
-                    table.insert(opts.sources, 1, {
-                      name = "copilot",
-                      group_index = 1,
-                      priority = 100,
-                    })
-                  end,
-                },
-              },
-            },
-          },
-        },
-        {
-          "saghen/blink.cmp",
-          optional = true,
-          dependencies = { "fang2hou/blink-copilot" },
-          opts = {
-            sources = {
-              default = { "copilot" },
-              providers = {
-                copilot = {
+              "hrsh7th/nvim-cmp",
+              optional = true,
+              ---@param opts cmp.ConfigSchema
+              opts = function(_, opts)
+                table.insert(opts.sources, 1, {
                   name = "copilot",
-                  module = "blink-copilot",
-                  score_offset = 100,
-                  async = true,
-                },
-              },
+                  group_index = 1,
+                  priority = 100,
+                })
+              end,
             },
           },
         },
-      }
-    or nil,
+      },
+    },
+    {
+      "saghen/blink.cmp",
+      optional = true,
+      dependencies = { "fang2hou/blink-copilot" },
+      opts = {
+        sources = {
+          default = { "copilot" },
+          providers = {
+            copilot = {
+              name = "copilot",
+              module = "blink-copilot",
+              score_offset = 100,
+              async = true,
+            },
+          },
+        },
+      },
+    },
+  } or nil,
 }
