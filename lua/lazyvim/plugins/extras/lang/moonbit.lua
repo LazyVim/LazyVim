@@ -11,7 +11,7 @@ return {
     opts = { ensure_installed = { "moonbit" } },
   },
 
-  -- TODO: Enable once moonbit LSP is available in mason registry
+  -- TODO: Enable once moonbit LSP is available in mason registry.
   -- https://github.com/mason-org/mason-registry
   -- {
   --   "mason-org/mason.nvim",
