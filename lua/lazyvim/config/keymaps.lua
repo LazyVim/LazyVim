@@ -94,6 +94,18 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
+-- copy file path
+map("n", "<leader>fy", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end, { desc = "Copy File Path" })
+map("n", "<leader>fY", function()
+  local path = vim.fn.expand("%:~:.")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end, { desc = "Copy Relative File Path" })
+
 -- location list
 map("n", "<leader>xl", function()
   local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
