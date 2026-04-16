@@ -112,7 +112,7 @@ map("n", "<leader>fY", function()
   end
   vim.fn.setreg("+", path)
   vim.notify("Copied: " .. path)
-end, { desc = "Copy Relative File Path" })
+end, { desc = "Copy Short File Path" })
 
 -- location list
 map("n", "<leader>xl", function()
