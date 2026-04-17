@@ -184,6 +184,9 @@ return {
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+
+        map("n", "<leader>xh", gs.setqflist, "Git hunks (file)")
+        map("n", "<leader>xH", function() gs.setqflist("all") end, "Git hunks (all)")
       end,
     },
   },
@@ -199,6 +202,24 @@ return {
           require("gitsigns").toggle_signs(state)
         end,
       }):map("<leader>uG")
+      Snacks.toggle({
+        name = "Git Line Blame",
+        get = function()
+          return require("gitsigns.config").config.current_line_blame
+        end,
+        set = function(state)
+          require("gitsigns").toggle_current_line_blame(state)
+        end,
+      }):map("<leader>uB")
+      Snacks.toggle({
+        name = "Git Word Diff",
+        get = function()
+          return require("gitsigns.config").config.word_diff
+        end,
+        set = function(state)
+          require("gitsigns").toggle_word_diff(state)
+        end,
+      }):map("<leader>uW")
     end,
   },
 

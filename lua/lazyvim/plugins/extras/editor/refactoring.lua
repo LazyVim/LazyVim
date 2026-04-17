@@ -47,6 +47,15 @@ return {
         expr = true,
       },
       {
+        "<leader>rI",
+        function()
+          return require("refactoring").refactor("Inline Function")
+        end,
+        mode = { "n", "x" },
+        desc = "Inline Function",
+        expr = true,
+      },
+      {
         "<leader>rb",
         function()
           return require("refactoring").refactor("Extract Block")
@@ -112,14 +121,6 @@ return {
         mode = { "n", "x" },
         desc = "Extract Variable",
         expr = true,
-      },
-      {
-        "<leader>rp",
-        function()
-          require("refactoring").debug.print_var()
-        end,
-        mode = { "n", "x" },
-        desc = "Debug Print Variable",
       },
     },
     opts = {

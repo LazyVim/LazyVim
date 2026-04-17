@@ -153,6 +153,7 @@ Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark B
 Snacks.toggle.dim():map("<leader>uD")
 Snacks.toggle.animate():map("<leader>ua")
 Snacks.toggle.indent():map("<leader>ug")
+Snacks.toggle.codelens():map("<leader>uH")
 Snacks.toggle.scroll():map("<leader>uS")
 Snacks.toggle.profiler():map("<leader>dpp")
 Snacks.toggle.profiler_highlights():map("<leader>dph")
