@@ -29,6 +29,17 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
+      if not opts.servers.vtsls or opts.servers.vtsls.enabled == false then
+        LazyVim.warn({
+          "The `lang.vue` extras requires `vtsls` for TypeScript integration.",
+          "Please enable `vtsls` so `lang.vue` works correctly.",
+        }, {
+          title = "LazyVim",
+          once = true,
+        })
+        return
+      end
+
       table.insert(opts.servers.vtsls.filetypes, "vue")
       LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
