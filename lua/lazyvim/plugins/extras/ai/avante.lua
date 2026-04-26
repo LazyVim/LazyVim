@@ -34,7 +34,7 @@ return {
       { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       { "<leader>aa", "<cmd>AvanteAsk<CR>", desc = "Ask Avante" },
       { "<leader>ac", "<cmd>AvanteChat<CR>", desc = "Chat with Avante" },
-      { "<leader>ae", "<cmd>AvanteEdit<CR>", mode = { "n", "v" }, desc = "Edit Avante" },
+      { "<leader>ae", "<cmd>AvanteEdit<CR>", mode = { "n", "x" }, desc = "Edit Avante" },
       { "<leader>af", "<cmd>AvanteFocus<CR>", desc = "Focus Avante" },
       { "<leader>ah", "<cmd>AvanteHistory<CR>", desc = "Avante History" },
       { "<leader>am", "<cmd>AvanteModels<CR>", desc = "Select Avante Model" },
