@@ -75,7 +75,7 @@
 - Neovim >= **0.11.2** ( باشد **LuaJIT** باید ساخته شده با )
 - Git >= **2.19.0** ( های جزئی clone  برای پشتیبانی از)
 - فونت [Nerd Font](https://www.nerdfonts.com/) **_(اختیاری)_**
-- یک کامپایلر C: برای اطلاعات بیشتر راجب nvim-treesittere، [اینجا](https://github.com/nvim-treesitter/nvim-treesitter#requirements)را ببیند.
+- یک کامپایلر C برای اطلاعات بیشتر راجب nvim-treesittere، [اینجا](https://github.com/nvim-treesitter/nvim-treesitter#requirements)را ببیند.
 
 ## 🚀 شروع  به کار
 
@@ -104,8 +104,7 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
   mv ~/.local/share/nvim ~/.local/share/nvim.bak
   ```
 
-- Clone the starter
-
+- قالب اولیه را کلون کنید.
   ```sh
   git clone https://github.com/LazyVim/starter ~/.config/nvim
   ```
@@ -147,10 +146,6 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 ---
 
-[@dusty-phillips](https://github.com/dusty-phillips) یک کتاب بسیار پرمحتوا که توسط
-[LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes)
-نوشته شده که به صورت آنلاین در دسترس است.
-
 ## 📂 ساختار فایل
 
 فایل های داخل پیکربندی به صورت خودکار در زمان مناسب بارگذاری می شوند، شما نیاز نیست که به صورت دستی بارگذاری کنید.
@@ -176,4 +171,4 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 ## ⚙️ پیکربندی
 
-رجوع کنید به [اسناد](https://lazyvim.github.io
+رجوع کنید به [اسناد](https://lazyvim.github.io)
