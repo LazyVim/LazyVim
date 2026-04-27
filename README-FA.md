@@ -37,17 +37,9 @@
     </a>
 </div>
 
-<<<<<<< HEAD
 
 این پیکربندی با نام LazyVim، که قدرت گرفته شده از Neovim هست [💤 lazy.nvim](https://github.com/folke/lazy.nvim)، تا سفارشی سازی و توسعه پیکربندی را برای شما آسان تر کند.
 به جای اینکه بخواهید بین شروع از صفر یا استفاده از یک توزیع از قبل ساخته شده انتخاب کنید، LazyVim بهترین هر دو جهان را به شما پیشنهاد میدهد - انعطاف اینکه پیکربندی را طبق نیازتان تغییر بدین، همراه با سادگی تنظیمات از قبل پیکربندی شده.
-=======
-LazyVim is a Neovim setup powered by [💤 lazy.nvim](https://github.com/folke/lazy.nvim)
-to make it easy to customize and extend your config.
-Rather than having to choose between starting from scratch or using a
-pre-made distro, LazyVim offers the best of both worlds - the flexibility
-to tweak your config as needed, along with the convenience of a pre-configured setup.
->>>>>>> d1cdedb5 (making the some changes in Farsi)
 
 ![image](https://user-images.githubusercontent.com/292349/211285846-0b7bb3bf-0462-4029-b64c-4ee1d037fc1c.png)
 
@@ -55,7 +47,6 @@ to tweak your config as needed, along with the convenience of a pre-configured s
 
 ## ✨ ویژگی ها
 
-<<<<<<< HEAD
 - 🔥 تبدیل  Neovim به یک IDE کامل
 - 💤 اختصاصی کردن و گسترش پیکربندی به سادگی با  [lazy.nvim](https://github.com/folke/lazy.nvim)
 - 🚀 بسیار سریع
@@ -72,24 +63,24 @@ to tweak your config as needed, along with the convenience of a pre-configured s
 ## 🚀 شروع  به کار
 
 شما می توانید یک قالب اولیه برای شروع LazyVim [اینجا](https://github.com/LazyVim/starter) پیدا کنید.
-=======
-- 🔥 Transform your Neovim into a full-fledged IDE
-- 💤 Easily customize and extend your config with [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+- 🔥 تبدیل  Neovim به یک IDE کامل
+- 💤 اختصاصی کردن و گسترش پیکربندی به سادگی با  [lazy.nvim](https://github.com/folke/lazy.nvim)
 - 🚀 بسیار سریع
-- 🧹 Sane default settings for options, autocmds, and keymaps
-- 📦 Comes with a wealth of plugins pre-configured and ready to use
+- 🧹 تنظیمات پیش فرض منطقی برای (خودکارسازی ها) options, autocmds (گزینه ها) و keymaps (کلیدهای میانبر)
+- 📦  همراه با تعداد زیادی از پلاگین های از پیش پیکربندی شده و آماده استفاده.
 
-## ⚡️ Requirements
+## ⚡️ الزامات
 
-- Neovim >= **0.11.2** (needs to be built with **LuaJIT**)
-- Git >= **2.19.0** (for partial clones support)
-- a [Nerd Font](https://www.nerdfonts.com/) **_(optional)_**
-- a **C** compiler for `nvim-treesitter`. See [here](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
+- Neovim >= **0.11.2** ( باشد **LuaJIT** باید ساخته شده با )
+- Git >= **2.19.0** ( های جزئی clone  برای پشتیبانی از)
+- فونت [Nerd Font](https://www.nerdfonts.com/) **_(اختیاری)_**
+- یک کامپایلر C: برای اطلاعات بیشتر راجب nvim-treesittere، [اینجا](https://github.com/nvim-treesitter/nvim-treesitter#requirements)را ببیند.
 
 ## 🚀 شروع  به کار
 
-You can find a starter template for **LazyVim** [here](https://github.com/LazyVim/starter)
->>>>>>> d1cdedb5 (making the some changes in Farsi)
+
+شما می توانید یک قالب اولیه برای شروع LazyVim [اینجا](https://github.com/LazyVim/starter) پیدا کنید.
 
 <details><summary>با داکر امتحان کنید.</summary>
 
@@ -104,11 +95,7 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 </details>
 
-<<<<<<< HEAD
 <details><summary>نصب <a href="https://github.com/LazyVim/starter">LazyVim Starter</a></summary>
-=======
-<details><summary>Install the <a href="https://github.com/LazyVim/starter">LazyVim Starter</a></summary>
->>>>>>> d1cdedb5 (making the some changes in Farsi)
 
 - یک بک آپ از فایل های neovim خود بگیرید.
 
@@ -117,11 +104,7 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
   mv ~/.local/share/nvim ~/.local/share/nvim.bak
   ```
 
-<<<<<<< HEAD
-- کلون کردن starter
-=======
 - Clone the starter
->>>>>>> d1cdedb5 (making the some changes in Farsi)
 
   ```sh
   git clone https://github.com/LazyVim/starter ~/.config/nvim
@@ -138,13 +121,11 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
   ```sh
   nvim
   ```
-<<<<<<< HEAD
 برای نحوه‌ی سفارشی‌سازی **LazyVim** به توضیحات موجود در فایل‌ها مراجعه کنید.
 
 </details>
 
 
----
 
 
 یک کتاب بسیار پرمحتوا که توسط [@dusty-phillips](https://github.com/dusty-phillips)  نوشته شده است به نام [LazyVim for Ambitious Developers](https://lazyvim-ambitious-devs.phillips.codes) که به صورت آنلاین در دسترس است.
@@ -171,14 +152,11 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 ## 📂 ساختار فایل
 
-The files under config will be automatically loaded at the appropriate time,
-so you don't need to require those files manually.
-**LazyVim** comes with a set of default config files that will be loaded
-**_before_** your own. See [here](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
+فایل های داخل پیکربندی به صورت خودکار در زمان مناسب بارگذاری می شوند، شما نیاز نیست که به صورت دستی بارگذاری کنید.
+در LazyVim یک مجوعه ای از فایل های پیکربندی پیش فرض وجود دارد، که قبل از فایل های شما بارگذاری می شوند. [اینجا](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config) را ببینید.
 
-You can add your custom plugin specs under `lua/plugins/`. All files there
-will be automatically loaded by [lazy.nvim](https://github.com/folke/lazy.nvim)
->>>>>>> d1cdedb5 (making the some changes in Farsi)
+
+شما می توانید پلاگین های اختصاصی خودتان در  `lua/plugins/` اضافه کنید. تمام فایل ها در آنجا به صورت خودکار توسط [lazy.nvim](https://github.com/folke/lazy.nvim) بارگذاری می شوند.
 
 <pre>
 ~/.config/nvim
