@@ -138,9 +138,10 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 
 شما می توانید پلاگین های اختصاصی خودتان در  `lua/plugins/` اضافه کنید. تمام فایل ها در آنجا به صورت خودکار توسط [lazy.nvim](https://github.com/folke/lazy.nvim) بارگذاری می شوند.
-=======
-به 
-  Refer to the comments in the files on how to customize **LazyVim**.
+
+به بخش کامنت ها در قسمت فایل ها بروید تا با نحوه سفارشی سازی LazyVim آشنا شوید. 
+
+  
 
 </details>
 
@@ -174,8 +175,5 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 </pre>
 
 ## ⚙️ پیکربندی
-<<<<<<< HEAD
-رجوع کنید به [اسناد](https://lazyvim.github.io)
-=======
-رجوع کنید به [docs](https://lazyvim.github.io)
->>>>>>> d1cdedb5 (making the some changes in Farsi)
+
+رجوع کنید به [اسناد](https://lazyvim.github.io
