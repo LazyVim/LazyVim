@@ -161,7 +161,7 @@ if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
-if vim.lsp.codelens.enable then
+if vim.fn.has("nvim-0.12") == 1 then
   if Snacks.toggle.codelens then
     Snacks.toggle.codelens():map("<leader>cC")
   else
@@ -177,6 +177,10 @@ if vim.lsp.codelens.enable then
       end,
     }):map("<leader>cC")
   end
+else
+  require("lazyvim.plugins.lsp.keymaps").set({}, {
+    { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+  })
 end
 
 -- lazygit

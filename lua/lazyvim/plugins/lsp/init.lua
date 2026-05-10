@@ -201,18 +201,14 @@ return {
       -- code lens
       if opts.codelens.enabled then
         Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
-          if vim.lsp.codelens.enable then
-            -- nvim v0.12
-            if
-              vim.api.nvim_buf_is_valid(buffer)
-              and vim.bo[buffer].buftype == ""
-              and not vim.tbl_contains(opts.codelens.exclude, vim.bo[buffer].filetype)
-            then
+          if
+            vim.api.nvim_buf_is_valid(buffer)
+            and vim.bo[buffer].buftype == ""
+            and not vim.tbl_contains(opts.codelens.exclude, vim.bo[buffer].filetype)
+          then
+            if vim.fn.has("nvim-0.12") == 1 then
               vim.lsp.codelens.enable(true, { bufnr = buffer })
-            end
-          else
-            -- nvim v0.11
-            if not vim.tbl_contains(opts.codelens.exclude, vim.bo[buffer].filetype) then
+            else
               vim.lsp.codelens.refresh()
               vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                 buffer = buffer,
