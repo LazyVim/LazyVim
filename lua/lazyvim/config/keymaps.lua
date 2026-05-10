@@ -161,6 +161,24 @@ if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
+if vim.lsp.codelens.enable then
+  if Snacks.toggle.codelens then
+    Snacks.toggle.codelens():map("<leader>cC")
+  else
+    -- TODO: remove this after codelens toggler is added to Snacks
+    Snacks.toggle.new({
+      id = "codelens",
+      name = "Codelens",
+      get = function()
+        return vim.lsp.codelens.is_enabled({ bufnr = 0 })
+      end,
+      set = function(state)
+        vim.lsp.codelens.enable(state, { bufnr = 0 })
+      end,
+    }):map("<leader>cC")
+  end
+end
+
 -- lazygit
 if vim.fn.executable("lazygit") == 1 then
   map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })

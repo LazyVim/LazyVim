@@ -45,6 +45,7 @@ return {
         -- provide the code lenses.
         codelens = {
           enabled = false,
+          exclude = {}, -- filetypes for which you don't want to enable codelens
         },
         -- Enable this to enable the builtin LSP folding on Neovim.
         -- Be aware that you also will need to properly configure your LSP server to
@@ -87,7 +88,6 @@ return {
               { "<c-k>", function() return vim.lsp.buf.signature_help() end, mode = "i", desc = "Signature Help", has = "signatureHelp" },
               { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
               { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" }, has = "codeLens" },
-              { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
               { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
               { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
               { "<leader>cA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
@@ -199,13 +199,27 @@ return {
       end
 
       -- code lens
-      if opts.codelens.enabled and vim.lsp.codelens then
+      if opts.codelens.enabled then
         Snacks.util.lsp.on({ method = "textDocument/codeLens" }, function(buffer)
-          vim.lsp.codelens.refresh()
-          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            buffer = buffer,
-            callback = vim.lsp.codelens.refresh,
-          })
+          if vim.lsp.codelens.enable then
+            -- nvim v0.12
+            if
+              vim.api.nvim_buf_is_valid(buffer)
+              and vim.bo[buffer].buftype == ""
+              and not vim.tbl_contains(opts.codelens.exclude, vim.bo[buffer].filetype)
+            then
+              vim.lsp.codelens.enable(true, { bufnr = buffer })
+            end
+          else
+            -- nvim v0.11
+            if not vim.tbl_contains(opts.codelens.exclude, vim.bo[buffer].filetype) then
+              vim.lsp.codelens.refresh()
+              vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                buffer = buffer,
+                callback = vim.lsp.codelens.refresh,
+              })
+            end
+          end
         end)
       end
 
