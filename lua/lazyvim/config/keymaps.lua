@@ -161,6 +161,24 @@ if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
+if vim.lsp.document_color then
+  if Snacks.toggle.document_color then
+    Snacks.toggle.document_color():map("<leader>uW") -- maybe other key?
+  else
+    -- TODO: remove this after the toggler is added to Snacks
+    Snacks.toggle.new({
+      id = "document_color",
+      name = "Document Color",
+      get = function()
+        return vim.lsp.document_color.is_enabled({ bufnr = 0 })
+      end,
+      set = function(state)
+        vim.lsp.document_color.enable(state, { bufnr = 0 })
+      end,
+    }):map("<leader>uW")
+  end
+end
+
 -- lazygit
 if vim.fn.executable("lazygit") == 1 then
   map("n", "<leader>gg", function() Snacks.lazygit( { cwd = LazyVim.root.git() }) end, { desc = "Lazygit (Root Dir)" })
