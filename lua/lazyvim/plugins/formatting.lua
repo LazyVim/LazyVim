@@ -74,6 +74,7 @@ return {
           lua = { "stylua" },
           fish = { "fish_indent" },
           sh = { "shfmt" },
+          zsh = { "shfmt" },
         },
         -- The options you set here will be merged with the builtin formatters.
         -- You can also define any custom formatters here.
