@@ -1,54 +1,3 @@
-local pick_chezmoi = function()
-  if LazyVim.pick.picker.name == "telescope" then
-    require("telescope").extensions.chezmoi.find_files()
-  elseif LazyVim.pick.picker.name == "fzf" then
-    local fzf_lua = require("fzf-lua")
-    local actions = {
-      ["enter"] = function(selected)
-        fzf_lua.actions.vimcmd_entry("ChezmoiEdit", selected, { cwd = vim.env.HOME })
-      end,
-    }
-    fzf_lua.files({
-      cmd = "chezmoi managed --include=files,symlinks",
-      actions = actions,
-      cwd = vim.env.HOME,
-      hidden = false,
-    })
-  elseif LazyVim.pick.picker.name == "snacks" then
-    local results = require("chezmoi.commands").list({
-      args = {
-        "--path-style",
-        "absolute",
-        "--include",
-        "files",
-        "--exclude",
-        "externals",
-      },
-    })
-    local items = {}
-
-    for _, czFile in ipairs(results) do
-      table.insert(items, {
-        text = czFile,
-        file = czFile,
-      })
-    end
-
-    ---@type snacks.picker.Config
-    local opts = {
-      items = items,
-      confirm = function(picker, item)
-        picker:close()
-        require("chezmoi.commands").edit({
-          targets = { item.text },
-          args = { "--watch" },
-        })
-      end,
-    }
-    Snacks.picker.pick(opts)
-  end
-end
-
 return {
   {
     -- highlighting for chezmoi files template files
@@ -64,7 +13,16 @@ return {
     keys = {
       {
         "<leader>sz",
-        pick_chezmoi,
+        function()
+          require("chezmoi.pick")[LazyVim.pick.picker.name]()
+        end,
+        desc = "Chezmoi",
+      },
+      {
+        "<leader>sZ",
+        function()
+          require("chezmoi.pick")[LazyVim.pick.picker.name](vim.fn.stdpath("config"))
+        end,
         desc = "Chezmoi",
       },
     },
@@ -97,7 +55,9 @@ return {
     optional = true,
     opts = function(_, opts)
       local projects = {
-        action = pick_chezmoi,
+        action = function()
+          require("chezmoi.pick")[LazyVim.pick.picker.name]()
+        end,
         desc = "  Config",
         icon = "",
         key = "c",
@@ -124,7 +84,9 @@ return {
         icon = " ",
         key = "c",
         desc = "Config",
-        action = pick_chezmoi,
+        action = function()
+          require("chezmoi.pick")[LazyVim.pick.picker.name]()
+        end,
       }
       local config_index
       for i = #opts.dashboard.preset.keys, 1, -1 do
