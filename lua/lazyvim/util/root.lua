@@ -67,7 +67,13 @@ function M.detectors.pattern(buf, patterns)
 end
 
 function M.bufpath(buf)
-  return M.realpath(vim.api.nvim_buf_get_name(assert(buf)))
+  local name = LazyVim.norm(vim.api.nvim_buf_get_name(assert(buf)))
+  local path = name and name:match("^term:/(.+/%d+):") or name
+  -- fix duplicated drive letters for Windows
+  if vim.fn.has("win32") == 1 and path and path:find(":/.*:/") then
+    path = path:gsub("^.-%:/", "", 1)
+  end
+  return M.realpath(path)
 end
 
 function M.cwd()
