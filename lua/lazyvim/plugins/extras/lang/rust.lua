@@ -93,7 +93,6 @@ return {
                 ".jj",
                 ".github",
                 ".gitlab",
-                "bin",
                 "node_modules",
                 "target",
                 "venv",
