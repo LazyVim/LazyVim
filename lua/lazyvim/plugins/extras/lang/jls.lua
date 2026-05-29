@@ -21,10 +21,6 @@ if lazyvim_docs then
   --
   -- 2. Open Neovim from the project root (so sourceRoots resolves to src/main/java automatically).
   --    If your sources are elsewhere, set SOURCE_ROOT=/path/to/src/main/java before launching Neovim.
-  --
-  -- 3. Press `<leader>dc` and select "Debug (Attach) - Remote (JLS)".
-  --
-  -- Set breakpoints with `<leader>db` before or after attaching.
 end
 
 return {
