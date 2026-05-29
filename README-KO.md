@@ -14,26 +14,19 @@
 
 <div align="center"><p>
     <a href="https://github.com/LazyVim/LazyVim/releases/latest">
-      <img alt="최신 업데이트" src="https://img.shields.io/github/v/release/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41&include_prerelease&sort=semver" />
-    </a>
+      <img alt="최신 업데이트" src="https://img.shields.io/github/v/release/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41&include_prerelease&sort=semver" /></a>
     <a href="https://github.com/LazyVim/LazyVim/pulse">
-      <img alt="마지막 커밋" src="https://img.shields.io/github/last-commit/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=8bd5ca&logoColor=D9E0EE&labelColor=302D41"/>
-    </a>
+      <img alt="마지막 커밋" src="https://img.shields.io/github/last-commit/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=8bd5ca&logoColor=D9E0EE&labelColor=302D41"/></a>
     <a href="https://github.com/LazyVim/LazyVim/blob/main/LICENSE">
-      <img alt="라이센스" src="https://img.shields.io/github/license/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=ee999f&logoColor=D9E0EE&labelColor=302D41" />
-    </a>
+      <img alt="라이센스" src="https://img.shields.io/github/license/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=ee999f&logoColor=D9E0EE&labelColor=302D41" /></a>
     <a href="https://github.com/LazyVim/LazyVim/stargazers">
-      <img alt="스타" src="https://img.shields.io/github/stars/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=c69ff5&logoColor=D9E0EE&labelColor=302D41" />
-    </a>
+      <img alt="스타" src="https://img.shields.io/github/stars/LazyVim/LazyVim?style=for-the-badge&logo=starship&color=c69ff5&logoColor=D9E0EE&labelColor=302D41" /></a>
     <a href="https://github.com/LazyVim/LazyVim/issues">
-      <img alt="이슈" src="https://img.shields.io/github/issues/LazyVim/LazyVim?style=for-the-badge&logo=bilibili&color=F5E0DC&logoColor=D9E0EE&labelColor=302D41" />
-    </a>
+      <img alt="이슈" src="https://img.shields.io/github/issues/LazyVim/LazyVim?style=for-the-badge&logo=bilibili&color=F5E0DC&logoColor=D9E0EE&labelColor=302D41" /></a>
     <a href="https://github.com/LazyVim/LazyVim">
-      <img alt="레파지토리 크기" src="https://img.shields.io/github/repo-size/LazyVim/LazyVim?color=%23DDB6F2&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=D9E0EE&labelColor=302D41" />
-    </a>
+      <img alt="레파지토리 크기" src="https://img.shields.io/github/repo-size/LazyVim/LazyVim?color=%23DDB6F2&label=SIZE&logo=codesandbox&style=for-the-badge&logoColor=D9E0EE&labelColor=302D41" /></a>
     <a href="https://twitter.com/intent/follow?screen_name=folke">
-      <img alt="트위터" src="https://img.shields.io/twitter/follow/folke?style=for-the-badge&logo=twitter&color=8aadf3&logoColor=D9E0EE&labelColor=302D41" />
-    </a>
+      <img alt="트위터" src="https://img.shields.io/twitter/follow/folke?style=for-the-badge&logo=twitter&color=8aadf3&logoColor=D9E0EE&labelColor=302D41" /></a>
 </div>
 
 LazyVim은 [💤 lazy.nvim](https://github.com/folke/lazy.nvim)를 기반으로 작동하는 Neovim 셋업입니다. 더 커스터마이징 가능하고, 설정들을 바꾸는 것을 쉽게 만들기위해 시작되었죠. 그저 처음부터 모든 설정들을 만지고 시작하는 방법, 또는 이미 만들어진 배포용 설정을 사용하는 방법이 있지만, LazyVIM은 이미 잘 설정된 환경과, 필요에 따라 쉽게 바꿀 수 있는 유연성을 모두 포괄합니다. 이를 통해 훨신 쉽고 편리한, 전에는 만나보실 수 없었던 새로운 Nvim의 세계를 경험하실 수 있으실 겁니다.
