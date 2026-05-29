@@ -110,7 +110,7 @@ return {
             if root and root ~= "" then
               return { root }
             end
-            return { vim.fn.getcwd() .. "/src/main/java" }
+            return { LazyVim.root() .. "/src/main/java" }
           end,
         },
       })
