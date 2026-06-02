@@ -57,14 +57,14 @@ como necessário, junto com a conveniência de um setup pré-configurado.
 
 ## ⚡️ Requesitos
 
-- Neovim >= **0.11.2** (preciso fazer build com **LuaJIT**)
+- Neovim >= **0.11.2** (precisa fazer build com **LuaJIT**)
 - Git >= **2.19.0** (para suporte parcial de clones)
 - uma [Nerd Font](https://www.nerdfonts.com/) **_(opcional)_**
 - um compilador de **C** para `nvim-treesitter`. Mais informações [aqui](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
 
 ## 🚀 Como Começar
 
-Podes encontrar uma template **LazyVim** starter para começar, [aqui](https://github.com/LazyVim/starter)
+Podes encontrar um template **LazyVim** starter para começar, [aqui](https://github.com/LazyVim/starter)
 
 <details><summary>Experimenta com docker</summary>
 
@@ -79,7 +79,7 @@ docker run -w /root -it --rm alpine:edge sh -uelic '
 
 </details>
 
-<details><summary>Instala a template <a href="https://github.com/LazyVim/starter">LazyVim Starter</a></summary>
+<details><summary>Instala o template <a href="https://github.com/LazyVim/starter">LazyVim Starter</a></summary>
 
 - Faz um backup da tua configuração atual de Neovim:
 
@@ -116,12 +116,12 @@ Existe um excelente video criado por [@elijahmanor](https://github.com/elijahman
 
 [![Vê o video](https://img.youtube.com/vi/N93cTbtLCIM/hqdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM)
 
-## 📂 Extrutura de ficheiros
+## 📂 Estrutura de ficheiros
 
 Os ficheiros no diretório **config** serão carregados automaticamente
 no momento apropriado, por isso não é necessário carregar os plugins manualmente.
 **LazyVim** vem com um conjunto de ficheiros
-que serão carregados **_antes_** dos teus. Lẽ mais [aqui](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
+que serão carregados **_antes_** dos teus. Lê mais [aqui](https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/config)
 
 Tu podes acrescentar a tua configuração em `lua/plugins`. Todos os ficheiros
 neste diretório serão carregados automaticamente por [lazy.nvim](https://github.com/folke/lazy.nvim)
