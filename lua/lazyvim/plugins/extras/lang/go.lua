@@ -14,6 +14,9 @@ return {
     opts = {
       servers = {
         gopls = {
+          init_options = {
+            semanticTokens = true,
+          },
           settings = {
             gopls = {
               gofumpt = true,
@@ -46,7 +49,6 @@ return {
               completeUnimported = true,
               staticcheck = true,
               directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-              semanticTokens = true,
             },
           },
         },
@@ -56,7 +58,12 @@ return {
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
           Snacks.util.lsp.on({ name = "gopls" }, function(_, client)
-            if not client.server_capabilities.semanticTokensProvider then
+            if
+              client.config
+              and client.config.init_options
+              and client.config.init_options.semanticTokens
+              and not client.server_capabilities.semanticTokensProvider
+            then
               local semantic = client.config.capabilities.textDocument.semanticTokens
               client.server_capabilities.semanticTokensProvider = {
                 full = true,
