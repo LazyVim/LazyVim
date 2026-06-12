@@ -139,6 +139,7 @@ return {
                 enabled = "all",
               },
             },
+            signatureHelp = { enabled = true },
           },
         },
       }
