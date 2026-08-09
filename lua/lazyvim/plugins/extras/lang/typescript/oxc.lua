@@ -7,7 +7,6 @@ local supported = {
   "jsonc",
   "vue",
   "svelte",
-  "astro",
 }
 
 return {

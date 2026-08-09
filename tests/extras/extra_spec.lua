@@ -154,4 +154,17 @@ describe("Extra", function()
       end
     end)
   end
+
+  describe("typescript.oxc", function()
+    it("does not register oxfmt for Astro files", function()
+      local spec = Plugin.Spec.new({
+        { "stevearc/conform.nvim", opts = {} },
+        require("lazyvim.plugins.extras.lang.typescript.oxc"),
+      }, { optional = true })
+      local opts = Plugin.values(spec.plugins["conform.nvim"], "opts", false)
+
+      assert.is_nil(opts.formatters_by_ft.astro)
+      assert.same({ "oxfmt" }, opts.formatters_by_ft.typescript)
+    end)
+  end)
 end)
