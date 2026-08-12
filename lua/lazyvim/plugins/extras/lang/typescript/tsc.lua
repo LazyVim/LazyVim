@@ -19,8 +19,7 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
-        ---@type lspconfig.settings.tsgo
-        tsgo = {
+        tsc = {
           -- explicitly add default filetypes, so that we can extend
           -- them in related extras
           filetypes = {
@@ -31,8 +30,9 @@ return {
             "typescriptreact",
             "typescript.tsx",
           },
+          ---@type lspconfig.settings.tsc
           settings = {
-            typescript = {
+            ["js/ts"] = {
               inlayHints = {
                 enumMemberValues = { enabled = true },
                 functionLikeReturnTypes = { enabled = false },

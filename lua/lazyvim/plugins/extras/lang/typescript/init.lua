@@ -10,7 +10,7 @@ end
 
 local extra = LazyVim.config.register_defaults("ts_lsp", {
   { name = "vtsls", extra = "lang.typescript.vtsls" },
-  { name = "tsgo", extra = "lang.typescript.tsgo" },
+  { name = "tsc", extra = "lang.typescript.tsc" },
 })
 
 return {
@@ -35,7 +35,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
       local lsp = extra.name or "vtsls"
-      local servers = { "tsserver", "ts_ls", "vtsls", "tsgo", lsp }
+      local servers = { "tsserver", "ts_ls", "vtsls", "tsc", lsp }
       for _, server in ipairs(servers) do
         opts.servers[server] = opts.servers[server] or {}
         opts.servers[server].enabled = server == lsp
