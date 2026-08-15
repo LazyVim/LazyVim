@@ -7,6 +7,7 @@ M.version = "16.0.0" -- x-release-please-version
 LazyVim.config = M
 
 ---@class LazyVimOptions
+---@field package_path? fun(pkg: string, path: string): string? Resolve package paths outside Mason. Return nil to use Mason.
 local defaults = {
   -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
   ---@type string|fun()
