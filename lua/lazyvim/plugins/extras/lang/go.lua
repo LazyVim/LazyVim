@@ -1,13 +1,48 @@
+-- `gohtml` is the html/template dialect of `gotmpl`: the same grammar, but with
+-- html injected into the text between actions. It mirrors how `helm` injects
+-- yaml into that grammar, and is kept separate for the same reason — `gotmpl`
+-- is also used for text/template (configs, emails, manifests), where injecting
+-- html would be wrong.
+-- Registered here rather than in `on_very_lazy`: a file named on the command
+-- line is detected before VeryLazy fires, and would open without a filetype.
+vim.filetype.add({
+  extension = { gohtml = "gohtml" },
+  pattern = { [".*%.html%.tmpl"] = "gohtml" },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "gohtml",
+  group = vim.api.nvim_create_augroup("lazyvim_gohtml", { clear = true }),
+  callback = function(ev)
+    -- Alias the installed `gotmpl` parser under the `gohtml` language rather
+    -- than shipping a second copy of the same grammar: the queries differ, the
+    -- parser does not. Registering the language is also what makes
+    -- `queries/gohtml/` apply instead of `gotmpl`'s own.
+    if #vim.api.nvim_get_runtime_file("parser/gohtml.so", false) == 0 then
+      local gotmpl = vim.api.nvim_get_runtime_file("parser/gotmpl.so", false)[1]
+      if not gotmpl then
+        return
+      end
+      if not pcall(vim.treesitter.language.add, "gohtml", { path = gotmpl, symbol_name = "gotmpl" }) then
+        return
+      end
+    end
+    -- Started here rather than by the treesitter extra, which only starts
+    -- languages nvim-treesitter reports as installed; `gohtml` never is.
+    pcall(vim.treesitter.start, ev.buf)
+  end,
+})
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
-      ft = { "go", "gomod", "gowork", "gotmpl" },
+      ft = { "go", "gomod", "gowork", "gotmpl", "gohtml" },
       root = { "go.work", "go.mod" },
     })
   end,
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "go", "gomod", "gowork", "gosum" } },
+    opts = { ensure_installed = { "go", "gomod", "gowork", "gosum", "gotmpl" } },
   },
   {
     "neovim/nvim-lspconfig",
@@ -54,6 +89,16 @@ return {
         },
       },
       setup = {
+        -- html-lsp gives gohtml files tag and attribute completion. Extended
+        -- through `setup`, which only runs for servers something else has
+        -- already enabled: pulling in an npm language server for everyone
+        -- writing Go would be too much for what it adds.
+        html = function(_, opts)
+          opts.filetypes = opts.filetypes or { "html" }
+          if not vim.tbl_contains(opts.filetypes, "gohtml") then
+            table.insert(opts.filetypes, "gohtml")
+          end
+        end,
         gopls = function(_, opts)
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
@@ -126,6 +171,13 @@ return {
     opts = {
       formatters_by_ft = {
         go = { "goimports", "gofumpt" },
+        -- No formatter round-trips Go template actions safely, html-lsp least
+        -- of all — it reflows the markup around {{ }} it cannot parse. Without
+        -- this, `default_format_opts.lsp_format = "fallback"` hands these
+        -- buffers to html-lsp as soon as it is attached, because no formatter
+        -- is configured for them.
+        gohtml = { lsp_format = "never" },
+        gotmpl = { lsp_format = "never" },
       },
     },
   },
@@ -169,6 +221,7 @@ return {
       },
       filetype = {
         gotmpl = { glyph = "󰟓", hl = "MiniIconsGrey" },
+        gohtml = { glyph = "󰟓", hl = "MiniIconsGrey" },
       },
     },
   },
