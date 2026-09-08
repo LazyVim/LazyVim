@@ -1,5 +1,5 @@
 *LazyVim.txt*                                                     LazyVim docs
-                                        For Neovim    Last change: 2026 May 27
+                                       For Neovim    Last change: 2026 June 02
 
 ==============================================================================
 Table of Contents                                  *LazyVim-table-of-contents*
