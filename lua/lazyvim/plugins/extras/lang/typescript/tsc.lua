@@ -19,6 +19,7 @@ return {
     opts = {
       -- make sure mason installs the server
       servers = {
+        tsgo = { enabled = false },
         tsc = {
           -- explicitly add default filetypes, so that we can extend
           -- them in related extras

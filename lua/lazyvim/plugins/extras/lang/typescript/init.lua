@@ -3,9 +3,14 @@ if lazyvim_docs then
   ---@type "vtsls" | "tsgo"
   vim.g.lazyvim_ts_lsp = "vtsls" -- currently the default
 
-  -- To use the newer, much faster `tsgo` LSP server, either:
-  -- * enable the `tsgo` extra, or
-  -- * set `vim.g.lazyvim_ts_lsp = "tsgo"` in your `options.lua`
+  -- To use the newer, much faster `tsc` LSP server, either:
+  -- * enable the `tsc` extra, or
+  -- * set `vim.g.lazyvim_ts_lsp = "tsc"` in your `options.lua`
+end
+
+-- change deprecated `tsgo` to `tsc` for now, since with TS7, `tsgo` == `tsc`
+if vim.g.lazyvim_ts_lsp == "tsgo" then
+  vim.g.lazyvim_ts_lsp = "tsc"
 end
 
 local extra = LazyVim.config.register_defaults("ts_lsp", {
