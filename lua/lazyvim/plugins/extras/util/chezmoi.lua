@@ -1,3 +1,24 @@
+-- Resolve source path, respecting .chezmoiroot
+local source_dir = (function()
+  local out = vim.fn.system("chezmoi source-path")
+  if vim.v.shell_error == 0 then
+    return vim.trim(out)
+  end
+  local base = vim.env.HOME .. "/.local/share/chezmoi"
+  local f = io.open(base .. "/.chezmoiroot", "r")
+  if f then
+    local root = f:read("*l")
+    f:close()
+    if root then
+      root = vim.fs.normalize(vim.trim(root), { expand_env = false })
+      if root ~= "" and not root:find("..", 1, true) then
+        return vim.fs.joinpath(base, root)
+      end
+    end
+  end
+  return base
+end)()
+
 local pick_chezmoi = function()
   if LazyVim.pick.picker.name == "telescope" then
     require("telescope").extensions.chezmoi.find_files()
@@ -55,7 +76,7 @@ return {
     "alker0/chezmoi.vim",
     init = function()
       vim.g["chezmoi#use_tmp_buffer"] = 1
-      vim.g["chezmoi#source_dir_path"] = vim.env.HOME .. "/.local/share/chezmoi"
+      vim.g["chezmoi#source_dir_path"] = source_dir
     end,
   },
   {
@@ -85,7 +106,7 @@ return {
     init = function()
       -- run chezmoi edit on file enter
       vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-        pattern = { vim.env.HOME .. "/.local/share/chezmoi/*" },
+        pattern = { source_dir .. "/*" },
         callback = function()
           vim.schedule(require("chezmoi.commands.__edit").watch)
         end,
