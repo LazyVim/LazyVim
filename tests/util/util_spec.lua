@@ -33,4 +33,42 @@ describe("util", function()
     assert.are.equal(f1(), 1)
     assert.are.equal(f2(), 2)
   end)
+
+  describe("get_pkg_path", function()
+    local package_path
+    local mason
+
+    before_each(function()
+      package_path = LazyVim.config.package_path
+      mason = vim.env.MASON
+    end)
+
+    after_each(function()
+      LazyVim.config.package_path = package_path
+      vim.env.MASON = mason
+    end)
+
+    it("should resolve packages with a custom provider", function()
+      LazyVim.config.package_path = function(pkg, path)
+        return "/packages/" .. pkg .. path
+      end
+
+      local path = LazyVim.get_pkg_path("svelte-language-server", "/node_modules/typescript-svelte-plugin", {
+        warn = false,
+      })
+      assert.are.equal("/packages/svelte-language-server/node_modules/typescript-svelte-plugin", path)
+    end)
+
+    it("should fall back to Mason when the provider returns nil", function()
+      LazyVim.config.package_path = function()
+        return nil
+      end
+      vim.env.MASON = "/mason"
+
+      local path = LazyVim.get_pkg_path("svelte-language-server", "/node_modules/typescript-svelte-plugin", {
+        warn = false,
+      })
+      assert.are.equal("/mason/packages/svelte-language-server/node_modules/typescript-svelte-plugin", path)
+    end)
+  end)
 end)

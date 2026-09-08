@@ -247,28 +247,31 @@ function M.create_undo()
   end
 end
 
---- Gets a path to a package in the Mason registry.
+--- Gets a path to a package using the configured provider or Mason.
 --- Prefer this to `get_package`, since the package might not always be
 --- available yet and trigger errors.
 ---@param pkg string
 ---@param path? string
 ---@param opts? { warn?: boolean }
 function M.get_pkg_path(pkg, path, opts)
-  pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
-  local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
   opts = opts or {}
   opts.warn = opts.warn == nil and true or opts.warn
   path = path or ""
-  local ret = vim.fs.normalize(root .. "/packages/" .. pkg .. "/" .. path)
+  local ret = LazyVim.config.package_path and LazyVim.config.package_path(pkg, path)
+  local external = ret ~= nil
+  if not ret then
+    pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
+    local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+    ret = root .. "/packages/" .. pkg .. "/" .. path
+  end
+  ret = vim.fs.normalize(ret)
   if opts.warn then
     vim.schedule(function()
       if not require("lazy.core.config").headless() and not vim.loop.fs_stat(ret) then
-        M.warn(
-          ("Mason package path not found for **%s**:\n- `%s`\nYou may need to force update the package."):format(
-            pkg,
-            path
-          )
-        )
+        local source = external and "Package" or "Mason package"
+        local missing = external and ret or path
+        local hint = external and "" or "\nYou may need to force update the package."
+        M.warn(("%s path not found for **%s**:\n- `%s`"):format(source, pkg, missing) .. hint)
       end
     end)
   end
