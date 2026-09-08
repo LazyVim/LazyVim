@@ -70,6 +70,7 @@ return {
           { "<leader>d", group = "debug" },
           { "<leader>dp", group = "profiler" },
           { "<leader>f", group = "file/find" },
+          { "<leader>fy", group = "copy path" },
           { "<leader>g", group = "git" },
           { "<leader>gh", group = "hunks" },
           { "<leader>q", group = "quit/session" },

@@ -97,6 +97,20 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
+-- copy path
+local copy_path = require("lazyvim.util.copy_path")
+map("n", "<leader>fyy", copy_path.copy_relative, { desc = "Path (relative)" })
+map("n", "<leader>fyY", copy_path.copy_absolute, { desc = "Path (absolute)" })
+map("n", "<leader>fyl", copy_path.copy_relative_with_line, { desc = "Path (relative, :line)" })
+map("n", "<leader>fyL", copy_path.copy_absolute_with_line, { desc = "Path (absolute, :line)" })
+map("n", "<leader>fyc", copy_path.copy_relative_with_line_column, { desc = "Path (relative, :line:col)" })
+map("n", "<leader>fyC", copy_path.copy_absolute_with_line_column, { desc = "Path (absolute, :line:col)" })
+map("n", "<leader>fyd", copy_path.copy_relative_directory, { desc = "Directory (relative)" })
+map("n", "<leader>fyD", copy_path.copy_absolute_directory, { desc = "Directory (absolute)" })
+map("n", "<leader>fyP", copy_path.copy_project, { desc = "Project Root" })
+map("n", "<leader>fyn", copy_path.copy_filename, { desc = "Filename" })
+map("n", "<leader>fyN", copy_path.copy_filename_no_ext, { desc = "Filename (no ext)" })
+
 -- location list
 map("n", "<leader>xl", function()
   local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
