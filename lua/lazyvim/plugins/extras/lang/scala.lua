@@ -11,26 +11,24 @@ return {
   },
   {
     "scalameta/nvim-metals",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
     keys = {
       {
-        "<leader>me",
+        "<localleader>e",
         function()
-          require("telescope").extensions.metals.commands()
+          require("metals").commands()
         end,
+        ft = { "scala", "sbt", "java" },
         desc = "Metals commands",
       },
       {
-        "<leader>mc",
+        "<localleader>c",
         function()
           require("metals").compile_cascade()
         end,
         desc = "Metals compile cascade",
       },
       {
-        "<leader>mh",
+        "<localleader>h",
         function()
           require("metals").hover_worksheet()
         end,
@@ -45,8 +43,8 @@ return {
 
       metals_config.settings = {
         verboseCompilation = true,
-        showImplicitArguments = true,
-        showImplicitConversionsAndClasses = true,
+        showImplicitArguments = false,
+        showImplicitConversionsAndClasses = false,
         showInferredType = true,
         superMethodLensesEnabled = true,
         excludedPackages = {
