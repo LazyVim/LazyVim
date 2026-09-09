@@ -21,6 +21,7 @@ return {
           require("telescope").extensions.metals.commands()
         end,
         desc = "Metals commands",
+        ft = { "scala", "sbt" },
       },
       {
         "<leader>mc",
@@ -28,6 +29,7 @@ return {
           require("metals").compile_cascade()
         end,
         desc = "Metals compile cascade",
+        ft = { "scala", "sbt" },
       },
       {
         "<leader>mh",
@@ -35,6 +37,7 @@ return {
           require("metals").hover_worksheet()
         end,
         desc = "Metals hover worksheet",
+        ft = { "scala", "sbt" },
       },
     },
     ft = { "scala", "sbt", "java" },
