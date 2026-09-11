@@ -254,7 +254,9 @@ return {
           return
         end
 
-        local use_mason = sopts.mason ~= false and vim.tbl_contains(mason_all, server)
+        local use_mason = sopts.mason ~= false
+          and opts.servers["*"].mason ~= false
+          and vim.tbl_contains(mason_all, server)
         local setup = opts.setup[server] or opts.setup["*"]
         if setup and setup(server, sopts) then
           mason_exclude[#mason_exclude + 1] = server
