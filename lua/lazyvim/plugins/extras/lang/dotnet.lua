@@ -5,7 +5,6 @@ return {
       root = { "*.sln", "*.csproj", "*.fsproj", "omnisharp.json", "function.json", "paket.dependencies", "paket.lock" },
     })
   end,
-
   { "Hoffs/omnisharp-extended-lsp.nvim", lazy = true },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -28,6 +27,14 @@ return {
       formatters_by_ft = {
         cs = { "csharpier" },
         fsharp = { "fantomas" },
+      },
+    },
+  },
+  {
+    "GustavEikaas/easy-dotnet.nvim",
+    opts = {
+      lsp = {
+        enabled = false,
       },
     },
   },
