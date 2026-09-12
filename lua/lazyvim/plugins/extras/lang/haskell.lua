@@ -15,6 +15,9 @@ return {
   {
     "mrcjkb/haskell-tools.nvim",
     version = false,
+    config = function(_, opts)
+      vim.g.haskell_tools = vim.tbl_deep_extend("keep", vim.g.haskell_tools or {}, opts or {})
+    end,
     ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
     keys = {
       {
