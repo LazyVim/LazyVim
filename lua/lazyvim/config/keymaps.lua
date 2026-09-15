@@ -97,6 +97,24 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
+local function copy_file_path(modifier)
+  local path = vim.fn.expand(modifier)
+  if path == "" then
+    vim.notify("No file path available for the current buffer", vim.log.levels.WARN)
+    return
+  end
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end
+
+-- copy file path
+map("n", "<leader>fy", function()
+  copy_file_path("%:p")
+end, { desc = "Copy File Path" })
+map("n", "<leader>fY", function()
+  copy_file_path("%:~:.")
+end, { desc = "Copy Short File Path" })
+
 -- location list
 map("n", "<leader>xl", function()
   local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
