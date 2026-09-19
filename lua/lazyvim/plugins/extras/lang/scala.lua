@@ -18,7 +18,11 @@ return {
       {
         "<leader>me",
         function()
-          require("telescope").extensions.metals.commands()
+          if LazyVim.pick.picker.name == "telescope" then
+            require("telescope").extensions.metals.commands()
+          else
+            require("metals").commands()
+          end
         end,
         desc = "Metals commands",
       },
