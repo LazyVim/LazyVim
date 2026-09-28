@@ -1,5 +1,13 @@
 # Changelog
 
+## [16.0.1](https://github.com/LazyVim/LazyVim/compare/v16.0.0...v16.0.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* **nvim-lint:** fix `prepend_args` logic ([#7105](https://github.com/LazyVim/LazyVim/issues/7105)) ([2239177](https://github.com/LazyVim/LazyVim/commit/2239177dbba96d01196eccc93aa1f80e5b73a8e0))
+* **typescript:** transition from `tsgo` to `tsc` ([#7233](https://github.com/LazyVim/LazyVim/issues/7233)) ([c8cd5a0](https://github.com/LazyVim/LazyVim/commit/c8cd5a0c4b4f8c339f095ec2c98257bdd3b0714d))
+
 ## [16.0.0](https://github.com/LazyVim/LazyVim/compare/v15.15.0...v16.0.0) (2026-05-27)
 
 
