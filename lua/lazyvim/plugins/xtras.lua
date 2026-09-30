@@ -9,14 +9,15 @@ local prios = {
   ["lazyvim.plugins.extras.coding.blink"] = 5,
   ["lazyvim.plugins.extras.lang.typescript"] = 5,
   ["lazyvim.plugins.extras.formatting.prettier"] = 10,
-  -- default core extra priority is 20
-  -- default priority is 50
   ["lazyvim.plugins.extras.editor.aerial"] = 100,
   ["lazyvim.plugins.extras.editor.outline"] = 100,
   ["lazyvim.plugins.extras.ui.alpha"] = 19,
   ["lazyvim.plugins.extras.ui.dashboard-nvim"] = 19,
   ["lazyvim.plugins.extras.ui.mini-starter"] = 19,
 }
+
+local default_core_extra_prio = 20
+local default_prio = 50
 
 if vim.g.xtras_prios then
   prios = vim.tbl_deep_extend("force", prios, vim.g.xtras_prios or {})
@@ -53,7 +54,29 @@ end
 -- Add default extras
 for name, extra in pairs(defaults) do
   if extra.enabled then
-    prios[name] = prios[name] or 20
+    prios[name] = prios[name] or default_core_extra_prio
+    extras[#extras + 1] = name
+  end
+end
+
+-- Add user enabled extras via `vim.g.lazyvim_user_extras`
+local user_enabled_extras = vim.g.lazyvim_user_extras or {}
+for k, v in pairs(user_enabled_extras) do
+  local is_atomic_value = type(k) == "number"
+  local name = is_atomic_value and v or k
+  local priority = is_atomic_value and default_prio or v
+
+  -- Validation logic: Check for existing priority conflict
+  if prios[name] and prios[name] ~= priority then
+    local msg = {
+      "Extras: you are not allowed to override priorities of either core default extras or extras defined in `lazyvim.json`",
+      string.format("- name of extras: %s", name),
+      string.format("- existing priority: %d", prios[name]),
+      string.format("- custom priority: %d", priority),
+    }
+    vim.notify(table.concat(msg, "\n"), vim.log.levels.WARN, { title = "LazyVim" })
+  else
+    prios[name] = priority
     extras[#extras + 1] = name
   end
 end
@@ -67,8 +90,8 @@ if vim.g.vscode then
 end
 
 table.sort(extras, function(a, b)
-  local pa = prios[a] or 50
-  local pb = prios[b] or 50
+  local pa = prios[a] or default_prio
+  local pb = prios[b] or default_prio
   if pa == pb then
     return a < b
   end
