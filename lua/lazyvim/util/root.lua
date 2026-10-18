@@ -44,7 +44,7 @@ function M.detectors.lsp(buf)
   end
   return vim.tbl_filter(function(path)
     path = LazyVim.norm(path)
-    return path and bufpath:find(path, 1, true) == 1
+    return path and (bufpath == path or bufpath:find(path .. "/", 1, true) == 1)
   end, roots)
 end
 
