@@ -32,7 +32,7 @@ return {
               [vim.diagnostic.severity.INFO] = LazyVim.config.icons.diagnostics.Info,
             },
           },
-          jump = vim.fn.has("nvim-0.13") and {
+          jump = vim.fn.has("nvim-0.13") == 1 and {
             on_jump = function(_, bufnr)
               vim.diagnostic.open_float({
                 bufnr = bufnr,
