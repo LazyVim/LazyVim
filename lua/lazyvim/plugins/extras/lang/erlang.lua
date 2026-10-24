@@ -9,7 +9,9 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        erlangls = {},
+        -- erlangls was dropped by nvim-lspconfig (unmaintained upstream);
+        -- elp (Erlang Language Platform) is its replacement.
+        elp = {},
       },
     },
   },
