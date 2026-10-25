@@ -25,10 +25,14 @@ return {
     },
   },
 
-  -- Configure tsserver plugin
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
+      opts.servers = opts.servers or {}
+      if not opts.servers.vtsls then
+        return
+      end
+      opts.servers.vtsls.filetypes = opts.servers.vtsls.filetypes or {}
       table.insert(opts.servers.vtsls.filetypes, "vue")
       LazyVim.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
         {
