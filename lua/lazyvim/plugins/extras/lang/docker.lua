@@ -1,3 +1,11 @@
+vim.filetype.add({
+  filename = {
+    ["compose.yml"] = "yaml.docker-compose",
+    ["compose.yaml"] = "yaml.docker-compose",
+    ["docker-compose.yml"] = "yaml.docker-compose",
+    ["docker-compose.yaml"] = "yaml.docker-compose",
+  },
+})
 return {
   recommended = function()
     return LazyVim.extras.wants({
