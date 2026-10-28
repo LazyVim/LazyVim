@@ -1,5 +1,12 @@
 # Changelog
 
+## [16.0.2](https://github.com/LazyVim/LazyVim/compare/v16.0.1...v16.0.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **lsp:** generic organize imports action now works as intended ([e12b2ad](https://github.com/LazyVim/LazyVim/commit/e12b2ad681c9ac58f2c6f809f2da044f870bdd6c))
+
 ## [16.0.1](https://github.com/LazyVim/LazyVim/compare/v16.0.0...v16.0.1) (2026-09-08)
 
 
