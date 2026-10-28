@@ -5,8 +5,12 @@ vim.filetype.add({
 })
 return {
   {
-    "mistweaverco/kulala.nvim",
+    "dont-be-evil-company/kulala.nvim",
     ft = "http",
+    -- v6 prompts for a kulala-core license during :LazyHealth.
+    version = "5.3.4",
+    -- 5.x has a `fmt` submodule that main dropped; recursing breaks the checkout.
+    submodules = false,
     keys = {
       { "<leader>R", "", desc = "+Rest" },
       { "<leader>Rb", "<cmd>lua require('kulala').scratchpad()<cr>", desc = "Open scratchpad" },
