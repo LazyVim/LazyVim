@@ -53,6 +53,16 @@ end
 
 ---@return string?
 local function win_find_cl()
+  -- vswhere comes with the Visual Studio Installer and finds Visual Studio and Build Tools
+  -- wherever they're installed (Visual Studio 2022+ installs to `C:/Program Files`)
+  local vswhere = (vim.env["ProgramFiles(x86)"] or "C:/Program Files (x86)")
+    .. "/Microsoft Visual Studio/Installer/vswhere.exe"
+  if vim.fn.executable(vswhere) == 1 then
+    local cl = vim.fn.systemlist({ vswhere, "-products", "*", "-find", "VC/Tools/MSVC/*/bin/Hostx64/x64/cl.exe" })[1]
+    if vim.v.shell_error == 0 and cl and cl ~= "" then
+      return cl
+    end
+  end
   local path = "C:/Program Files (x86)/Microsoft Visual Studio"
   local pattern = "*/*/VC/Tools/MSVC/*/bin/Hostx64/x64/cl.exe"
   return vim.fn.globpath(path, pattern, true, true)[1]
