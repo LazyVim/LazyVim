@@ -73,24 +73,19 @@ return {
 
   -- Markdown preview
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = function()
-      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
-      vim.fn["mkdp#util#install"]()
-    end,
+    "selimacerbas/mdkite.nvim",
+    cmd = "MdKite",
     keys = {
       {
         "<leader>cp",
         ft = "markdown",
-        "<cmd>MarkdownPreviewToggle<cr>",
+        "<cmd>MdKite toggle<cr>",
         desc = "Markdown Preview",
       },
     },
-    config = function()
-      vim.cmd([[do FileType]])
-    end,
+    opts = {},
   },
+  { "selimacerbas/kitehost.nvim", lazy = true },
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
