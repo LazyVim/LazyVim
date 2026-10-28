@@ -25,6 +25,10 @@ M.deprecated_extras = {
   because it's causing too many issues.
   Either use `basedpyright`, or copy the [old extra](https://github.com/LazyVim/LazyVim/blob/c1f5fcf9c7ed2659c9d5ac41b3bb8a93e0a3c6a0/lua/lazyvim/plugins/extras/lang/python-semshi.lua#L1) to your own config.
   ]],
+  ["lazyvim.plugins.extras.util.rest"] = [[The `util.rest` extra has been removed,
+  because `kulala.nvim` >= 6.0.0 requires a license token for its now private core.
+  If you still want to use it, copy the [old extra](https://github.com/LazyVim/LazyVim/blob/999700997f72227187d49d8b92667183dc7fc809/lua/lazyvim/plugins/extras/util/rest.lua#L1) to your own config.
+  ]],
 }
 M.renamed_extras = {
   ["lazyvim.plugins.extras.lang.omnisharp"] = "lazyvim.plugins.extras.lang.dotnet",
