@@ -115,6 +115,36 @@ describe("Extra", function()
         end)
       end
 
+      -- Several extras add to the same tables of a shared plugin. An extra must merge
+      -- into them, not replace them, or it silently drops what other specs added.
+      local shared_opts = {
+        ["nvim-lint"] = { url = "mfussenegger/nvim-lint", keys = { "linters_by_ft", "linters" } },
+        ["conform.nvim"] = { url = "stevearc/conform.nvim", keys = { "formatters_by_ft", "formatters" } },
+      }
+      for plugin_name, shared in pairs(shared_opts) do
+        if spec.plugins[plugin_name] then
+          it("does not replace " .. plugin_name .. " opts set by other specs", function()
+            local existing = {}
+            for _, key in ipairs(shared.keys) do
+              existing[key] = { lazyvim_test_existing = {} }
+            end
+            local merged = Plugin.Spec.new({
+              { "mason-org/mason.nvim", opts = { ensure_installed = {} } },
+              { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
+              { shared.url, opts = existing },
+              mod,
+            }, { optional = true })
+            local merged_opts = Plugin.values(merged.plugins[plugin_name], "opts", false)
+            for _, key in ipairs(shared.keys) do
+              assert(
+                merged_opts[key] and merged_opts[key].lazyvim_test_existing,
+                "`opts." .. key .. "` of " .. plugin_name .. " is replaced instead of extended"
+              )
+            end
+          end)
+        end
+      end
+
       local ts = spec.plugins["nvim-treesitter"]
       local opts = Plugin.values(ts, "opts", false)
 
