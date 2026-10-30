@@ -50,6 +50,7 @@ return {
         },
         right = {
           { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
+          { title = "Sidekick", ft = "sidekick_terminal", size = { width = 0.4 } },
         },
         keys = {
           -- increase width
