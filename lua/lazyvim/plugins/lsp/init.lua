@@ -46,6 +46,15 @@ return {
         codelens = {
           enabled = false,
         },
+        -- Enable this to enable the builtin LSP document color on Neovim.
+        -- Be aware that you also will need to properly configure your LSP server to
+        -- provide the document color.
+        ---@type vim.lsp.document_color.Opts|{enabled:boolean, exclude:string[]}
+        document_color = {
+          enabled = true,
+          exclude = {}, -- filetypes for which you don't want to enable document color
+          style = "background",
+        },
         -- Enable this to enable the builtin LSP folding on Neovim.
         -- Be aware that you also will need to properly configure your LSP server to
         -- provide the folds.
@@ -185,6 +194,26 @@ return {
             and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
           then
             vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+          end
+        end)
+      end
+
+      -- document color
+      if vim.fn.has("nvim-0.12") == 1 then
+        Snacks.util.lsp.on({ method = "textDocument/documentColor" }, function(buffer)
+          if vim.api.nvim_buf_is_valid(buffer) and vim.bo[buffer].buftype == "" then
+            -- The document color is enabled by default. To make our config work,
+            -- we need to disable it first and then re-enable it depending on our config.
+            -- We also pass the style to the function at this time,
+            -- which will be stored in a local variable and used when the document color is enabled.
+            vim.lsp.document_color.enable(false, { bufnr = buffer }, { style = opts.document_color.style })
+
+            if
+              opts.document_color.enabled
+              and not vim.tbl_contains(opts.document_color.exclude, vim.bo[buffer].filetype)
+            then
+              vim.lsp.document_color.enable(true, { bufnr = buffer })
+            end
           end
         end)
       end
