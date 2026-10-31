@@ -51,11 +51,6 @@ return {
   },
 
   {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "haskell-language-server" } },
-  },
-
-  {
     "mfussenegger/nvim-dap",
     optional = true,
     dependencies = {
@@ -132,13 +127,22 @@ return {
         haskell = { "hlint" },
       },
     },
+    dependencies = {
+      {
+        "mason-org/mason.nvim",
+        opts = { ensure_installed = { "hlint" } },
+      },
+    },
   },
 
-  -- Make sure lspconfig doesn't start hls,
+  -- Make sure neither lspconfig nor mason-lspconfig starts hls,
   -- as it conflicts with haskell-tools
   {
     "neovim/nvim-lspconfig",
     opts = {
+      servers = {
+        hls = {},
+      },
       setup = {
         hls = function()
           return true
