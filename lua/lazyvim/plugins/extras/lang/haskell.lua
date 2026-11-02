@@ -19,7 +19,9 @@ return {
     keys = {
       {
         "<localleader>e",
-        "<cmd>HlsEvalAll<cr>",
+        function()
+          require("haskell-tools").lsp.buf_eval_all()
+        end,
         ft = "haskell",
         desc = "Evaluate All",
       },
