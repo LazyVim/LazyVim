@@ -39,6 +39,9 @@ M.plugin = {
           group = function(_, _, data)
             ---@type string
             local match = data.full_match
+            if match == "#add" then
+              return
+            end
             local r, g, b = match:sub(2, 2), match:sub(3, 3), match:sub(4, 4)
             local hex_color = "#" .. r .. r .. g .. g .. b .. b
 

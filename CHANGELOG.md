@@ -1,5 +1,34 @@
 # Changelog
 
+## [16.0.1](https://github.com/LazyVim/LazyVim/compare/v16.0.0...v16.0.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* **nvim-lint:** fix `prepend_args` logic ([#7105](https://github.com/LazyVim/LazyVim/issues/7105)) ([2239177](https://github.com/LazyVim/LazyVim/commit/2239177dbba96d01196eccc93aa1f80e5b73a8e0))
+* **typescript:** transition from `tsgo` to `tsc` ([#7233](https://github.com/LazyVim/LazyVim/issues/7233)) ([c8cd5a0](https://github.com/LazyVim/LazyVim/commit/c8cd5a0c4b4f8c339f095ec2c98257bdd3b0714d))
+
+## [16.0.0](https://github.com/LazyVim/LazyVim/compare/v15.15.0...v16.0.0) (2026-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **refactoring:** conform to upstream breaking changes on 2.0 branch ([#7124](https://github.com/LazyVim/LazyVim/issues/7124))
+
+### Features
+
+* **keymaps:** added leader+bi to delete invisible buffers ([58089db](https://github.com/LazyVim/LazyVim/commit/58089db8b198fc81f91789b6f12d0617cae21437))
+
+
+### Bug Fixes
+
+* **autocmds:** correct version check for nvim-0.13 ([#7184](https://github.com/LazyVim/LazyVim/issues/7184)) ([6eb16e7](https://github.com/LazyVim/LazyVim/commit/6eb16e730d1a686224dca41b05ba125cfd62c1bb))
+* **autocmds:** replace `vim.hl.on_yank` with `vim.hl.hl_op` for `nvim-0.13` and above ([#7171](https://github.com/LazyVim/LazyVim/issues/7171)) ([b30c031](https://github.com/LazyVim/LazyVim/commit/b30c0312ea1c5bed6b28e72d930059622b0525f8))
+* **go:** use semanticTokens if setup in gopls config init_options ([#7172](https://github.com/LazyVim/LazyVim/issues/7172)) ([b830a52](https://github.com/LazyVim/LazyVim/commit/b830a523b5973c300639d4d9c4fea7d92fa04dc3))
+* **hipatterns:** don't color #add (use it too often as a private function in TS) ([dc6240f](https://github.com/LazyVim/LazyVim/commit/dc6240f4d56ae0d40cd0e673ca740dda50c4bf3b))
+* **oxc:** prefer top-level oxlint root_dir in monorepos ([d840410](https://github.com/LazyVim/LazyVim/commit/d840410047d20a8f93fb8d473599209ebe95584e))
+* **refactoring:** conform to upstream breaking changes on 2.0 branch ([#7124](https://github.com/LazyVim/LazyVim/issues/7124)) ([d926923](https://github.com/LazyVim/LazyVim/commit/d92692309c41581e1f839033fbccd745be732c7e))
+
 ## [15.15.0](https://github.com/LazyVim/LazyVim/compare/v15.14.0...v15.15.0) (2026-04-02)
 
 
