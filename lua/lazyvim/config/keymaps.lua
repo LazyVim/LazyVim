@@ -48,9 +48,15 @@ map("n", "<leader>bi", function()
 end, { desc = "Delete Invisible Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
--- Clear search and stop snippet on escape
+-- Clear search, multicursors and stop snippet on escape
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
+
+  if vim.fn.mode() == "n" then
+    local mc_ns = vim.api.nvim_create_namespace("nvim.multicursor")
+    vim.api.nvim_buf_clear_namespace(0, mc_ns, 0, -1)
+  end
+
   LazyVim.cmp.actions.snippet_stop()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
