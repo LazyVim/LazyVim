@@ -1,5 +1,13 @@
 # Changelog
 
+## [16.0.2](https://github.com/LazyVim/LazyVim/compare/v16.0.1...v16.0.2) (2026-11-07)
+
+
+### Bug Fixes
+
+* **haskell:** prevent mason-lspconfig from starting hls ([#7147](https://github.com/LazyVim/LazyVim/issues/7147)) ([92239bc](https://github.com/LazyVim/LazyVim/commit/92239bc95b72744dedb6971598b7656a2918289b))
+* **lsp:** generic organize imports action now works as intended ([e12b2ad](https://github.com/LazyVim/LazyVim/commit/e12b2ad681c9ac58f2c6f809f2da044f870bdd6c))
+
 ## [16.0.1](https://github.com/LazyVim/LazyVim/compare/v16.0.0...v16.0.1) (2026-09-08)
 
 
