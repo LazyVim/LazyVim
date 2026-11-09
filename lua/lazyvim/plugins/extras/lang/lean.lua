@@ -10,6 +10,10 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
+  init = function()
+    vim.g.lean_config = LazyVim.opts("lean.nvim")
+  end,
+  config = function() end,
 
   -- see details below for full configuration options
   opts = {
