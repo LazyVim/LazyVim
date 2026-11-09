@@ -134,7 +134,19 @@ function M.ensure_treesitter_cli(cb)
   local mr = require("mason-registry")
   mr.refresh(function()
     local p = mr.get_package("tree-sitter-cli")
-    if not p:is_installed() then
+    if p:is_installing() then
+      -- the build hook and config both get here on a first install
+      local on_success, on_failed
+      on_success = vim.schedule_wrap(function()
+        p:off("install:failed", on_failed)
+        cb(true)
+      end)
+      on_failed = vim.schedule_wrap(function()
+        p:off("install:success", on_success)
+        cb(false, "Failed to install `tree-sitter-cli` with `mason.nvim`.")
+      end)
+      p:once("install:success", on_success):once("install:failed", on_failed)
+    elseif not p:is_installed() then
       LazyVim.info("Installing `tree-sitter-cli` with `mason.nvim`...")
       p:install(
         nil,
