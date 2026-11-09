@@ -193,6 +193,7 @@ return {
         opts = vim.tbl_deep_extend("force", fix(require("fzf-lua.profiles.default-title")), opts)
         opts[1] = nil
       end
+      opts.ui_select = nil
       require("fzf-lua").setup(opts)
     end,
     init = function()
