@@ -31,9 +31,10 @@ return {
       "AvanteToggle",
     },
     keys = {
+      { "<leader>a", "", desc = "+ai", mode = { "n", "x" } },
       { "<leader>aa", "<cmd>AvanteAsk<CR>", desc = "Ask Avante" },
       { "<leader>ac", "<cmd>AvanteChat<CR>", desc = "Chat with Avante" },
-      { "<leader>ae", "<cmd>AvanteEdit<CR>", desc = "Edit Avante" },
+      { "<leader>ae", "<cmd>AvanteEdit<CR>", mode = { "n", "x" }, desc = "Edit Avante" },
       { "<leader>af", "<cmd>AvanteFocus<CR>", desc = "Focus Avante" },
       { "<leader>ah", "<cmd>AvanteHistory<CR>", desc = "Avante History" },
       { "<leader>am", "<cmd>AvanteModels<CR>", desc = "Select Avante Model" },
