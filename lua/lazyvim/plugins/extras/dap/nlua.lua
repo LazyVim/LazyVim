@@ -18,7 +18,7 @@ return {
               adapter.port = c.port
               adapter.host = c.host
             end
-            require("osv").run_this()
+            require("osv").launch({port = adapter.port})
             dap.run = dap_run
           end
           callback(adapter)
