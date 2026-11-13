@@ -1,3 +1,11 @@
+if lazyvim_docs then
+  -- LSP Server to use for Kotlin.
+  -- Set to "kotlin_lsp" to use JetBrains' official Kotlin LSP.
+  vim.g.lazyvim_kotlin_lsp = "kotlin_language_server"
+end
+
+local lsp = vim.g.lazyvim_kotlin_lsp or "kotlin_language_server"
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -27,7 +35,8 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        kotlin_language_server = {},
+        kotlin_language_server = { enabled = lsp == "kotlin_language_server" },
+        kotlin_lsp = { enabled = lsp == "kotlin_lsp" },
       },
     },
   },
