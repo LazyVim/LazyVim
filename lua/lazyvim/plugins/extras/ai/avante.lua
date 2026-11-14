@@ -1,5 +1,13 @@
 return {
   { "MunifTanjim/nui.nvim", lazy = true },
+  {
+    "ColinKennedy/mega.logging",
+    lazy = true,
+  },
+  {
+    "ColinKennedy/mega.cmdparse",
+    lazy = true,
+  },
 
   {
     "yetone/avante.nvim",
