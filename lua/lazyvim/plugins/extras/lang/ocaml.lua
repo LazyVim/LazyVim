@@ -28,7 +28,7 @@ return {
           },
           root_markers = {
             function(name)
-              return name:match(".*%.opam$")
+              return name:match(".+%.opam$")
             end,
             "esy.json",
             "package.json",
