@@ -16,6 +16,10 @@ return {
     },
   },
   {
+    "mason-org/mason.nvim",
+    opts = { ensure_installed = { "nixfmt", "statix" } },
+  },
+  {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
