@@ -26,6 +26,18 @@ return {
     end,
   },
 
+  -- blink.cmp integration
+  {
+    "saghen/blink.cmp",
+    optional = true,
+    dependencies = { "PaterJason/cmp-conjure", "saghen/blink.compat" },
+    opts = {
+      sources = {
+        compat = { "conjure" },
+      },
+    },
+  },
+
   -- Add s-exp mappings
   { "julienvincent/nvim-paredit", opts = {}, event = "LazyFile" },
 
